@@ -53,7 +53,39 @@ trying to come up with a solution for this... Grr... Arg...</p>
 </p>
 <p>The above layout was created with the following code:</p>
 <p class='figcap'>Layout example 1</p>
-<pre>package com.magelang.test;import java.applet.*;import java.awt.*;import com.magelang.splitter.*;public class SplitterEx1 extends Applet {  public void init() {    super.init();    setLayout(new SplitterLayout(SplitterLayout.HORIZONTAL));    add(&quot;1&quot;,new Button(&quot;A (1)&quot;));    add(&quot;2&quot;,new Button(&quot;B (2)&quot;));    add(&quot;4&quot;,new Button(&quot;C (4)&quot;));    add(&quot;8&quot;,new Button(&quot;D (8)&quot;));    add(&quot;3&quot;,new Button(&quot;E (3)&quot;));  }}  </pre>
+<pre>package com.magelang.test;
+
+
+
+import java.applet.*;
+
+import java.awt.*;
+
+import com.magelang.splitter.*;
+
+
+
+public class SplitterEx1 extends Applet {
+
+  public void init() {
+
+    super.init();
+
+    setLayout(new SplitterLayout(SplitterLayout.HORIZONTAL));
+
+    add(&quot;1&quot;,new Button(&quot;A (1)&quot;));
+
+    add(&quot;2&quot;,new Button(&quot;B (2)&quot;));
+
+    add(&quot;4&quot;,new Button(&quot;C (4)&quot;));
+
+    add(&quot;8&quot;,new Button(&quot;D (8)&quot;));
+
+    add(&quot;3&quot;,new Button(&quot;E (3)&quot;));
+
+  }
+
+}  </pre>
 <p>The quoted numbers act as proportions to determine the amount of
 space each component gets.</p>
 <h2>Adding <tt>SplitterBar</tt>s</h2>
@@ -64,7 +96,47 @@ space each component gets.</p>
 </p>
 <p>The above layout was created with the following code:</p>
 <p class='figcap'>Layout example 2</p>
-<pre>package com.magelang.test;import java.applet.*;import java.awt.*;import com.magelang.splitter.*;public class SplitterEx2 extends Applet {  public void init() {  super.init();  setLayout(new SplitterLayout(SplitterLayout.HORIZONTAL));  add(&quot;1&quot;,new Button(&quot;A (1)&quot;));  add(new SplitterBar());  add(&quot;2&quot;,new Button(&quot;B (2)&quot;));  add(new SplitterBar());  add(&quot;4&quot;,new Button(&quot;C (4)&quot;));  add(new SplitterBar());  add(&quot;8&quot;,new Button(&quot;D (8)&quot;));  add(new SplitterBar());  add(&quot;3&quot;,new Button(&quot;E (3)&quot;));  }}  </pre>
+<pre>package com.magelang.test;
+
+
+
+import java.applet.*;
+
+import java.awt.*;
+
+import com.magelang.splitter.*;
+
+
+
+public class SplitterEx2 extends Applet {
+
+  public void init() {
+
+  super.init();
+
+  setLayout(new SplitterLayout(SplitterLayout.HORIZONTAL));
+
+  add(&quot;1&quot;,new Button(&quot;A (1)&quot;));
+
+  add(new SplitterBar());
+
+  add(&quot;2&quot;,new Button(&quot;B (2)&quot;));
+
+  add(new SplitterBar());
+
+  add(&quot;4&quot;,new Button(&quot;C (4)&quot;));
+
+  add(new SplitterBar());
+
+  add(&quot;8&quot;,new Button(&quot;D (8)&quot;));
+
+  add(new SplitterBar());
+
+  add(&quot;3&quot;,new Button(&quot;E (3)&quot;));
+
+  }
+
+}  </pre>
 <p>Adding Splitterbars between components allows the user to resize
 the components.&nbsp; The quoted numbers are now only used as an initial size
 for the components.</p>
@@ -81,7 +153,69 @@ simple &quot;movable status bar&quot; layout:</p>
 <p>&nbsp;</p>
 <p>The above layout was created with the following code:</p>
 <p class='figcap'>Layout example 3</p>
-<pre>package com.magelang.test;import java.applet.*;import java.awt.*;import com.magelang.splitter.*;public class SplitterEx3 extends Applet {  public void init() {    super.init();    setLayout(new SplitterLayout(SplitterLayout.VERTICAL));    add(&quot;1&quot;,new Button(&quot;A (1)&quot;));    SplitterBar b1 = new SplitterBar();    b1.setLayout(new GridLayout(1,0));    b1.add(new SplitterSpace());    b1.add(new Label(&quot;Status&quot;));    b1.add(new TextField(&quot;Enter your name&quot;));    b1.add(new SplitterSpace());    add(b1);    add(&quot;2&quot;,new Button(&quot;B (2)&quot;));    SplitterBar b2 = new SplitterBar();    b2.setLayout(new SplitterLayout(SplitterLayout.HORIZONTAL));    b2.add(&quot;5&quot;,new SplitterSpace());    b2.add(new SplitterBar());    b2.add(&quot;10&quot;,new Label(&quot;Status&quot;));    b2.add(new SplitterBar());    b2.add(&quot;40&quot;,new TextField(&quot;Enter your name&quot;));    add(b2);    add(&quot;4&quot;,new Button(&quot;C (4)&quot;));  }}  </pre>
+<pre>package com.magelang.test;
+
+
+
+import java.applet.*;
+
+import java.awt.*;
+
+import com.magelang.splitter.*;
+
+public class SplitterEx3 extends Applet {
+
+  public void init() {
+
+    super.init();
+
+    setLayout(new SplitterLayout(SplitterLayout.VERTICAL));
+
+
+
+    add(&quot;1&quot;,new Button(&quot;A (1)&quot;));
+
+
+
+    SplitterBar b1 = new SplitterBar();
+
+    b1.setLayout(new GridLayout(1,0));
+
+    b1.add(new SplitterSpace());
+
+    b1.add(new Label(&quot;Status&quot;));
+
+    b1.add(new TextField(&quot;Enter your name&quot;));
+
+    b1.add(new SplitterSpace());
+
+    add(b1);
+
+    add(&quot;2&quot;,new Button(&quot;B (2)&quot;));
+
+
+
+    SplitterBar b2 = new SplitterBar();
+
+    b2.setLayout(new SplitterLayout(SplitterLayout.HORIZONTAL));
+
+    b2.add(&quot;5&quot;,new SplitterSpace());
+
+    b2.add(new SplitterBar());
+
+    b2.add(&quot;10&quot;,new Label(&quot;Status&quot;));
+
+    b2.add(new SplitterBar());
+
+    b2.add(&quot;40&quot;,new TextField(&quot;Enter your name&quot;));
+
+    add(b2);
+
+    add(&quot;4&quot;,new Button(&quot;C (4)&quot;));
+
+  }
+
+}  </pre>
 
 				<!-- #EndEditable "content" -->
 				<div id="footer">
@@ -123,4 +257,5 @@ simple &quot;movable status bar&quot; layout:</p>
 		</div>
 		<p>&nbsp;</p>
 	</body>
-<!-- #EndTemplate --></html>
+<!-- #EndTemplate -->
+</html>
