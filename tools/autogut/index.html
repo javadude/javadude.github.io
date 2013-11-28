@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- #BeginTemplate "../../master.dwt" -->
+
+	<head>
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+		<!-- #BeginEditable "doctitle" -->
+		<title>Autogut - Scott Stanchfield</title>
+		<!-- #EndEditable -->
+		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
+		<!-- #BeginEditable "head" -->
+		<!-- #EndEditable -->
+		<style type="text/css">
+
+.style1 {
+	vertical-align: middle;
+}
+</style>
+	</head>
+
+	<body>
+		<div id="header">
+			<h1>JavaDude.com</h1>
+			<h4>-- Scott Stanchfield</h4>
+		</div>
+		<div id="content">
+			<div id="topBar">&nbsp;</div>
+			<div id="contentIndent">
+				<!-- #BeginEditable "content" -->
+<h1>Autogut</h1>
+<h3><strong>Gutting an Interface to Create a Class</strong></h3>
+<h2>News</h2>
+<ul>
+    <li>6/7/2003<ul>
+    <li>In case you didn't know, Eclipse has this function built in. To use it<ul>
+    <li>Select the name of a class in Eclipse</li>
+	<li>Choose <b>Refactor-&gt;Extract Interface</b></li>
+</ul>
+	</li>
+</ul>
+    </li>
+	<li>10/24/99
+        <ul>
+			<li>Initial release of autogut</li>
+			<li>Status: An initial release - not entirely robust, but should
+                work pretty well. I need to add a bit more checking for
+                situations like &quot;project already exists in repository&quot;
+                and ask if you want to create it. I suggest for now that you
+                always use the Browse buttons for project and package.<br/>This release has not undergone a great deal of testing, but
+                should not pose any risks to your existing data. It does not
+                modify the&nbsp;</li>
+	</ul>
+    </li>
+</ul>
+<h2>Introduction</h2>
+<p>VisualAge for Java provides some excellent tools for JavaBean component
+creation and maintenance. However, it is often important to create interfaces to
+abstract a bean, especially for use in design patterns such as
+Model-View-Controller (MVC).</p>
+<p>In a normal MVC development cycle, you first create your interfaces, then
+implement them as concrete models. Conceptually, this is the right way to go.
+However, this can involve a lot of typing. Often, the model interface provides
+standard bound properties and custom event registration capabilities.</p>
+<p>VisualAge for Java's BeanInfo editor creates JavaBean properties and events
+quite easily. We can leverage this by creating a concrete model <i>first</i>,
+then gutting it to create an interface.</p>
+<p>AutoGut examines an existing class and creates an interface for all of its
+public methods. This provides a good initial interface that you can use for your
+model. You may need to do a bit of tweaking (AutoGut currently does not copy
+import statements, for example), but this is much simpler than writing the
+interface by hand.</p>
+<h2>Distribution</h2>
+<p>I have just packaged autogut as a tool for VisualAge for Java 3.0. It will
+probably work in version 2.0 but I have not tested it there.<a href="../index.html">Tools</a></p>
+<h3>Installation for VisualAge for Java - Tool Packaging</h3>
+<p>To use AutoGut in VisualAge for Java:</p>
+<ol>
+    <li>Download <a href="autogut.zip">autogut.zip</a> from this site.</li>
+    <li>Unzip autogut.zip to the directory where VisualAge for Java is
+        installed.&nbsp; For example, C:\IBMVJava.</li>
+    <li>Shutdown VisualAge for Java if it is running</li>
+    <li>Start VisualAge for Java.</li>
+</ol>
+<p>This will add the autogut tool to the <b>Workspace-&gt;Tools</b> menu, as
+well as the Tools menu for classes.</p>
+<h3>Source Code</h3>
+<p>If you're interested in the source code for this tool, you can download <a href="Autogut-dat.zip">Autogut-dat.zip</a>.
+Note that you <i>do not</i> need the source code to use the tool. This is a
+zipped VisualAge for Java repository file. You will need to unzip this file and
+import the JavaDude AutoGut project from this repository.</p>
+<h2>Use</h2>
+<h3>VisualAge for Java</h3>
+<p>To use AutoGut (once it is installed)</p>
+<ul>
+    <li>Select <b>Tools-&gt;Create Interface from Class</b> from the <b>Workbench</b>
+        menu or from a class' popup menu</li>
+    <li>Specify the name of the class to gut (automatically selected if you had
+        started AutoGut from a class' tool menu)</li>
+    <li>Specify the name of the interface you want to create</li>
+    <li>Specify the project and package where you want to create that interface.
+        Note that if you pick a package that is in the workspace it will
+        automatically select the project.</li>
+</ul>
+<h2>Limitations</h2>
+<p>Currently the tool does not copy the import statements from the class. You
+may need to add them yourself.</p>
+<p>The tool is not completely bulletproof yet, though it's in pretty good shape.
+Just be careful what you type.</p>
+<h2>License</h2>
+<p>AutoGut free for <em>any</em> use <em>other</em> than selling it as a
+stand-alone product.</p>
+<p>Note that AutoGut is provided &quot;as-is&quot; without any warrantee or
+guarantee of suitability for any purpose. Scott Stanchfield cannot be held
+responsible for any damage caused by its use.</p>
+<p>(In other words, use 'em for free at your own risk.)</p>
+
+				<!-- #EndEditable "content" -->
+				<div id="footer">
+					<p>&nbsp;</p>
+					<hr/>
+					<p>Copyright &copy; 1996-2009, Scott Stanchfield. All Rights Reserved.<br/>
+					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
+					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
+					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
+					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../../images/cssplay_button.png" width="88" /></a></p>
+					<p>
+					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
+					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../../images/feed-icon-14x14.png" width="14" />Want 
+					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div id="bottom"/>
+		<div id="navigation">
+			<ul>
+				<li><a href="../../index.html">Home</a></li>
+				<li><a href="../../articles/index.html">Articles</a></li>
+				<li><a href="../index.html">Tools</a></li>
+				<li><a href="../../evaj/index.html">Effective VisualAge for Java</a></li>
+				<li><a href="../../eclipse/index.html">Eclipse Tips</a></li>
+				<li><a href="../../vaj/index.html">VisualAge Tips</a></li>
+				<!--
+				<li><a href="resume.html">Resume</a></li>
+				-->
+				<li><a href="../../publications.html">Publications</a></li>
+			</ul>
+			<p>&nbsp;</p>
+			<div style="margin-left:10px">
+<script type="text/javascript"><!--
+google_ad_client = "pub-1721904981084162";
+/* Homepage Gutter */
+google_ad_slot = "0044274311";
+google_ad_width = 120;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+		</div>
+		<div id="bottomcorner"/>
+		<div id="topcorner"/>
+		</div>
+		<p>&nbsp;</p>
+	</body>
+<!-- #EndTemplate -->
+</html>
