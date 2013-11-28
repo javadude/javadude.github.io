@@ -1,33 +1,35 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+
 
 <!-- #BeginTemplate "../../master.dwt" -->
 
-	<head>
-		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-		<!-- #BeginEditable "doctitle" -->
+	<head>
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+		<!-- #BeginEditable "doctitle" -->
+
 		<title>Applying MVC in VisualAge for Java - Scott Stanchfield</title>
-		<!-- #EndEditable -->
-		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
-		<!-- #BeginEditable "head" -->
-		<!-- #EndEditable -->
-		<style type="text/css">
-
-.style1 {
-	vertical-align: middle;
-}
-</style>
-	</head>
-
-	<body>
-		<div id="header">
-			<h1>JavaDude.com</h1>
-			<h4>-- Scott Stanchfield</h4>
-		</div>
-		<div id="content">
-			<div id="topBar">&nbsp;</div>
-			<div id="contentIndent">
-				<!-- #BeginEditable "content" -->
+		<!-- #EndEditable -->
+		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
+		<!-- #BeginEditable "head" -->
+		<!-- #EndEditable -->
+		<style type="text/css">
+.style1 {
+	vertical-align: middle;
+}
+</style>
+	</head>
+
+	<body>
+		<div id="header">
+			<h1>JavaDude.com</h1>
+			<h4>-- Scott Stanchfield</h4>
+		</div>
+		<div id="content">
+			<div id="topBar">&nbsp;</div>
+			<div id="contentIndent">
+				<!-- #BeginEditable "content" -->
+
 
 <h1>Applying MVC in VisualAge for Java</h1>
 	<h2>Downloads</h2>
@@ -843,10 +845,7 @@ interface. Edit AddressBookModel's interface definition to look as follows. The
 changes are in bold text.
 </p>
 
-<pre><b>import java.io.*;</b>
-
-public interface AddressBookModel <b>extends Serializable</b> {
-}</pre>
+<pre><b>import java.io.*;</b>public interface AddressBookModel <b>extends Serializable</b> {}</pre>
 
 <table border="1" cellpadding="5">
 
@@ -862,9 +861,7 @@ text indicates the change. You do not need to change anything else in this
 declaration.
 </p>
 
-<pre>public class HashAddressBook implements Serializable<b>, AddressBookModel</b> {
-  ...
-}</pre>
+<pre>public class HashAddressBook implements Serializable<b>, AddressBookModel</b> {  ...}</pre>
 
 <p>Now we can use a HashAddressBook instance anywhere we need to talk to an
 AddressBookModel.
@@ -890,12 +887,7 @@ to perform its task.
 bold.
 </p>
 
-<pre>
-public class HashAddressBook implements Serializable, AddressBookModel {
-<b>  private Hashtable records = new Hashtable();
-  private int count = 0;
-</b>	...
-}</pre>
+<pre>public class HashAddressBook implements Serializable, AddressBookModel {<b>  private Hashtable records = new Hashtable();  private int count = 0;</b>	...}</pre>
 
 <p>This creates a Hashtable named <i>records</i> in which we store our
 addresses, and a count of how many addresses we have. We need <i>count</i> to
@@ -905,12 +897,7 @@ help us process the <i>addresses</i> property, as we'll see in a moment.
 <p>Next, edit the add method and change its code to the following:
 </p>
 
-<pre>public void add(AddressDataModel address) {
-<b>  if (records.get(address.getName()) == null)
-    count++;
-  records.put(address.getName(),address);
-  firePropertyChange(&quot;addresses&quot;,null, getAddresses());
-</b>}</pre>
+<pre>public void add(AddressDataModel address) {<b>  if (records.get(address.getName()) == null)    count++;  records.put(address.getName(),address);  firePropertyChange(&quot;addresses&quot;,null, getAddresses());</b>}</pre>
 
 <p>This code stores the record in the hash table, and increments the count if
 there wasn't already a record with the same key.
@@ -919,12 +906,7 @@ there wasn't already a record with the same key.
 <p>Now, edit the find() method and change its code to the following:
 </p>
 
-<pre>public AddressDataModel find(String name) {
-<b>  AddressDataModel data = (AddressDataModel)records.get(name);
-  if (data == null)
-    throw new RuntimeException(name + &quot; not found&quot;);
-  return data;
-</b>}</pre>
+<pre>public AddressDataModel find(String name) {<b>  AddressDataModel data = (AddressDataModel)records.get(name);  if (data == null)    throw new RuntimeException(name + &quot; not found&quot;);  return data;</b>}</pre>
 
 <p>The find() method searches for an entry and returns it, or throws an
 exception if not found. Note that we're using RuntimeException for convenience
@@ -943,15 +925,7 @@ could provide a cache array -- once we generate the array, keep it until a new
 address is added.
 </p>
 
-<pre>public AddressDataModel[] getAddresses() {
-<b>  // convert the contents of the Hashtable into an array
-  Enumeration e = records.elements();
-  AddressDataModel[] result = new AddressDataModel[count];
-  int i = 0;
-  while (e.hasMoreElements())
-    result[i++] = (AddressDataModel) e.nextElement();
-  return result;
-</b>}</pre>
+<pre>public AddressDataModel[] getAddresses() {<b>  // convert the contents of the Hashtable into an array  Enumeration e = records.elements();  AddressDataModel[] result = new AddressDataModel[count];  int i = 0;  while (e.hasMoreElements())    result[i++] = (AddressDataModel) e.nextElement();  return result;</b>}</pre>
 
 <p>The getAddress(int index) method will work ok as it is, as it calls the above
 getAddress() method. Note that there is no setAddresses(); the add() method acts
@@ -2072,21 +2046,7 @@ in the old record!
 modify our add() method in HashAddressBook as follows:
 </p>
 
-<pre>public void add(AddressDataModel address) {
-  if (records.get(address.getName()) == null)
-    count++;
-<b>  SimpleAddressData copy = new SimpleAddressData();
-  copy.setName(address.getName());
-  copy.setAddress(address.getAddress());
-  copy.setCity(address.getCity());
-  copy.setState(address.getState());
-  copy.setCountry(address.getCountry());
-  copy.setPostalCode(address.getPostalCode());
-  copy.setHomePhone(address.getHomePhone());
-  copy.setBusinessPhone(address.getBusinessPhone());
-</b>  records.put(<b>copy</b>.getName(), <b>copy</b>);
-  firePropertyChange(&quot;addresses&quot;,null, getAddresses());
-}</pre>
+<pre>public void add(AddressDataModel address) {  if (records.get(address.getName()) == null)    count++;<b>  SimpleAddressData copy = new SimpleAddressData();  copy.setName(address.getName());  copy.setAddress(address.getAddress());  copy.setCity(address.getCity());  copy.setState(address.getState());  copy.setCountry(address.getCountry());  copy.setPostalCode(address.getPostalCode());  copy.setHomePhone(address.getHomePhone());  copy.setBusinessPhone(address.getBusinessPhone());</b>  records.put(<b>copy</b>.getName(), <b>copy</b>);  firePropertyChange(&quot;addresses&quot;,null, getAddresses());}</pre>
 
 <p>The find() method would perform a similar copy, returning a fresh copy of the
 retrieved data.
@@ -2109,13 +2069,7 @@ prototype, and call the clone() method in that interface to make the copy. We
 could use this in the add() method as follows:
 </p>
 
-<pre>public void add(AddressDataModel address) {
-  if (records.get(address.getName()) == null)
-    count++;
-  <b>AddressData copy = (AddressData)address.clone();
-</b>  records.put(<b>copy</b>.getName(), <b>copy</b>);
-  firePropertyChange(&quot;addresses&quot;,null, getAddresses());
-}</pre>
+<pre>public void add(AddressDataModel address) {  if (records.get(address.getName()) == null)    count++;  <b>AddressData copy = (AddressData)address.clone();</b>  records.put(<b>copy</b>.getName(), <b>copy</b>);  firePropertyChange(&quot;addresses&quot;,null, getAddresses());}</pre>
 
 <p>This is obviously much less code here, and making the address data Cloneable
 is an easy task (the Java VM provides support for the actual bitwise shallow
@@ -2171,8 +2125,7 @@ shown in Figures 71 and 72.
 directly in the interface definition.)
 </p>
 
-<pre>public AddressDataModel create();
-public AddressDataModel create(AddressDataModel address);</pre>
+<pre>public AddressDataModel create();public AddressDataModel create(AddressDataModel address);</pre>
 
 <p>Note that we use the model type. The generic concept of the
 AddressDataFactoryModel is to create <i>any</i> type of AddressDataModel.
@@ -2232,22 +2185,9 @@ SimpleAddressDataFactory</i>
 following:
 </p>
 
-<pre>public AddressDataModel create() {
-  return new SimpleAddressData();
-}</pre>
+<pre>public AddressDataModel create() {  return new SimpleAddressData();}</pre>
 
-<pre>public AddressDataModel create(AddressDataModel address) {
-  SimpleAddressData copy = new SimpleAddressData();
-  copy.setName(address.getName());
-  copy.setAddress(address.getAddress());
-  copy.setCity(address.getCity());
-  copy.setState(address.getState());
-  copy.setCountry(address.getCountry());
-  copy.setPostalCode(address.getPostalCode());
-  copy.setHomePhone(address.getHomePhone());
-  copy.setBusinessPhone(address.getBusinessPhone());
-  return copy;
-}</pre>
+<pre>public AddressDataModel create(AddressDataModel address) {  SimpleAddressData copy = new SimpleAddressData();  copy.setName(address.getName());  copy.setAddress(address.getAddress());  copy.setCity(address.getCity());  copy.setState(address.getState());  copy.setCountry(address.getCountry());  copy.setPostalCode(address.getPostalCode());  copy.setHomePhone(address.getHomePhone());  copy.setBusinessPhone(address.getBusinessPhone());  return copy;}</pre>
 
 <p>Although this is a very simple class, it provides us total flexibility in our
 HashAddressBook. And speaking of our HashAddressBook.
@@ -2279,21 +2219,9 @@ property.
 factory model. Updated code is in bold text.
 </p>
 
-<pre>public void add(AddressDataModel address) {
-  if (records.get(address.getName()) == null)
-    count++;
-<b>  AddressDataModel copy =
-    getAddressDataFactory().create(address);
-</b>  records.put(<b>copy</b>.getName(), <b>copy</b>);
-  firePropertyChange(&quot;addresses&quot;,null, getAddresses());
-}</pre>
+<pre>public void add(AddressDataModel address) {  if (records.get(address.getName()) == null)    count++;<b>  AddressDataModel copy =    getAddressDataFactory().create(address);</b>  records.put(<b>copy</b>.getName(), <b>copy</b>);  firePropertyChange(&quot;addresses&quot;,null, getAddresses());}</pre>
 
-<pre>public AddressDataModel find(String name) {
-  AddressDataModel data = (AddressDataModel)records.get(name);
-  if (data == null)
-    throw new RuntimeException(name + &quot; not found&quot;);
-  return <b>getAddressDataFactory().create(data)</b>;
-}</pre>
+<pre>public AddressDataModel find(String name) {  AddressDataModel data = (AddressDataModel)records.get(name);  if (data == null)    throw new RuntimeException(name + &quot; not found&quot;);  return <b>getAddressDataFactory().create(data)</b>;}</pre>
 
 <table border="1" cellpadding="5">
 
@@ -2394,12 +2322,7 @@ of the power of MVC really starts to show.
     clears the current list and adds all items to it. This is not terribly
     efficient, but easy to do for an example.
 
-    <pre>public void loadList(AddressDataModel[] addresses, List list) {
-  list.removeAll();
-	
-  for(int i = 0; i&lt;addresses.length; i++)
-    list.addItem(addresses[i].getName());
-}</pre>
+    <pre>public void loadList(AddressDataModel[] addresses, List list) {  list.removeAll();	  for(int i = 0; i&lt;addresses.length; i++)    list.addItem(addresses[i].getName());}</pre>
 
   </li>
   <li>Make sure <b>Pass event data</b> is checked in the Event to code dialog
@@ -2558,56 +2481,44 @@ maintenance and debugging.</p>
 </ul>
 
 
-				<!-- #EndEditable "content" -->
-				<div id="footer">
-					<p>&nbsp;</p>
-					<hr/>
-					<p>Copyright &copy; 1996-2009, Scott Stanchfield. All Rights Reserved.<br/>
-					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
-					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
-					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
-					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../../images/cssplay_button.png" width="88" /></a></p>
-					<p>
-					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
-					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../../images/feed-icon-14x14.png" width="14" />Want 
-					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
-					</p>
-				</div>
-			</div>
-		</div>
-		<div id="bottom"/>
-		<div id="navigation">
-			<ul>
-				<li><a href="../../index.html">Home</a></li>
-				<li><a href="../index.html">Articles</a></li>
-				<li><a href="../../tools/index.html">Tools</a></li>
-				<li><a href="../../evaj/index.html">Effective VisualAge for Java</a></li>
-				<li><a href="../../eclipse/index.html">Eclipse Tips</a></li>
-				<li><a href="../../vaj/index.html">VisualAge Tips</a></li>
-				<!--
-				<li><a href="resume.html">Resume</a></li>
-				-->
-				<li><a href="../../publications.html">Publications</a></li>
-			</ul>
-			<p>&nbsp;</p>
-			<div style="margin-left:10px">
-<script type="text/javascript"><!--
-google_ad_client = "pub-1721904981084162";
-/* Homepage Gutter */
-google_ad_slot = "0044274311";
-google_ad_width = 120;
-google_ad_height = 600;
-//-->
-</script>
-<script type="text/javascript"
-src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script>
-</div>
-		</div>
-		<div id="bottomcorner"/>
-		<div id="topcorner"/>
-		</div>
-		<p>&nbsp;</p>
-	</body>
-<!-- #EndTemplate -->
-</html>
+				<!-- #EndEditable "content" -->
+				<div id="footer">
+					<p>&nbsp;</p>
+					<hr/>
+					<p>Copyright &copy; 1996-2013, Scott Stanchfield. All Rights Reserved.<br />
+					<br/>
+					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
+					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
+					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
+					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../../images/cssplay_button.png" width="88" /></a></p>
+					<p>
+					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
+					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../../images/feed-icon-14x14.png" width="14" />Want 
+					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div id="bottom"/>
+		<div id="navigation">
+			<h3>NAVIGATION</h3>
+			<ul>
+				<li><a href="../../index.html">Home</a></li>
+				<li><a href="../index.html">Articles</a></li>
+				<li><a href="../../tools/index.html">Tools</a></li>
+				<li><a href="../../evaj/index.html">Effective VisualAge<br/>&nbsp;&nbsp;&nbsp;&nbsp;for Java</a></li>
+				<li><a href="../../eclipse/index.html">Eclipse Tips</a></li>
+				<li><a href="../../vaj/index.html">VisualAge Tips</a></li>
+				<!--
+				<li><a href="resume.html">Resume</a></li>
+				-->
+				<li><a href="../../publications.html">Publications</a></li>
+			</ul>
+			<p>&nbsp;</p>
+		</div>
+		<div id="bottomcorner"/>
+		<div id="topcorner"/>
+		</div>
+		<p>&nbsp;</p>
+	</body>
+<!-- #EndTemplate --></html>

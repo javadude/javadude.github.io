@@ -1,31 +1,33 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+
 	<!-- #BeginTemplate "../../master.dwt" -->
-	<head>
-		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-		<!-- #BeginEditable "doctitle" -->
+	<head>
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+		<!-- #BeginEditable "doctitle" -->
+
 <title>JavaDude Annotations - Scott Stanchfield</title>
-		<!-- #EndEditable -->
-		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
-		<!-- #BeginEditable "head" -->
-		<!-- #EndEditable -->
-		<style type="text/css">
-
-.style1 {
-	vertical-align: middle;
-}
-</style>
-	</head>
-
-	<body>
-		<div id="header">
-			<h1>JavaDude.com</h1>
-			<h4>-- Scott Stanchfield</h4>
-		</div>
-		<div id="content">
-			<div id="topBar">&nbsp;</div>
-			<div id="contentIndent">
-				<!-- #BeginEditable "content" -->
+		<!-- #EndEditable -->
+		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
+		<!-- #BeginEditable "head" -->
+		<!-- #EndEditable -->
+		<style type="text/css">
+.style1 {
+	vertical-align: middle;
+}
+</style>
+	</head>
+
+	<body>
+		<div id="header">
+			<h1>JavaDude.com</h1>
+			<h4>-- Scott Stanchfield</h4>
+		</div>
+		<div id="content">
+			<div id="topBar">&nbsp;</div>
+			<div id="contentIndent">
+				<!-- #BeginEditable "content" -->
+
 				<h1>JavaDude Annotations</h1>
 				<h2>Overview</h2>
 				<p>The JavaDude Annotations are Java 5/6 annotations and 
@@ -115,90 +117,48 @@
 				<p>The following is a sample ant script to run the annotation 
 				processor, compile and execute an example. This ant script 
 				requires Java 5 or Java 6 to execute.</p>
-				<pre><span class="comment">&lt;!-- A sample Ant build script for the JavaDude Annotations --&gt;</span>
-&lt;project name=<span class="string">"sample"</span> default=<span class="string">"build"</span>&gt;
-    <span class="comment">&lt;!-- Define directories --&gt;</span>
-    &lt;property name=<span class="string">"lib.dir"</span> value=<span class="string">"lib"</span> /&gt;
-    &lt;property name=<span class="string">"source.dir"</span> value=<span class="string">"src"</span> /&gt;
-    &lt;property name=<span class="string">"classes.dir"</span> value=<span class="string">"build-out"</span> /&gt;
-	
-    <span class="comment">&lt;!-- Build the java code --&gt;</span>
-    &lt;target name=<span class="string">"build"</span>&gt;
-        &lt;mkdir dir=<span class="string">"${classes.dir}"</span>/&gt;
-		
-        &lt;apt srcdir=<span class="string">"${source.dir}"</span>
-             destdir=<span class="string">"${classes.dir}"</span>
-             classpath=<span class="string">"${lib.dir}/velocity-dep-1.5.jar${path.separator}${lib.dir}/com.javadude.annotation_2.0.18.jar"</span>
-             compile=<span class="string">"true"</span>/&gt;
-    &lt;/target&gt;
-
-    <span class="comment">&lt;!-- Run the java code --&gt;</span>
-    &lt;target name=<span class="string">"run"</span> depends=<span class="string">"build"</span>&gt;
-        &lt;java classname=<span class="string">"com.javadude.annotation.example.Test"</span> classpath=<span class="string">"${classes.dir}"</span> /&gt;
-    &lt;/target&gt;
-	
-    <span class="comment">&lt;!-- Clean up --&gt;</span>
-    &lt;target name=<span class="string">"clean"</span>&gt;
-        &lt;delete dir=<span class="string">"${classes.dir}"</span> failonerror=<span class="string">"false"</span> /&gt;
-    &lt;/target&gt;
-	
-    <span class="comment">&lt;!-- Do everything --&gt;</span>
-    &lt;target name=<span class="string">"all"</span> depends=<span class="string">"clean,build,run"</span> /&gt;
-&lt;/project&gt;
-</pre>
+				<pre><span class="comment">&lt;!-- A sample Ant build script for the JavaDude Annotations --&gt;</span>&lt;project name=<span class="string">"sample"</span> default=<span class="string">"build"</span>&gt;    <span class="comment">&lt;!-- Define directories --&gt;</span>    &lt;property name=<span class="string">"lib.dir"</span> value=<span class="string">"lib"</span> /&gt;    &lt;property name=<span class="string">"source.dir"</span> value=<span class="string">"src"</span> /&gt;    &lt;property name=<span class="string">"classes.dir"</span> value=<span class="string">"build-out"</span> /&gt;	    <span class="comment">&lt;!-- Build the java code --&gt;</span>    &lt;target name=<span class="string">"build"</span>&gt;        &lt;mkdir dir=<span class="string">"${classes.dir}"</span>/&gt;		        &lt;apt srcdir=<span class="string">"${source.dir}"</span>             destdir=<span class="string">"${classes.dir}"</span>             classpath=<span class="string">"${lib.dir}/velocity-dep-1.5.jar${path.separator}${lib.dir}/com.javadude.annotation_2.0.18.jar"</span>             compile=<span class="string">"true"</span>/&gt;    &lt;/target&gt;    <span class="comment">&lt;!-- Run the java code --&gt;</span>    &lt;target name=<span class="string">"run"</span> depends=<span class="string">"build"</span>&gt;        &lt;java classname=<span class="string">"com.javadude.annotation.example.Test"</span> classpath=<span class="string">"${classes.dir}"</span> /&gt;    &lt;/target&gt;	    <span class="comment">&lt;!-- Clean up --&gt;</span>    &lt;target name=<span class="string">"clean"</span>&gt;        &lt;delete dir=<span class="string">"${classes.dir}"</span> failonerror=<span class="string">"false"</span> /&gt;    &lt;/target&gt;	    <span class="comment">&lt;!-- Do everything --&gt;</span>    &lt;target name=<span class="string">"all"</span> depends=<span class="string">"clean,build,run"</span> /&gt;&lt;/project&gt;</pre>
 				<h2>Runtime</h2>
 				<p>The generated code does not have any dependencies; you can 
 				run without adding extra jars to your classpath.</p>
-				<!-- #EndEditable "content" -->
-				<div id="footer">
-					<p>&nbsp;</p>
-					<hr/>
-					<p>Copyright &copy; 1996-2009, Scott Stanchfield. All Rights Reserved.<br/>
-					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
-					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
-					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
-					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../../images/cssplay_button.png" width="88" /></a></p>
-					<p>
-					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
-					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../../images/feed-icon-14x14.png" width="14" />Want 
-					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
-					</p>
-				</div>
-			</div>
-		</div>
-		<div id="bottom"/>
-		<div id="navigation">
-			<ul>
-				<li><a href="../../index.html">Home</a></li>
-				<li><a href="../../articles/index.html">Articles</a></li>
-				<li><a href="../index.html">Tools</a></li>
-				<li><a href="../../evaj/index.html">Effective VisualAge for Java</a></li>
-				<li><a href="../../eclipse/index.html">Eclipse Tips</a></li>
-				<li><a href="../../vaj/index.html">VisualAge Tips</a></li>
-				<!--
-				<li><a href="resume.html">Resume</a></li>
-				-->
-				<li><a href="../../publications.html">Publications</a></li>
-			</ul>
-			<p>&nbsp;</p>
-			<div style="margin-left:10px">
-<script type="text/javascript"><!--
-google_ad_client = "pub-1721904981084162";
-/* Homepage Gutter */
-google_ad_slot = "0044274311";
-google_ad_width = 120;
-google_ad_height = 600;
-//-->
-</script>
-<script type="text/javascript"
-src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script>
-</div>
-		</div>
-		<div id="bottomcorner"/>
-		<div id="topcorner"/>
-		</div>
-		<p>&nbsp;</p>
-	</body>
-<!-- #EndTemplate -->
-</html>
+				<!-- #EndEditable "content" -->
+				<div id="footer">
+					<p>&nbsp;</p>
+					<hr/>
+					<p>Copyright &copy; 1996-2013, Scott Stanchfield. All Rights Reserved.<br />
+					<br/>
+					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
+					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
+					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
+					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../../images/cssplay_button.png" width="88" /></a></p>
+					<p>
+					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
+					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../../images/feed-icon-14x14.png" width="14" />Want 
+					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div id="bottom"/>
+		<div id="navigation">
+			<h3>NAVIGATION</h3>
+			<ul>
+				<li><a href="../../index.html">Home</a></li>
+				<li><a href="../../articles/index.html">Articles</a></li>
+				<li><a href="../index.html">Tools</a></li>
+				<li><a href="../../evaj/index.html">Effective VisualAge<br/>&nbsp;&nbsp;&nbsp;&nbsp;for Java</a></li>
+				<li><a href="../../eclipse/index.html">Eclipse Tips</a></li>
+				<li><a href="../../vaj/index.html">VisualAge Tips</a></li>
+				<!--
+				<li><a href="resume.html">Resume</a></li>
+				-->
+				<li><a href="../../publications.html">Publications</a></li>
+			</ul>
+			<p>&nbsp;</p>
+		</div>
+		<div id="bottomcorner"/>
+		<div id="topcorner"/>
+		</div>
+		<p>&nbsp;</p>
+	</body>
+<!-- #EndTemplate --></html>

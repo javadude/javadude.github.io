@@ -1,33 +1,35 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+
 
 <!-- #BeginTemplate "../../master.dwt" -->
 
-	<head>
-		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-		<!-- #BeginEditable "doctitle" -->
+	<head>
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+		<!-- #BeginEditable "doctitle" -->
+
 		<title>VAJ: Extending VisualAge for Java - Scott Stanchfield</title>
-		<!-- #EndEditable -->
-		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
-		<!-- #BeginEditable "head" -->
-		<!-- #EndEditable -->
-		<style type="text/css">
-
-.style1 {
-	vertical-align: middle;
-}
-</style>
-	</head>
-
-	<body>
-		<div id="header">
-			<h1>JavaDude.com</h1>
-			<h4>-- Scott Stanchfield</h4>
-		</div>
-		<div id="content">
-			<div id="topBar">&nbsp;</div>
-			<div id="contentIndent">
-				<!-- #BeginEditable "content" -->
+		<!-- #EndEditable -->
+		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
+		<!-- #BeginEditable "head" -->
+		<!-- #EndEditable -->
+		<style type="text/css">
+.style1 {
+	vertical-align: middle;
+}
+</style>
+	</head>
+
+	<body>
+		<div id="header">
+			<h1>JavaDude.com</h1>
+			<h4>-- Scott Stanchfield</h4>
+		</div>
+		<div id="content">
+			<div id="topBar">&nbsp;</div>
+			<div id="contentIndent">
+				<!-- #BeginEditable "content" -->
+
 
 
 <h1>Extending VisualAge for Java: Tool Integration</h1>
@@ -189,11 +191,7 @@ file has the following format. Note that the order in which these entries appear
 is not important.
 </p>
 
-<pre>Name=<i>feature name
-</i>Version=<i>version id string
-</i>Help-Item=<i>menu text</i>,<i>HTML file name
-</i>Palette-Items=<i>category1</i>,<i>class1</i>,<i>class2</i>,...,<i>classN</i> ; <i>category2</i>,<i>class1</i>,...
-Prereq-Features=<i>base dir1</i>,<i>base dir2</i>,...</pre>
+<pre>Name=<i>feature name</i>Version=<i>version id string</i>Help-Item=<i>menu text</i>,<i>HTML file name</i>Palette-Items=<i>category1</i>,<i>class1</i>,<i>class2</i>,...,<i>classN</i> ; <i>category2</i>,<i>class1</i>,...Prereq-Features=<i>base dir1</i>,<i>base dir2</i>,...</pre>
 
 <ul>
   <li><b>Name</b> -- A unique name for the feature. Note that it is <i>very</i>
@@ -230,19 +228,7 @@ Prereq-Features=<i>base dir1</i>,<i>base dir2</i>,...</pre>
 this example, the control file looks as follows:
 </p>
 
-<pre>Name=Box Beans
-Version=1.2.2
-Help-Item=Box Beans,doc/packages.html
-Palette-Items=AWT,com.javadude.boxbeans.BoxAdapter,       \
-                  com.javadude.boxbeans.HorizontalStrut,  \
-                  com.javadude.boxbeans.VerticalStrut,    \
-                  com.javadude.boxbeans.HorizontalGlue,   \
-                  com.javadude.boxbeans.VerticalGlue;     \
-              Swing,com.javadude.boxbeans.BoxAdapter,     \
-                    com.javadude.boxbeans.HorizontalStrut,\
-                    com.javadude.boxbeans.VerticalStrut,  \
-                    com.javadude.boxbeans.HorizontalGlue, \
-                    com.javadude.boxbeans.VerticalGlue</pre>
+<pre>Name=Box BeansVersion=1.2.2Help-Item=Box Beans,doc/packages.htmlPalette-Items=AWT,com.javadude.boxbeans.BoxAdapter,       \                  com.javadude.boxbeans.HorizontalStrut,  \                  com.javadude.boxbeans.VerticalStrut,    \                  com.javadude.boxbeans.HorizontalGlue,   \                  com.javadude.boxbeans.VerticalGlue;     \              Swing,com.javadude.boxbeans.BoxAdapter,     \                    com.javadude.boxbeans.HorizontalStrut,\                    com.javadude.boxbeans.VerticalStrut,  \                    com.javadude.boxbeans.HorizontalGlue, \                    com.javadude.boxbeans.VerticalGlue</pre>
 
 <p>The Palette-Items must either all appear on a single line or be followed by
 backslash characters as above. Note the grouping of the palette items. In this
@@ -406,14 +392,7 @@ and place it in the tool's base directory. The file has the following format.
 Note that the order in which these entries appear is not important.
 </p>
 
-<pre>Name=<i>feature name
-</i>Version=<i>version id string
-</i>Help-Item=<i>menu text</i>,<i>HTML file name
-</i>Menu-Group=<i>menu group name
-</i>Menu-Items=<i>menu item text</i>,<i>class</i>,<i>context</i> ; <i>menu item text</i>,<i> ...
-</i>Action-Items=<i>menu op name</i>,<i>class</i>,<i>context</i>; <i>menu op name</i>, ...
-Quick-Start-Group=<i>quick start category
-</i>Quick-Start-Items=<i>quick start text</i>,<i>app class</i>; <i>quick start text</i>, ...</pre>
+<pre>Name=<i>feature name</i>Version=<i>version id string</i>Help-Item=<i>menu text</i>,<i>HTML file name</i>Menu-Group=<i>menu group name</i>Menu-Items=<i>menu item text</i>,<i>class</i>,<i>context</i> ; <i>menu item text</i>,<i> ...</i>Action-Items=<i>menu op name</i>,<i>class</i>,<i>context</i>; <i>menu op name</i>, ...Quick-Start-Group=<i>quick start category</i>Quick-Start-Items=<i>quick start text</i>,<i>app class</i>; <i>quick start text</i>, ...</pre>
 
 <ul>
   <li><b>Name</b> -- A unique name for the tool. Note that it is <i>very</i>
@@ -567,12 +546,7 @@ the menu bar and a <b>Tools-&gt;Explode</b> item in a class' popup menu. Both
 places execute the same class, though the parameters differ. Note
 </p>
 
-<pre>Menu-Group=External Fun
-Menu-Items=Configure,com.foo.SetUp,;     \
-           Configure,com.foo.Setup,-c;   \
-           Run in JDK,com.foo.Runner,-c; \
-           Configure,com.foo.Setup,-P;   \
-           Add to ClassPath JDK,com.foo.ClassPathSetter,-P</pre>
+<pre>Menu-Group=External FunMenu-Items=Configure,com.foo.SetUp,;     \           Configure,com.foo.Setup,-c;   \           Run in JDK,com.foo.Runner,-c; \           Configure,com.foo.Setup,-P;   \           Add to ClassPath JDK,com.foo.ClassPathSetter,-P</pre>
 
 <p>This specification creates the following options:
 </p>
@@ -605,16 +579,7 @@ in multiple contexts.
 AutoGut tool.
 </p>
 
-<pre>Name=AutoGut
-Version=1.0
-Quick-Start-Group=Scott Stanchfield's Tools
-Quick-Start-Items=Create an interface based on a class
-Help-Item=Create an interface based on a class,doc/index.html
-Menu-Items=\
-  Create interface from a class,           \
-      com.javadude.vaj.autogut.AutoGut,;   \
-  Create interface from these classes,     \
-      com.javadude.vaj.autogut.AutoGut,-c</pre>
+<pre>Name=AutoGutVersion=1.0Quick-Start-Group=Scott Stanchfield's ToolsQuick-Start-Items=Create an interface based on a classHelp-Item=Create an interface based on a class,doc/index.htmlMenu-Items=\  Create interface from a class,           \      com.javadude.vaj.autogut.AutoGut,;   \  Create interface from these classes,     \      com.javadude.vaj.autogut.AutoGut,-c</pre>
 
 <p>Note that in this control file the text for the menu and quick-start items
 does not simply list the name of the tool. This makes it easier for the user to
@@ -629,19 +594,7 @@ is involved.
 resource files. Its control file might look as follows.
 </p>
 
-<pre>Name=Graphic Editor
-Version=1.0
-Quick-Start-Group=Resource File Tools
-Quick-Start-Items=Edit Graphical Resources
-Menu-Items=\
-  Edit this JPG,com.foo.GraphicsEditor,-R.JPG;\
-  Edit this GIF,com.foo.GraphicsEditor,-R.GIF;\
-  Edit all JPG &amp; GIFs in this dir,com.foo.GraphicsEditor,-R/;\
-  Give this file a suffix,com.foo.SuffixGiver,-R.
-Action-Items=\
-  OPEN, com.foo.GraphicsEditor,-R.JPG;\
-  OPEN, com.foo.GraphicsEditor,-R.GIF;\
-  OPEN, com.foo.GraphicsEditor,-R./</pre>
+<pre>Name=Graphic EditorVersion=1.0Quick-Start-Group=Resource File ToolsQuick-Start-Items=Edit Graphical ResourcesMenu-Items=\  Edit this JPG,com.foo.GraphicsEditor,-R.JPG;\  Edit this GIF,com.foo.GraphicsEditor,-R.GIF;\  Edit all JPG &amp; GIFs in this dir,com.foo.GraphicsEditor,-R/;\  Give this file a suffix,com.foo.SuffixGiver,-R.Action-Items=\  OPEN, com.foo.GraphicsEditor,-R.JPG;\  OPEN, com.foo.GraphicsEditor,-R.GIF;\  OPEN, com.foo.GraphicsEditor,-R./</pre>
 
 <p>The menu and actions are only available from the resources panel of the
 project browser.
@@ -722,8 +675,7 @@ things.
 directories to your design-time CLASSPATH.
 </p>
 
-<pre>c:\IBMVJava\ide\project_resources\IBM IDE Utility class libraries\
-c:\IBMVJava\ide\project_resources\IBM IDE Utility local implementation\</pre>
+<pre>c:\IBMVJava\ide\project_resources\IBM IDE Utility class libraries\c:\IBMVJava\ide\project_resources\IBM IDE Utility local implementation\</pre>
 
 <p>You can modify the design-time CLASSPATH setting by choosing <b>Window-&gt;Options</b>
 to access the options dialog, then choosing the <b>Visual Composition</b> page.
@@ -838,8 +790,7 @@ error handling accordingly.
 <p>You should normally include these two files in your tool class as follows:
 </p>
 
-<pre>import com.ibm.ivj.util.base.*;
-import com.ibm.ivj.util.builders.*;</pre>
+<pre>import com.ibm.ivj.util.base.*;import com.ibm.ivj.util.builders.*;</pre>
 
 <address>
   <b>NOTE<br/>
@@ -870,13 +821,7 @@ the Tool API libraries. A better method of determining where you are running is
 to use the following code.
 </p>
 
-<pre>boolean inVisualAge = false;
-
-try {
-  Class.forName(&quot;com.ibm.ivj.util.base.ToolEnv&quot;);
-  inVisualAge = true;
-}
-catch (ClassNotFoundException ignoreMe) {}</pre>
+<pre>boolean inVisualAge = false;try {  Class.forName(&quot;com.ibm.ivj.util.base.ToolEnv&quot;);  inVisualAge = true;}catch (ClassNotFoundException ignoreMe) {}</pre>
 
 <p>This method ensures that you do not try to use classes that do not exist.
 However, if your class includes references to the Tool API (instance variables,
@@ -897,38 +842,7 @@ to choose the class name from a list. Otherwise, you would need to ask the user
 to type the name. You can implement this as follows.
 </p>
 
-<pre>public interface Helper {
-  public String askUserForClassName();
-}
-
-public class VisualAgeHelper implements Helper {
-  public String askUserForClassName() {
-    //  use Tool API to prompt the user for a class
-    //    and return its name
-  }
-}
-
-public class NonVisualAgeHelper implements Helper {
-  public String askUserForClassName() {
-    //  display a simple dialog asking user to type
-    //    class name and return that class name
-  }
-}
-
-public class MyPropertyEditor ... {
-  private Helper helper;
-  public MyPropertyEditor() {
-    try {
-      Class.forName(&quot;com.ibm.ivj.util.base.ToolEnv&quot;);
-      helper = new VisualAgeHelper();
-    }
-    catch (ClassNotFoundException ignoreMe) {
-      helper = new NonVisualAgeHelper();
-    }
-  }
-  // in some method where needed...
-  String name = helper.askUserForClassName();
-}</pre>
+<pre>public interface Helper {  public String askUserForClassName();}public class VisualAgeHelper implements Helper {  public String askUserForClassName() {    //  use Tool API to prompt the user for a class    //    and return its name  }}public class NonVisualAgeHelper implements Helper {  public String askUserForClassName() {    //  display a simple dialog asking user to type    //    class name and return that class name  }}public class MyPropertyEditor ... {  private Helper helper;  public MyPropertyEditor() {    try {      Class.forName(&quot;com.ibm.ivj.util.base.ToolEnv&quot;);      helper = new VisualAgeHelper();    }    catch (ClassNotFoundException ignoreMe) {      helper = new NonVisualAgeHelper();    }  }  // in some method where needed...  String name = helper.askUserForClassName();}</pre>
 
 <p>Using a scheme like this allows you to provide the added benefit when using
 VisualAge for Java, but still allows the property editor in other IDEs.
@@ -1009,9 +923,7 @@ control issues. The difficulty compounds when running in team mode. If you ever
 need to determine if VisualAge is running in team mode, use the following code.
 </p>
 
-<pre>if (workspace.isTeamMode()) {
-  // we are running in team version mode!
-}</pre>
+<pre>if (workspace.isTeamMode()) {  // we are running in team version mode!}</pre>
 
 <p>Team mode can greatly affect versioning issues like whether or not you can
 version a project, package, or class, and if you can create open editions. Be
@@ -1243,16 +1155,7 @@ repository, and asking it for the getLoaded() Project (see below).
 <p>As a simple example, we can print the name of all projects in the Workspace.
 </p>
 
-<pre>// connect to the workspace
-Workspace workspace = ToolEnv.connectToWorkspace();
-
-// get the projects in the workspace
-Project[] projects = workspace.getProjects();
-
-// log their names
-workspace.logMessage(&quot;\n&quot;,false); // ensure we start on new line
-for(int i=0; i&lt; projects.length; i++)
-  workspace.logMessage(projects[i].getName() + &quot;\n&quot;, true);</pre>
+<pre>// connect to the workspaceWorkspace workspace = ToolEnv.connectToWorkspace();// get the projects in the workspaceProject[] projects = workspace.getProjects();// log their namesworkspace.logMessage(&quot;\n&quot;,false); // ensure we start on new linefor(int i=0; i&lt; projects.length; i++)  workspace.logMessage(projects[i].getName() + &quot;\n&quot;, true);</pre>
 
 
 <h4>ProjectEdition</h4>
@@ -1319,41 +1222,7 @@ providing identification information, and adds a few extra methods.
 projects in the repository.
 </p>
 
-<pre>String versionName = &quot;&quot;;
-
-// connect to the workspace   
-Workspace workspace = ToolEnv.connectToWorkspace();
-
-// grab the current repository
-Repository repository = workspace.getRepository();
-
-// get a list of the names of all projects in the
-//   repository
-String[] projectNames = repository.getProjectNames();
-
-// for each name...
-workspace.logMessage(&quot;\n&quot;,false); // ensure we start on new line
-for(int i = 0; i&lt;projectNames.length; i++) {
-  // report the name
-  workspace.logMessage(projectNames[i] + &quot;\n&quot;, true);
-
-  // get a list of all editions of the project
-  ProjectEdition[] editions = 
-    repository.getProjectEditions(projectNames[i]);
-
-  // for each edition
-  for(int j=0; j&lt; editions.length; j++) {
-    // determine the version name - if not versioned, use 
-    //   open edition format for the name
-    if (editions[j].isVersion())
-      versionName = editions[j].getVersionName();
-    else
-      versionName = &quot;(&quot; + editions[j].getVersionStamp() + &quot;)&quot;;
-
-    // print the edition name
-    workspace.logMessage(&quot;  &quot; + versionName + &quot;\n&quot;, true);
-  }
-}</pre>
+<pre>String versionName = &quot;&quot;;// connect to the workspace   Workspace workspace = ToolEnv.connectToWorkspace();// grab the current repositoryRepository repository = workspace.getRepository();// get a list of the names of all projects in the//   repositoryString[] projectNames = repository.getProjectNames();// for each name...workspace.logMessage(&quot;\n&quot;,false); // ensure we start on new linefor(int i = 0; i&lt;projectNames.length; i++) {  // report the name  workspace.logMessage(projectNames[i] + &quot;\n&quot;, true);  // get a list of all editions of the project  ProjectEdition[] editions =     repository.getProjectEditions(projectNames[i]);  // for each edition  for(int j=0; j&lt; editions.length; j++) {    // determine the version name - if not versioned, use     //   open edition format for the name    if (editions[j].isVersion())      versionName = editions[j].getVersionName();    else      versionName = &quot;(&quot; + editions[j].getVersionStamp() + &quot;)&quot;;    // print the edition name    workspace.logMessage(&quot;  &quot; + versionName + &quot;\n&quot;, true);  }}</pre>
 
 
 <h3>Working with Packages</h3>
@@ -1454,21 +1323,7 @@ the Workspace.
 within each project. The bold code is what we have added for this example.
 </p>
 
-<pre>// connect to the workspace
-Workspace workspace = ToolEnv.connectToWorkspace();
-
-// get the projects in the workspace
-Project[] projects = workspace.getProjects();
-
-// log their names
-workspace.logMessage(&quot;\n&quot;,false); // ensure we start on new line
-for(int i=0; i&lt; projects.length; i++) {
-  workspace.logMessage(projects[i].getName() + &quot;\n&quot;, true);
-<b>  // write names of all packages in this project
-  Package[] packages = projects[i].getPackages();
-  for(int j=0; j&lt; packages.length; j++)
-    workspace.logMessage(&quot;  &quot; + packages[j].getName() + &quot;\n&quot;, true);
-</b>}</pre>
+<pre>// connect to the workspaceWorkspace workspace = ToolEnv.connectToWorkspace();// get the projects in the workspaceProject[] projects = workspace.getProjects();// log their namesworkspace.logMessage(&quot;\n&quot;,false); // ensure we start on new linefor(int i=0; i&lt; projects.length; i++) {  workspace.logMessage(projects[i].getName() + &quot;\n&quot;, true);<b>  // write names of all packages in this project  Package[] packages = projects[i].getPackages();  for(int j=0; j&lt; packages.length; j++)    workspace.logMessage(&quot;  &quot; + packages[j].getName() + &quot;\n&quot;, true);</b>}</pre>
 
 
 <h4>PackageEdition</h4>
@@ -1526,66 +1381,7 @@ provides the following methods to work with PackageEditions.
 packages inside the project versions. The additional code appears in bold text.
 </p>
 
-<pre>String versionName = &quot;&quot;;
-
-// connect to the workspace   
-Workspace workspace = ToolEnv.connectToWorkspace();
-
-// grab the current repository
-Repository repository = workspace.getRepository();
-
-// get a list of the names of all projects in the
-//   repository
-String[] projectNames = repository.getProjectNames();
-
-// for each name...
-workspace.logMessage(&quot;\n&quot;,false); // ensure we start on new line
-for(int i = 0; i&lt;projectNames.length; i++) {
-  // report the name
-  workspace.logMessage(projectNames[i] + &quot;\n&quot;, true);
-
-  // get a list of all editions of the project
-  ProjectEdition[] editions = 
-    repository.getProjectEditions(projectNames[i]);
-
-  // for each edition
-  for(int j=0; j&lt; editions.length; j++) {
-    // determine the version name - if not versioned, use 
-    //   open edition format for the name
-    if (editions[j].isVersion())
-      versionName = editions[j].getVersionName();
-    else
-      versionName = &quot;(&quot; + editions[j].getVersionStamp() + &quot;)&quot;;
-
-    // print the edition name
-    workspace.logMessage(&quot;  &quot; + versionName + &quot;\n&quot;, true);
-<b>
-    // for each package edition in the project edition
-    PackageEdition[] packageEditions = 
-                       editions[j].getPackageEditions();
-    if (packageEditions != null) 
-      for(int k=0; k &lt; packageEditions.length; k++) {
-        // determine the version name
-        // note the necessary try-catch!
-        try {
-          if (packageEditions[k].isVersion())
-            versionName = packageEditions[k].getVersionName();
-          else
-            versionName = 
-              &quot;(&quot; + packageEditions[k].getVersionStamp() + &quot;)&quot;;
-        }
-        catch(IvjUnresolvedException e) {
-          versionName = &quot;UNRESOLVED: &quot; +
-                        packageEditions[k].getVersionName();
-        }
-
-        // print the package info</b>}
-<b>        workspace.logMessage(
-          &quot;    &quot; + packageEditions[k].getName() +
-          &quot;  &quot; + versionName + &quot;\n&quot;, true);
-      }
-</b>  }
-}</pre>
+<pre>String versionName = &quot;&quot;;// connect to the workspace   Workspace workspace = ToolEnv.connectToWorkspace();// grab the current repositoryRepository repository = workspace.getRepository();// get a list of the names of all projects in the//   repositoryString[] projectNames = repository.getProjectNames();// for each name...workspace.logMessage(&quot;\n&quot;,false); // ensure we start on new linefor(int i = 0; i&lt;projectNames.length; i++) {  // report the name  workspace.logMessage(projectNames[i] + &quot;\n&quot;, true);  // get a list of all editions of the project  ProjectEdition[] editions =     repository.getProjectEditions(projectNames[i]);  // for each edition  for(int j=0; j&lt; editions.length; j++) {    // determine the version name - if not versioned, use     //   open edition format for the name    if (editions[j].isVersion())      versionName = editions[j].getVersionName();    else      versionName = &quot;(&quot; + editions[j].getVersionStamp() + &quot;)&quot;;    // print the edition name    workspace.logMessage(&quot;  &quot; + versionName + &quot;\n&quot;, true);<b>    // for each package edition in the project edition    PackageEdition[] packageEditions =                        editions[j].getPackageEditions();    if (packageEditions != null)       for(int k=0; k &lt; packageEditions.length; k++) {        // determine the version name        // note the necessary try-catch!        try {          if (packageEditions[k].isVersion())            versionName = packageEditions[k].getVersionName();          else            versionName =               &quot;(&quot; + packageEditions[k].getVersionStamp() + &quot;)&quot;;        }        catch(IvjUnresolvedException e) {          versionName = &quot;UNRESOLVED: &quot; +                        packageEditions[k].getVersionName();        }        // print the package info</b>}<b>        workspace.logMessage(          &quot;    &quot; + packageEditions[k].getName() +          &quot;  &quot; + versionName + &quot;\n&quot;, true);      }</b>  }}</pre>
 
 
 <h3>Working with Types</h3>
@@ -1684,57 +1480,12 @@ effective means to access Types.
 implement selected interfaces. We can do this through the following code.
 </p>
 
-<pre>import com.ibm.ivj.util.base.*;
-import com.ibm.ivj.util.builders.*; 
-
-/** A Simple VisualAge for Java tool that displays 
- * all classes that implement the selected interfaces 
- */ 
-public class ListImplementers { 
-  /** The main tool processing */
-  public static void main(String[] args) throws IvjException { 
-    // connect to the workspace 
-    Workspace workspace = ToolEnv.connectToWorkspace(); 
-    workspace.logMessage(&quot;\n&quot;, true); 
-
-    // we only run in context -c so 
-    // there will always be at least two args 
-    // first is &quot;-c&quot;, second and after are the list 
-    // of selected type names 
-    for(int i=1; i&lt;args.length; i++) {
-      String interfaceToFind = args[i]; 
-
-      // find the selected type in the workspace 
-      Type interfaceType = workspace.loadedTypeNamed(interfaceToFind); 
-
-      // if it's not an interface, report, but continue 
-      if (!interfaceType.isInterface()) 
-        workspace.logMessage(interfaceToFind + &quot; is not an interface!\n&quot;, true); 
-
-      // otherwise, it's an interface 
-      else { 
-        // write a small header 
-        workspace.logMessage(&quot;Classes that implement interface &quot; + interfaceToFind + &quot;\n&quot;, true); 
-
-        // get a list of all implementers and sub-interfaces 
-        Type[] implementers = interfaceType.getAllSubtypes(); 
-
-        // walk the list 
-        for(int j=0; j&lt;implementers.length; j++) 
-          // check if it's an implementing class 
-          if (implementers[j].isClass()) 
-            // if so, report it! 
-            workspace.logMessage( &quot; &quot; + implementers[j].getQualifiedName() + &quot;\n&quot;, true);
-      }
-    }
-  }
-}</pre>
+<pre>import com.ibm.ivj.util.base.*;import com.ibm.ivj.util.builders.*; /** A Simple VisualAge for Java tool that displays  * all classes that implement the selected interfaces  */ public class ListImplementers {   /** The main tool processing */  public static void main(String[] args) throws IvjException {     // connect to the workspace     Workspace workspace = ToolEnv.connectToWorkspace();     workspace.logMessage(&quot;\n&quot;, true);     // we only run in context -c so     // there will always be at least two args     // first is &quot;-c&quot;, second and after are the list     // of selected type names     for(int i=1; i&lt;args.length; i++) {      String interfaceToFind = args[i];       // find the selected type in the workspace       Type interfaceType = workspace.loadedTypeNamed(interfaceToFind);       // if it's not an interface, report, but continue       if (!interfaceType.isInterface())         workspace.logMessage(interfaceToFind + &quot; is not an interface!\n&quot;, true);       // otherwise, it's an interface       else {         // write a small header         workspace.logMessage(&quot;Classes that implement interface &quot; + interfaceToFind + &quot;\n&quot;, true);         // get a list of all implementers and sub-interfaces         Type[] implementers = interfaceType.getAllSubtypes();         // walk the list         for(int j=0; j&lt;implementers.length; j++)           // check if it's an implementing class           if (implementers[j].isClass())             // if so, report it!             workspace.logMessage( &quot; &quot; + implementers[j].getQualifiedName() + &quot;\n&quot;, true);      }    }  }}</pre>
 
 <p>The control file for the above tool looks as follows.
 </p>
 
-<pre>Name=List Interface Implementers
-Version=0.2 Menu-Items=\ List implementers,\ effectivevaj.under.toolapi.ListImplementers,-c</pre>
+<pre>Name=List Interface ImplementersVersion=0.2 Menu-Items=\ List implementers,\ effectivevaj.under.toolapi.ListImplementers,-c</pre>
 
 <p>We set this tool up outside VisualAge for Java (in the tools directory, as
 explained above), shutdown and restart VisualAge. We now have a simple tool that
@@ -1781,72 +1532,7 @@ this example here to help show the relationship between the various edition
 objects. Once again, the additional code appears in bold text.
 </p>
 
-<pre>String versionName = &quot;&quot;;
-// connect to the workspace 
-Workspace workspace = ToolEnv.connectToWorkspace(); 
-
-// grab the current repository 
-Repository repository = workspace.getRepository(); 
-
-// get a list of the names of all projects in the repository 
-String[] projectNames = repository.getProjectNames(); 
-
-// for each name... log it 
-workspace.logMessage(&quot;\n&quot;,false); // ensure we start on new line
-for(int i = 0; i&lt;projectNames.length; i++) {
-  // report the name 
-  workspace.logMessage(projectNames[i] + &quot;\n&quot;, true);
-
-  // get a list of all editions of the project 
-  ProjectEdition[] editions = repository.getProjectEditions(projectNames[i]); 
-
-  // for each edition 
-  for(int j=0; j&lt; editions.length; j++) {
-    // determine the version name - if not versioned, use 
-    // open edition format for the name 
-    if (editions[j].isVersion()) 
-      versionName = editions[j].getVersionName(); 
-    else 
-      versionName = &quot;(&quot; + editions[j].getVersionStamp() + &quot;)&quot;; 
-
-    // print the edition name 
-    workspace.logMessage(&quot; &quot; + versionName + &quot;\n&quot;, true); 
-
-    // for each package edition in the project edition 
-    PackageEdition[] packageEditions = editions[j].getPackageEditions(); 
-
-    if (packageEditions != null) 
-      for(int k=0; k &lt; packageEditions.length; k++) {
-        <b>boolean validEdition = true;</b> 
-        // determine the version name 
-        // note the necessary try-catch! 
-        try {
-          if (packageEditions[k].isVersion()) 
-            versionName = packageEditions[k].getVersionName(); 
-          else 
-            versionName = &quot;(&quot; + packageEditions[k].getVersionStamp() + &quot;)&quot;; 
-        }
-        catch(IvjUnresolvedException e) {
-          versionName = &quot;UNRESOLVED: &quot; + packageEditions[k].getVersionName(); <b>
-          validEdition = false;</b> 
-        }
-
-        // print the package info 
-        workspace.logMessage( &quot; &quot; + packageEditions[k].getName() + &quot; &quot; + versionName + &quot;\n&quot;, true); <b>
-        if (validEdition) {
-</b>          <b>TypeEdition[] typeEditions =</b> <b>packageEditions[k].getTypeEditions();</b> <b>
-          if (typeEditions != null)</b> <b>
-            for(int l=0; l &lt; typeEditions.length; l++) {
-</b>              <b>if (typeEditions[l].isVersion())</b> <b>
-                versionName = typeEditions[l].getVersionName();</b> <b>
-              else</b> <b>
-                versionName = </b><b>&quot;(&quot; + typeEditions[l].getVersionStamp() + &quot;)&quot;;</b> <b>
-              workspace.logMessage(</b> <b>&quot; &quot; + typeEditions[l].getName() +</b> <b>&quot; &quot; + versionName + &quot;\n&quot;, true);</b> <b>
-            }
-       </b> <b>}
-</b>    }
-  }
-}</pre>
+<pre>String versionName = &quot;&quot;;// connect to the workspace Workspace workspace = ToolEnv.connectToWorkspace(); // grab the current repository Repository repository = workspace.getRepository(); // get a list of the names of all projects in the repository String[] projectNames = repository.getProjectNames(); // for each name... log it workspace.logMessage(&quot;\n&quot;,false); // ensure we start on new linefor(int i = 0; i&lt;projectNames.length; i++) {  // report the name   workspace.logMessage(projectNames[i] + &quot;\n&quot;, true);  // get a list of all editions of the project   ProjectEdition[] editions = repository.getProjectEditions(projectNames[i]);   // for each edition   for(int j=0; j&lt; editions.length; j++) {    // determine the version name - if not versioned, use     // open edition format for the name     if (editions[j].isVersion())       versionName = editions[j].getVersionName();     else       versionName = &quot;(&quot; + editions[j].getVersionStamp() + &quot;)&quot;;     // print the edition name     workspace.logMessage(&quot; &quot; + versionName + &quot;\n&quot;, true);     // for each package edition in the project edition     PackageEdition[] packageEditions = editions[j].getPackageEditions();     if (packageEditions != null)       for(int k=0; k &lt; packageEditions.length; k++) {        <b>boolean validEdition = true;</b>         // determine the version name         // note the necessary try-catch!         try {          if (packageEditions[k].isVersion())             versionName = packageEditions[k].getVersionName();           else             versionName = &quot;(&quot; + packageEditions[k].getVersionStamp() + &quot;)&quot;;         }        catch(IvjUnresolvedException e) {          versionName = &quot;UNRESOLVED: &quot; + packageEditions[k].getVersionName(); <b>          validEdition = false;</b>         }        // print the package info         workspace.logMessage( &quot; &quot; + packageEditions[k].getName() + &quot; &quot; + versionName + &quot;\n&quot;, true); <b>        if (validEdition) {</b>          <b>TypeEdition[] typeEditions =</b> <b>packageEditions[k].getTypeEditions();</b> <b>          if (typeEditions != null)</b> <b>            for(int l=0; l &lt; typeEditions.length; l++) {</b>              <b>if (typeEditions[l].isVersion())</b> <b>                versionName = typeEditions[l].getVersionName();</b> <b>              else</b> <b>                versionName = </b><b>&quot;(&quot; + typeEditions[l].getVersionStamp() + &quot;)&quot;;</b> <b>              workspace.logMessage(</b> <b>&quot; &quot; + typeEditions[l].getName() +</b> <b>&quot; &quot; + versionName + &quot;\n&quot;, true);</b> <b>            }       </b> <b>}</b>    }  }}</pre>
 
 
 <h2>Running a Class</h2>
@@ -1863,20 +1549,7 @@ you want to execute, and an array of Strings to pass as arguments. A sample
 invocation might look as follows.
 </p>
 
-<pre>// the following string for the class name could come from a 
-// parameter, or could be selected by the user while the 
-// tool is running 
-String className = &quot;effectivevaj.SomeClass&quot;; 
-
-// get a class object for the named class 
-try { 
-  Class theClass = Class.forName(className); 
-  // run the application 
-  workspace.runMain(theClass, new String[] {&quot;Larry&quot;, &quot;Curly&quot;, &quot;Moe&quot;});
-}
-catch(ClassNotFoundException e) { 
-  // deal with the bad class name 
-}</pre>
+<pre>// the following string for the class name could come from a // parameter, or could be selected by the user while the // tool is running String className = &quot;effectivevaj.SomeClass&quot;; // get a class object for the named class try {   Class theClass = Class.forName(className);   // run the application   workspace.runMain(theClass, new String[] {&quot;Larry&quot;, &quot;Curly&quot;, &quot;Moe&quot;});}catch(ClassNotFoundException e) {   // deal with the bad class name }</pre>
 
 <p>Sometimes these other applications require different CLASSPATH settings to
 find resources, and you may not know which resource directories you need until
@@ -1916,24 +1589,7 @@ following methods, defined in the Workspace interface.
 CLASSPATH, as well as the Swing class libraries.
 </p>
 
-<pre>// connect to the workspace
-Workspace workspace = ToolEnv.connectToWorkspace(); 
-
-// get the entries that VisualAge requires 
-Object[] requiredStuff = workspace.getDefaultClassPathEntries(); 
-
-// create the new (bigger) class path array 
-Object[] newClassPath = new Object[requiredStuff.length + 2]; 
-
-// copy the required entries 
-System.arraycopy(requiredStuff, 0, newClassPath, 2, requiredStuff.length); 
-
-// set the new entries 
-newClassPath[0] = &quot;c:\\jars\\cookie.jar&quot;; 
-newClassPath[1] = workspace.loadedProjectNamed(&quot;JFC class libraries&quot;); 
-
-// set the CLASSPATH in the workspace 
-workspace.setClassPath(newClassPath);</pre>
+<pre>// connect to the workspaceWorkspace workspace = ToolEnv.connectToWorkspace(); // get the entries that VisualAge requires Object[] requiredStuff = workspace.getDefaultClassPathEntries(); // create the new (bigger) class path array Object[] newClassPath = new Object[requiredStuff.length + 2]; // copy the required entries System.arraycopy(requiredStuff, 0, newClassPath, 2, requiredStuff.length); // set the new entries newClassPath[0] = &quot;c:\\jars\\cookie.jar&quot;; newClassPath[1] = workspace.loadedProjectNamed(&quot;JFC class libraries&quot;); // set the CLASSPATH in the workspace workspace.setClassPath(newClassPath);</pre>
 
 
 <h2>Helping the User Pick an Object</h2>
@@ -2074,15 +1730,7 @@ interaction.
 presses Cancel, the methods return null. For example
 </p>
 
-<pre>// connect to the workspace
-Workspace workspace = ToolEnv.connectToWorkspace(); 
-
-// Find the example project for this book 
-Project book = workspace.loadedProjectNamed(&quot;Effective VisualAge for Java&quot;); 
-
-// Ask the user to choose a class. Only classes 
-// in this book's package appear in the selection list 
-String className = workspace.promptForClass(&quot;Select Class&quot;, &quot;Please select the class to use!&quot;, book, null);</pre>
+<pre>// connect to the workspaceWorkspace workspace = ToolEnv.connectToWorkspace(); // Find the example project for this book Project book = workspace.loadedProjectNamed(&quot;Effective VisualAge for Java&quot;); // Ask the user to choose a class. Only classes // in this book's package appear in the selection list String className = workspace.promptForClass(&quot;Select Class&quot;, &quot;Please select the class to use!&quot;, book, null);</pre>
 
 
 <h2>Exporting and Importing</h2>
@@ -2194,36 +1842,7 @@ default constructor.
   </li>
 </ul>
 
-<pre>Workspace workspace = null;
-try {
-  // connect to the workspace 
-  workspace = ToolEnv.connectToWorkspace(); 
-
-  // create a list of packages to export 
-  Package[] packages = new Package[2]; 
-  packages[0] = workspace.loadedPackageNamed(&quot;effectivevaj.gencode&quot;); 
-  packages[1] = workspace.loadedPackageNamed(&quot;effectivevaj.vce.factory&quot;); 
-
-  // set up the export specification 
-  ExportCodeSpec exportData = new ExportCodeSpec(); 
-  exportData.includeClass(false); 
-  exportData.includeJava(true); 
-  exportData.includeResources(true); 
-  exportData.overwriteFiles(true); 
-  exportData.setPackages(packages); 
-  exportData.setExportDirectory(&quot;c:\\targetdir&quot;); 
-
-  // perform the export 
-  workspace.exportData(exportData); 
-}
-
-// if we had an export problem, list the errors 
-catch(IvjExportException e) {
-  String[] errors = e.getErrors();
-  workspace.logMessage(&quot;\nErrors during export!\n&quot;, true); 
-  for(int i=0; i&lt;errors.length; i++) 
-    workspace.logMessage(errors[i]+&quot;\n&quot;, true); 
-}</pre>
+<pre>Workspace workspace = null;try {  // connect to the workspace   workspace = ToolEnv.connectToWorkspace();   // create a list of packages to export   Package[] packages = new Package[2];   packages[0] = workspace.loadedPackageNamed(&quot;effectivevaj.gencode&quot;);   packages[1] = workspace.loadedPackageNamed(&quot;effectivevaj.vce.factory&quot;);   // set up the export specification   ExportCodeSpec exportData = new ExportCodeSpec();   exportData.includeClass(false);   exportData.includeJava(true);   exportData.includeResources(true);   exportData.overwriteFiles(true);   exportData.setPackages(packages);   exportData.setExportDirectory(&quot;c:\\targetdir&quot;);   // perform the export   workspace.exportData(exportData); }// if we had an export problem, list the errors catch(IvjExportException e) {  String[] errors = e.getErrors();  workspace.logMessage(&quot;\nErrors during export!\n&quot;, true);   for(int i=0; i&lt;errors.length; i++)     workspace.logMessage(errors[i]+&quot;\n&quot;, true); }</pre>
 
 
 <h4>ExportInterchangeSpec</h4>
@@ -2278,37 +1897,7 @@ Bad VooDoo Scotty&quot; to repository file c:\sample\transfer.dat. We could do
 so with the following code.
 </p>
 
-<pre>Workspace workspace = null;
-try { 
-  // connect to the workspace 
-  workspace = ToolEnv.connectToWorkspace(); 
-
-  // get the current repository 
-  Repository myRepository = workspace.getRepository(); 
-
-  // specify the target repository 
-  Repository targetRepository = workspace.getRepository(&quot;c:\\sample\\transfer.dat&quot;); 
-
-  // Find all versions of the project to export. 
-  ProjectEdition[] projects = myRepository.getProjectEditions(&quot;Big Bad VooDoo Scotty&quot;);   
-
-  // fill in the export details 
-  ExportInterchangeSpec exportData = new ExportInterchangeSpec(); 
-  exportData.allowRepositoryCreation(true); 
-  exportData.setProjectEditions(projects); 
-  exportData.setRepository(targetRepository); 
-
-  // perform the export 
-  workspace.exportData(exportData); 
-}
-
-// report any errors 
-catch(IvjExportException e) {
-  String[] errors = e.getErrors(); 
-  workspace.logMessage(&quot;\nErrors during export!\n&quot;, true); 
-  for(int i=0; i&lt;errors.length; i++) 
-    workspace.logMessage(errors[i]+&quot;\n&quot;, true); 
-}</pre>
+<pre>Workspace workspace = null;try {   // connect to the workspace   workspace = ToolEnv.connectToWorkspace();   // get the current repository   Repository myRepository = workspace.getRepository();   // specify the target repository   Repository targetRepository = workspace.getRepository(&quot;c:\\sample\\transfer.dat&quot;);   // Find all versions of the project to export.   ProjectEdition[] projects = myRepository.getProjectEditions(&quot;Big Bad VooDoo Scotty&quot;);     // fill in the export details   ExportInterchangeSpec exportData = new ExportInterchangeSpec();   exportData.allowRepositoryCreation(true);   exportData.setProjectEditions(projects);   exportData.setRepository(targetRepository);   // perform the export   workspace.exportData(exportData); }// report any errors catch(IvjExportException e) {  String[] errors = e.getErrors();   workspace.logMessage(&quot;\nErrors during export!\n&quot;, true);   for(int i=0; i&lt;errors.length; i++)     workspace.logMessage(errors[i]+&quot;\n&quot;, true); }</pre>
 
 
 <h4>ImportCodeSpec</h4>
@@ -2370,39 +1959,7 @@ catch(IvjExportException e) {
 workspace.
 </p>
 
-<pre>Workspace workspace = null;
-try { 
-  // connect to the workspace 
-  workspace = ToolEnv.connectToWorkspace();   
-
-  // create an import specification 
-  ImportCodeSpec importData = new ImportCodeSpec(); 
-  
-  // create a new project to import into 
-  Project targetProject = workspace.createProject(&quot;Sample Project&quot;, true); 
-
-  // list the files to import 
-  String[] javaFiles = { &quot;C:\\sample\\test\\FirstClass.java&quot;, 
-                         &quot;C:\\sample\\test\\SecondClass.java&quot;,
-                         &quot;C:\\sample\\test\\AnotherClass.java&quot;, 
-                         &quot;C:\\sample\\test\\StillAnotherClass.java&quot; 
-                       };
-
-  // set up the parameters for the import 
-  importData.setDefaultProject(targetProject); 
-  importData.setJavaFiles(javaFiles); 
-
-  // perform the import 
-  workspace.importData(importData); 
-}
-
-// report any errors 
-catch(IvjImportException e) {
-  String[] errors = e.getErrors();
-  workspace.logMessage(&quot;\nErrors during import!\n&quot;, true);
-  for(int i=0; i&lt;errors.length; i++) 
-    workspace.logMessage(errors[i]+&quot;\n&quot;, true); 
-}</pre>
+<pre>Workspace workspace = null;try {   // connect to the workspace   workspace = ToolEnv.connectToWorkspace();     // create an import specification   ImportCodeSpec importData = new ImportCodeSpec();     // create a new project to import into   Project targetProject = workspace.createProject(&quot;Sample Project&quot;, true);   // list the files to import   String[] javaFiles = { &quot;C:\\sample\\test\\FirstClass.java&quot;,                          &quot;C:\\sample\\test\\SecondClass.java&quot;,                         &quot;C:\\sample\\test\\AnotherClass.java&quot;,                          &quot;C:\\sample\\test\\StillAnotherClass.java&quot;                        };  // set up the parameters for the import   importData.setDefaultProject(targetProject);   importData.setJavaFiles(javaFiles);   // perform the import   workspace.importData(importData); }// report any errors catch(IvjImportException e) {  String[] errors = e.getErrors();  workspace.logMessage(&quot;\nErrors during import!\n&quot;, true);  for(int i=0; i&lt;errors.length; i++)     workspace.logMessage(errors[i]+&quot;\n&quot;, true); }</pre>
 
 
 <h4>ImportInterchangeSpec</h4>
@@ -2434,33 +1991,7 @@ provides the following methods.
 in an external repository file.
 </p>
 
-<pre>Workspace workspace = null;
-try { 
-  // connect to the workspace 
-  workspace = ToolEnv.connectToWorkspace(); 
- 
-  // get the source repository 
-  Repository sourceRepository = workspace.getRepository(&quot;c:\\sample\\boxbeans.dat&quot;); 
-  
-  // get all versions to import 
-  ProjectEdition[] projects = sourceRepository.getProjectEditions(&quot;JavaDude Box Beans&quot;);   
-
-  // setup the import parameters 
-  ImportInterchangeSpec importData = new ImportInterchangeSpec(); 
-  importData.setProjectEditions(projects); 
-  importData.setRepository(sourceRepository); 
-
-  // perform the import 
-  workspace.importData(importData); 
-}
-
-// report any errors 
-catch(IvjImportException e) {
-  String[] errors = e.getErrors(); 
-  workspace.logMessage(&quot;\nErrors during import!\n&quot;, true);
-  for(int i=0; i&lt;errors.length; i++) 
-    workspace.logMessage(errors[i]+&quot;\n&quot;, true); 
-}</pre>
+<pre>Workspace workspace = null;try {   // connect to the workspace   workspace = ToolEnv.connectToWorkspace();    // get the source repository   Repository sourceRepository = workspace.getRepository(&quot;c:\\sample\\boxbeans.dat&quot;);     // get all versions to import   ProjectEdition[] projects = sourceRepository.getProjectEditions(&quot;JavaDude Box Beans&quot;);     // setup the import parameters   ImportInterchangeSpec importData = new ImportInterchangeSpec();   importData.setProjectEditions(projects);   importData.setRepository(sourceRepository);   // perform the import   workspace.importData(importData); }// report any errors catch(IvjImportException e) {  String[] errors = e.getErrors();   workspace.logMessage(&quot;\nErrors during import!\n&quot;, true);  for(int i=0; i&lt;errors.length; i++)     workspace.logMessage(errors[i]+&quot;\n&quot;, true); }</pre>
 
 
 <h2>Generating Code</h2>
@@ -2675,48 +2206,7 @@ ways to do this. The easiest is to define the entire source for the class in a
 TypeBuilder and save that TypeBuilder.
 </p>
 
-<pre>String projectName = &quot;Generated Code Samples&quot;;
-String packageName = &quot;sample.generated.code&quot;; 
-
-// connect to the workspace 
-Workspace workspace = ToolEnv.connectToWorkspace(); 
-
-// get a builderfactory to start the generation 
-BuilderFactory factory = workspace.createBuilderFactory(); 
-
-// find or create the specified project 
-Project targetProject = workspace.loadedProjectNamed(projectName); 
-if (targetProject == null) 
-  targetProject = workspace.createProject(projectName, true); 
-
-// find or create the specified package in that project 
-Package targetPackage = workspace.loadedPackageNamed(packageName); 
-if (targetPackage == null) 
-  targetPackage = targetProject.createPackage(packageName, true);   
-
-// if the package is in the wrong project, complain! 
-else if (targetPackage.getProject() != targetProject) 
-  workspace.logMessage(&quot;The target package &quot; + packageName + &quot; is already in another project!!!&quot;, true); 
-
-// create a TypeBuilder for the new Class 
-TypeBuilder typeBuilder = factory.createTypeBuilder(&quot;HelloWorld&quot;, targetPackage); 
-
-// Use a StringBuffer for building the code -- it's much 
-// faster than concatenating Strings 
-StringBuffer b = new StringBuffer(); 
-
-// Write the code for the class 
-b.append(&quot;public class HelloWorld {\n&quot; );
-b.append(&quot;\tpublic static void main(String[] args) {\n&quot; );
-b.append(&quot;\t\tSystem.out.println(\&quot;Hello, World!\&quot;);\n&quot; );
-b.append(&quot;\t}\n&quot; ); 
-b.append(&quot;}\n&quot; );
-
-// set that code as the source for the new class 
-typeBuilder.setSource(b.toString()); 
-
-// save the class 
-typeBuilder.save();</pre>
+<pre>String projectName = &quot;Generated Code Samples&quot;;String packageName = &quot;sample.generated.code&quot;; // connect to the workspace Workspace workspace = ToolEnv.connectToWorkspace(); // get a builderfactory to start the generation BuilderFactory factory = workspace.createBuilderFactory(); // find or create the specified project Project targetProject = workspace.loadedProjectNamed(projectName); if (targetProject == null)   targetProject = workspace.createProject(projectName, true); // find or create the specified package in that project Package targetPackage = workspace.loadedPackageNamed(packageName); if (targetPackage == null)   targetPackage = targetProject.createPackage(packageName, true);   // if the package is in the wrong project, complain! else if (targetPackage.getProject() != targetProject)   workspace.logMessage(&quot;The target package &quot; + packageName + &quot; is already in another project!!!&quot;, true); // create a TypeBuilder for the new Class TypeBuilder typeBuilder = factory.createTypeBuilder(&quot;HelloWorld&quot;, targetPackage); // Use a StringBuffer for building the code -- it's much // faster than concatenating Strings StringBuffer b = new StringBuffer(); // Write the code for the class b.append(&quot;public class HelloWorld {\n&quot; );b.append(&quot;\tpublic static void main(String[] args) {\n&quot; );b.append(&quot;\t\tSystem.out.println(\&quot;Hello, World!\&quot;);\n&quot; );b.append(&quot;\t}\n&quot; ); b.append(&quot;}\n&quot; );// set that code as the source for the new class typeBuilder.setSource(b.toString()); // save the class typeBuilder.save();</pre>
 
 <p>The other method is similar to the next section. We create the TypeBuilder
 and add MethodBuilders to it for each of the methods we need in that class.
@@ -2736,37 +2226,7 @@ it. The following code demonstrates how to do this.
   the Tool API removes all leading whitespace characters.
 </address>
 
-<pre>// connnect to the workspace
-Workspace workspace = ToolEnv.connectToWorkspace(); 
-
-// find the specified class 
-Type helloWorld = workspace.loadedTypeNamed(args[1]); 
-
-// create a builder factory to start code generation 
-BuilderFactory factory = workspace.createBuilderFactory(); 
-
-// find the type builder for the existing type 
-TypeBuilder typeBuilder = factory.createTypeBuilder(helloWorld); 
-
-// create a new method builder for the new method 
-MethodBuilder mainMethod = factory.createMethodBuilder(&quot;main&quot;);   
-
-// Use a string buffer for efficiency 
-StringBuffer b = new StringBuffer(); 
-
-// write the code for the new method 
-b.append(&quot;\tpublic void foo() {\n&quot; ); 
-b.append(&quot;\t\tSystem.out.println(\&quot;We're doing something\&quot;);\n&quot; ); 
-b.append(&quot;\t}\n&quot;); 
-
-// set the source for the new method 
-mainMethod.setSource(b.toString()); 
-
-// tell the type builder to add this method when save()d 
-typeBuilder.addMethodBuilder(mainMethod); 
-
-// save the type 
-typeBuilder.save();</pre>
+<pre>// connnect to the workspaceWorkspace workspace = ToolEnv.connectToWorkspace(); // find the specified class Type helloWorld = workspace.loadedTypeNamed(args[1]); // create a builder factory to start code generation BuilderFactory factory = workspace.createBuilderFactory(); // find the type builder for the existing type TypeBuilder typeBuilder = factory.createTypeBuilder(helloWorld); // create a new method builder for the new method MethodBuilder mainMethod = factory.createMethodBuilder(&quot;main&quot;);   // Use a string buffer for efficiency StringBuffer b = new StringBuffer(); // write the code for the new method b.append(&quot;\tpublic void foo() {\n&quot; ); b.append(&quot;\t\tSystem.out.println(\&quot;We're doing something\&quot;);\n&quot; ); b.append(&quot;\t}\n&quot;); // set the source for the new method mainMethod.setSource(b.toString()); // tell the type builder to add this method when save()d typeBuilder.addMethodBuilder(mainMethod); // save the type typeBuilder.save();</pre>
 
 
 <h4>Modify the Code in a Method</h4>
@@ -2786,33 +2246,7 @@ Source of an Existing Method</i> below to access the source as a String, then
 make some changes, then save it using this technique.
 </p>
 
-<pre>// connnect to the workspace
-Workspace workspace = ToolEnv.connectToWorkspace(); 
-
-// find the specified class 
-Type helloWorld = workspace.loadedTypeNamed(args[1]); 
-
-// create a builder factory to start code generation 
-BuilderFactory factory = workspace.createBuilderFactory(); 
-
-// find the type builder for the existing type 
-TypeBuilder typeBuilder = factory.createTypeBuilder(helloWorld); 
-
-// create a new method builder for the new method 
-MethodBuilder mainMethod = factory.createMethodBuilder(&quot;main&quot;);   
-
-// Use a string buffer for efficiency 
-StringBuffer b = new StringBuffer(); 
-
-// define the new code
-b.append(&quot;\tpublic static void main(String[] args) {\n&quot; ); 
-b.append(&quot;\t\tSystem.out.println(\&quot;Goodbye, World!\&quot;);\n&quot; ); 
-b.append(&quot;\t}\n&quot; ); 
-
-// save the changes
-mainMethod.setSource(b.toString()); 
-typeBuilder.addMethodBuilder(mainMethod); 
-typeBuilder.save();</pre>
+<pre>// connnect to the workspaceWorkspace workspace = ToolEnv.connectToWorkspace(); // find the specified class Type helloWorld = workspace.loadedTypeNamed(args[1]); // create a builder factory to start code generation BuilderFactory factory = workspace.createBuilderFactory(); // find the type builder for the existing type TypeBuilder typeBuilder = factory.createTypeBuilder(helloWorld); // create a new method builder for the new method MethodBuilder mainMethod = factory.createMethodBuilder(&quot;main&quot;);   // Use a string buffer for efficiency StringBuffer b = new StringBuffer(); // define the new codeb.append(&quot;\tpublic static void main(String[] args) {\n&quot; ); b.append(&quot;\t\tSystem.out.println(\&quot;Goodbye, World!\&quot;);\n&quot; ); b.append(&quot;\t}\n&quot; ); // save the changesmainMethod.setSource(b.toString()); typeBuilder.addMethodBuilder(mainMethod); typeBuilder.save();</pre>
 
 
 <h4>Defining User Code Blocks</h4>
@@ -2837,38 +2271,7 @@ you pick textual names rather than numbers like the VCE uses. This gives you
 more flexibility if you want to add more user blocks later.
 </p>
 
-<pre>// connnect to the workspace
-Workspace workspace = ToolEnv.connectToWorkspace(); 
-
-// find the specified class 
-Type helloWorld = workspace.loadedTypeNamed(args[1]); 
-
-// create a builder factory to start code generation 
-BuilderFactory factory = workspace.createBuilderFactory(); 
-
-// find the type builder for the existing type 
-TypeBuilder typeBuilder = factory.createTypeBuilder(helloWorld); 
-
-// create a new method builder for the new method 
-MethodBuilder mainMethod = factory.createMethodBuilder(&quot;main&quot;);   
-
-// Use a string buffer for efficiency 
-StringBuffer b = new StringBuffer(); 
-
-// Define the source for the method, including some 
-// user code blocks before and after the action 
-b.append(&quot;\tpublic static void main(String[] args) {\n&quot; ); 
-b.append(factory.createUserCodeBlock(&quot;before action&quot;,&quot;\t\t&quot;)); 
-b.append(&quot;\n&quot;); 
-b.append(&quot;\t\tSystem.out.println(\&quot;Hello, World!\&quot;);\n&quot; ); 
-b.append(factory.createUserCodeBlock(&quot;after action&quot;,&quot;\t\t&quot;)); 
-b.append(&quot;\n&quot;); 
-b.append(&quot;\t}\n&quot; ); 
-
-// save the changes
-mainMethod.setSource(b.toString()); 
-typeBuilder.addMethodBuilder(mainMethod); 
-typeBuilder.saveMerge();</pre>
+<pre>// connnect to the workspaceWorkspace workspace = ToolEnv.connectToWorkspace(); // find the specified class Type helloWorld = workspace.loadedTypeNamed(args[1]); // create a builder factory to start code generation BuilderFactory factory = workspace.createBuilderFactory(); // find the type builder for the existing type TypeBuilder typeBuilder = factory.createTypeBuilder(helloWorld); // create a new method builder for the new method MethodBuilder mainMethod = factory.createMethodBuilder(&quot;main&quot;);   // Use a string buffer for efficiency StringBuffer b = new StringBuffer(); // Define the source for the method, including some // user code blocks before and after the action b.append(&quot;\tpublic static void main(String[] args) {\n&quot; ); b.append(factory.createUserCodeBlock(&quot;before action&quot;,&quot;\t\t&quot;)); b.append(&quot;\n&quot;); b.append(&quot;\t\tSystem.out.println(\&quot;Hello, World!\&quot;);\n&quot; ); b.append(factory.createUserCodeBlock(&quot;after action&quot;,&quot;\t\t&quot;)); b.append(&quot;\n&quot;); b.append(&quot;\t}\n&quot; ); // save the changesmainMethod.setSource(b.toString()); typeBuilder.addMethodBuilder(mainMethod); typeBuilder.saveMerge();</pre>
 
 
 <h4>Modify Method with Embedded User Code</h4>
@@ -2880,45 +2283,7 @@ block. If none of the changes you are making modify methods with user code
 blocks, you can still use save()/
 </p>
 
-<pre>// connnect to the workspace
-Workspace workspace = ToolEnv.connectToWorkspace(); 
-
-// find the specified class 
-Type helloWorld = workspace.loadedTypeNamed(args[1]); 
-
-// create a builder factory to start code generation 
-BuilderFactory factory = workspace.createBuilderFactory(); 
-
-// find the type builder for the existing type 
-TypeBuilder typeBuilder = factory.createTypeBuilder(helloWorld); 
-
-// create a new method builder for the new method 
-MethodBuilder mainMethod = factory.createMethodBuilder(&quot;main&quot;);   
-
-// Use a string buffer for efficiency 
-StringBuffer b = new StringBuffer(); 
-
-// Create the new code with user blocks. In this 
-// example we add a new user block 
-b.append(&quot;\tpublic static void main(String[] args) {\n&quot; );
-b.append(factory.createUserCodeBlock(&quot;before action&quot;,&quot;\t\t&quot;)); 
-b.append(&quot;\n&quot;); 
-b.append(&quot;\t\tSystem.out.println(\&quot;This is different!\&quot;);\n&quot; ); 
-b.append(factory.createUserCodeBlock(&quot;after action&quot;,&quot;\t\t&quot;)); 
-b.append(&quot;\n&quot;); 
-b.append(&quot;\t\tSystem.out.println(\&quot;So is this!\&quot;);\n&quot; ); 
-b.append(factory.createUserCodeBlock(&quot;final action&quot;,&quot;\t\t&quot;)); 
-b.append(&quot;\n&quot;); 
-b.append(&quot;\t}\n&quot; );
-
-// set the source for the method builder 
-mainMethod.setSource(b.toString()); 
-
-// tell the type builder that we want to change 
-typeBuilder.addMethodBuilder(mainMethod); 
-
-// merge the changes, keeping the user-entered code 
-typeBuilder.saveMerge();</pre>
+<pre>// connnect to the workspaceWorkspace workspace = ToolEnv.connectToWorkspace(); // find the specified class Type helloWorld = workspace.loadedTypeNamed(args[1]); // create a builder factory to start code generation BuilderFactory factory = workspace.createBuilderFactory(); // find the type builder for the existing type TypeBuilder typeBuilder = factory.createTypeBuilder(helloWorld); // create a new method builder for the new method MethodBuilder mainMethod = factory.createMethodBuilder(&quot;main&quot;);   // Use a string buffer for efficiency StringBuffer b = new StringBuffer(); // Create the new code with user blocks. In this // example we add a new user block b.append(&quot;\tpublic static void main(String[] args) {\n&quot; );b.append(factory.createUserCodeBlock(&quot;before action&quot;,&quot;\t\t&quot;)); b.append(&quot;\n&quot;); b.append(&quot;\t\tSystem.out.println(\&quot;This is different!\&quot;);\n&quot; ); b.append(factory.createUserCodeBlock(&quot;after action&quot;,&quot;\t\t&quot;)); b.append(&quot;\n&quot;); b.append(&quot;\t\tSystem.out.println(\&quot;So is this!\&quot;);\n&quot; ); b.append(factory.createUserCodeBlock(&quot;final action&quot;,&quot;\t\t&quot;)); b.append(&quot;\n&quot;); b.append(&quot;\t}\n&quot; );// set the source for the method builder mainMethod.setSource(b.toString()); // tell the type builder that we want to change typeBuilder.addMethodBuilder(mainMethod); // merge the changes, keeping the user-entered code typeBuilder.saveMerge();</pre>
 
 
 <h4>Checking if a Method Exists</h4>
@@ -2942,26 +2307,7 @@ the type.
 any code within the method.
 </p>
 
-<pre>// connect to the workspace
-Workspace workspace = ToolEnv.connectToWorkspace(); 
-Type type = workspace.loadedTypeNamed(args[1]);   
-
-// get the type builder for the class 
-BuilderFactory factory = workspace.createBuilderFactory(); 
-TypeBuilder typeBuilder = factory.createTypeBuilder(type); 
-
-// create a new method builder for the search 
-// note that it just needs to define the signature 
-// -- no method body needed 
-// -- no access modifier needed 
-// -- parameter types should be fully-qualified 
-//    in case imports are not present 
-MethodBuilder test = factory.createMethodBuilder(&quot;test&quot;); 
-test.setSource(&quot;void paint(java.awt.Graphics i) {}&quot;); 
-
-// check to see if we have a method with the signature 
-if (typeBuilder.checkMethodExists(test)) 
-  System.out.println(&quot;FOUND!!!&quot;);</pre>
+<pre>// connect to the workspaceWorkspace workspace = ToolEnv.connectToWorkspace(); Type type = workspace.loadedTypeNamed(args[1]);   // get the type builder for the class BuilderFactory factory = workspace.createBuilderFactory(); TypeBuilder typeBuilder = factory.createTypeBuilder(type); // create a new method builder for the search // note that it just needs to define the signature // -- no method body needed // -- no access modifier needed // -- parameter types should be fully-qualified //    in case imports are not present MethodBuilder test = factory.createMethodBuilder(&quot;test&quot;); test.setSource(&quot;void paint(java.awt.Graphics i) {}&quot;); // check to see if we have a method with the signature if (typeBuilder.checkMethodExists(test))   System.out.println(&quot;FOUND!!!&quot;);</pre>
 
 
 <h4>Delete a Method</h4>
@@ -2972,32 +2318,7 @@ you mark that MethodBuilder for deletion. Finally, add it to the TypeBuilder.
 When the TypeBuilder save()s or saveMerge()s, the method is deleted.
 </p>
 
-<pre>// connect to the workspace
-Workspace workspace = ToolEnv.connectToWorkspace(); 
-
-// find the specified type 
-Type helloWorld = workspace.loadedTypeNamed(args[1]); 
-
-// get a builder factory to start code generation 
-BuilderFactory factory = workspace.createBuilderFactory(); 
-
-// get the type builder to change the specified class 
-TypeBuilder typeBuilder = factory.createTypeBuilder(helloWorld); 
-MethodBuilder mainMethod = factory.createMethodBuilder(&quot;main&quot;); 
-
-// specify enough source for the method signature 
-mainMethod.setSource(&quot;void main(java.lang.String[] args) {}&quot;);
-
-// check if it exists... 
-if (typeBuilder.checkMethodExists(mainMethod)) 
-  // ... if so, mark it for deletion 
-  mainMethod.markForDeletion(true); 
-
-// tell the type builder that we'd like to make changes 
-typeBuilder.addMethodBuilder(mainMethod); 
-
-// save the type, deleting the method. 
-typeBuilder.save();</pre>
+<pre>// connect to the workspaceWorkspace workspace = ToolEnv.connectToWorkspace(); // find the specified type Type helloWorld = workspace.loadedTypeNamed(args[1]); // get a builder factory to start code generation BuilderFactory factory = workspace.createBuilderFactory(); // get the type builder to change the specified class TypeBuilder typeBuilder = factory.createTypeBuilder(helloWorld); MethodBuilder mainMethod = factory.createMethodBuilder(&quot;main&quot;); // specify enough source for the method signature mainMethod.setSource(&quot;void main(java.lang.String[] args) {}&quot;);// check if it exists... if (typeBuilder.checkMethodExists(mainMethod))   // ... if so, mark it for deletion   mainMethod.markForDeletion(true); // tell the type builder that we'd like to make changes typeBuilder.addMethodBuilder(mainMethod); // save the type, deleting the method. typeBuilder.save();</pre>
 
 
 <h4>Obtaining the Source of an Existing Method</h4>
@@ -3010,29 +2331,7 @@ getExistingMethodSource() for that MethodBuilder in the TypeBuilder. This finds
 the method with the same signature and returns its code as a String.
 </p>
 
-<pre>// connect to the workspace
-Workspace workspace = ToolEnv.connectToWorkspace();
-
-// find the specified type 
-Type helloWorld = workspace.loadedTypeNamed(args[1]);
-
-// get a builder factory to start code generation
-BuilderFactory factory = workspace.createBuilderFactory();
-
-// get the type builder to change the specified class
-TypeBuilder typeBuilder = factory.createTypeBuilder(helloWorld);
-
-// create a method builder to help us find main
-MethodBuilder mainMethod = factory.createMethodBuilder(&quot;test&quot;);
-
-// set enough source so we have the signature
-mainMethod.setSource(&quot;void main(java.lang.String[] args) {}&quot;);
-
-// check to see if a method with that signature exists
-if (typeBuilder.checkMethodExists(mainMethod)) {
-  String source = typeBuilder.getExistingMethodSource(mainMethod);
-  workspace.logMessage(&quot;Source code for main:\n&quot; + source, true);
-}</pre>
+<pre>// connect to the workspaceWorkspace workspace = ToolEnv.connectToWorkspace();// find the specified type Type helloWorld = workspace.loadedTypeNamed(args[1]);// get a builder factory to start code generationBuilderFactory factory = workspace.createBuilderFactory();// get the type builder to change the specified classTypeBuilder typeBuilder = factory.createTypeBuilder(helloWorld);// create a method builder to help us find mainMethodBuilder mainMethod = factory.createMethodBuilder(&quot;test&quot;);// set enough source so we have the signaturemainMethod.setSource(&quot;void main(java.lang.String[] args) {}&quot;);// check to see if a method with that signature existsif (typeBuilder.checkMethodExists(mainMethod)) {  String source = typeBuilder.getExistingMethodSource(mainMethod);  workspace.logMessage(&quot;Source code for main:\n&quot; + source, true);}</pre>
 
 
 <h2>Storing Tool Options</h2>
@@ -3060,49 +2359,13 @@ example, suppose we want to store the last-used class, package and project
 names. We start by defining a bean that holds the data for us.
 </p>
 
-<pre>import java.io.*;
-
-public class LastUsedOptions implements Serializable {
-  private String lastClass;
-  private String lastPackage; 
-  private String lastProject; 
-
-  public String getLastClass() {
-    return lastClass;
-  } 
-  public String getLastPackage() {
-    return lastPackage;
-  } 
-  public String getLastProject() {
-    return lastProject;
-  } 
-  public void setLastClass(String lastClass) {
-    this.lastClass = lastClass; 
-  } 
-  public void setLastPackage(String lastPackage) {
-    this.lastPackage = lastPackage; 
-  } 
-  public void setLastProject(String lastProject) {
-    this.lastProject = lastProject; 
-  }
-}</pre>
+<pre>import java.io.*;public class LastUsedOptions implements Serializable {  private String lastClass;  private String lastPackage;   private String lastProject;   public String getLastClass() {    return lastClass;  }   public String getLastPackage() {    return lastPackage;  }   public String getLastProject() {    return lastProject;  }   public void setLastClass(String lastClass) {    this.lastClass = lastClass;   }   public void setLastPackage(String lastPackage) {    this.lastPackage = lastPackage;   }   public void setLastProject(String lastProject) {    this.lastProject = lastProject;   }}</pre>
 
 <p>We then write the code to store the current values from out tool in this
 object and save it as tool data.
 </p>
 
-<pre>// connect to the workspace
-Workspace workspace = ToolEnv.connectToWorkspace(); 
-
-// set up the options for later retrieval 
-LastUsedOptions options = new LastUsedOptions();
-options.setLastClass(&quot;SomeClassName&quot;);
-options.setLastPackage(&quot;some.package&quot;);
-options.setLastProject(&quot;A Sample Project&quot;); 
-
-// store the options, keyed by this tool name 
-ToolData toolData = new ToolData(&quot;my.class.ThisToolName&quot;, options); 
-workspace.setToolOptions(toolData);</pre>
+<pre>// connect to the workspaceWorkspace workspace = ToolEnv.connectToWorkspace(); // set up the options for later retrieval LastUsedOptions options = new LastUsedOptions();options.setLastClass(&quot;SomeClassName&quot;);options.setLastPackage(&quot;some.package&quot;);options.setLastProject(&quot;A Sample Project&quot;); // store the options, keyed by this tool name ToolData toolData = new ToolData(&quot;my.class.ThisToolName&quot;, options); workspace.setToolOptions(toolData);</pre>
 
 
 <h3>Checking to See If Tool Data Exists</h3>
@@ -3111,14 +2374,7 @@ workspace.setToolOptions(toolData);</pre>
 testToolOptions() in the Workspace interface. For example,
 </p>
 
-<pre>// connect to workspace
-Workspace workspace = null;
-workspace = ToolEnv.connectToWorkspace();
-
-// check to see if the tool options exist
-if (workspace.testToolOptions(&quot;my.class.ThisToolName&quot;)) {
-  // get the options...
-}</pre>
+<pre>// connect to workspaceWorkspace workspace = null;workspace = ToolEnv.connectToWorkspace();// check to see if the tool options existif (workspace.testToolOptions(&quot;my.class.ThisToolName&quot;)) {  // get the options...}</pre>
 
 
 <h3>Reading the Tool Data</h3>
@@ -3127,19 +2383,7 @@ if (workspace.testToolOptions(&quot;my.class.ThisToolName&quot;)) {
 method in the Workspace interface.
 </p>
 
-<pre>// connect to the workspace
-Workspace workspace = ToolEnv.connectToWorkspace();
-
-// grab the tool data
-ToolData toolData = workspace.getToolOptions(&quot;my.class.ThisToolName&quot;);
-
-// get the data we want from it
-LastUsedOptions options = (LastUsedOptions)toolData.getData();
-
-// use the data
-workspace.logMessage(options.getLastClass() + &quot;\n&quot;, true);
-workspace.logMessage(options.getLastPackage() + &quot;\n&quot;, true);
-workspace.logMessage(options.getLastProject() + &quot;\n&quot;, true);</pre>
+<pre>// connect to the workspaceWorkspace workspace = ToolEnv.connectToWorkspace();// grab the tool dataToolData toolData = workspace.getToolOptions(&quot;my.class.ThisToolName&quot;);// get the data we want from itLastUsedOptions options = (LastUsedOptions)toolData.getData();// use the dataworkspace.logMessage(options.getLastClass() + &quot;\n&quot;, true);workspace.logMessage(options.getLastPackage() + &quot;\n&quot;, true);workspace.logMessage(options.getLastProject() + &quot;\n&quot;, true);</pre>
 
 
 <h3>Deleting the Tool Data</h3>
@@ -3148,11 +2392,7 @@ workspace.logMessage(options.getLastProject() + &quot;\n&quot;, true);</pre>
 delete the tool data by calling clearToolOptions().
 </p>
 
-<pre>// connect to the workspace
-Workspace workspace = ToolEnv.connectToWorkspace();
-
-// delete the tool data
-workspace.clearToolOptions(&quot;my.class.ThisToolName&quot;);</pre>
+<pre>// connect to the workspaceWorkspace workspace = ToolEnv.connectToWorkspace();// delete the tool dataworkspace.clearToolOptions(&quot;my.class.ThisToolName&quot;);</pre>
 
 
 <h3>Storing Other Files</h3>
@@ -3325,56 +2565,44 @@ need to create some very useful tools, helping you to generate commonly-used
 code and automate tasks such as exports, imports, and repository maintenance.
 </p>
 
-				<!-- #EndEditable "content" -->
-				<div id="footer">
-					<p>&nbsp;</p>
-					<hr/>
-					<p>Copyright &copy; 1996-2009, Scott Stanchfield. All Rights Reserved.<br/>
-					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
-					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
-					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
-					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../../images/cssplay_button.png" width="88" /></a></p>
-					<p>
-					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
-					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../../images/feed-icon-14x14.png" width="14" />Want 
-					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
-					</p>
-				</div>
-			</div>
-		</div>
-		<div id="bottom"/>
-		<div id="navigation">
-			<ul>
-				<li><a href="../../index.html">Home</a></li>
-				<li><a href="../../articles/index.html">Articles</a></li>
-				<li><a href="../../tools/index.html">Tools</a></li>
-				<li><a href="../../evaj/index.html">Effective VisualAge for Java</a></li>
-				<li><a href="../../eclipse/index.html">Eclipse Tips</a></li>
-				<li><a href="../index.html">VisualAge Tips</a></li>
-				<!--
-				<li><a href="resume.html">Resume</a></li>
-				-->
-				<li><a href="../../publications.html">Publications</a></li>
-			</ul>
-			<p>&nbsp;</p>
-			<div style="margin-left:10px">
-<script type="text/javascript"><!--
-google_ad_client = "pub-1721904981084162";
-/* Homepage Gutter */
-google_ad_slot = "0044274311";
-google_ad_width = 120;
-google_ad_height = 600;
-//-->
-</script>
-<script type="text/javascript"
-src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script>
-</div>
-		</div>
-		<div id="bottomcorner"/>
-		<div id="topcorner"/>
-		</div>
-		<p>&nbsp;</p>
-	</body>
-<!-- #EndTemplate -->
-</html>
+				<!-- #EndEditable "content" -->
+				<div id="footer">
+					<p>&nbsp;</p>
+					<hr/>
+					<p>Copyright &copy; 1996-2013, Scott Stanchfield. All Rights Reserved.<br />
+					<br/>
+					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
+					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
+					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
+					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../../images/cssplay_button.png" width="88" /></a></p>
+					<p>
+					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
+					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../../images/feed-icon-14x14.png" width="14" />Want 
+					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div id="bottom"/>
+		<div id="navigation">
+			<h3>NAVIGATION</h3>
+			<ul>
+				<li><a href="../../index.html">Home</a></li>
+				<li><a href="../../articles/index.html">Articles</a></li>
+				<li><a href="../../tools/index.html">Tools</a></li>
+				<li><a href="../../evaj/index.html">Effective VisualAge<br/>&nbsp;&nbsp;&nbsp;&nbsp;for Java</a></li>
+				<li><a href="../../eclipse/index.html">Eclipse Tips</a></li>
+				<li><a href="../index.html">VisualAge Tips</a></li>
+				<!--
+				<li><a href="resume.html">Resume</a></li>
+				-->
+				<li><a href="../../publications.html">Publications</a></li>
+			</ul>
+			<p>&nbsp;</p>
+		</div>
+		<div id="bottomcorner"/>
+		<div id="topcorner"/>
+		</div>
+		<p>&nbsp;</p>
+	</body>
+<!-- #EndTemplate --></html>

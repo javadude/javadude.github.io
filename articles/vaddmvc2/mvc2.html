@@ -1,33 +1,35 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+
 
 <!-- #BeginTemplate "../../master.dwt" -->
 
-	<head>
-		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-		<!-- #BeginEditable "doctitle" -->
+	<head>
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+		<!-- #BeginEditable "doctitle" -->
+
 		<title>Advanced MVC Patterns - Scott Stanchfield</title>
-		<!-- #EndEditable -->
-		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
-		<!-- #BeginEditable "head" -->
-		<!-- #EndEditable -->
-		<style type="text/css">
-
-.style1 {
-	vertical-align: middle;
-}
-</style>
-	</head>
-
-	<body>
-		<div id="header">
-			<h1>JavaDude.com</h1>
-			<h4>-- Scott Stanchfield</h4>
-		</div>
-		<div id="content">
-			<div id="topBar">&nbsp;</div>
-			<div id="contentIndent">
-				<!-- #BeginEditable "content" -->
+		<!-- #EndEditable -->
+		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
+		<!-- #BeginEditable "head" -->
+		<!-- #EndEditable -->
+		<style type="text/css">
+.style1 {
+	vertical-align: middle;
+}
+</style>
+	</head>
+
+	<body>
+		<div id="header">
+			<h1>JavaDude.com</h1>
+			<h4>-- Scott Stanchfield</h4>
+		</div>
+		<div id="content">
+			<div id="topBar">&nbsp;</div>
+			<div id="contentIndent">
+				<!-- #BeginEditable "content" -->
+
 
 <h1>Advanced MVC Patterns</h1>
 <h2>Downloads</h2>
@@ -107,23 +109,7 @@ models and delegates. We will use Swing's TableModel, showing ways to enhance
 its behavior and use it in VisualAge for Java. TableModel is an interface that
 defines the following methods.</p>
 
-<pre>public interface TableModel {
-  public int getRowCount();
-  public int getColumnCount();
-  public String getColumnName(int columnIndex);
-  public Class getColumnClass(int columnIndex);
-  public boolean isCellEditable(int rowIndex,
-                                int columnIndex);
-  public Object getValueAt(int rowIndex,
-                           int columnIndex);
-  public void setValueAt(Object aValue,
-                         int rowIndex,
-                         int columnIndex);
-  public void addTableModelListener(
-                TableModelListener l);
-  public void removeTableModelListener(
-                TableModelListener l);
-}</pre>
+<pre>public interface TableModel {  public int getRowCount();  public int getColumnCount();  public String getColumnName(int columnIndex);  public Class getColumnClass(int columnIndex);  public boolean isCellEditable(int rowIndex,                                int columnIndex);  public Object getValueAt(int rowIndex,                           int columnIndex);  public void setValueAt(Object aValue,                         int rowIndex,                         int columnIndex);  public void addTableModelListener(                TableModelListener l);  public void removeTableModelListener(                TableModelListener l);}</pre>
 
 <h2>Advanced Models and Delegate</h2>
 
@@ -168,45 +154,7 @@ example of such a model follows. Note that this TableModel hard codes its data,
 but it could easily have obtained the data from a database. The data in this
 model helps to demonstrate the effect of applied filters.</p>
 
-<pre>package com.javadude.articles.vaddmvc2;
-
-import com.sun.java.swing.*;
-import com.sun.java.swing.event.*;
-import com.sun.java.swing.table.*;
-
-/**
- * A simple table model with hardcoded data
- * Each cell displays (r,c) where r and c
- *   are integer row and column numbers
- * This model helps to show the effect of
- *   an applied filter model
- */
-public class FixedTableModel extends AbstractTableModel {
-  /**
-   * Return the number of columns
-   *   in the model -- we explicitly use 6
-   */
-  public int getColumnCount() {
-    return 6;
-  }
-
-  /**
-   * Return the number of rows
-   *   in the model -- we explicitly use 20
-   */
-  public int getRowCount() {
-    return 20;
-  }
-
-  /**
-   * Return a string that describes the
-   *   location in the data
-   */
-  public Object getValueAt(int rowIndex, 
-                           int columnIndex) {
-    return columnIndex + &quot;,&quot; + rowIndex;
-  }
-}</pre>
+<pre>package com.javadude.articles.vaddmvc2;import com.sun.java.swing.*;import com.sun.java.swing.event.*;import com.sun.java.swing.table.*;/** * A simple table model with hardcoded data * Each cell displays (r,c) where r and c *   are integer row and column numbers * This model helps to show the effect of *   an applied filter model */public class FixedTableModel extends AbstractTableModel {  /**   * Return the number of columns   *   in the model -- we explicitly use 6   */  public int getColumnCount() {    return 6;  }  /**   * Return the number of rows   *   in the model -- we explicitly use 20   */  public int getRowCount() {    return 20;  }  /**   * Return a string that describes the   *   location in the data   */  public Object getValueAt(int rowIndex,                            int columnIndex) {    return columnIndex + &quot;,&quot; + rowIndex;  }}</pre>
 
 <p>To simplify this and other examples, we create an abstract class named
 FilteredTableModel. FilteredTableModel keeps track of another TableModel This
@@ -215,186 +163,20 @@ Each of the delegations alter the requested row and column using the mapRow()
 and mapColumn() method. This allows subclasses to create simple filters just by
 changing the mappings.</p>
 
-<pre>package com.javadude.articles.vaddmvc2;
- 
-import com.sun.java.swing.*;
-import com.sun.java.swing.event.*;
-import com.sun.java.swing.table.*;
-
-/**
- * A sample abstract filtering model
- * This model delegates nearly all its
- *   methods to another TableModel, but
- *   subclasses can change the way columns
- *   are mapped
- * Note that we have omitted error checking
- *   such as &quot;is the real model null&quot; for
- *   brevity/clarity in this example
- */
-public abstract class FilteredTableModel
-                implements TableModel {
-    // The realTableModel property. This property
-    //   tracks the real model we use
-    private TableModel fieldRealTableModel;
-
-    /**
-     * Gets the realTableModel property (TableModel) value.
-     * @return The realTableModel property value.
-     * @see #setRealTableModel
-     */
-    public TableModel getRealTableModel() {
-        return fieldRealTableModel;
-    }
-
-    /**
-     * Sets the realTableModel property (TableModel) value.
-     * @param realTableModel The new value for the property.
-     * @see #getRealTableModel
-     */
-    public void setRealTableModel(TableModel realTableModel) {
-        fieldRealTableModel = realTableModel;
-    }
-
-    /** Provides a mapping from a requested
-     *    column to the column in the real model
-     *  Subclasses can override this to
-     *    define special mappings
-     */
-    protected int mapColumn(int columnIndex) {
-        return columnIndex;
-    }
-
-    /** Provides a mapping from a requested
-     *    row to the row in the real model
-     *  Subclasses can override this to
-     *    define special mappings
-     */
-    protected int mapRow(int rowIndex) {
-        return rowIndex;
-    }
-
-    public void addTableModelListener(TableModelListener l) {
-        getRealTableModel().addTableModelListener(l);
-    }
-
-    public Class getColumnClass(int columnIndex) {
-        return getRealTableModel().
-                 getColumnClass(mapColumn(columnIndex));
-    }
-
-    public int getColumnCount() {
-        return getRealTableModel().getColumnCount();
-    }
-
-    public String getColumnName(int columnIndex) {
-        return getRealTableModel().
-                 getColumnName(mapColumn(columnIndex));
-    }
-
-    public int getRowCount() {
-        return getRealTableModel().getRowCount();
-    }
-
-    public Object getValueAt(int rowIndex,
-                             int columnIndex) {
-        return getRealTableModel().
-                 getValueAt(mapRow(rowIndex), 
-                            mapColumn(columnIndex));
-    }
-
-    public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return getRealTableModel().
-                 isCellEditable(mapRow(rowIndex),
-                                mapColumn(columnIndex));
-    }
-
-    public void removeTableModelListener(TableModelListener l) {
-        getRealTableModel().removeTableModelListener(l);
-    }
-
-    public void setValueAt(Object aValue, int rowIndex, 
-                           int columnIndex) {
-        getRealTableModel().
-            setValueAt(aValue, mapRow(rowIndex), 
-                       mapColumn(columnIndex));
-    }
-}</pre>
+<pre>package com.javadude.articles.vaddmvc2; import com.sun.java.swing.*;import com.sun.java.swing.event.*;import com.sun.java.swing.table.*;/** * A sample abstract filtering model * This model delegates nearly all its *   methods to another TableModel, but *   subclasses can change the way columns *   are mapped * Note that we have omitted error checking *   such as &quot;is the real model null&quot; for *   brevity/clarity in this example */public abstract class FilteredTableModel                implements TableModel {    // The realTableModel property. This property    //   tracks the real model we use    private TableModel fieldRealTableModel;    /**     * Gets the realTableModel property (TableModel) value.     * @return The realTableModel property value.     * @see #setRealTableModel     */    public TableModel getRealTableModel() {        return fieldRealTableModel;    }    /**     * Sets the realTableModel property (TableModel) value.     * @param realTableModel The new value for the property.     * @see #getRealTableModel     */    public void setRealTableModel(TableModel realTableModel) {        fieldRealTableModel = realTableModel;    }    /** Provides a mapping from a requested     *    column to the column in the real model     *  Subclasses can override this to     *    define special mappings     */    protected int mapColumn(int columnIndex) {        return columnIndex;    }    /** Provides a mapping from a requested     *    row to the row in the real model     *  Subclasses can override this to     *    define special mappings     */    protected int mapRow(int rowIndex) {        return rowIndex;    }    public void addTableModelListener(TableModelListener l) {        getRealTableModel().addTableModelListener(l);    }    public Class getColumnClass(int columnIndex) {        return getRealTableModel().                 getColumnClass(mapColumn(columnIndex));    }    public int getColumnCount() {        return getRealTableModel().getColumnCount();    }    public String getColumnName(int columnIndex) {        return getRealTableModel().                 getColumnName(mapColumn(columnIndex));    }    public int getRowCount() {        return getRealTableModel().getRowCount();    }    public Object getValueAt(int rowIndex,                             int columnIndex) {        return getRealTableModel().                 getValueAt(mapRow(rowIndex),                             mapColumn(columnIndex));    }    public boolean isCellEditable(int rowIndex, int columnIndex) {        return getRealTableModel().                 isCellEditable(mapRow(rowIndex),                                mapColumn(columnIndex));    }    public void removeTableModelListener(TableModelListener l) {        getRealTableModel().removeTableModelListener(l);    }    public void setValueAt(Object aValue, int rowIndex,                            int columnIndex) {        getRealTableModel().            setValueAt(aValue, mapRow(rowIndex),                        mapColumn(columnIndex));    }}</pre>
 
 <p>We define two subclasses that provide interesting filtering. First,
 OmitColumnTableModel hides a single column. It extends FilteredTableModel and
 changes the column mapping to omit a column, and reduces the column number
 report.</p>
 
-<pre>package com.javadude.articles.vaddmvc2;
- 
-import com.sun.java.swing.*;
-import com.sun.java.swing.event.*;
-import com.sun.java.swing.table.*;
-
-/**
- * A sample filtering model that omits
- *   a single column in a table
- */
-public class OmitColumnTableModel extends FilteredTableModel {
-    // The hiddenColumn property tells us which column to omit
-    private int fieldHiddenColumn = 0;
-
-    /**
-     * Gets the hiddenColumn property (int) value.
-     * @return The hiddenColumn property value.
-     * @see #setHiddenColumn
-     */
-    public int getHiddenColumn() {
-        return fieldHiddenColumn;
-    }
-
-    /**
-     * Sets the hiddenColumn property (int) value.
-     * @param hiddenColumn The new value for the property.
-     * @see #getHiddenColumn
-     */
-    public void setHiddenColumn(int hiddenColumn) {
-        fieldHiddenColumn = hiddenColumn;
-    }
-
-    // Change the column mapping to skip the hidden column
-
-    /** Returns a fewer columns than the real
-     *    TableModel actually has, as we hide one
-     */
-    public int getColumnCount() {
-        return getRealTableModel().getColumnCount() - 1;
-    }
-
-    /** Provides a mapping from a requested
-     *    column to the column in the real model
-     */
-    protected int mapColumn(int col) {
-        if (col &gt;= getHiddenColumn())
-            col++;
-        return col;
-    }
-}</pre>
+<pre>package com.javadude.articles.vaddmvc2; import com.sun.java.swing.*;import com.sun.java.swing.event.*;import com.sun.java.swing.table.*;/** * A sample filtering model that omits *   a single column in a table */public class OmitColumnTableModel extends FilteredTableModel {    // The hiddenColumn property tells us which column to omit    private int fieldHiddenColumn = 0;    /**     * Gets the hiddenColumn property (int) value.     * @return The hiddenColumn property value.     * @see #setHiddenColumn     */    public int getHiddenColumn() {        return fieldHiddenColumn;    }    /**     * Sets the hiddenColumn property (int) value.     * @param hiddenColumn The new value for the property.     * @see #getHiddenColumn     */    public void setHiddenColumn(int hiddenColumn) {        fieldHiddenColumn = hiddenColumn;    }    // Change the column mapping to skip the hidden column    /** Returns a fewer columns than the real     *    TableModel actually has, as we hide one     */    public int getColumnCount() {        return getRealTableModel().getColumnCount() - 1;    }    /** Provides a mapping from a requested     *    column to the column in the real model     */    protected int mapColumn(int col) {        if (col &gt;= getHiddenColumn())            col++;        return col;    }}</pre>
 
 <p>This simple extension effectively hides a column in the model. We define
 another filter that reverses the order of the columns. This is even simpler than
 the column-omitting filter.</p>
 
-<pre>package com.javadude.articles.vaddmvc2;
- 
-/**
- * This TableModel reverses the column display
- */
-public class ReverseColumnTableModel
-       extends FilteredTableModel {
-    /** Change the column mapping
-     *    to return the columns in
-     *    reverse order
-     */
-    protected int mapColumn(int col) {
-        return getColumnCount() - col - 1;
-    }
-}</pre>
+<pre>package com.javadude.articles.vaddmvc2; /** * This TableModel reverses the column display */public class ReverseColumnTableModel       extends FilteredTableModel {    /** Change the column mapping     *    to return the columns in     *    reverse order     */    protected int mapColumn(int col) {        return getColumnCount() - col - 1;    }}</pre>
 
 <p>We apply these filters when assembling our application. The JTable acts as
 our delegate, while the above two filters act as the models. We will assemble a
@@ -444,26 +226,7 @@ nave TableModel implementation might copy the properties from each Person into
 a two-dimensional array, and use that array in Swing's default TableModel
 support as follows.</p>
 
-<pre>// define the target data for the table
-String[][] data = new String[10][3];
-
-// copy the property values to the array
-for(int i = 0; i &lt; people.length; i++) {
-  data[i][0] = people[i].getName();
-  data[i][1] = people[i].getAddress();
-  data[i][2] = people[i].getPhone();
-}
-
-// define the names of the columns
-String[] columnNames =
-    {&quot;Name&quot;,&quot;Address&quot;,&quot;Phone&quot;};
-
-// create a default table model with the data
-DefaultTableModel tableModel =
-  new DefaultTableModel(data, columnNames);
-
-// use the default model with a table
-table.setModel(tableModel);</pre>
+<pre>// define the target data for the tableString[][] data = new String[10][3];// copy the property values to the arrayfor(int i = 0; i &lt; people.length; i++) {  data[i][0] = people[i].getName();  data[i][1] = people[i].getAddress();  data[i][2] = people[i].getPhone();}// define the names of the columnsString[] columnNames =    {&quot;Name&quot;,&quot;Address&quot;,&quot;Phone&quot;};// create a default table model with the dataDefaultTableModel tableModel =  new DefaultTableModel(data, columnNames);// use the default model with a tabletable.setModel(tableModel);</pre>
 
 <p>This is a <i>horribly</i> slow implementation. Data copying must be avoided
 whenever possible.&nbsp;</p>
@@ -479,14 +242,7 @@ For this example, a better approach would be to define a TableModel that simply
 interprets the existing data and returns it. For example, the getValueAt()
 method of such a TableModel might look as follows.
 
-<pre>public Object getValueAt(int row, int col) {
-  switch(col) {
-    case 0: return people[row].getName();
-    case 1: return people[row].getAddress();
-    case 2: return people[row].getPhone();
-    default: throw IllegalArgumentException(&quot;Bad Column&quot;);
-  }
-}</pre>
+<pre>public Object getValueAt(int row, int col) {  switch(col) {    case 0: return people[row].getName();    case 1: return people[row].getAddress();    case 2: return people[row].getPhone();    default: throw IllegalArgumentException(&quot;Bad Column&quot;);  }}</pre>
 
 <p>Using a filter model such as this provides access to the existing data <i>in
 its existing format</i>. We simply interpret the existing data, adapting it to
@@ -511,25 +267,7 @@ uses; always abstract the communication via an interface!</p>
 required methods to support a bound read/write String property named <i>pattern</i>.
 This interface looks as follows.</p>
 
-<pre>package com.javadude.articles.vaddmvc2;
-
-import java.beans.*;
-
-/**
- * An interface that describes and object
- *   that keeps track of a pattern
- */
-public interface Patterned {
-  // the pattern property
-  public String getPattern();
-  public void setPattern(String pattern);
-
-  // Bound property support
-  public void addPropertyChangeListener(
-                  PropertyChangeListener listener);
-  public void removePropertyChangeListener(
-                  PropertyChangeListener listener);
-}</pre>
+<pre>package com.javadude.articles.vaddmvc2;import java.beans.*;/** * An interface that describes and object *   that keeps track of a pattern */public interface Patterned {  // the pattern property  public String getPattern();  public void setPattern(String pattern);  // Bound property support  public void addPropertyChangeListener(                  PropertyChangeListener listener);  public void removePropertyChangeListener(                  PropertyChangeListener listener);}</pre>
 
 <p>Our strategy for the pattern filter must ensure that:</p>
 <ul>
@@ -569,145 +307,7 @@ especially bound properties and ensuring that the event source is correct. The
 VCE's generated code depends upon a proper event source specification in order
 to perform connection processing.</p>
 
-<pre>package com.javadude.articles.vaddmvc2;
-
-import com.javadude.articles.vaddmvc1.AddressBookModel;
-import com.javadude.articles.vaddmvc1.AddressDataModel;
-import java.beans.*;
-
-/**
- * An AddressBookModel filter.
- * This filter allows specification of a pattern that
- *   restricts which address are returned by the addresses
- *   indexed property
- */
-public class PatternedAddressBook
-     implements AddressBookModel, Patterned {
-  private AddressBookModel fieldRealAddressBook;
-  protected transient PropertyChangeSupport propertyChange;
-  private String fieldPattern;
-
-  // pcl is a holder for the PropertyChangeListener that
-  //   we add to the real model. We need to hold a reference
-  //   to it in case we change the real model later
-  private PropertyChangeListener pcl;
-
-  // Define addresses property to filter based on the
-  //   pattern property
-  public AddressDataModel[] getAddresses() {
-    AddressDataModel[] data = getRealAddressBook().getAddresses();
-    String pattern = getPattern();
-
-    // if no pattern or it's empty, return data
-    if (pattern == null || pattern.equals(&quot;&quot;))
-      return data;
-
-    // find out how many match the pattern
-    int count = 0;
-    for (int i = 0; i &lt; data.length; i++)
-      if (data[i].getName().startsWith(getPattern()))
-        count++;
-
-    // if pattern matches all, return all
-    if (count == data.length)
-      return data;
-
-    // Otherwise Make the new data array
-    // Unfortunately, there is no other way to
-    //   do this for an indexed property other
-    //   than copy the String refs to a new
-    //   array
-    AddressDataModel[] patterned = new AddressDataModel[count];
-    for (int i = 0, j = 0; i &lt; data.length; i++)
-      if (data[i].getName().startsWith(getPattern()))
-        patterned[j++] = data[i];
-    return patterned;
-  }
-
-  public AddressDataModel getAddresses(int index) {
-    return getAddresses()[index];
-  }
-
-  // the pattern string property
-  public String getPattern() {
-    return fieldPattern;
-  }
-
-  public void setPattern(String pattern) {
-    String oldValue = fieldPattern;
-    fieldPattern = pattern;
-    firePropertyChange(&quot;pattern&quot;, oldValue, pattern);
-    firePropertyChange(&quot;addresses&quot;, null, getAddresses());
-  }
-
-  // the realAddressBook property, tracking the real model
-  //   that we filter
-  public AddressBookModel getRealAddressBook() {
-    return fieldRealAddressBook;
-  }
-
-  public void setRealAddressBook(AddressBookModel realAddressBook) {
-    AddressBookModel oldValue = fieldRealAddressBook;
-    // if we used to have a value, remove the
-    //   old property change listener
-    if (oldValue != null)
-      oldValue.removePropertyChangeListener(pcl);
-
-    // set the property value
-    fieldRealAddressBook = realAddressBook;
-
-    // set up listener to delegate events
-    if (pcl == null)
-      pcl = new PropertyChangeListener() {
-      public void propertyChange(PropertyChangeEvent e) {
-        firePropertyChange(e.getPropertyName(),
-                   e.getOldValue(),
-                   e.getNewValue());
-      }
-    };
-
-    realAddressBook.addPropertyChangeListener(pcl);
-
-    // report that the property has changed
-    firePropertyChange(&quot;realAddressBook&quot;, oldValue,
-               realAddressBook);
-  }
-
-  // Simply delegate the add &amp; find methods
-  public void add(AddressDataModel data) {
-    getRealAddressBook().add(data);
-  }
-
-  public AddressDataModel find(String name) {
-    return getRealAddressBook().find(name);
-  }
-
-  // support methods for the bound properties
-  public void addPropertyChangeListener(
-          PropertyChangeListener listener) {
-    getPropertyChange().addPropertyChangeListener(listener);
-  }
-
-  public void removePropertyChangeListener(
-          PropertyChangeListener listener) {
-    getPropertyChange().removePropertyChangeListener(listener);
-  }
-
-  public void firePropertyChange(String propertyName,
-                   Object oldValue,
-                   Object newValue) {
-    getPropertyChange().firePropertyChange(propertyName,
-                         oldValue,
-                         newValue);
-  }
-
-  protected PropertyChangeSupport getPropertyChange() {
-    if (propertyChange == null) {
-      propertyChange = new PropertyChangeSupport(this);
-    };
-    return propertyChange;
-  }
-}</pre>
+<pre>package com.javadude.articles.vaddmvc2;import com.javadude.articles.vaddmvc1.AddressBookModel;import com.javadude.articles.vaddmvc1.AddressDataModel;import java.beans.*;/** * An AddressBookModel filter. * This filter allows specification of a pattern that *   restricts which address are returned by the addresses *   indexed property */public class PatternedAddressBook     implements AddressBookModel, Patterned {  private AddressBookModel fieldRealAddressBook;  protected transient PropertyChangeSupport propertyChange;  private String fieldPattern;  // pcl is a holder for the PropertyChangeListener that  //   we add to the real model. We need to hold a reference  //   to it in case we change the real model later  private PropertyChangeListener pcl;  // Define addresses property to filter based on the  //   pattern property  public AddressDataModel[] getAddresses() {    AddressDataModel[] data = getRealAddressBook().getAddresses();    String pattern = getPattern();    // if no pattern or it's empty, return data    if (pattern == null || pattern.equals(&quot;&quot;))      return data;    // find out how many match the pattern    int count = 0;    for (int i = 0; i &lt; data.length; i++)      if (data[i].getName().startsWith(getPattern()))        count++;    // if pattern matches all, return all    if (count == data.length)      return data;    // Otherwise Make the new data array    // Unfortunately, there is no other way to    //   do this for an indexed property other    //   than copy the String refs to a new    //   array    AddressDataModel[] patterned = new AddressDataModel[count];    for (int i = 0, j = 0; i &lt; data.length; i++)      if (data[i].getName().startsWith(getPattern()))        patterned[j++] = data[i];    return patterned;  }  public AddressDataModel getAddresses(int index) {    return getAddresses()[index];  }  // the pattern string property  public String getPattern() {    return fieldPattern;  }  public void setPattern(String pattern) {    String oldValue = fieldPattern;    fieldPattern = pattern;    firePropertyChange(&quot;pattern&quot;, oldValue, pattern);    firePropertyChange(&quot;addresses&quot;, null, getAddresses());  }  // the realAddressBook property, tracking the real model  //   that we filter  public AddressBookModel getRealAddressBook() {    return fieldRealAddressBook;  }  public void setRealAddressBook(AddressBookModel realAddressBook) {    AddressBookModel oldValue = fieldRealAddressBook;    // if we used to have a value, remove the    //   old property change listener    if (oldValue != null)      oldValue.removePropertyChangeListener(pcl);    // set the property value    fieldRealAddressBook = realAddressBook;    // set up listener to delegate events    if (pcl == null)      pcl = new PropertyChangeListener() {      public void propertyChange(PropertyChangeEvent e) {        firePropertyChange(e.getPropertyName(),                   e.getOldValue(),                   e.getNewValue());      }    };    realAddressBook.addPropertyChangeListener(pcl);    // report that the property has changed    firePropertyChange(&quot;realAddressBook&quot;, oldValue,               realAddressBook);  }  // Simply delegate the add &amp; find methods  public void add(AddressDataModel data) {    getRealAddressBook().add(data);  }  public AddressDataModel find(String name) {    return getRealAddressBook().find(name);  }  // support methods for the bound properties  public void addPropertyChangeListener(          PropertyChangeListener listener) {    getPropertyChange().addPropertyChangeListener(listener);  }  public void removePropertyChangeListener(          PropertyChangeListener listener) {    getPropertyChange().removePropertyChangeListener(listener);  }  public void firePropertyChange(String propertyName,                   Object oldValue,                   Object newValue) {    getPropertyChange().firePropertyChange(propertyName,                         oldValue,                         newValue);  }  protected PropertyChangeSupport getPropertyChange() {    if (propertyChange == null) {      propertyChange = new PropertyChangeSupport(this);    };    return propertyChange;  }}</pre>
 
 <p>Once we define the model, we need to use it in a delegate. We create a new
 delegate that wraps the previous AddressBookListUI, adding a pattern. We can
@@ -769,21 +369,7 @@ only the order in which the data appears. The following code provides a sort for
 the displayed names. The entire model is similar to the PatternedAddressBook
 above, without the <i>pattern</i> property.</p>
 
-<pre>public AddressDataModel[] getAddresses() {
-  AddressDataModel[] data = getRealAddressBook().getAddresses();
-  AddressDataModel[] sorted = new AddressDataModel[data.length];
-  System.arraycopy(data, 0, sorted, 0, data.length);
-
-  // do a simple inefficient bubble sort
-  for (int i = 0; i &lt; sorted.length - 1; i++)
-    for (int j = i + 1; j &lt; sorted.length; j++)
-      if (sorted[i].getName().compareTo(sorted[j].getName()) &gt; 0) {
-        AddressDataModel temp = sorted[i];
-        sorted[i] = sorted[j];
-        sorted[j] = temp;
-      }
-  return sorted;
-}</pre>
+<pre>public AddressDataModel[] getAddresses() {  AddressDataModel[] data = getRealAddressBook().getAddresses();  AddressDataModel[] sorted = new AddressDataModel[data.length];  System.arraycopy(data, 0, sorted, 0, data.length);  // do a simple inefficient bubble sort  for (int i = 0; i &lt; sorted.length - 1; i++)    for (int j = i + 1; j &lt; sorted.length; j++)      if (sorted[i].getName().compareTo(sorted[j].getName()) &gt; 0) {        AddressDataModel temp = sorted[i];        sorted[i] = sorted[j];        sorted[j] = temp;      }  return sorted;}</pre>
 
 <p>We apply this filter <i>around</i> the pattern filter, so that we only sort
 the reduced data. A sample application design appears in Figure 7. For this
@@ -815,173 +401,7 @@ could combine data from two or more real models. A join filter allows a delegate
 to display data from multiple sources as though there were a single source. As
 an example, we will use Swing's TableModel as a joined model.</p>
 
-<pre>package com.javadude.articles.vaddmvc2;
- 
-import com.sun.java.swing.*;
-import com.sun.java.swing.event.*;
-import com.sun.java.swing.table.*;
-import java.beans.*;
-
-/**
- * A Join Model, combining the columns in two models
- */
-public class TwoTableJoinTableModel
-       extends AbstractTableModel
-       implements TableModelListener {
-  protected transient PropertyChangeSupport propertyChange;
-  private TableModel fieldModel1 = null;
-  private TableModel fieldModel2 = null;
-
-  /** Return the type of the column, mapping the column into
-   *  the appropriate table
-   */
-  public Class getColumnClass(int columnIndex) {
-    int col1Count = getModel1().getColumnCount();
-    if (columnIndex &lt; col1Count)
-      return getModel1().getColumnClass(columnIndex);
-    else
-      return getModel2().getColumnClass(columnIndex - col1Count);
-  }
-
-  /** Return the number of columns, which is the sum of the
-   *  the number of columns in each joined table
-   */
-  public int getColumnCount() {
-    return getModel1().getColumnCount() +
-           getModel2().getColumnCount();
-  }
-
-  /** Return the name of the column, mapping the column into
-   *  the appropriate table
-   */
-  public String getColumnName(int columnIndex) {
-    int col1Count = getModel1().getColumnCount();
-    if (columnIndex &lt; col1Count)
-      return getModel1().getColumnName(columnIndex);
-    else
-      return getModel2().getColumnName(columnIndex - col1Count);
-  }
-
-  /** return the number of rows in this table -- we'll use
-   *  the maximum number of rows in either joined table
-   */
-  public int getRowCount() {
-    return Math.max(getModel1().getRowCount(),
-                    getModel2().getRowCount());
-  }
-
-  /** get the row/column value, mapping it to the appropriate
-   *  real table position. If an empty position is requested,
-   *  we return null
-   */
-  public Object getValueAt(int rowIndex, int columnIndex) {
-    int col1Count = getModel1().getColumnCount();
-    if (columnIndex &lt; col1Count) {
-      if (rowIndex &lt; getModel1().getRowCount())
-        return getModel1().getValueAt(rowIndex, columnIndex);
-    }
-    else
-      if (rowIndex &lt; getModel2().getRowCount())
-        return getModel2().getValueAt(rowIndex,
-                                      columnIndex - col1Count);
-    return null;
-  }
-
-  /** set the row/column value, mapping it to the appropriate
-   *  real table position. If an empty position is requested,
-   *  we return null
-   */
-  public void setValueAt(Object aValue, int rowIndex,
-                         int columnIndex) {
-    int col1Count = getModel1().getColumnCount();
-    if (columnIndex &lt; col1Count)
-      getModel1().setValueAt(aValue, rowIndex, columnIndex);
-    else
-      getModel2().setValueAt(aValue, rowIndex,
-                             columnIndex - col1Count);
-  }
-
-  /** delegate the check to see if a cell is editable to the
-   *  appropriate real model
-   */
-  public boolean isCellEditable(int rowIndex, int columnIndex) {
-    int col1Count = getModel1().getColumnCount();
-    if (columnIndex &lt; col1Count) {
-      if (rowIndex &lt; getModel1().getRowCount())
-        return getModel1().isCellEditable(rowIndex, columnIndex);
-    }
-    else
-      if (rowIndex &lt; getModel2().getRowCount())
-        return getModel2().isCellEditable(rowIndex,
-                                          columnIndex-col1Count);
-    return false;
-  }
-
-  // properties to track the two real models
-  public TableModel getModel1() {
-    return fieldModel1;
-  }
-
-  public TableModel getModel2() {
-    return fieldModel2;
-  }
-
-  // The set methods need to add us as a listener
-  //   so that we can forward the events to _our_ listeners
-  public void setModel1(TableModel model1) {
-    if (fieldModel1 != null)
-      fieldModel1.removeTableModelListener(this);
-    TableModel oldValue = fieldModel1;
-    fieldModel1 = model1;
-    fieldModel1.addTableModelListener(this);
-    firePropertyChange(&quot;model1&quot;, oldValue, model1);
-  }
-
-  public void setModel2(TableModel model2) {
-    if (fieldModel1 != null)
-      fieldModel1.removeTableModelListener(this);
-    TableModel oldValue = fieldModel2;
-    fieldModel2 = model2;
-    fieldModel1.addTableModelListener(this);
-    firePropertyChange(&quot;model2&quot;, oldValue, model2);
-  }
-
-  /** Catch the table model events of the real
-   *  models and refire it to _our_ listeners
-   */
-  public void tableChanged(TableModelEvent e) {
-    fireTableChanged(new TableModelEvent(this,
-                                         e.getFirstRow(),
-                                         e.getLastRow(),
-                                         e.getColumn(),
-                                         e.getType()));
-  }
-
-  // standard bound property support
-  public synchronized void addPropertyChangeListener(
-                             PropertyChangeListener listener) {
-    getPropertyChange().addPropertyChangeListener(listener);
-  }
-
-  public void firePropertyChange(String propertyName,
-                                 Object oldValue,
-                                 Object newValue) {
-    getPropertyChange().firePropertyChange(propertyName,
-                                           oldValue, newValue);
-  }
-
-  public synchronized void removePropertyChangeListener(
-                             PropertyChangeListener listener) {
-    getPropertyChange().removePropertyChangeListener(listener);
-  }
-
-  protected PropertyChangeSupport getPropertyChange() {
-    if (propertyChange == null) {
-      propertyChange = new java.beans.PropertyChangeSupport(this);
-    };
-    return propertyChange;
-  }
-}</pre>
+<pre>package com.javadude.articles.vaddmvc2; import com.sun.java.swing.*;import com.sun.java.swing.event.*;import com.sun.java.swing.table.*;import java.beans.*;/** * A Join Model, combining the columns in two models */public class TwoTableJoinTableModel       extends AbstractTableModel       implements TableModelListener {  protected transient PropertyChangeSupport propertyChange;  private TableModel fieldModel1 = null;  private TableModel fieldModel2 = null;  /** Return the type of the column, mapping the column into   *  the appropriate table   */  public Class getColumnClass(int columnIndex) {    int col1Count = getModel1().getColumnCount();    if (columnIndex &lt; col1Count)      return getModel1().getColumnClass(columnIndex);    else      return getModel2().getColumnClass(columnIndex - col1Count);  }  /** Return the number of columns, which is the sum of the   *  the number of columns in each joined table   */  public int getColumnCount() {    return getModel1().getColumnCount() +           getModel2().getColumnCount();  }  /** Return the name of the column, mapping the column into   *  the appropriate table   */  public String getColumnName(int columnIndex) {    int col1Count = getModel1().getColumnCount();    if (columnIndex &lt; col1Count)      return getModel1().getColumnName(columnIndex);    else      return getModel2().getColumnName(columnIndex - col1Count);  }  /** return the number of rows in this table -- we'll use   *  the maximum number of rows in either joined table   */  public int getRowCount() {    return Math.max(getModel1().getRowCount(),                    getModel2().getRowCount());  }  /** get the row/column value, mapping it to the appropriate   *  real table position. If an empty position is requested,   *  we return null   */  public Object getValueAt(int rowIndex, int columnIndex) {    int col1Count = getModel1().getColumnCount();    if (columnIndex &lt; col1Count) {      if (rowIndex &lt; getModel1().getRowCount())        return getModel1().getValueAt(rowIndex, columnIndex);    }    else      if (rowIndex &lt; getModel2().getRowCount())        return getModel2().getValueAt(rowIndex,                                      columnIndex - col1Count);    return null;  }  /** set the row/column value, mapping it to the appropriate   *  real table position. If an empty position is requested,   *  we return null   */  public void setValueAt(Object aValue, int rowIndex,                         int columnIndex) {    int col1Count = getModel1().getColumnCount();    if (columnIndex &lt; col1Count)      getModel1().setValueAt(aValue, rowIndex, columnIndex);    else      getModel2().setValueAt(aValue, rowIndex,                             columnIndex - col1Count);  }  /** delegate the check to see if a cell is editable to the   *  appropriate real model   */  public boolean isCellEditable(int rowIndex, int columnIndex) {    int col1Count = getModel1().getColumnCount();    if (columnIndex &lt; col1Count) {      if (rowIndex &lt; getModel1().getRowCount())        return getModel1().isCellEditable(rowIndex, columnIndex);    }    else      if (rowIndex &lt; getModel2().getRowCount())        return getModel2().isCellEditable(rowIndex,                                          columnIndex-col1Count);    return false;  }  // properties to track the two real models  public TableModel getModel1() {    return fieldModel1;  }  public TableModel getModel2() {    return fieldModel2;  }  // The set methods need to add us as a listener  //   so that we can forward the events to _our_ listeners  public void setModel1(TableModel model1) {    if (fieldModel1 != null)      fieldModel1.removeTableModelListener(this);    TableModel oldValue = fieldModel1;    fieldModel1 = model1;    fieldModel1.addTableModelListener(this);    firePropertyChange(&quot;model1&quot;, oldValue, model1);  }  public void setModel2(TableModel model2) {    if (fieldModel1 != null)      fieldModel1.removeTableModelListener(this);    TableModel oldValue = fieldModel2;    fieldModel2 = model2;    fieldModel1.addTableModelListener(this);    firePropertyChange(&quot;model2&quot;, oldValue, model2);  }  /** Catch the table model events of the real   *  models and refire it to _our_ listeners   */  public void tableChanged(TableModelEvent e) {    fireTableChanged(new TableModelEvent(this,                                         e.getFirstRow(),                                         e.getLastRow(),                                         e.getColumn(),                                         e.getType()));  }  // standard bound property support  public synchronized void addPropertyChangeListener(                             PropertyChangeListener listener) {    getPropertyChange().addPropertyChangeListener(listener);  }  public void firePropertyChange(String propertyName,                                 Object oldValue,                                 Object newValue) {    getPropertyChange().firePropertyChange(propertyName,                                           oldValue, newValue);  }  public synchronized void removePropertyChangeListener(                             PropertyChangeListener listener) {    getPropertyChange().removePropertyChangeListener(listener);  }  protected PropertyChangeSupport getPropertyChange() {    if (propertyChange == null) {      propertyChange = new java.beans.PropertyChangeSupport(this);    };    return propertyChange;  }}</pre>
 
 <p>To use this new model, we simply need to connect two real models to a join
 model, then, connect the join model to one or more delegates. An example of this
@@ -1103,101 +523,15 @@ represent the selection model. This allows us to replace the model (if needed)
 without requiring changes to a delegate. This model interface defines a single
 bound property of type AddressDataModel, and the bound-property support methods.</p>
 
-<pre>package com.javadude.articles.vaddmvc2;
- 
-import com.javadude.articles.vaddmvc1.*;
-import java.beans.*;
-
-public interface AddressDataSelectionModel{
-  public void addPropertyChangeListener(
-                PropertyChangeListener listener) ;
-  public AddressBookModel getModel() ;
-  public AddressDataModel getSelection() ;
-  public void removePropertyChangeListener(
-                PropertyChangeListener listener) ;
-  public void setModel(AddressBookModel model) ;
-  public void setSelection(AddressDataModel selection) ;
-}</pre>
+<pre>package com.javadude.articles.vaddmvc2; import com.javadude.articles.vaddmvc1.*;import java.beans.*;public interface AddressDataSelectionModel{  public void addPropertyChangeListener(                PropertyChangeListener listener) ;  public AddressBookModel getModel() ;  public AddressDataModel getSelection() ;  public void removePropertyChangeListener(                PropertyChangeListener listener) ;  public void setModel(AddressBookModel model) ;  public void setSelection(AddressDataModel selection) ;}</pre>
 
 <p>We implement this using a very straightforward bean implementation. The only
 trick is handling changes in the model from which it gets data. Whenever the
 model changes, we need to check if the selection still exists in the model.</p>
 
-<pre>package com.javadude.articles.vaddmvc2;
- 
-import com.javadude.articles.vaddmvc1.*;
-import java.beans.*;
+<pre>package com.javadude.articles.vaddmvc2; import com.javadude.articles.vaddmvc1.*;import java.beans.*;/** * A simple selection model that tracks * and address in a phone book */public class AddressDataSelectionModel       implements PropertyChangeListener {  protected transient PropertyChangeSupport propertyChange;  private AddressDataModel fieldSelection;  private AddressBookModel fieldModel;  // standard bound property support omitted for brevity  // model property keeps track of the model that contains the  //   selection  public AddressBookModel getModel() {    return fieldModel;  }  public void setModel(AddressBookModel model) {    // if we had a model before, remove us as a listener    if (fieldModel != null)      fieldModel.removePropertyChangeListener(this);    AddressBookModel oldValue = fieldModel;    fieldModel = model;</pre>
 
-/**
- * A simple selection model that tracks
- * and address in a phone book
- */
-public class AddressDataSelectionModel
-       implements PropertyChangeListener {
-  protected transient PropertyChangeSupport propertyChange;
-  private AddressDataModel fieldSelection;
-  private AddressBookModel fieldModel;
-
-  // standard bound property support omitted for brevity
-
-  // model property keeps track of the model that contains the
-  //   selection
-  public AddressBookModel getModel() {
-    return fieldModel;
-  }
-
-  public void setModel(AddressBookModel model) {
-    // if we had a model before, remove us as a listener
-    if (fieldModel != null)
-      fieldModel.removePropertyChangeListener(this);
-    AddressBookModel oldValue = fieldModel;
-    fieldModel = model;
-</pre>
-
-<pre>    // add us as a listener so we can make sure the selection
-    //   still exists in the model
-    fieldModel.addPropertyChangeListener(this);
-    firePropertyChange(&quot;model&quot;, oldValue, model);
-  }
-
-  // selection property tracks which address is currently
-  //   selected
-  public AddressDataModel getSelection() {
-    return fieldSelection;
-  }
-
-  public void setSelection(AddressDataModel selection) {
-    AddressDataModel oldValue = fieldSelection;
-    fieldSelection = selection;
-    firePropertyChange(&quot;selection&quot;, oldValue, selection);
-  }
-
-  /** listen for changes in the model where the selection
-   *    comes from. If we find out that the selection is
-   *    no longer in the model, we kill it...
-   */
-  public void propertyChange(PropertyChangeEvent evt) {
-    // if the model's list of addresses changes,
-    //   check to be sure that the selection is still
-    //   there
-    if (evt.getPropertyName().equals(&quot;addresses&quot;)) {
-      AddressDataModel[] data = getModel().getAddresses();
-      for (int i = 0; i &lt; data.length; i++)
-        if (getSelection().getName().equals(data[i].getName()))
-          return;
-      // if not found, clear the selection
-      AddressDataModel sel = getSelection();
-      sel.setAddress(&quot;&quot;);
-      sel.setBusinessPhone(&quot;&quot;);
-      sel.setCity(&quot;&quot;);
-      sel.setCountry(&quot;&quot;);
-      sel.setHomePhone(&quot;&quot;);
-      sel.setName(&quot;&quot;);
-      sel.setPostalCode(&quot;&quot;);
-      sel.setState(&quot;&quot;);
-    }
-  }
-}</pre>
+<pre>    // add us as a listener so we can make sure the selection    //   still exists in the model    fieldModel.addPropertyChangeListener(this);    firePropertyChange(&quot;model&quot;, oldValue, model);  }  // selection property tracks which address is currently  //   selected  public AddressDataModel getSelection() {    return fieldSelection;  }  public void setSelection(AddressDataModel selection) {    AddressDataModel oldValue = fieldSelection;    fieldSelection = selection;    firePropertyChange(&quot;selection&quot;, oldValue, selection);  }  /** listen for changes in the model where the selection   *    comes from. If we find out that the selection is   *    no longer in the model, we kill it...   */  public void propertyChange(PropertyChangeEvent evt) {    // if the model's list of addresses changes,    //   check to be sure that the selection is still    //   there    if (evt.getPropertyName().equals(&quot;addresses&quot;)) {      AddressDataModel[] data = getModel().getAddresses();      for (int i = 0; i &lt; data.length; i++)        if (getSelection().getName().equals(data[i].getName()))          return;      // if not found, clear the selection      AddressDataModel sel = getSelection();      sel.setAddress(&quot;&quot;);      sel.setBusinessPhone(&quot;&quot;);      sel.setCity(&quot;&quot;);      sel.setCountry(&quot;&quot;);      sel.setHomePhone(&quot;&quot;);      sel.setName(&quot;&quot;);      sel.setPostalCode(&quot;&quot;);      sel.setState(&quot;&quot;);    }  }}</pre>
 
 <p>Once we have defined the interface for the selection model, we can update our
 delegates to interact with the selection. Figure 14 shows the patterned list
@@ -1221,14 +555,7 @@ for the connection. We then pass a reference to the List so we can update it.
 The code for changeSelection, shown below, walks the items in the list to see
 which item number matches the selection's name, then selects the item.</p>
 
-<pre>public void changeSelection(AddressDataModel data, List list) {
-  // find which item matches the selection
-  for(int i=0; i&lt;list.getItemCount(); i++)
-    if (list.getItem(i).equals(data.getName())) {
-      list.select(i);
-      return; // we are done!
-    }
-}</pre>
+<pre>public void changeSelection(AddressDataModel data, List list) {  // find which item matches the selection  for(int i=0; i&lt;list.getItemCount(); i++)    if (list.getItem(i).equals(data.getName())) {      list.select(i);      return; // we are done!    }}</pre>
 
 <p>Finally, we promote the <i>this</i> property of the selection model variable
 so we can set it from the outside. We now have a list delegate that can set its
@@ -1360,56 +687,44 @@ programmers will thank you for a more flexible design.</p>
 <li><a href="mvc2.zip">Normal zip of sample code</a></li>
 </ul>
 
-				<!-- #EndEditable "content" -->
-				<div id="footer">
-					<p>&nbsp;</p>
-					<hr/>
-					<p>Copyright &copy; 1996-2009, Scott Stanchfield. All Rights Reserved.<br/>
-					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
-					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
-					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
-					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../../images/cssplay_button.png" width="88" /></a></p>
-					<p>
-					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
-					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../../images/feed-icon-14x14.png" width="14" />Want 
-					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
-					</p>
-				</div>
-			</div>
-		</div>
-		<div id="bottom"/>
-		<div id="navigation">
-			<ul>
-				<li><a href="../../index.html">Home</a></li>
-				<li><a href="../index.html">Articles</a></li>
-				<li><a href="../../tools/index.html">Tools</a></li>
-				<li><a href="../../evaj/index.html">Effective VisualAge for Java</a></li>
-				<li><a href="../../eclipse/index.html">Eclipse Tips</a></li>
-				<li><a href="../../vaj/index.html">VisualAge Tips</a></li>
-				<!--
-				<li><a href="resume.html">Resume</a></li>
-				-->
-				<li><a href="../../publications.html">Publications</a></li>
-			</ul>
-			<p>&nbsp;</p>
-			<div style="margin-left:10px">
-<script type="text/javascript"><!--
-google_ad_client = "pub-1721904981084162";
-/* Homepage Gutter */
-google_ad_slot = "0044274311";
-google_ad_width = 120;
-google_ad_height = 600;
-//-->
-</script>
-<script type="text/javascript"
-src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script>
-</div>
-		</div>
-		<div id="bottomcorner"/>
-		<div id="topcorner"/>
-		</div>
-		<p>&nbsp;</p>
-	</body>
-<!-- #EndTemplate -->
-</html>
+				<!-- #EndEditable "content" -->
+				<div id="footer">
+					<p>&nbsp;</p>
+					<hr/>
+					<p>Copyright &copy; 1996-2013, Scott Stanchfield. All Rights Reserved.<br />
+					<br/>
+					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
+					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
+					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
+					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../../images/cssplay_button.png" width="88" /></a></p>
+					<p>
+					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
+					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../../images/feed-icon-14x14.png" width="14" />Want 
+					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div id="bottom"/>
+		<div id="navigation">
+			<h3>NAVIGATION</h3>
+			<ul>
+				<li><a href="../../index.html">Home</a></li>
+				<li><a href="../index.html">Articles</a></li>
+				<li><a href="../../tools/index.html">Tools</a></li>
+				<li><a href="../../evaj/index.html">Effective VisualAge<br/>&nbsp;&nbsp;&nbsp;&nbsp;for Java</a></li>
+				<li><a href="../../eclipse/index.html">Eclipse Tips</a></li>
+				<li><a href="../../vaj/index.html">VisualAge Tips</a></li>
+				<!--
+				<li><a href="resume.html">Resume</a></li>
+				-->
+				<li><a href="../../publications.html">Publications</a></li>
+			</ul>
+			<p>&nbsp;</p>
+		</div>
+		<div id="bottomcorner"/>
+		<div id="topcorner"/>
+		</div>
+		<p>&nbsp;</p>
+	</body>
+<!-- #EndTemplate --></html>

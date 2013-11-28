@@ -1,33 +1,35 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+
 
 <!-- #BeginTemplate "../../master.dwt" -->
 
-	<head>
-		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-		<!-- #BeginEditable "doctitle" -->
+	<head>
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+		<!-- #BeginEditable "doctitle" -->
+
 		<title>AWT Layouts for SWT - Scott Stanchfield</title>
-		<!-- #EndEditable -->
-		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
-		<!-- #BeginEditable "head" -->
-		<!-- #EndEditable -->
-		<style type="text/css">
-
-.style1 {
-	vertical-align: middle;
-}
-</style>
-	</head>
-
-	<body>
-		<div id="header">
-			<h1>JavaDude.com</h1>
-			<h4>-- Scott Stanchfield</h4>
-		</div>
-		<div id="content">
-			<div id="topBar">&nbsp;</div>
-			<div id="contentIndent">
-				<!-- #BeginEditable "content" -->
+		<!-- #EndEditable -->
+		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
+		<!-- #BeginEditable "head" -->
+		<!-- #EndEditable -->
+		<style type="text/css">
+.style1 {
+	vertical-align: middle;
+}
+</style>
+	</head>
+
+	<body>
+		<div id="header">
+			<h1>JavaDude.com</h1>
+			<h4>-- Scott Stanchfield</h4>
+		</div>
+		<div id="content">
+			<div id="topBar">&nbsp;</div>
+			<div id="contentIndent">
+				<!-- #BeginEditable "content" -->
+
 
 <h1>AWT Layout Managers for SWT</h1>
 <h2>Description</h2>
@@ -64,58 +66,11 @@ Add the &quot;JavaDude SWT/AWT Layouts Plugin&quot; as a dependency to your plug
 Borderlayout requires that you set layout constraints on the contained 
 components. Some examples (more detailed docs and examples with appear later...)</p>
 <h3>BorderLayout Example</h3>
-<a name='figure.1'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 1: BorderLayout Example</p><pre class='content'><span class='ident'>Composite</span> <span class='ident'>parent</span> <span class='operator'>=</span> <span class='operator'>...;</span>
-
-<span class='ident'>parent</span><span class='operator'>.</span><span class='ident'>setLayout</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>BorderLayout</span><span class='operator'>());</span>
-  <span class='comment'>// Make sure you choose com.javadude.swt.layouts.BorderLayout, not java.awt.BorderLayout!!!</span>
-
-<span class='ident'>Button</span> <span class='ident'>northButton</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>Button</span><span class='operator'>(</span><span class='ident'>parent</span>, <span class='ident'>SWT</span><span class='operator'>.</span><span class='ident'>DEFAULT</span><span class='operator'>);</span>
-<span class='ident'>northButton</span><span class='operator'>.</span><span class='ident'>setLayoutData</span><span class='operator'>(</span><span class='ident'>BorderLayout</span><span class='operator'>.</span><span class='ident'>NORTH</span><span class='operator'>);</span>
-<span class='ident'>northButton</span><span class='operator'>.</span><span class='ident'>setText</span><span class='operator'>(&quot;</span><span class='ident'>North</span><span class='operator'>&quot;);</span>
-
-<span class='ident'>Button</span> <span class='ident'>southButton</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>Button</span><span class='operator'>(</span><span class='ident'>parent</span>, <span class='ident'>SWT</span><span class='operator'>.</span><span class='ident'>DEFAULT</span><span class='operator'>);</span>
-<span class='ident'>southButton</span><span class='operator'>.</span><span class='ident'>setLayoutData</span><span class='operator'>(</span><span class='ident'>BorderLayout</span><span class='operator'>.</span><span class='ident'>SOUTH</span><span class='operator'>);</span>
-<span class='ident'>southButton</span><span class='operator'>.</span><span class='ident'>setText</span><span class='operator'>(&quot;</span><span class='ident'>South</span><span class='operator'>&quot;);</span>
-
-<span class='comment'>// etc...</span>
-
-<span class='comment'>// You can also set the hgap and vgap in the same manner as AWT's BorderLayout</span>
-<span class='comment'>// For example:</span>
-<span class='ident'>parent</span><span class='operator'>.</span><span class='ident'>setLayout</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>BorderLayout</span><span class='operator'>(</span>5,3<span class='operator'>));</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+<a name='figure.1'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 1: BorderLayout Example</p><pre class='content'><span class='ident'>Composite</span> <span class='ident'>parent</span> <span class='operator'>=</span> <span class='operator'>...;</span><span class='ident'>parent</span><span class='operator'>.</span><span class='ident'>setLayout</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>BorderLayout</span><span class='operator'>());</span>  <span class='comment'>// Make sure you choose com.javadude.swt.layouts.BorderLayout, not java.awt.BorderLayout!!!</span><span class='ident'>Button</span> <span class='ident'>northButton</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>Button</span><span class='operator'>(</span><span class='ident'>parent</span>, <span class='ident'>SWT</span><span class='operator'>.</span><span class='ident'>DEFAULT</span><span class='operator'>);</span><span class='ident'>northButton</span><span class='operator'>.</span><span class='ident'>setLayoutData</span><span class='operator'>(</span><span class='ident'>BorderLayout</span><span class='operator'>.</span><span class='ident'>NORTH</span><span class='operator'>);</span><span class='ident'>northButton</span><span class='operator'>.</span><span class='ident'>setText</span><span class='operator'>(&quot;</span><span class='ident'>North</span><span class='operator'>&quot;);</span><span class='ident'>Button</span> <span class='ident'>southButton</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>Button</span><span class='operator'>(</span><span class='ident'>parent</span>, <span class='ident'>SWT</span><span class='operator'>.</span><span class='ident'>DEFAULT</span><span class='operator'>);</span><span class='ident'>southButton</span><span class='operator'>.</span><span class='ident'>setLayoutData</span><span class='operator'>(</span><span class='ident'>BorderLayout</span><span class='operator'>.</span><span class='ident'>SOUTH</span><span class='operator'>);</span><span class='ident'>southButton</span><span class='operator'>.</span><span class='ident'>setText</span><span class='operator'>(&quot;</span><span class='ident'>South</span><span class='operator'>&quot;);</span><span class='comment'>// etc...</span><span class='comment'>// You can also set the hgap and vgap in the same manner as AWT's BorderLayout</span><span class='comment'>// For example:</span><span class='ident'>parent</span><span class='operator'>.</span><span class='ident'>setLayout</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>BorderLayout</span><span class='operator'>(</span>5,3<span class='operator'>));</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
 <h3>GridLayout Example</h3>
-<a name='figure.2'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 2: GridLayout Example</p><pre class='content'><span class='ident'>Composite</span> <span class='ident'>parent</span> <span class='operator'>=</span> <span class='operator'>...;</span>
-
-<span class='ident'>parent</span><span class='operator'>.</span><span class='ident'>setLayout</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>GridLayout</span><span class='operator'>(</span>2,0<span class='operator'>));</span>
-  <span class='comment'>// Make sure you choose com.javadude.swt.layouts.GridLayout, not java.awt.GridLayout!!!</span>
-
-<span class='ident'>Button</span> <span class='ident'>b1</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>Button</span><span class='operator'>(</span><span class='ident'>parent</span>, <span class='ident'>SWT</span><span class='operator'>.</span><span class='ident'>DEFAULT</span><span class='operator'>);</span>
-<span class='ident'>b1</span><span class='operator'>.</span><span class='ident'>setText</span><span class='operator'>(&quot;</span>1<span class='operator'>&quot;);</span>
-
-<span class='ident'>Button</span> <span class='ident'>b2</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>Button</span><span class='operator'>(</span><span class='ident'>parent</span>, <span class='ident'>SWT</span><span class='operator'>.</span><span class='ident'>DEFAULT</span><span class='operator'>);</span>
-<span class='ident'>b2</span><span class='operator'>.</span><span class='ident'>setText</span><span class='operator'>(&quot;</span>2<span class='operator'>&quot;);</span>
-
-<span class='comment'>// etc...</span>
-
-<span class='comment'>// You can also set the hgap and vgap in the same manner as AWT's GridLayout</span>
-<span class='comment'>// For example:</span>
-<span class='ident'>parent</span><span class='operator'>.</span><span class='ident'>setLayout</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>GridLayout</span><span class='operator'>(</span>2,0,5,3<span class='operator'>));</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+<a name='figure.2'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 2: GridLayout Example</p><pre class='content'><span class='ident'>Composite</span> <span class='ident'>parent</span> <span class='operator'>=</span> <span class='operator'>...;</span><span class='ident'>parent</span><span class='operator'>.</span><span class='ident'>setLayout</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>GridLayout</span><span class='operator'>(</span>2,0<span class='operator'>));</span>  <span class='comment'>// Make sure you choose com.javadude.swt.layouts.GridLayout, not java.awt.GridLayout!!!</span><span class='ident'>Button</span> <span class='ident'>b1</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>Button</span><span class='operator'>(</span><span class='ident'>parent</span>, <span class='ident'>SWT</span><span class='operator'>.</span><span class='ident'>DEFAULT</span><span class='operator'>);</span><span class='ident'>b1</span><span class='operator'>.</span><span class='ident'>setText</span><span class='operator'>(&quot;</span>1<span class='operator'>&quot;);</span><span class='ident'>Button</span> <span class='ident'>b2</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>Button</span><span class='operator'>(</span><span class='ident'>parent</span>, <span class='ident'>SWT</span><span class='operator'>.</span><span class='ident'>DEFAULT</span><span class='operator'>);</span><span class='ident'>b2</span><span class='operator'>.</span><span class='ident'>setText</span><span class='operator'>(&quot;</span>2<span class='operator'>&quot;);</span><span class='comment'>// etc...</span><span class='comment'>// You can also set the hgap and vgap in the same manner as AWT's GridLayout</span><span class='comment'>// For example:</span><span class='ident'>parent</span><span class='operator'>.</span><span class='ident'>setLayout</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>GridLayout</span><span class='operator'>(</span>2,0,5,3<span class='operator'>));</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
 <h3>FlowLayout Example</h3>
-<a name='figure.3'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 3: FlowLayout example</p><pre class='content'><span class='ident'>Composite</span> <span class='ident'>parent</span> <span class='operator'>=</span> <span class='operator'>...;</span>
-
-<span class='ident'>parent</span><span class='operator'>.</span><span class='ident'>setLayout</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>FlowLayout</span><span class='operator'>());</span>
-  <span class='comment'>// Make sure you choose com.javadude.swt.layouts.FlowLayout, not java.awt.FlowLayout!!!</span>
-
-<span class='ident'>Button</span> <span class='ident'>b1</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>Button</span><span class='operator'>(</span><span class='ident'>parent</span>, <span class='ident'>SWT</span><span class='operator'>.</span><span class='ident'>DEFAULT</span><span class='operator'>);</span>
-<span class='ident'>b1</span><span class='operator'>.</span><span class='ident'>setText</span><span class='operator'>(&quot;</span>1<span class='operator'>&quot;);</span>
-
-<span class='ident'>Button</span> <span class='ident'>b2</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>Button</span><span class='operator'>(</span><span class='ident'>parent</span>, <span class='ident'>SWT</span><span class='operator'>.</span><span class='ident'>DEFAULT</span><span class='operator'>);</span>
-<span class='ident'>b2</span><span class='operator'>.</span><span class='ident'>setText</span><span class='operator'>(&quot;</span>2<span class='operator'>&quot;);</span>
-
-<span class='comment'>// etc...</span>
-
-<span class='comment'>// You can also set the hgap, vgap and alignment in the same manner as AWT's FlowLayout</span>
-<span class='comment'>// For example:</span>
-<span class='ident'>parent</span><span class='operator'>.</span><span class='ident'>setLayout</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>FlowLayout</span><span class='operator'>(</span><span class='ident'>FlowLayout</span><span class='operator'>.</span><span class='ident'>RIGHT</span><span class='operator'>));</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+<a name='figure.3'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 3: FlowLayout example</p><pre class='content'><span class='ident'>Composite</span> <span class='ident'>parent</span> <span class='operator'>=</span> <span class='operator'>...;</span><span class='ident'>parent</span><span class='operator'>.</span><span class='ident'>setLayout</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>FlowLayout</span><span class='operator'>());</span>  <span class='comment'>// Make sure you choose com.javadude.swt.layouts.FlowLayout, not java.awt.FlowLayout!!!</span><span class='ident'>Button</span> <span class='ident'>b1</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>Button</span><span class='operator'>(</span><span class='ident'>parent</span>, <span class='ident'>SWT</span><span class='operator'>.</span><span class='ident'>DEFAULT</span><span class='operator'>);</span><span class='ident'>b1</span><span class='operator'>.</span><span class='ident'>setText</span><span class='operator'>(&quot;</span>1<span class='operator'>&quot;);</span><span class='ident'>Button</span> <span class='ident'>b2</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>Button</span><span class='operator'>(</span><span class='ident'>parent</span>, <span class='ident'>SWT</span><span class='operator'>.</span><span class='ident'>DEFAULT</span><span class='operator'>);</span><span class='ident'>b2</span><span class='operator'>.</span><span class='ident'>setText</span><span class='operator'>(&quot;</span>2<span class='operator'>&quot;);</span><span class='comment'>// etc...</span><span class='comment'>// You can also set the hgap, vgap and alignment in the same manner as AWT's FlowLayout</span><span class='comment'>// For example:</span><span class='ident'>parent</span><span class='operator'>.</span><span class='ident'>setLayout</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>FlowLayout</span><span class='operator'>(</span><span class='ident'>FlowLayout</span><span class='operator'>.</span><span class='ident'>RIGHT</span><span class='operator'>));</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
 <h2>Uninstalling from Eclipse</h2>
 <p>To uninstall from Eclipse, simply delete the <b><i>installdir</i>/plugins/com.javadude.swt.layouts</b> 
 directory.</p>
@@ -138,56 +93,44 @@ see this tool do.&nbsp; Feel free to send example code to implement it as well.<
 <p>&nbsp; </p>
 
 				</a>
-				<!-- #EndEditable "content" -->
-				<div id="footer">
-					<p>&nbsp;</p>
-					<hr/>
-					<p>Copyright &copy; 1996-2009, Scott Stanchfield. All Rights Reserved.<br/>
-					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
-					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
-					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
-					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../../images/cssplay_button.png" width="88" /></a></p>
-					<p>
-					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
-					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../../images/feed-icon-14x14.png" width="14" />Want 
-					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
-					</p>
-				</div>
-			</div>
-		</div>
-		<div id="bottom"/>
-		<div id="navigation">
-			<ul>
-				<li><a href="../../index.html">Home</a></li>
-				<li><a href="../../articles/index.html">Articles</a></li>
-				<li><a href="../index.html">Tools</a></li>
-				<li><a href="../../evaj/index.html">Effective VisualAge for Java</a></li>
-				<li><a href="../../eclipse/index.html">Eclipse Tips</a></li>
-				<li><a href="../../vaj/index.html">VisualAge Tips</a></li>
-				<!--
-				<li><a href="resume.html">Resume</a></li>
-				-->
-				<li><a href="../../publications.html">Publications</a></li>
-			</ul>
-			<p>&nbsp;</p>
-			<div style="margin-left:10px">
-<script type="text/javascript"><!--
-google_ad_client = "pub-1721904981084162";
-/* Homepage Gutter */
-google_ad_slot = "0044274311";
-google_ad_width = 120;
-google_ad_height = 600;
-//-->
-</script>
-<script type="text/javascript"
-src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script>
-</div>
-		</div>
-		<div id="bottomcorner"/>
-		<div id="topcorner"/>
-		</div>
-		<p>&nbsp;</p>
-	</body>
-<!-- #EndTemplate -->
-</html>
+				<!-- #EndEditable "content" -->
+				<div id="footer">
+					<p>&nbsp;</p>
+					<hr/>
+					<p>Copyright &copy; 1996-2013, Scott Stanchfield. All Rights Reserved.<br />
+					<br/>
+					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
+					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
+					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
+					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../../images/cssplay_button.png" width="88" /></a></p>
+					<p>
+					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
+					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../../images/feed-icon-14x14.png" width="14" />Want 
+					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div id="bottom"/>
+		<div id="navigation">
+			<h3>NAVIGATION</h3>
+			<ul>
+				<li><a href="../../index.html">Home</a></li>
+				<li><a href="../../articles/index.html">Articles</a></li>
+				<li><a href="../index.html">Tools</a></li>
+				<li><a href="../../evaj/index.html">Effective VisualAge<br/>&nbsp;&nbsp;&nbsp;&nbsp;for Java</a></li>
+				<li><a href="../../eclipse/index.html">Eclipse Tips</a></li>
+				<li><a href="../../vaj/index.html">VisualAge Tips</a></li>
+				<!--
+				<li><a href="resume.html">Resume</a></li>
+				-->
+				<li><a href="../../publications.html">Publications</a></li>
+			</ul>
+			<p>&nbsp;</p>
+		</div>
+		<div id="bottomcorner"/>
+		<div id="topcorner"/>
+		</div>
+		<p>&nbsp;</p>
+	</body>
+<!-- #EndTemplate --></html>

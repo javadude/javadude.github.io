@@ -1,33 +1,35 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+
 
 <!-- #BeginTemplate "../../master.dwt" -->
 
-	<head>
-		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-		<!-- #BeginEditable "doctitle" -->
+	<head>
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+		<!-- #BeginEditable "doctitle" -->
+
 		<title>An ANTLR 2.0 Tutorial</title>
-		<!-- #EndEditable -->
-		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
-		<!-- #BeginEditable "head" -->
-		<!-- #EndEditable -->
-		<style type="text/css">
-
-.style1 {
-	vertical-align: middle;
-}
-</style>
-	</head>
-
-	<body>
-		<div id="header">
-			<h1>JavaDude.com</h1>
-			<h4>-- Scott Stanchfield</h4>
-		</div>
-		<div id="content">
-			<div id="topBar">&nbsp;</div>
-			<div id="contentIndent">
-				<!-- #BeginEditable "content" -->
+		<!-- #EndEditable -->
+		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
+		<!-- #BeginEditable "head" -->
+		<!-- #EndEditable -->
+		<style type="text/css">
+.style1 {
+	vertical-align: middle;
+}
+</style>
+	</head>
+
+	<body>
+		<div id="header">
+			<h1>JavaDude.com</h1>
+			<h4>-- Scott Stanchfield</h4>
+		</div>
+		<div id="content">
+			<div id="topBar">&nbsp;</div>
+			<div id="contentIndent">
+				<!-- #BeginEditable "content" -->
+
 
 	<h1>An ANTLR 2.0 Tutorial</h1>
 						<h3><em>Note: This is the ANTLR 2.x Tutorial. If you&#39;re 
@@ -169,43 +171,30 @@
       actual values of the type. As with type <b>Char</b>, the predecessor and 
       successor functions of an enumeration type <b>T</b> as invoked as 
       attributes <b>T'pred</b> and <b>T'succ</b>. For example:</p>
-      <pre><span class="keyword">type </span>CardSuit = &lt;CLUB, DIAMOND, HEART, SPADE&gt;;
-           </pre>
+      <pre><span class="keyword">type </span>CardSuit = &lt;CLUB, DIAMOND, HEART, SPADE&gt;;           </pre>
       <p>Then <b>CardSuit'pred(HEART)</b> is DIAMOND and 
       <b>CardSuit'succ(HEART)</b> is SPADE.</p>
       <p>An array type (one dimensional only) is defined by giving a range of 
       indices and the component type. Only integer indices are allowed in XL. 
-      For example</p><pre><span class="keyword">type </span>Table = <span class="keyword">array</span>[1..10] of <span class="keyword">Integer</span>;
-           </pre>
+      For example</p><pre><span class="keyword">type </span>Table = <span class="keyword">array</span>[1..10] of <span class="keyword">Integer</span>;           </pre>
       <p>A record type is defined by listing the individual component names 
-      (fields) and their types. For example:</p><pre><span class="keyword">type </span>Date =
-    <span class="keyword">record</span>
-        day : <span class="keyword">Integer</span>;
-        month: <span class="keyword">Integer</span>;
-        year: <span class="keyword">Integer</span>;
-    <span class="keyword">end record</span>;
-           </pre>
+      (fields) and their types. For example:</p><pre><span class="keyword">type </span>Date =    <span class="keyword">record</span>        day : <span class="keyword">Integer</span>;        month: <span class="keyword">Integer</span>;        year: <span class="keyword">Integer</span>;    <span class="keyword">end record</span>;           </pre>
       <hr/>
 
       <h3>Named Constants</h3>
-      <p>Named constants are introduced by declarations of the form</p><pre><span class="keyword">constant </span>ID, ID, . . ., ID: typeName := expression;
-           </pre>
+      <p>Named constants are introduced by declarations of the form</p><pre><span class="keyword">constant </span>ID, ID, . . ., ID: typeName := expression;           </pre>
       <p><code>typeName</code> must be an identifier representing a scalar type 
       (<b>Integer</b>, <b>Boolean</b>, <b>Char</b> or a user-defined enumeration 
       type.) The phrase "<code>:= </code>expression" is required. For 
-      example:</p><pre><span class="keyword">constant </span>maxIndex : <span class="keyword">Integer </span>:= 100;
-           </pre>
+      example:</p><pre><span class="keyword">constant </span>maxIndex : <span class="keyword">Integer </span>:= 100;           </pre>
       <hr/>
 
       <h3>Variables</h3>
-      <p>Variables are introduced by declarations of the form</p><pre><span class="keyword">var </span>ID, ID, ..., ID : typeName := expression;
-           </pre>
+      <p>Variables are introduced by declarations of the form</p><pre><span class="keyword">var </span>ID, ID, ..., ID : typeName := expression;           </pre>
       <p><code>typeName</code> must be an identifier, not a type constructor 
       such as an <b>array</b> or <b>record</b>. The phrase "<code>:= 
       expression</code>" is optional and can only involve literals and named 
-      constants. For example:</p><pre><span class="keyword">var </span>I : <span class="keyword">Integer </span>:= 1;
-<span class="keyword">var </span>b1, b2 : <span class="keyword">Boolean</span>;
-           </pre>
+      constants. For example:</p><pre><span class="keyword">var </span>I : <span class="keyword">Integer </span>:= 1;<span class="keyword">var </span>b1, b2 : <span class="keyword">Boolean</span>;           </pre>
       <hr/>
 
       <h3>Operators and Expressions</h3>
@@ -254,29 +243,12 @@
       <p>All statements are terminated with a semicolon.</p>
       <h4>Assignment statement</h4>
       <p>(":=" is the assignment operator). For example</p><pre>i := 2*I + 5;     </pre>
-      <h4>If statement</h4><pre><span class="keyword">if </span>x &gt; MAX <span class="keyword">then             if </span>x &lt; 10 <span class="keyword">then</span>
-    MAX := x;                   x := x + 1;
-<span class="keyword">elsif </span>x &lt; MIN <span class="keyword">then              </span>y := 2*x;
-    MIN := x;               <span class="keyword">end if</span>;
-<span class="keyword">end if</span>;
-           </pre>
-      <h4>Loop and exit statements</h4><pre><span class="keyword">loop                        while </span>I &lt; n <span class="keyword">loop</span>
-    get(x);                     sum := sum + a[I];
-    <span class="keyword">exit when </span>x = SIGNAL;       i := i + 1;
-    process(x);             <span class="keyword">end loop</span>;
-<span class="keyword">end loop</span>;
-           </pre>
+      <h4>If statement</h4><pre><span class="keyword">if </span>x &gt; MAX <span class="keyword">then             if </span>x &lt; 10 <span class="keyword">then</span>    MAX := x;                   x := x + 1;<span class="keyword">elsif </span>x &lt; MIN <span class="keyword">then              </span>y := 2*x;    MIN := x;               <span class="keyword">end if</span>;<span class="keyword">end if</span>;           </pre>
+      <h4>Loop and exit statements</h4><pre><span class="keyword">loop                        while </span>I &lt; n <span class="keyword">loop</span>    get(x);                     sum := sum + a[I];    <span class="keyword">exit when </span>x = SIGNAL;       i := i + 1;    process(x);             <span class="keyword">end loop</span>;<span class="keyword">end loop</span>;           </pre>
       <h4>I/O Statements (for text I/O only)</h4>
       <p>XL defines only sequential I/O for two basic character streams, 
       standard input and standard output. All I/O is provided by the following 
-      procedures:</p><pre><span class="keyword">procedure </span>put(item : String); <span class="comment">// for string literals</span>
-<span class="keyword">procedure </span>put(item : Char);
-<span class="keyword">procedure </span>put(item : Integer);
-<span class="keyword">procedure </span>newLine;
-<span class="keyword">procedure </span>get(<span class="keyword">var </span>item : Char);
-<span class="keyword">procedure </span>get(<span class="keyword">var </span>item : Integer);
-<span class="keyword">procedure </span>skipLine;
-           </pre>
+      procedures:</p><pre><span class="keyword">procedure </span>put(item : String); <span class="comment">// for string literals</span><span class="keyword">procedure </span>put(item : Char);<span class="keyword">procedure </span>put(item : Integer);<span class="keyword">procedure </span>newLine;<span class="keyword">procedure </span>get(<span class="keyword">var </span>item : Char);<span class="keyword">procedure </span>get(<span class="keyword">var </span>item : Integer);<span class="keyword">procedure </span>skipLine;           </pre>
       <hr/>
 
       <h3>Subprograms</h3>
@@ -287,18 +259,14 @@
       <h4>Functions</h4>
       <p>Functions can return scalar types only, not arrays or records. Only 
       value parameters are allowed. A function returns a value by executing a 
-      statement of the form</p><pre><span class="keyword">return </span>expression;
-           </pre>
+      statement of the form</p><pre><span class="keyword">return </span>expression;           </pre>
       <h4>Parameters</h4>
       <p>There are two parameter modes in XL: value parameters and variable 
       parameters. Value parameters (passed by copy) are the default. Variable 
-      parameters (passed by reference) must be explicitly declared as in</p><pre>procedure p(<span class="keyword">var </span>x : <span class="keyword">Integer</span>) ...
-           </pre>
+      parameters (passed by reference) must be explicitly declared as in</p><pre>procedure p(<span class="keyword">var </span>x : <span class="keyword">Integer</span>) ...           </pre>
       <h4>Subprogram end</h4>
       <p>The name of the procedure must be repeated at the end of its 
-      declaration. For example</p><pre><span class="keyword">procedure </span>proc1;
-<span class="keyword">end </span>proc1;
-           </pre>
+      declaration. For example</p><pre><span class="keyword">procedure </span>proc1;<span class="keyword">end </span>proc1;           </pre>
       <hr/>
 
       <h3>Specification Conclusion</h3>
@@ -393,22 +361,7 @@ approach...</p>
       <p>In ANTLR 2.x, you specify the scanner grammar in the same manner in 
       which you specify the parser grammar.&nbsp; We'll discuss some minor 
       differences a bit later, but overall, they are virtually identical.</p>
-      <p>For our whitespace rule, we specify the following:</p><pre>WS
-  : ( <span class="string">' '</span>
-    | <span class="string">'\t'</span>
-    | <span class="string">'\f'</span>
-
-    <span class="comment">// handle newlines</span>
-    | ( <span class="string">"\r\n"</span>  <span class="comment">// DOS/Windows</span>
-      | <span class="string">'\r'</span>    <span class="comment">// Macintosh</span>
-      | <span class="string">'\n'</span>    <span class="comment">// Unix</span>
-      )
-      <span class="comment">// increment the line count in the scanner</span>
-      <span class="curly">{ newline(); }</span>
-    )
-    <span class="curly">{ $setType(Token.SKIP); }</span>
-  ;
-</pre>
+      <p>For our whitespace rule, we specify the following:</p><pre>WS  : ( <span class="string">' '</span>    | <span class="string">'\t'</span>    | <span class="string">'\f'</span>    <span class="comment">// handle newlines</span>    | ( <span class="string">"\r\n"</span>  <span class="comment">// DOS/Windows</span>      | <span class="string">'\r'</span>    <span class="comment">// Macintosh</span>      | <span class="string">'\n'</span>    <span class="comment">// Unix</span>      )      <span class="comment">// increment the line count in the scanner</span>      <span class="curly">{ newline(); }</span>    )    <span class="curly">{ $setType(Token.SKIP); }</span>  ;</pre>
       <p>The <code>WS</code> rule defines what will happen when the scanner sees 
       space (<code>' '</code>), tab (<code>'\t'</code>), formfeed 
       (<code>'\f'</code>) or one of the platform-specific manners of indicating 
@@ -439,29 +392,15 @@ approach...</p>
       the next token it will try to match.</p>
       <p>Note that ANTLR's syntax allows you to specify <em>subrules</em>. You 
       can nest decisions within other decisions by enclosing the lower-level 
-      decision in another set of parenthesis.&nbsp; Think of it as follows:</p><pre>someRuleName
-  : <span class="string">'A' 'B' 'C'</span>    <span class="comment">// a top-level alternative</span>
-  | <span class="string">'D' 'E' 'F'</span>    <span class="comment">// a top-level alternative</span>
-  | <span class="string">'Q'</span> (          <span class="comment">// starting a subrule!</span>
-           <span class="string">'R' 'S'</span> <span class="comment">// a subrule alternative</span>
-        |  <span class="string">'W' 'X'</span> <span class="comment">// a subrule alternative</span>
-        )          <span class="comment">// end the subrule</span>
-  ; <span class="comment">// end the rule</span>   </pre>
-      <p>The above rule could match the following "words"</p><pre>ABC
-DEF
-QRS
-QWX   </pre>
+      decision in another set of parenthesis.&nbsp; Think of it as follows:</p><pre>someRuleName  : <span class="string">'A' 'B' 'C'</span>    <span class="comment">// a top-level alternative</span>  | <span class="string">'D' 'E' 'F'</span>    <span class="comment">// a top-level alternative</span>  | <span class="string">'Q'</span> (          <span class="comment">// starting a subrule!</span>           <span class="string">'R' 'S'</span> <span class="comment">// a subrule alternative</span>        |  <span class="string">'W' 'X'</span> <span class="comment">// a subrule alternative</span>        )          <span class="comment">// end the subrule</span>  ; <span class="comment">// end the rule</span>   </pre>
+      <p>The above rule could match the following "words"</p><pre>ABCDEFQRSQWX   </pre>
       <hr/>
 
       <h4>Comments</h4>
       <p>We got lucky in XL (it uses C++-style comments), but I'll bore you with 
       C-style comments in a minute...</p>
       <p>XL defines comments as "all text from // to the end of the current 
-      line." So, we get a rule like</p><pre>COMMENT
-  : <span class="string">"//"</span> (~(<span class="string">'\n'</span>|<span class="string">'\r'</span>))*
-    <span class="curly">{ $setType(Token.SKIP); }</span>
-  ;
-</pre>
+      line." So, we get a rule like</p><pre>COMMENT  : <span class="string">"//"</span> (~(<span class="string">'\n'</span>|<span class="string">'\r'</span>))*    <span class="curly">{ $setType(Token.SKIP); }</span>  ;</pre>
       <p>A few things to notice about this rule:</p>
       <ul>
         <li>Note that we <em>didn't</em> match the end-of-line character.&nbsp; 
@@ -484,29 +423,7 @@ QWX   </pre>
       description than regular expressions.&nbsp;&nbsp; If you take a look at 
       the old PCCTS tutorial, you can see what a mess defining C-style comments 
       can be.&nbsp; In contrast, a C-style comment in ANTLR 2.0 is a bit 
-      simpler:</p><pre>// multiple-line comments
-ML_COMMENT
-  : <span class="string">"/*"</span>
-    (               <span class="comment">/* '\r' '\n' can be matched in one alternative or by matching
-                       '\r' in one iteration and '\n' in another. I am trying to
-                       handle any flavor of newline that comes in, but the language
-                       that allows both "\r\n" and "\r" and "\n" to all be valid
-                       newline is ambiguous. Consequently, the resulting grammar
-                       must be ambiguous. I'm shutting this warning off.
-                    */</span>
-      options {
-        generateAmbigWarnings=false;
-      }
-      :  <span class="curly">{ LA(2)!='/' }?</span> <span class="string">'*'</span>
-      | <span class="string">'\r' '\n'</span> <span class="curly">{newline();}</span>
-      | <span class="string">'\r'</span> <span class="curly">{newline();}</span>
-      | <span class="string">'\n'</span> <span class="curly">{newline();}</span>
-      | ~(<span class="string">'*'</span>|<span class="string">'\n'</span>|<span class="string">'\r'</span>)
-    )*
-    <span class="string">"*/"</span>
-    <span class="curly">{$setType(Token.SKIP);}</span>
-;
-   </pre>
+      simpler:</p><pre>// multiple-line commentsML_COMMENT  : <span class="string">"/*"</span>    (               <span class="comment">/* '\r' '\n' can be matched in one alternative or by matching                       '\r' in one iteration and '\n' in another. I am trying to                       handle any flavor of newline that comes in, but the language                       that allows both "\r\n" and "\r" and "\n" to all be valid                       newline is ambiguous. Consequently, the resulting grammar                       must be ambiguous. I'm shutting this warning off.                    */</span>      options {        generateAmbigWarnings=false;      }      :  <span class="curly">{ LA(2)!='/' }?</span> <span class="string">'*'</span>      | <span class="string">'\r' '\n'</span> <span class="curly">{newline();}</span>      | <span class="string">'\r'</span> <span class="curly">{newline();}</span>      | <span class="string">'\n'</span> <span class="curly">{newline();}</span>      | ~(<span class="string">'*'</span>|<span class="string">'\n'</span>|<span class="string">'\r'</span>)    )*    <span class="string">"*/"</span>    <span class="curly">{$setType(Token.SKIP);}</span>;   </pre>
       <p>This rule says the following:</p>
       <ul>
         <li>Match "/*" to start a comment </li>
@@ -543,18 +460,12 @@ ML_COMMENT
       <b>Character</b> and <b>String</b>.</p>
       <p><b>Integer literals</b> are simple -- they are just a series of 
       digits.&nbsp; Just so we can demonstrate a <code>protected</code> scanner 
-      rule, we'll start out by defining what a <code>DIGIT</code> is:</p><pre>protected DIGIT
-  : <span class="string">'0'</span>..<span class="string">'9'</span>
-  ;
-</pre>
+      rule, we'll start out by defining what a <code>DIGIT</code> is:</p><pre>protected DIGIT  : <span class="string">'0'</span>..<span class="string">'9'</span>  ;</pre>
       <p>Because this rule is marked <code>protected</code>, we will not get a 
       <code>DIGIT</code> token returned to the parser;&nbsp; <code>DIGIT</code> 
       is never directly called from the <code>nextToken()</code> method.</p>
       <p>Now that we have a helper method that defines what an integer digit is, 
-      we'll define an <code>INTLIT</code> (integer literal):</p><pre>INTLIT 
-  : (DIGIT)+
-  ;
-</pre>
+      we'll define an <code>INTLIT</code> (integer literal):</p><pre>INTLIT   : (DIGIT)+  ;</pre>
       <p>This rule means "an <code>INTLIT</code> is composed of one or more 
       <code>DIGIT</code>s".&nbsp;&nbsp; Note that we do not set the token type 
       to <code>Token.SKIP</code> this time. This means that is an 
@@ -563,15 +474,10 @@ ML_COMMENT
       the parser, via the <code>nextToken()</code> method.</p>
       <p>Note that this will result in the generated INTLIT scanner rule 
       <em>calling</em> the generated DIGIT scanner rule.&nbsp; A slightly more 
-      efficient approach would be to define the INTLIT rule as follows:</p><pre>INTLIT
-  : (<span class="string">'0'</span>..<span class="string">'9'</span>)+
-  ;   </pre>
+      efficient approach would be to define the INTLIT rule as follows:</p><pre>INTLIT  : (<span class="string">'0'</span>..<span class="string">'9'</span>)+  ;   </pre>
       <p>Our final code will use the first, less-efficient method, just to show 
       use of the <code>protected</code> keyword.</p>
-      <p><b>Character literals</b> as fairly simple as well:</p><pre>CHARLIT
-  : <span class="string">'\''</span>! . <span class="string">'\''</span>!
-  ;
-</pre>
+      <p><b>Character literals</b> as fairly simple as well:</p><pre>CHARLIT  : <span class="string">'\''</span>! . <span class="string">'\''</span>!  ;</pre>
       <p>Basically, an apostrophe followed by any character, followed by another 
       apostrophe. In the grammar, we will use <code>CHARLIT</code> to refer to a 
       character literal.&nbsp; The "any character" is represented by an unquoted 
@@ -585,16 +491,7 @@ ML_COMMENT
       what ends a string literal.&nbsp; We defined string literals as being all 
       text within double-quotes, <em>but</em> the entire literal must be on one 
       line in the source file.&nbsp; This results in the following scanner 
-      rule:</p><pre>STRING_LITERAL
-  : <span class="string">'"'</span>!
-    ( <span class="string">'"'</span> <span class="string">'"'</span>!
-    | ~(<span class="string">'"'</span>|<span class="string">'\n'</span>|<span class="string">'\r'</span>)
-    )*
-    ( <span class="string">'"'</span>!
-    | <span class="comment">// nothing -- write error message</span>
-    )
-   ;
-</pre>
+      rule:</p><pre>STRING_LITERAL  : <span class="string">'"'</span>!    ( <span class="string">'"'</span> <span class="string">'"'</span>!    | ~(<span class="string">'"'</span>|<span class="string">'\n'</span>|<span class="string">'\r'</span>)    )*    ( <span class="string">'"'</span>!    | <span class="comment">// nothing -- write error message</span>    )   ;</pre>
       <p>First, we enter a string when we see a double quote.</p>
       <p>What can we see inside a string? Remember, from the spec, two 
       double-quotes is a literal double quote. So we match them.&nbsp; However, 
@@ -643,27 +540,7 @@ ML_COMMENT
       <h4>Operators</h4>
       <p>XL defines several operators, and we'll define them as well... These 
       definitions are <em>very</em> straightforward.&nbsp; Just assign a scanner 
-      rule name to match the text.</p><pre>DOT        : <span class="string">'.'</span>   ;
-BECOMES    : <span class="string">":="</span>  ;
-COLON      : <span class="string">':'</span>   ;
-SEMI       : <span class="string">';'</span>   ;
-COMMA      : <span class="string">','</span>   ;
-EQUALS     : <span class="string">'='</span>   ;
-LBRACKET   : <span class="string">'['</span>   ;
-RBRACKET   : <span class="string">']'</span>   ;
-DOTDOT     : <span class="string">".."</span>  ;
-LPAREN     : <span class="string">'('</span>   ;
-RPAREN     : <span class="string">')'</span>   ;
-NOT_EQUALS : <span class="string">"/="</span>  ;
-LT         : <span class="string">'&lt;'</span>   ;
-LTE        : <span class="string">"&lt;="</span>  ;
-GT         : <span class="string">'&gt;'</span>   ;
-GTE        : <span class="string">"&gt;="</span>  ;
-PLUS       : <span class="string">'+'</span>   ;
-MINUS      : <span class="string">'-'</span>   ;
-TIMES      : <span class="string">'*'</span>   ;
-DIV        : <span class="string">'/'</span>   ;
-</pre>
+      rule name to match the text.</p><pre>DOT        : <span class="string">'.'</span>   ;BECOMES    : <span class="string">":="</span>  ;COLON      : <span class="string">':'</span>   ;SEMI       : <span class="string">';'</span>   ;COMMA      : <span class="string">','</span>   ;EQUALS     : <span class="string">'='</span>   ;LBRACKET   : <span class="string">'['</span>   ;RBRACKET   : <span class="string">']'</span>   ;DOTDOT     : <span class="string">".."</span>  ;LPAREN     : <span class="string">'('</span>   ;RPAREN     : <span class="string">')'</span>   ;NOT_EQUALS : <span class="string">"/="</span>  ;LT         : <span class="string">'&lt;'</span>   ;LTE        : <span class="string">"&lt;="</span>  ;GT         : <span class="string">'&gt;'</span>   ;GTE        : <span class="string">"&gt;="</span>  ;PLUS       : <span class="string">'+'</span>   ;MINUS      : <span class="string">'-'</span>   ;TIMES      : <span class="string">'*'</span>   ;DIV        : <span class="string">'/'</span>   ;</pre>
       <p>Note that some of these tokens have common prefixes.&nbsp; For example, 
       <code>GT</code> and <code>GTE</code> both start with character 
       <code>'&gt;'</code>.&nbsp; In a Deterministic Finite Automata (DFA)-based 
@@ -675,10 +552,7 @@ DIV        : <span class="string">'/'</span>   ;
         <li>Left-factor the rules in question. </li>
         <li>Increase the lookahead characters. </li></ul>
       <p>Taking the first approach, left factoring, would require that we define 
-      a rule to deal with <code>GT</code> and <code>GTE</code> as follows:</p><pre>GT
-  : <span class="string">'&gt;'</span>
-    (<span class="string">'='</span> <span class="curly">{$setType(GTE);}</span>)?
-  ;   </pre>
+      a rule to deal with <code>GT</code> and <code>GTE</code> as follows:</p><pre>GT  : <span class="string">'&gt;'</span>    (<span class="string">'='</span> <span class="curly">{$setType(GTE);}</span>)?  ;   </pre>
       <p>This rule says "match the <code>'&gt;'</code> character.&nbsp; Then, if 
       I see <code>'='</code> as the next character. match it."&nbsp; The "trick" 
       here is that the "normal" completion of the rule defines the resulting 
@@ -693,9 +567,7 @@ DIV        : <span class="string">'/'</span>   ;
       character.&nbsp; Checking the next two characters in the input stream 
       allows the scanner to correct decide if it should choose to match the 
       <code>GT</code> rule or the <code>GTE</code> rule.&nbsp; You can specify a 
-      higher lookahead value in the scanner as follows:</p><pre>options {
-  k=2; <span class="comment">// two characters of lookahead</span>
-}   </pre>
+      higher lookahead value in the scanner as follows:</p><pre>options {  k=2; <span class="comment">// two characters of lookahead</span>}   </pre>
       <p>immediately after defining the scanner.&nbsp; We'll see how the scanner 
       is defined in a moment.&nbsp; It is important to think carefully whether 
       you want to increase the lookahead amount.&nbsp; While it may make the 
@@ -711,9 +583,7 @@ DIV        : <span class="string">'/'</span>   ;
 
       <h4>Identifiers</h4>
       <p>Finally, we talk about identifiers. Basically, they are any sequence of 
-      letters and digits that's left. So we get a regular expression like:</p><pre>IDENT
-  : (<span class="string">'a'</span>..<span class="string">'z'</span>|<span class="string">'A'</span>..<span class="string">'Z'</span>) (<span class="string">'a'</span>..<span class="string">'z'</span>|<span class="string">'A'</span>..<span class="string">'Z'</span>|<span class="string">'0'</span>..<span class="string">'9'</span>)*
-  ;   </pre>
+      letters and digits that's left. So we get a regular expression like:</p><pre>IDENT  : (<span class="string">'a'</span>..<span class="string">'z'</span>|<span class="string">'A'</span>..<span class="string">'Z'</span>) (<span class="string">'a'</span>..<span class="string">'z'</span>|<span class="string">'A'</span>..<span class="string">'Z'</span>|<span class="string">'0'</span>..<span class="string">'9'</span>)*  ;   </pre>
       <p>Very simple. Note that there is no action code here, especially not any 
       that would perform symbol table lookup. I'm very adamant in pushing my 
       view that scanner to parser communication should be a one-way street. This 
@@ -731,11 +601,7 @@ DIV        : <span class="string">'/'</span>   ;
       generating tokens called <code>LITERAL_begin</code> and 
       <code>LITERAL_end</code>, for example.&nbsp; Recall that these literals 
       will be inserted in a special hash table.&nbsp; To utililize this hash 
-      table, modify the IDENT rule as follows:</p><pre>IDENT
-  options <span class="curly">{testLiterals=true;}</span>
-  : (<span class="string">'a'</span>..<span class="string">'z'</span>|<span class="string">'A'</span>..<span class="string">'Z'</span>) (<span class="string">'a'</span>..<span class="string">'z'</span>|<span class="string">'A'</span>..<span class="string">'Z'</span>|<span class="string">'0'</span>..<span class="string">'9'</span>)*
-  ;
-</pre>
+      table, modify the IDENT rule as follows:</p><pre>IDENT  options <span class="curly">{testLiterals=true;}</span>  : (<span class="string">'a'</span>..<span class="string">'z'</span>|<span class="string">'A'</span>..<span class="string">'Z'</span>) (<span class="string">'a'</span>..<span class="string">'z'</span>|<span class="string">'A'</span>..<span class="string">'Z'</span>|<span class="string">'0'</span>..<span class="string">'9'</span>)*  ;</pre>
       <p>Note the <code>testLiterals=true</code> option.&nbsp; This generates 
       code that will lookup a name in the literals hash table <em>if</em> the 
       IDENT rule matches a word.&nbsp;&nbsp; This implies that every literal you 
@@ -749,16 +615,7 @@ DIV        : <span class="string">'/'</span>   ;
       <h4>Putting the Lexical Elements Together</h4>
       <p>What do we have so far? Let's look at it in one lump, shall we?</p>
       <p>But first, we need to tell ANTLR that we're creating a scanner and 
-      specify a new options (such as lookahead):</p><pre><span class="comment">//---------------
-// The XL scanner
-//---------------</span>
-class XLLexer extends Lexer;
-
-options {
-    charVocabulary = <span class="string">'\0'</span>..<span class="string">'\377'</span>;
-    testLiterals=false;    <span class="comment">// don't automatically test for literals</span>
-    k=2;                   <span class="comment">// two characters of lookahead</span>
-}   </pre>
+      specify a new options (such as lookahead):</p><pre><span class="comment">//---------------// The XL scanner//---------------</span>class XLLexer extends Lexer;options {    charVocabulary = <span class="string">'\0'</span>..<span class="string">'\377'</span>;    testLiterals=false;    <span class="comment">// don't automatically test for literals</span>    k=2;                   <span class="comment">// two characters of lookahead</span>}   </pre>
       <p>First, we specify that we are creating a scanner called 
       <code>XLLexer</code>, subclassing the <code>Lexer</code> class.&nbsp; 
       <code>Lexer</code> is an abstract class that defines the basis for an 
@@ -786,111 +643,14 @@ options {
         alternative to choose.&nbsp; The extra lookahead is only used when 
         actually necessary to disambiguate. </li></ul>
       <p>After specifying the name and options for the scanner, we specify the 
-      rules.&nbsp; The following is our entire scanner:</p><pre><span class="comment">//----------------------------------------------------------------------------</span>
-<span class="comment">// The XL scanner</span>
-<span class="comment">//----------------------------------------------------------------------------</span>
-class XLLexer extends Lexer;
-
-options <span class="curly">{
-  charVocabulary = <span class="string">'\0'</span>..<span class="string">'\377'</span>;
-  testLiterals=false;    <span class="comment">// don't automatically test for literals</span>
-  k=2;                   <span class="comment">// two characters of lookahead</span>
-}</span>
-
-
-<span class="comment">// Single-line comments</span>
-COMMENT
-  : <span class="string">"//"</span> (~(<span class="string">'\n'</span>|<span class="string">'\r'</span>))*
-    <span class="curly">{ $setType(Token.SKIP); }</span>
-  ;
-
-
-<span class="comment">// Literals</span>
-protected DIGIT
-  : <span class="string">'0'</span>..<span class="string">'9'</span>
-  ;
-
-INTLIT 
-  : (DIGIT)+
-  ;
-  
-CHARLIT
-  : <span class="string">'\''</span>! . <span class="string">'\''</span>!
-  ;
-
-<span class="comment">// string literals</span>
-STRING_LITERAL
-  : <span class="string">'"'</span>!
-    ( <span class="string">'"'</span> <span class="string">'"'</span>!
-    | ~(<span class="string">'"'</span>|<span class="string">'\n'</span>|<span class="string">'\r'</span>)
-    )*
-    ( <span class="string">'"'</span>!
-    | <span class="comment">// nothing -- write error message</span>
-    )
-   ;
-
-<span class="comment">// Whitespace -- ignored</span>
-WS
-  : ( <span class="string">' '</span>
-    | <span class="string">'\t'</span>
-    | <span class="string">'\f'</span>
-
-    <span class="comment">// handle newlines</span>
-    | ( <span class="string">"\r\n"</span>  <span class="comment">// DOS/Windows</span>
-      | <span class="string">'\r'</span>    <span class="comment">// Macintosh</span>
-      | <span class="string">'\n'</span>    <span class="comment">// Unix</span>
-      )
-      <span class="comment">// increment the line count in the scanner</span>
-      <span class="curly">{ newline(); }</span>
-    )
-    <span class="curly">{ $setType(Token.SKIP); }</span>
-  ;
-
-
-<span class="comment">// an identifier.  Note that testLiterals is set to true!  This means</span>
-<span class="comment">// that after we match the rule, we look in the literals table to see</span>
-<span class="comment">// if it's a literal or really an identifer</span>
-IDENT
-  options <span class="curly">{testLiterals=true;}</span>
-  : (<span class="string">'a'</span>..<span class="string">'z'</span>|<span class="string">'A'</span>..<span class="string">'Z'</span>) (<span class="string">'a'</span>..<span class="string">'z'</span>|<span class="string">'A'</span>..<span class="string">'Z'</span>|<span class="string">'0'</span>..<span class="string">'9'</span>)*
-  ;
-  
-<span class="comment">// Operators</span>
-DOT        : <span class="string">'.'</span>   ;
-BECOMES    : <span class="string">":="</span>  ;
-COLON      : <span class="string">':'</span>   ;
-SEMI       : <span class="string">';'</span>   ;
-COMMA      : <span class="string">','</span>   ;
-EQUALS     : <span class="string">'='</span>   ;
-LBRACKET   : <span class="string">'['</span>   ;
-RBRACKET   : <span class="string">']'</span>   ;
-DOTDOT     : <span class="string">".."</span>  ;
-LPAREN     : <span class="string">'('</span>   ;
-RPAREN     : <span class="string">')'</span>   ;
-NOT_EQUALS : <span class="string">"/="</span>  ;
-LT         : <span class="string">'&lt;'</span>   ;
-LTE        : <span class="string">"&lt;="</span>  ;
-GT         : <span class="string">'&gt;'</span>   ;
-GTE        : <span class="string">"&gt;="</span>  ;
-PLUS       : <span class="string">'+'</span>   ;
-MINUS      : <span class="string">'-'</span>   ;
-TIMES      : <span class="string">'*'</span>   ;
-DIV        : <span class="string">'/'</span>   ;
-
-</pre>
+      rules.&nbsp; The following is our entire scanner:</p><pre><span class="comment">//----------------------------------------------------------------------------</span><span class="comment">// The XL scanner</span><span class="comment">//----------------------------------------------------------------------------</span>class XLLexer extends Lexer;options <span class="curly">{  charVocabulary = <span class="string">'\0'</span>..<span class="string">'\377'</span>;  testLiterals=false;    <span class="comment">// don't automatically test for literals</span>  k=2;                   <span class="comment">// two characters of lookahead</span>}</span><span class="comment">// Single-line comments</span>COMMENT  : <span class="string">"//"</span> (~(<span class="string">'\n'</span>|<span class="string">'\r'</span>))*    <span class="curly">{ $setType(Token.SKIP); }</span>  ;<span class="comment">// Literals</span>protected DIGIT  : <span class="string">'0'</span>..<span class="string">'9'</span>  ;INTLIT   : (DIGIT)+  ;  CHARLIT  : <span class="string">'\''</span>! . <span class="string">'\''</span>!  ;<span class="comment">// string literals</span>STRING_LITERAL  : <span class="string">'"'</span>!    ( <span class="string">'"'</span> <span class="string">'"'</span>!    | ~(<span class="string">'"'</span>|<span class="string">'\n'</span>|<span class="string">'\r'</span>)    )*    ( <span class="string">'"'</span>!    | <span class="comment">// nothing -- write error message</span>    )   ;<span class="comment">// Whitespace -- ignored</span>WS  : ( <span class="string">' '</span>    | <span class="string">'\t'</span>    | <span class="string">'\f'</span>    <span class="comment">// handle newlines</span>    | ( <span class="string">"\r\n"</span>  <span class="comment">// DOS/Windows</span>      | <span class="string">'\r'</span>    <span class="comment">// Macintosh</span>      | <span class="string">'\n'</span>    <span class="comment">// Unix</span>      )      <span class="comment">// increment the line count in the scanner</span>      <span class="curly">{ newline(); }</span>    )    <span class="curly">{ $setType(Token.SKIP); }</span>  ;<span class="comment">// an identifier.  Note that testLiterals is set to true!  This means</span><span class="comment">// that after we match the rule, we look in the literals table to see</span><span class="comment">// if it's a literal or really an identifer</span>IDENT  options <span class="curly">{testLiterals=true;}</span>  : (<span class="string">'a'</span>..<span class="string">'z'</span>|<span class="string">'A'</span>..<span class="string">'Z'</span>) (<span class="string">'a'</span>..<span class="string">'z'</span>|<span class="string">'A'</span>..<span class="string">'Z'</span>|<span class="string">'0'</span>..<span class="string">'9'</span>)*  ;  <span class="comment">// Operators</span>DOT        : <span class="string">'.'</span>   ;BECOMES    : <span class="string">":="</span>  ;COLON      : <span class="string">':'</span>   ;SEMI       : <span class="string">';'</span>   ;COMMA      : <span class="string">','</span>   ;EQUALS     : <span class="string">'='</span>   ;LBRACKET   : <span class="string">'['</span>   ;RBRACKET   : <span class="string">']'</span>   ;DOTDOT     : <span class="string">".."</span>  ;LPAREN     : <span class="string">'('</span>   ;RPAREN     : <span class="string">')'</span>   ;NOT_EQUALS : <span class="string">"/="</span>  ;LT         : <span class="string">'&lt;'</span>   ;LTE        : <span class="string">"&lt;="</span>  ;GT         : <span class="string">'&gt;'</span>   ;GTE        : <span class="string">"&gt;="</span>  ;PLUS       : <span class="string">'+'</span>   ;MINUS      : <span class="string">'-'</span>   ;TIMES      : <span class="string">'*'</span>   ;DIV        : <span class="string">'/'</span>   ;</pre>
       <p>Let's move on to the parser grammar.<br/></p>
       <p>&nbsp;&nbsp;</p> 
       <h2>The Parser</h2>      <p>Now we'll look at a parser grammar for XL. Note that we are building 
       just a recognizer at this state, and the grammar may (and will!) 
       change.</p>
       <p>Let's start at the top, shall we?</p>
-      <h3>Program Specification</h3>      <p>XL has one program per file, so this is really our starting rule.</p><pre>program
-  : <span class="string">"program"</span> IDENT EQUALS 
-      subprogramBody 
-    DOT
-    <span class="comment">// end-of-file</span>
-  ;
-</pre>
+      <h3>Program Specification</h3>      <p>XL has one program per file, so this is really our starting rule.</p><pre>program  : <span class="string">"program"</span> IDENT EQUALS       subprogramBody     DOT    <span class="comment">// end-of-file</span>  ;</pre>
       <p>Pretty straightforward. Note that so far, we don't care that we are 
       <b>definitely</b> declaring that <code>IDENT</code> here. We will later, 
       though...</p>
@@ -898,14 +658,7 @@ DIV        : <span class="string">'/'</span>   ;
 
       <h3>Subprogram Bodies</h3>      <p>A subprogram body is a little (or big) block of code that makes up the 
       "what I do" part of a program, procedure, or function. It's not bad to 
-      define, but it will get a bit tricker later. Well, not too much so.</p><pre>subprogramBody
-  : (basicDecl)*
-    (procedureDecl)*
-    <span class="string">"begin"</span>
-        (statement)*
-    <span class="string">"end"</span> IDENT
-  ;
-</pre>
+      define, but it will get a bit tricker later. Well, not too much so.</p><pre>subprogramBody  : (basicDecl)*    (procedureDecl)*    <span class="string">"begin"</span>        (statement)*    <span class="string">"end"</span> IDENT  ;</pre>
       <p>So what is it? Basically, define your local variables, types and 
       constants (<code>basicDecls</code>). There can be zero or more of these, 
       hence the use of the <code>( )*</code> closure. Then, define any nested 
@@ -924,42 +677,20 @@ DIV        : <span class="string">'/'</span>   ;
       <b>FUNCTION</b>/<b>PROCEDURE</b>) but not quite that rigid.</p>
       <hr/>
 
-      <h3>Basic Declarations</h3>      <p>XL has three main declarations: variables, constants, and types:</p><pre>basicDecl
-  : varDecl
-  | constDecl
-  | typeDecl
-  ;
-</pre>
+      <h3>Basic Declarations</h3>      <p>XL has three main declarations: variables, constants, and types:</p><pre>basicDecl  : varDecl  | constDecl  | typeDecl  ;</pre>
       <p>Just so this section isn't so short, I'll define <code>varDecl</code> 
       and <code>constDecl</code> here.</p>
-      <p>A variable declaration looks like:</p><pre>varDecl
-  : <span class="string">"var"</span> identList COLON typeName
-    (BECOMES constantValue)?
-    SEMI
-  ;
-</pre>
+      <p>A variable declaration looks like:</p><pre>varDecl  : <span class="string">"var"</span> identList COLON typeName    (BECOMES constantValue)?    SEMI  ;</pre>
       <p>Unlike Pascal, each declaration must start with "var"; there is no "VAR 
       section" that starts with the keyword VAR. The <code>varDecl</code> states 
       that you can defined any number of idents at once, and you can optionally 
       initialize the variable(s).</p>
       <p>A constant declaration is similar to a variable declaration, except 
-      that you use the keyword "constant" and must assign a value:</p><pre>constDecl
-  : <span class="string">"constant"</span> identList COLON typeName
-    BECOMES constantValue SEMI
-  ;
-</pre>
+      that you use the keyword "constant" and must assign a value:</p><pre>constDecl  : <span class="string">"constant"</span> identList COLON typeName    BECOMES constantValue SEMI  ;</pre>
       <p>In the above rules, subrules <code>identList</code> and 
-      <code>constantValue</code> are mentioned. These are:</p><pre>identList
-  : IDENT (COMMA IDENT)*
-  ;
-</pre>
+      <code>constantValue</code> are mentioned. These are:</p><pre>identList  : IDENT (COMMA IDENT)*  ;</pre>
       <p>which says "one or more <code>IDENT</code>s separated by 
-      <code>COMMA</code>s", and</p><pre>constantValue
-  : INTLIT
-  | STRING_LITERAL
-  | IDENT
-  ;
-</pre>
+      <code>COMMA</code>s", and</p><pre>constantValue  : INTLIT  | STRING_LITERAL  | IDENT  ;</pre>
       <p>which is pretty self-explanatory. One thing to note, though, there 
       there is nothing right now that prevents us from using a variable 
       <code>IDENT</code> instead of a constant <code>IDENT</code>. That's 
@@ -970,14 +701,7 @@ DIV        : <span class="string">'/'</span>   ;
       types. In my project, I only defined arrays and records, so for now, I'll 
       skip enumeration types. I may add them at another time.</p>
       <p>A type declaration is either an array declaration or a record 
-      declaration:</p><pre>typeDecl
-  : <span class="string">"type"</span> IDENT EQUALS
-    ( arrayDecl
-    | recordDecl
-    )
-    SEMI
-  ;
-</pre>
+      declaration:</p><pre>typeDecl  : <span class="string">"type"</span> IDENT EQUALS    ( arrayDecl    | recordDecl    )    SEMI  ;</pre>
       <p>I got a bit fancier here by using a subrule to say "array or record" 
       instead of defining a new rule for it. This is also a bit more efficient 
       than the extra function call created by another rule there. Basic rule of 
@@ -985,96 +709,44 @@ DIV        : <span class="string">'/'</span>   ;
       it. However, watch out for using several nested subrules, as the meaning 
       can get hidden quickly.</p>
       <p>Arrays are defined as <code>ARRAY [x..y] OF type</code>. Only 
-      one-dimensional, pretty simple:</p><pre>arrayDecl
-  : <span class="string">"array"</span> LBRACKET integerConstant DOTDOT integerConstant RBRACKET
-    <span class="string">"of"</span> typeName
-  ;
-</pre><pre>integerConstant
-  : INTLIT
-  | IDENT <span class="comment">// again, a constant...</span>
-  ;
-</pre>
+      one-dimensional, pretty simple:</p><pre>arrayDecl  : <span class="string">"array"</span> LBRACKET integerConstant DOTDOT integerConstant RBRACKET    <span class="string">"of"</span> typeName  ;</pre><pre>integerConstant  : INTLIT  | IDENT <span class="comment">// again, a constant...</span>  ;</pre>
       <p>Records are defined as <code>RECORD x,y,z:typename; END RECORD. 
-      </code>Again, simple until we have to know what it means:</p><pre>recordDecl
-  : <span class="string">"record"</span> (identList COLON typeName SEMI)+ <span class="string">"end"</span> <span class="string">"record"</span>
-  ;
-</pre>
+      </code>Again, simple until we have to know what it means:</p><pre>recordDecl  : <span class="string">"record"</span> (identList COLON typeName SEMI)+ <span class="string">"end"</span> <span class="string">"record"</span>  ;</pre>
       <p>So what is this <code>typeName</code> I keep bringing up? Well, it's 
       either one of the predefined types, <b>Integer</b> or <b>Boolean</b>, or 
-      it's a user-defined type (which means its an <code>IDENT</code>), so:</p><pre>typeName
-  : IDENT
-  | <span class="string">"Integer"</span>
-  | <span class="string">"Boolean"</span>
-  ;
-</pre>
+      it's a user-defined type (which means its an <code>IDENT</code>), so:</p><pre>typeName  : IDENT  | <span class="string">"Integer"</span>  | <span class="string">"Boolean"</span>  ;</pre>
       <p>Enough about types, now, on to</p>
       <hr/>
 
       <h3>Procedure Declarations</h3>      <p>A procedure in XL is similar to a program, so basically, it's a small 
-      heading followed by a <code>subprogramBody</code>:</p><pre>procedureDecl
-  : <span class="string">"procedure"</span> IDENT (formalParameters)? EQUALS
-        subprogramBody
-    SEMI
-  ;
-</pre>
+      heading followed by a <code>subprogramBody</code>:</p><pre>procedureDecl  : <span class="string">"procedure"</span> IDENT (formalParameters)? EQUALS        subprogramBody    SEMI  ;</pre>
       <p>At the time I originally did this project, I only did procedures, not 
       functions. Perhaps I'll add them later... (You may think "boy he left a 
       lot out," but Dr. Moore made a large subset of the project required, and I 
       did a few extra point things, but not the whole thing. I <i>was</i> 
       working full-time you know...)</p>
       <p>Notice that the <code>formalParameters</code> are optional... Let's 
-      define what they look like:</p><pre>formalParameters
-  : LPAREN parameterSpec (SEMI parameterSpec)* RPAREN
-  ;
-</pre>
+      define what they look like:</p><pre>formalParameters  : LPAREN parameterSpec (SEMI parameterSpec)* RPAREN  ;</pre>
       <p>Again we see the familiar <b>x (COMMA x)*</b> notation -- the ()* 
-      closure is very handy and efficient for matching lists of things...</p><pre>parameterSpec
-  : (<span class="string">"var"</span>)? identList COLON typeName
-  ;
-</pre>
+      closure is very handy and efficient for matching lists of things...</p><pre>parameterSpec  : (<span class="string">"var"</span>)? identList COLON typeName  ;</pre>
       <p>You'll notice that this is quite a bit like a variable declaration, 
       except that <b>VAR</b> is optional, and there's no semicolon after it. 
       We'll handle it a bit differently as well, once we add action code.</p>
       <p>Next, we'll look at...</p>
       <p>&nbsp;&nbsp; </p>
       <h2>Statements</h2>      <p>There are seven statements in XL (I told you it was a small language): 
-      assignment, exit, procedure call, return, if-then, loop and I/O.</p><pre>statement
-  : exitStatement
-  | returnStatement
-  | ifStatement
-  | loopStatement
-  | ioStatement
-  | procedureCallStatement
-  | assignmentStatement
-  | endStatement
-  ;
-</pre>
+      assignment, exit, procedure call, return, if-then, loop and I/O.</p><pre>statement  : exitStatement  | returnStatement  | ifStatement  | loopStatement  | ioStatement  | procedureCallStatement  | assignmentStatement  | endStatement  ;</pre>
       <h3>Assignment Statement</h3>      <p>The assignment statement is pretty much like Pascal's assignment 
-      statement, except that there are no type conversions allowed.</p><pre>assignmentStatement
-  : variableReference BECOMES expression SEMI
-  ;
-</pre>
+      statement, except that there are no type conversions allowed.</p><pre>assignmentStatement  : variableReference BECOMES expression SEMI  ;</pre>
       <p>Very simple, but the pieces (variable and expression) are somewhat 
       complex -- we'll look at them after all the statements are done. We'll 
       look at <code>variableReference</code> later...</p>
       <hr/>
 
-      <h3>Exit Statement</h3>      <p>The exit statement tells a loop it's done. It looks like</p><pre>exitStatement
-  : <span class="string">"exit"</span> <span class="string">"when"</span> expression
-  ;
-</pre>
-      <h3>Procedure Call Statement</h3>      <p>A procedure call takes the form</p><pre>procedureCallStatement
-  : IDENT (actualParameters)? SEMI
-  ;
-</pre><pre>actualParameters
-  : LPAREN (expression (COMMA expression)*)? RPAREN
-  ;
-</pre>
+      <h3>Exit Statement</h3>      <p>The exit statement tells a loop it's done. It looks like</p><pre>exitStatement  : <span class="string">"exit"</span> <span class="string">"when"</span> expression  ;</pre>
+      <h3>Procedure Call Statement</h3>      <p>A procedure call takes the form</p><pre>procedureCallStatement  : IDENT (actualParameters)? SEMI  ;</pre><pre>actualParameters  : LPAREN (expression (COMMA expression)*)? RPAREN  ;</pre>
       <p>I extended XL just a bit for this. The original XL compiler I wrote 
-      had</p><pre>actualParameters
-  : LPAREN expression (COMMA expression)* RPAREN
-  ;
-</pre>
+      had</p><pre>actualParameters  : LPAREN expression (COMMA expression)* RPAREN  ;</pre>
       <p>which basically means that if you have parens, you <b>must</b> have at 
       least one expression in them. I thought it would be nice to allow 
       <b>myfunc()</b> as a valid procedure call.</p>
@@ -1083,10 +755,7 @@ DIV        : <span class="string">'/'</span>   ;
       <h3>Return Statement</h3>      <p>The XL return statement tells a procedure or function to return 
       immediately. Keeping in mind that I did not implement functions (yet, at 
       least), <b>return</b> cannot take an expression argument. Therefore, it's 
-      just</p><pre>returnStatement
-  : <span class="string">"return"</span> SEMI
-  ;
-</pre>
+      just</p><pre>returnStatement  : <span class="string">"return"</span> SEMI  ;</pre>
       <h3>If Statement</h3>      <p>The XL "if-then-elsif-else-end if" statement is a fairly simple 
       <b>if</b> type statement. This is because it is defined as a closed 
       <b>if</b> statement; that is, there is a definite "I'm done" part to the 
@@ -1095,41 +764,18 @@ DIV        : <span class="string">'/'</span>   ;
       close the <b>if</b> statement, the conflict disappears. First, I'll 
       present the rule for XL, then I'll talk a bit about how to do the 
       <b>if</b> statement for C.</p>
-      <p>XL's <b>if</b> statement looks like:</p><pre>ifStatement
-  : <span class="string">"if"</span> expression <span class="string">"then"</span>
-      ( statement )*
-      ( <span class="string">"elsif"</span> expression <span class="string">"then"</span>
-        ( statement )*
-      )*
-      ( <span class="string">"else"</span> ( statement )* )?
-    <span class="string">"end" "if"</span> SEMI
-  ;</pre>
+      <p>XL's <b>if</b> statement looks like:</p><pre>ifStatement  : <span class="string">"if"</span> expression <span class="string">"then"</span>      ( statement )*      ( <span class="string">"elsif"</span> expression <span class="string">"then"</span>        ( statement )*      )*      ( <span class="string">"else"</span> ( statement )* )?    <span class="string">"end" "if"</span> SEMI  ;</pre>
       <p>Which is the most straightforward way to write the rule. However, you 
       may notice some redundancy in the rule -- there are two separate places 
       where we'll need to deal with <b>expression</b> evaluation. Not a big deal 
       now, but we'd need to duplicate code later. After staring at the rule for 
       a bit, we might try splitting out the "<b>expression</b> THEN possible 
       ELSE" stuff into a separate rule, and call it recursively if we get an 
-      ELSIF. In other words:</p><pre>ifStatement
-  : <span class="string">"if"</span> ifPart <span class="string">"end"</span> <span class="string">"if"</span> SEMI
-  ;
-</pre><pre>ifPart
-  : expression <span class="string">"then"</span>
-    (statement)*
-    ( <span class="string">"elsif"</span> ifPart
-    | <span class="string">"else"</span> (statement)*
-    )?
-  ;
-</pre>
+      ELSIF. In other words:</p><pre>ifStatement  : <span class="string">"if"</span> ifPart <span class="string">"end"</span> <span class="string">"if"</span> SEMI  ;</pre><pre>ifPart  : expression <span class="string">"then"</span>    (statement)*    ( <span class="string">"elsif"</span> ifPart    | <span class="string">"else"</span> (statement)*    )?  ;</pre>
       <p>Which is much less redundant.</p>
       <p>Earlier, I threatened to look at the "dangling else" problem. In ANTLR, 
       this is an easy problem to solve. Basically, the problem is that in a 
-      statement like</p><pre>if (x)
-    if (y)
-        myfunc();
-    else
-        yourfunc();
-             </pre>
+      statement like</p><pre>if (x)    if (y)        myfunc();    else        yourfunc();             </pre>
       <p>It isn't terribly apparent (to the compiler at least) which 
       <b>if</b>-condition owns the "else" clause. The compiler can't tell if the 
       inner <b>if</b> is an "if-without-an-else" inside an "if-with-an-else," or 
@@ -1138,11 +784,7 @@ DIV        : <span class="string">'/'</span>   ;
       owned by its most recent <b>if</b> that can possibly own it. In this case, 
       the <b>else</b> would clearly belong to the <b>(y)</b> condition. However, 
       the compiler doesn't know this.</p>
-      <p>In a yacc grammar, an if-statement for C might be written</p><pre>ifStatement
-  : IF LPAREN expression RPAREN statementList
-  | IF LPAREN expression RPAREN statementList
-      ELSE statementList
-  ;</pre>
+      <p>In a yacc grammar, an if-statement for C might be written</p><pre>ifStatement  : IF LPAREN expression RPAREN statementList  | IF LPAREN expression RPAREN statementList      ELSE statementList  ;</pre>
       <p>which causes yacc to report a "shift/reduce" conflict -- yacc can't 
       tell if you intended to have an "if-without-else" (the first alternative) 
       be nested inside an "if-with-else" (the second alternative.) It doesn't 
@@ -1154,26 +796,15 @@ DIV        : <span class="string">'/'</span>   ;
       alternative we intend) requires the use of either some very messy (and 
       hard-to-follow) rules, or explicit precedence assignment. Neither is 
       pretty, or very readable for someone else.</p>
-      <p>In ANTLR, the C if statement would look like</p><pre>ifStatement
-  : <span class="string">"if"</span> LPAREN expression RPAREN (statement)*
-    ( <span class="string">"else"</span> (statement)* )?
-  ;</pre>
+      <p>In ANTLR, the C if statement would look like</p><pre>ifStatement  : <span class="string">"if"</span> LPAREN expression RPAREN (statement)*    ( <span class="string">"else"</span> (statement)* )?  ;</pre>
       <p>which, of course, causes ANTLR to report a conflict. To get rid of this 
       conflict, we can use a syntactic predicate (aka "guess" mode) which 
       basically says "try this -- if it works, use it. Otherwise, try the next 
       alt."</p>
       <p>Applying a nice syntactic predicate to the <code>ifStatement</code> 
-      rule above yields</p><pre>ifStatement
-  : <span class="string">"if"</span> LPAREN expression RPAREN (statement)*
-    ( (<span class="string">"else"</span>)=&gt; <span class="string">"else"</span> (statement)*)?
-  ;</pre>
+      rule above yields</p><pre>ifStatement  : <span class="string">"if"</span> LPAREN expression RPAREN (statement)*    ( (<span class="string">"else"</span>)=&gt; <span class="string">"else"</span> (statement)*)?  ;</pre>
       <p>which can a bit easier to read if you break the <code>( )?</code> 
-      subrule into a "this-or-nothing" subrule.</p><pre>ifStatement
-  : <span class="string">"if"</span> LPAREN expression RPAREN (statement)*
-    ( (<span class="string">"else"</span>)=&gt; <span class="string">"else"</span> (statement)*
-    | ( ) <span class="comment">// nothing</span>
-    )
-  ;</pre>
+      subrule into a "this-or-nothing" subrule.</p><pre>ifStatement  : <span class="string">"if"</span> LPAREN expression RPAREN (statement)*    ( (<span class="string">"else"</span>)=&gt; <span class="string">"else"</span> (statement)*    | ( ) <span class="comment">// nothing</span>    )  ;</pre>
       <p>The predicate says "try matching an ELSE. If you can, then use the 
       first alt. Otherwise, use the second alt (the "nothing" alternative.) Note 
       that we will be using the more compact <code><b>( )?</b></code> form for 
@@ -1183,36 +814,18 @@ DIV        : <span class="string">'/'</span>   ;
       <h3>Loop Statement</h3>      <p>The loop statement in XL is pretty simple. (Anyone sick of the word 
       "simple" yet? But it's true, really it is.) It's a set of statements 
       enclosed by <b>loop</b> and <b>end</b> <b>loop</b>, with an optional 
-      <b>while</b> clause in front of it. It looks like</p><pre>loopStatement
-  : (<span class="string">"while"</span> expression)? <span class="string">"loop"</span>
-        ( statement )*
-    <span class="string">"end" "loop"</span> SEMI
-  ;</pre>
+      <b>while</b> clause in front of it. It looks like</p><pre>loopStatement  : (<span class="string">"while"</span> expression)? <span class="string">"loop"</span>        ( statement )*    <span class="string">"end" "loop"</span> SEMI  ;</pre>
       <p>Not too bad, eh? Well, just to confuse matters a bit, what would happen 
       if XL allowed an <b>END</b> statement, like in BASIC? (BASIC's <b>END</b> 
       statement exits the program immediately.) Come to think of it, what the 
-      heck, let's add one!</p><pre>endStatement
-  : <span class="string">"end"</span> SEMI
-  ;</pre>
+      heck, let's add one!</p><pre>endStatement  : <span class="string">"end"</span> SEMI  ;</pre>
       <p>Now why would I be mentioning this here? Let's look at some XL sample 
-      code:</p><pre>program sponge =
-    var x : integer := 1;
-
-    begin
-        while x &lt; 10 loop
-            x := x + 1;
-            end;
-        end loop
-    end sponge.</pre>
+      code:</p><pre>program sponge =    var x : integer := 1;    begin        while x &lt; 10 loop            x := x + 1;            end;        end loop    end sponge.</pre>
       <p>Kind of contrived (and useless, I know), and simple, until you look 
       closer...</p>
       <p>What happens when the parser sees the <b>end</b> inside the loop? Let's 
       look at the <code>loopStatement</code> rule again (repeated here 'cause 
-      you're a programmer which means you're too lazy to turn back a page):</p><pre>loopStatement
-  : (<span class="string">"while"</span> expression)? <span class="string">"loop"</span>
-        ( statement )*
-    <span class="string">"end" "loop"</span> SEMI
-  ;</pre>
+      you're a programmer which means you're too lazy to turn back a page):</p><pre>loopStatement  : (<span class="string">"while"</span> expression)? <span class="string">"loop"</span>        ( statement )*    <span class="string">"end" "loop"</span> SEMI  ;</pre>
       <p>Assuming k=1 lookahead, we have a problem: how does the parser 
       determine that the <b>end</b> in loop is an <code>endStatement</code> and 
       not the <b>end</b> that is the first part of <b>end</b> <b>loop</b>? The 
@@ -1238,11 +851,7 @@ DIV        : <span class="string">'/'</span>   ;
       the known lookahead is lengthy.)</p>
       <p>We can tell ANTLR exactly how to distinguish an 
       <code>endStatement</code> from the end of a loop. How? Simple (for me at 
-      least, 'cause I already know...):</p><pre>statement
-  : (<span class="string">"end"</span> SEMI)=&gt; endStatement
-  | assignmentStatement
-    . . .
-  ;</pre>
+      least, 'cause I already know...):</p><pre>statement  : (<span class="string">"end"</span> SEMI)=&gt; endStatement  | assignmentStatement    . . .  ;</pre>
       <p>Now what the heck does that mean? Basically, it says "try to match 
       <b>END</b>, then <b>SEMI</b>." If it works, then we really want the 
       <code>endStatement</code>. If we didn't get a match, try the next 
@@ -1252,82 +861,35 @@ DIV        : <span class="string">'/'</span>   ;
       <code>endStatement</code>. It just seems like bad isolation of rules. I'm 
       a bit picky at times, though. What I'd rather do is say to myself, hmmm, 
       <b>END</b> <b>SEMI</b> is an <code>endStatement</code>, so why not put 
-      that inside the <code>( )=&gt;</code> -- like this:</p><pre>statement
-  : (endStatement)=&gt; endStatement
-  | assignmentStatement
-    . . .
-  ;</pre>
+      that inside the <code>( )=&gt;</code> -- like this:</p><pre>statement  : (endStatement)=&gt; endStatement  | assignmentStatement    . . .  ;</pre>
       <p>(Note: This will be a bit less efficient than spelling it out -- the 
       "guess" that ANTLR will make will need to make a function call to 
       <code>endStatement</code> to check for <b>END</b> <b>SEMI</b> rather than 
       just directly check for <b>END</b> <b>SEMI</b> in the statement rule. 
       However, as long as you don't do this too much, the penalty for a function 
       call is minimal on most machines nowadays. Just keep it to a minimum!)</p>
-      <p>What if <code>endStatement</code> were a bit more involved, such as</p><pre>endStatement
-  : <span class="string">"end"</span> SEMI expression SEMI
-  ;</pre>
+      <p>What if <code>endStatement</code> were a bit more involved, such as</p><pre>endStatement  : <span class="string">"end"</span> SEMI expression SEMI  ;</pre>
       <p>(Kinda useless, but so are most examples.) All we need to predict it 
       are the <b>END</b> and <b>SEMI</b>. If we keep the predicate as it is, 
       <b>(endStatement)?</b>, the "guess" would keep going through expression 
       (which could be pretty long) and the next SEMI. That would be mighty 
       wasteful. So, in a case where we want to limit the lookahead, it's 
       probably better to sacrifice readability a bit and limit the lookahead to 
-      just END SEMI:</p><pre>statement
-  : (<span class="string">"end"</span> SEMI)=&gt; endStatement
-  | assignmentStatement
-    . . .
-  ;</pre>
+      just END SEMI:</p><pre>statement  : (<span class="string">"end"</span> SEMI)=&gt; endStatement  | assignmentStatement    . . .  ;</pre>
       <p>(Look familiar?) You may ask "why not just put the <b>(END SEMI)?</b> 
       in the <code>endStatement</code> rule itself?" Unfortunately, ANTLR 
-      complains about a rule like</p><pre>endStatement
-  : (<span class="string">"end"</span> SEMI)=&gt; "end" SEMI expression SEMI
-  ;</pre>
+      complains about a rule like</p><pre>endStatement  : (<span class="string">"end"</span> SEMI)=&gt; "end" SEMI expression SEMI  ;</pre>
       <p>basically telling you "why bother with a predicate -- there's only one 
       alternative!" I think I'd prefer to be able to specify it like this, and 
       have ANTLR hoist the predicate up into the statement rule (and possibly 
       optimize it out of the <code>endStatement</code> rule altogether.) But 
       let's work with the great tool we currently have, shall we?</p>
-      <p>So, we end up with two new rules:</p><pre>loopStatement
-  : (<span class="string">"while"</span> expression)? <span class="string">"loop"</span>
-        (statement)*
-    <span class="string">"end"</span> <span class="string">"loop"</span> SEMI
-  ;
-</pre><pre>endStatement
-  : <span class="string">"end"</span> SEMI
-  ;
-</pre>
-      <p>and we modify the <code>statement</code> rule to look like</p><pre>statement
-  : (endStatement)=&gt; endStatement
-  | assignmentStatement
-  | exitStatement
-  | procedureCallStatement
-  | returnStatement
-  | ifStatement
-  | loopStatement
-  | ioStatement 
-  ;</pre>
+      <p>So, we end up with two new rules:</p><pre>loopStatement  : (<span class="string">"while"</span> expression)? <span class="string">"loop"</span>        (statement)*    <span class="string">"end"</span> <span class="string">"loop"</span> SEMI  ;</pre><pre>endStatement  : <span class="string">"end"</span> SEMI  ;</pre>
+      <p>and we modify the <code>statement</code> rule to look like</p><pre>statement  : (endStatement)=&gt; endStatement  | assignmentStatement  | exitStatement  | procedureCallStatement  | returnStatement  | ifStatement  | loopStatement  | ioStatement   ;</pre>
       <p>But is the order important in the <code>statement</code> rule? Of 
       course, but it's not so obvious until you look at what the generated code 
       will say. The following isn't actual generated code, but pseudocode that 
-      will show what happens in the statement rule:</p><pre>statement
-{
-    if next token is <span class="string">"end"</span> and guess(endStatement) worked
-        do endStatement
-    else if next token is IDENT
-        do assignmentStatement
-    else if next token is <span class="string">"exit"</span>
-        do exitStatement
-    else if next token is IDENT
-        do procedureCallStatement
-    else if next token is <span class="string">"return"</span>
-        do returnStatement
-    else if next token is <span class="string">"if"</span>
-        do ifStatement
-    else if next token is (<span class="string">"while"</span> or <span class="string">"loop"</span>)
-        do loopStatement
-    else if next token is (<span class="string">"put"</span> or <span class="string">"get"</span>)
-        do ioStatement (defined later)
-}</pre>
+      will show what happens in the statement rule:</p><pre>statement{    if next token is <span class="string">"end"</span> and guess(endStatement) worked        do endStatement    else if next token is IDENT        do assignmentStatement    else if next token is <span class="string">"exit"</span>        do exitStatement    else if next token is IDENT        do procedureCallStatement    else if next token is <span class="string">"return"</span>        do returnStatement    else if next token is <span class="string">"if"</span>        do ifStatement    else if next token is (<span class="string">"while"</span> or <span class="string">"loop"</span>)        do loopStatement    else if next token is (<span class="string">"put"</span> or <span class="string">"get"</span>)        do ioStatement (defined later)}</pre>
       <p>A few things to notice here:</p>
       <ul>
         <li>Most of the conditions in this code are simple, one-test comparisons </li>
@@ -1361,23 +923,11 @@ DIV        : <span class="string">'/'</span>   ;
       use an END statement, and on top of that, it's more complex, so let's put 
       it at the bottom of the list.</p>
       <p>We also need to disambiguate <code>assigmentStatement</code> and 
-      <code>procedureCallStatement</code>. Recall that they look like:</p><pre>assignmentStatement
-  : variableReference BECOMES expression SEMI
-  ;
-</pre><pre>procedureCallStatement
-  : IDENT (actualParameters)? SEMI
-  ;
-</pre>
+      <code>procedureCallStatement</code>. Recall that they look like:</p><pre>assignmentStatement  : variableReference BECOMES expression SEMI  ;</pre><pre>procedureCallStatement  : IDENT (actualParameters)? SEMI  ;</pre>
       <p>So, how do we tell them apart? First, let's look at the FIRST sets of 
       each (the sets that contain all tokens that can be the first terminal in a 
       rule.) Impossible until we define <code>variableReference</code>, so let's 
-      do that now (sorry about the jumping around here..)</p><pre>variableReference
-  : IDENT
-    ( LBRACKET expression RBRACKET
-    | DOT IDENT
-    )*
-  ;
-</pre>
+      do that now (sorry about the jumping around here..)</p><pre>variableReference  : IDENT    ( LBRACKET expression RBRACKET    | DOT IDENT    )*  ;</pre>
       <p>which says a variable reference is an IDENT followed by any number of 
       array or field dereferences.</p>
       <p>Without going into a long discussion about FIRST sets, what is the 
@@ -1391,20 +941,14 @@ DIV        : <span class="string">'/'</span>   ;
       first with a FIRST set of {IDENT}, which is bad. So, we need to add a 
       predicate to one of the rules. But which one? Lets look at what would be 
       needed for each. What makes each unique? <code>assignmentStatement</code> 
-      could start out with</p><pre>IDENT BECOMES . . . <span class="comment">     // just ident := expression</span>
-IDENT LBRACKET . . .     <span class="comment">// starting with array reference</span>
-IDENT DOT . . .          <span class="comment">// starting with field reference</span></pre>
+      could start out with</p><pre>IDENT BECOMES . . . <span class="comment">     // just ident := expression</span>IDENT LBRACKET . . .     <span class="comment">// starting with array reference</span>IDENT DOT . . .          <span class="comment">// starting with field reference</span></pre>
       <p>and <code>procedureCallStatement</code> could start out with (after 
-      looking at <code>actualParameters</code>)</p><pre>IDENT SEMI    <span class="comment">     // No parameters (or parens)</span>
-IDENT LPAREN . . . <span class="comment">// parameters (or just parens)</span></pre>
+      looking at <code>actualParameters</code>)</p><pre>IDENT SEMI    <span class="comment">     // No parameters (or parens)</span>IDENT LPAREN . . . <span class="comment">// parameters (or just parens)</span></pre>
       <p>Obviously, they are unique with two tokens of lookahead. So, we're back 
       to the decision of "do we bump lookahead to k=2, or use predicates." k=2 
       would resolve the conflict, but my gut says we should use a syntactic 
       predicate here. But which one?</p>
-      <p>The predicates would look like:</p><pre>statement
-  : . . .
-  |(IDENT (BECOMES|LBRACKET|DOT))=&gt; assignmentStatement
-  |(IDENT (SEMI|LPAREN))=&gt; procedureCallStatement</pre>
+      <p>The predicates would look like:</p><pre>statement  : . . .  |(IDENT (BECOMES|LBRACKET|DOT))=&gt; assignmentStatement  |(IDENT (SEMI|LPAREN))=&gt; procedureCallStatement</pre>
       <p>Well, the predicate for <code>procedureCallStatement</code> is actually 
       a bit simpler. We probably should use it and put its alternative ahead of 
       the one for <code>assignmentStatement</code>.\ If your research proves 
@@ -1414,17 +958,7 @@ IDENT LPAREN . . . <span class="comment">// parameters (or just parens)</span></
       <p>So what do we end up with? Using our basic rule of "keep the simple 
       stuff near the top" and adding syntactic predicates for 
       <code>endStatement</code> and <code>procedureCallStatement</code>, we get 
-      (without taking into account statistical frequency of each statement):</p><pre>statement
-  : exitStatement
-  | returnStatement
-  | ifStatement
-  | loopStatement
-  | ioStatement
-  | (IDENT (LPAREN|SEMI))=&gt; procedureCallStatement
-  | assignmentStatement
-  | (endStatement)=&gt; endStatement
-  ;
-</pre>
+      (without taking into account statistical frequency of each statement):</p><pre>statement  : exitStatement  | returnStatement  | ifStatement  | loopStatement  | ioStatement  | (IDENT (LPAREN|SEMI))=&gt; procedureCallStatement  | assignmentStatement  | (endStatement)=&gt; endStatement  ;</pre>
       <p>Now, on to our final statement...</p>
       <hr/>
 
@@ -1433,13 +967,7 @@ IDENT LPAREN . . . <span class="comment">// parameters (or just parens)</span></
       These really should be handled just like any other procedure call, but I'm 
       putting them here just because that's how I did it the first time around, 
       and because I don't want to mess with special pre-defined identifiers in 
-      the symbol table later...</p><pre>ioStatement
-  : <span class="string">"put"</span> LPAREN expression RPAREN SEMI
-  | <span class="string">"get"</span> LPAREN variableReference RPAREN SEMI
-  | <span class="string">"newLine"</span> (LPAREN RPAREN)? SEMI
-  | <span class="string">"skipLine"</span> (LPAREN RPAREN)? SEMI
-  ;
-</pre>
+      the symbol table later...</p><pre>ioStatement  : <span class="string">"put"</span> LPAREN expression RPAREN SEMI  | <span class="string">"get"</span> LPAREN variableReference RPAREN SEMI  | <span class="string">"newLine"</span> (LPAREN RPAREN)? SEMI  | <span class="string">"skipLine"</span> (LPAREN RPAREN)? SEMI  ;</pre>
       <p>Note that I was nice and allow the user to put "()" after 
       <b>skipLine</b> and <b>newLine</b>, just like we did for procedure calls 
       in general.</p>
@@ -1455,24 +983,12 @@ IDENT LPAREN . . . <span class="comment">// parameters (or just parens)</span></
       means several things, but the biggest (with regard to expressions) is that 
       left recursion is <b>not</b> allowed. See some compiler books for the 
       details; in a nutshell</p><pre>a : a PLUS a ; </pre>
-      <p>would generate code like</p><pre>a()
-{
-    a();
-    match(PLUS);
-    a();
-} </pre>
+      <p>would generate code like</p><pre>a(){    a();    match(PLUS);    a();} </pre>
       <p>which would obviously recursively call itself until you run out of 
       stack space. There are several ways around this. You have probably seen 
-      the following type of code used to describe parts of expressions:</p><pre>a
-  : a PLUS a
-  | t
-  ; </pre>
+      the following type of code used to describe parts of expressions:</p><pre>a  : a PLUS a  | t  ; </pre>
       <p>To get rid of the left-recursion that renders LL(k) grammars helpless, 
-      you can use some wonderfully-mechanical algorithms to turn it into</p><pre>a      : a1 a_tail ;
-a1     : t ;
-a_tail : PLUS t a_tail
-       | // nothing
-       ; </pre>
+      you can use some wonderfully-mechanical algorithms to turn it into</p><pre>a      : a1 a_tail ;a1     : t ;a_tail : PLUS t a_tail       | // nothing       ; </pre>
       <p>Yuck! It works, but how long did you have to think about it to 
       understand what it means?</p>
       <p>Notice that the mechanically-generated code utilizes tail-recursion 
@@ -1484,16 +1000,9 @@ a_tail : PLUS t a_tail
       be replaced very easily by a loop. (From where do you recall this? I 
       dunno. Some programming class.) In ANTLR, we have the advantage of being 
       able to use ()* and ()+ closures using EBNF notation. In other words, we 
-      can easily represent loops. So, a rule like</p><pre>a_tail
-  : PLUS t a_tail
-  | // nothing
-  ; </pre>
-      <p>can be re-written as</p><pre>a_tail
-  : (PLUS t)*
-  ; </pre>
-      <p>which is much better so far. Now look what we have:</p><pre>a      : a1 a_tail ;
-a1     : t ;
-a_tail : (PLUS t)* ; </pre>
+      can easily represent loops. So, a rule like</p><pre>a_tail  : PLUS t a_tail  | // nothing  ; </pre>
+      <p>can be re-written as</p><pre>a_tail  : (PLUS t)*  ; </pre>
+      <p>which is much better so far. Now look what we have:</p><pre>a      : a1 a_tail ;a1     : t ;a_tail : (PLUS t)* ; </pre>
       <p>Notice something about <code>a_tail</code> now? Without the tail 
       recursion, it's only used in one place, so we can substitute it. And while 
       we're at it, let's substitute <code>a1</code> in place as well, 
@@ -1505,9 +1014,7 @@ a_tail : (PLUS t)* ; </pre>
       because it matches what your brain does as it adds new parts to the 
       expression as it reads left-to-right.</p>
       <p>The moral of the above nonsense is that an expression-like rule such 
-      as</p><pre>a : a OPERATOR a
-  | t
-  ; </pre>
+      as</p><pre>a : a OPERATOR a  | t  ; </pre>
       <p>can be re-written</p><pre>a : t (OPERATOR t)* ; </pre>
       <p>Now that we're armed, lets start organizing for our attack on XL's 
       expression rules!</p>
@@ -1575,342 +1082,40 @@ a_tail : (PLUS t)* ; </pre>
       <p>We need to start with our primitive expression elements. In XL, these 
       are constant values, variable references, and parenthesized expressions. 
       Remember, parenthesizing an expression basically makes it the most 
-      important thing that is currently being evaluated.</p><pre>primitiveElement
-  : constantValue
-  | variableReference
-  | LPAREN expression RPAREN
-  ;
-</pre>
+      important thing that is currently being evaluated.</p><pre>primitiveElement  : constantValue  | variableReference  | LPAREN expression RPAREN  ;</pre>
       <p>So far so good. Now, let's just walk down the precedence chart. First, 
-      boolean negation:</p><pre>booleanNegationExpression
-  : (<span class="string">"not"</span>)* primitiveElement
-  ;
-</pre>
+      boolean negation:</p><pre>booleanNegationExpression  : (<span class="string">"not"</span>)* primitiveElement  ;</pre>
       <p>Notice that the <b>NOT</b> is optional here, and you can have as many 
       of them as you like. That is because we want to be able to just pass any 
       expression element through a rule without modifying it, enabling us to 
       have an expression just be a <code>primitiveElement</code> if that's what 
-      the user wants. Next, we have unary PLUS and MINUS:</p><pre>signExpression
-  : ((PLUS|MINUS))* booleanNegationExpression
-  ;
-</pre>
+      the user wants. Next, we have unary PLUS and MINUS:</p><pre>signExpression  : ((PLUS|MINUS))* booleanNegationExpression  ;</pre>
       <p>Notice that the <code>( )*</code> can evaluate to "no operators," 
       meaning that <code>booleanNegationExpression</code> can be passed straight 
       through this precedence level without any modification.</p>
       <p>Let us have as many plusses or minuses in front of our expression so 
       far. Next, we have our multiplying operators, *, / and 
-      <code>mod</code>:</p><pre>multiplyingExpression
-  : signExpression ((TIMES|DIV|<span class="string">"mod"</span>) signExpression)*
-  ;
-</pre>
+      <code>mod</code>:</p><pre>multiplyingExpression  : signExpression ((TIMES|DIV|<span class="string">"mod"</span>) signExpression)*  ;</pre>
       <p>Which lets us keep tacking on multiplying operators ad nauseum.</p>
       <p>Notice that this precedence rule imbedded the previous rule, and again, 
       can let it just pass <code>signExpression</code> right on through without 
       modifying it. By now, things should be seeming a bit more clear. Next, we 
-      move onto the binary adding operations:</p><pre>addingExpression
-  : multiplyingExpression ((PLUS|MINUS) multiplyingExpression)*
-  ;
-</pre>
+      move onto the binary adding operations:</p><pre>addingExpression  : multiplyingExpression ((PLUS|MINUS) multiplyingExpression)*  ;</pre>
       <p>Will we have a conflict between an (PLUS|MINUS) acting as a binary add 
       operator and one acting as a unary operator? No. The reason is that if we 
       see one in between two partial expressions, it must be a binary operator. 
       If we see another right after it (and any number of them after that) they 
       must be working (covertly) as unary operators. Next we have the relational 
-      operators:</p><pre>relationalExpression
-  : addingExpression ((EQUALS|NOT_EQUALS|GT|GTE|LT|LTE) addingExpression)*
-  ;
-</pre>
+      operators:</p><pre>relationalExpression  : addingExpression ((EQUALS|NOT_EQUALS|GT|GTE|LT|LTE) addingExpression)*  ;</pre>
       <p>Finally, we get to the operators with the lowest precedence. At this 
       level, we can call the result a full expression. This level encompasses 
-      <b>and</b> and <b>or</b> operators:</p><pre>expression
-  : relationalExpression ((<span class="string">"and"</span>|<span class="string">"or"</span>) relationalExpression)*
-  ;
-</pre>
+      <b>and</b> and <b>or</b> operators:</p><pre>expression  : relationalExpression ((<span class="string">"and"</span>|<span class="string">"or"</span>) relationalExpression)*  ;</pre>
       <p>Tack on as many and/or partial expressions as you like...</p>
       <p>Now that we've gotten through expressions, it really doesn't seem so 
       bad. The precedence table actually made it easier, rather than more 
       confusing.</p>
       <p>At this point, we have specified the entire grammar for an XL parser. 
-      You've already seen the entire scanner. The following is our parser:</p><pre><span class="comment">//-----------------------------------------------------------------------------</span>
-<span class="comment">// Define a Parser, calling it XLRecognizer</span>
-<span class="comment">//-----------------------------------------------------------------------------</span>
-class XLRecognizer extends Parser;
-options <span class="curly">{
-  defaultErrorHandler = true;      <span class="comment">// Don't generate parser error handlers</span>
-}</span>
-
-
-<span class="comment">// Define some methods and variables to use in the generated parser.</span>
-<span class="curly">{
-  <span class="comment">// Define a main</span>
-  public static void main(String[] args) {
-    <span class="comment">// Use a try/catch block for parser exceptions</span>
-    try {
-      <span class="comment">// if we have at least one command-line argument</span>
-      if (args.length &gt; 0 ) {
-        System.err.println(<span class="string">"Parsing..."</span>);
-
-        <span class="comment">// for each directory/file specified on the command line</span>
-        for(int i=0; i&lt; args.length;i++)
-          doFile(new File(args[i])); <span class="comment">// parse it</span>
-      }
-      else
-        System.err.println(<span class="string">"Usage: java XLRecogizer &lt;directory name&gt;"</span>);
-
-    }
-    catch(Exception e) {
-      System.err.println(<span class="string">"exception: "</span>+e);
-      e.printStackTrace(System.err);   <span class="comment">// so we can get stack trace</span>
-    }
-  }
-
-
-  <span class="comment">// This method decides what action to take based on the type of</span>
-  <span class="comment">//   file we are looking at</span>
-  public static void doFile(File f) throws Exception {
-    <span class="comment">// If this is a directory, walk each file/dir in that directory</span>
-    if (f.isDirectory()) {
-      String files[] = f.list();
-      for(int i=0; i &lt; files.length; i++)
-        doFile(new File(f, files[i]));
-    }
-
-    <span class="comment">// otherwise, if this is a java file, parse it!</span>
-    else if ((f.getName().length()&gt;5) &amp;&amp;
-             f.getName().substring(f.getName().length()-3).equals(<span class="string">".xl"</span>)) {
-      System.err.println(<span class="string">"-------------------------------------------"</span>);
-      System.err.println(f.getAbsolutePath());
-      parseFile(new FileInputStream(f));
-    }
-  }
-
-  <span class="comment">// Here's where we do the real work...</span>
-  public static void parseFile(InputStream s) throws Exception {
-    try {
-      <span class="comment">// Create a scanner that reads from the input stream passed to us</span>
-      XLLexer lexer = new XLLexer(s);
-
-      <span class="comment">// Create a parser that reads from the scanner</span>
-      XLRecognizer parser = new XLRecognizer(lexer);
-
-      <span class="comment">// start parsing at the compilationUnit rule</span>
-      parser.program();
-    }
-    catch (Exception e) {
-      System.err.println(<span class="string">"parser exception: "</span>+e);
-      e.printStackTrace();   <span class="comment">// so we can get stack trace		</span>
-    }
-  }
-}</span>
-
-<span class="comment">// the following tag is used to find the start of the rules section for</span>
-<span class="comment">//   automated chunk-grabbing when displaying the page</span>
-
-
-program
-  : <span class="string">"program"</span> IDENT EQUALS 
-      subprogramBody 
-    DOT
-    <span class="comment">// end-of-file</span>
-  ;
-
-
-subprogramBody
-  : (basicDecl)*
-    (procedureDecl)*
-    <span class="string">"begin"</span>
-        (statement)*
-    <span class="string">"end"</span> IDENT
-  ;
-
-
-basicDecl
-  : varDecl
-  | constDecl
-  | typeDecl
-  ;
-
-
-varDecl
-  : <span class="string">"var"</span> identList COLON typeName
-    (BECOMES constantValue)?
-    SEMI
-  ;
-
-
-constDecl
-  : <span class="string">"constant"</span> identList COLON typeName
-    BECOMES constantValue SEMI
-  ;
-
-
-
-identList
-  : IDENT (COMMA IDENT)*
-  ;
-
-
-constantValue
-  : INTLIT
-  | STRING_LITERAL
-  | IDENT
-  ;
-
-
-typeDecl
-  : <span class="string">"type"</span> IDENT EQUALS
-    ( arrayDecl
-    | recordDecl
-    )
-    SEMI
-  ;
-
-
-arrayDecl
-  : <span class="string">"array"</span> LBRACKET integerConstant DOTDOT integerConstant RBRACKET
-    <span class="string">"of"</span> typeName
-  ;
-
-integerConstant
-  : INTLIT
-  | IDENT <span class="comment">// again, a constant...</span>
-  ;
-
-
-recordDecl
-  : <span class="string">"record"</span> (identList COLON typeName SEMI)+ <span class="string">"end"</span> <span class="string">"record"</span>
-  ;
-
-
-typeName
-  : IDENT
-  | <span class="string">"Integer"</span>
-  | <span class="string">"Boolean"</span>
-  ;
-
-
-procedureDecl
-  : <span class="string">"procedure"</span> IDENT (formalParameters)? EQUALS
-        subprogramBody
-    SEMI
-  ;
-
-
-formalParameters
-  : LPAREN parameterSpec (SEMI parameterSpec)* RPAREN
-  ;
-
-
-parameterSpec
-  : (<span class="string">"var"</span>)? identList COLON typeName
-  ;
-
-statement
-  : exitStatement
-  | returnStatement
-  | ifStatement
-  | loopStatement
-  | ioStatement
-  | (IDENT (LPAREN|SEMI))=&gt; procedureCallStatement
-  | assignmentStatement
-  | (endStatement)=&gt; endStatement
-  ;
-
-assignmentStatement
-  : variableReference BECOMES expression SEMI
-  ;
-
-
-exitStatement
-  : <span class="string">"exit"</span> <span class="string">"when"</span> expression
-  ;
-
-procedureCallStatement
-  : IDENT (actualParameters)? SEMI
-  ;
-
-actualParameters
-  : LPAREN (expression (COMMA expression)*)? RPAREN
-  ;
-
-
-returnStatement
-  : <span class="string">"return"</span> SEMI
-  ;
-
-
-ifStatement
-  : <span class="string">"if"</span> ifPart <span class="string">"end"</span> <span class="string">"if"</span> SEMI
-  ;
-
-ifPart
-  : expression <span class="string">"then"</span>
-    (statement)*
-    ( <span class="string">"elsif"</span> ifPart
-    | <span class="string">"else"</span> (statement)*
-    )?
-  ;
-
-loopStatement
-  : (<span class="string">"while"</span> expression)? <span class="string">"loop"</span>
-        (statement)*
-    <span class="string">"end"</span> <span class="string">"loop"</span> SEMI
-  ;
-
-endStatement
-  : <span class="string">"end"</span> SEMI
-  ;
-
-variableReference
-  : IDENT
-    ( LBRACKET expression RBRACKET
-    | DOT IDENT
-    )*
-  ;
-
-
-
-ioStatement
-  : <span class="string">"put"</span> LPAREN expression RPAREN SEMI
-  | <span class="string">"get"</span> LPAREN variableReference RPAREN SEMI
-  | <span class="string">"newLine"</span> (LPAREN RPAREN)? SEMI
-  | <span class="string">"skipLine"</span> (LPAREN RPAREN)? SEMI
-  ;
-
-
-primitiveElement
-  : constantValue
-  | variableReference
-  | LPAREN expression RPAREN
-  ;
-
-
-booleanNegationExpression
-  : (<span class="string">"not"</span>)* primitiveElement
-  ;
-
-signExpression
-  : ((PLUS|MINUS))* booleanNegationExpression
-  ;
-
-
-multiplyingExpression
-  : signExpression ((TIMES|DIV|<span class="string">"mod"</span>) signExpression)*
-  ;
-
-addingExpression
-  : multiplyingExpression ((PLUS|MINUS) multiplyingExpression)*
-  ;
-
-relationalExpression
-  : addingExpression ((EQUALS|NOT_EQUALS|GT|GTE|LT|LTE) addingExpression)*
-  ;
-
-expression
-  : relationalExpression ((<span class="string">"and"</span>|<span class="string">"or"</span>) relationalExpression)*
-  ;
-
-</pre>Now we need to discuss...
+      You've already seen the entire scanner. The following is our parser:</p><pre><span class="comment">//-----------------------------------------------------------------------------</span><span class="comment">// Define a Parser, calling it XLRecognizer</span><span class="comment">//-----------------------------------------------------------------------------</span>class XLRecognizer extends Parser;options <span class="curly">{  defaultErrorHandler = true;      <span class="comment">// Don't generate parser error handlers</span>}</span><span class="comment">// Define some methods and variables to use in the generated parser.</span><span class="curly">{  <span class="comment">// Define a main</span>  public static void main(String[] args) {    <span class="comment">// Use a try/catch block for parser exceptions</span>    try {      <span class="comment">// if we have at least one command-line argument</span>      if (args.length &gt; 0 ) {        System.err.println(<span class="string">"Parsing..."</span>);        <span class="comment">// for each directory/file specified on the command line</span>        for(int i=0; i&lt; args.length;i++)          doFile(new File(args[i])); <span class="comment">// parse it</span>      }      else        System.err.println(<span class="string">"Usage: java XLRecogizer &lt;directory name&gt;"</span>);    }    catch(Exception e) {      System.err.println(<span class="string">"exception: "</span>+e);      e.printStackTrace(System.err);   <span class="comment">// so we can get stack trace</span>    }  }  <span class="comment">// This method decides what action to take based on the type of</span>  <span class="comment">//   file we are looking at</span>  public static void doFile(File f) throws Exception {    <span class="comment">// If this is a directory, walk each file/dir in that directory</span>    if (f.isDirectory()) {      String files[] = f.list();      for(int i=0; i &lt; files.length; i++)        doFile(new File(f, files[i]));    }    <span class="comment">// otherwise, if this is a java file, parse it!</span>    else if ((f.getName().length()&gt;5) &amp;&amp;             f.getName().substring(f.getName().length()-3).equals(<span class="string">".xl"</span>)) {      System.err.println(<span class="string">"-------------------------------------------"</span>);      System.err.println(f.getAbsolutePath());      parseFile(new FileInputStream(f));    }  }  <span class="comment">// Here's where we do the real work...</span>  public static void parseFile(InputStream s) throws Exception {    try {      <span class="comment">// Create a scanner that reads from the input stream passed to us</span>      XLLexer lexer = new XLLexer(s);      <span class="comment">// Create a parser that reads from the scanner</span>      XLRecognizer parser = new XLRecognizer(lexer);      <span class="comment">// start parsing at the compilationUnit rule</span>      parser.program();    }    catch (Exception e) {      System.err.println(<span class="string">"parser exception: "</span>+e);      e.printStackTrace();   <span class="comment">// so we can get stack trace		</span>    }  }}</span><span class="comment">// the following tag is used to find the start of the rules section for</span><span class="comment">//   automated chunk-grabbing when displaying the page</span>program  : <span class="string">"program"</span> IDENT EQUALS       subprogramBody     DOT    <span class="comment">// end-of-file</span>  ;subprogramBody  : (basicDecl)*    (procedureDecl)*    <span class="string">"begin"</span>        (statement)*    <span class="string">"end"</span> IDENT  ;basicDecl  : varDecl  | constDecl  | typeDecl  ;varDecl  : <span class="string">"var"</span> identList COLON typeName    (BECOMES constantValue)?    SEMI  ;constDecl  : <span class="string">"constant"</span> identList COLON typeName    BECOMES constantValue SEMI  ;identList  : IDENT (COMMA IDENT)*  ;constantValue  : INTLIT  | STRING_LITERAL  | IDENT  ;typeDecl  : <span class="string">"type"</span> IDENT EQUALS    ( arrayDecl    | recordDecl    )    SEMI  ;arrayDecl  : <span class="string">"array"</span> LBRACKET integerConstant DOTDOT integerConstant RBRACKET    <span class="string">"of"</span> typeName  ;integerConstant  : INTLIT  | IDENT <span class="comment">// again, a constant...</span>  ;recordDecl  : <span class="string">"record"</span> (identList COLON typeName SEMI)+ <span class="string">"end"</span> <span class="string">"record"</span>  ;typeName  : IDENT  | <span class="string">"Integer"</span>  | <span class="string">"Boolean"</span>  ;procedureDecl  : <span class="string">"procedure"</span> IDENT (formalParameters)? EQUALS        subprogramBody    SEMI  ;formalParameters  : LPAREN parameterSpec (SEMI parameterSpec)* RPAREN  ;parameterSpec  : (<span class="string">"var"</span>)? identList COLON typeName  ;statement  : exitStatement  | returnStatement  | ifStatement  | loopStatement  | ioStatement  | (IDENT (LPAREN|SEMI))=&gt; procedureCallStatement  | assignmentStatement  | (endStatement)=&gt; endStatement  ;assignmentStatement  : variableReference BECOMES expression SEMI  ;exitStatement  : <span class="string">"exit"</span> <span class="string">"when"</span> expression  ;procedureCallStatement  : IDENT (actualParameters)? SEMI  ;actualParameters  : LPAREN (expression (COMMA expression)*)? RPAREN  ;returnStatement  : <span class="string">"return"</span> SEMI  ;ifStatement  : <span class="string">"if"</span> ifPart <span class="string">"end"</span> <span class="string">"if"</span> SEMI  ;ifPart  : expression <span class="string">"then"</span>    (statement)*    ( <span class="string">"elsif"</span> ifPart    | <span class="string">"else"</span> (statement)*    )?  ;loopStatement  : (<span class="string">"while"</span> expression)? <span class="string">"loop"</span>        (statement)*    <span class="string">"end"</span> <span class="string">"loop"</span> SEMI  ;endStatement  : <span class="string">"end"</span> SEMI  ;variableReference  : IDENT    ( LBRACKET expression RBRACKET    | DOT IDENT    )*  ;ioStatement  : <span class="string">"put"</span> LPAREN expression RPAREN SEMI  | <span class="string">"get"</span> LPAREN variableReference RPAREN SEMI  | <span class="string">"newLine"</span> (LPAREN RPAREN)? SEMI  | <span class="string">"skipLine"</span> (LPAREN RPAREN)? SEMI  ;primitiveElement  : constantValue  | variableReference  | LPAREN expression RPAREN  ;booleanNegationExpression  : (<span class="string">"not"</span>)* primitiveElement  ;signExpression  : ((PLUS|MINUS))* booleanNegationExpression  ;multiplyingExpression  : signExpression ((TIMES|DIV|<span class="string">"mod"</span>) signExpression)*  ;addingExpression  : multiplyingExpression ((PLUS|MINUS) multiplyingExpression)*  ;relationalExpression  : addingExpression ((EQUALS|NOT_EQUALS|GT|GTE|LT|LTE) addingExpression)*  ;expression  : relationalExpression ((<span class="string">"and"</span>|<span class="string">"or"</span>) relationalExpression)*  ;</pre>Now we need to discuss...
       <p>&nbsp;</p>
       <h2>ANTLR Glue</h2>      <p>I like to call the code that wraps the scanner specification and 
       grammar specification together into an ANTLR "grammar" file the "ANTLR 
@@ -1926,57 +1131,7 @@ expression
       parser definition, and references to all the fun definitions that ANTLR 
       needs to create an executable. Without saying much more (I may later), we 
       have the following. Note that we'll be changing some of it later when we 
-      add trees, symbols and other compiler goodies...</p><pre>header {
-  ...definitions that need to go at top of all generated files...
-}
-
-{
-  ...Stuff at the top of generated files based on this file...
-    ...Note that stuff in these { } will appear after anything 
-    ...in the header { } code...
-}
-
-
-class <strong><em>ParserNameGoesHere</em></strong> extends Parser;
-options {
-  ...parser options...
-}
-
-{
-  ...your parser method/variable definitions...
-
-  <span class="comment">// a sample main</span>
-  public static void main(String[] args) {
-
-    <span class="comment">// Use a try/catch block for parser exceptions</span>
-    try {
-      InputStream input = new FileInputStream(args[0]);
-      XLLexer lexer = new XLLexer(s);
-      XLRecognizer parser = new XLRecognizer(lexer);
-      parser.program();
-    }
-    catch (Exception e) {
-      System.err.println("parser exception: "+e);
-      e.printStackTrace();   <span class="comment">// so we can get stack trace</span>		
-    }
-  }
-}
-
-...parser rules go here...
-
-
-class <em><strong>ScannerNameGoesHere</strong></em> extends Lexer;
-
-options {
-  ...scanner options...
-}
-
-{
-  ...your scanner method/variable definitions...
-}
-
-...scanner rules go here...
-</pre>
+      add trees, symbols and other compiler goodies...</p><pre>header {  ...definitions that need to go at top of all generated files...}{  ...Stuff at the top of generated files based on this file...    ...Note that stuff in these { } will appear after anything     ...in the header { } code...}class <strong><em>ParserNameGoesHere</em></strong> extends Parser;options {  ...parser options...}{  ...your parser method/variable definitions...  <span class="comment">// a sample main</span>  public static void main(String[] args) {    <span class="comment">// Use a try/catch block for parser exceptions</span>    try {      InputStream input = new FileInputStream(args[0]);      XLLexer lexer = new XLLexer(s);      XLRecognizer parser = new XLRecognizer(lexer);      parser.program();    }    catch (Exception e) {      System.err.println("parser exception: "+e);      e.printStackTrace();   <span class="comment">// so we can get stack trace</span>		    }  }}...parser rules go here...class <em><strong>ScannerNameGoesHere</strong></em> extends Lexer;options {  ...scanner options...}{  ...your scanner method/variable definitions...}...scanner rules go here...</pre>
       <p>Now we know everything that needs to go into our recognizer.</p>&nbsp; 
       <h2>Understanding the ANTLR Compilation Process</h2>      <h3>The Files Involved</h3>
       <p>At some point I will expand on this a bit more to help understand how 
@@ -2009,9 +1164,7 @@ options {
       <p>To build this tutorial, you can use Apache Ant. You can download Ant 
       from <a href="http://ant.apache.org/">http://ant.apache.org/</a>. Ant 
       provides an optional task that runs ANTLR. To build a grammar with this 
-      task, you add</p><pre>&lt;antlr target="src/com/javadude/xl1/xl1.g"&gt;
-    &lt;classpath path="lib/antlr.jar" /&gt;
-&lt;/antlr&gt;</pre>
+      task, you add</p><pre>&lt;antlr target="src/com/javadude/xl1/xl1.g"&gt;    &lt;classpath path="lib/antlr.jar" /&gt;&lt;/antlr&gt;</pre>
       <p>The tutorial download includes an ANTLR.jar in its lib directory. You 
       can choose a different ANTLR.jar by specifying it in the classpath 
 tag.</p>
@@ -2024,14 +1177,7 @@ tag.</p>
       at them.</p>
       <p>Remember our discussion about adding <code>END</code> as a statement. 
       Looks like it came back and bit us on the butt. But why?</p>
-      <p>The rules that are giving us trouble are rules like</p><pre>subprogramBody
-  : (basicDecl)*
-    (procedureDecl)*
-    <span class="string">"begin"</span>
-        (statement)*
-    <span class="string">"end"</span> IDENT
-  ;
-</pre>
+      <p>The rules that are giving us trouble are rules like</p><pre>subprogramBody  : (basicDecl)*    (procedureDecl)*    <span class="string">"begin"</span>        (statement)*    <span class="string">"end"</span> IDENT  ;</pre>
       <p>The problem is that the <code>( )*</code> closure needs to determine 
       when to exit. ANTLR checks to see if the "next" thing in the closure is 
       also the first thing <em>after</em> the closure.&nbsp; This makes the 
@@ -2046,20 +1192,13 @@ tag.</p>
       closures, it may work, but now we have extra predicates all over the 
       grammar. Our goal was to fix the lookahead problem in a single place. So 
       let's create a single place. Instead of using <code>(statement)*</code> to 
-      represent a statement list, we'll create a rule called statementList:</p><pre>statementList
-  : statementList statement
-  | <span class="comment">// nothing</span>
-  ;     </pre>
+      represent a statement list, we'll create a rule called statementList:</p><pre>statementList  : statementList statement  | <span class="comment">// nothing</span>  ;     </pre>
       <p>Some of you may be saying "but..." but I'll cut you off because I've 
       spent too much time in yacc-land recently. Silly me coded the rule this 
       way. Yup, left-recursion, an LL no-no, but I'm not too proud to admit I 
-      make these mistakes sometimes. ANTLR is very nice about it and reports</p><pre>error: line 197: infinite recursion to rule statementList from
-                 rule statementList     </pre>
+      make these mistakes sometimes. ANTLR is very nice about it and reports</p><pre>error: line 197: infinite recursion to rule statementList from                 rule statementList     </pre>
       <p>So I shake my head in disbelief that I typed it (10 minutes before 
-      writing this) and change it to</p><pre>statementList
-  : statement statementList
-  | <span class="comment">// nothing</span>
-  ;     </pre>
+      writing this) and change it to</p><pre>statementList  : statement statementList  | <span class="comment">// nothing</span>  ;     </pre>
       <p>and compile again...</p>
       <p>Better; we're still getting the message about the <code>END</code> 
       statement. But now the conflict is isolated to one spot. The conflict is 
@@ -2071,17 +1210,10 @@ tag.</p>
       parse would take place for every statement. Not good. But we still need to 
       make a guess at this point. So what do we do?</p>
       <p>We move the <code>endStatement</code> out of the statement rule and 
-      into <code>statementList</code>:</p><pre>statementList
-  : statement  statementList
-  | (endStatement)=&gt; endStatement statementList
-  | <span class="comment">// nothing</span>
-  ;
-</pre>
+      into <code>statementList</code>:</p><pre>statementList  : statement  statementList  | (endStatement)=&gt; endStatement statementList  | <span class="comment">// nothing</span>  ;</pre>
       <p>And now, the conflict disappears. We have applied the syntactic 
       predicate to the point of the conflict.</p>
-      <p>After we compile this, we have one last conflict.</p><pre>warning: line 265: nondeterminism upon
-        k==1:IDENT
-        between alts 1 and 2 of block     </pre>
+      <p>After we compile this, we have one last conflict.</p><pre>warning: line 265: nondeterminism upon        k==1:IDENT        between alts 1 and 2 of block     </pre>
       <p>In <code>primitiveElement</code> we have a choice between 
       <code>constantValue</code> and <code>variableReference</code> <i>which 
       could both be an <code>IDENT</code></i>! Why do we have <code>IDENT</code> 
@@ -2092,19 +1224,7 @@ tag.</p>
       is a constant, match <code>constantValue</code>; if it's not, match 
       <code>variableReference</code>." That type of check requires a symbol 
       table, which we don't have yet. So, we leave this conflict in the grammar. 
-      This will produce code for <code>primitiveElement</code> like</p><pre>primitiveElement() {
-    if next token is IDENT || STRING_LITERAL
-                           || INTLIT
-        call constantValue
-    else if next token is IDENT
-        call variableReference
-    else if next token is LPAREN
-        match LPAREN
-        call expression
-        match RPAREN
-    else
-        report error
-                       </pre>
+      This will produce code for <code>primitiveElement</code> like</p><pre>primitiveElement() {    if next token is IDENT || STRING_LITERAL                           || INTLIT        call constantValue    else if next token is IDENT        call variableReference    else if next token is LPAREN        match LPAREN        call expression        match RPAREN    else        report error                       </pre>
       <p>which means that an IDENT that could come in a 
       <code>primitiveElement</code> context will be matched through 
       <code>constantValue</code>. This is a bit of a problem, because things 
@@ -2129,56 +1249,44 @@ tag.</p>
       spend on it.&nbsp; Stay tuned to ANTLR-interest (<a       href="http://www.antlr.org:8080/mailman/listinfo/antlr-interest">http://www.antlr.org:8080/mailman/listinfo/antlr-interest</a>) 
       for information!</p>
       <p></p>
-				<!-- #EndEditable "content" -->
-				<div id="footer">
-					<p>&nbsp;</p>
-					<hr/>
-					<p>Copyright &copy; 1996-2009, Scott Stanchfield. All Rights Reserved.<br/>
-					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
-					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
-					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
-					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../../images/cssplay_button.png" width="88" /></a></p>
-					<p>
-					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
-					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../../images/feed-icon-14x14.png" width="14" />Want 
-					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
-					</p>
-				</div>
-			</div>
-		</div>
-		<div id="bottom"/>
-		<div id="navigation">
-			<ul>
-				<li><a href="../../index.html">Home</a></li>
-				<li><a href="../index.html">Articles</a></li>
-				<li><a href="../../tools/index.html">Tools</a></li>
-				<li><a href="../../evaj/index.html">Effective VisualAge for Java</a></li>
-				<li><a href="../../eclipse/index.html">Eclipse Tips</a></li>
-				<li><a href="../../vaj/index.html">VisualAge Tips</a></li>
-				<!--
-				<li><a href="resume.html">Resume</a></li>
-				-->
-				<li><a href="../../publications.html">Publications</a></li>
-			</ul>
-			<p>&nbsp;</p>
-			<div style="margin-left:10px">
-<script type="text/javascript"><!--
-google_ad_client = "pub-1721904981084162";
-/* Homepage Gutter */
-google_ad_slot = "0044274311";
-google_ad_width = 120;
-google_ad_height = 600;
-//-->
-</script>
-<script type="text/javascript"
-src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script>
-</div>
-		</div>
-		<div id="bottomcorner"/>
-		<div id="topcorner"/>
-		</div>
-		<p>&nbsp;</p>
-	</body>
-<!-- #EndTemplate -->
-</html>
+				<!-- #EndEditable "content" -->
+				<div id="footer">
+					<p>&nbsp;</p>
+					<hr/>
+					<p>Copyright &copy; 1996-2013, Scott Stanchfield. All Rights Reserved.<br />
+					<br/>
+					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
+					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
+					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
+					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../../images/cssplay_button.png" width="88" /></a></p>
+					<p>
+					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
+					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../../images/feed-icon-14x14.png" width="14" />Want 
+					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div id="bottom"/>
+		<div id="navigation">
+			<h3>NAVIGATION</h3>
+			<ul>
+				<li><a href="../../index.html">Home</a></li>
+				<li><a href="../index.html">Articles</a></li>
+				<li><a href="../../tools/index.html">Tools</a></li>
+				<li><a href="../../evaj/index.html">Effective VisualAge<br/>&nbsp;&nbsp;&nbsp;&nbsp;for Java</a></li>
+				<li><a href="../../eclipse/index.html">Eclipse Tips</a></li>
+				<li><a href="../../vaj/index.html">VisualAge Tips</a></li>
+				<!--
+				<li><a href="resume.html">Resume</a></li>
+				-->
+				<li><a href="../../publications.html">Publications</a></li>
+			</ul>
+			<p>&nbsp;</p>
+		</div>
+		<div id="bottomcorner"/>
+		<div id="topcorner"/>
+		</div>
+		<p>&nbsp;</p>
+	</body>
+<!-- #EndTemplate --></html>

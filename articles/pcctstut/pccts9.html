@@ -1,33 +1,35 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+
 
 <!-- #BeginTemplate "../../master.dwt" -->
 
-	<head>
-		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-		<!-- #BeginEditable "doctitle" -->
+	<head>
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+		<!-- #BeginEditable "doctitle" -->
+
 		<title>PCCTS Tutorial: Putting it all together  - Scott Stanchfield</title>
-		<!-- #EndEditable -->
-		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
-		<!-- #BeginEditable "head" -->
-		<!-- #EndEditable -->
-		<style type="text/css">
-
-.style1 {
-	vertical-align: middle;
-}
-</style>
-	</head>
-
-	<body>
-		<div id="header">
-			<h1>JavaDude.com</h1>
-			<h4>-- Scott Stanchfield</h4>
-		</div>
-		<div id="content">
-			<div id="topBar">&nbsp;</div>
-			<div id="contentIndent">
-				<!-- #BeginEditable "content" -->
+		<!-- #EndEditable -->
+		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
+		<!-- #BeginEditable "head" -->
+		<!-- #EndEditable -->
+		<style type="text/css">
+.style1 {
+	vertical-align: middle;
+}
+</style>
+	</head>
+
+	<body>
+		<div id="header">
+			<h1>JavaDude.com</h1>
+			<h4>-- Scott Stanchfield</h4>
+		</div>
+		<div id="content">
+			<div id="topBar">&nbsp;</div>
+			<div id="contentIndent">
+				<!-- #BeginEditable "content" -->
+
 
 <h1>Putting it all together</h1>
 <h2>The code to be compiled</h2>
@@ -45,345 +47,7 @@ zip files (pkzip and tar.gz formats):
 <p>Here's what we have at this point:
 </p>
 
-<pre>#header
-&lt;&lt; // any definitions that you need in the 
-   //  generated files
-&gt;&gt;
-
-
-&lt;&lt; // scanner definitions would go here
-#include &quot;dlexerbase.h&quot;
-#include &quot;dlglexer.h&quot;
-#include &quot;atoken.h&quot;
-typedef antlrcommontoken antlrtoken;
-int main(int argc, char **argv) {
-    dlgfileinput in(stdin);
-    dlglexer scanner(&amp;in);
-    antlrtokenbuffer pipe(&amp;scanner);
-    antlrtoken tok;
-    scanner.settoken(&amp;tok);
-    xlparser xlparser(&amp;pipe);
-    xlparser.init(); // initialize
-    xlparser.program(); // start first rule return 0;
-} &gt;&gt;
-
-
-// scanner rules
-
-#lexclass START // Not really necessary, but
-                // good commentary nonetheless
-
-// White Space
-#token &quot;[\ \t\r]&quot;     &lt;&lt;skip();&gt;&gt;
-#token &quot;\n&quot;           &lt;&lt;skip(); newline();&gt;&gt;
-
-// Comments
-#token &quot;// ~[\n@]* [\n@]&quot; &lt;&lt;skip(); newline();&gt;&gt;
-
-// Literals
-#token INTLIT  &quot;[0-9]+&quot;
-#token CHARLIT &quot;\' ~[] \'&quot;
-#token         &quot;\&quot;&quot; &lt;&lt; // start stringlit
-                       skip(); mode(string);
-                    &gt;&gt;
-
-// Keywords
-#token PROGRAM   &quot;program&quot;
-#token BEGIN     &quot;begin&quot;
-#token END       &quot;end&quot;
-#token VAR       &quot;var&quot;
-#token CONSTANT  &quot;constant&quot;
-#token TYPE      &quot;type&quot;
-#token RECORD    &quot;record&quot;
-#token ARRAY     &quot;array&quot;
-#token OF        &quot;of&quot;
-#token PROCEDURE &quot;procedure&quot;
-#token PUT       &quot;put&quot;
-#token GET       &quot;get&quot;
-#token SKIPLINE  &quot;skipLine&quot;
-#token NEWLINE   &quot;newLine&quot;
-#token EXIT      &quot;exit&quot;
-#token WHEN      &quot;when&quot;
-#token RETURN    &quot;return&quot;
-#token IF        &quot;if&quot;
-#token THEN      &quot;then&quot;
-#token ELSE      &quot;else&quot;
-#token ELSIF     &quot;elsif&quot;
-#token WHILE     &quot;while&quot;
-#token LOOP      &quot;loop&quot;
-#token AND       &quot;and&quot;
-#token OR        &quot;or&quot;
-#token INTEGER  &quot;Integer&quot;
-#token BOOLEAN &quot;Boolean&quot; 
-
-// Operators
-#token DOT        &quot;.&quot;
-#token BECOMES    &quot;:=&quot;
-#token COLON      &quot;:&quot;
-#token SEMI       &quot;;&quot;
-#token COMMA      &quot;,&quot;
-#token EQUALS     &quot;=&quot;
-#token LBRACKET   &quot;\[&quot;
-#token RBRACKET   &quot;\]&quot;
-#token DOTDOT     &quot;..&quot;
-#token LPAREN     &quot;\(&quot;
-#token RPAREN     &quot;\)&quot;
-#token NOT_EQUALS &quot;/=&quot;
-#token LT         &quot;&lt;&quot;
-#token lte        &quot;&lt;=&quot;
-#token GT         &quot;&gt;&quot;
-#token GTE        &quot;&gt;=&quot;
-#token PLUS       &quot;\+&quot;
-#token MINUS      &quot;\-&quot;
-#token TIMES      &quot;\*&quot;
-#token DIV        &quot;/&quot;
-#token MOD        &quot;mod&quot;
-#token NOT        &quot;not&quot;
-
-// Identifiers
-#token IDENT &quot;[a-zA-Z] [a-zA-Z0-9]*&quot;
-
-// String Literal Processing
-// Separate Scanner class!
-#lexclass STRING
-#token           &quot;\&quot;\&quot;&quot; &lt;&lt; more(); replchar('\&quot;');&gt;&gt;
-#token BADSTRING &quot;\n&quot;   &lt;&lt; replchar('\0');
-                           newline();
-                           mode(start);
-                           /* error message */
-                        &gt;&gt;
-#token STRINGLIT &quot;\&quot;&quot;   &lt;&lt; replchar('\0'); 
-                           mode(start);
-                        &gt;&gt;
-#token           &quot;~[]&quot;  &lt;&lt;more();&gt;&gt;
-
-#tokclass STRING_LITERAL {STRINGLIT BADSTRING}
-#tokclass ADD_OP {PLUS MINUS}
-#tokclass RELATIONAL_OP {EQUALS NOT_EQUALS GT GTE LT LTE}
-#tokclass BOOLEAN_OP {AND OR}
-#tokclass MULT_OP {TIMES DIV MOD}
-
-class XLParser
-{
-&lt;&lt;
-    // parser definitions go here
-    public:
-        void init() {
-            antlrparser::init();
-            // any specific initialization you need
-            // (if none, don't override init() 
-}&gt;&gt;
-
-
-
-program
-  : PROGRAM IDENT EQUALS 
-        subprogramBody 
-    DOT
-    &quot;@&quot; // end-of-file
-  ;
-
-
-subprogramBody
-  : (basicDecl)*
-    (procedureDecl)*
-    BEGIN
-        statementList
-    END IDENT
-  ;
-
-
-basicDecl
-  : varDecl
-  | constDecl
-  | typeDecl
-  ;
-
-
-varDecl
-  : VAR identList COLON typeName
-    {BECOMES constantValue}
-    SEMI
-  ;
-
-
-constDecl
-  : CONSTANT identList COLON typeName
-    BECOMES constantValue SEMI
-  ;
-
-
-identList
-  : IDENT (COMMA IDENT)*
-  ;
-
-
-constantValue
-  : INTLIT
-  | STRING_LITERAL
-  | IDENT
-  ;
-
-
-typeDecl
-  : TYPE IDENT EQUALS
-    ( arrayDecl
-    | recordDecl
-    )
-    SEMI
-  ;
-
-
-arrayDecl
-  : ARRAY LBRACKET integerConstant 
-      DOTDOT integerConstant RBRACKET
-      OF typeName
-  ;
-
-integerConstant
-  : INTLIT
-  | IDENT // again, a constant...
-  ;
-
-
-recordDecl
-  : RECORD (identList COLON typeName SEMI)+ 
-    END RECORD
-  ;
-
-
-typeName
-  : IDENT
-  | INTEGER
-  | BOOLEAN
-  ;
-
-
-procedureDecl
-  : PROCEDURE IDENT {formalParameters} EQUALS
-        subprogramBody
-    SEMI
-  ;
-
-
-formalParameters
-  : LPAREN parameterSpec (SEMI parameterSpec)*
-    RPAREN
-  ;
-
-
-parameterSpec
-  : {VAR} identList COLON typeName
-  ;
-
-statement
-  : exitStatement
-  | returnStatement
-  | ifStatement
-  | loopStatement
-  | ioStatement
-  | (IDENT (LPAREN|SEMI))? procedureCallStatement
-  | assignmentStatement
-  ;
-
-statementList
-  : statement statementList
-  | (endStatement)? endStatement statementList
-  | // nothing
-  ;
-
-assignmentStatement
-  : variableReference BECOMES expression SEMI
-  ;
-
-
-exitStatement
-  : EXIT WHEN expression SEMI
-  ;
-
-procedureCallStatement
-  : IDENT {actualParameters} SEMI
-  ;
-
-actualParameters
-  : LPAREN { expression (COMMA expression)* } RPAREN
-  ;
-
-
-returnStatement
-  : RETURN SEMI
-  ;
-
-
-ifStatement
-  : IF ifPart END IF SEMI
-  ;
-
-ifPart
-  : expression THEN
-    statementList
-    { ELSIF ifPart
-    | ELSE statementList
-    }
-  ;
-
-loopStatement
-  : {WHILE expression} LOOP
-        statementList
-    END LOOP SEMI
-  ;
-
-endStatement
-  : END SEMI
-  ;
-
-variableReference
-  : IDENT
-    ( LBRACKET expression RBRACKET
-    | DOT IDENT
-    )*
-  ;
-
-ioStatement
-  : PUT LPAREN expression RPAREN SEMI
-  | GET LPAREN variableReference RPAREN SEMI
-  | SKIPLINE {LPAREN RPAREN} SEMI
-  | NEWLINE {LPAREN RPAREN} SEMI
-  ;
-
-
-primitiveElement
-  : variableReference
-  | constantValue
-  | LPAREN expression RPAREN
-  ;
-
-
-booleanNegationExpression
-  : (NOT)* primitiveElement
-  ;
-
-signExpression
-  : (ADD_OP)* booleanNegationExpression
-  ;
-
-
-multiplyingExpression
-  : signExpression (MULT_OP signExpression)*
-  ;
-
-addingExpression
-  : multiplyingExpression (ADD_OP multiplyingExpression)*
-  ;
-
-relationalExpression
-  : addingExpression (RELATIONAL_OP addingExpression)*
-  ;
-
-expression
-  : relationalExpression (BOOLEAN_OP relationalExpression)*
-  ;
-               </pre>
+<pre>#header&lt;&lt; // any definitions that you need in the    //  generated files&gt;&gt;&lt;&lt; // scanner definitions would go here#include &quot;dlexerbase.h&quot;#include &quot;dlglexer.h&quot;#include &quot;atoken.h&quot;typedef antlrcommontoken antlrtoken;int main(int argc, char **argv) {    dlgfileinput in(stdin);    dlglexer scanner(&amp;in);    antlrtokenbuffer pipe(&amp;scanner);    antlrtoken tok;    scanner.settoken(&amp;tok);    xlparser xlparser(&amp;pipe);    xlparser.init(); // initialize    xlparser.program(); // start first rule return 0;} &gt;&gt;// scanner rules#lexclass START // Not really necessary, but                // good commentary nonetheless// White Space#token &quot;[\ \t\r]&quot;     &lt;&lt;skip();&gt;&gt;#token &quot;\n&quot;           &lt;&lt;skip(); newline();&gt;&gt;// Comments#token &quot;// ~[\n@]* [\n@]&quot; &lt;&lt;skip(); newline();&gt;&gt;// Literals#token INTLIT  &quot;[0-9]+&quot;#token CHARLIT &quot;\' ~[] \'&quot;#token         &quot;\&quot;&quot; &lt;&lt; // start stringlit                       skip(); mode(string);                    &gt;&gt;// Keywords#token PROGRAM   &quot;program&quot;#token BEGIN     &quot;begin&quot;#token END       &quot;end&quot;#token VAR       &quot;var&quot;#token CONSTANT  &quot;constant&quot;#token TYPE      &quot;type&quot;#token RECORD    &quot;record&quot;#token ARRAY     &quot;array&quot;#token OF        &quot;of&quot;#token PROCEDURE &quot;procedure&quot;#token PUT       &quot;put&quot;#token GET       &quot;get&quot;#token SKIPLINE  &quot;skipLine&quot;#token NEWLINE   &quot;newLine&quot;#token EXIT      &quot;exit&quot;#token WHEN      &quot;when&quot;#token RETURN    &quot;return&quot;#token IF        &quot;if&quot;#token THEN      &quot;then&quot;#token ELSE      &quot;else&quot;#token ELSIF     &quot;elsif&quot;#token WHILE     &quot;while&quot;#token LOOP      &quot;loop&quot;#token AND       &quot;and&quot;#token OR        &quot;or&quot;#token INTEGER  &quot;Integer&quot;#token BOOLEAN &quot;Boolean&quot; // Operators#token DOT        &quot;.&quot;#token BECOMES    &quot;:=&quot;#token COLON      &quot;:&quot;#token SEMI       &quot;;&quot;#token COMMA      &quot;,&quot;#token EQUALS     &quot;=&quot;#token LBRACKET   &quot;\[&quot;#token RBRACKET   &quot;\]&quot;#token DOTDOT     &quot;..&quot;#token LPAREN     &quot;\(&quot;#token RPAREN     &quot;\)&quot;#token NOT_EQUALS &quot;/=&quot;#token LT         &quot;&lt;&quot;#token lte        &quot;&lt;=&quot;#token GT         &quot;&gt;&quot;#token GTE        &quot;&gt;=&quot;#token PLUS       &quot;\+&quot;#token MINUS      &quot;\-&quot;#token TIMES      &quot;\*&quot;#token DIV        &quot;/&quot;#token MOD        &quot;mod&quot;#token NOT        &quot;not&quot;// Identifiers#token IDENT &quot;[a-zA-Z] [a-zA-Z0-9]*&quot;// String Literal Processing// Separate Scanner class!#lexclass STRING#token           &quot;\&quot;\&quot;&quot; &lt;&lt; more(); replchar('\&quot;');&gt;&gt;#token BADSTRING &quot;\n&quot;   &lt;&lt; replchar('\0');                           newline();                           mode(start);                           /* error message */                        &gt;&gt;#token STRINGLIT &quot;\&quot;&quot;   &lt;&lt; replchar('\0');                            mode(start);                        &gt;&gt;#token           &quot;~[]&quot;  &lt;&lt;more();&gt;&gt;#tokclass STRING_LITERAL {STRINGLIT BADSTRING}#tokclass ADD_OP {PLUS MINUS}#tokclass RELATIONAL_OP {EQUALS NOT_EQUALS GT GTE LT LTE}#tokclass BOOLEAN_OP {AND OR}#tokclass MULT_OP {TIMES DIV MOD}class XLParser{&lt;&lt;    // parser definitions go here    public:        void init() {            antlrparser::init();            // any specific initialization you need            // (if none, don't override init() }&gt;&gt;program  : PROGRAM IDENT EQUALS         subprogramBody     DOT    &quot;@&quot; // end-of-file  ;subprogramBody  : (basicDecl)*    (procedureDecl)*    BEGIN        statementList    END IDENT  ;basicDecl  : varDecl  | constDecl  | typeDecl  ;varDecl  : VAR identList COLON typeName    {BECOMES constantValue}    SEMI  ;constDecl  : CONSTANT identList COLON typeName    BECOMES constantValue SEMI  ;identList  : IDENT (COMMA IDENT)*  ;constantValue  : INTLIT  | STRING_LITERAL  | IDENT  ;typeDecl  : TYPE IDENT EQUALS    ( arrayDecl    | recordDecl    )    SEMI  ;arrayDecl  : ARRAY LBRACKET integerConstant       DOTDOT integerConstant RBRACKET      OF typeName  ;integerConstant  : INTLIT  | IDENT // again, a constant...  ;recordDecl  : RECORD (identList COLON typeName SEMI)+     END RECORD  ;typeName  : IDENT  | INTEGER  | BOOLEAN  ;procedureDecl  : PROCEDURE IDENT {formalParameters} EQUALS        subprogramBody    SEMI  ;formalParameters  : LPAREN parameterSpec (SEMI parameterSpec)*    RPAREN  ;parameterSpec  : {VAR} identList COLON typeName  ;statement  : exitStatement  | returnStatement  | ifStatement  | loopStatement  | ioStatement  | (IDENT (LPAREN|SEMI))? procedureCallStatement  | assignmentStatement  ;statementList  : statement statementList  | (endStatement)? endStatement statementList  | // nothing  ;assignmentStatement  : variableReference BECOMES expression SEMI  ;exitStatement  : EXIT WHEN expression SEMI  ;procedureCallStatement  : IDENT {actualParameters} SEMI  ;actualParameters  : LPAREN { expression (COMMA expression)* } RPAREN  ;returnStatement  : RETURN SEMI  ;ifStatement  : IF ifPart END IF SEMI  ;ifPart  : expression THEN    statementList    { ELSIF ifPart    | ELSE statementList    }  ;loopStatement  : {WHILE expression} LOOP        statementList    END LOOP SEMI  ;endStatement  : END SEMI  ;variableReference  : IDENT    ( LBRACKET expression RBRACKET    | DOT IDENT    )*  ;ioStatement  : PUT LPAREN expression RPAREN SEMI  | GET LPAREN variableReference RPAREN SEMI  | SKIPLINE {LPAREN RPAREN} SEMI  | NEWLINE {LPAREN RPAREN} SEMI  ;primitiveElement  : variableReference  | constantValue  | LPAREN expression RPAREN  ;booleanNegationExpression  : (NOT)* primitiveElement  ;signExpression  : (ADD_OP)* booleanNegationExpression  ;multiplyingExpression  : signExpression (MULT_OP signExpression)*  ;addingExpression  : multiplyingExpression (ADD_OP multiplyingExpression)*  ;relationalExpression  : addingExpression (RELATIONAL_OP addingExpression)*  ;expression  : relationalExpression (BOOLEAN_OP relationalExpression)*  ;               </pre>
 
 <hr/>
 
@@ -497,8 +161,7 @@ somewhat lengthy point.
 <p>Notice the warnings you get from the -w2 option like
 </p>
 
-<pre>warning: token label has no associated
-         rexpr: STRING_LITERAL               </pre>
+<pre>warning: token label has no associated         rexpr: STRING_LITERAL               </pre>
 
 <p>This means one of two things:
 </p>
@@ -548,14 +211,7 @@ like it came back and bit us on the but. But why?
 <p>The rules that are giving us trouble are rules like
 </p>
 
-<pre>subprogramBody
-  : (basicDecl)*
-    (procedureDecl)*
-    BEGIN
-        ( statement )*
-    END IDENT
-  ;
-               </pre>
+<pre>subprogramBody  : (basicDecl)*    (procedureDecl)*    BEGIN        ( statement )*    END IDENT  ;               </pre>
 
 <p>But I thought we guarded this with predicates for the <code>END</code>
 statement?
@@ -588,11 +244,7 @@ single place. So let's create a single place. Instead of using <code>(statement)
 to represent a statement list, we'll create a rule called statementList:
 </p>
 
-<pre>statementList
-  : statementList statement
-  | // nothing
-  ;
-               </pre>
+<pre>statementList  : statementList statement  | // nothing  ;               </pre>
 
 <p>Some of you may be saying &quot;but...&quot; but I'll cut you off because
 I've spent too much time in yacc-land recently. Silly me coded the rule this
@@ -600,18 +252,13 @@ way. Yup, left-recursion, an LL no-no, but I'm not too proud to admit I make
 these mistakes sometimes. ANTLR is very nice about it and reports
 </p>
 
-<pre>error: infinite left-recursion to rule statementList
-       from rule statementList               </pre>
+<pre>error: infinite left-recursion to rule statementList       from rule statementList               </pre>
 
 <p>So I shake my head in disbelief that I typed it (10 minutes before writing
 this) and change it to
 </p>
 
-<pre>statementList
-  : statement statementList
-  | // nothing
-  ;
-               </pre>
+<pre>statementList  : statement statementList  | // nothing  ;               </pre>
 
 <p>and compile again...
 </p>
@@ -632,12 +279,7 @@ So what do we do?
 <p>We move the <code>endStatement</code> out of the statement rule and into <code>statementList</code>:
 </p>
 
-<pre>statementList
-  : statement statementList
-  | (endStatement)? endStatement statementList
-  | // nothing
-  ;
-               </pre>
+<pre>statementList  : statement statementList  | (endStatement)? endStatement statementList  | // nothing  ;               </pre>
 
 <p>And now, the conflict disappears. We have applied the syntactic predicate to
 the point of the conflict.
@@ -656,19 +298,7 @@ leave this conflict in the grammar. This will produce code for <code>primitiveEl
 like
 </p>
 
-<pre>primitiveElement() {
-    if next token is IDENT || STRING_LITERAL
-                           || INTLIT
-        call constantValue
-    else if next token is IDENT
-        call variableReference
-    else if next token is LPAREN
-        match LPAREN
-        call expression
-        match RPAREN
-    else
-        report error
-               </pre>
+<pre>primitiveElement() {    if next token is IDENT || STRING_LITERAL                           || INTLIT        call constantValue    else if next token is IDENT        call variableReference    else if next token is LPAREN        match LPAREN        call expression        match RPAREN    else        report error               </pre>
 
 <p>which means that and IDENT that could come in a <code>primitiveElement</code>
 context will be matched through <code>constantValue</code>. This is a bit of a
@@ -742,56 +372,44 @@ on a Tutorial book for ANTLR 2.0, the new, Java version of PCCTS.&nbsp; Stay
 tuned to <a href="news:comp.compilers.tools.pccts">comp.compilers.tools.pccts</a>&nbsp;
 for information!
 </p>
-				<!-- #EndEditable "content" -->
-				<div id="footer">
-					<p>&nbsp;</p>
-					<hr/>
-					<p>Copyright &copy; 1996-2009, Scott Stanchfield. All Rights Reserved.<br/>
-					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
-					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
-					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
-					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../../images/cssplay_button.png" width="88" /></a></p>
-					<p>
-					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
-					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../../images/feed-icon-14x14.png" width="14" />Want 
-					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
-					</p>
-				</div>
-			</div>
-		</div>
-		<div id="bottom"/>
-		<div id="navigation">
-			<ul>
-				<li><a href="../../index.html">Home</a></li>
-				<li><a href="../index.html">Articles</a></li>
-				<li><a href="../../tools/index.html">Tools</a></li>
-				<li><a href="../../evaj/index.html">Effective VisualAge for Java</a></li>
-				<li><a href="../../eclipse/index.html">Eclipse Tips</a></li>
-				<li><a href="../../vaj/index.html">VisualAge Tips</a></li>
-				<!--
-				<li><a href="resume.html">Resume</a></li>
-				-->
-				<li><a href="../../publications.html">Publications</a></li>
-			</ul>
-			<p>&nbsp;</p>
-			<div style="margin-left:10px">
-<script type="text/javascript"><!--
-google_ad_client = "pub-1721904981084162";
-/* Homepage Gutter */
-google_ad_slot = "0044274311";
-google_ad_width = 120;
-google_ad_height = 600;
-//-->
-</script>
-<script type="text/javascript"
-src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script>
-</div>
-		</div>
-		<div id="bottomcorner"/>
-		<div id="topcorner"/>
-		</div>
-		<p>&nbsp;</p>
-	</body>
-<!-- #EndTemplate -->
-</html>
+				<!-- #EndEditable "content" -->
+				<div id="footer">
+					<p>&nbsp;</p>
+					<hr/>
+					<p>Copyright &copy; 1996-2013, Scott Stanchfield. All Rights Reserved.<br />
+					<br/>
+					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
+					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
+					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
+					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../../images/cssplay_button.png" width="88" /></a></p>
+					<p>
+					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
+					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../../images/feed-icon-14x14.png" width="14" />Want 
+					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div id="bottom"/>
+		<div id="navigation">
+			<h3>NAVIGATION</h3>
+			<ul>
+				<li><a href="../../index.html">Home</a></li>
+				<li><a href="../index.html">Articles</a></li>
+				<li><a href="../../tools/index.html">Tools</a></li>
+				<li><a href="../../evaj/index.html">Effective VisualAge<br/>&nbsp;&nbsp;&nbsp;&nbsp;for Java</a></li>
+				<li><a href="../../eclipse/index.html">Eclipse Tips</a></li>
+				<li><a href="../../vaj/index.html">VisualAge Tips</a></li>
+				<!--
+				<li><a href="resume.html">Resume</a></li>
+				-->
+				<li><a href="../../publications.html">Publications</a></li>
+			</ul>
+			<p>&nbsp;</p>
+		</div>
+		<div id="bottomcorner"/>
+		<div id="topcorner"/>
+		</div>
+		<p>&nbsp;</p>
+	</body>
+<!-- #EndTemplate --></html>

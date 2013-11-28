@@ -1,33 +1,35 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+
 
 <!-- #BeginTemplate "../../master.dwt" -->
 
-	<head>
-		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-		<!-- #BeginEditable "doctitle" -->
+	<head>
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+		<!-- #BeginEditable "doctitle" -->
+
 		<title>PCCTS Tutorial: The Target Language  - Scott Stanchfield</title>
-		<!-- #EndEditable -->
-		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
-		<!-- #BeginEditable "head" -->
-		<!-- #EndEditable -->
-		<style type="text/css">
-
-.style1 {
-	vertical-align: middle;
-}
-</style>
-	</head>
-
-	<body>
-		<div id="header">
-			<h1>JavaDude.com</h1>
-			<h4>-- Scott Stanchfield</h4>
-		</div>
-		<div id="content">
-			<div id="topBar">&nbsp;</div>
-			<div id="contentIndent">
-				<!-- #BeginEditable "content" -->
+		<!-- #EndEditable -->
+		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
+		<!-- #BeginEditable "head" -->
+		<!-- #EndEditable -->
+		<style type="text/css">
+.style1 {
+	vertical-align: middle;
+}
+</style>
+	</head>
+
+	<body>
+		<div id="header">
+			<h1>JavaDude.com</h1>
+			<h4>-- Scott Stanchfield</h4>
+		</div>
+		<div id="content">
+			<div id="topBar">&nbsp;</div>
+			<div id="contentIndent">
+				<!-- #BeginEditable "content" -->
+
 
 <h1>The Target Language</h1>
 						<p>The compiler course I took at Johns Hopkins featured a small language called &quot;XL.&quot; I'm not sure who came up with this language, but the course was taught by Dr. John Moore, and he presented XL to us. I wanted to at least give him some credit
@@ -103,37 +105,24 @@ is 'B'. (At this point, these attributes are not implemented. I may add them lat
 <h2>Type Generators</h2>
 <p>An enumeration type is defined by listing the identifiers which are the actual values of the type. As with type <b>Char</b>, the predecessor and successor functions of an enumeration type <b>T</b> as invoked as attributes <b>T'pred</b> and <b>T'succ</b>.
 For example:</p>
-<pre>type CardSuit = &lt;CLUB, DIAMOND, HEART, SPADE&gt;;
-           </pre>
+<pre>type CardSuit = &lt;CLUB, DIAMOND, HEART, SPADE&gt;;           </pre>
 <p>Then <b>CardSuit'pred(HEART)</b> is DIAMOND and <b>CardSuit'succ(HEART)</b> is SPADE.</p>
 <p>An array type (one dimensional only) is defined by giving a range of indices and the component type. Only integer indices are allowed in XL. For example</p>
-<pre>type Table = array[1..10] of Integer;
-           </pre>
+<pre>type Table = array[1..10] of Integer;           </pre>
 <p>A record type is defined by listing the individual component names (fields) and their types. For example:</p>
-<pre>type Date =
-    record
-        day : Integer;
-        month: Integer;
-        year: Integer;
-    end record;
-           </pre>
+<pre>type Date =    record        day : Integer;        month: Integer;        year: Integer;    end record;           </pre>
 <hr/>
 <h2>Named Constants</h2>
 <p>Named constants are introduced by declarations of the form</p>
-<pre>constant ID, ID, . . ., ID: typeName := expression;
-           </pre>
+<pre>constant ID, ID, . . ., ID: typeName := expression;           </pre>
 <p><code>typeName</code> must be an identifier representing a scalar type (<b>Integer</b>, <b>Boolean</b>, <b>Char</b> or a user-defined enumeration type.) The phrase &quot;<code>:= </code>expression&quot; is required. For example:</p>
-<pre>constant maxIndex : Integer := 100;
-           </pre>
+<pre>constant maxIndex : Integer := 100;           </pre>
 <hr/>
 <h2>Variables</h2>
 <p>Variables are introduced by declarations of the form</p>
-<pre>var ID, ID, ..., ID : typeName := expression;
-           </pre>
+<pre>var ID, ID, ..., ID : typeName := expression;           </pre>
 <p><code>typeName</code> must be an identifier, not a type constructor such as an <b>array</b> or <b>record</b>. The phrase &quot;<code>:= expression</code>&quot; is optional and can only involve literals and named constants. For example:</p>
-<pre>var I : Integer := 1;
-var b1, b2 : Boolean;
-           </pre>
+<pre>var I : Integer := 1;var b1, b2 : Boolean;           </pre>
 <hr/>
 <h2>Operators and Expressions</h2>
 <h3>Operators</h3>
@@ -171,102 +160,69 @@ matter what the second operand is, so the second operand is not even evaluated. 
 <p>(&quot;:=&quot; is the assignment operator). For example</p>
 <pre>i := 2*I + 5;     </pre>
 <h3>If statement</h3>
-<pre>if x &gt; MAX then             if x &lt; 10 then
-    MAX := x;                   x := x + 1;
-elsif x &lt; MIN then              y := 2*x;
-    MIN := x;               end if;
-end if;
-           </pre>
+<pre>if x &gt; MAX then             if x &lt; 10 then    MAX := x;                   x := x + 1;elsif x &lt; MIN then              y := 2*x;    MIN := x;               end if;end if;           </pre>
 <h3>Loop and exit statements</h3>
-<pre>loop                        while I &lt; n loop
-    get(x);                     sum := sum + a[I];
-    exit when x = SIGNAL;       i := i + 1;
-    process(x);             end loop;
-end loop;
-           </pre>
+<pre>loop                        while I &lt; n loop    get(x);                     sum := sum + a[I];    exit when x = SIGNAL;       i := i + 1;    process(x);             end loop;end loop;           </pre>
 <h3>I/O Statements (for text I/O only)</h3>
 <p>XL defines only sequential I/O for two basic character streams, standard input and standard output. All I/O is provided by the following procedures:</p>
-<pre>procedure put(item : String); // for string literals
-procedure put(item : Char);
-procedure put(item : Integer);
-procedure newLine;
-procedure get(var item : Char);
-procedure get(var item : Integer);
-procedure skipLine;
-           </pre>
+<pre>procedure put(item : String); // for string literalsprocedure put(item : Char);procedure put(item : Integer);procedure newLine;procedure get(var item : Char);procedure get(var item : Integer);procedure skipLine;           </pre>
 <hr/>
 <h2>Subprograms</h2>
 <h3>Procedures</h3>
 <p>Procedures are similar to those in Pascal except that an explicit return is allowed. The program is essentially the outermost procedure (with no parameters) and serves as a starting point for the program.</p>
 <h3>Functions</h3>
 <p>Functions can return scalar types only, not arrays or records. Only value parameters are allowed. A function returns a value by executing a statement of the form</p>
-<pre>return expression;
-           </pre>
+<pre>return expression;           </pre>
 <h3>Parameters</h3>
 <p>There are two parameter modes in XL: value parameters and variable parameters. Value parameters (passed by copy) are the default. Variable parameters (passed by reference) must be explicitly declared as in</p>
-<pre>procedure p(var x : Integer) ...
-           </pre>
+<pre>procedure p(var x : Integer) ...           </pre>
 <h3>Subprogram end</h3>
 <p>The name of the procedure must be repeated at the end of its declaration. For example</p>
-<pre>procedure proc1;
-end proc1;
-           </pre>
+<pre>procedure proc1;end proc1;           </pre>
 <hr/>
 <h2>Specification Conclusion</h2>
 <p>OK, so it's sketchy. I know, I know. But that's what I got. Maybe I'll improve it someday, but I think if you're a programmer you'll probably understand it pretty well anyway...</p>
 <p>Next we'll discuss our <a href="pccts3.html">strategy</a>...</p>
 
 											
-				<!-- #EndEditable "content" -->
-				<div id="footer">
-					<p>&nbsp;</p>
-					<hr/>
-					<p>Copyright &copy; 1996-2009, Scott Stanchfield. All Rights Reserved.<br/>
-					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
-					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
-					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
-					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../../images/cssplay_button.png" width="88" /></a></p>
-					<p>
-					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
-					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../../images/feed-icon-14x14.png" width="14" />Want 
-					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
-					</p>
-				</div>
-			</div>
-		</div>
-		<div id="bottom"/>
-		<div id="navigation">
-			<ul>
-				<li><a href="../../index.html">Home</a></li>
-				<li><a href="../index.html">Articles</a></li>
-				<li><a href="../../tools/index.html">Tools</a></li>
-				<li><a href="../../evaj/index.html">Effective VisualAge for Java</a></li>
-				<li><a href="../../eclipse/index.html">Eclipse Tips</a></li>
-				<li><a href="../../vaj/index.html">VisualAge Tips</a></li>
-				<!--
-				<li><a href="resume.html">Resume</a></li>
-				-->
-				<li><a href="../../publications.html">Publications</a></li>
-			</ul>
-			<p>&nbsp;</p>
-			<div style="margin-left:10px">
-<script type="text/javascript"><!--
-google_ad_client = "pub-1721904981084162";
-/* Homepage Gutter */
-google_ad_slot = "0044274311";
-google_ad_width = 120;
-google_ad_height = 600;
-//-->
-</script>
-<script type="text/javascript"
-src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script>
-</div>
-		</div>
-		<div id="bottomcorner"/>
-		<div id="topcorner"/>
-		</div>
-		<p>&nbsp;</p>
-	</body>
-<!-- #EndTemplate -->
-</html>
+				<!-- #EndEditable "content" -->
+				<div id="footer">
+					<p>&nbsp;</p>
+					<hr/>
+					<p>Copyright &copy; 1996-2013, Scott Stanchfield. All Rights Reserved.<br />
+					<br/>
+					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
+					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
+					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
+					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../../images/cssplay_button.png" width="88" /></a></p>
+					<p>
+					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
+					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../../images/feed-icon-14x14.png" width="14" />Want 
+					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div id="bottom"/>
+		<div id="navigation">
+			<h3>NAVIGATION</h3>
+			<ul>
+				<li><a href="../../index.html">Home</a></li>
+				<li><a href="../index.html">Articles</a></li>
+				<li><a href="../../tools/index.html">Tools</a></li>
+				<li><a href="../../evaj/index.html">Effective VisualAge<br/>&nbsp;&nbsp;&nbsp;&nbsp;for Java</a></li>
+				<li><a href="../../eclipse/index.html">Eclipse Tips</a></li>
+				<li><a href="../../vaj/index.html">VisualAge Tips</a></li>
+				<!--
+				<li><a href="resume.html">Resume</a></li>
+				-->
+				<li><a href="../../publications.html">Publications</a></li>
+			</ul>
+			<p>&nbsp;</p>
+		</div>
+		<div id="bottomcorner"/>
+		<div id="topcorner"/>
+		</div>
+		<p>&nbsp;</p>
+	</body>
+<!-- #EndTemplate --></html>

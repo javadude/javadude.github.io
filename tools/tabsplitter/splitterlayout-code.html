@@ -1,33 +1,35 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+
 
 <!-- #BeginTemplate "../../master.dwt" -->
 
-	<head>
-		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-		<!-- #BeginEditable "doctitle" -->
+	<head>
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+		<!-- #BeginEditable "doctitle" -->
+
 		<title>SplitterLayout - Scott Stanchfield</title>
-		<!-- #EndEditable -->
-		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
-		<!-- #BeginEditable "head" -->
-		<!-- #EndEditable -->
-		<style type="text/css">
-
-.style1 {
-	vertical-align: middle;
-}
-</style>
-	</head>
-
-	<body>
-		<div id="header">
-			<h1>JavaDude.com</h1>
-			<h4>-- Scott Stanchfield</h4>
-		</div>
-		<div id="content">
-			<div id="topBar">&nbsp;</div>
-			<div id="contentIndent">
-				<!-- #BeginEditable "content" -->
+		<!-- #EndEditable -->
+		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
+		<!-- #BeginEditable "head" -->
+		<!-- #EndEditable -->
+		<style type="text/css">
+.style1 {
+	vertical-align: middle;
+}
+</style>
+	</head>
+
+	<body>
+		<div id="header">
+			<h1>JavaDude.com</h1>
+			<h4>-- Scott Stanchfield</h4>
+		</div>
+		<div id="content">
+			<div id="topBar">&nbsp;</div>
+			<div id="contentIndent">
+				<!-- #BeginEditable "content" -->
+
 <h1>SplitterLayout</h1>
 <h3>A Layout Manager for Split Windows</h3>
 <p><tt>SplitterLayout</tt> is a simple layout manager that handles segmented
@@ -51,23 +53,7 @@ trying to come up with a solution for this... Grr... Arg...</p>
 </p>
 <p>The above layout was created with the following code:</p>
 <p class='figcap'>Layout example 1</p>
-<pre>package com.magelang.test;
-
-import java.applet.*;
-import java.awt.*;
-import com.magelang.splitter.*;
-
-public class SplitterEx1 extends Applet {
-  public void init() {
-    super.init();
-    setLayout(new SplitterLayout(SplitterLayout.HORIZONTAL));
-    add(&quot;1&quot;,new Button(&quot;A (1)&quot;));
-    add(&quot;2&quot;,new Button(&quot;B (2)&quot;));
-    add(&quot;4&quot;,new Button(&quot;C (4)&quot;));
-    add(&quot;8&quot;,new Button(&quot;D (8)&quot;));
-    add(&quot;3&quot;,new Button(&quot;E (3)&quot;));
-  }
-}  </pre>
+<pre>package com.magelang.test;import java.applet.*;import java.awt.*;import com.magelang.splitter.*;public class SplitterEx1 extends Applet {  public void init() {    super.init();    setLayout(new SplitterLayout(SplitterLayout.HORIZONTAL));    add(&quot;1&quot;,new Button(&quot;A (1)&quot;));    add(&quot;2&quot;,new Button(&quot;B (2)&quot;));    add(&quot;4&quot;,new Button(&quot;C (4)&quot;));    add(&quot;8&quot;,new Button(&quot;D (8)&quot;));    add(&quot;3&quot;,new Button(&quot;E (3)&quot;));  }}  </pre>
 <p>The quoted numbers act as proportions to determine the amount of
 space each component gets.</p>
 <h2>Adding <tt>SplitterBar</tt>s</h2>
@@ -78,27 +64,7 @@ space each component gets.</p>
 </p>
 <p>The above layout was created with the following code:</p>
 <p class='figcap'>Layout example 2</p>
-<pre>package com.magelang.test;
-
-import java.applet.*;
-import java.awt.*;
-import com.magelang.splitter.*;
-
-public class SplitterEx2 extends Applet {
-  public void init() {
-  super.init();
-  setLayout(new SplitterLayout(SplitterLayout.HORIZONTAL));
-  add(&quot;1&quot;,new Button(&quot;A (1)&quot;));
-  add(new SplitterBar());
-  add(&quot;2&quot;,new Button(&quot;B (2)&quot;));
-  add(new SplitterBar());
-  add(&quot;4&quot;,new Button(&quot;C (4)&quot;));
-  add(new SplitterBar());
-  add(&quot;8&quot;,new Button(&quot;D (8)&quot;));
-  add(new SplitterBar());
-  add(&quot;3&quot;,new Button(&quot;E (3)&quot;));
-  }
-}  </pre>
+<pre>package com.magelang.test;import java.applet.*;import java.awt.*;import com.magelang.splitter.*;public class SplitterEx2 extends Applet {  public void init() {  super.init();  setLayout(new SplitterLayout(SplitterLayout.HORIZONTAL));  add(&quot;1&quot;,new Button(&quot;A (1)&quot;));  add(new SplitterBar());  add(&quot;2&quot;,new Button(&quot;B (2)&quot;));  add(new SplitterBar());  add(&quot;4&quot;,new Button(&quot;C (4)&quot;));  add(new SplitterBar());  add(&quot;8&quot;,new Button(&quot;D (8)&quot;));  add(new SplitterBar());  add(&quot;3&quot;,new Button(&quot;E (3)&quot;));  }}  </pre>
 <p>Adding Splitterbars between components allows the user to resize
 the components.&nbsp; The quoted numbers are now only used as an initial size
 for the components.</p>
@@ -115,89 +81,46 @@ simple &quot;movable status bar&quot; layout:</p>
 <p>&nbsp;</p>
 <p>The above layout was created with the following code:</p>
 <p class='figcap'>Layout example 3</p>
-<pre>package com.magelang.test;
+<pre>package com.magelang.test;import java.applet.*;import java.awt.*;import com.magelang.splitter.*;public class SplitterEx3 extends Applet {  public void init() {    super.init();    setLayout(new SplitterLayout(SplitterLayout.VERTICAL));    add(&quot;1&quot;,new Button(&quot;A (1)&quot;));    SplitterBar b1 = new SplitterBar();    b1.setLayout(new GridLayout(1,0));    b1.add(new SplitterSpace());    b1.add(new Label(&quot;Status&quot;));    b1.add(new TextField(&quot;Enter your name&quot;));    b1.add(new SplitterSpace());    add(b1);    add(&quot;2&quot;,new Button(&quot;B (2)&quot;));    SplitterBar b2 = new SplitterBar();    b2.setLayout(new SplitterLayout(SplitterLayout.HORIZONTAL));    b2.add(&quot;5&quot;,new SplitterSpace());    b2.add(new SplitterBar());    b2.add(&quot;10&quot;,new Label(&quot;Status&quot;));    b2.add(new SplitterBar());    b2.add(&quot;40&quot;,new TextField(&quot;Enter your name&quot;));    add(b2);    add(&quot;4&quot;,new Button(&quot;C (4)&quot;));  }}  </pre>
 
-import java.applet.*;
-import java.awt.*;
-import com.magelang.splitter.*;
-public class SplitterEx3 extends Applet {
-  public void init() {
-    super.init();
-    setLayout(new SplitterLayout(SplitterLayout.VERTICAL));
-
-    add(&quot;1&quot;,new Button(&quot;A (1)&quot;));
-
-    SplitterBar b1 = new SplitterBar();
-    b1.setLayout(new GridLayout(1,0));
-    b1.add(new SplitterSpace());
-    b1.add(new Label(&quot;Status&quot;));
-    b1.add(new TextField(&quot;Enter your name&quot;));
-    b1.add(new SplitterSpace());
-    add(b1);
-    add(&quot;2&quot;,new Button(&quot;B (2)&quot;));
-
-    SplitterBar b2 = new SplitterBar();
-    b2.setLayout(new SplitterLayout(SplitterLayout.HORIZONTAL));
-    b2.add(&quot;5&quot;,new SplitterSpace());
-    b2.add(new SplitterBar());
-    b2.add(&quot;10&quot;,new Label(&quot;Status&quot;));
-    b2.add(new SplitterBar());
-    b2.add(&quot;40&quot;,new TextField(&quot;Enter your name&quot;));
-    add(b2);
-    add(&quot;4&quot;,new Button(&quot;C (4)&quot;));
-  }
-}  </pre>
-
-				<!-- #EndEditable "content" -->
-				<div id="footer">
-					<p>&nbsp;</p>
-					<hr/>
-					<p>Copyright &copy; 1996-2009, Scott Stanchfield. All Rights Reserved.<br/>
-					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
-					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
-					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
-					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../../images/cssplay_button.png" width="88" /></a></p>
-					<p>
-					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
-					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../../images/feed-icon-14x14.png" width="14" />Want 
-					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
-					</p>
-				</div>
-			</div>
-		</div>
-		<div id="bottom"/>
-		<div id="navigation">
-			<ul>
-				<li><a href="../../index.html">Home</a></li>
-				<li><a href="../../articles/index.html">Articles</a></li>
-				<li><a href="../index.html">Tools</a></li>
-				<li><a href="../../evaj/index.html">Effective VisualAge for Java</a></li>
-				<li><a href="../../eclipse/index.html">Eclipse Tips</a></li>
-				<li><a href="../../vaj/index.html">VisualAge Tips</a></li>
-				<!--
-				<li><a href="resume.html">Resume</a></li>
-				-->
-				<li><a href="../../publications.html">Publications</a></li>
-			</ul>
-			<p>&nbsp;</p>
-			<div style="margin-left:10px">
-<script type="text/javascript"><!--
-google_ad_client = "pub-1721904981084162";
-/* Homepage Gutter */
-google_ad_slot = "0044274311";
-google_ad_width = 120;
-google_ad_height = 600;
-//-->
-</script>
-<script type="text/javascript"
-src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script>
-</div>
-		</div>
-		<div id="bottomcorner"/>
-		<div id="topcorner"/>
-		</div>
-		<p>&nbsp;</p>
-	</body>
-<!-- #EndTemplate -->
-</html>
+				<!-- #EndEditable "content" -->
+				<div id="footer">
+					<p>&nbsp;</p>
+					<hr/>
+					<p>Copyright &copy; 1996-2013, Scott Stanchfield. All Rights Reserved.<br />
+					<br/>
+					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
+					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
+					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
+					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../../images/cssplay_button.png" width="88" /></a></p>
+					<p>
+					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
+					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../../images/feed-icon-14x14.png" width="14" />Want 
+					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div id="bottom"/>
+		<div id="navigation">
+			<h3>NAVIGATION</h3>
+			<ul>
+				<li><a href="../../index.html">Home</a></li>
+				<li><a href="../../articles/index.html">Articles</a></li>
+				<li><a href="../index.html">Tools</a></li>
+				<li><a href="../../evaj/index.html">Effective VisualAge<br/>&nbsp;&nbsp;&nbsp;&nbsp;for Java</a></li>
+				<li><a href="../../eclipse/index.html">Eclipse Tips</a></li>
+				<li><a href="../../vaj/index.html">VisualAge Tips</a></li>
+				<!--
+				<li><a href="resume.html">Resume</a></li>
+				-->
+				<li><a href="../../publications.html">Publications</a></li>
+			</ul>
+			<p>&nbsp;</p>
+		</div>
+		<div id="bottomcorner"/>
+		<div id="topcorner"/>
+		</div>
+		<p>&nbsp;</p>
+	</body>
+<!-- #EndTemplate --></html>

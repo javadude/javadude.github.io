@@ -1,33 +1,35 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+
 
 <!-- #BeginTemplate "../../master.dwt" -->
 
-	<head>
-		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-		<!-- #BeginEditable "doctitle" -->
+	<head>
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+		<!-- #BeginEditable "doctitle" -->
+
 		<title>AWT Layouts for SWT - Scott Stanchfield</title>
-		<!-- #EndEditable -->
-		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
-		<!-- #BeginEditable "head" -->
-		<!-- #EndEditable -->
-		<style type="text/css">
-
-.style1 {
-	vertical-align: middle;
-}
-</style>
-	</head>
-
-	<body>
-		<div id="header">
-			<h1>JavaDude.com</h1>
-			<h4>-- Scott Stanchfield</h4>
-		</div>
-		<div id="content">
-			<div id="topBar">&nbsp;</div>
-			<div id="contentIndent">
-				<!-- #BeginEditable "content" -->
+		<!-- #EndEditable -->
+		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
+		<!-- #BeginEditable "head" -->
+		<!-- #EndEditable -->
+		<style type="text/css">
+.style1 {
+	vertical-align: middle;
+}
+</style>
+	</head>
+
+	<body>
+		<div id="header">
+			<h1>JavaDude.com</h1>
+			<h4>-- Scott Stanchfield</h4>
+		</div>
+		<div id="content">
+			<div id="topBar">&nbsp;</div>
+			<div id="contentIndent">
+				<!-- #BeginEditable "content" -->
+
 
 <h1>AWT Layout Managers for SWT</h1>
 <h2>Description</h2>
@@ -65,60 +67,13 @@ Borderlayout requires that you set layout constraints on the contained
 components. Some examples (more detailed docs and examples with appear later...)</p>
 <h3>BorderLayout Example</h3>
 <p class='figcap'>BorderLayout Example</p>
-<pre>Composite parent = ...;
-
-parent.setLayout(new BorderLayout());
-  // Make sure you choose com.javadude.swt.layouts.BorderLayout, not java.awt.BorderLayout!!!
-
-Button northButton = new Button(parent, SWT.DEFAULT);
-northButton.setLayoutData(BorderLayout.NORTH);
-northButton.setText(&quot;North&quot;);
-
-Button southButton = new Button(parent, SWT.DEFAULT);
-southButton.setLayoutData(BorderLayout.SOUTH);
-southButton.setText(&quot;South&quot;);
-
-// etc...
-
-// You can also set the hgap and vgap in the same manner as AWT's BorderLayout
-// For example:
-parent.setLayout(new BorderLayout(5,3));</pre>
+<pre>Composite parent = ...;parent.setLayout(new BorderLayout());  // Make sure you choose com.javadude.swt.layouts.BorderLayout, not java.awt.BorderLayout!!!Button northButton = new Button(parent, SWT.DEFAULT);northButton.setLayoutData(BorderLayout.NORTH);northButton.setText(&quot;North&quot;);Button southButton = new Button(parent, SWT.DEFAULT);southButton.setLayoutData(BorderLayout.SOUTH);southButton.setText(&quot;South&quot;);// etc...// You can also set the hgap and vgap in the same manner as AWT's BorderLayout// For example:parent.setLayout(new BorderLayout(5,3));</pre>
 <h3>GridLayout Example</h3>
 <p class='figcap'>GridLayout Example</p>
-<pre>Composite parent = ...;
-
-parent.setLayout(new GridLayout(2,0));
-  // Make sure you choose com.javadude.swt.layouts.GridLayout, not java.awt.GridLayout!!!
-
-Button b1 = new Button(parent, SWT.DEFAULT);
-b1.setText(&quot;1&quot;);
-
-Button b2 = new Button(parent, SWT.DEFAULT);
-b2.setText(&quot;2&quot;);
-
-// etc...
-
-// You can also set the hgap and vgap in the same manner as AWT's GridLayout
-// For example:
-parent.setLayout(new GridLayout(2,0,5,3));</pre>
+<pre>Composite parent = ...;parent.setLayout(new GridLayout(2,0));  // Make sure you choose com.javadude.swt.layouts.GridLayout, not java.awt.GridLayout!!!Button b1 = new Button(parent, SWT.DEFAULT);b1.setText(&quot;1&quot;);Button b2 = new Button(parent, SWT.DEFAULT);b2.setText(&quot;2&quot;);// etc...// You can also set the hgap and vgap in the same manner as AWT's GridLayout// For example:parent.setLayout(new GridLayout(2,0,5,3));</pre>
 <h3>FlowLayout Example</h3>
 <p class='figcap'>FlowLayout example</p>
-<pre>Composite parent = ...;
-
-parent.setLayout(new FlowLayout());
-  // Make sure you choose com.javadude.swt.layouts.FlowLayout, not java.awt.FlowLayout!!!
-
-Button b1 = new Button(parent, SWT.DEFAULT);
-b1.setText(&quot;1&quot;);
-
-Button b2 = new Button(parent, SWT.DEFAULT);
-b2.setText(&quot;2&quot;);
-
-// etc...
-
-// You can also set the hgap, vgap and alignment in the same manner as AWT's FlowLayout
-// For example:
-parent.setLayout(new FlowLayout(FlowLayout.RIGHT));</pre>
+<pre>Composite parent = ...;parent.setLayout(new FlowLayout());  // Make sure you choose com.javadude.swt.layouts.FlowLayout, not java.awt.FlowLayout!!!Button b1 = new Button(parent, SWT.DEFAULT);b1.setText(&quot;1&quot;);Button b2 = new Button(parent, SWT.DEFAULT);b2.setText(&quot;2&quot;);// etc...// You can also set the hgap, vgap and alignment in the same manner as AWT's FlowLayout// For example:parent.setLayout(new FlowLayout(FlowLayout.RIGHT));</pre>
 <h2>Uninstalling from Eclipse</h2>
 <p>To uninstall from Eclipse, simply delete the <b><i>installdir</i>/plugins/com.javadude.swt.layouts</b> 
 directory.</p>
@@ -140,56 +95,44 @@ see this tool do.&nbsp; Feel free to send example code to implement it as well.<
 </ul>
 <p>&nbsp; </p>
 
-				<!-- #EndEditable "content" -->
-				<div id="footer">
-					<p>&nbsp;</p>
-					<hr/>
-					<p>Copyright &copy; 1996-2009, Scott Stanchfield. All Rights Reserved.<br/>
-					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
-					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
-					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
-					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../../images/cssplay_button.png" width="88" /></a></p>
-					<p>
-					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
-					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../../images/feed-icon-14x14.png" width="14" />Want 
-					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
-					</p>
-				</div>
-			</div>
-		</div>
-		<div id="bottom"/>
-		<div id="navigation">
-			<ul>
-				<li><a href="../../index.html">Home</a></li>
-				<li><a href="../../articles/index.html">Articles</a></li>
-				<li><a href="../index.html">Tools</a></li>
-				<li><a href="../../evaj/index.html">Effective VisualAge for Java</a></li>
-				<li><a href="../../eclipse/index.html">Eclipse Tips</a></li>
-				<li><a href="../../vaj/index.html">VisualAge Tips</a></li>
-				<!--
-				<li><a href="resume.html">Resume</a></li>
-				-->
-				<li><a href="../../publications.html">Publications</a></li>
-			</ul>
-			<p>&nbsp;</p>
-			<div style="margin-left:10px">
-<script type="text/javascript"><!--
-google_ad_client = "pub-1721904981084162";
-/* Homepage Gutter */
-google_ad_slot = "0044274311";
-google_ad_width = 120;
-google_ad_height = 600;
-//-->
-</script>
-<script type="text/javascript"
-src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script>
-</div>
-		</div>
-		<div id="bottomcorner"/>
-		<div id="topcorner"/>
-		</div>
-		<p>&nbsp;</p>
-	</body>
-<!-- #EndTemplate -->
-</html>
+				<!-- #EndEditable "content" -->
+				<div id="footer">
+					<p>&nbsp;</p>
+					<hr/>
+					<p>Copyright &copy; 1996-2013, Scott Stanchfield. All Rights Reserved.<br />
+					<br/>
+					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
+					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
+					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
+					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../../images/cssplay_button.png" width="88" /></a></p>
+					<p>
+					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
+					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../../images/feed-icon-14x14.png" width="14" />Want 
+					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div id="bottom"/>
+		<div id="navigation">
+			<h3>NAVIGATION</h3>
+			<ul>
+				<li><a href="../../index.html">Home</a></li>
+				<li><a href="../../articles/index.html">Articles</a></li>
+				<li><a href="../index.html">Tools</a></li>
+				<li><a href="../../evaj/index.html">Effective VisualAge<br/>&nbsp;&nbsp;&nbsp;&nbsp;for Java</a></li>
+				<li><a href="../../eclipse/index.html">Eclipse Tips</a></li>
+				<li><a href="../../vaj/index.html">VisualAge Tips</a></li>
+				<!--
+				<li><a href="resume.html">Resume</a></li>
+				-->
+				<li><a href="../../publications.html">Publications</a></li>
+			</ul>
+			<p>&nbsp;</p>
+		</div>
+		<div id="bottomcorner"/>
+		<div id="topcorner"/>
+		</div>
+		<p>&nbsp;</p>
+	</body>
+<!-- #EndTemplate --></html>
