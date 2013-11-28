@@ -14,6 +14,7 @@
 		<!-- #BeginEditable "head" -->
 		<!-- #EndEditable -->
 		<style type="text/css">
+
 .style1 {
 	vertical-align: middle;
 }
@@ -60,13 +61,35 @@ just have them do <em>one</em> connection on actionPerformed, setting the proper
 <p>Add one of these beans to the design area of the VCE (drop it somewhere outside the Frame so it's not contained by any other bean.)</p>
 <p>Create a subclass of Frame and design it in the VCE.&nbsp;&nbsp; Make the Frame have a GridLayout with columns=3 and rows=0.&nbsp; (Remember, this means &quot;3 columns, any number of rows&quot;)</p>
 <p>Add twelve buttons to the frame, and label them as follows:</p>
-<pre>1	2	34	5	67	8	9*	0	#</pre>
+<pre>1	2	3
+
+4	5	6
+
+7	8	9
+
+*	0	#</pre>
 <p>Now instead of hooking up those three connections for every darn button, we'll create a trigger that can do most of the work for us!</p>
 <p>Define a bean in VisualAge that's a subclass of <tt>java.lang.Object</tt> that only has one property -- a reference to a java.awt.Button.&nbsp; Name the property <strong>button</strong> and make sure you specify that it is a <strong>bound</strong>
 property.&nbsp; (The easiest way to do this is to open the Class to Bean Info (<strong>Open To-&gt;Bean Info</strong> from the class' pop-up menu) and press the &quot;Add new propery feature&quot; on the toolbar.)</p>
 <p>Specifying the property as <strong>bound</strong> sets up some event handling that will be triggered any time the property value changes.</p>
 <p>After you have defined the property, go to its setButton method:</p>
-<pre>public void setButton(java.awt.Button button) {    /* Get the old property value for fire property change event. */    java.awt.Button oldValue = fieldButton;    /* Set the button property (attribute) to the new value. */    fieldButton = button;    /* Fire (signal/notify) the button property change event. */    firePropertyChange(&quot;button&quot;, oldValue, button);    return;}                </pre>
+<pre>public void setButton(java.awt.Button button) {
+
+    /* Get the old property value for fire property change event. */
+
+    java.awt.Button oldValue = fieldButton;
+
+    /* Set the button property (attribute) to the new value. */
+
+    fieldButton = button;
+
+    /* Fire (signal/notify) the button property change event. */
+
+    firePropertyChange(&quot;button&quot;, oldValue, button);
+
+    return;
+
+}                </pre>
 <p>Make a simple change -- change the line</p>
 <pre>java.awt.Button oldValue = fieldButton;</pre>
 <p>to</p>
@@ -127,4 +150,5 @@ particular example would be to have the trigger have a String property and set i
 		</div>
 		<p>&nbsp;</p>
 	</body>
-<!-- #EndTemplate --></html>
+<!-- #EndTemplate -->
+</html>

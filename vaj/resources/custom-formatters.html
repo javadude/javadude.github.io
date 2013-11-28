@@ -14,6 +14,7 @@
 		<!-- #BeginEditable "head" -->
 		<!-- #EndEditable -->
 		<style type="text/css">
+
 .style1 {
 	vertical-align: middle;
 }
@@ -64,7 +65,169 @@ at</p>
         It should look as follows. The code inside the format method can do
         anything you would like. This example just calls the default formatter
         and adds a comment (just to prove the custom formatter was called.)
-        <pre>package <i>your-package-name</i>;import com.ibm.jdt.formatter.api.CodeFormatter;import com.ibm.jdt.compiler.api.ConfigurableOption;/** &lt;p&gt;A sample custom code formatter class. All you need to do is put your *    formatting code in the format method.&lt;/p&gt; * *  &lt;p&gt;This sample formatter calls the default IBM formatter and adds a *    comment at the top of the formatted code.&lt;/p&gt; * *  &lt;p&gt;We recommend that you come up with an alternate means of providing *    formatting options, but this demonstration might be useful *    to show the options.&lt;/p&gt; * *  &lt;p&gt;&lt;i&gt;Note: to edit this class, you'll need to import the VisualAge *        formatter code. You should create a project named LFC and *        import the vajinstall\ide\program\lib\lfc.jar file into it.&lt;/i&gt;&lt;/p&gt; *  * &lt;p&gt;&lt;b&gt;DISCLAIMER&lt;/b&gt;&lt;/p&gt; *  *   &lt;p&gt;This Java code sample is provided to you on an 'as-is' basis *      without warranty or condition of any kind, either express or *      implied, including, but not limited to, warranty or condition of *      merchantable quality or fitness for a particular purpose.&lt;/p&gt; *  *   &lt;p&gt;This sample code is provided to you solely for the purpose of  *      assisting you in the development of your applications.  *      Neither Instantiations nor Scott Stanchfield shall be liable for  *      any damages arising out of your use of this sample code, even  *      if they have been advised of the possibility of such damages.&lt;/p&gt; *  *   &lt;p&gt;&lt;i&gt;Copyright (c) 2001, Instantiations and Scott Stanchfield,  *         All Rights Reserved&lt;/i&gt;&lt;/p&gt; * * @author Scott Stanchfield * @version [SS - 2001-05-18] 1.0.0  */public class <i>YourFormatterClassName</i> {  /** &lt;p&gt;This method performs the formatting. It's called for   *    &lt;i&gt;all&lt;/i&gt; formatting inside VisualAge when control-w (or   *    whatever key you assign) is pressed in the editor. This applies   *    for class definitions or method definitions. &lt;i&gt;There is no way   *    to tell the difference between a call to format a class definition   *    or a method definition.&lt;/i&gt;&lt;/p&gt;   *   *  &lt;p&gt;Depending on the VA Assist/J settings, this may also be called   *    when importing, exporting, or viewing the entire class source.&lt;/p&gt;   *   *  &lt;p&gt;This sample version of the format method calls the default   *     VisualAge formatter and adds a comment at the top of the code.&lt;/p&gt;   *   *  @param code    (&lt;code&gt;java.lang.String&lt;/code&gt;)&lt;dl&gt;&lt;dd&gt;    *                 The source code to be formatted&lt;/dd&gt;&lt;/dl&gt;   *   *  @param n       (&lt;code&gt;int&lt;/code&gt;)&lt;dl&gt;&lt;dd&gt;    *                 The function of this parameter is unknown,    *                 but it's always 0...&lt;/dd&gt;&lt;/dl&gt;   *   *  @param options (&lt;code&gt;com.ibm.jdt.compiler.api.ConfigurableOption[]&lt;/code&gt;)&lt;dl&gt;&lt;dd&gt;    *                 An array of option objects representing the settings    *                 in VisualAge's Window-&gt;Options dialog.&lt;/dd&gt;&lt;/dl&gt;   *    *  @return        (&lt;code&gt;java.lang.String&lt;/code&gt;)&lt;dl&gt;&lt;dd&gt;    *                 The formatted code. You should use the appropriate line    *                 separation character for your platform in place of    *                 newlines. You can obtain this by calling    *                 &lt;pre&gt;System.getProperty(&quot;line.separator&quot;)&lt;/pre&gt;&lt;/dd&gt;&lt;/dl&gt;   */  public static String format(String code, int n, ConfigurableOption[] options) {    // Ask VisualAge's default formatter to format the code    String formatted = CodeFormatter.format(code, 0, options);    // determine the appropriate new line sequence for this platform    String nl = System.getProperty(&quot;line.separator&quot;);    // do our own formatting (in this case, just add a message to    //   prove we came here)    return &quot;// *** I'VE BEEN FORMATTED! ***&quot; + nl + formatted;  }}</pre>
+        <pre>package <i>your-package-name</i>;
+
+
+
+import com.ibm.jdt.formatter.api.CodeFormatter;
+
+import com.ibm.jdt.compiler.api.ConfigurableOption;
+
+
+
+/** &lt;p&gt;A sample custom code formatter class. All you need to do is put your
+
+ *    formatting code in the format method.&lt;/p&gt;
+
+ *
+
+ *  &lt;p&gt;This sample formatter calls the default IBM formatter and adds a
+
+ *    comment at the top of the formatted code.&lt;/p&gt;
+
+ *
+
+ *  &lt;p&gt;We recommend that you come up with an alternate means of providing
+
+ *    formatting options, but this demonstration might be useful
+
+ *    to show the options.&lt;/p&gt;
+
+ *
+
+ *  &lt;p&gt;&lt;i&gt;Note: to edit this class, you'll need to import the VisualAge
+
+ *        formatter code. You should create a project named LFC and
+
+ *        import the vajinstall\ide\program\lib\lfc.jar file into it.&lt;/i&gt;&lt;/p&gt;
+
+ * 
+
+ * &lt;p&gt;&lt;b&gt;DISCLAIMER&lt;/b&gt;&lt;/p&gt;
+
+ * 
+
+ *   &lt;p&gt;This Java code sample is provided to you on an 'as-is' basis
+
+ *      without warranty or condition of any kind, either express or
+
+ *      implied, including, but not limited to, warranty or condition of
+
+ *      merchantable quality or fitness for a particular purpose.&lt;/p&gt;
+
+ * 
+
+ *   &lt;p&gt;This sample code is provided to you solely for the purpose of 
+
+ *      assisting you in the development of your applications. 
+
+ *      Neither Instantiations nor Scott Stanchfield shall be liable for 
+
+ *      any damages arising out of your use of this sample code, even 
+
+ *      if they have been advised of the possibility of such damages.&lt;/p&gt;
+
+ * 
+
+ *   &lt;p&gt;&lt;i&gt;Copyright (c) 2001, Instantiations and Scott Stanchfield, 
+
+ *         All Rights Reserved&lt;/i&gt;&lt;/p&gt;
+
+ *
+
+ * @author Scott Stanchfield
+
+ * @version [SS - 2001-05-18] 1.0.0 
+
+ */
+
+
+
+public class <i>YourFormatterClassName</i> {
+
+  /** &lt;p&gt;This method performs the formatting. It's called for
+
+   *    &lt;i&gt;all&lt;/i&gt; formatting inside VisualAge when control-w (or
+
+   *    whatever key you assign) is pressed in the editor. This applies
+
+   *    for class definitions or method definitions. &lt;i&gt;There is no way
+
+   *    to tell the difference between a call to format a class definition
+
+   *    or a method definition.&lt;/i&gt;&lt;/p&gt;
+
+   *
+
+   *  &lt;p&gt;Depending on the VA Assist/J settings, this may also be called
+
+   *    when importing, exporting, or viewing the entire class source.&lt;/p&gt;
+
+   *
+
+   *  &lt;p&gt;This sample version of the format method calls the default
+
+   *     VisualAge formatter and adds a comment at the top of the code.&lt;/p&gt;
+
+   *
+
+   *  @param code    (&lt;code&gt;java.lang.String&lt;/code&gt;)&lt;dl&gt;&lt;dd&gt; 
+
+   *                 The source code to be formatted&lt;/dd&gt;&lt;/dl&gt;
+
+   *
+
+   *  @param n       (&lt;code&gt;int&lt;/code&gt;)&lt;dl&gt;&lt;dd&gt; 
+
+   *                 The function of this parameter is unknown, 
+
+   *                 but it's always 0...&lt;/dd&gt;&lt;/dl&gt;
+
+   *
+
+   *  @param options (&lt;code&gt;com.ibm.jdt.compiler.api.ConfigurableOption[]&lt;/code&gt;)&lt;dl&gt;&lt;dd&gt; 
+
+   *                 An array of option objects representing the settings 
+
+   *                 in VisualAge's Window-&gt;Options dialog.&lt;/dd&gt;&lt;/dl&gt;
+
+   * 
+
+   *  @return        (&lt;code&gt;java.lang.String&lt;/code&gt;)&lt;dl&gt;&lt;dd&gt; 
+
+   *                 The formatted code. You should use the appropriate line 
+
+   *                 separation character for your platform in place of 
+
+   *                 newlines. You can obtain this by calling 
+
+   *                 &lt;pre&gt;System.getProperty(&quot;line.separator&quot;)&lt;/pre&gt;&lt;/dd&gt;&lt;/dl&gt;
+
+   */
+
+  public static String format(String code, int n, ConfigurableOption[] options) {
+
+    // Ask VisualAge's default formatter to format the code
+
+    String formatted = CodeFormatter.format(code, 0, options);
+
+
+
+    // determine the appropriate new line sequence for this platform
+
+    String nl = System.getProperty(&quot;line.separator&quot;);
+
+
+
+    // do our own formatting (in this case, just add a message to
+
+    //   prove we came here)
+
+    return &quot;// *** I'VE BEEN FORMATTED! ***&quot; + nl + formatted;
+
+  }
+
+}</pre>
     </li>
     <li>Create code in your class' format() method to format the passed-in code
         string and return it. We recommend you do any String modification in a
@@ -158,4 +321,5 @@ Plugin for VisualAge for Java</a>.</p>
 		</div>
 		<p>&nbsp;</p>
 	</body>
-<!-- #EndTemplate --></html>
+<!-- #EndTemplate -->
+</html>

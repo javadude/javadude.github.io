@@ -14,6 +14,7 @@
 		<!-- #BeginEditable "head" -->
 		<!-- #EndEditable -->
 		<style type="text/css">
+
 .style1 {
 	vertical-align: middle;
 }
@@ -33,11 +34,21 @@
 <h1>Visual Assertions</h1>
 <p>Here's a simple way to do conditional connections in the VCE, though not the most &quot;normal&quot;...&nbsp; hey, I'm weird, what can I say...</p>
 <p>Define a &quot;conditional&quot; method to choose whether or not we want to do something.&nbsp; For example: &quot;is the sky blue.&quot;</p>
-<pre>public void assertSkyBlue() {    if (!skyBlue)      throw new RuntimeException(&quot;&quot;);  }          </pre>
+<pre>public void assertSkyBlue() {
+
+    if (!skyBlue)
+
+      throw new RuntimeException(&quot;&quot;);
+
+  }
+
+          </pre>
 <p>Note that this doesn't do anything except throw an exception if the sky isn't blue.</p>
 <p><strong>If you use this approach, <em>do not</em> call the method<tt> isSkyBlue()</tt></strong> -- that implies it's a boolean property of a JavaBean...</p>
 <p>VisualAge thinks of this as</p>
-<pre>  sky isn't blue == exceptionOccurred  sky is blue    == normal result          </pre>
+<pre>  sky isn't blue == exceptionOccurred
+
+  sky is blue    == normal result          </pre>
 <p>So we can bastardize this into making a conditional connection.&nbsp; To try it:</p>
 <ul>
   <li>create a new <tt>Frame</tt> or <tt>Applet</tt> bean</li>
@@ -97,4 +108,5 @@
 		</div>
 		<p>&nbsp;</p>
 	</body>
-<!-- #EndTemplate --></html>
+<!-- #EndTemplate -->
+</html>

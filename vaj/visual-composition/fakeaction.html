@@ -14,6 +14,7 @@
 		<!-- #BeginEditable "head" -->
 		<!-- #EndEditable -->
 		<style type="text/css">
+
 .style1 {
 	vertical-align: middle;
 }
@@ -36,7 +37,13 @@
 <p>After pondering for a minute, I tried the following and it worked!</p>
 <h2>Making&nbsp; a fakeAction method</h2>
 <p>Create a method as follows:</p>
-<pre>public void fakeAction(Component c) {    getToolkit().getSystemEventQueue().postEvent(      new ActionEvent(c, ActionEvent.ACTION_PERFORMED, &quot;&quot;));}            </pre>
+<pre>public void fakeAction(Component c) {
+
+    getToolkit().getSystemEventQueue().postEvent(
+
+      new ActionEvent(c, ActionEvent.ACTION_PERFORMED, &quot;&quot;));
+
+}            </pre>
 <p>(It's your choice if you want to explicitly qualify java.awt.event.ActionEvent or import it in your class.)</p>
 <p>After you've defined this method, set up connections as you normally would for the menu action.&nbsp; Then, for the button, connect its actionPerformed() event to the <em><strong>script</strong></em> fakeAction.&nbsp; (Set up an event-to-script
 connection -- start the connection from the button's actionPerformed() event, end it on an empty spot in the design area, selecting <em>event-to-script</em> as the type of connection.</p>
@@ -86,4 +93,5 @@ For instance, a four-function calculator's number buttons all do nearly the same
 		</div>
 		<p>&nbsp;</p>
 	</body>
-<!-- #EndTemplate --></html>
+<!-- #EndTemplate -->
+</html>

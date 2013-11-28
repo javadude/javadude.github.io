@@ -14,6 +14,7 @@
 		<!-- #BeginEditable "head" -->
 		<!-- #EndEditable -->
 		<style type="text/css">
+
 .style1 {
 	vertical-align: middle;
 }
@@ -60,7 +61,17 @@ over and into to check what line raises my exception.
 tested this code yet so it may contain a typo...
 </p>
 
-<pre>  try {    Class debugSupport = Class.forName(&quot;com.ibm.uvm.tools.DebugSupport&quot;);    Method halt = debugSupport.getMethod(&quot;halt&quot;, null);    halt.invoke(null, null);  }  catch (Exception ignoreMe) {}     </pre>
+<pre>  try {
+
+    Class debugSupport = Class.forName(&quot;com.ibm.uvm.tools.DebugSupport&quot;);
+
+    Method halt = debugSupport.getMethod(&quot;halt&quot;, null);
+
+    halt.invoke(null, null);
+
+  }
+
+  catch (Exception ignoreMe) {}     </pre>
 
 <p>This allows you to compile it and run outside of VisualAge.&nbsp; If run
 inside VisualAge (where the uvm classes live) it will invoke the debugger.&nbsp;
@@ -108,4 +119,5 @@ drop into the empty exception handler.
 		</div>
 		<p>&nbsp;</p>
 	</body>
-<!-- #EndTemplate --></html>
+<!-- #EndTemplate -->
+</html>

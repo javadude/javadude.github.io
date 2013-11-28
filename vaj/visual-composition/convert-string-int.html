@@ -14,6 +14,7 @@
 		<!-- #BeginEditable "head" -->
 		<!-- #EndEditable -->
 		<style type="text/css">
+
 .style1 {
 	vertical-align: middle;
 }
@@ -39,9 +40,13 @@
 <h2>The easy way... cheat a little...</h2>
 <p>First, let me state that what I'm about to tell you is considered &quot;bad style&quot;.&nbsp; However, that only really applies to when you're coding this stuff by hand.&nbsp; That said...</p>
 <p>It is possible to call <em><strong>static</strong></em> methods via a reference to some instance of a class.&nbsp; For example:</p>
-<pre>Integer someInteger = new Integer();int crud = someInteger.parseInt(&quot;1234&quot;);         </pre>
+<pre>Integer someInteger = new Integer();
+
+int crud = someInteger.parseInt(&quot;1234&quot;);         </pre>
 <p>To make matters even weirder, you can call the method <em>even if you don't have an instance of the class!</em>&nbsp; For example:</p>
-<pre>Integer someInteger = null;int crud = someInteger.parseInt(&quot;1234&quot;)         </pre>
+<pre>Integer someInteger = null;
+
+int crud = someInteger.parseInt(&quot;1234&quot;)         </pre>
 <p><strong>This <em>will not </em>result in a NullPointerException!</strong>&nbsp; Pretty neat, eh?&nbsp; More like pretty sneaky...</p>
 <h2>Yeah, yeah, get on with it!</h2>
 <p>So how can this help us?&nbsp; Suppose we have a <tt>TextField</tt> <tt>field1</tt> and want to pass the integer value of that field to a method <tt>doSomething(int x)</tt> (suppose it's a method in some bean in the design area)&nbsp; when <tt>button1</tt>
@@ -95,4 +100,5 @@ is pressed:</p>
 		</div>
 		<p>&nbsp;</p>
 	</body>
-<!-- #EndTemplate --></html>
+<!-- #EndTemplate -->
+</html>

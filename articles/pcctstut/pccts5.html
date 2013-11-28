@@ -14,6 +14,7 @@
 		<!-- #BeginEditable "head" -->
 		<!-- #EndEditable -->
 		<style type="text/css">
+
 .style1 {
 	vertical-align: middle;
 }
@@ -36,12 +37,38 @@
 <p>Let's start at the top, shall we?</p>
 <h2>Program Specification</h2>
 <p>XL has one program per file, so this is really our starting rule.</p>
-<pre>program  : PROGRAM IDENT EQUALS         subprogramBody     DOT    &quot;@&quot; // end-of-file  ;           </pre>
+<pre>program
+
+  : PROGRAM IDENT EQUALS 
+
+        subprogramBody 
+
+    DOT
+
+    &quot;@&quot; // end-of-file
+
+  ;
+
+           </pre>
 <p>Pretty straightforward. Note that so far, we don't care that we are <b>definitely</b> declaring that <b>IDENT</b> here. We will later, though...</p>
 <hr/>
 <h2>Subprogram Bodies</h2>
 <p>A subprogram body is a little (or big) block of code that makes up the &quot;what I do&quot; part of a program, procedure, or function. It's not bad to define, but it will get a bit tricker later. Well, not too much so.</p>
-<pre>subprogramBody  : (basicDecl)*    (procedureDecl)*    BEGIN        (statement)*    END IDENT  ;           </pre>
+<pre>subprogramBody
+
+  : (basicDecl)*
+
+    (procedureDecl)*
+
+    BEGIN
+
+        (statement)*
+
+    END IDENT
+
+  ;
+
+           </pre>
 <p>So what is it? Basically, define your local variables, types and constants (<code>basicDecls</code>). There can be zero or more of these, hence the use of the ()* closure. Then, define any nested procedures or functions. Again, zero or more of these.
 Finally, we get to the definition of what the current program/procedure/function does. This starts with a BEGIN, has zero or more statements in it, and is ended by END <b>IDENT</b>. Note that the XL spec stated that the identifer that ends a subroutine
 must match the beginning one. Right now, we have no way of doing that, as the name for the subroutine is outside the scope of this rule. We'll handle this later, though, and in a pretty neat way I must say. Yacc can't hold a candle to it, you'll see!</p>
@@ -50,43 +77,159 @@ must match the beginning one. Right now, we have no way of doing that, as the na
 <hr/>
 <h2>Basic Declarations</h2>
 <p>XL has three main declarations: variables, constants, and types:</p>
-<pre>basicDecl  : varDecl  | constDecl  | typeDecl  ;           </pre>
+<pre>basicDecl
+
+  : varDecl
+
+  | constDecl
+
+  | typeDecl
+
+  ;
+
+           </pre>
 <p>Just so this section isn't so short, I'll define <code>varDecl</code> and <code>constDecl</code> here.</p>
 <p>A variable declaration looks like:</p>
-<pre>varDecl  : VAR identList COLON typeName    {BECOMES constantValue}    SEMI  ;           </pre>
+<pre>varDecl
+
+  : VAR identList COLON typeName
+
+    {BECOMES constantValue}
+
+    SEMI
+
+  ;
+
+           </pre>
 <p>Unlike Pascal, each declaration must start with <b>VAR</b>; there is no &quot;<b>VAR</b> section&quot; that starts with the keyword <b>VAR</b>. The <code>varDecl</code> states that you can defined any number of idents at once, and you can optionally
 initialize the variable(s).</p>
 <p>A constant declaration is similar to a variable declaration, except that you use the keyword <b>CONST</b> and must assign a value:</p>
-<pre>constDecl  : CONST identList COLON typeName    BECOMES constantValue SEMI  ;           </pre>
+<pre>constDecl
+
+  : CONST identList COLON typeName
+
+    BECOMES constantValue SEMI
+
+  ;
+
+           </pre>
 <p>In the above rules, there subrules <code>identList</code> and <code>constantValue</code> are mentioned. These are:</p>
-<pre>identList  : IDENT (COMMA IDENT)*  ;           </pre>
+<pre>identList
+
+  : IDENT (COMMA IDENT)*
+
+  ;
+
+           </pre>
 <p>which says &quot;one or more <b>IDENT</b>s separated by <b>COMMA</b>s&quot;, and</p>
-<pre>constantValue  : INTLIT  | STRING_LITERAL  | IDENT  ;           </pre>
+<pre>constantValue
+
+  : INTLIT
+
+  | STRING_LITERAL
+
+  | IDENT
+
+  ;
+
+           </pre>
 <p>which is pretty self-explanatory. One thing to note, though, there there is nothing right now that prevents us from using a variable <b>IDENT</b> instead of a constant <b>IDENT</b>. That's handled later...</p>
 <hr/>
 <h2>Type Declarations</h2>
 <p>XL defines three user-defined types: arrays, records and enumeration types. In my project, I only defined arrays and records, so for now, I'll skip enumeration types. I may add them at another time.</p>
 <p>A type declaration is either an array declaration or a record declaration:</p>
-<pre>typeDecl  : TYPE IDENT EQUALS    ( arrayDecl    | recordDecl    )    SEMI  ;           </pre>
+<pre>typeDecl
+
+  : TYPE IDENT EQUALS
+
+    ( arrayDecl
+
+    | recordDecl
+
+    )
+
+    SEMI
+
+  ;
+
+           </pre>
 <p>I got a bit fancier here by using a subrule to say &quot;array or record&quot; instead of defining a new rule for it. This is also a bit more efficient than the extra function call created by another rule there. Basic rule of thumb -- if a subrule is
 clear, and not deeply nested, feel free to use it. However, watch out for using several nested subrules, as the meaning can get hidden quickly.</p>
 <p>Arrays are defined as <code>ARRAY [x..y] OF type</code>. Only one-dimensional, pretty simple:</p>
-<pre>arrayDecl  : ARRAY LBRACKET integerConstant      DOTDOT integerConstant RBRACKET      OF typeName  ;integerConstant  : INTLIT  | IDENT // again, a constant...  ;           </pre>
+<pre>arrayDecl
+
+  : ARRAY LBRACKET integerConstant
+
+      DOTDOT integerConstant RBRACKET
+
+      OF typeName
+
+  ;
+
+
+
+integerConstant
+
+  : INTLIT
+
+  | IDENT // again, a constant...
+
+  ;
+
+           </pre>
 <p>Records are defined as <code>RECORD x,y,z:typename; END RECORD. .</code> Again, simple until we have to know what it means:</p>
-<pre>recordDecl  : RECORD (identList COLON typeName SEMI)+ END RECORD  ;           </pre>
+<pre>recordDecl
+
+  : RECORD (identList COLON typeName SEMI)+ END RECORD
+
+  ;
+
+           </pre>
 <p>So what is this <code>typeName</code> I keep bringing up? Well, it's either one of the predefined types, <b>Integer</b> or <b>Boolean</b>, or it's a user-defined type (which means its an <b>IDENT</b>), so:</p>
-<pre>typeName  : IDENT  | INTEGER  | BOOLEAN  ;           </pre>
+<pre>typeName
+
+  : IDENT
+
+  | INTEGER
+
+  | BOOLEAN
+
+  ;
+
+           </pre>
 <p>Enough about types, now, on to</p>
 <hr/>
 <h2>Procedure Declarations</h2>
 <p>A procedure in XL is similar to a program, so basically, it's a small heading followed by a <code>subprogramBody</code>:</p>
-<pre>procedureDecl  : PROCEDURE IDENT {formalParameters} EQUALS        subprogramBody    SEMI  ;           </pre>
+<pre>procedureDecl
+
+  : PROCEDURE IDENT {formalParameters} EQUALS
+
+        subprogramBody
+
+    SEMI
+
+  ;
+
+           </pre>
 <p>At the time I originally did this project, I only did procedures, not functions. Perhaps I'll add them later... (You may think &quot;boy he left a lot out,&quot; but Dr. Moore made a large subset of the project required, and I did a few extra point
 things, but not the whole thing. I <i>was</i> working full-time you know...)</p>
 <p>Notice that the <code>formalParameters</code> are optional... Let's define what they look like:</p>
-<pre>formalParameters  : LPAREN parameterSpec (SEMI parameterSpec)* RPAREN  ;           </pre>
+<pre>formalParameters
+
+  : LPAREN parameterSpec (SEMI parameterSpec)* RPAREN
+
+  ;
+
+           </pre>
 <p>Again we see the familiar <b>x (COMMA x)*</b> notation -- the ()* closure is very handy and efficient for matching lists of things...</p>
-<pre>parameterSpec  : {VAR} identList COLON typeName  ;           </pre>
+<pre>parameterSpec
+
+  : {VAR} identList COLON typeName
+
+  ;
+
+           </pre>
 <p>You'll notice that this is quite a bit like a variable declaration, except that <b>VAR</b> is optional, and there's no semicolon after it. We'll handle it a bit differently as well, once we add action code.</p>
 <p>Next, we'll look at <a href="pccts6.html">statements</a>...</p>
 
@@ -130,4 +273,5 @@ things, but not the whole thing. I <i>was</i> working full-time you know...)</p>
 		</div>
 		<p>&nbsp;</p>
 	</body>
-<!-- #EndTemplate --></html>
+<!-- #EndTemplate -->
+</html>

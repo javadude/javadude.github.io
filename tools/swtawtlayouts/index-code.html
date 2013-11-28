@@ -14,6 +14,7 @@
 		<!-- #BeginEditable "head" -->
 		<!-- #EndEditable -->
 		<style type="text/css">
+
 .style1 {
 	vertical-align: middle;
 }
@@ -67,13 +68,107 @@ Borderlayout requires that you set layout constraints on the contained
 components. Some examples (more detailed docs and examples with appear later...)</p>
 <h3>BorderLayout Example</h3>
 <p class='figcap'>BorderLayout Example</p>
-<pre>Composite parent = ...;parent.setLayout(new BorderLayout());  // Make sure you choose com.javadude.swt.layouts.BorderLayout, not java.awt.BorderLayout!!!Button northButton = new Button(parent, SWT.DEFAULT);northButton.setLayoutData(BorderLayout.NORTH);northButton.setText(&quot;North&quot;);Button southButton = new Button(parent, SWT.DEFAULT);southButton.setLayoutData(BorderLayout.SOUTH);southButton.setText(&quot;South&quot;);// etc...// You can also set the hgap and vgap in the same manner as AWT's BorderLayout// For example:parent.setLayout(new BorderLayout(5,3));</pre>
+<pre>Composite parent = ...;
+
+
+
+parent.setLayout(new BorderLayout());
+
+  // Make sure you choose com.javadude.swt.layouts.BorderLayout, not java.awt.BorderLayout!!!
+
+
+
+Button northButton = new Button(parent, SWT.DEFAULT);
+
+northButton.setLayoutData(BorderLayout.NORTH);
+
+northButton.setText(&quot;North&quot;);
+
+
+
+Button southButton = new Button(parent, SWT.DEFAULT);
+
+southButton.setLayoutData(BorderLayout.SOUTH);
+
+southButton.setText(&quot;South&quot;);
+
+
+
+// etc...
+
+
+
+// You can also set the hgap and vgap in the same manner as AWT's BorderLayout
+
+// For example:
+
+parent.setLayout(new BorderLayout(5,3));</pre>
 <h3>GridLayout Example</h3>
 <p class='figcap'>GridLayout Example</p>
-<pre>Composite parent = ...;parent.setLayout(new GridLayout(2,0));  // Make sure you choose com.javadude.swt.layouts.GridLayout, not java.awt.GridLayout!!!Button b1 = new Button(parent, SWT.DEFAULT);b1.setText(&quot;1&quot;);Button b2 = new Button(parent, SWT.DEFAULT);b2.setText(&quot;2&quot;);// etc...// You can also set the hgap and vgap in the same manner as AWT's GridLayout// For example:parent.setLayout(new GridLayout(2,0,5,3));</pre>
+<pre>Composite parent = ...;
+
+
+
+parent.setLayout(new GridLayout(2,0));
+
+  // Make sure you choose com.javadude.swt.layouts.GridLayout, not java.awt.GridLayout!!!
+
+
+
+Button b1 = new Button(parent, SWT.DEFAULT);
+
+b1.setText(&quot;1&quot;);
+
+
+
+Button b2 = new Button(parent, SWT.DEFAULT);
+
+b2.setText(&quot;2&quot;);
+
+
+
+// etc...
+
+
+
+// You can also set the hgap and vgap in the same manner as AWT's GridLayout
+
+// For example:
+
+parent.setLayout(new GridLayout(2,0,5,3));</pre>
 <h3>FlowLayout Example</h3>
 <p class='figcap'>FlowLayout example</p>
-<pre>Composite parent = ...;parent.setLayout(new FlowLayout());  // Make sure you choose com.javadude.swt.layouts.FlowLayout, not java.awt.FlowLayout!!!Button b1 = new Button(parent, SWT.DEFAULT);b1.setText(&quot;1&quot;);Button b2 = new Button(parent, SWT.DEFAULT);b2.setText(&quot;2&quot;);// etc...// You can also set the hgap, vgap and alignment in the same manner as AWT's FlowLayout// For example:parent.setLayout(new FlowLayout(FlowLayout.RIGHT));</pre>
+<pre>Composite parent = ...;
+
+
+
+parent.setLayout(new FlowLayout());
+
+  // Make sure you choose com.javadude.swt.layouts.FlowLayout, not java.awt.FlowLayout!!!
+
+
+
+Button b1 = new Button(parent, SWT.DEFAULT);
+
+b1.setText(&quot;1&quot;);
+
+
+
+Button b2 = new Button(parent, SWT.DEFAULT);
+
+b2.setText(&quot;2&quot;);
+
+
+
+// etc...
+
+
+
+// You can also set the hgap, vgap and alignment in the same manner as AWT's FlowLayout
+
+// For example:
+
+parent.setLayout(new FlowLayout(FlowLayout.RIGHT));</pre>
 <h2>Uninstalling from Eclipse</h2>
 <p>To uninstall from Eclipse, simply delete the <b><i>installdir</i>/plugins/com.javadude.swt.layouts</b> 
 directory.</p>
@@ -135,4 +230,5 @@ see this tool do.&nbsp; Feel free to send example code to implement it as well.<
 		</div>
 		<p>&nbsp;</p>
 	</body>
-<!-- #EndTemplate --></html>
+<!-- #EndTemplate -->
+</html>

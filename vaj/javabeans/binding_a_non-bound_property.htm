@@ -14,6 +14,7 @@
 		<!-- #BeginEditable "head" -->
 		<!-- #EndEditable -->
 		<style type="text/css">
+
 .style1 {
 	vertical-align: middle;
 }
@@ -46,24 +47,160 @@ connections.</p>
         second page of the "Add class" smartguide)<br/>
 <b>ALSO: </b> Use the second page of the smartguide to add imports<br/>
         for:</p>
-<pre>  com.sun.java.swing.*  com.sun.java.swing.event.*  com.sun.java.swing.text.*</pre>
+<pre>  com.sun.java.swing.*
+
+  com.sun.java.swing.event.*
+
+  com.sun.java.swing.text.*</pre>
 <p>or if you're using Swing &gt;=1.1</p>
-<pre>  javax.swing.*  javax.swing.event.*  javax.swing.text.*</pre>
+<pre>  javax.swing.*
+
+  javax.swing.event.*
+
+  javax.swing.text.*</pre>
 <h2>2: Create method <code>firePropertyChange()</code></h2>
 <p> This may seem weird, but you need this to be able to access        the <code> firePropertyChange()</code> method in
 <code> JComponent </code> from an        inner class. I'm not sure whether to think of this        as a bug in VAJ's compiler or
 not...</p>
-<pre>protected void firePropertyChange(String propertyName,                                   Object oldValue,                                   Object newValue) {  super.firePropertyChange(propertyName, oldValue, newValue);}</pre>
+<pre>protected void firePropertyChange(String propertyName, 
+
+                                  Object oldValue, 
+
+                                  Object newValue) {
+
+  super.firePropertyChange(propertyName, oldValue, newValue);
+
+}</pre>
 <h2>3: Create method <code>createListeners()</code></h2>
 <p>This method is used to add some listeners to the <i>document</i> (the model)
 of the <code>JTextField</code>. Whenever the model changes, this listener is
 informed and will fire a <code>PropertyChangeEvent</code>.</p>
-<pre>protected void createListeners() {  getDocument().addDocumentListener(new DocumentListener() {    public void insertUpdate(DocumentEvent e) {      firePropertyChange(&quot;text&quot;, null, getText());    }    public void removeUpdate(DocumentEvent e) {      firePropertyChange(&quot;text&quot;, null, getText());    }    public void changedUpdate(DocumentEvent e) {      firePropertyChange(&quot;text&quot;, null, getText());    }  });}</pre>
+<pre>protected void createListeners() {
+
+  getDocument().addDocumentListener(new DocumentListener() {
+
+
+
+    public void insertUpdate(DocumentEvent e) {
+
+      firePropertyChange(&quot;text&quot;, null, getText());
+
+    }
+
+
+
+    public void removeUpdate(DocumentEvent e) {
+
+      firePropertyChange(&quot;text&quot;, null, getText());
+
+    }
+
+
+
+    public void changedUpdate(DocumentEvent e) {
+
+      firePropertyChange(&quot;text&quot;, null, getText());
+
+    }
+
+  });
+
+}</pre>
 <p>As far as I can see, because the new <code> DocumentListener </code> isn't a subclass of
 <code>JComponent</code>, and isn't in the same package, it cannot directly access
 <code>JComponent</code>'s <code> firePropertyChange()</code> method...</p>
 <h2>4: Add a call to <code>createListeners() </code> at the end of each constructor</h2>
-<pre>/** * BoundJTextField constructor comment. */public BoundJTextField() {	super();<b>	createListeners();</b>}/** * BoundJTextField constructor comment. * @param columns int */public BoundJTextField(int columns) {	super(columns);<b>	createListeners();</b>}/** * BoundJTextField constructor comment. * @param doc com.sun.java.swing.text.Document * @param text java.lang.String * @param columns int */public BoundJTextField(Document doc, String text, int columns) {	super(doc, text, columns);<b>	createListeners();</b>}/** * BoundJTextField constructor comment. * @param text java.lang.String */public BoundJTextField(String text) {	super(text);<b>	createListeners();</b>}/** * BoundJTextField constructor comment. * @param text java.lang.String * @param columns int */public BoundJTextField(String text, int columns) {	super(text, columns);<b>	createListeners();</b>}</pre>
+<pre>/**
+
+ * BoundJTextField constructor comment.
+
+ */
+
+public BoundJTextField() {
+
+	super();
+
+<b>	createListeners();
+
+</b>}
+
+
+
+/**
+
+ * BoundJTextField constructor comment.
+
+ * @param columns int
+
+ */
+
+public BoundJTextField(int columns) {
+
+	super(columns);
+
+<b>	createListeners();
+
+</b>}
+
+
+
+/**
+
+ * BoundJTextField constructor comment.
+
+ * @param doc com.sun.java.swing.text.Document
+
+ * @param text java.lang.String
+
+ * @param columns int
+
+ */
+
+public BoundJTextField(Document doc, String text, int columns) {
+
+	super(doc, text, columns);
+
+<b>	createListeners();
+
+</b>}
+
+
+
+/**
+
+ * BoundJTextField constructor comment.
+
+ * @param text java.lang.String
+
+ */
+
+public BoundJTextField(String text) {
+
+	super(text);
+
+<b>	createListeners();
+
+</b>}
+
+
+
+/**
+
+ * BoundJTextField constructor comment.
+
+ * @param text java.lang.String
+
+ * @param columns int
+
+ */
+
+public BoundJTextField(String text, int columns) {
+
+	super(text, columns);
+
+<b>	createListeners();
+
+</b>}</pre>
 <h2>5: Make the BeanInfo realize it's bound</h2>
 <p>In order to use this text property as a bound property in the VCE, we need to
 explicitly list it as <i>bound</i> in a BeanInfo class. This is necessary
@@ -134,4 +271,5 @@ to override it.</p>
 		</div>
 		<p>&nbsp;</p>
 	</body>
-<!-- #EndTemplate --></html>
+<!-- #EndTemplate -->
+</html>

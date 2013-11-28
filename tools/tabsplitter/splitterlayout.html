@@ -14,6 +14,7 @@
 		<!-- #BeginEditable "head" -->
 		<!-- #EndEditable -->
 		<style type="text/css">
+
 .style1 {
 	vertical-align: middle;
 }
@@ -52,7 +53,39 @@ trying to come up with a solution for this... Grr... Arg...</p>
 </applet>
 </p>
 <p>The above layout was created with the following code:</p>
-<a name='figure.1'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 1: Layout example 1</p><pre class='content'><span class='keyword'>package</span> <span class='ident'>com</span><span class='operator'>.</span><span class='ident'>magelang</span><span class='operator'>.</span><span class='ident'>test</span><span class='operator'>;</span><span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>applet</span><span class='operator'>.*;</span><span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>awt</span><span class='operator'>.*;</span><span class='keyword'>import</span> <span class='ident'>com</span><span class='operator'>.</span><span class='ident'>magelang</span><span class='operator'>.</span><span class='ident'>splitter</span><span class='operator'>.*;</span><span class='keyword'>public</span> <span class='keyword'>class</span> <span class='ident'>SplitterEx1</span> <span class='keyword'>extends</span> <span class='ident'>Applet</span> <span class='operator'>{</span>  <span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>init</span><span class='operator'>()</span> <span class='operator'>{</span>    <span class='keyword'>super</span><span class='operator'>.</span><span class='ident'>init</span><span class='operator'>();</span>    <span class='ident'>setLayout</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>SplitterLayout</span><span class='operator'>(</span><span class='ident'>SplitterLayout</span><span class='operator'>.</span><span class='ident'>HORIZONTAL</span><span class='operator'>));</span>    <span class='ident'>add</span><span class='operator'>(&quot;</span>1<span class='operator'>&quot;</span>,<span class='keyword'>new</span> <span class='ident'>Button</span><span class='operator'>(&quot;</span><span class='ident'>A</span> <span class='operator'>(</span>1<span class='operator'>)&quot;));</span>    <span class='ident'>add</span><span class='operator'>(&quot;</span>2<span class='operator'>&quot;</span>,<span class='keyword'>new</span> <span class='ident'>Button</span><span class='operator'>(&quot;</span><span class='ident'>B</span> <span class='operator'>(</span>2<span class='operator'>)&quot;));</span>    <span class='ident'>add</span><span class='operator'>(&quot;</span>4<span class='operator'>&quot;</span>,<span class='keyword'>new</span> <span class='ident'>Button</span><span class='operator'>(&quot;</span><span class='ident'>C</span> <span class='operator'>(</span>4<span class='operator'>)&quot;));</span>    <span class='ident'>add</span><span class='operator'>(&quot;</span>8<span class='operator'>&quot;</span>,<span class='keyword'>new</span> <span class='ident'>Button</span><span class='operator'>(&quot;</span><span class='ident'>D</span> <span class='operator'>(</span>8<span class='operator'>)&quot;));</span>    <span class='ident'>add</span><span class='operator'>(&quot;</span>3<span class='operator'>&quot;</span>,<span class='keyword'>new</span> <span class='ident'>Button</span><span class='operator'>(&quot;</span><span class='ident'>E</span> <span class='operator'>(</span>3<span class='operator'>)&quot;));</span>  <span class='operator'>}</span><span class='operator'>}</span>  </pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+<a name='figure.1'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 1: Layout example 1</p><pre class='content'><span class='keyword'>package</span> <span class='ident'>com</span><span class='operator'>.</span><span class='ident'>magelang</span><span class='operator'>.</span><span class='ident'>test</span><span class='operator'>;</span>
+
+
+
+<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>applet</span><span class='operator'>.*;</span>
+
+<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>awt</span><span class='operator'>.*;</span>
+
+<span class='keyword'>import</span> <span class='ident'>com</span><span class='operator'>.</span><span class='ident'>magelang</span><span class='operator'>.</span><span class='ident'>splitter</span><span class='operator'>.*;</span>
+
+
+
+<span class='keyword'>public</span> <span class='keyword'>class</span> <span class='ident'>SplitterEx1</span> <span class='keyword'>extends</span> <span class='ident'>Applet</span> <span class='operator'>{</span>
+
+  <span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>init</span><span class='operator'>()</span> <span class='operator'>{</span>
+
+    <span class='keyword'>super</span><span class='operator'>.</span><span class='ident'>init</span><span class='operator'>();</span>
+
+    <span class='ident'>setLayout</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>SplitterLayout</span><span class='operator'>(</span><span class='ident'>SplitterLayout</span><span class='operator'>.</span><span class='ident'>HORIZONTAL</span><span class='operator'>));</span>
+
+    <span class='ident'>add</span><span class='operator'>(&quot;</span>1<span class='operator'>&quot;</span>,<span class='keyword'>new</span> <span class='ident'>Button</span><span class='operator'>(&quot;</span><span class='ident'>A</span> <span class='operator'>(</span>1<span class='operator'>)&quot;));</span>
+
+    <span class='ident'>add</span><span class='operator'>(&quot;</span>2<span class='operator'>&quot;</span>,<span class='keyword'>new</span> <span class='ident'>Button</span><span class='operator'>(&quot;</span><span class='ident'>B</span> <span class='operator'>(</span>2<span class='operator'>)&quot;));</span>
+
+    <span class='ident'>add</span><span class='operator'>(&quot;</span>4<span class='operator'>&quot;</span>,<span class='keyword'>new</span> <span class='ident'>Button</span><span class='operator'>(&quot;</span><span class='ident'>C</span> <span class='operator'>(</span>4<span class='operator'>)&quot;));</span>
+
+    <span class='ident'>add</span><span class='operator'>(&quot;</span>8<span class='operator'>&quot;</span>,<span class='keyword'>new</span> <span class='ident'>Button</span><span class='operator'>(&quot;</span><span class='ident'>D</span> <span class='operator'>(</span>8<span class='operator'>)&quot;));</span>
+
+    <span class='ident'>add</span><span class='operator'>(&quot;</span>3<span class='operator'>&quot;</span>,<span class='keyword'>new</span> <span class='ident'>Button</span><span class='operator'>(&quot;</span><span class='ident'>E</span> <span class='operator'>(</span>3<span class='operator'>)&quot;));</span>
+
+  <span class='operator'>}</span>
+
+<span class='operator'>}</span>  </pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
 <p>The quoted numbers act as proportions to determine the amount of
 space each component gets.</p>
 <h2>Adding <tt>SplitterBar</tt>s</h2>
@@ -62,7 +95,47 @@ space each component gets.</p>
 </applet>
 </p>
 <p>The above layout was created with the following code:</p>
-<a name='figure.2'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 2: Layout example 2</p><pre class='content'><span class='keyword'>package</span> <span class='ident'>com</span><span class='operator'>.</span><span class='ident'>magelang</span><span class='operator'>.</span><span class='ident'>test</span><span class='operator'>;</span><span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>applet</span><span class='operator'>.*;</span><span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>awt</span><span class='operator'>.*;</span><span class='keyword'>import</span> <span class='ident'>com</span><span class='operator'>.</span><span class='ident'>magelang</span><span class='operator'>.</span><span class='ident'>splitter</span><span class='operator'>.*;</span><span class='keyword'>public</span> <span class='keyword'>class</span> <span class='ident'>SplitterEx2</span> <span class='keyword'>extends</span> <span class='ident'>Applet</span> <span class='operator'>{</span>  <span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>init</span><span class='operator'>()</span> <span class='operator'>{</span>  <span class='keyword'>super</span><span class='operator'>.</span><span class='ident'>init</span><span class='operator'>();</span>  <span class='ident'>setLayout</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>SplitterLayout</span><span class='operator'>(</span><span class='ident'>SplitterLayout</span><span class='operator'>.</span><span class='ident'>HORIZONTAL</span><span class='operator'>));</span>  <span class='ident'>add</span><span class='operator'>(&quot;</span>1<span class='operator'>&quot;</span>,<span class='keyword'>new</span> <span class='ident'>Button</span><span class='operator'>(&quot;</span><span class='ident'>A</span> <span class='operator'>(</span>1<span class='operator'>)&quot;));</span>  <span class='ident'>add</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>SplitterBar</span><span class='operator'>());</span>  <span class='ident'>add</span><span class='operator'>(&quot;</span>2<span class='operator'>&quot;</span>,<span class='keyword'>new</span> <span class='ident'>Button</span><span class='operator'>(&quot;</span><span class='ident'>B</span> <span class='operator'>(</span>2<span class='operator'>)&quot;));</span>  <span class='ident'>add</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>SplitterBar</span><span class='operator'>());</span>  <span class='ident'>add</span><span class='operator'>(&quot;</span>4<span class='operator'>&quot;</span>,<span class='keyword'>new</span> <span class='ident'>Button</span><span class='operator'>(&quot;</span><span class='ident'>C</span> <span class='operator'>(</span>4<span class='operator'>)&quot;));</span>  <span class='ident'>add</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>SplitterBar</span><span class='operator'>());</span>  <span class='ident'>add</span><span class='operator'>(&quot;</span>8<span class='operator'>&quot;</span>,<span class='keyword'>new</span> <span class='ident'>Button</span><span class='operator'>(&quot;</span><span class='ident'>D</span> <span class='operator'>(</span>8<span class='operator'>)&quot;));</span>  <span class='ident'>add</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>SplitterBar</span><span class='operator'>());</span>  <span class='ident'>add</span><span class='operator'>(&quot;</span>3<span class='operator'>&quot;</span>,<span class='keyword'>new</span> <span class='ident'>Button</span><span class='operator'>(&quot;</span><span class='ident'>E</span> <span class='operator'>(</span>3<span class='operator'>)&quot;));</span>  <span class='operator'>}</span><span class='operator'>}</span>  </pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+<a name='figure.2'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 2: Layout example 2</p><pre class='content'><span class='keyword'>package</span> <span class='ident'>com</span><span class='operator'>.</span><span class='ident'>magelang</span><span class='operator'>.</span><span class='ident'>test</span><span class='operator'>;</span>
+
+
+
+<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>applet</span><span class='operator'>.*;</span>
+
+<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>awt</span><span class='operator'>.*;</span>
+
+<span class='keyword'>import</span> <span class='ident'>com</span><span class='operator'>.</span><span class='ident'>magelang</span><span class='operator'>.</span><span class='ident'>splitter</span><span class='operator'>.*;</span>
+
+
+
+<span class='keyword'>public</span> <span class='keyword'>class</span> <span class='ident'>SplitterEx2</span> <span class='keyword'>extends</span> <span class='ident'>Applet</span> <span class='operator'>{</span>
+
+  <span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>init</span><span class='operator'>()</span> <span class='operator'>{</span>
+
+  <span class='keyword'>super</span><span class='operator'>.</span><span class='ident'>init</span><span class='operator'>();</span>
+
+  <span class='ident'>setLayout</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>SplitterLayout</span><span class='operator'>(</span><span class='ident'>SplitterLayout</span><span class='operator'>.</span><span class='ident'>HORIZONTAL</span><span class='operator'>));</span>
+
+  <span class='ident'>add</span><span class='operator'>(&quot;</span>1<span class='operator'>&quot;</span>,<span class='keyword'>new</span> <span class='ident'>Button</span><span class='operator'>(&quot;</span><span class='ident'>A</span> <span class='operator'>(</span>1<span class='operator'>)&quot;));</span>
+
+  <span class='ident'>add</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>SplitterBar</span><span class='operator'>());</span>
+
+  <span class='ident'>add</span><span class='operator'>(&quot;</span>2<span class='operator'>&quot;</span>,<span class='keyword'>new</span> <span class='ident'>Button</span><span class='operator'>(&quot;</span><span class='ident'>B</span> <span class='operator'>(</span>2<span class='operator'>)&quot;));</span>
+
+  <span class='ident'>add</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>SplitterBar</span><span class='operator'>());</span>
+
+  <span class='ident'>add</span><span class='operator'>(&quot;</span>4<span class='operator'>&quot;</span>,<span class='keyword'>new</span> <span class='ident'>Button</span><span class='operator'>(&quot;</span><span class='ident'>C</span> <span class='operator'>(</span>4<span class='operator'>)&quot;));</span>
+
+  <span class='ident'>add</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>SplitterBar</span><span class='operator'>());</span>
+
+  <span class='ident'>add</span><span class='operator'>(&quot;</span>8<span class='operator'>&quot;</span>,<span class='keyword'>new</span> <span class='ident'>Button</span><span class='operator'>(&quot;</span><span class='ident'>D</span> <span class='operator'>(</span>8<span class='operator'>)&quot;));</span>
+
+  <span class='ident'>add</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>SplitterBar</span><span class='operator'>());</span>
+
+  <span class='ident'>add</span><span class='operator'>(&quot;</span>3<span class='operator'>&quot;</span>,<span class='keyword'>new</span> <span class='ident'>Button</span><span class='operator'>(&quot;</span><span class='ident'>E</span> <span class='operator'>(</span>3<span class='operator'>)&quot;));</span>
+
+  <span class='operator'>}</span>
+
+<span class='operator'>}</span>  </pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
 <p>Adding Splitterbars between components allows the user to resize
 the components.&nbsp; The quoted numbers are now only used as an initial size
 for the components.</p>
@@ -78,7 +151,69 @@ simple &quot;movable status bar&quot; layout:</p>
 </p>
 <p>&nbsp;</p>
 <p>The above layout was created with the following code:</p>
-<a name='figure.3'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 3: Layout example 3</p><pre class='content'><span class='keyword'>package</span> <span class='ident'>com</span><span class='operator'>.</span><span class='ident'>magelang</span><span class='operator'>.</span><span class='ident'>test</span><span class='operator'>;</span><span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>applet</span><span class='operator'>.*;</span><span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>awt</span><span class='operator'>.*;</span><span class='keyword'>import</span> <span class='ident'>com</span><span class='operator'>.</span><span class='ident'>magelang</span><span class='operator'>.</span><span class='ident'>splitter</span><span class='operator'>.*;</span><span class='keyword'>public</span> <span class='keyword'>class</span> <span class='ident'>SplitterEx3</span> <span class='keyword'>extends</span> <span class='ident'>Applet</span> <span class='operator'>{</span>  <span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>init</span><span class='operator'>()</span> <span class='operator'>{</span>    <span class='keyword'>super</span><span class='operator'>.</span><span class='ident'>init</span><span class='operator'>();</span>    <span class='ident'>setLayout</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>SplitterLayout</span><span class='operator'>(</span><span class='ident'>SplitterLayout</span><span class='operator'>.</span><span class='ident'>VERTICAL</span><span class='operator'>));</span>    <span class='ident'>add</span><span class='operator'>(&quot;</span>1<span class='operator'>&quot;</span>,<span class='keyword'>new</span> <span class='ident'>Button</span><span class='operator'>(&quot;</span><span class='ident'>A</span> <span class='operator'>(</span>1<span class='operator'>)&quot;));</span>    <span class='ident'>SplitterBar</span> <span class='ident'>b1</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>SplitterBar</span><span class='operator'>();</span>    <span class='ident'>b1</span><span class='operator'>.</span><span class='ident'>setLayout</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>GridLayout</span><span class='operator'>(</span>1,0<span class='operator'>));</span>    <span class='ident'>b1</span><span class='operator'>.</span><span class='ident'>add</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>SplitterSpace</span><span class='operator'>());</span>    <span class='ident'>b1</span><span class='operator'>.</span><span class='ident'>add</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>Label</span><span class='operator'>(&quot;</span><span class='ident'>Status</span><span class='operator'>&quot;));</span>    <span class='ident'>b1</span><span class='operator'>.</span><span class='ident'>add</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>TextField</span><span class='operator'>(&quot;</span><span class='ident'>Enter</span> <span class='ident'>your</span> <span class='ident'>name</span><span class='operator'>&quot;));</span>    <span class='ident'>b1</span><span class='operator'>.</span><span class='ident'>add</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>SplitterSpace</span><span class='operator'>());</span>    <span class='ident'>add</span><span class='operator'>(</span><span class='ident'>b1</span><span class='operator'>);</span>    <span class='ident'>add</span><span class='operator'>(&quot;</span>2<span class='operator'>&quot;</span>,<span class='keyword'>new</span> <span class='ident'>Button</span><span class='operator'>(&quot;</span><span class='ident'>B</span> <span class='operator'>(</span>2<span class='operator'>)&quot;));</span>    <span class='ident'>SplitterBar</span> <span class='ident'>b2</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>SplitterBar</span><span class='operator'>();</span>    <span class='ident'>b2</span><span class='operator'>.</span><span class='ident'>setLayout</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>SplitterLayout</span><span class='operator'>(</span><span class='ident'>SplitterLayout</span><span class='operator'>.</span><span class='ident'>HORIZONTAL</span><span class='operator'>));</span>    <span class='ident'>b2</span><span class='operator'>.</span><span class='ident'>add</span><span class='operator'>(&quot;</span>5<span class='operator'>&quot;</span>,<span class='keyword'>new</span> <span class='ident'>SplitterSpace</span><span class='operator'>());</span>    <span class='ident'>b2</span><span class='operator'>.</span><span class='ident'>add</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>SplitterBar</span><span class='operator'>());</span>    <span class='ident'>b2</span><span class='operator'>.</span><span class='ident'>add</span><span class='operator'>(&quot;</span>10<span class='operator'>&quot;</span>,<span class='keyword'>new</span> <span class='ident'>Label</span><span class='operator'>(&quot;</span><span class='ident'>Status</span><span class='operator'>&quot;));</span>    <span class='ident'>b2</span><span class='operator'>.</span><span class='ident'>add</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>SplitterBar</span><span class='operator'>());</span>    <span class='ident'>b2</span><span class='operator'>.</span><span class='ident'>add</span><span class='operator'>(&quot;</span>40<span class='operator'>&quot;</span>,<span class='keyword'>new</span> <span class='ident'>TextField</span><span class='operator'>(&quot;</span><span class='ident'>Enter</span> <span class='ident'>your</span> <span class='ident'>name</span><span class='operator'>&quot;));</span>    <span class='ident'>add</span><span class='operator'>(</span><span class='ident'>b2</span><span class='operator'>);</span>    <span class='ident'>add</span><span class='operator'>(&quot;</span>4<span class='operator'>&quot;</span>,<span class='keyword'>new</span> <span class='ident'>Button</span><span class='operator'>(&quot;</span><span class='ident'>C</span> <span class='operator'>(</span>4<span class='operator'>)&quot;));</span>  <span class='operator'>}</span><span class='operator'>}</span>  </pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+<a name='figure.3'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 3: Layout example 3</p><pre class='content'><span class='keyword'>package</span> <span class='ident'>com</span><span class='operator'>.</span><span class='ident'>magelang</span><span class='operator'>.</span><span class='ident'>test</span><span class='operator'>;</span>
+
+
+
+<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>applet</span><span class='operator'>.*;</span>
+
+<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>awt</span><span class='operator'>.*;</span>
+
+<span class='keyword'>import</span> <span class='ident'>com</span><span class='operator'>.</span><span class='ident'>magelang</span><span class='operator'>.</span><span class='ident'>splitter</span><span class='operator'>.*;</span>
+
+<span class='keyword'>public</span> <span class='keyword'>class</span> <span class='ident'>SplitterEx3</span> <span class='keyword'>extends</span> <span class='ident'>Applet</span> <span class='operator'>{</span>
+
+  <span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>init</span><span class='operator'>()</span> <span class='operator'>{</span>
+
+    <span class='keyword'>super</span><span class='operator'>.</span><span class='ident'>init</span><span class='operator'>();</span>
+
+    <span class='ident'>setLayout</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>SplitterLayout</span><span class='operator'>(</span><span class='ident'>SplitterLayout</span><span class='operator'>.</span><span class='ident'>VERTICAL</span><span class='operator'>));</span>
+
+
+
+    <span class='ident'>add</span><span class='operator'>(&quot;</span>1<span class='operator'>&quot;</span>,<span class='keyword'>new</span> <span class='ident'>Button</span><span class='operator'>(&quot;</span><span class='ident'>A</span> <span class='operator'>(</span>1<span class='operator'>)&quot;));</span>
+
+
+
+    <span class='ident'>SplitterBar</span> <span class='ident'>b1</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>SplitterBar</span><span class='operator'>();</span>
+
+    <span class='ident'>b1</span><span class='operator'>.</span><span class='ident'>setLayout</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>GridLayout</span><span class='operator'>(</span>1,0<span class='operator'>));</span>
+
+    <span class='ident'>b1</span><span class='operator'>.</span><span class='ident'>add</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>SplitterSpace</span><span class='operator'>());</span>
+
+    <span class='ident'>b1</span><span class='operator'>.</span><span class='ident'>add</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>Label</span><span class='operator'>(&quot;</span><span class='ident'>Status</span><span class='operator'>&quot;));</span>
+
+    <span class='ident'>b1</span><span class='operator'>.</span><span class='ident'>add</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>TextField</span><span class='operator'>(&quot;</span><span class='ident'>Enter</span> <span class='ident'>your</span> <span class='ident'>name</span><span class='operator'>&quot;));</span>
+
+    <span class='ident'>b1</span><span class='operator'>.</span><span class='ident'>add</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>SplitterSpace</span><span class='operator'>());</span>
+
+    <span class='ident'>add</span><span class='operator'>(</span><span class='ident'>b1</span><span class='operator'>);</span>
+
+    <span class='ident'>add</span><span class='operator'>(&quot;</span>2<span class='operator'>&quot;</span>,<span class='keyword'>new</span> <span class='ident'>Button</span><span class='operator'>(&quot;</span><span class='ident'>B</span> <span class='operator'>(</span>2<span class='operator'>)&quot;));</span>
+
+
+
+    <span class='ident'>SplitterBar</span> <span class='ident'>b2</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>SplitterBar</span><span class='operator'>();</span>
+
+    <span class='ident'>b2</span><span class='operator'>.</span><span class='ident'>setLayout</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>SplitterLayout</span><span class='operator'>(</span><span class='ident'>SplitterLayout</span><span class='operator'>.</span><span class='ident'>HORIZONTAL</span><span class='operator'>));</span>
+
+    <span class='ident'>b2</span><span class='operator'>.</span><span class='ident'>add</span><span class='operator'>(&quot;</span>5<span class='operator'>&quot;</span>,<span class='keyword'>new</span> <span class='ident'>SplitterSpace</span><span class='operator'>());</span>
+
+    <span class='ident'>b2</span><span class='operator'>.</span><span class='ident'>add</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>SplitterBar</span><span class='operator'>());</span>
+
+    <span class='ident'>b2</span><span class='operator'>.</span><span class='ident'>add</span><span class='operator'>(&quot;</span>10<span class='operator'>&quot;</span>,<span class='keyword'>new</span> <span class='ident'>Label</span><span class='operator'>(&quot;</span><span class='ident'>Status</span><span class='operator'>&quot;));</span>
+
+    <span class='ident'>b2</span><span class='operator'>.</span><span class='ident'>add</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>SplitterBar</span><span class='operator'>());</span>
+
+    <span class='ident'>b2</span><span class='operator'>.</span><span class='ident'>add</span><span class='operator'>(&quot;</span>40<span class='operator'>&quot;</span>,<span class='keyword'>new</span> <span class='ident'>TextField</span><span class='operator'>(&quot;</span><span class='ident'>Enter</span> <span class='ident'>your</span> <span class='ident'>name</span><span class='operator'>&quot;));</span>
+
+    <span class='ident'>add</span><span class='operator'>(</span><span class='ident'>b2</span><span class='operator'>);</span>
+
+    <span class='ident'>add</span><span class='operator'>(&quot;</span>4<span class='operator'>&quot;</span>,<span class='keyword'>new</span> <span class='ident'>Button</span><span class='operator'>(&quot;</span><span class='ident'>C</span> <span class='operator'>(</span>4<span class='operator'>)&quot;));</span>
+
+  <span class='operator'>}</span>
+
+<span class='operator'>}</span>  </pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
 
 				</a>
 				<!-- #EndEditable "content" -->
@@ -121,4 +256,5 @@ simple &quot;movable status bar&quot; layout:</p>
 		</div>
 		<p>&nbsp;</p>
 	</body>
-<!-- #EndTemplate --></html>
+<!-- #EndTemplate -->
+</html>

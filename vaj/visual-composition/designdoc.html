@@ -14,6 +14,7 @@
 		<!-- #BeginEditable "head" -->
 		<!-- #EndEditable -->
 		<style type="text/css">
+
 .style1 {
 	vertical-align: middle;
 }
@@ -50,7 +51,9 @@ himself &quot;hmm, things don't work quite right when the user uses the &quot;ad
 <ul>
   <li><big><strong>Use the &quot;user code&quot; blocks that VisualAge sets up <em>very</em> sparingly.</strong></big>
         <p>VisualAge generates <em>lots</em> of methods to handle the connections that you set up.&nbsp; In each of these methods, there are one or more blocks that are delimited by comments that say something like</p>
-    <pre><tt>// user code begin {1}// user code end</tt>                                 </pre>
+    <pre><tt>// user code begin {1}
+
+// user code end</tt>                                 </pre>
         <p>You can safely add your own code between these comments, and VisualAge will keep it (as long as you don't delete the connection in the VCE...)</p>
         <p><strong><em>But</em>, </strong>I like to recommend that you use these as infrequently as possible!&nbsp; Why, you ask?&nbsp; Think about your poor maintenance programmer again.&nbsp;&nbsp; There is no indication that you've added code in those
         blocks.&nbsp; Your maintenance programmer will have to dig through (potentially) <em>tons</em> of generated code to finally find the one place where you put</p>
@@ -140,4 +143,5 @@ There are a few things you can do to help this:</p>
 		</div>
 		<p>&nbsp;</p>
 	</body>
-<!-- #EndTemplate --></html>
+<!-- #EndTemplate -->
+</html>

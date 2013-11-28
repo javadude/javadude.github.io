@@ -14,6 +14,7 @@
 		<!-- #BeginEditable "head" -->
 		<!-- #EndEditable -->
 		<style type="text/css">
+
 .style1 {
 	vertical-align: middle;
 }
@@ -215,7 +216,23 @@ same time as you are !
 recompilation of constants. Suppose you have the following code :
 </p>
 
-<pre><tt>public class ClassA{   public static final int CONSTANT_A = 1000;}public class ClassB{   public static final int CONSTANT_B = ClassA.CONSTANT_A;}</tt></pre>
+<pre><tt>
+
+public class ClassA{
+
+   public static final int CONSTANT_A = 1000;
+
+}
+
+
+
+public class ClassB{
+
+   public static final int CONSTANT_B = ClassA.CONSTANT_A;
+
+}
+
+</tt></pre>
 
 <p>When you change the value of CONSTANT_A you would generally assume that the
 value of CONSTANT_B would reflect the change as well. However, VisualAge does in
@@ -274,4 +291,5 @@ is.
 		</div>
 		<p>&nbsp;</p>
 	</body>
-<!-- #EndTemplate --></html>
+<!-- #EndTemplate -->
+</html>
