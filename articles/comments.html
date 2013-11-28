@@ -1,33 +1,36 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+
 
 <!-- #BeginTemplate "../master.dwt" -->
 
-	<head>
-		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-		<!-- #BeginEditable "doctitle" -->
+	<head>
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+		<!-- #BeginEditable "doctitle" -->
+
 		<title>Using the Right Comment in Java - Scott Stanchfield</title>
-		<!-- #EndEditable -->
-		<link href="../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
-		<!-- #BeginEditable "head" -->
-		<!-- #EndEditable -->
-		<style type="text/css">
-
-.style1 {
-	vertical-align: middle;
-}
-</style>
-	</head>
-
-	<body>
-		<div id="header">
-			<h1>JavaDude.com</h1>
-			<h4>-- Scott Stanchfield</h4>
-		</div>
-		<div id="content">
-			<div id="topBar">&nbsp;</div>
-			<div id="contentIndent">
-				<!-- #BeginEditable "content" -->
+		<!-- #EndEditable -->
+		<link href="../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
+		<!-- #BeginEditable "head" -->
+		<!-- #EndEditable -->
+		<style type="text/css">
+
+.style1 {
+	vertical-align: middle;
+}
+</style>
+	</head>
+
+	<body>
+		<div id="header">
+			<h1>JavaDude.com</h1>
+			<h4>-- Scott Stanchfield</h4>
+		</div>
+		<div id="content">
+			<div id="topBar">&nbsp;</div>
+			<div id="contentIndent">
+				<!-- #BeginEditable "content" -->
+
 
 <h1>Using the Right Comment in Java</h1>
 <p>Java provides three types of comments:</p>
@@ -36,7 +39,8 @@
         <p>The simplest comment in Java is the single line comment. It
         starts with two forward slashes and continues to the end of the
         line. For example:</p>
-<a name='figure.1'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 1: Single-line comments</p><pre class='content'><span class='comment'>// this is a single-line comment</span>
+<a name='figure.1'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 1: Single-line comments</p><pre class='content'><span class='comment'>// this is a single-line comment</span>
+
 <span class='ident'>x</span> <span class='operator'>=</span> 1<span class='operator'>;</span> <span class='comment'>// a single-line comment after code</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
     </li>
 </ul>
@@ -49,26 +53,36 @@
     end it with an asterisk followed by a forward slash. The start and end
     delimiters for this type of comment may be on the same line, or they can be
     on different lines. For example</p>
-<a name='figure.2'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 2: Multi-line comments</p><pre class='content'><span class='comment'>/* This is a c-style comment */</span>
-<span class='comment'>/*  This is also a
-    c-style comment, spanning
+<a name='figure.2'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 2: Multi-line comments</p><pre class='content'><span class='comment'>/* This is a c-style comment */</span>
+
+<span class='comment'>/*  This is also a
+
+    c-style comment, spanning
+
     multiple lines */</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
     <p>Note that C-style comments <strong><em>cannot</em></strong> be
     nested. Something like
-<a name='figure.3'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 3: Bad comment nesting</p><pre class='content'><span class='comment'>/* A comment looks like
-   /* This is a comment */</span>
-   <span class='ident'>blah</span> <span class='ident'>blah</span> <span class='ident'>blah</span>
+<a name='figure.3'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 3: Bad comment nesting</p><pre class='content'><span class='comment'>/* A comment looks like
+
+   /* This is a comment */</span>
+
+   <span class='ident'>blah</span> <span class='ident'>blah</span> <span class='ident'>blah</span>
+
  <span class='operator'>*/</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
     <p>will generated a syntax error because the java compiler will only treat
     through the first */ as a comment. (The comment ends at the first
     &quot;*/&quot; the compiler sees.)</p>
     <p>You <em>can</em> nest single-line comments within multi-line comments:</p>
-<a name='figure.4'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 4: Good comment nesting</p><pre class='content'><span class='comment'>/* This is a single-line comment:
-    // a single-line comment
+<a name='figure.4'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 4: Good comment nesting</p><pre class='content'><span class='comment'>/* This is a single-line comment:
+
+    // a single-line comment
+
  */</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
     <p>and multi-line comments in single-line comments:</p>
-<a name='figure.5'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 5: Multi-line comments in a single-line comment</p><pre class='content'><span class='comment'>// /* this is</span>
-<span class='comment'>//    a multi-line</span>
+<a name='figure.5'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 5: Multi-line comments in a single-line comment</p><pre class='content'><span class='comment'>// /* this is</span>
+
+<span class='comment'>//    a multi-line</span>
+
 <span class='comment'>//    comment */</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
 </blockquote>
 <ul>
@@ -78,8 +92,10 @@
         source code. These begin with a forward slash followed by <strong><em>two</em></strong>
         asterisks, and end with an asterisk followed by a forward slash.
         For example:</p>
-<a name='figure.6'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 6: Documentation comment</p><pre class='content'><span class='comment'>/** This is a documentation comment */</span>
-<span class='comment'>/** This is also a
+<a name='figure.6'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 6: Documentation comment</p><pre class='content'><span class='comment'>/** This is a documentation comment */</span>
+
+<span class='comment'>/** This is also a
+
     documentation comment */</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
         <p>There are a few important things to note about documentation
         comments:</p>
@@ -94,24 +110,32 @@
                 javadoc assumes this is just used to create a
                 &quot;box&quot; around the comment in the source code and
                 ignores the extra asterisks. For example:
-<a name='figure.7'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 7: Extra asterisks</p><pre class='content'><span class='comment'>/**********************************
-   This is the start of a method
+<a name='figure.7'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 7: Extra asterisks</p><pre class='content'><span class='comment'>/**********************************
+
+   This is the start of a method
+
 **********************************/</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
                 <p>will only keep the text &quot;This is the start of a
                 method&quot;.</p></li>
             <li>javadoc will ignore leading asterisks inside a
                 documentation-comment block. For example:
-<a name='figure.8'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 8: Leading asterisks</p><pre class='content'><span class='comment'>/***************************************
- * This is a doc comment
- * on multiple lines that I want to stand
- * out in source code, looking &quot;neat&quot;
+<a name='figure.8'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 8: Leading asterisks</p><pre class='content'><span class='comment'>/***************************************
+
+ * This is a doc comment
+
+ * on multiple lines that I want to stand
+
+ * out in source code, looking &quot;neat&quot;
+
  ***************************************/</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
                 <p>will only keep the text &quot;This is a doc comment on
                 multiple lines that I want to stand out in source code, looking
                 &quot;neat&quot;&quot;</p></li>
             <li>It's common practice to use something like
-<a name='figure.9'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 9: Accidental javadoc comment</p><pre class='content'><span class='comment'>/******************************************
-   ...
+<a name='figure.9'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 9: Accidental javadoc comment</p><pre class='content'><span class='comment'>/******************************************
+
+   ...
+
  ******************************************/</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
                 <p>to make a comment stand out. Be aware that this is
                 treated as a documentation comment (even if that's not what you
@@ -138,36 +162,52 @@ or variable) use a single line comment.</p>
 out&quot; a section of your code! (&quot;Commenting out code&quot; refers
 to changing the lexical state of a section of source code to being inside a
 comment, making the compiler ignore that code.) Take as an example:</p>
-<a name='figure.10'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 10: Code to comment out</p><pre class='content'><span class='ident'>x</span> <span class='operator'>=</span> 1<span class='operator'>;</span>   <span class='comment'>/* set x to 1 */</span>
-<span class='ident'>y</span> <span class='operator'>=</span> 2<span class='operator'>;</span>   <span class='comment'>/* set y to 2 */</span>
+<a name='figure.10'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 10: Code to comment out</p><pre class='content'><span class='ident'>x</span> <span class='operator'>=</span> 1<span class='operator'>;</span>   <span class='comment'>/* set x to 1 */</span>
+
+<span class='ident'>y</span> <span class='operator'>=</span> 2<span class='operator'>;</span>   <span class='comment'>/* set y to 2 */</span>
+
 <span class='ident'>f</span><span class='operator'>(</span><span class='ident'>x</span>, <span class='ident'>y</span><span class='operator'>);</span> <span class='comment'>/* call f with x and y */</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
 <p>If you want to comment out these three lines, you would either need to put a
 single line comment in front of each line:</p>
-<a name='figure.11'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 11: Commenting-out code using single-line comments</p><pre class='content'><span class='comment'>// x = 1;   /* set x to 1 */</span>
-<span class='comment'>// y = 2;   /* set y to 2 */</span>
+<a name='figure.11'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 11: Commenting-out code using single-line comments</p><pre class='content'><span class='comment'>// x = 1;   /* set x to 1 */</span>
+
+<span class='comment'>// y = 2;   /* set y to 2 */</span>
+
 <span class='comment'>// f(x, y); /* call f with x and y */</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
 <p>or add in multi-line comments wherever there isn't already one present:</p>
-<a name='figure.12'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 12: Commenting-out code using multi-line comments</p><pre class='content'><span class='comment'>/* x = 1;  */</span> <span class='comment'>/* set x to 1 */</span>
-<span class='comment'>/* y = 2;  */</span> <span class='comment'>/* set y to 2 */</span>
+<a name='figure.12'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 12: Commenting-out code using multi-line comments</p><pre class='content'><span class='comment'>/* x = 1;  */</span> <span class='comment'>/* set x to 1 */</span>
+
+<span class='comment'>/* y = 2;  */</span> <span class='comment'>/* set y to 2 */</span>
+
 <span class='comment'>/* f(x, y);*/</span> <span class='comment'>/* call f with x and y */</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
 <p>or mutilate/remove the &quot;end comment&quot; delimiters of the existing
 comments:</p>
-<a name='figure.13'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 13: Commenting-out code using multi-line comments (alternative)</p><pre class='content'><span class='comment'>/*
-x = 1;   /* set x to 1 * /
-y = 2;   /* set y to 2 * /
-f(x, y); /* call f with x and y * /
+<a name='figure.13'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 13: Commenting-out code using multi-line comments (alternative)</p><pre class='content'><span class='comment'>/*
+
+x = 1;   /* set x to 1 * /
+
+y = 2;   /* set y to 2 * /
+
+f(x, y); /* call f with x and y * /
+
 */</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
 <p>None of these are terribly pleasant. It's much easier if the original
 code were:</p>
-<a name='figure.14'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 14: Easier code to comment out</p><pre class='content'><span class='ident'>x</span> <span class='operator'>=</span> 1<span class='operator'>;</span>   <span class='comment'>// set x to 1</span>
-<span class='ident'>y</span> <span class='operator'>=</span> 2<span class='operator'>;</span>   <span class='comment'>// set y to 2</span>
+<a name='figure.14'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 14: Easier code to comment out</p><pre class='content'><span class='ident'>x</span> <span class='operator'>=</span> 1<span class='operator'>;</span>   <span class='comment'>// set x to 1</span>
+
+<span class='ident'>y</span> <span class='operator'>=</span> 2<span class='operator'>;</span>   <span class='comment'>// set y to 2</span>
+
 <span class='ident'>f</span><span class='operator'>(</span><span class='ident'>x</span>, <span class='ident'>y</span><span class='operator'>);</span> <span class='comment'>// call f with x and y</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
 <p>then you can easily comment it out by just placing a multi-line comment
 around it:</p>
-<a name='figure.15'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 15: Commenting-out single-line comments with a single multi-line comment</p><pre class='content'><span class='comment'>/*
-x = 1;   // set x to 1
-y = 2;   // set y to 2
-f(x, y); // call f with x and y
+<a name='figure.15'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 15: Commenting-out single-line comments with a single multi-line comment</p><pre class='content'><span class='comment'>/*
+
+x = 1;   // set x to 1
+
+y = 2;   // set y to 2
+
+f(x, y); // call f with x and y
+
 */</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
 <p><em>Always</em> use single-line comments for your everyday commenting needs!</p>
 <h2>When to Use Multi-Line Comments</h2>
@@ -175,56 +215,43 @@ f(x, y); // call f with x and y
 use multi-line comments to comment out sections of code. <em>Never </em>use
 them for <em>any</em> other purpose!</p>
 				</a>
-				<!-- #EndEditable "content" -->
-				<div id="footer">
-					<p>&nbsp;</p>
-					<hr/>
-					<p>Copyright &copy; 1996-2009, Scott Stanchfield. All Rights Reserved.<br/>
-					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
-					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
-					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
-					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../images/cssplay_button.png" width="88" /></a></p>
-					<p>
-					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
-					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../images/feed-icon-14x14.png" width="14" />Want 
-					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
-					</p>
-				</div>
-			</div>
-		</div>
-		<div id="bottom"/>
-		<div id="navigation">
-			<ul>
-				<li><a href="../index.html">Home</a></li>
-				<li><a href="index.html">Articles</a></li>
-				<li><a href="../tools/index.html">Tools</a></li>
-				<li><a href="../evaj/index.html">Effective VisualAge for Java</a></li>
-				<li><a href="../eclipse/index.html">Eclipse Tips</a></li>
-				<li><a href="../vaj/index.html">VisualAge Tips</a></li>
-				<!--
-				<li><a href="resume.html">Resume</a></li>
-				-->
-				<li><a href="../publications.html">Publications</a></li>
-			</ul>
-			<p>&nbsp;</p>
-			<div style="margin-left:10px">
-<script type="text/javascript"><!--
-google_ad_client = "pub-1721904981084162";
-/* Homepage Gutter */
-google_ad_slot = "0044274311";
-google_ad_width = 120;
-google_ad_height = 600;
-//-->
-</script>
-<script type="text/javascript"
-src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script>
-</div>
-		</div>
-		<div id="bottomcorner"/>
-		<div id="topcorner"/>
-		</div>
-		<p>&nbsp;</p>
-	</body>
-<!-- #EndTemplate -->
-</html>
+				<!-- #EndEditable "content" -->
+				<div id="footer">
+					<p>&nbsp;</p>
+					<hr/>
+					<p>Copyright &copy; 1996-2013, Scott Stanchfield. All Rights Reserved.<br/>
+					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
+					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
+					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
+					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../images/cssplay_button.png" width="88" /></a></p>
+					<p>
+					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
+					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../images/feed-icon-14x14.png" width="14" />Want 
+					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div id="bottom"/>
+		<div id="navigation">
+			<ul>
+				<li><a href="../index.html">Home</a></li>
+				<li><a href="index.html">Articles</a></li>
+				<li><a href="../tools/index.html">Tools</a></li>
+				<li><a href="../evaj/index.html">Effective VisualAge for Java</a></li>
+				<li><a href="../eclipse/index.html">Eclipse Tips</a></li>
+				<li><a href="../vaj/index.html">VisualAge Tips</a></li>
+				<!--
+				<li><a href="resume.html">Resume</a></li>
+				-->
+				<li><a href="../publications.html">Publications</a></li>
+			</ul>
+			<p>&nbsp;</p>
+		</div>
+		<div id="bottomcorner"/>
+		<div id="topcorner"/>
+		</div>
+		<p>&nbsp;</p>
+	</body>
+<!-- #EndTemplate -->
+</html>

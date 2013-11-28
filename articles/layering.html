@@ -1,33 +1,36 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+
 
 <!-- #BeginTemplate "../master.dwt" -->
 
-	<head>
-		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-		<!-- #BeginEditable "doctitle" -->
+	<head>
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+		<!-- #BeginEditable "doctitle" -->
+
 		<title>Layering Applications - Scott Stanchfield</title>
-		<!-- #EndEditable -->
-		<link href="../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
-		<!-- #BeginEditable "head" -->
-		<!-- #EndEditable -->
-		<style type="text/css">
-
-.style1 {
-	vertical-align: middle;
-}
-</style>
-	</head>
-
-	<body>
-		<div id="header">
-			<h1>JavaDude.com</h1>
-			<h4>-- Scott Stanchfield</h4>
-		</div>
-		<div id="content">
-			<div id="topBar">&nbsp;</div>
-			<div id="contentIndent">
-				<!-- #BeginEditable "content" -->
+		<!-- #EndEditable -->
+		<link href="../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
+		<!-- #BeginEditable "head" -->
+		<!-- #EndEditable -->
+		<style type="text/css">
+
+.style1 {
+	vertical-align: middle;
+}
+</style>
+	</head>
+
+	<body>
+		<div id="header">
+			<h1>JavaDude.com</h1>
+			<h4>-- Scott Stanchfield</h4>
+		</div>
+		<div id="content">
+			<div id="topBar">&nbsp;</div>
+			<div id="contentIndent">
+				<!-- #BeginEditable "content" -->
+
 <h1>Layering Applications</h1>
 <h2>Introduction</h2>
 <p><i>Note that this is a quick, initial pass at this article, in response to a 
@@ -106,18 +109,30 @@ more interfaces to lock down that communication. Once you have the interfaces in
 place, <i>it doesn't matter <b>what</b> the components actually <b>are</b> or <b>
 do</b>, as long as they respect that communication!</i></p>
 <p>Think about this for a moment. Suppose we define:</p>
-<a name='figure.1'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 1: Customer definition as an interface</p><pre class='content'><span class='keyword'>public</span> <span class='keyword'>interface</span> <span class='ident'>Customer</span> <span class='operator'>{</span>
-  <span class='keyword'>public</span> <span class='ident'>String</span> <span class='ident'>getName</span><span class='operator'>();</span>
-  <span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>setName</span><span class='operator'>(</span><span class='ident'>String</span> <span class='ident'>name</span><span class='operator'>);</span>
-  <span class='operator'>...</span>
-<span class='operator'>}</span>
-
-<span class='keyword'>public</span> <span class='keyword'>interface</span> <span class='ident'>CustomerManager</span> <span class='operator'>{</span>
-  <span class='keyword'>public</span> <span class='ident'>Customer</span>   <span class='ident'>load</span><span class='operator'>(</span><span class='keyword'>int</span> <span class='ident'>id</span><span class='operator'>);</span>
-  <span class='keyword'>public</span> <span class='ident'>Customer</span>   <span class='ident'>store</span><span class='operator'>(</span><span class='ident'>Customer</span> <span class='ident'>customer</span><span class='operator'>);</span>
-  <span class='keyword'>public</span> <span class='ident'>Customer</span><span class='operator'>[]</span> <span class='ident'>findByName</span><span class='operator'>(</span><span class='ident'>String</span> <span class='ident'>namePattern</span><span class='operator'>);</span>
-  <span class='keyword'>public</span> <span class='ident'>Customer</span>   <span class='ident'>createCustomer</span><span class='operator'>(</span><span class='ident'>String</span> <span class='ident'>name</span>, <span class='keyword'>float</span> <span class='ident'>creditLimit</span><span class='operator'>);</span>
-  <span class='keyword'>public</span> <span class='keyword'>void</span>       <span class='ident'>deleteCustomer</span><span class='operator'>(</span><span class='ident'>Customer</span> <span class='ident'>customer</span><span class='operator'>);</span>
+<a name='figure.1'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 1: Customer definition as an interface</p><pre class='content'><span class='keyword'>public</span> <span class='keyword'>interface</span> <span class='ident'>Customer</span> <span class='operator'>{</span>
+
+  <span class='keyword'>public</span> <span class='ident'>String</span> <span class='ident'>getName</span><span class='operator'>();</span>
+
+  <span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>setName</span><span class='operator'>(</span><span class='ident'>String</span> <span class='ident'>name</span><span class='operator'>);</span>
+
+  <span class='operator'>...</span>
+
+<span class='operator'>}</span>
+
+
+
+<span class='keyword'>public</span> <span class='keyword'>interface</span> <span class='ident'>CustomerManager</span> <span class='operator'>{</span>
+
+  <span class='keyword'>public</span> <span class='ident'>Customer</span>   <span class='ident'>load</span><span class='operator'>(</span><span class='keyword'>int</span> <span class='ident'>id</span><span class='operator'>);</span>
+
+  <span class='keyword'>public</span> <span class='ident'>Customer</span>   <span class='ident'>store</span><span class='operator'>(</span><span class='ident'>Customer</span> <span class='ident'>customer</span><span class='operator'>);</span>
+
+  <span class='keyword'>public</span> <span class='ident'>Customer</span><span class='operator'>[]</span> <span class='ident'>findByName</span><span class='operator'>(</span><span class='ident'>String</span> <span class='ident'>namePattern</span><span class='operator'>);</span>
+
+  <span class='keyword'>public</span> <span class='ident'>Customer</span>   <span class='ident'>createCustomer</span><span class='operator'>(</span><span class='ident'>String</span> <span class='ident'>name</span>, <span class='keyword'>float</span> <span class='ident'>creditLimit</span><span class='operator'>);</span>
+
+  <span class='keyword'>public</span> <span class='keyword'>void</span>       <span class='ident'>deleteCustomer</span><span class='operator'>(</span><span class='ident'>Customer</span> <span class='ident'>customer</span><span class='operator'>);</span>
+
 <span class='operator'>}</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
 <p>Notice how this <i>does not</i> say anything about <i>how</i> or <i>where</i>
 the customer is stored. All we're doing here is specifying the basic CRUD 
@@ -209,12 +224,18 @@ get the time...)</p>
 <p>The hardest part of making your application nice and generic is dealing with 
 exceptions.</p>
 <p>Let's just think about our CustomerManager:</p>
-<a name='figure.2'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 2: A manager -- needs some exceptions...</p><pre class='content'><span class='keyword'>public</span> <span class='keyword'>interface</span> <span class='ident'>CustomerManager</span> <span class='operator'>{</span>
-  <span class='keyword'>public</span> <span class='ident'>Customer</span>   <span class='ident'>load</span><span class='operator'>(</span><span class='keyword'>int</span> <span class='ident'>id</span><span class='operator'>);</span>
-  <span class='keyword'>public</span> <span class='ident'>Customer</span>   <span class='ident'>store</span><span class='operator'>(</span><span class='ident'>Customer</span> <span class='ident'>customer</span><span class='operator'>);</span>
-  <span class='keyword'>public</span> <span class='ident'>Customer</span><span class='operator'>[]</span> <span class='ident'>findByName</span><span class='operator'>(</span><span class='ident'>String</span> <span class='ident'>namePattern</span><span class='operator'>);</span>
-  <span class='keyword'>public</span> <span class='ident'>Customer</span>   <span class='ident'>createCustomer</span><span class='operator'>(</span><span class='ident'>String</span> <span class='ident'>name</span>, <span class='keyword'>float</span> <span class='ident'>creditLimit</span><span class='operator'>);</span>
-  <span class='keyword'>public</span> <span class='keyword'>void</span>       <span class='ident'>deleteCustomer</span><span class='operator'>(</span><span class='ident'>Customer</span> <span class='ident'>customer</span><span class='operator'>);</span>
+<a name='figure.2'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 2: A manager -- needs some exceptions...</p><pre class='content'><span class='keyword'>public</span> <span class='keyword'>interface</span> <span class='ident'>CustomerManager</span> <span class='operator'>{</span>
+
+  <span class='keyword'>public</span> <span class='ident'>Customer</span>   <span class='ident'>load</span><span class='operator'>(</span><span class='keyword'>int</span> <span class='ident'>id</span><span class='operator'>);</span>
+
+  <span class='keyword'>public</span> <span class='ident'>Customer</span>   <span class='ident'>store</span><span class='operator'>(</span><span class='ident'>Customer</span> <span class='ident'>customer</span><span class='operator'>);</span>
+
+  <span class='keyword'>public</span> <span class='ident'>Customer</span><span class='operator'>[]</span> <span class='ident'>findByName</span><span class='operator'>(</span><span class='ident'>String</span> <span class='ident'>namePattern</span><span class='operator'>);</span>
+
+  <span class='keyword'>public</span> <span class='ident'>Customer</span>   <span class='ident'>createCustomer</span><span class='operator'>(</span><span class='ident'>String</span> <span class='ident'>name</span>, <span class='keyword'>float</span> <span class='ident'>creditLimit</span><span class='operator'>);</span>
+
+  <span class='keyword'>public</span> <span class='keyword'>void</span>       <span class='ident'>deleteCustomer</span><span class='operator'>(</span><span class='ident'>Customer</span> <span class='ident'>customer</span><span class='operator'>);</span>
+
 <span class='operator'>}</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
 <p>This definition has some serious problems. If anything goes wrong, the caller 
 needs to know about it. So we'll need to declare some thrown exceptions for 
@@ -224,32 +245,52 @@ error cases.</p>
 SQLExceptions (btw: SQL is properly pronounced "squeal", no Ned Beatty 
 references, please.)</p>
 <p>So we could write a class that looks like:</p>
-<a name='figure.3'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 3: A JDBC-based customer manager</p><pre class='content'><span class='keyword'>public</span> <span class='keyword'>class</span> <span class='ident'>CustomerManagerUsingJDBC</span> <span class='keyword'>implements</span> <span class='ident'>CustomerManager</span> <span class='operator'>{</span>
-  <span class='keyword'>public</span> <span class='ident'>Customer</span>   <span class='ident'>load</span><span class='operator'>(</span><span class='keyword'>int</span> <span class='ident'>id</span><span class='operator'>)</span> <span class='keyword'>throws</span> <span class='ident'>SQLException</span> <span class='operator'>{</span>
-    <span class='operator'>...</span>
-  <span class='operator'>}</span>
-
-  <span class='keyword'>public</span> <span class='ident'>Customer</span>   <span class='ident'>store</span><span class='operator'>(</span><span class='ident'>Customer</span> <span class='ident'>customer</span><span class='operator'>)</span> <span class='keyword'>throws</span> <span class='ident'>SQLException</span> <span class='operator'>{</span>
-    <span class='operator'>...</span>
-  <span class='operator'>}</span>
-
-  <span class='operator'>...</span>
+<a name='figure.3'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 3: A JDBC-based customer manager</p><pre class='content'><span class='keyword'>public</span> <span class='keyword'>class</span> <span class='ident'>CustomerManagerUsingJDBC</span> <span class='keyword'>implements</span> <span class='ident'>CustomerManager</span> <span class='operator'>{</span>
+
+  <span class='keyword'>public</span> <span class='ident'>Customer</span>   <span class='ident'>load</span><span class='operator'>(</span><span class='keyword'>int</span> <span class='ident'>id</span><span class='operator'>)</span> <span class='keyword'>throws</span> <span class='ident'>SQLException</span> <span class='operator'>{</span>
+
+    <span class='operator'>...</span>
+
+  <span class='operator'>}</span>
+
+
+
+  <span class='keyword'>public</span> <span class='ident'>Customer</span>   <span class='ident'>store</span><span class='operator'>(</span><span class='ident'>Customer</span> <span class='ident'>customer</span><span class='operator'>)</span> <span class='keyword'>throws</span> <span class='ident'>SQLException</span> <span class='operator'>{</span>
+
+    <span class='operator'>...</span>
+
+  <span class='operator'>}</span>
+
+
+
+  <span class='operator'>...</span>
+
 <span class='operator'>}</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
 <p>and then modify the interface to also throw those exceptions. Ok so far, and 
 we set up the business logic to catch SQLExceptions as necessary.</p>
 <h3>Uhhhh, but what about EJB?</h3>
 <p>But things get nasty if we try to change the implementation to use Enterprise 
 JavaBeans:</p>
-<a name='figure.4'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 4: An EJB-based customer manager</p><pre class='content'><span class='keyword'>public</span> <span class='keyword'>class</span> <span class='ident'>CustomerManagerUsingEJB</span> <span class='keyword'>implements</span> <span class='ident'>CustomerManager</span> <span class='operator'>{</span>
-  <span class='keyword'>public</span> <span class='ident'>Customer</span>   <span class='ident'>load</span><span class='operator'>(</span><span class='keyword'>int</span> <span class='ident'>id</span><span class='operator'>)</span> <span class='keyword'>throws</span> <span class='ident'>EJBException</span>, <span class='ident'>RemoteException</span> <span class='operator'>{</span>
-    <span class='operator'>...</span>
-  <span class='operator'>}</span>
-
-  <span class='keyword'>public</span> <span class='ident'>Customer</span>   <span class='ident'>store</span><span class='operator'>(</span><span class='ident'>Customer</span> <span class='ident'>customer</span><span class='operator'>)</span> <span class='keyword'>throws</span> <span class='ident'>EJBException</span>, <span class='ident'>RemoteException</span> <span class='operator'>{</span>
-    <span class='operator'>...</span>
-  <span class='operator'>}</span>
-
-  <span class='operator'>...</span>
+<a name='figure.4'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 4: An EJB-based customer manager</p><pre class='content'><span class='keyword'>public</span> <span class='keyword'>class</span> <span class='ident'>CustomerManagerUsingEJB</span> <span class='keyword'>implements</span> <span class='ident'>CustomerManager</span> <span class='operator'>{</span>
+
+  <span class='keyword'>public</span> <span class='ident'>Customer</span>   <span class='ident'>load</span><span class='operator'>(</span><span class='keyword'>int</span> <span class='ident'>id</span><span class='operator'>)</span> <span class='keyword'>throws</span> <span class='ident'>EJBException</span>, <span class='ident'>RemoteException</span> <span class='operator'>{</span>
+
+    <span class='operator'>...</span>
+
+  <span class='operator'>}</span>
+
+
+
+  <span class='keyword'>public</span> <span class='ident'>Customer</span>   <span class='ident'>store</span><span class='operator'>(</span><span class='ident'>Customer</span> <span class='ident'>customer</span><span class='operator'>)</span> <span class='keyword'>throws</span> <span class='ident'>EJBException</span>, <span class='ident'>RemoteException</span> <span class='operator'>{</span>
+
+    <span class='operator'>...</span>
+
+  <span class='operator'>}</span>
+
+
+
+  <span class='operator'>...</span>
+
 <span class='operator'>}</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
 <p>Accessing EJBs could throw EJBException or RemoteException. Ok, so we'll 
 modify the interface to use EJB, then change the code in the business logic.</p>
@@ -268,61 +309,110 @@ to change the business logic to "match" its exceptions.</p>
 </ul>
 <p>Those are a few simple cases. Ok, let's define custom exceptions to deal with 
 this.</p>
-<a name='figure.5'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 5: A custom exception for our application</p><pre class='content'><span class='keyword'>public</span> <span class='keyword'>class</span> <span class='ident'>MyApplicationException</span> <span class='keyword'>extends</span> <span class='ident'>Exception</span> <span class='operator'>{</span>
-  <span class='keyword'>private</span> <span class='ident'>Throwable</span> <span class='ident'>nestedException</span><span class='operator'>;</span>
-
-  <span class='keyword'>public</span> <span class='ident'>MyApplicationException</span> <span class='operator'>(</span><span class='ident'>String</span> <span class='ident'>message</span>, <span class='ident'>Throwable</span> <span class='ident'>nestedException</span><span class='operator'>)</span> <span class='operator'>{</span>
-    <span class='keyword'>super</span><span class='operator'>(</span><span class='ident'>message</span><span class='operator'>);</span>
-    <span class='keyword'>this</span><span class='operator'>.</span><span class='ident'>nestedException</span> <span class='operator'>=</span> <span class='ident'>nestedException</span><span class='operator'>;</span>
-  <span class='operator'>}</span>
-  <span class='keyword'>public</span> <span class='ident'>Throwable</span> <span class='ident'>getNestedException</span><span class='operator'>()</span> <span class='operator'>{</span>
-    <span class='keyword'>return</span> <span class='ident'>nestedException</span><span class='operator'>;</span>
-  <span class='operator'>}</span>
-<span class='operator'>}</span>
-
-<span class='keyword'>public</span> <span class='keyword'>class</span> <span class='ident'>CustomerException</span> <span class='keyword'>extends</span> <span class='ident'>MyApplicationException</span> <span class='operator'>{</span>
-  <span class='keyword'>public</span> <span class='ident'>CustomerException</span><span class='operator'>(</span><span class='ident'>String</span> <span class='ident'>message</span>, <span class='ident'>Throwable</span> <span class='ident'>nestedException</span><span class='operator'>)</span> <span class='operator'>{</span>
-    <span class='keyword'>super</span><span class='operator'>(</span><span class='ident'>message</span>, <span class='ident'>nestedException</span><span class='operator'>);</span>
-  <span class='operator'>}</span>
-<span class='operator'>}</span>
-
-<span class='keyword'>public</span> <span class='keyword'>class</span> <span class='ident'>NotFoundException</span> <span class='keyword'>extends</span> <span class='ident'>MyApplicationException</span> <span class='operator'>{</span>
-  <span class='keyword'>public</span> <span class='ident'>NotFoundException</span><span class='operator'>(</span><span class='ident'>String</span> <span class='ident'>message</span>, <span class='ident'>Throwable</span> <span class='ident'>nestedException</span><span class='operator'>)</span> <span class='operator'>{</span>
-    <span class='keyword'>super</span><span class='operator'>(</span><span class='ident'>message</span>, <span class='ident'>nestedException</span><span class='operator'>);</span>
-  <span class='operator'>}</span>
+<a name='figure.5'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 5: A custom exception for our application</p><pre class='content'><span class='keyword'>public</span> <span class='keyword'>class</span> <span class='ident'>MyApplicationException</span> <span class='keyword'>extends</span> <span class='ident'>Exception</span> <span class='operator'>{</span>
+
+  <span class='keyword'>private</span> <span class='ident'>Throwable</span> <span class='ident'>nestedException</span><span class='operator'>;</span>
+
+
+
+  <span class='keyword'>public</span> <span class='ident'>MyApplicationException</span> <span class='operator'>(</span><span class='ident'>String</span> <span class='ident'>message</span>, <span class='ident'>Throwable</span> <span class='ident'>nestedException</span><span class='operator'>)</span> <span class='operator'>{</span>
+
+    <span class='keyword'>super</span><span class='operator'>(</span><span class='ident'>message</span><span class='operator'>);</span>
+
+    <span class='keyword'>this</span><span class='operator'>.</span><span class='ident'>nestedException</span> <span class='operator'>=</span> <span class='ident'>nestedException</span><span class='operator'>;</span>
+
+  <span class='operator'>}</span>
+
+  <span class='keyword'>public</span> <span class='ident'>Throwable</span> <span class='ident'>getNestedException</span><span class='operator'>()</span> <span class='operator'>{</span>
+
+    <span class='keyword'>return</span> <span class='ident'>nestedException</span><span class='operator'>;</span>
+
+  <span class='operator'>}</span>
+
+<span class='operator'>}</span>
+
+
+
+<span class='keyword'>public</span> <span class='keyword'>class</span> <span class='ident'>CustomerException</span> <span class='keyword'>extends</span> <span class='ident'>MyApplicationException</span> <span class='operator'>{</span>
+
+  <span class='keyword'>public</span> <span class='ident'>CustomerException</span><span class='operator'>(</span><span class='ident'>String</span> <span class='ident'>message</span>, <span class='ident'>Throwable</span> <span class='ident'>nestedException</span><span class='operator'>)</span> <span class='operator'>{</span>
+
+    <span class='keyword'>super</span><span class='operator'>(</span><span class='ident'>message</span>, <span class='ident'>nestedException</span><span class='operator'>);</span>
+
+  <span class='operator'>}</span>
+
+<span class='operator'>}</span>
+
+
+
+<span class='keyword'>public</span> <span class='keyword'>class</span> <span class='ident'>NotFoundException</span> <span class='keyword'>extends</span> <span class='ident'>MyApplicationException</span> <span class='operator'>{</span>
+
+  <span class='keyword'>public</span> <span class='ident'>NotFoundException</span><span class='operator'>(</span><span class='ident'>String</span> <span class='ident'>message</span>, <span class='ident'>Throwable</span> <span class='ident'>nestedException</span><span class='operator'>)</span> <span class='operator'>{</span>
+
+    <span class='keyword'>super</span><span class='operator'>(</span><span class='ident'>message</span>, <span class='ident'>nestedException</span><span class='operator'>);</span>
+
+  <span class='operator'>}</span>
+
 <span class='operator'>}</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
 <p>Now we define the interface as follows. Note that this is how we <i>should</i>
 have defined it in the first place, so it won't require changes.</p>
-<a name='figure.6'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 6: Using logical exceptions in the customer manager</p><pre class='content'><span class='keyword'>public</span> <span class='keyword'>interface</span> <span class='ident'>CustomerManager</span> <span class='operator'>{</span>
-  <span class='keyword'>public</span> <span class='ident'>Customer</span>   <span class='ident'>load</span><span class='operator'>(</span><span class='keyword'>int</span> <span class='ident'>id</span><span class='operator'>)</span> <span class='keyword'>throws</span> <span class='ident'>CustomerException</span>, <span class='ident'>NotFoundException</span> <span class='operator'>{</span>
-    <span class='operator'>...</span>
-  <span class='operator'>}</span>
-
-  <span class='keyword'>public</span> <span class='ident'>Customer</span>   <span class='ident'>store</span><span class='operator'>(</span><span class='ident'>Customer</span> <span class='ident'>customer</span><span class='operator'>)</span> <span class='keyword'>throws</span> <span class='ident'>CustomerException</span> <span class='operator'>{</span>
-    <span class='operator'>...</span>
-  <span class='operator'>}</span>
-
-  <span class='operator'>...</span>
+<a name='figure.6'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 6: Using logical exceptions in the customer manager</p><pre class='content'><span class='keyword'>public</span> <span class='keyword'>interface</span> <span class='ident'>CustomerManager</span> <span class='operator'>{</span>
+
+  <span class='keyword'>public</span> <span class='ident'>Customer</span>   <span class='ident'>load</span><span class='operator'>(</span><span class='keyword'>int</span> <span class='ident'>id</span><span class='operator'>)</span> <span class='keyword'>throws</span> <span class='ident'>CustomerException</span>, <span class='ident'>NotFoundException</span> <span class='operator'>{</span>
+
+    <span class='operator'>...</span>
+
+  <span class='operator'>}</span>
+
+
+
+  <span class='keyword'>public</span> <span class='ident'>Customer</span>   <span class='ident'>store</span><span class='operator'>(</span><span class='ident'>Customer</span> <span class='ident'>customer</span><span class='operator'>)</span> <span class='keyword'>throws</span> <span class='ident'>CustomerException</span> <span class='operator'>{</span>
+
+    <span class='operator'>...</span>
+
+  <span class='operator'>}</span>
+
+
+
+  <span class='operator'>...</span>
+
 <span class='operator'>}</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
 <p>Now the interface is <i>totally generic</i>, with respect to how we store the 
 data! A sample JDBC implementation might look like:</p>
-<a name='figure.7'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 7: Using logical exceptions in the JDBC-based customer manager</p><pre class='content'><span class='keyword'>public</span> <span class='keyword'>class</span> <span class='ident'>CustomerManagerUsingJDBC</span> <span class='keyword'>implements</span> <span class='ident'>CustomerManager</span> <span class='operator'>{</span>
-  <span class='keyword'>public</span> <span class='ident'>Customer</span>   <span class='ident'>load</span><span class='operator'>(</span><span class='keyword'>int</span> <span class='ident'>id</span><span class='operator'>)</span> <span class='keyword'>throws</span> <span class='ident'>CustomerException</span>, <span class='ident'>NotFoundException</span> <span class='operator'>{</span>
-    <span class='keyword'>try</span> <span class='operator'>{</span>
-      <span class='comment'>// JDBC to try to fetch data</span>
-      <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>resultSetIsEmpty</span><span class='operator'>)</span>
-        <span class='keyword'>throw</span> <span class='keyword'>new</span> <span class='ident'>NotFoundException</span><span class='operator'>(</span><span class='string'>"Customer "</span> <span class='operator'>+</span> <span class='ident'>id</span> <span class='operator'>+</span> <span class='string'>" not found"</span>, <span class='ident'>null</span><span class='operator'>);</span>
-    <span class='operator'>}</span>
-    <span class='keyword'>catch</span><span class='operator'>(</span><span class='ident'>NotFoundException</span> <span class='ident'>e</span><span class='operator'>)</span> <span class='operator'>{</span>
-      <span class='keyword'>throw</span> <span class='ident'>e</span><span class='operator'>;</span>
-    <span class='operator'>}</span>
-    <span class='keyword'>catch</span><span class='operator'>(</span><span class='ident'>SQLException</span> <span class='ident'>e</span><span class='operator'>)</span> <span class='operator'>{</span>
-      <span class='keyword'>throw</span> <span class='keyword'>new</span> <span class='ident'>CustomerException</span><span class='operator'>(</span><span class='string'>"oops!"</span>, <span class='ident'>e</span><span class='operator'>);</span>
-    <span class='operator'>}</span>
-    <span class='operator'>...</span>
-  <span class='operator'>}</span>
-
-  <span class='operator'>...</span>
+<a name='figure.7'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 7: Using logical exceptions in the JDBC-based customer manager</p><pre class='content'><span class='keyword'>public</span> <span class='keyword'>class</span> <span class='ident'>CustomerManagerUsingJDBC</span> <span class='keyword'>implements</span> <span class='ident'>CustomerManager</span> <span class='operator'>{</span>
+
+  <span class='keyword'>public</span> <span class='ident'>Customer</span>   <span class='ident'>load</span><span class='operator'>(</span><span class='keyword'>int</span> <span class='ident'>id</span><span class='operator'>)</span> <span class='keyword'>throws</span> <span class='ident'>CustomerException</span>, <span class='ident'>NotFoundException</span> <span class='operator'>{</span>
+
+    <span class='keyword'>try</span> <span class='operator'>{</span>
+
+      <span class='comment'>// JDBC to try to fetch data</span>
+
+      <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>resultSetIsEmpty</span><span class='operator'>)</span>
+
+        <span class='keyword'>throw</span> <span class='keyword'>new</span> <span class='ident'>NotFoundException</span><span class='operator'>(</span><span class='string'>"Customer "</span> <span class='operator'>+</span> <span class='ident'>id</span> <span class='operator'>+</span> <span class='string'>" not found"</span>, <span class='ident'>null</span><span class='operator'>);</span>
+
+    <span class='operator'>}</span>
+
+    <span class='keyword'>catch</span><span class='operator'>(</span><span class='ident'>NotFoundException</span> <span class='ident'>e</span><span class='operator'>)</span> <span class='operator'>{</span>
+
+      <span class='keyword'>throw</span> <span class='ident'>e</span><span class='operator'>;</span>
+
+    <span class='operator'>}</span>
+
+    <span class='keyword'>catch</span><span class='operator'>(</span><span class='ident'>SQLException</span> <span class='ident'>e</span><span class='operator'>)</span> <span class='operator'>{</span>
+
+      <span class='keyword'>throw</span> <span class='keyword'>new</span> <span class='ident'>CustomerException</span><span class='operator'>(</span><span class='string'>"oops!"</span>, <span class='ident'>e</span><span class='operator'>);</span>
+
+    <span class='operator'>}</span>
+
+    <span class='operator'>...</span>
+
+  <span class='operator'>}</span>
+
+
+
+  <span class='operator'>...</span>
+
 <span class='operator'>}</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
 <p>The idea is to catch the specific exception and wrap it in an application 
 exception. This allows the business logic to worry about the <i>concept</i> of 
@@ -343,41 +433,73 @@ interfaces of EJBs. It should use <i>your application interfaces!</i></p>
 <h3>Entity Beans</h3>
 <p>Entity beans are really just another way to store data.</p>
 <p>Start with our interfaces again:</p>
-<a name='figure.8'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 8: Exceptions in the customer</p><pre class='content'><span class='keyword'>public</span> <span class='keyword'>interface</span> <span class='ident'>Customer</span> <span class='operator'>{</span>
-  <span class='keyword'>public</span> <span class='ident'>String</span> <span class='ident'>getName</span><span class='operator'>()</span>          <span class='keyword'>throws</span> <span class='ident'>CustomerException</span><span class='operator'>;</span>
-  <span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>setName</span><span class='operator'>(</span><span class='ident'>String</span> <span class='ident'>name</span><span class='operator'>)</span> <span class='keyword'>throws</span> <span class='ident'>CustomerException</span><span class='operator'>;</span>
-  <span class='operator'>...</span>
-<span class='operator'>}</span>
-
-<span class='keyword'>public</span> <span class='keyword'>interface</span> <span class='ident'>CustomerManager</span> <span class='operator'>{</span>
-  <span class='keyword'>public</span> <span class='ident'>Customer</span>   <span class='ident'>load</span><span class='operator'>(</span><span class='keyword'>int</span> <span class='ident'>id</span><span class='operator'>)</span>
-                      <span class='keyword'>throws</span> <span class='ident'>CustomerException</span>, <span class='ident'>NotFoundException</span><span class='operator'>;</span>
-  <span class='keyword'>public</span> <span class='ident'>Customer</span>   <span class='ident'>store</span><span class='operator'>(</span><span class='ident'>Customer</span> <span class='ident'>customer</span><span class='operator'>)</span> 
-                      <span class='keyword'>throws</span> <span class='ident'>CustomerException</span><span class='operator'>;</span>
-  <span class='keyword'>public</span> <span class='ident'>Customer</span><span class='operator'>[]</span> <span class='ident'>findByName</span><span class='operator'>(</span><span class='ident'>String</span> <span class='ident'>namePattern</span><span class='operator'>)</span> 
-                      <span class='keyword'>throws</span> <span class='ident'>CustomerException</span>, <span class='ident'>NotFoundException</span><span class='operator'>;</span>
-  <span class='keyword'>public</span> <span class='ident'>Customer</span>   <span class='ident'>createCustomer</span><span class='operator'>(</span><span class='ident'>String</span> <span class='ident'>name</span>, <span class='keyword'>float</span> <span class='ident'>creditLimit</span><span class='operator'>)</span> 
-                      <span class='keyword'>throws</span> <span class='ident'>CustomerException</span><span class='operator'>;</span>
-  <span class='keyword'>public</span> <span class='keyword'>void</span>       <span class='ident'>deleteCustomer</span><span class='operator'>(</span><span class='ident'>Customer</span> <span class='ident'>customer</span><span class='operator'>)</span> 
-                      <span class='keyword'>throws</span> <span class='ident'>CustomerException</span><span class='operator'>;</span>
+<a name='figure.8'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 8: Exceptions in the customer</p><pre class='content'><span class='keyword'>public</span> <span class='keyword'>interface</span> <span class='ident'>Customer</span> <span class='operator'>{</span>
+
+  <span class='keyword'>public</span> <span class='ident'>String</span> <span class='ident'>getName</span><span class='operator'>()</span>          <span class='keyword'>throws</span> <span class='ident'>CustomerException</span><span class='operator'>;</span>
+
+  <span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>setName</span><span class='operator'>(</span><span class='ident'>String</span> <span class='ident'>name</span><span class='operator'>)</span> <span class='keyword'>throws</span> <span class='ident'>CustomerException</span><span class='operator'>;</span>
+
+  <span class='operator'>...</span>
+
+<span class='operator'>}</span>
+
+
+
+<span class='keyword'>public</span> <span class='keyword'>interface</span> <span class='ident'>CustomerManager</span> <span class='operator'>{</span>
+
+  <span class='keyword'>public</span> <span class='ident'>Customer</span>   <span class='ident'>load</span><span class='operator'>(</span><span class='keyword'>int</span> <span class='ident'>id</span><span class='operator'>)</span>
+
+                      <span class='keyword'>throws</span> <span class='ident'>CustomerException</span>, <span class='ident'>NotFoundException</span><span class='operator'>;</span>
+
+  <span class='keyword'>public</span> <span class='ident'>Customer</span>   <span class='ident'>store</span><span class='operator'>(</span><span class='ident'>Customer</span> <span class='ident'>customer</span><span class='operator'>)</span> 
+
+                      <span class='keyword'>throws</span> <span class='ident'>CustomerException</span><span class='operator'>;</span>
+
+  <span class='keyword'>public</span> <span class='ident'>Customer</span><span class='operator'>[]</span> <span class='ident'>findByName</span><span class='operator'>(</span><span class='ident'>String</span> <span class='ident'>namePattern</span><span class='operator'>)</span> 
+
+                      <span class='keyword'>throws</span> <span class='ident'>CustomerException</span>, <span class='ident'>NotFoundException</span><span class='operator'>;</span>
+
+  <span class='keyword'>public</span> <span class='ident'>Customer</span>   <span class='ident'>createCustomer</span><span class='operator'>(</span><span class='ident'>String</span> <span class='ident'>name</span>, <span class='keyword'>float</span> <span class='ident'>creditLimit</span><span class='operator'>)</span> 
+
+                      <span class='keyword'>throws</span> <span class='ident'>CustomerException</span><span class='operator'>;</span>
+
+  <span class='keyword'>public</span> <span class='keyword'>void</span>       <span class='ident'>deleteCustomer</span><span class='operator'>(</span><span class='ident'>Customer</span> <span class='ident'>customer</span><span class='operator'>)</span> 
+
+                      <span class='keyword'>throws</span> <span class='ident'>CustomerException</span><span class='operator'>;</span>
+
 <span class='operator'>}</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
 <p>The key here is the cooperation between the implementations of Customer and 
 CustomerManager. First, our Customer implementation might look like:</p>
-<a name='figure.9'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 9: Entity bean implementation of customer</p><pre class='content'><span class='keyword'>public</span> <span class='keyword'>class</span> <span class='ident'>CustomerAsEntityBean</span> <span class='keyword'>implements</span> <span class='ident'>Customer</span> <span class='operator'>{</span>
-  <span class='keyword'>private</span> <span class='ident'>EntityCustomer</span> <span class='ident'>entityCustomer</span><span class='operator'>;</span>
-  <span class='keyword'>public</span> <span class='ident'>CustomerAsEntityBean</span><span class='operator'>(</span><span class='ident'>EntityCustomer</span> <span class='ident'>entityCustomer</span><span class='operator'>)</span> <span class='operator'>{</span>
-    <span class='keyword'>this</span><span class='operator'>.</span><span class='ident'>entityCustomer</span> <span class='operator'>=</span> <span class='ident'>entityCustomer</span><span class='operator'>;</span>
-  <span class='operator'>}</span>
-
-  <span class='keyword'>public</span> <span class='ident'>String</span> <span class='ident'>getName</span><span class='operator'>()</span> <span class='keyword'>throws</span> <span class='ident'>CustomerException</span> <span class='operator'>{</span>
-    <span class='keyword'>try</span> <span class='operator'>{</span>
-      <span class='keyword'>return</span> <span class='ident'>entityCustomer</span><span class='operator'>.</span><span class='ident'>getName</span><span class='operator'>();</span>
-    <span class='operator'>}</span>
-    <span class='keyword'>catch</span><span class='operator'>(</span><span class='ident'>Exception</span> <span class='ident'>e</span><span class='operator'>)</span> <span class='operator'>{</span> <span class='comment'>// EJBException, RemoteException</span>
-      <span class='keyword'>throw</span> <span class='keyword'>new</span> <span class='ident'>CustomerException</span><span class='operator'>(</span><span class='ident'>e</span><span class='operator'>);</span>
-    <span class='operator'>}</span>
-  <span class='operator'>}</span>
-  <span class='operator'>...</span>
+<a name='figure.9'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 9: Entity bean implementation of customer</p><pre class='content'><span class='keyword'>public</span> <span class='keyword'>class</span> <span class='ident'>CustomerAsEntityBean</span> <span class='keyword'>implements</span> <span class='ident'>Customer</span> <span class='operator'>{</span>
+
+  <span class='keyword'>private</span> <span class='ident'>EntityCustomer</span> <span class='ident'>entityCustomer</span><span class='operator'>;</span>
+
+  <span class='keyword'>public</span> <span class='ident'>CustomerAsEntityBean</span><span class='operator'>(</span><span class='ident'>EntityCustomer</span> <span class='ident'>entityCustomer</span><span class='operator'>)</span> <span class='operator'>{</span>
+
+    <span class='keyword'>this</span><span class='operator'>.</span><span class='ident'>entityCustomer</span> <span class='operator'>=</span> <span class='ident'>entityCustomer</span><span class='operator'>;</span>
+
+  <span class='operator'>}</span>
+
+
+
+  <span class='keyword'>public</span> <span class='ident'>String</span> <span class='ident'>getName</span><span class='operator'>()</span> <span class='keyword'>throws</span> <span class='ident'>CustomerException</span> <span class='operator'>{</span>
+
+    <span class='keyword'>try</span> <span class='operator'>{</span>
+
+      <span class='keyword'>return</span> <span class='ident'>entityCustomer</span><span class='operator'>.</span><span class='ident'>getName</span><span class='operator'>();</span>
+
+    <span class='operator'>}</span>
+
+    <span class='keyword'>catch</span><span class='operator'>(</span><span class='ident'>Exception</span> <span class='ident'>e</span><span class='operator'>)</span> <span class='operator'>{</span> <span class='comment'>// EJBException, RemoteException</span>
+
+      <span class='keyword'>throw</span> <span class='keyword'>new</span> <span class='ident'>CustomerException</span><span class='operator'>(</span><span class='ident'>e</span><span class='operator'>);</span>
+
+    <span class='operator'>}</span>
+
+  <span class='operator'>}</span>
+
+  <span class='operator'>...</span>
+
 <span class='operator'>}</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
 <p>This customer is a <i>proxy</i> for our Entity Bean. Note that all requests 
 are merely passed through to the entity bean.</p>
@@ -405,23 +527,40 @@ application (other than the data manager)</i>. All the rest of your application
 cares about is that it can ask a Customer for pieces of information and deal 
 with problems accessing that data.</p>
 <p>The final piece necessary to make this work is a data manager:</p>
-<a name='figure.10'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 10: New EJB-based customer manager</p><pre class='content'><span class='keyword'>public</span> <span class='keyword'>class</span> <span class='ident'>CustomerManagerUsingEJB</span> <span class='keyword'>interface</span> <span class='ident'>CustomerManager</span> <span class='operator'>{</span>
-  <span class='keyword'>public</span> <span class='ident'>Customer</span>   <span class='ident'>load</span><span class='operator'>(</span><span class='keyword'>int</span> <span class='ident'>id</span><span class='operator'>)</span>
-                      <span class='keyword'>throws</span> <span class='ident'>CustomerException</span>, <span class='ident'>NotFoundException</span> <span class='operator'>{</span>
-    
-    <span class='keyword'>try</span> <span class='operator'>{</span>
-      <span class='comment'>// set up naming context</span>
-      <span class='comment'>// grab home interface for entity</span>
-      <span class='comment'>// find entity (store as entityCustomer)</span>
-      <span class='keyword'>return</span> <span class='keyword'>new</span> <span class='ident'>CustomerAsEntityBean</span><span class='operator'>(</span><span class='ident'>entityCustomer</span><span class='operator'>);</span>
-    <span class='operator'>}</span>
-    <span class='keyword'>catch</span><span class='operator'>(</span><span class='ident'>FinderException</span> <span class='ident'>e</span><span class='operator'>)</span> <span class='operator'>{</span> 
-      <span class='keyword'>throw</span> <span class='keyword'>new</span> <span class='ident'>NotFoundException</span><span class='operator'>(</span><span class='string'>"Customer "</span> <span class='operator'>+</span> <span class='ident'>id</span> <span class='operator'>+</span> <span class='string'>" not found"</span>, <span class='ident'>e</span><span class='operator'>);</span>
-    <span class='operator'>}</span>
-    <span class='keyword'>catch</span><span class='operator'>(</span><span class='ident'>Exception</span> <span class='ident'>e</span><span class='operator'>)</span> <span class='operator'>{</span> <span class='comment'>//EJBException, RemoteException</span>
-    <span class='operator'>}</span>
-  <span class='operator'>}</span>
-  <span class='operator'>...</span>
+<a name='figure.10'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 10: New EJB-based customer manager</p><pre class='content'><span class='keyword'>public</span> <span class='keyword'>class</span> <span class='ident'>CustomerManagerUsingEJB</span> <span class='keyword'>interface</span> <span class='ident'>CustomerManager</span> <span class='operator'>{</span>
+
+  <span class='keyword'>public</span> <span class='ident'>Customer</span>   <span class='ident'>load</span><span class='operator'>(</span><span class='keyword'>int</span> <span class='ident'>id</span><span class='operator'>)</span>
+
+                      <span class='keyword'>throws</span> <span class='ident'>CustomerException</span>, <span class='ident'>NotFoundException</span> <span class='operator'>{</span>
+
+    
+
+    <span class='keyword'>try</span> <span class='operator'>{</span>
+
+      <span class='comment'>// set up naming context</span>
+
+      <span class='comment'>// grab home interface for entity</span>
+
+      <span class='comment'>// find entity (store as entityCustomer)</span>
+
+      <span class='keyword'>return</span> <span class='keyword'>new</span> <span class='ident'>CustomerAsEntityBean</span><span class='operator'>(</span><span class='ident'>entityCustomer</span><span class='operator'>);</span>
+
+    <span class='operator'>}</span>
+
+    <span class='keyword'>catch</span><span class='operator'>(</span><span class='ident'>FinderException</span> <span class='ident'>e</span><span class='operator'>)</span> <span class='operator'>{</span> 
+
+      <span class='keyword'>throw</span> <span class='keyword'>new</span> <span class='ident'>NotFoundException</span><span class='operator'>(</span><span class='string'>"Customer "</span> <span class='operator'>+</span> <span class='ident'>id</span> <span class='operator'>+</span> <span class='string'>" not found"</span>, <span class='ident'>e</span><span class='operator'>);</span>
+
+    <span class='operator'>}</span>
+
+    <span class='keyword'>catch</span><span class='operator'>(</span><span class='ident'>Exception</span> <span class='ident'>e</span><span class='operator'>)</span> <span class='operator'>{</span> <span class='comment'>//EJBException, RemoteException</span>
+
+    <span class='operator'>}</span>
+
+  <span class='operator'>}</span>
+
+  <span class='operator'>...</span>
+
 <span class='operator'>}</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
 <p>Now all your business logic cares about is that it can ask <i>some</i>
 CustomerManager for <i>some</i> Customer. It doesn't need to even know that EJB 
@@ -434,110 +573,143 @@ was involved!</p>
 a Factory class. We'll use the Factory Method pattern (see <i>Design Patterns</i>
 by Gamma et al) to implement this.</p>
 <p>A simple factory might look as follows:</p>
-<a name='figure.11'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 11: Sample application factory</p><pre class='content'><span class='keyword'>public</span> <span class='keyword'>class</span> <span class='ident'>MyApplicationFactory</span> <span class='operator'>{</span>
-  <span class='keyword'>private</span> <span class='keyword'>static</span> <span class='ident'>CustomerManager</span> <span class='ident'>customerManager</span> <span class='operator'>=</span>
-                   <span class='keyword'>new</span> <span class='ident'>CustomerManagerUsingEJB</span><span class='operator'>();</span>
-  <span class='keyword'>private</span> <span class='keyword'>static</span> <span class='ident'>ApplicationLogic</span> <span class='ident'>applicationLogic</span> <span class='operator'>=</span>
-                   <span class='keyword'>new</span> <span class='ident'>ApplicationLogicAsSessionBean</span><span class='operator'>();</span>
-
-  <span class='keyword'>public</span> <span class='keyword'>static</span> <span class='ident'>CustomerManager</span> <span class='ident'>getCustomerManager</span><span class='operator'>()</span> <span class='operator'>{</span>
-    <span class='keyword'>return</span> <span class='ident'>customerManager</span><span class='operator'>;</span>
-  <span class='operator'>}</span>
-  
-  <span class='keyword'>public</span> <span class='keyword'>static</span> <span class='ident'>ApplicationLogic</span> <span class='ident'>getLogic</span><span class='operator'>()</span> <span class='operator'>{</span>
-    <span class='keyword'>return</span> <span class='ident'>applicationLogic</span><span class='operator'>;</span>
-  <span class='operator'>}</span>
+<a name='figure.11'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 11: Sample application factory</p><pre class='content'><span class='keyword'>public</span> <span class='keyword'>class</span> <span class='ident'>MyApplicationFactory</span> <span class='operator'>{</span>
+
+  <span class='keyword'>private</span> <span class='keyword'>static</span> <span class='ident'>CustomerManager</span> <span class='ident'>customerManager</span> <span class='operator'>=</span>
+
+                   <span class='keyword'>new</span> <span class='ident'>CustomerManagerUsingEJB</span><span class='operator'>();</span>
+
+  <span class='keyword'>private</span> <span class='keyword'>static</span> <span class='ident'>ApplicationLogic</span> <span class='ident'>applicationLogic</span> <span class='operator'>=</span>
+
+                   <span class='keyword'>new</span> <span class='ident'>ApplicationLogicAsSessionBean</span><span class='operator'>();</span>
+
+
+
+  <span class='keyword'>public</span> <span class='keyword'>static</span> <span class='ident'>CustomerManager</span> <span class='ident'>getCustomerManager</span><span class='operator'>()</span> <span class='operator'>{</span>
+
+    <span class='keyword'>return</span> <span class='ident'>customerManager</span><span class='operator'>;</span>
+
+  <span class='operator'>}</span>
+
+  
+
+  <span class='keyword'>public</span> <span class='keyword'>static</span> <span class='ident'>ApplicationLogic</span> <span class='ident'>getLogic</span><span class='operator'>()</span> <span class='operator'>{</span>
+
+    <span class='keyword'>return</span> <span class='ident'>applicationLogic</span><span class='operator'>;</span>
+
+  <span class='operator'>}</span>
+
 <span class='operator'>}</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
 <p>You could even make things more flexible, keeping the names of the actual 
 classes to use in a property file (I'll eventually provoide much more detail on 
 how this works, and better error handling)</p>
-<a name='figure.12'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 12: Property-file-based application factory</p><pre class='content'><span class='keyword'>public</span> <span class='keyword'>class</span> <span class='ident'>MyApplicationFactory</span> <span class='operator'>{</span>
-  <span class='keyword'>private</span> <span class='keyword'>static</span> <span class='ident'>CustomerManager</span> <span class='ident'>customerManager</span><span class='operator'>;</span>
-  <span class='keyword'>private</span> <span class='keyword'>static</span> <span class='ident'>ApplicationLogic</span> <span class='ident'>applicationLogic</span><span class='operator'>;</span>
-
-  <span class='comment'>// note: needs **much** better error handling...</span>
-  <span class='comment'>//       this is just to give the idea... </span>
-  <span class='keyword'>static</span> <span class='operator'>{</span>
-    <span class='keyword'>try</span> <span class='operator'>{</span>
-      <span class='ident'>InputStream</span> <span class='ident'>in</span> <span class='operator'>=</span> 
-        <span class='ident'>MyApplicationFactory</span><span class='operator'>.</span><span class='ident'>getResourceAsStream</span><span class='operator'>(</span>
-                               <span class='string'>"application.properties"</span><span class='operator'>);</span>
-      <span class='ident'>Properties</span> <span class='ident'>p</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>Properties</span><span class='operator'>();</span>
-      <span class='ident'>p</span><span class='operator'>.</span><span class='ident'>load</span><span class='operator'>(</span><span class='ident'>in</span><span class='operator'>);</span>
-      <span class='ident'>in</span><span class='operator'>.</span><span class='ident'>close</span><span class='operator'>();</span>
-      <span class='ident'>customerManager</span> <span class='operator'>=</span> 
-        <span class='ident'>Class</span><span class='operator'>.</span><span class='ident'>forName</span><span class='operator'>(</span><span class='ident'>p</span><span class='operator'>.</span><span class='ident'>getProperty</span><span class='operator'>(</span><span class='string'>"manager.customer"</span><span class='operator'>)).</span>
-              <span class='ident'>newInstance</span><span class='operator'>();</span>
-      <span class='ident'>applicationLogic</span> <span class='operator'>=</span> 
-        <span class='ident'>Class</span><span class='operator'>.</span><span class='ident'>forName</span><span class='operator'>(</span><span class='ident'>p</span><span class='operator'>.</span><span class='ident'>getProperty</span><span class='operator'>(</span><span class='string'>"logic.application"</span><span class='operator'>)).</span>
-              <span class='ident'>newInstance</span><span class='operator'>();</span>
-    <span class='operator'>}</span>
-    <span class='keyword'>catch</span><span class='operator'>(</span><span class='ident'>Exception</span> <span class='ident'>e</span><span class='operator'>)</span> <span class='operator'>{</span>
-      <span class='comment'>// report error</span>
-    <span class='operator'>}</span>
-  <span class='operator'>}</span>
- 
-  <span class='keyword'>public</span> <span class='keyword'>static</span> <span class='ident'>CustomerManager</span> <span class='ident'>getCustomerManager</span><span class='operator'>()</span> <span class='operator'>{</span>
-    <span class='keyword'>return</span> <span class='ident'>customerManager</span><span class='operator'>;</span>
-  <span class='operator'>}</span>
-  
-  <span class='keyword'>public</span> <span class='keyword'>static</span> <span class='ident'>ApplicationLogic</span> <span class='ident'>getLogic</span><span class='operator'>()</span> <span class='operator'>{</span>
-    <span class='keyword'>return</span> <span class='ident'>applicationLogic</span><span class='operator'>;</span>
-  <span class='operator'>}</span>
+<a name='figure.12'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 12: Property-file-based application factory</p><pre class='content'><span class='keyword'>public</span> <span class='keyword'>class</span> <span class='ident'>MyApplicationFactory</span> <span class='operator'>{</span>
+
+  <span class='keyword'>private</span> <span class='keyword'>static</span> <span class='ident'>CustomerManager</span> <span class='ident'>customerManager</span><span class='operator'>;</span>
+
+  <span class='keyword'>private</span> <span class='keyword'>static</span> <span class='ident'>ApplicationLogic</span> <span class='ident'>applicationLogic</span><span class='operator'>;</span>
+
+
+
+  <span class='comment'>// note: needs **much** better error handling...</span>
+
+  <span class='comment'>//       this is just to give the idea... </span>
+
+  <span class='keyword'>static</span> <span class='operator'>{</span>
+
+    <span class='keyword'>try</span> <span class='operator'>{</span>
+
+      <span class='ident'>InputStream</span> <span class='ident'>in</span> <span class='operator'>=</span> 
+
+        <span class='ident'>MyApplicationFactory</span><span class='operator'>.</span><span class='ident'>getResourceAsStream</span><span class='operator'>(</span>
+
+                               <span class='string'>"application.properties"</span><span class='operator'>);</span>
+
+      <span class='ident'>Properties</span> <span class='ident'>p</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>Properties</span><span class='operator'>();</span>
+
+      <span class='ident'>p</span><span class='operator'>.</span><span class='ident'>load</span><span class='operator'>(</span><span class='ident'>in</span><span class='operator'>);</span>
+
+      <span class='ident'>in</span><span class='operator'>.</span><span class='ident'>close</span><span class='operator'>();</span>
+
+      <span class='ident'>customerManager</span> <span class='operator'>=</span> 
+
+        <span class='ident'>Class</span><span class='operator'>.</span><span class='ident'>forName</span><span class='operator'>(</span><span class='ident'>p</span><span class='operator'>.</span><span class='ident'>getProperty</span><span class='operator'>(</span><span class='string'>"manager.customer"</span><span class='operator'>)).</span>
+
+              <span class='ident'>newInstance</span><span class='operator'>();</span>
+
+      <span class='ident'>applicationLogic</span> <span class='operator'>=</span> 
+
+        <span class='ident'>Class</span><span class='operator'>.</span><span class='ident'>forName</span><span class='operator'>(</span><span class='ident'>p</span><span class='operator'>.</span><span class='ident'>getProperty</span><span class='operator'>(</span><span class='string'>"logic.application"</span><span class='operator'>)).</span>
+
+              <span class='ident'>newInstance</span><span class='operator'>();</span>
+
+    <span class='operator'>}</span>
+
+    <span class='keyword'>catch</span><span class='operator'>(</span><span class='ident'>Exception</span> <span class='ident'>e</span><span class='operator'>)</span> <span class='operator'>{</span>
+
+      <span class='comment'>// report error</span>
+
+    <span class='operator'>}</span>
+
+  <span class='operator'>}</span>
+
+ 
+
+  <span class='keyword'>public</span> <span class='keyword'>static</span> <span class='ident'>CustomerManager</span> <span class='ident'>getCustomerManager</span><span class='operator'>()</span> <span class='operator'>{</span>
+
+    <span class='keyword'>return</span> <span class='ident'>customerManager</span><span class='operator'>;</span>
+
+  <span class='operator'>}</span>
+
+  
+
+  <span class='keyword'>public</span> <span class='keyword'>static</span> <span class='ident'>ApplicationLogic</span> <span class='ident'>getLogic</span><span class='operator'>()</span> <span class='operator'>{</span>
+
+    <span class='keyword'>return</span> <span class='ident'>applicationLogic</span><span class='operator'>;</span>
+
+  <span class='operator'>}</span>
+
 <span class='operator'>}</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
 <p>&nbsp;</p>
 <p>(more detail to come, including some simple examples)</p>
 				</a>
-				<!-- #EndEditable "content" -->
-				<div id="footer">
-					<p>&nbsp;</p>
-					<hr/>
-					<p>Copyright &copy; 1996-2009, Scott Stanchfield. All Rights Reserved.<br/>
-					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
-					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
-					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
-					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../images/cssplay_button.png" width="88" /></a></p>
-					<p>
-					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
-					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../images/feed-icon-14x14.png" width="14" />Want 
-					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
-					</p>
-				</div>
-			</div>
-		</div>
-		<div id="bottom"/>
-		<div id="navigation">
-			<ul>
-				<li><a href="../index.html">Home</a></li>
-				<li><a href="index.html">Articles</a></li>
-				<li><a href="../tools/index.html">Tools</a></li>
-				<li><a href="../evaj/index.html">Effective VisualAge for Java</a></li>
-				<li><a href="../eclipse/index.html">Eclipse Tips</a></li>
-				<li><a href="../vaj/index.html">VisualAge Tips</a></li>
-				<!--
-				<li><a href="resume.html">Resume</a></li>
-				-->
-				<li><a href="../publications.html">Publications</a></li>
-			</ul>
-			<p>&nbsp;</p>
-			<div style="margin-left:10px">
-<script type="text/javascript"><!--
-google_ad_client = "pub-1721904981084162";
-/* Homepage Gutter */
-google_ad_slot = "0044274311";
-google_ad_width = 120;
-google_ad_height = 600;
-//-->
-</script>
-<script type="text/javascript"
-src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script>
-</div>
-		</div>
-		<div id="bottomcorner"/>
-		<div id="topcorner"/>
-		</div>
-		<p>&nbsp;</p>
-	</body>
-<!-- #EndTemplate -->
-</html>
+				<!-- #EndEditable "content" -->
+				<div id="footer">
+					<p>&nbsp;</p>
+					<hr/>
+					<p>Copyright &copy; 1996-2013, Scott Stanchfield. All Rights Reserved.<br/>
+					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
+					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
+					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
+					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../images/cssplay_button.png" width="88" /></a></p>
+					<p>
+					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
+					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../images/feed-icon-14x14.png" width="14" />Want 
+					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div id="bottom"/>
+		<div id="navigation">
+			<ul>
+				<li><a href="../index.html">Home</a></li>
+				<li><a href="index.html">Articles</a></li>
+				<li><a href="../tools/index.html">Tools</a></li>
+				<li><a href="../evaj/index.html">Effective VisualAge for Java</a></li>
+				<li><a href="../eclipse/index.html">Eclipse Tips</a></li>
+				<li><a href="../vaj/index.html">VisualAge Tips</a></li>
+				<!--
+				<li><a href="resume.html">Resume</a></li>
+				-->
+				<li><a href="../publications.html">Publications</a></li>
+			</ul>
+			<p>&nbsp;</p>
+		</div>
+		<div id="bottomcorner"/>
+		<div id="topcorner"/>
+		</div>
+		<p>&nbsp;</p>
+	</body>
+<!-- #EndTemplate -->
+</html>

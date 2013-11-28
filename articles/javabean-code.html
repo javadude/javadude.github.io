@@ -1,33 +1,36 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+
 
 <!-- #BeginTemplate "../master.dwt" -->
 
-	<head>
-		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-		<!-- #BeginEditable "doctitle" -->
+	<head>
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+		<!-- #BeginEditable "doctitle" -->
+
 		<title>JavaBeans - Scott Stanchfield</title>
-		<!-- #EndEditable -->
-		<link href="../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
-		<!-- #BeginEditable "head" -->
-		<!-- #EndEditable -->
-		<style type="text/css">
-
-.style1 {
-	vertical-align: middle;
-}
-</style>
-	</head>
-
-	<body>
-		<div id="header">
-			<h1>JavaDude.com</h1>
-			<h4>-- Scott Stanchfield</h4>
-		</div>
-		<div id="content">
-			<div id="topBar">&nbsp;</div>
-			<div id="contentIndent">
-				<!-- #BeginEditable "content" -->
+		<!-- #EndEditable -->
+		<link href="../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
+		<!-- #BeginEditable "head" -->
+		<!-- #EndEditable -->
+		<style type="text/css">
+
+.style1 {
+	vertical-align: middle;
+}
+</style>
+	</head>
+
+	<body>
+		<div id="header">
+			<h1>JavaDude.com</h1>
+			<h4>-- Scott Stanchfield</h4>
+		</div>
+		<div id="content">
+			<div id="topBar">&nbsp;</div>
+			<div id="contentIndent">
+				<!-- #BeginEditable "content" -->
+
 
 <h1>The JavaBean Component Model</h1>
 
@@ -59,8 +62,10 @@
 <h3>Simple Properties</h3>
 <p>Simple properties act like individual bits of data, describing the state of a bean. You define simple properties using sets of methods that match the following patterns:</p>
 <p class='figcap'>Simple property naming patterns</p>
-<pre>public TypeName getPropertyName()
-public boolean isPropertyName()
+<pre>public TypeName getPropertyName()
+
+public boolean isPropertyName()
+
 public void setPropertyName(TypeName value)</pre>
 <p></i>Note: You can only define the isPropertyName() method for boolean properties.</i></p>
 <p>TypeName is the name of a class or primitive type, and PropertyName is the name of the property. The presence of a get or is method defines a readable property. A set method defines a writeable property. The property name is actually a lowercased version of whatever follows the get or set in the method declaration. For example, suppose a bean defines the following method:</p>
@@ -69,10 +74,14 @@ public void setPropertyName(TypeName value)</pre>
 <p>This defines a readable property named eyeColor of type java.awt.Color.</p>
 <p>Note that there can be both a get and is method for a boolean property; the is method is allowed for readability. Normally, you define the get and set methods, but sometimes the get method doesn't read naturally. For example</p>
 <p class='figcap'>Using "is" methods instead of "get"</p>
-<pre>if (list.isEmpty()) {...}
-
-// is more readable than
-
+<pre>if (list.isEmpty()) {...}
+
+
+
+// is more readable than
+
+
+
 if (list.getEmpty()) {...}</pre>
 <p>The beauty of this model is its simplicity. Many programmers already use get and set methods to access their data, so defining properties is no different from their current style.</p>
 <p>A tool that recognizes these get and set methods can present a list of properties to a user, enabling the user to specify property values. The tool generates code to pass the specified values to the set methods.</p>
@@ -81,9 +90,12 @@ if (list.getEmpty()) {...}</pre>
 <p>Indexed properties are an extension of simple properties that allow multiple values for that property. The property acts like an array, even if there is no actual data for that property or if the data is stored in a non-array structure.</p>
 <p>You define indexed properties using four methods:</p>
 <p class='figcap'>Indexed property naming patterns</p>
-<pre>public TypeName[] getPropertyName()
-public TypeName getPropertyName(int index)
-public void setPropertyName(TypeName[] value)
+<pre>public TypeName[] getPropertyName()
+
+public TypeName getPropertyName(int index)
+
+public void setPropertyName(TypeName[] value)
+
 public void setPropertyName(int index, TypeName value)</pre>
 <p>Recognizing these methods, a bean-builder tool can present a (possibly editable) list of values for setting the property.</p>
 <h3>Bound and Constrained Properties</h3>
@@ -94,14 +106,22 @@ public void setPropertyName(int index, TypeName value)</pre>
 <p>TODO: WRITE NOTE ABOUT THIS BEING THE OBSERVER PATTERN</p>
 <p>A bound property fires a PropertyChangeEvent (defined in package java.beans) when its state changes. PropertyChangeListeners register themselves with the bean to receive notification of those changes. The java.beans package provides support for this processing through its PropertyChangeSupport class. For example, consider a simple property phoneNumber, defined as follows:</p>
 <p class='figcap'>A readable/writeable "phoneNumber" property</p>
-<pre>private String phoneNumber;
-
-public void setPhoneNumber(String phoneNumber) {
-  this.phoneNumber = phoneNumber;
-}
-
-public String getPhoneNumber() {
-  return phoneNumber;
+<pre>private String phoneNumber;
+
+
+
+public void setPhoneNumber(String phoneNumber) {
+
+  this.phoneNumber = phoneNumber;
+
+}
+
+
+
+public String getPhoneNumber() {
+
+  return phoneNumber;
+
 }</pre>
 <p><i>Note: Sometimes the statement</i></p>
 <p class='figcap'>Assigning the field</p>
@@ -114,130 +134,246 @@ public String getPhoneNumber() {
 </ul>
 <p>Because the code to perform these functions is identical for every bound property, we can delegate these functions to an instance of PropertyChangeSupport. A resulting Person bean containing the phoneNumber property could look as follows:</p>
 <p class='figcap'>Binding the "phoneNumber" property</p>
-<pre>package effectivevaj.bean.intro.boundproperty;
-
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
-import java.io.Serializable;
-
-/**
- * A sample Person bean that defines a bound property
- */
-public class Person implements Serializable {
-  ``// Create a PropertyChangeSupport instance``
-  ``//   to which we'll delegate our bound-property``
-  ``//   functionality``
-  ``private transient PropertyChangeSupport pcs =``
-          ``new PropertyChangeSupport(this);``
-
-  ``/** Let classes listen for property changes */``
-  ``public void addPropertyChangeListener(PropertyChangeListener l) {``
-    ``pcs.addPropertyChangeListener(l);``
-  ``}``
-
-  ``/** Let classes stop listening to property changes */``
-  ``public void removePropertyChangeListener(PropertyChangeListener l) {``
-    ``pcs.removePropertyChangeListener(l);``
-  ``}``
-
-  // Define a read/write/bound property named phoneNumber
-  private String phoneNumber;
-
-  /** Define property phoneNumber as readable String */
-  public String getPhoneNumber() {
-    return phoneNumber;
-  }
-  
-  /** Define property phoneNumber as writeable String
-   *  phoneNumber is bound, firing PropertyChangeEvents
-   *  whenever its value changes
-   */
-  public void setPhoneNumber(String phoneNumber) {
-    ``// save the old value``
-    ``String oldNumber = this.phoneNumber;``
-    // set the new value
-    this.phoneNumber = phoneNumber;
-    ``// report the change``
-    ``pcs.firePropertyChange("phoneNumber", oldNumber, phoneNumber);``
-  }
+<pre>package effectivevaj.bean.intro.boundproperty;
+
+
+
+import java.beans.PropertyChangeEvent;
+
+import java.beans.PropertyChangeListener;
+
+import java.beans.PropertyChangeSupport;
+
+import java.io.Serializable;
+
+
+
+/**
+
+ * A sample Person bean that defines a bound property
+
+ */
+
+public class Person implements Serializable {
+
+  ``// Create a PropertyChangeSupport instance``
+
+  ``//   to which we'll delegate our bound-property``
+
+  ``//   functionality``
+
+  ``private transient PropertyChangeSupport pcs =``
+
+          ``new PropertyChangeSupport(this);``
+
+
+
+  ``/** Let classes listen for property changes */``
+
+  ``public void addPropertyChangeListener(PropertyChangeListener l) {``
+
+    ``pcs.addPropertyChangeListener(l);``
+
+  ``}``
+
+
+
+  ``/** Let classes stop listening to property changes */``
+
+  ``public void removePropertyChangeListener(PropertyChangeListener l) {``
+
+    ``pcs.removePropertyChangeListener(l);``
+
+  ``}``
+
+
+
+  // Define a read/write/bound property named phoneNumber
+
+  private String phoneNumber;
+
+
+
+  /** Define property phoneNumber as readable String */
+
+  public String getPhoneNumber() {
+
+    return phoneNumber;
+
+  }
+
+  
+
+  /** Define property phoneNumber as writeable String
+
+   *  phoneNumber is bound, firing PropertyChangeEvents
+
+   *  whenever its value changes
+
+   */
+
+  public void setPhoneNumber(String phoneNumber) {
+
+    ``// save the old value``
+
+    ``String oldNumber = this.phoneNumber;``
+
+    // set the new value
+
+    this.phoneNumber = phoneNumber;
+
+    ``// report the change``
+
+    ``pcs.firePropertyChange("phoneNumber", oldNumber, phoneNumber);``
+
+  }
+
 }</pre>
 The highlighted text in the previous example is the extra code needed to bind the phoneNumber property. Note that many tools, such as VisualAge for Java, can generate all of this code for you.</p>
 <p>After binding phoneNumber, we can keep the telephone numbers of two people synchronized by creating listeners. For example, suppose we have a married couple, Scott and Nancy, who share a telephone number. When one spouse changes the telephone number, the telephone number should change for the other person as well.</p>
 <p>The following code acts as glue between two Person beans, scott and nancy. We create event listeners (using anonymous inner classes) to listen for changes to the phoneNumber property of each bean. Whenever we hear that the phoneNumber of scott changes, we set the phoneNumber of nancy. We provide the same type of handling for changes to the phoneNumber in nancy as well.</p>
 <p class='figcap'>Synchronizing the phone numbers of two Person beans</p>
-<pre>package effectivevaj.bean.intro.boundproperty;
-
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-
-/**
- * Test the Person bean's bound phone number property
- */
-public class PhoneSync {
-  /**
-   *  Test the bound phoneNumber of the Person bean
-   *  Create two people that share a phone number and
-   *    create property-change listeners that will keep
-   *    their phone numbers synchronized
-   */
-  public static void main(String[] args) {
-    // create two people who share a phone number
-    final Person scott = new Person();
-    final Person nancy = new Person();
-
-    // when scott's phone changes, change nancy's
-    scott.addPropertyChangeListener(
-      new PropertyChangeListener() {
-        public void propertyChange(PropertyChangeEvent e) {
-          if (e.getPropertyName().equals("phoneNumber"))
-            nancy.setPhoneNumber(scott.getPhoneNumber());
-        }
-      }
-    );
-
-    // when nancy's phone changes, change scott's
-    nancy.addPropertyChangeListener(
-      new PropertyChangeListener() {
-        public void propertyChange(PropertyChangeEvent e) {
-          if (e.getPropertyName().equals("phoneNumber"))
-            scott.setPhoneNumber(nancy.getPhoneNumber());
-        }
-      }
-    );
-
-    // Run a little test...
-    System.out.println("Initial phone numbers");
-    System.out.println("Scott: "  + scott.getPhoneNumber());
-    System.out.println("Nancy: "  + scott.getPhoneNumber());
-    System.out.println();
-
-    System.out.println("Set Scott's number to 555-1212");
-    scott.setPhoneNumber("555-1212");
-
-    System.out.println("Scott: "  + scott.getPhoneNumber());
-    System.out.println("Nancy: "  + scott.getPhoneNumber());
-    System.out.println();
-
-    System.out.println("Set Nancy's number to 555-7777");
-    nancy.setPhoneNumber("555-7777");
-
-    System.out.println("Scott: "  + scott.getPhoneNumber());
-    System.out.println("Nancy: "  + scott.getPhoneNumber());
-  }
+<pre>package effectivevaj.bean.intro.boundproperty;
+
+
+
+import java.beans.PropertyChangeEvent;
+
+import java.beans.PropertyChangeListener;
+
+
+
+/**
+
+ * Test the Person bean's bound phone number property
+
+ */
+
+public class PhoneSync {
+
+  /**
+
+   *  Test the bound phoneNumber of the Person bean
+
+   *  Create two people that share a phone number and
+
+   *    create property-change listeners that will keep
+
+   *    their phone numbers synchronized
+
+   */
+
+  public static void main(String[] args) {
+
+    // create two people who share a phone number
+
+    final Person scott = new Person();
+
+    final Person nancy = new Person();
+
+
+
+    // when scott's phone changes, change nancy's
+
+    scott.addPropertyChangeListener(
+
+      new PropertyChangeListener() {
+
+        public void propertyChange(PropertyChangeEvent e) {
+
+          if (e.getPropertyName().equals("phoneNumber"))
+
+            nancy.setPhoneNumber(scott.getPhoneNumber());
+
+        }
+
+      }
+
+    );
+
+
+
+    // when nancy's phone changes, change scott's
+
+    nancy.addPropertyChangeListener(
+
+      new PropertyChangeListener() {
+
+        public void propertyChange(PropertyChangeEvent e) {
+
+          if (e.getPropertyName().equals("phoneNumber"))
+
+            scott.setPhoneNumber(nancy.getPhoneNumber());
+
+        }
+
+      }
+
+    );
+
+
+
+    // Run a little test...
+
+    System.out.println("Initial phone numbers");
+
+    System.out.println("Scott: "  + scott.getPhoneNumber());
+
+    System.out.println("Nancy: "  + scott.getPhoneNumber());
+
+    System.out.println();
+
+
+
+    System.out.println("Set Scott's number to 555-1212");
+
+    scott.setPhoneNumber("555-1212");
+
+
+
+    System.out.println("Scott: "  + scott.getPhoneNumber());
+
+    System.out.println("Nancy: "  + scott.getPhoneNumber());
+
+    System.out.println();
+
+
+
+    System.out.println("Set Nancy's number to 555-7777");
+
+    nancy.setPhoneNumber("555-7777");
+
+
+
+    System.out.println("Scott: "  + scott.getPhoneNumber());
+
+    System.out.println("Nancy: "  + scott.getPhoneNumber());
+
+  }
+
 }</pre>
 <p>Creating PropertyChangeListeners for each Person bean automatically updates both Person beans when either telephone number changes. We will use this technique during visual composition to achieve several interesting effects, including keeping a model synchronized with a GUI. The results of running PhoneSync follow:</p>
 <p class='figcap'>Running the example</p>
-<pre>Initial phone numbers
-Scott: null
-Nancy: null
-
-Set Scott's number to 555-1212
-Scott: 555-1212
-Nancy: 555-1212
-
-Set Nancy's number to 555-7777
-Scott: 555-7777
+<pre>Initial phone numbers
+
+Scott: null
+
+Nancy: null
+
+
+
+Set Scott's number to 555-1212
+
+Scott: 555-1212
+
+Nancy: 555-1212
+
+
+
+Set Nancy's number to 555-7777
+
+Scott: 555-7777
+
 Nancy: 555-7777</pre>
 <p><i>Note: Some tools, such as VisualAge for Java, can generate code to perform exactly this task.</i></p>
 <h3>Constrained Properties: Property Validation by Delegation</h3>
@@ -259,60 +395,114 @@ Nancy: 555-7777</pre>
 <p>The java.beans package provides another concrete-implementation class, VetoableChangeSupport, to assist with constrained-property event processing. Constraining a property is very similar to making it bound.</p>
 <p>The following code defines a constrained property called phoneNumber. Similar to our earlier bound property example, we delegate the listener tracking and event firing to another object, one of class VetoableChangeSupport.</p>
 <p class='figcap'>Constraining a "phoneNumber" property</p>
-<pre>package effectivevaj.bean.intro.constrainedproperty;
-
-import java.io.Serializable;
-import java.beans.PropertyChangeEvent;
-import java.beans.VetoableChangeListener;
-import java.beans.VetoableChangeSupport;
-import java.beans.PropertyVetoException;
-
-/**
- * A sample Person bean that defines a constrained property
- */
-public class Person implements Serializable {
-  ``// Create a VetoableChangeSupport instance``
-  ``//   to which we'll delegate our constrained-property``
-  ``//   functionality``
-  ``private transient VetoableChangeSupport vcs;``
-
-  ``/** Let classes listen for property changes */``
-  ``public void addVetoableChangeListener(VetoableChangeListener l) {``
-    ``if (vcs == null)``
-      ``vcs = new VetoableChangeSupport(this);``
-    ``vcs.addVetoableChangeListener(l);``
-  ``}``
-
-  ``/** Let classes stop listening to property changes */``
-  ``public void removeVetoableChangeListener(VetoableChangeListener l) {``
-    ``if (vcs == null)``
-      ``vcs = new VetoableChangeSupport(this);``
-    ``vcs.removeVetoableChangeListener(l);``
-  ``}``
-
-  // Define a read/write/constrained property named
-  //  phoneNumber
-  private String phoneNumber; 
-
-  /** Define property phoneNumber as readable String */
-  public String getPhoneNumber() {
-    return phoneNumber;
-  }
-
-  /** Define property phoneNumber as writeable String
-   *  phoneNumber is constrained, firing 
-   *  PropertyChangeEvents whenever its value is
-   *  about to change
-   */
-  public void setPhoneNumber(String phoneNumber) 
-              throws PropertyVetoException {
-    ``if (vcs != null)``
-      ``// report the impending change``
-      ``vcs.fireVetoableChange("phoneNumber", ``
-                             ``this.phoneNumber, phoneNumber);``
-    // change to the new value
-    this.phoneNumber = phoneNumber;
-  }
+<pre>package effectivevaj.bean.intro.constrainedproperty;
+
+
+
+import java.io.Serializable;
+
+import java.beans.PropertyChangeEvent;
+
+import java.beans.VetoableChangeListener;
+
+import java.beans.VetoableChangeSupport;
+
+import java.beans.PropertyVetoException;
+
+
+
+/**
+
+ * A sample Person bean that defines a constrained property
+
+ */
+
+public class Person implements Serializable {
+
+  ``// Create a VetoableChangeSupport instance``
+
+  ``//   to which we'll delegate our constrained-property``
+
+  ``//   functionality``
+
+  ``private transient VetoableChangeSupport vcs;``
+
+
+
+  ``/** Let classes listen for property changes */``
+
+  ``public void addVetoableChangeListener(VetoableChangeListener l) {``
+
+    ``if (vcs == null)``
+
+      ``vcs = new VetoableChangeSupport(this);``
+
+    ``vcs.addVetoableChangeListener(l);``
+
+  ``}``
+
+
+
+  ``/** Let classes stop listening to property changes */``
+
+  ``public void removeVetoableChangeListener(VetoableChangeListener l) {``
+
+    ``if (vcs == null)``
+
+      ``vcs = new VetoableChangeSupport(this);``
+
+    ``vcs.removeVetoableChangeListener(l);``
+
+  ``}``
+
+
+
+  // Define a read/write/constrained property named
+
+  //  phoneNumber
+
+  private String phoneNumber; 
+
+
+
+  /** Define property phoneNumber as readable String */
+
+  public String getPhoneNumber() {
+
+    return phoneNumber;
+
+  }
+
+
+
+  /** Define property phoneNumber as writeable String
+
+   *  phoneNumber is constrained, firing 
+
+   *  PropertyChangeEvents whenever its value is
+
+   *  about to change
+
+   */
+
+  public void setPhoneNumber(String phoneNumber) 
+
+              throws PropertyVetoException {
+
+    ``if (vcs != null)``
+
+      ``// report the impending change``
+
+      ``vcs.fireVetoableChange("phoneNumber", ``
+
+                             ``this.phoneNumber, phoneNumber);``
+
+    // change to the new value
+
+    this.phoneNumber = phoneNumber;
+
+  }
+
 }</pre>
 The highlighted text is the set of changes necessary to support a constrained property. Again, many tools, such as VisualAge for Java, can generate all of this code for you.</p> 
 <p>Registered VetoableChangeListeners can throw a PropertyVetoException, which halts the setPhoneNumber processing, throwing the exception to the caller of setPhoneNumber().</p>
@@ -321,143 +511,268 @@ The highlighted text is the set of changes necessary to support a constrained pr
 <li>Constrain the phoneNumber property. (We have defined that previously.)</li>
 <li>Create the class StringLengthCheck to ensure that a String is within a minimum-maximum range, as follows:
 <p class='figcap'>StringLengthCheck</p>
-<pre>package effectivevaj.bean.intro.constrainedproperty;
-
-import java.beans.PropertyVetoException;
-import java.beans.PropertyChangeEvent;
-import java.beans.VetoableChangeListener;
-
-/**
- * A VetoableChangeListener that validates that a String's
- *   length falls within a given range
- */
-public class StringLengthCheck 
-       implements VetoableChangeListener {
-        
-  private int minimum, maximum;
-  
-  /** constructor -- gather the min-max range for
-   *                 the legal string length
-   */
-  public StringLengthCheck(int min, int max) {
-    minimum = min;
-    maximum = max;
-  }
-  
-  /** VetoableChangeListener notification - check to see 
-   *    if the length of the new string value is within 
-   *    the minimum/maximum range
-   */
-  public void vetoableChange(PropertyChangeEvent e) 
-         throws PropertyVetoException {
-    if (e.getPropertyName().equals("phoneNumber")) {
-      String number = (String) e.getNewValue();
-      if (number == null)
-        throw new PropertyVetoException("No new value!", e);
-      int len = number.length();
-      if (len < minimum || len > maximum)
-        throw new PropertyVetoException(
-                  "Improper length: must be in range " + 
-                  minimum + "-" + maximum, e);
-    }
-  }
+<pre>package effectivevaj.bean.intro.constrainedproperty;
+
+
+
+import java.beans.PropertyVetoException;
+
+import java.beans.PropertyChangeEvent;
+
+import java.beans.VetoableChangeListener;
+
+
+
+/**
+
+ * A VetoableChangeListener that validates that a String's
+
+ *   length falls within a given range
+
+ */
+
+public class StringLengthCheck 
+
+       implements VetoableChangeListener {
+
+        
+
+  private int minimum, maximum;
+
+  
+
+  /** constructor -- gather the min-max range for
+
+   *                 the legal string length
+
+   */
+
+  public StringLengthCheck(int min, int max) {
+
+    minimum = min;
+
+    maximum = max;
+
+  }
+
+  
+
+  /** VetoableChangeListener notification - check to see 
+
+   *    if the length of the new string value is within 
+
+   *    the minimum/maximum range
+
+   */
+
+  public void vetoableChange(PropertyChangeEvent e) 
+
+         throws PropertyVetoException {
+
+    if (e.getPropertyName().equals("phoneNumber")) {
+
+      String number = (String) e.getNewValue();
+
+      if (number == null)
+
+        throw new PropertyVetoException("No new value!", e);
+
+      int len = number.length();
+
+      if (len < minimum || len > maximum)
+
+        throw new PropertyVetoException(
+
+                  "Improper length: must be in range " + 
+
+                  minimum + "-" + maximum, e);
+
+    }
+
+  }
+
 }</pre>
 </li>
 <li>Create class NumberStringCheck to ensure that all characters are numeric, as follows:
 <p class='figcap'>NumberStringCheck</p>
-<pre>package effectivevaj.bean.intro.constrainedproperty;
-
-import java.beans.VetoableChangeListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyVetoException;
-
-/** A VetoableChangeListener that validates that a 
-  *   String's value is completely numeric
-  */
-public class NumberStringCheck 
-       implements VetoableChangeListener {
-       
-  public void vetoableChange(PropertyChangeEvent e) 
-         throws PropertyVetoException {
-    if (e.getPropertyName().equals("phoneNumber")) {
-      String number = (String) e.getNewValue();
-      if (number != null) {
-        int len = number.length();
-
-        for (int i = 0; i < len; i++)
-          if (!Character.isDigit(number.charAt(i)))
-
-              throw new PropertyVetoException(number + 
-                     " contains non-numeric characters", e);
-      }
-    }
-  }
+<pre>package effectivevaj.bean.intro.constrainedproperty;
+
+
+
+import java.beans.VetoableChangeListener;
+
+import java.beans.PropertyChangeEvent;
+
+import java.beans.PropertyVetoException;
+
+
+
+/** A VetoableChangeListener that validates that a 
+
+  *   String's value is completely numeric
+
+  */
+
+public class NumberStringCheck 
+
+       implements VetoableChangeListener {
+
+       
+
+  public void vetoableChange(PropertyChangeEvent e) 
+
+         throws PropertyVetoException {
+
+    if (e.getPropertyName().equals("phoneNumber")) {
+
+      String number = (String) e.getNewValue();
+
+      if (number != null) {
+
+        int len = number.length();
+
+
+
+        for (int i = 0; i < len; i++)
+
+          if (!Character.isDigit(number.charAt(i)))
+
+
+
+              throw new PropertyVetoException(number + 
+
+                     " contains non-numeric characters", e);
+
+      }
+
+    }
+
+  }
+
 }</pre>
 </li>
 <li>Add instances of StringLengthCheck and NumberStringCheck to the Person bean as VetoableChangeListeners, as follows:
 <p class='figcap'>Registering the constraints</p>
-<pre>package effectivevaj.bean.intro.constrainedproperty;
-
-import java.beans.PropertyVetoException;
-
-/**
- * Test our constrained phoneNumber property
- */
-public class PhoneValidate {
-
-  /** A convenience method to handle the exceptions for us */
-  protected static void setPersonsPhoneNumber(Person person,
-                                              String number){ 
-    try {
-      person.setPhoneNumber(number);
-      System.out.println("Set number to " + number);
-    }
-    catch (PropertyVetoException e) {
-      System.out.println(e);
-    }
-  }
-
-  /**
-   * Runs a simple test of our constrained phone property
-   */
-  public static void main(String[] args) {
-    Person scott = new Person();
-    scott.addVetoableChangeListener(
-            new StringLengthCheck(7, 7));
-    scott.addVetoableChangeListener(new NumberStringCheck());
-
-    // test a non-numeric phone number
-    setPersonsPhoneNumber(scott,"111aaaa");
-
-    // test a long phone number
-    setPersonsPhoneNumber(scott,"5551111111111");
-
-    // test a normal phone number
-    setPersonsPhoneNumber(scott,"5551212");
-
-    // create a new person that only checks that the
-    //   phoneNumber is numeric
-    Person nancy = new Person();
-    nancy.addVetoableChangeListener(new NumberStringCheck());
-
-    // test a non-numeric phone number
-    setPersonsPhoneNumber(nancy,"111aaaa");
-
-    // test a long phone number
-    setPersonsPhoneNumber(nancy,"5551111111111");
-  }
+<pre>package effectivevaj.bean.intro.constrainedproperty;
+
+
+
+import java.beans.PropertyVetoException;
+
+
+
+/**
+
+ * Test our constrained phoneNumber property
+
+ */
+
+public class PhoneValidate {
+
+
+
+  /** A convenience method to handle the exceptions for us */
+
+  protected static void setPersonsPhoneNumber(Person person,
+
+                                              String number){ 
+
+    try {
+
+      person.setPhoneNumber(number);
+
+      System.out.println("Set number to " + number);
+
+    }
+
+    catch (PropertyVetoException e) {
+
+      System.out.println(e);
+
+    }
+
+  }
+
+
+
+  /**
+
+   * Runs a simple test of our constrained phone property
+
+   */
+
+  public static void main(String[] args) {
+
+    Person scott = new Person();
+
+    scott.addVetoableChangeListener(
+
+            new StringLengthCheck(7, 7));
+
+    scott.addVetoableChangeListener(new NumberStringCheck());
+
+
+
+    // test a non-numeric phone number
+
+    setPersonsPhoneNumber(scott,"111aaaa");
+
+
+
+    // test a long phone number
+
+    setPersonsPhoneNumber(scott,"5551111111111");
+
+
+
+    // test a normal phone number
+
+    setPersonsPhoneNumber(scott,"5551212");
+
+
+
+    // create a new person that only checks that the
+
+    //   phoneNumber is numeric
+
+    Person nancy = new Person();
+
+    nancy.addVetoableChangeListener(new NumberStringCheck());
+
+
+
+    // test a non-numeric phone number
+
+    setPersonsPhoneNumber(nancy,"111aaaa");
+
+
+
+    // test a long phone number
+
+    setPersonsPhoneNumber(nancy,"5551111111111");
+
+  }
+
 }</pre>
 </li></ul>
 <p>As you can see from the previous test, not only can we plug in several validations, but we can also use different sets of validations for each instance of a class. The previous example will print the following to System.out:</p>
 <p class='figcap'>Constrained test output</p>
-<pre>java.beans.PropertyVetoException: 111aaaa contains 
-  non-numeric characters
-java.beans.PropertyVetoException: Improper length: must be 
-  in range 7-7
-Set number to 5551212
-java.beans.PropertyVetoException: 111aaaa contains 
-  non-numeric characters
-Set number to 5551111111111
+<pre>java.beans.PropertyVetoException: 111aaaa contains 
+
+  non-numeric characters
+
+java.beans.PropertyVetoException: Improper length: must be 
+
+  in range 7-7
+
+Set number to 5551212
+
+java.beans.PropertyVetoException: 111aaaa contains 
+
+  non-numeric characters
+
+Set number to 5551111111111
+
 </p>
 <p>Tool support for constrained properties is pretty much non-existent. Eventually, tools should support attaching validation vetoers to your beans, but we may not see this behavior for some time.</p>
 1.3.6 How Can a Tool Tell if a Property is Bound or Constrained?
@@ -713,57 +1028,44 @@ How can we hide features from the user of a bean-builder tool? How can we allow 
 BeanInfo classes are associated with a bean by a simple naming convention. The name of the BeanInfo class is the name of the bean with "BeanInfo" as its suffix. For example, a bean named Person could have a PersonBeanInfo class that describes it. BeanInfo classes all implement the java.beans.BeanInfo interface, which requires methods that return arrays of PropertyDescriptors, MethodDescriptors, and EventSetDescriptors as well as general information about the bean itself.
 If the introspection process discovers a BeanInfo class, it queries that BeanInfo class to determine features instead of examining public method names. The FeatureDescriptors (PropertyDescriptors, MethodDescriptors, and EventSetDescriptors) provide the names and descriptions of the features. Each FeatureDescriptor can contain additional information, stating if a feature should be hidden or considered expert. The bean-builder tool uses the FeatureDescriptor information to filter the features that are available. PropertyDescriptors can also specify a property editor, one means of customizing the way a user edits a property’s value in the bean-builder tool.
 Finally, the BeanInfo class provides a BeanDescriptor, which describes the overall bean, possibly including a Customizer (which provides customized editing for the entire bean) and icons to represent the bean in the bean-builder tool’s palette. BeanInfo classes are tedious to write, but fortunately, many tools, such as VisualAge for Java, generate them for you.
-Keep in mind that once you define a BeanInfo class, it is in charge of describing bean features. If you add new methods to your bean, bean builder tools will not know about them unless you add the features to the BeanInfo class as well.
-				<!-- #EndEditable "content" -->
-				<div id="footer">
-					<p>&nbsp;</p>
-					<hr/>
-					<p>Copyright &copy; 1996-2009, Scott Stanchfield. All Rights Reserved.<br/>
-					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
-					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
-					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
-					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../images/cssplay_button.png" width="88" /></a></p>
-					<p>
-					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
-					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../images/feed-icon-14x14.png" width="14" />Want 
-					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
-					</p>
-				</div>
-			</div>
-		</div>
-		<div id="bottom"/>
-		<div id="navigation">
-			<ul>
-				<li><a href="../index.html">Home</a></li>
-				<li><a href="index.html">Articles</a></li>
-				<li><a href="../tools/index.html">Tools</a></li>
-				<li><a href="../evaj/index.html">Effective VisualAge for Java</a></li>
-				<li><a href="../eclipse/index.html">Eclipse Tips</a></li>
-				<li><a href="../vaj/index.html">VisualAge Tips</a></li>
-				<!--
-				<li><a href="resume.html">Resume</a></li>
-				-->
-				<li><a href="../publications.html">Publications</a></li>
-			</ul>
-			<p>&nbsp;</p>
-			<div style="margin-left:10px">
-<script type="text/javascript"><!--
-google_ad_client = "pub-1721904981084162";
-/* Homepage Gutter */
-google_ad_slot = "0044274311";
-google_ad_width = 120;
-google_ad_height = 600;
-//-->
-</script>
-<script type="text/javascript"
-src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script>
-</div>
-		</div>
-		<div id="bottomcorner"/>
-		<div id="topcorner"/>
-		</div>
-		<p>&nbsp;</p>
-	</body>
-<!-- #EndTemplate -->
-</html>
+Keep in mind that once you define a BeanInfo class, it is in charge of describing bean features. If you add new methods to your bean, bean builder tools will not know about them unless you add the features to the BeanInfo class as well.
+				<!-- #EndEditable "content" -->
+				<div id="footer">
+					<p>&nbsp;</p>
+					<hr/>
+					<p>Copyright &copy; 1996-2013, Scott Stanchfield. All Rights Reserved.<br/>
+					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
+					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
+					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
+					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../images/cssplay_button.png" width="88" /></a></p>
+					<p>
+					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
+					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../images/feed-icon-14x14.png" width="14" />Want 
+					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div id="bottom"/>
+		<div id="navigation">
+			<ul>
+				<li><a href="../index.html">Home</a></li>
+				<li><a href="index.html">Articles</a></li>
+				<li><a href="../tools/index.html">Tools</a></li>
+				<li><a href="../evaj/index.html">Effective VisualAge for Java</a></li>
+				<li><a href="../eclipse/index.html">Eclipse Tips</a></li>
+				<li><a href="../vaj/index.html">VisualAge Tips</a></li>
+				<!--
+				<li><a href="resume.html">Resume</a></li>
+				-->
+				<li><a href="../publications.html">Publications</a></li>
+			</ul>
+			<p>&nbsp;</p>
+		</div>
+		<div id="bottomcorner"/>
+		<div id="topcorner"/>
+		</div>
+		<p>&nbsp;</p>
+	</body>
+<!-- #EndTemplate -->
+</html>

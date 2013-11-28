@@ -1,33 +1,36 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+
 
 <!-- #BeginTemplate "../master.dwt" -->
 
-	<head>
-		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-		<!-- #BeginEditable "doctitle" -->
+	<head>
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+		<!-- #BeginEditable "doctitle" -->
+
 		<title>Using the Right Comment in Java - Scott Stanchfield</title>
-		<!-- #EndEditable -->
-		<link href="../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
-		<!-- #BeginEditable "head" -->
-		<!-- #EndEditable -->
-		<style type="text/css">
-
-.style1 {
-	vertical-align: middle;
-}
-</style>
-	</head>
-
-	<body>
-		<div id="header">
-			<h1>JavaDude.com</h1>
-			<h4>-- Scott Stanchfield</h4>
-		</div>
-		<div id="content">
-			<div id="topBar">&nbsp;</div>
-			<div id="contentIndent">
-				<!-- #BeginEditable "content" -->
+		<!-- #EndEditable -->
+		<link href="../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
+		<!-- #BeginEditable "head" -->
+		<!-- #EndEditable -->
+		<style type="text/css">
+
+.style1 {
+	vertical-align: middle;
+}
+</style>
+	</head>
+
+	<body>
+		<div id="header">
+			<h1>JavaDude.com</h1>
+			<h4>-- Scott Stanchfield</h4>
+		</div>
+		<div id="content">
+			<div id="topBar">&nbsp;</div>
+			<div id="contentIndent">
+				<!-- #BeginEditable "content" -->
+
 
 <h1>Using the Right Comment in Java</h1>
 <p>Java provides three types of comments:</p>
@@ -37,7 +40,8 @@
         starts with two forward slashes and continues to the end of the
         line. For example:</p>
 <p class='figcap'>Single-line comments</p>
-<pre>// this is a single-line comment
+<pre>// this is a single-line comment
+
 x = 1; // a single-line comment after code</pre>
     </li>
 </ul>
@@ -51,29 +55,39 @@ x = 1; // a single-line comment after code</pre>
     delimiters for this type of comment may be on the same line, or they can be
     on different lines. For example</p>
 <p class='figcap'>Multi-line comments</p>
-<pre>/* This is a c-style comment */
-/*  This is also a
-    c-style comment, spanning
+<pre>/* This is a c-style comment */
+
+/*  This is also a
+
+    c-style comment, spanning
+
     multiple lines */</pre>
     <p>Note that C-style comments <strong><em>cannot</em></strong> be
     nested. Something like
 <p class='figcap'>Bad comment nesting</p>
-<pre>/* A comment looks like
-   /* This is a comment */
-   blah blah blah
+<pre>/* A comment looks like
+
+   /* This is a comment */
+
+   blah blah blah
+
  */</pre>
     <p>will generated a syntax error because the java compiler will only treat
     through the first */ as a comment. (The comment ends at the first
     &quot;*/&quot; the compiler sees.)</p>
     <p>You <em>can</em> nest single-line comments within multi-line comments:</p>
 <p class='figcap'>Good comment nesting</p>
-<pre>/* This is a single-line comment:
-    // a single-line comment
+<pre>/* This is a single-line comment:
+
+    // a single-line comment
+
  */</pre>
     <p>and multi-line comments in single-line comments:</p>
 <p class='figcap'>Multi-line comments in a single-line comment</p>
-<pre>// /* this is
-//    a multi-line
+<pre>// /* this is
+
+//    a multi-line
+
 //    comment */</pre>
 </blockquote>
 <ul>
@@ -84,8 +98,10 @@ x = 1; // a single-line comment after code</pre>
         asterisks, and end with an asterisk followed by a forward slash.
         For example:</p>
 <p class='figcap'>Documentation comment</p>
-<pre>/** This is a documentation comment */
-/** This is also a
+<pre>/** This is a documentation comment */
+
+/** This is also a
+
     documentation comment */</pre>
         <p>There are a few important things to note about documentation
         comments:</p>
@@ -101,26 +117,34 @@ x = 1; // a single-line comment after code</pre>
                 &quot;box&quot; around the comment in the source code and
                 ignores the extra asterisks. For example:
 <p class='figcap'>Extra asterisks</p>
-<pre>/**********************************
-   This is the start of a method
+<pre>/**********************************
+
+   This is the start of a method
+
 **********************************/</pre>
                 <p>will only keep the text &quot;This is the start of a
                 method&quot;.</p></li>
             <li>javadoc will ignore leading asterisks inside a
                 documentation-comment block. For example:
 <p class='figcap'>Leading asterisks</p>
-<pre>/***************************************
- * This is a doc comment
- * on multiple lines that I want to stand
- * out in source code, looking &quot;neat&quot;
+<pre>/***************************************
+
+ * This is a doc comment
+
+ * on multiple lines that I want to stand
+
+ * out in source code, looking &quot;neat&quot;
+
  ***************************************/</pre>
                 <p>will only keep the text &quot;This is a doc comment on
                 multiple lines that I want to stand out in source code, looking
                 &quot;neat&quot;&quot;</p></li>
             <li>It's common practice to use something like
 <p class='figcap'>Accidental javadoc comment</p>
-<pre>/******************************************
-   ...
+<pre>/******************************************
+
+   ...
+
  ******************************************/</pre>
                 <p>to make a comment stand out. Be aware that this is
                 treated as a documentation comment (even if that's not what you
@@ -148,97 +172,100 @@ out&quot; a section of your code! (&quot;Commenting out code&quot; refers
 to changing the lexical state of a section of source code to being inside a
 comment, making the compiler ignore that code.) Take as an example:</p>
 <p class='figcap'>Code to comment out</p>
-<pre>x = 1;   /* set x to 1 */
-y = 2;   /* set y to 2 */
+<pre>x = 1;   /* set x to 1 */
+
+y = 2;   /* set y to 2 */
+
 f(x, y); /* call f with x and y */</pre>
 <p>If you want to comment out these three lines, you would either need to put a
 single line comment in front of each line:</p>
 <p class='figcap'>Commenting-out code using single-line comments</p>
-<pre>// x = 1;   /* set x to 1 */
-// y = 2;   /* set y to 2 */
+<pre>// x = 1;   /* set x to 1 */
+
+// y = 2;   /* set y to 2 */
+
 // f(x, y); /* call f with x and y */</pre>
 <p>or add in multi-line comments wherever there isn't already one present:</p>
 <p class='figcap'>Commenting-out code using multi-line comments</p>
-<pre>/* x = 1;  */ /* set x to 1 */
-/* y = 2;  */ /* set y to 2 */
+<pre>/* x = 1;  */ /* set x to 1 */
+
+/* y = 2;  */ /* set y to 2 */
+
 /* f(x, y);*/ /* call f with x and y */</pre>
 <p>or mutilate/remove the &quot;end comment&quot; delimiters of the existing
 comments:</p>
 <p class='figcap'>Commenting-out code using multi-line comments (alternative)</p>
-<pre>/*
-x = 1;   /* set x to 1 * /
-y = 2;   /* set y to 2 * /
-f(x, y); /* call f with x and y * /
+<pre>/*
+
+x = 1;   /* set x to 1 * /
+
+y = 2;   /* set y to 2 * /
+
+f(x, y); /* call f with x and y * /
+
 */</pre>
 <p>None of these are terribly pleasant. It's much easier if the original
 code were:</p>
 <p class='figcap'>Easier code to comment out</p>
-<pre>x = 1;   // set x to 1
-y = 2;   // set y to 2
+<pre>x = 1;   // set x to 1
+
+y = 2;   // set y to 2
+
 f(x, y); // call f with x and y</pre>
 <p>then you can easily comment it out by just placing a multi-line comment
 around it:</p>
 <p class='figcap'>Commenting-out single-line comments with a single multi-line comment</p>
-<pre>/*
-x = 1;   // set x to 1
-y = 2;   // set y to 2
-f(x, y); // call f with x and y
+<pre>/*
+
+x = 1;   // set x to 1
+
+y = 2;   // set y to 2
+
+f(x, y); // call f with x and y
+
 */</pre>
 <p><em>Always</em> use single-line comments for your everyday commenting needs!</p>
 <h2>When to Use Multi-Line Comments</h2>
 <p>After reading the above section, this becomes obvious. <em>Only</em>
 use multi-line comments to comment out sections of code. <em>Never </em>use
 them for <em>any</em> other purpose!</p>
-				<!-- #EndEditable "content" -->
-				<div id="footer">
-					<p>&nbsp;</p>
-					<hr/>
-					<p>Copyright &copy; 1996-2009, Scott Stanchfield. All Rights Reserved.<br/>
-					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
-					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
-					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
-					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../images/cssplay_button.png" width="88" /></a></p>
-					<p>
-					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
-					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../images/feed-icon-14x14.png" width="14" />Want 
-					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
-					</p>
-				</div>
-			</div>
-		</div>
-		<div id="bottom"/>
-		<div id="navigation">
-			<ul>
-				<li><a href="../index.html">Home</a></li>
-				<li><a href="index.html">Articles</a></li>
-				<li><a href="../tools/index.html">Tools</a></li>
-				<li><a href="../evaj/index.html">Effective VisualAge for Java</a></li>
-				<li><a href="../eclipse/index.html">Eclipse Tips</a></li>
-				<li><a href="../vaj/index.html">VisualAge Tips</a></li>
-				<!--
-				<li><a href="resume.html">Resume</a></li>
-				-->
-				<li><a href="../publications.html">Publications</a></li>
-			</ul>
-			<p>&nbsp;</p>
-			<div style="margin-left:10px">
-<script type="text/javascript"><!--
-google_ad_client = "pub-1721904981084162";
-/* Homepage Gutter */
-google_ad_slot = "0044274311";
-google_ad_width = 120;
-google_ad_height = 600;
-//-->
-</script>
-<script type="text/javascript"
-src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script>
-</div>
-		</div>
-		<div id="bottomcorner"/>
-		<div id="topcorner"/>
-		</div>
-		<p>&nbsp;</p>
-	</body>
-<!-- #EndTemplate -->
-</html>
+				<!-- #EndEditable "content" -->
+				<div id="footer">
+					<p>&nbsp;</p>
+					<hr/>
+					<p>Copyright &copy; 1996-2013, Scott Stanchfield. All Rights Reserved.<br/>
+					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
+					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
+					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
+					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../images/cssplay_button.png" width="88" /></a></p>
+					<p>
+					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
+					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../images/feed-icon-14x14.png" width="14" />Want 
+					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div id="bottom"/>
+		<div id="navigation">
+			<ul>
+				<li><a href="../index.html">Home</a></li>
+				<li><a href="index.html">Articles</a></li>
+				<li><a href="../tools/index.html">Tools</a></li>
+				<li><a href="../evaj/index.html">Effective VisualAge for Java</a></li>
+				<li><a href="../eclipse/index.html">Eclipse Tips</a></li>
+				<li><a href="../vaj/index.html">VisualAge Tips</a></li>
+				<!--
+				<li><a href="resume.html">Resume</a></li>
+				-->
+				<li><a href="../publications.html">Publications</a></li>
+			</ul>
+			<p>&nbsp;</p>
+		</div>
+		<div id="bottomcorner"/>
+		<div id="topcorner"/>
+		</div>
+		<p>&nbsp;</p>
+	</body>
+<!-- #EndTemplate -->
+</html>

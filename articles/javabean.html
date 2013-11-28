@@ -1,33 +1,36 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+
 
 <!-- #BeginTemplate "../master.dwt" -->
 
-	<head>
-		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-		<!-- #BeginEditable "doctitle" -->
+	<head>
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+		<!-- #BeginEditable "doctitle" -->
+
 		<title>Converting a Grammar from LALR to LL - Scott Stanchfield</title>
-		<!-- #EndEditable -->
-		<link href="../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
-		<!-- #BeginEditable "head" -->
-		<!-- #EndEditable -->
-		<style type="text/css">
-
-.style1 {
-	vertical-align: middle;
-}
-</style>
-	</head>
-
-	<body>
-		<div id="header">
-			<h1>JavaDude.com</h1>
-			<h4>-- Scott Stanchfield</h4>
-		</div>
-		<div id="content">
-			<div id="topBar">&nbsp;</div>
-			<div id="contentIndent">
-				<!-- #BeginEditable "content" -->
+		<!-- #EndEditable -->
+		<link href="../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
+		<!-- #BeginEditable "head" -->
+		<!-- #EndEditable -->
+		<style type="text/css">
+
+.style1 {
+	vertical-align: middle;
+}
+</style>
+	</head>
+
+	<body>
+		<div id="header">
+			<h1>JavaDude.com</h1>
+			<h4>-- Scott Stanchfield</h4>
+		</div>
+		<div id="content">
+			<div id="topBar">&nbsp;</div>
+			<div id="contentIndent">
+				<!-- #BeginEditable "content" -->
+
 
 <h1>The JavaBean Component Model</h1>
 
@@ -58,18 +61,24 @@
 <p><i>Note: A property can be either simple or indexed; it cannot be both.</i></p>
 <h3>Simple Properties</h3>
 <p>Simple properties act like individual bits of data, describing the state of a bean. You define simple properties using sets of methods that match the following patterns:</p>
-<a name='figure.1'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 1: Simple property naming patterns</p><pre class='content'><span class='keyword'>public</span> <span class='ident'>TypeName</span> <span class='ident'>getPropertyName</span><span class='operator'>()</span>
-<span class='keyword'>public</span> <span class='keyword'>boolean</span> <span class='ident'>isPropertyName</span><span class='operator'>()</span>
+<a name='figure.1'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 1: Simple property naming patterns</p><pre class='content'><span class='keyword'>public</span> <span class='ident'>TypeName</span> <span class='ident'>getPropertyName</span><span class='operator'>()</span>
+
+<span class='keyword'>public</span> <span class='keyword'>boolean</span> <span class='ident'>isPropertyName</span><span class='operator'>()</span>
+
 <span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>setPropertyName</span><span class='operator'>(</span><span class='ident'>TypeName</span> <span class='ident'>value</span><span class='operator'>)</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
 <p></i>Note: You can only define the isPropertyName() method for boolean properties.</i></p>
 <p>TypeName is the name of a class or primitive type, and PropertyName is the name of the property. The presence of a get or is method defines a readable property. A set method defines a writeable property. The property name is actually a lowercased version of whatever follows the get or set in the method declaration. For example, suppose a bean defines the following method:</p>
 <a name='figure.2'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 2: Readable eyeColor property</p><pre class='content'><span class='keyword'>public</span> <span class='ident'>Color</span> <span class='ident'>getEyeColor</span><span class='operator'>()</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
 <p>This defines a readable property named eyeColor of type java.awt.Color.</p>
 <p>Note that there can be both a get and is method for a boolean property; the is method is allowed for readability. Normally, you define the get and set methods, but sometimes the get method doesn't read naturally. For example</p>
-<a name='figure.3'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 3: Using "is" methods instead of "get"</p><pre class='content'><span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>list</span><span class='operator'>.</span><span class='ident'>isEmpty</span><span class='operator'>())</span> <span class='operator'>{...}</span>
-
-<span class='comment'>// is more readable than</span>
-
+<a name='figure.3'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 3: Using "is" methods instead of "get"</p><pre class='content'><span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>list</span><span class='operator'>.</span><span class='ident'>isEmpty</span><span class='operator'>())</span> <span class='operator'>{...}</span>
+
+
+
+<span class='comment'>// is more readable than</span>
+
+
+
 <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>list</span><span class='operator'>.</span><span class='ident'>getEmpty</span><span class='operator'>())</span> <span class='operator'>{...}</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
 <p>The beauty of this model is its simplicity. Many programmers already use get and set methods to access their data, so defining properties is no different from their current style.</p>
 <p>A tool that recognizes these get and set methods can present a list of properties to a user, enabling the user to specify property values. The tool generates code to pass the specified values to the set methods.</p>
@@ -77,9 +86,12 @@
 <h3>Indexed Properties</h3>
 <p>Indexed properties are an extension of simple properties that allow multiple values for that property. The property acts like an array, even if there is no actual data for that property or if the data is stored in a non-array structure.</p>
 <p>You define indexed properties using four methods:</p>
-<a name='figure.4'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 4: Indexed property naming patterns</p><pre class='content'><span class='keyword'>public</span> <span class='ident'>TypeName</span><span class='operator'>[]</span> <span class='ident'>getPropertyName</span><span class='operator'>()</span>
-<span class='keyword'>public</span> <span class='ident'>TypeName</span> <span class='ident'>getPropertyName</span><span class='operator'>(</span><span class='keyword'>int</span> <span class='ident'>index</span><span class='operator'>)</span>
-<span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>setPropertyName</span><span class='operator'>(</span><span class='ident'>TypeName</span><span class='operator'>[]</span> <span class='ident'>value</span><span class='operator'>)</span>
+<a name='figure.4'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 4: Indexed property naming patterns</p><pre class='content'><span class='keyword'>public</span> <span class='ident'>TypeName</span><span class='operator'>[]</span> <span class='ident'>getPropertyName</span><span class='operator'>()</span>
+
+<span class='keyword'>public</span> <span class='ident'>TypeName</span> <span class='ident'>getPropertyName</span><span class='operator'>(</span><span class='keyword'>int</span> <span class='ident'>index</span><span class='operator'>)</span>
+
+<span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>setPropertyName</span><span class='operator'>(</span><span class='ident'>TypeName</span><span class='operator'>[]</span> <span class='ident'>value</span><span class='operator'>)</span>
+
 <span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>setPropertyName</span><span class='operator'>(</span><span class='keyword'>int</span> <span class='ident'>index</span>, <span class='ident'>TypeName</span> <span class='ident'>value</span><span class='operator'>)</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
 <p>Recognizing these methods, a bean-builder tool can present a (possibly editable) list of values for setting the property.</p>
 <h3>Bound and Constrained Properties</h3>
@@ -89,14 +101,22 @@
 <h3>Bound Properties: Reporting Property-State Changes</h3>
 <p>TODO: WRITE NOTE ABOUT THIS BEING THE OBSERVER PATTERN</p>
 <p>A bound property fires a PropertyChangeEvent (defined in package java.beans) when its state changes. PropertyChangeListeners register themselves with the bean to receive notification of those changes. The java.beans package provides support for this processing through its PropertyChangeSupport class. For example, consider a simple property phoneNumber, defined as follows:</p>
-<a name='figure.5'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 5: A readable/writeable "phoneNumber" property</p><pre class='content'><span class='keyword'>private</span> <span class='ident'>String</span> <span class='ident'>phoneNumber</span><span class='operator'>;</span>
-
-<span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>setPhoneNumber</span><span class='operator'>(</span><span class='ident'>String</span> <span class='ident'>phoneNumber</span><span class='operator'>)</span> <span class='operator'>{</span>
-  <span class='keyword'>this</span><span class='operator'>.</span><span class='ident'>phoneNumber</span> <span class='operator'>=</span> <span class='ident'>phoneNumber</span><span class='operator'>;</span>
-<span class='operator'>}</span>
-
-<span class='keyword'>public</span> <span class='ident'>String</span> <span class='ident'>getPhoneNumber</span><span class='operator'>()</span> <span class='operator'>{</span>
-  <span class='keyword'>return</span> <span class='ident'>phoneNumber</span><span class='operator'>;</span>
+<a name='figure.5'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 5: A readable/writeable "phoneNumber" property</p><pre class='content'><span class='keyword'>private</span> <span class='ident'>String</span> <span class='ident'>phoneNumber</span><span class='operator'>;</span>
+
+
+
+<span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>setPhoneNumber</span><span class='operator'>(</span><span class='ident'>String</span> <span class='ident'>phoneNumber</span><span class='operator'>)</span> <span class='operator'>{</span>
+
+  <span class='keyword'>this</span><span class='operator'>.</span><span class='ident'>phoneNumber</span> <span class='operator'>=</span> <span class='ident'>phoneNumber</span><span class='operator'>;</span>
+
+<span class='operator'>}</span>
+
+
+
+<span class='keyword'>public</span> <span class='ident'>String</span> <span class='ident'>getPhoneNumber</span><span class='operator'>()</span> <span class='operator'>{</span>
+
+  <span class='keyword'>return</span> <span class='ident'>phoneNumber</span><span class='operator'>;</span>
+
 <span class='operator'>}</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
 <p><i>Note: Sometimes the statement</i></p>
 <a name='figure.6'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 6: Assigning the field</p><pre class='content'>    <span class='keyword'>this</span><span class='operator'>.</span><span class='ident'>phoneNumber</span> <span class='operator'>=</span> <span class='ident'>phoneNumber</span><span class='operator'>;</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
@@ -107,128 +127,244 @@
 <li>Code to fire a PropertyChangeEvent to the registered listeners</li>
 </ul>
 <p>Because the code to perform these functions is identical for every bound property, we can delegate these functions to an instance of PropertyChangeSupport. A resulting Person bean containing the phoneNumber property could look as follows:</p>
-<a name='figure.7'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 7: Binding the "phoneNumber" property</p><pre class='content'><span class='keyword'>package</span> <span class='ident'>effectivevaj</span><span class='operator'>.</span><span class='ident'>bean</span><span class='operator'>.</span><span class='ident'>intro</span><span class='operator'>.</span><span class='ident'>boundproperty</span><span class='operator'>;</span>
-
-<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>beans</span><span class='operator'>.</span><span class='ident'>PropertyChangeEvent</span><span class='operator'>;</span>
-<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>beans</span><span class='operator'>.</span><span class='ident'>PropertyChangeListener</span><span class='operator'>;</span>
-<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>beans</span><span class='operator'>.</span><span class='ident'>PropertyChangeSupport</span><span class='operator'>;</span>
-<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>io</span><span class='operator'>.</span><span class='ident'>Serializable</span><span class='operator'>;</span>
-
-<span class='comment'>/**
- * A sample Person bean that defines a bound property
- */</span>
-<span class='keyword'>public</span> <span class='keyword'>class</span> <span class='ident'>Person</span> <span class='keyword'>implements</span> <span class='ident'>Serializable</span> <span class='operator'>{</span>
-  <span class='highlight'><span class='comment'>// Create a PropertyChangeSupport instance</span></span>
-  <span class='highlight'><span class='comment'>//   to which we'll delegate our bound-property</span></span>
-  <span class='highlight'><span class='comment'>//   functionality</span></span>
-  <span class='highlight'><span class='keyword'>private</span> <span class='keyword'>transient</span> <span class='ident'>PropertyChangeSupport</span> <span class='ident'>pcs</span> <span class='operator'>=</span></span>
-          <span class='highlight'><span class='keyword'>new</span> <span class='ident'>PropertyChangeSupport</span><span class='operator'>(</span><span class='keyword'>this</span><span class='operator'>);</span></span>
-
-  <span class='highlight'><span class='comment'>/** Let classes listen for property changes */</span></span>
-  <span class='highlight'><span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>addPropertyChangeListener</span><span class='operator'>(</span><span class='ident'>PropertyChangeListener</span> <span class='ident'>l</span><span class='operator'>)</span> <span class='operator'>{</span></span>
-    <span class='highlight'><span class='ident'>pcs</span><span class='operator'>.</span><span class='ident'>addPropertyChangeListener</span><span class='operator'>(</span><span class='ident'>l</span><span class='operator'>);</span></span>
-  <span class='highlight'><span class='operator'>}</span></span>
-
-  <span class='highlight'><span class='comment'>/** Let classes stop listening to property changes */</span></span>
-  <span class='highlight'><span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>removePropertyChangeListener</span><span class='operator'>(</span><span class='ident'>PropertyChangeListener</span> <span class='ident'>l</span><span class='operator'>)</span> <span class='operator'>{</span></span>
-    <span class='highlight'><span class='ident'>pcs</span><span class='operator'>.</span><span class='ident'>removePropertyChangeListener</span><span class='operator'>(</span><span class='ident'>l</span><span class='operator'>);</span></span>
-  <span class='highlight'><span class='operator'>}</span></span>
-
-  <span class='comment'>// Define a read/write/bound property named phoneNumber</span>
-  <span class='keyword'>private</span> <span class='ident'>String</span> <span class='ident'>phoneNumber</span><span class='operator'>;</span>
-
-  <span class='comment'>/** Define property phoneNumber as readable String */</span>
-  <span class='keyword'>public</span> <span class='ident'>String</span> <span class='ident'>getPhoneNumber</span><span class='operator'>()</span> <span class='operator'>{</span>
-    <span class='keyword'>return</span> <span class='ident'>phoneNumber</span><span class='operator'>;</span>
-  <span class='operator'>}</span>
-  
-  <span class='comment'>/** Define property phoneNumber as writeable String
-   *  phoneNumber is bound, firing PropertyChangeEvents
-   *  whenever its value changes
-   */</span>
-  <span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>setPhoneNumber</span><span class='operator'>(</span><span class='ident'>String</span> <span class='ident'>phoneNumber</span><span class='operator'>)</span> <span class='operator'>{</span>
-    <span class='highlight'><span class='comment'>// save the old value</span></span>
-    <span class='highlight'><span class='ident'>String</span> <span class='ident'>oldNumber</span> <span class='operator'>=</span> <span class='keyword'>this</span><span class='operator'>.</span><span class='ident'>phoneNumber</span><span class='operator'>;</span></span>
-    <span class='comment'>// set the new value</span>
-    <span class='keyword'>this</span><span class='operator'>.</span><span class='ident'>phoneNumber</span> <span class='operator'>=</span> <span class='ident'>phoneNumber</span><span class='operator'>;</span>
-    <span class='highlight'><span class='comment'>// report the change</span></span>
-    <span class='highlight'><span class='ident'>pcs</span><span class='operator'>.</span><span class='ident'>firePropertyChange</span><span class='operator'>(</span><span class='string'>"phoneNumber"</span>, <span class='ident'>oldNumber</span>, <span class='ident'>phoneNumber</span><span class='operator'>);</span></span>
-  <span class='operator'>}</span>
+<a name='figure.7'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 7: Binding the "phoneNumber" property</p><pre class='content'><span class='keyword'>package</span> <span class='ident'>effectivevaj</span><span class='operator'>.</span><span class='ident'>bean</span><span class='operator'>.</span><span class='ident'>intro</span><span class='operator'>.</span><span class='ident'>boundproperty</span><span class='operator'>;</span>
+
+
+
+<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>beans</span><span class='operator'>.</span><span class='ident'>PropertyChangeEvent</span><span class='operator'>;</span>
+
+<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>beans</span><span class='operator'>.</span><span class='ident'>PropertyChangeListener</span><span class='operator'>;</span>
+
+<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>beans</span><span class='operator'>.</span><span class='ident'>PropertyChangeSupport</span><span class='operator'>;</span>
+
+<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>io</span><span class='operator'>.</span><span class='ident'>Serializable</span><span class='operator'>;</span>
+
+
+
+<span class='comment'>/**
+
+ * A sample Person bean that defines a bound property
+
+ */</span>
+
+<span class='keyword'>public</span> <span class='keyword'>class</span> <span class='ident'>Person</span> <span class='keyword'>implements</span> <span class='ident'>Serializable</span> <span class='operator'>{</span>
+
+  <span class='highlight'><span class='comment'>// Create a PropertyChangeSupport instance</span></span>
+
+  <span class='highlight'><span class='comment'>//   to which we'll delegate our bound-property</span></span>
+
+  <span class='highlight'><span class='comment'>//   functionality</span></span>
+
+  <span class='highlight'><span class='keyword'>private</span> <span class='keyword'>transient</span> <span class='ident'>PropertyChangeSupport</span> <span class='ident'>pcs</span> <span class='operator'>=</span></span>
+
+          <span class='highlight'><span class='keyword'>new</span> <span class='ident'>PropertyChangeSupport</span><span class='operator'>(</span><span class='keyword'>this</span><span class='operator'>);</span></span>
+
+
+
+  <span class='highlight'><span class='comment'>/** Let classes listen for property changes */</span></span>
+
+  <span class='highlight'><span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>addPropertyChangeListener</span><span class='operator'>(</span><span class='ident'>PropertyChangeListener</span> <span class='ident'>l</span><span class='operator'>)</span> <span class='operator'>{</span></span>
+
+    <span class='highlight'><span class='ident'>pcs</span><span class='operator'>.</span><span class='ident'>addPropertyChangeListener</span><span class='operator'>(</span><span class='ident'>l</span><span class='operator'>);</span></span>
+
+  <span class='highlight'><span class='operator'>}</span></span>
+
+
+
+  <span class='highlight'><span class='comment'>/** Let classes stop listening to property changes */</span></span>
+
+  <span class='highlight'><span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>removePropertyChangeListener</span><span class='operator'>(</span><span class='ident'>PropertyChangeListener</span> <span class='ident'>l</span><span class='operator'>)</span> <span class='operator'>{</span></span>
+
+    <span class='highlight'><span class='ident'>pcs</span><span class='operator'>.</span><span class='ident'>removePropertyChangeListener</span><span class='operator'>(</span><span class='ident'>l</span><span class='operator'>);</span></span>
+
+  <span class='highlight'><span class='operator'>}</span></span>
+
+
+
+  <span class='comment'>// Define a read/write/bound property named phoneNumber</span>
+
+  <span class='keyword'>private</span> <span class='ident'>String</span> <span class='ident'>phoneNumber</span><span class='operator'>;</span>
+
+
+
+  <span class='comment'>/** Define property phoneNumber as readable String */</span>
+
+  <span class='keyword'>public</span> <span class='ident'>String</span> <span class='ident'>getPhoneNumber</span><span class='operator'>()</span> <span class='operator'>{</span>
+
+    <span class='keyword'>return</span> <span class='ident'>phoneNumber</span><span class='operator'>;</span>
+
+  <span class='operator'>}</span>
+
+  
+
+  <span class='comment'>/** Define property phoneNumber as writeable String
+
+   *  phoneNumber is bound, firing PropertyChangeEvents
+
+   *  whenever its value changes
+
+   */</span>
+
+  <span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>setPhoneNumber</span><span class='operator'>(</span><span class='ident'>String</span> <span class='ident'>phoneNumber</span><span class='operator'>)</span> <span class='operator'>{</span>
+
+    <span class='highlight'><span class='comment'>// save the old value</span></span>
+
+    <span class='highlight'><span class='ident'>String</span> <span class='ident'>oldNumber</span> <span class='operator'>=</span> <span class='keyword'>this</span><span class='operator'>.</span><span class='ident'>phoneNumber</span><span class='operator'>;</span></span>
+
+    <span class='comment'>// set the new value</span>
+
+    <span class='keyword'>this</span><span class='operator'>.</span><span class='ident'>phoneNumber</span> <span class='operator'>=</span> <span class='ident'>phoneNumber</span><span class='operator'>;</span>
+
+    <span class='highlight'><span class='comment'>// report the change</span></span>
+
+    <span class='highlight'><span class='ident'>pcs</span><span class='operator'>.</span><span class='ident'>firePropertyChange</span><span class='operator'>(</span><span class='string'>"phoneNumber"</span>, <span class='ident'>oldNumber</span>, <span class='ident'>phoneNumber</span><span class='operator'>);</span></span>
+
+  <span class='operator'>}</span>
+
 <span class='operator'>}</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
 The highlighted text in the previous example is the extra code needed to bind the phoneNumber property. Note that many tools, such as VisualAge for Java, can generate all of this code for you.</p>
 <p>After binding phoneNumber, we can keep the telephone numbers of two people synchronized by creating listeners. For example, suppose we have a married couple, Scott and Nancy, who share a telephone number. When one spouse changes the telephone number, the telephone number should change for the other person as well.</p>
 <p>The following code acts as glue between two Person beans, scott and nancy. We create event listeners (using anonymous inner classes) to listen for changes to the phoneNumber property of each bean. Whenever we hear that the phoneNumber of scott changes, we set the phoneNumber of nancy. We provide the same type of handling for changes to the phoneNumber in nancy as well.</p>
-<a name='figure.8'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 8: Synchronizing the phone numbers of two Person beans</p><pre class='content'><span class='keyword'>package</span> <span class='ident'>effectivevaj</span><span class='operator'>.</span><span class='ident'>bean</span><span class='operator'>.</span><span class='ident'>intro</span><span class='operator'>.</span><span class='ident'>boundproperty</span><span class='operator'>;</span>
-
-<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>beans</span><span class='operator'>.</span><span class='ident'>PropertyChangeEvent</span><span class='operator'>;</span>
-<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>beans</span><span class='operator'>.</span><span class='ident'>PropertyChangeListener</span><span class='operator'>;</span>
-
-<span class='comment'>/**
- * Test the Person bean's bound phone number property
- */</span>
-<span class='keyword'>public</span> <span class='keyword'>class</span> <span class='ident'>PhoneSync</span> <span class='operator'>{</span>
-  <span class='comment'>/**
-   *  Test the bound phoneNumber of the Person bean
-   *  Create two people that share a phone number and
-   *    create property-change listeners that will keep
-   *    their phone numbers synchronized
-   */</span>
-  <span class='keyword'>public</span> <span class='keyword'>static</span> <span class='keyword'>void</span> <span class='ident'>main</span><span class='operator'>(</span><span class='ident'>String</span><span class='operator'>[]</span> <span class='ident'>args</span><span class='operator'>)</span> <span class='operator'>{</span>
-    <span class='comment'>// create two people who share a phone number</span>
-    <span class='keyword'>final</span> <span class='ident'>Person</span> <span class='ident'>scott</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>Person</span><span class='operator'>();</span>
-    <span class='keyword'>final</span> <span class='ident'>Person</span> <span class='ident'>nancy</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>Person</span><span class='operator'>();</span>
-
-    <span class='comment'>// when scott's phone changes, change nancy's</span>
-    <span class='ident'>scott</span><span class='operator'>.</span><span class='ident'>addPropertyChangeListener</span><span class='operator'>(</span>
-      <span class='keyword'>new</span> <span class='ident'>PropertyChangeListener</span><span class='operator'>()</span> <span class='operator'>{</span>
-        <span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>propertyChange</span><span class='operator'>(</span><span class='ident'>PropertyChangeEvent</span> <span class='ident'>e</span><span class='operator'>)</span> <span class='operator'>{</span>
-          <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>e</span><span class='operator'>.</span><span class='ident'>getPropertyName</span><span class='operator'>().</span><span class='ident'>equals</span><span class='operator'>(</span><span class='string'>"phoneNumber"</span><span class='operator'>))</span>
-            <span class='ident'>nancy</span><span class='operator'>.</span><span class='ident'>setPhoneNumber</span><span class='operator'>(</span><span class='ident'>scott</span><span class='operator'>.</span><span class='ident'>getPhoneNumber</span><span class='operator'>());</span>
-        <span class='operator'>}</span>
-      <span class='operator'>}</span>
-    <span class='operator'>);</span>
-
-    <span class='comment'>// when nancy's phone changes, change scott's</span>
-    <span class='ident'>nancy</span><span class='operator'>.</span><span class='ident'>addPropertyChangeListener</span><span class='operator'>(</span>
-      <span class='keyword'>new</span> <span class='ident'>PropertyChangeListener</span><span class='operator'>()</span> <span class='operator'>{</span>
-        <span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>propertyChange</span><span class='operator'>(</span><span class='ident'>PropertyChangeEvent</span> <span class='ident'>e</span><span class='operator'>)</span> <span class='operator'>{</span>
-          <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>e</span><span class='operator'>.</span><span class='ident'>getPropertyName</span><span class='operator'>().</span><span class='ident'>equals</span><span class='operator'>(</span><span class='string'>"phoneNumber"</span><span class='operator'>))</span>
-            <span class='ident'>scott</span><span class='operator'>.</span><span class='ident'>setPhoneNumber</span><span class='operator'>(</span><span class='ident'>nancy</span><span class='operator'>.</span><span class='ident'>getPhoneNumber</span><span class='operator'>());</span>
-        <span class='operator'>}</span>
-      <span class='operator'>}</span>
-    <span class='operator'>);</span>
-
-    <span class='comment'>// Run a little test...</span>
-    <span class='ident'>System</span><span class='operator'>.</span><span class='ident'>out</span><span class='operator'>.</span><span class='ident'>println</span><span class='operator'>(</span><span class='string'>"Initial phone numbers"</span><span class='operator'>);</span>
-    <span class='ident'>System</span><span class='operator'>.</span><span class='ident'>out</span><span class='operator'>.</span><span class='ident'>println</span><span class='operator'>(</span><span class='string'>"Scott: "</span>  <span class='operator'>+</span> <span class='ident'>scott</span><span class='operator'>.</span><span class='ident'>getPhoneNumber</span><span class='operator'>());</span>
-    <span class='ident'>System</span><span class='operator'>.</span><span class='ident'>out</span><span class='operator'>.</span><span class='ident'>println</span><span class='operator'>(</span><span class='string'>"Nancy: "</span>  <span class='operator'>+</span> <span class='ident'>scott</span><span class='operator'>.</span><span class='ident'>getPhoneNumber</span><span class='operator'>());</span>
-    <span class='ident'>System</span><span class='operator'>.</span><span class='ident'>out</span><span class='operator'>.</span><span class='ident'>println</span><span class='operator'>();</span>
-
-    <span class='ident'>System</span><span class='operator'>.</span><span class='ident'>out</span><span class='operator'>.</span><span class='ident'>println</span><span class='operator'>(</span><span class='string'>"Set Scott's number to 555-1212"</span><span class='operator'>);</span>
-    <span class='ident'>scott</span><span class='operator'>.</span><span class='ident'>setPhoneNumber</span><span class='operator'>(</span><span class='string'>"555-1212"</span><span class='operator'>);</span>
-
-    <span class='ident'>System</span><span class='operator'>.</span><span class='ident'>out</span><span class='operator'>.</span><span class='ident'>println</span><span class='operator'>(</span><span class='string'>"Scott: "</span>  <span class='operator'>+</span> <span class='ident'>scott</span><span class='operator'>.</span><span class='ident'>getPhoneNumber</span><span class='operator'>());</span>
-    <span class='ident'>System</span><span class='operator'>.</span><span class='ident'>out</span><span class='operator'>.</span><span class='ident'>println</span><span class='operator'>(</span><span class='string'>"Nancy: "</span>  <span class='operator'>+</span> <span class='ident'>scott</span><span class='operator'>.</span><span class='ident'>getPhoneNumber</span><span class='operator'>());</span>
-    <span class='ident'>System</span><span class='operator'>.</span><span class='ident'>out</span><span class='operator'>.</span><span class='ident'>println</span><span class='operator'>();</span>
-
-    <span class='ident'>System</span><span class='operator'>.</span><span class='ident'>out</span><span class='operator'>.</span><span class='ident'>println</span><span class='operator'>(</span><span class='string'>"Set Nancy's number to 555-7777"</span><span class='operator'>);</span>
-    <span class='ident'>nancy</span><span class='operator'>.</span><span class='ident'>setPhoneNumber</span><span class='operator'>(</span><span class='string'>"555-7777"</span><span class='operator'>);</span>
-
-    <span class='ident'>System</span><span class='operator'>.</span><span class='ident'>out</span><span class='operator'>.</span><span class='ident'>println</span><span class='operator'>(</span><span class='string'>"Scott: "</span>  <span class='operator'>+</span> <span class='ident'>scott</span><span class='operator'>.</span><span class='ident'>getPhoneNumber</span><span class='operator'>());</span>
-    <span class='ident'>System</span><span class='operator'>.</span><span class='ident'>out</span><span class='operator'>.</span><span class='ident'>println</span><span class='operator'>(</span><span class='string'>"Nancy: "</span>  <span class='operator'>+</span> <span class='ident'>scott</span><span class='operator'>.</span><span class='ident'>getPhoneNumber</span><span class='operator'>());</span>
-  <span class='operator'>}</span>
+<a name='figure.8'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 8: Synchronizing the phone numbers of two Person beans</p><pre class='content'><span class='keyword'>package</span> <span class='ident'>effectivevaj</span><span class='operator'>.</span><span class='ident'>bean</span><span class='operator'>.</span><span class='ident'>intro</span><span class='operator'>.</span><span class='ident'>boundproperty</span><span class='operator'>;</span>
+
+
+
+<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>beans</span><span class='operator'>.</span><span class='ident'>PropertyChangeEvent</span><span class='operator'>;</span>
+
+<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>beans</span><span class='operator'>.</span><span class='ident'>PropertyChangeListener</span><span class='operator'>;</span>
+
+
+
+<span class='comment'>/**
+
+ * Test the Person bean's bound phone number property
+
+ */</span>
+
+<span class='keyword'>public</span> <span class='keyword'>class</span> <span class='ident'>PhoneSync</span> <span class='operator'>{</span>
+
+  <span class='comment'>/**
+
+   *  Test the bound phoneNumber of the Person bean
+
+   *  Create two people that share a phone number and
+
+   *    create property-change listeners that will keep
+
+   *    their phone numbers synchronized
+
+   */</span>
+
+  <span class='keyword'>public</span> <span class='keyword'>static</span> <span class='keyword'>void</span> <span class='ident'>main</span><span class='operator'>(</span><span class='ident'>String</span><span class='operator'>[]</span> <span class='ident'>args</span><span class='operator'>)</span> <span class='operator'>{</span>
+
+    <span class='comment'>// create two people who share a phone number</span>
+
+    <span class='keyword'>final</span> <span class='ident'>Person</span> <span class='ident'>scott</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>Person</span><span class='operator'>();</span>
+
+    <span class='keyword'>final</span> <span class='ident'>Person</span> <span class='ident'>nancy</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>Person</span><span class='operator'>();</span>
+
+
+
+    <span class='comment'>// when scott's phone changes, change nancy's</span>
+
+    <span class='ident'>scott</span><span class='operator'>.</span><span class='ident'>addPropertyChangeListener</span><span class='operator'>(</span>
+
+      <span class='keyword'>new</span> <span class='ident'>PropertyChangeListener</span><span class='operator'>()</span> <span class='operator'>{</span>
+
+        <span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>propertyChange</span><span class='operator'>(</span><span class='ident'>PropertyChangeEvent</span> <span class='ident'>e</span><span class='operator'>)</span> <span class='operator'>{</span>
+
+          <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>e</span><span class='operator'>.</span><span class='ident'>getPropertyName</span><span class='operator'>().</span><span class='ident'>equals</span><span class='operator'>(</span><span class='string'>"phoneNumber"</span><span class='operator'>))</span>
+
+            <span class='ident'>nancy</span><span class='operator'>.</span><span class='ident'>setPhoneNumber</span><span class='operator'>(</span><span class='ident'>scott</span><span class='operator'>.</span><span class='ident'>getPhoneNumber</span><span class='operator'>());</span>
+
+        <span class='operator'>}</span>
+
+      <span class='operator'>}</span>
+
+    <span class='operator'>);</span>
+
+
+
+    <span class='comment'>// when nancy's phone changes, change scott's</span>
+
+    <span class='ident'>nancy</span><span class='operator'>.</span><span class='ident'>addPropertyChangeListener</span><span class='operator'>(</span>
+
+      <span class='keyword'>new</span> <span class='ident'>PropertyChangeListener</span><span class='operator'>()</span> <span class='operator'>{</span>
+
+        <span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>propertyChange</span><span class='operator'>(</span><span class='ident'>PropertyChangeEvent</span> <span class='ident'>e</span><span class='operator'>)</span> <span class='operator'>{</span>
+
+          <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>e</span><span class='operator'>.</span><span class='ident'>getPropertyName</span><span class='operator'>().</span><span class='ident'>equals</span><span class='operator'>(</span><span class='string'>"phoneNumber"</span><span class='operator'>))</span>
+
+            <span class='ident'>scott</span><span class='operator'>.</span><span class='ident'>setPhoneNumber</span><span class='operator'>(</span><span class='ident'>nancy</span><span class='operator'>.</span><span class='ident'>getPhoneNumber</span><span class='operator'>());</span>
+
+        <span class='operator'>}</span>
+
+      <span class='operator'>}</span>
+
+    <span class='operator'>);</span>
+
+
+
+    <span class='comment'>// Run a little test...</span>
+
+    <span class='ident'>System</span><span class='operator'>.</span><span class='ident'>out</span><span class='operator'>.</span><span class='ident'>println</span><span class='operator'>(</span><span class='string'>"Initial phone numbers"</span><span class='operator'>);</span>
+
+    <span class='ident'>System</span><span class='operator'>.</span><span class='ident'>out</span><span class='operator'>.</span><span class='ident'>println</span><span class='operator'>(</span><span class='string'>"Scott: "</span>  <span class='operator'>+</span> <span class='ident'>scott</span><span class='operator'>.</span><span class='ident'>getPhoneNumber</span><span class='operator'>());</span>
+
+    <span class='ident'>System</span><span class='operator'>.</span><span class='ident'>out</span><span class='operator'>.</span><span class='ident'>println</span><span class='operator'>(</span><span class='string'>"Nancy: "</span>  <span class='operator'>+</span> <span class='ident'>scott</span><span class='operator'>.</span><span class='ident'>getPhoneNumber</span><span class='operator'>());</span>
+
+    <span class='ident'>System</span><span class='operator'>.</span><span class='ident'>out</span><span class='operator'>.</span><span class='ident'>println</span><span class='operator'>();</span>
+
+
+
+    <span class='ident'>System</span><span class='operator'>.</span><span class='ident'>out</span><span class='operator'>.</span><span class='ident'>println</span><span class='operator'>(</span><span class='string'>"Set Scott's number to 555-1212"</span><span class='operator'>);</span>
+
+    <span class='ident'>scott</span><span class='operator'>.</span><span class='ident'>setPhoneNumber</span><span class='operator'>(</span><span class='string'>"555-1212"</span><span class='operator'>);</span>
+
+
+
+    <span class='ident'>System</span><span class='operator'>.</span><span class='ident'>out</span><span class='operator'>.</span><span class='ident'>println</span><span class='operator'>(</span><span class='string'>"Scott: "</span>  <span class='operator'>+</span> <span class='ident'>scott</span><span class='operator'>.</span><span class='ident'>getPhoneNumber</span><span class='operator'>());</span>
+
+    <span class='ident'>System</span><span class='operator'>.</span><span class='ident'>out</span><span class='operator'>.</span><span class='ident'>println</span><span class='operator'>(</span><span class='string'>"Nancy: "</span>  <span class='operator'>+</span> <span class='ident'>scott</span><span class='operator'>.</span><span class='ident'>getPhoneNumber</span><span class='operator'>());</span>
+
+    <span class='ident'>System</span><span class='operator'>.</span><span class='ident'>out</span><span class='operator'>.</span><span class='ident'>println</span><span class='operator'>();</span>
+
+
+
+    <span class='ident'>System</span><span class='operator'>.</span><span class='ident'>out</span><span class='operator'>.</span><span class='ident'>println</span><span class='operator'>(</span><span class='string'>"Set Nancy's number to 555-7777"</span><span class='operator'>);</span>
+
+    <span class='ident'>nancy</span><span class='operator'>.</span><span class='ident'>setPhoneNumber</span><span class='operator'>(</span><span class='string'>"555-7777"</span><span class='operator'>);</span>
+
+
+
+    <span class='ident'>System</span><span class='operator'>.</span><span class='ident'>out</span><span class='operator'>.</span><span class='ident'>println</span><span class='operator'>(</span><span class='string'>"Scott: "</span>  <span class='operator'>+</span> <span class='ident'>scott</span><span class='operator'>.</span><span class='ident'>getPhoneNumber</span><span class='operator'>());</span>
+
+    <span class='ident'>System</span><span class='operator'>.</span><span class='ident'>out</span><span class='operator'>.</span><span class='ident'>println</span><span class='operator'>(</span><span class='string'>"Nancy: "</span>  <span class='operator'>+</span> <span class='ident'>scott</span><span class='operator'>.</span><span class='ident'>getPhoneNumber</span><span class='operator'>());</span>
+
+  <span class='operator'>}</span>
+
 <span class='operator'>}</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
 <p>Creating PropertyChangeListeners for each Person bean automatically updates both Person beans when either telephone number changes. We will use this technique during visual composition to achieve several interesting effects, including keeping a model synchronized with a GUI. The results of running PhoneSync follow:</p>
-<a name='figure.9'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 9: Running the example</p><pre class='content'><span class='ident'>Initial</span> <span class='ident'>phone</span> <span class='ident'>numbers</span>
-<span class='ident'>Scott</span><span class='operator'>:</span> <span class='ident'>null</span>
-<span class='ident'>Nancy</span><span class='operator'>:</span> <span class='ident'>null</span>
-
-<span class='ident'>Set</span> <span class='ident'>Scott</span>'<span class='ident'>s</span> <span class='ident'>number</span> <span class='ident'>to</span> 555<span class='operator'>-</span>1212
-<span class='ident'>Scott</span><span class='operator'>:</span> 555<span class='operator'>-</span>1212
-<span class='ident'>Nancy</span><span class='operator'>:</span> 555<span class='operator'>-</span>1212
-
-<span class='ident'>Set</span> <span class='ident'>Nancy</span>'<span class='ident'>s</span> <span class='ident'>number</span> <span class='ident'>to</span> 555<span class='operator'>-</span>7777
-<span class='ident'>Scott</span><span class='operator'>:</span> 555<span class='operator'>-</span>7777
+<a name='figure.9'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 9: Running the example</p><pre class='content'><span class='ident'>Initial</span> <span class='ident'>phone</span> <span class='ident'>numbers</span>
+
+<span class='ident'>Scott</span><span class='operator'>:</span> <span class='ident'>null</span>
+
+<span class='ident'>Nancy</span><span class='operator'>:</span> <span class='ident'>null</span>
+
+
+
+<span class='ident'>Set</span> <span class='ident'>Scott</span>'<span class='ident'>s</span> <span class='ident'>number</span> <span class='ident'>to</span> 555<span class='operator'>-</span>1212
+
+<span class='ident'>Scott</span><span class='operator'>:</span> 555<span class='operator'>-</span>1212
+
+<span class='ident'>Nancy</span><span class='operator'>:</span> 555<span class='operator'>-</span>1212
+
+
+
+<span class='ident'>Set</span> <span class='ident'>Nancy</span>'<span class='ident'>s</span> <span class='ident'>number</span> <span class='ident'>to</span> 555<span class='operator'>-</span>7777
+
+<span class='ident'>Scott</span><span class='operator'>:</span> 555<span class='operator'>-</span>7777
+
 <span class='ident'>Nancy</span><span class='operator'>:</span> 555<span class='operator'>-</span>7777</pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
 <p><i>Note: Some tools, such as VisualAge for Java, can generate code to perform exactly this task.</i></p>
 <h3>Constrained Properties: Property Validation by Delegation</h3>
@@ -249,60 +385,114 @@ The highlighted text in the previous example is the extra code needed to bind th
 <p>Each validation process is contained in a separate VetoableChangeListener and registered with the text field. If any of the separate validations is not successful, the setText() method will fail. This is preferable to making a new subclass of the text field simply to add different validation in its setText() method. Think of all the subclasses that you would need to provide validation. Suppose we wanted to check that the value entered in a text field or a combo box were a date. We would need to subclass each of these classes to perform the validation. If we made their text or value properties constrained, we would only need to define the data-check logic in one validator class.</p>
 <p>The java.beans package provides another concrete-implementation class, VetoableChangeSupport, to assist with constrained-property event processing. Constraining a property is very similar to making it bound.</p>
 <p>The following code defines a constrained property called phoneNumber. Similar to our earlier bound property example, we delegate the listener tracking and event firing to another object, one of class VetoableChangeSupport.</p>
-<a name='figure.10'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 10: Constraining a "phoneNumber" property</p><pre class='content'><span class='keyword'>package</span> <span class='ident'>effectivevaj</span><span class='operator'>.</span><span class='ident'>bean</span><span class='operator'>.</span><span class='ident'>intro</span><span class='operator'>.</span><span class='ident'>constrainedproperty</span><span class='operator'>;</span>
-
-<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>io</span><span class='operator'>.</span><span class='ident'>Serializable</span><span class='operator'>;</span>
-<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>beans</span><span class='operator'>.</span><span class='ident'>PropertyChangeEvent</span><span class='operator'>;</span>
-<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>beans</span><span class='operator'>.</span><span class='ident'>VetoableChangeListener</span><span class='operator'>;</span>
-<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>beans</span><span class='operator'>.</span><span class='ident'>VetoableChangeSupport</span><span class='operator'>;</span>
-<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>beans</span><span class='operator'>.</span><span class='ident'>PropertyVetoException</span><span class='operator'>;</span>
-
-<span class='comment'>/**
- * A sample Person bean that defines a constrained property
- */</span>
-<span class='keyword'>public</span> <span class='keyword'>class</span> <span class='ident'>Person</span> <span class='keyword'>implements</span> <span class='ident'>Serializable</span> <span class='operator'>{</span>
-  <span class='highlight'><span class='comment'>// Create a VetoableChangeSupport instance</span></span>
-  <span class='highlight'><span class='comment'>//   to which we'll delegate our constrained-property</span></span>
-  <span class='highlight'><span class='comment'>//   functionality</span></span>
-  <span class='highlight'><span class='keyword'>private</span> <span class='keyword'>transient</span> <span class='ident'>VetoableChangeSupport</span> <span class='ident'>vcs</span><span class='operator'>;</span></span>
-
-  <span class='highlight'><span class='comment'>/** Let classes listen for property changes */</span></span>
-  <span class='highlight'><span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>addVetoableChangeListener</span><span class='operator'>(</span><span class='ident'>VetoableChangeListener</span> <span class='ident'>l</span><span class='operator'>)</span> <span class='operator'>{</span></span>
-    <span class='highlight'><span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>vcs</span> <span class='operator'>==</span> <span class='ident'>null</span><span class='operator'>)</span></span>
-      <span class='highlight'><span class='ident'>vcs</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>VetoableChangeSupport</span><span class='operator'>(</span><span class='keyword'>this</span><span class='operator'>);</span></span>
-    <span class='highlight'><span class='ident'>vcs</span><span class='operator'>.</span><span class='ident'>addVetoableChangeListener</span><span class='operator'>(</span><span class='ident'>l</span><span class='operator'>);</span></span>
-  <span class='highlight'><span class='operator'>}</span></span>
-
-  <span class='highlight'><span class='comment'>/** Let classes stop listening to property changes */</span></span>
-  <span class='highlight'><span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>removeVetoableChangeListener</span><span class='operator'>(</span><span class='ident'>VetoableChangeListener</span> <span class='ident'>l</span><span class='operator'>)</span> <span class='operator'>{</span></span>
-    <span class='highlight'><span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>vcs</span> <span class='operator'>==</span> <span class='ident'>null</span><span class='operator'>)</span></span>
-      <span class='highlight'><span class='ident'>vcs</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>VetoableChangeSupport</span><span class='operator'>(</span><span class='keyword'>this</span><span class='operator'>);</span></span>
-    <span class='highlight'><span class='ident'>vcs</span><span class='operator'>.</span><span class='ident'>removeVetoableChangeListener</span><span class='operator'>(</span><span class='ident'>l</span><span class='operator'>);</span></span>
-  <span class='highlight'><span class='operator'>}</span></span>
-
-  <span class='comment'>// Define a read/write/constrained property named</span>
-  <span class='comment'>//  phoneNumber</span>
-  <span class='keyword'>private</span> <span class='ident'>String</span> <span class='ident'>phoneNumber</span><span class='operator'>;</span> 
-
-  <span class='comment'>/** Define property phoneNumber as readable String */</span>
-  <span class='keyword'>public</span> <span class='ident'>String</span> <span class='ident'>getPhoneNumber</span><span class='operator'>()</span> <span class='operator'>{</span>
-    <span class='keyword'>return</span> <span class='ident'>phoneNumber</span><span class='operator'>;</span>
-  <span class='operator'>}</span>
-
-  <span class='comment'>/** Define property phoneNumber as writeable String
-   *  phoneNumber is constrained, firing 
-   *  PropertyChangeEvents whenever its value is
-   *  about to change
-   */</span>
-  <span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>setPhoneNumber</span><span class='operator'>(</span><span class='ident'>String</span> <span class='ident'>phoneNumber</span><span class='operator'>)</span> 
-              <span class='keyword'>throws</span> <span class='ident'>PropertyVetoException</span> <span class='operator'>{</span>
-    <span class='highlight'><span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>vcs</span> <span class='operator'>!=</span> <span class='ident'>null</span><span class='operator'>)</span></span>
-      <span class='highlight'><span class='comment'>// report the impending change</span></span>
-      <span class='highlight'><span class='ident'>vcs</span><span class='operator'>.</span><span class='ident'>fireVetoableChange</span><span class='operator'>(</span><span class='string'>"phoneNumber"</span>, </span>
-                             <span class='highlight'><span class='keyword'>this</span><span class='operator'>.</span><span class='ident'>phoneNumber</span>, <span class='ident'>phoneNumber</span><span class='operator'>);</span></span>
-    <span class='comment'>// change to the new value</span>
-    <span class='keyword'>this</span><span class='operator'>.</span><span class='ident'>phoneNumber</span> <span class='operator'>=</span> <span class='ident'>phoneNumber</span><span class='operator'>;</span>
-  <span class='operator'>}</span>
+<a name='figure.10'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 10: Constraining a "phoneNumber" property</p><pre class='content'><span class='keyword'>package</span> <span class='ident'>effectivevaj</span><span class='operator'>.</span><span class='ident'>bean</span><span class='operator'>.</span><span class='ident'>intro</span><span class='operator'>.</span><span class='ident'>constrainedproperty</span><span class='operator'>;</span>
+
+
+
+<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>io</span><span class='operator'>.</span><span class='ident'>Serializable</span><span class='operator'>;</span>
+
+<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>beans</span><span class='operator'>.</span><span class='ident'>PropertyChangeEvent</span><span class='operator'>;</span>
+
+<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>beans</span><span class='operator'>.</span><span class='ident'>VetoableChangeListener</span><span class='operator'>;</span>
+
+<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>beans</span><span class='operator'>.</span><span class='ident'>VetoableChangeSupport</span><span class='operator'>;</span>
+
+<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>beans</span><span class='operator'>.</span><span class='ident'>PropertyVetoException</span><span class='operator'>;</span>
+
+
+
+<span class='comment'>/**
+
+ * A sample Person bean that defines a constrained property
+
+ */</span>
+
+<span class='keyword'>public</span> <span class='keyword'>class</span> <span class='ident'>Person</span> <span class='keyword'>implements</span> <span class='ident'>Serializable</span> <span class='operator'>{</span>
+
+  <span class='highlight'><span class='comment'>// Create a VetoableChangeSupport instance</span></span>
+
+  <span class='highlight'><span class='comment'>//   to which we'll delegate our constrained-property</span></span>
+
+  <span class='highlight'><span class='comment'>//   functionality</span></span>
+
+  <span class='highlight'><span class='keyword'>private</span> <span class='keyword'>transient</span> <span class='ident'>VetoableChangeSupport</span> <span class='ident'>vcs</span><span class='operator'>;</span></span>
+
+
+
+  <span class='highlight'><span class='comment'>/** Let classes listen for property changes */</span></span>
+
+  <span class='highlight'><span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>addVetoableChangeListener</span><span class='operator'>(</span><span class='ident'>VetoableChangeListener</span> <span class='ident'>l</span><span class='operator'>)</span> <span class='operator'>{</span></span>
+
+    <span class='highlight'><span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>vcs</span> <span class='operator'>==</span> <span class='ident'>null</span><span class='operator'>)</span></span>
+
+      <span class='highlight'><span class='ident'>vcs</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>VetoableChangeSupport</span><span class='operator'>(</span><span class='keyword'>this</span><span class='operator'>);</span></span>
+
+    <span class='highlight'><span class='ident'>vcs</span><span class='operator'>.</span><span class='ident'>addVetoableChangeListener</span><span class='operator'>(</span><span class='ident'>l</span><span class='operator'>);</span></span>
+
+  <span class='highlight'><span class='operator'>}</span></span>
+
+
+
+  <span class='highlight'><span class='comment'>/** Let classes stop listening to property changes */</span></span>
+
+  <span class='highlight'><span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>removeVetoableChangeListener</span><span class='operator'>(</span><span class='ident'>VetoableChangeListener</span> <span class='ident'>l</span><span class='operator'>)</span> <span class='operator'>{</span></span>
+
+    <span class='highlight'><span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>vcs</span> <span class='operator'>==</span> <span class='ident'>null</span><span class='operator'>)</span></span>
+
+      <span class='highlight'><span class='ident'>vcs</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>VetoableChangeSupport</span><span class='operator'>(</span><span class='keyword'>this</span><span class='operator'>);</span></span>
+
+    <span class='highlight'><span class='ident'>vcs</span><span class='operator'>.</span><span class='ident'>removeVetoableChangeListener</span><span class='operator'>(</span><span class='ident'>l</span><span class='operator'>);</span></span>
+
+  <span class='highlight'><span class='operator'>}</span></span>
+
+
+
+  <span class='comment'>// Define a read/write/constrained property named</span>
+
+  <span class='comment'>//  phoneNumber</span>
+
+  <span class='keyword'>private</span> <span class='ident'>String</span> <span class='ident'>phoneNumber</span><span class='operator'>;</span> 
+
+
+
+  <span class='comment'>/** Define property phoneNumber as readable String */</span>
+
+  <span class='keyword'>public</span> <span class='ident'>String</span> <span class='ident'>getPhoneNumber</span><span class='operator'>()</span> <span class='operator'>{</span>
+
+    <span class='keyword'>return</span> <span class='ident'>phoneNumber</span><span class='operator'>;</span>
+
+  <span class='operator'>}</span>
+
+
+
+  <span class='comment'>/** Define property phoneNumber as writeable String
+
+   *  phoneNumber is constrained, firing 
+
+   *  PropertyChangeEvents whenever its value is
+
+   *  about to change
+
+   */</span>
+
+  <span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>setPhoneNumber</span><span class='operator'>(</span><span class='ident'>String</span> <span class='ident'>phoneNumber</span><span class='operator'>)</span> 
+
+              <span class='keyword'>throws</span> <span class='ident'>PropertyVetoException</span> <span class='operator'>{</span>
+
+    <span class='highlight'><span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>vcs</span> <span class='operator'>!=</span> <span class='ident'>null</span><span class='operator'>)</span></span>
+
+      <span class='highlight'><span class='comment'>// report the impending change</span></span>
+
+      <span class='highlight'><span class='ident'>vcs</span><span class='operator'>.</span><span class='ident'>fireVetoableChange</span><span class='operator'>(</span><span class='string'>"phoneNumber"</span>, </span>
+
+                             <span class='highlight'><span class='keyword'>this</span><span class='operator'>.</span><span class='ident'>phoneNumber</span>, <span class='ident'>phoneNumber</span><span class='operator'>);</span></span>
+
+    <span class='comment'>// change to the new value</span>
+
+    <span class='keyword'>this</span><span class='operator'>.</span><span class='ident'>phoneNumber</span> <span class='operator'>=</span> <span class='ident'>phoneNumber</span><span class='operator'>;</span>
+
+  <span class='operator'>}</span>
+
 <span class='operator'>}</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
 The highlighted text is the set of changes necessary to support a constrained property. Again, many tools, such as VisualAge for Java, can generate all of this code for you.</p> 
 <p>Registered VetoableChangeListeners can throw a PropertyVetoException, which halts the setPhoneNumber processing, throwing the exception to the caller of setPhoneNumber().</p>
@@ -310,141 +500,266 @@ The highlighted text is the set of changes necessary to support a constrained pr
 <ul>
 <li>Constrain the phoneNumber property. (We have defined that previously.)</li>
 <li>Create the class StringLengthCheck to ensure that a String is within a minimum-maximum range, as follows:
-<a name='figure.11'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 11: StringLengthCheck</p><pre class='content'><span class='keyword'>package</span> <span class='ident'>effectivevaj</span><span class='operator'>.</span><span class='ident'>bean</span><span class='operator'>.</span><span class='ident'>intro</span><span class='operator'>.</span><span class='ident'>constrainedproperty</span><span class='operator'>;</span>
-
-<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>beans</span><span class='operator'>.</span><span class='ident'>PropertyVetoException</span><span class='operator'>;</span>
-<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>beans</span><span class='operator'>.</span><span class='ident'>PropertyChangeEvent</span><span class='operator'>;</span>
-<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>beans</span><span class='operator'>.</span><span class='ident'>VetoableChangeListener</span><span class='operator'>;</span>
-
-<span class='comment'>/**
- * A VetoableChangeListener that validates that a String's
- *   length falls within a given range
- */</span>
-<span class='keyword'>public</span> <span class='keyword'>class</span> <span class='ident'>StringLengthCheck</span> 
-       <span class='keyword'>implements</span> <span class='ident'>VetoableChangeListener</span> <span class='operator'>{</span>
-        
-  <span class='keyword'>private</span> <span class='keyword'>int</span> <span class='ident'>minimum</span>, <span class='ident'>maximum</span><span class='operator'>;</span>
-  
-  <span class='comment'>/** constructor -- gather the min-max range for
-   *                 the legal string length
-   */</span>
-  <span class='keyword'>public</span> <span class='ident'>StringLengthCheck</span><span class='operator'>(</span><span class='keyword'>int</span> <span class='ident'>min</span>, <span class='keyword'>int</span> <span class='ident'>max</span><span class='operator'>)</span> <span class='operator'>{</span>
-    <span class='ident'>minimum</span> <span class='operator'>=</span> <span class='ident'>min</span><span class='operator'>;</span>
-    <span class='ident'>maximum</span> <span class='operator'>=</span> <span class='ident'>max</span><span class='operator'>;</span>
-  <span class='operator'>}</span>
-  
-  <span class='comment'>/** VetoableChangeListener notification - check to see 
-   *    if the length of the new string value is within 
-   *    the minimum/maximum range
-   */</span>
-  <span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>vetoableChange</span><span class='operator'>(</span><span class='ident'>PropertyChangeEvent</span> <span class='ident'>e</span><span class='operator'>)</span> 
-         <span class='keyword'>throws</span> <span class='ident'>PropertyVetoException</span> <span class='operator'>{</span>
-    <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>e</span><span class='operator'>.</span><span class='ident'>getPropertyName</span><span class='operator'>().</span><span class='ident'>equals</span><span class='operator'>(</span><span class='string'>"phoneNumber"</span><span class='operator'>))</span> <span class='operator'>{</span>
-      <span class='ident'>String</span> <span class='ident'>number</span> <span class='operator'>=</span> <span class='operator'>(</span><span class='ident'>String</span><span class='operator'>)</span> <span class='ident'>e</span><span class='operator'>.</span><span class='ident'>getNewValue</span><span class='operator'>();</span>
-      <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>number</span> <span class='operator'>==</span> <span class='ident'>null</span><span class='operator'>)</span>
-        <span class='keyword'>throw</span> <span class='keyword'>new</span> <span class='ident'>PropertyVetoException</span><span class='operator'>(</span><span class='string'>"No new value!"</span>, <span class='ident'>e</span><span class='operator'>);</span>
-      <span class='keyword'>int</span> <span class='ident'>len</span> <span class='operator'>=</span> <span class='ident'>number</span><span class='operator'>.</span><span class='ident'>length</span><span class='operator'>();</span>
-      <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>len</span> <span class='operator'><</span> <span class='ident'>minimum</span> <span class='operator'>||</span> <span class='ident'>len</span> <span class='operator'>></span> <span class='ident'>maximum</span><span class='operator'>)</span>
-        <span class='keyword'>throw</span> <span class='keyword'>new</span> <span class='ident'>PropertyVetoException</span><span class='operator'>(</span>
-                  <span class='string'>"Improper length: must be in range "</span> <span class='operator'>+</span> 
-                  <span class='ident'>minimum</span> <span class='operator'>+</span> <span class='string'>"-"</span> <span class='operator'>+</span> <span class='ident'>maximum</span>, <span class='ident'>e</span><span class='operator'>);</span>
-    <span class='operator'>}</span>
-  <span class='operator'>}</span>
+<a name='figure.11'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 11: StringLengthCheck</p><pre class='content'><span class='keyword'>package</span> <span class='ident'>effectivevaj</span><span class='operator'>.</span><span class='ident'>bean</span><span class='operator'>.</span><span class='ident'>intro</span><span class='operator'>.</span><span class='ident'>constrainedproperty</span><span class='operator'>;</span>
+
+
+
+<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>beans</span><span class='operator'>.</span><span class='ident'>PropertyVetoException</span><span class='operator'>;</span>
+
+<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>beans</span><span class='operator'>.</span><span class='ident'>PropertyChangeEvent</span><span class='operator'>;</span>
+
+<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>beans</span><span class='operator'>.</span><span class='ident'>VetoableChangeListener</span><span class='operator'>;</span>
+
+
+
+<span class='comment'>/**
+
+ * A VetoableChangeListener that validates that a String's
+
+ *   length falls within a given range
+
+ */</span>
+
+<span class='keyword'>public</span> <span class='keyword'>class</span> <span class='ident'>StringLengthCheck</span> 
+
+       <span class='keyword'>implements</span> <span class='ident'>VetoableChangeListener</span> <span class='operator'>{</span>
+
+        
+
+  <span class='keyword'>private</span> <span class='keyword'>int</span> <span class='ident'>minimum</span>, <span class='ident'>maximum</span><span class='operator'>;</span>
+
+  
+
+  <span class='comment'>/** constructor -- gather the min-max range for
+
+   *                 the legal string length
+
+   */</span>
+
+  <span class='keyword'>public</span> <span class='ident'>StringLengthCheck</span><span class='operator'>(</span><span class='keyword'>int</span> <span class='ident'>min</span>, <span class='keyword'>int</span> <span class='ident'>max</span><span class='operator'>)</span> <span class='operator'>{</span>
+
+    <span class='ident'>minimum</span> <span class='operator'>=</span> <span class='ident'>min</span><span class='operator'>;</span>
+
+    <span class='ident'>maximum</span> <span class='operator'>=</span> <span class='ident'>max</span><span class='operator'>;</span>
+
+  <span class='operator'>}</span>
+
+  
+
+  <span class='comment'>/** VetoableChangeListener notification - check to see 
+
+   *    if the length of the new string value is within 
+
+   *    the minimum/maximum range
+
+   */</span>
+
+  <span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>vetoableChange</span><span class='operator'>(</span><span class='ident'>PropertyChangeEvent</span> <span class='ident'>e</span><span class='operator'>)</span> 
+
+         <span class='keyword'>throws</span> <span class='ident'>PropertyVetoException</span> <span class='operator'>{</span>
+
+    <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>e</span><span class='operator'>.</span><span class='ident'>getPropertyName</span><span class='operator'>().</span><span class='ident'>equals</span><span class='operator'>(</span><span class='string'>"phoneNumber"</span><span class='operator'>))</span> <span class='operator'>{</span>
+
+      <span class='ident'>String</span> <span class='ident'>number</span> <span class='operator'>=</span> <span class='operator'>(</span><span class='ident'>String</span><span class='operator'>)</span> <span class='ident'>e</span><span class='operator'>.</span><span class='ident'>getNewValue</span><span class='operator'>();</span>
+
+      <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>number</span> <span class='operator'>==</span> <span class='ident'>null</span><span class='operator'>)</span>
+
+        <span class='keyword'>throw</span> <span class='keyword'>new</span> <span class='ident'>PropertyVetoException</span><span class='operator'>(</span><span class='string'>"No new value!"</span>, <span class='ident'>e</span><span class='operator'>);</span>
+
+      <span class='keyword'>int</span> <span class='ident'>len</span> <span class='operator'>=</span> <span class='ident'>number</span><span class='operator'>.</span><span class='ident'>length</span><span class='operator'>();</span>
+
+      <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>len</span> <span class='operator'><</span> <span class='ident'>minimum</span> <span class='operator'>||</span> <span class='ident'>len</span> <span class='operator'>></span> <span class='ident'>maximum</span><span class='operator'>)</span>
+
+        <span class='keyword'>throw</span> <span class='keyword'>new</span> <span class='ident'>PropertyVetoException</span><span class='operator'>(</span>
+
+                  <span class='string'>"Improper length: must be in range "</span> <span class='operator'>+</span> 
+
+                  <span class='ident'>minimum</span> <span class='operator'>+</span> <span class='string'>"-"</span> <span class='operator'>+</span> <span class='ident'>maximum</span>, <span class='ident'>e</span><span class='operator'>);</span>
+
+    <span class='operator'>}</span>
+
+  <span class='operator'>}</span>
+
 <span class='operator'>}</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
 </li>
 <li>Create class NumberStringCheck to ensure that all characters are numeric, as follows:
-<a name='figure.12'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 12: NumberStringCheck</p><pre class='content'><span class='keyword'>package</span> <span class='ident'>effectivevaj</span><span class='operator'>.</span><span class='ident'>bean</span><span class='operator'>.</span><span class='ident'>intro</span><span class='operator'>.</span><span class='ident'>constrainedproperty</span><span class='operator'>;</span>
-
-<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>beans</span><span class='operator'>.</span><span class='ident'>VetoableChangeListener</span><span class='operator'>;</span>
-<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>beans</span><span class='operator'>.</span><span class='ident'>PropertyChangeEvent</span><span class='operator'>;</span>
-<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>beans</span><span class='operator'>.</span><span class='ident'>PropertyVetoException</span><span class='operator'>;</span>
-
-<span class='comment'>/** A VetoableChangeListener that validates that a 
-  *   String's value is completely numeric
-  */</span>
-<span class='keyword'>public</span> <span class='keyword'>class</span> <span class='ident'>NumberStringCheck</span> 
-       <span class='keyword'>implements</span> <span class='ident'>VetoableChangeListener</span> <span class='operator'>{</span>
-       
-  <span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>vetoableChange</span><span class='operator'>(</span><span class='ident'>PropertyChangeEvent</span> <span class='ident'>e</span><span class='operator'>)</span> 
-         <span class='keyword'>throws</span> <span class='ident'>PropertyVetoException</span> <span class='operator'>{</span>
-    <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>e</span><span class='operator'>.</span><span class='ident'>getPropertyName</span><span class='operator'>().</span><span class='ident'>equals</span><span class='operator'>(</span><span class='string'>"phoneNumber"</span><span class='operator'>))</span> <span class='operator'>{</span>
-      <span class='ident'>String</span> <span class='ident'>number</span> <span class='operator'>=</span> <span class='operator'>(</span><span class='ident'>String</span><span class='operator'>)</span> <span class='ident'>e</span><span class='operator'>.</span><span class='ident'>getNewValue</span><span class='operator'>();</span>
-      <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>number</span> <span class='operator'>!=</span> <span class='ident'>null</span><span class='operator'>)</span> <span class='operator'>{</span>
-        <span class='keyword'>int</span> <span class='ident'>len</span> <span class='operator'>=</span> <span class='ident'>number</span><span class='operator'>.</span><span class='ident'>length</span><span class='operator'>();</span>
-
-        <span class='keyword'>for</span> <span class='operator'>(</span><span class='keyword'>int</span> <span class='ident'>i</span> <span class='operator'>=</span> 0<span class='operator'>;</span> <span class='ident'>i</span> <span class='operator'><</span> <span class='ident'>len</span><span class='operator'>;</span> <span class='ident'>i</span><span class='operator'>++)</span>
-          <span class='keyword'>if</span> <span class='operator'>(!</span><span class='ident'>Character</span><span class='operator'>.</span><span class='ident'>isDigit</span><span class='operator'>(</span><span class='ident'>number</span><span class='operator'>.</span><span class='ident'>charAt</span><span class='operator'>(</span><span class='ident'>i</span><span class='operator'>)))</span>
-
-              <span class='keyword'>throw</span> <span class='keyword'>new</span> <span class='ident'>PropertyVetoException</span><span class='operator'>(</span><span class='ident'>number</span> <span class='operator'>+</span> 
-                     <span class='string'>" contains non-numeric characters"</span>, <span class='ident'>e</span><span class='operator'>);</span>
-      <span class='operator'>}</span>
-    <span class='operator'>}</span>
-  <span class='operator'>}</span>
+<a name='figure.12'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 12: NumberStringCheck</p><pre class='content'><span class='keyword'>package</span> <span class='ident'>effectivevaj</span><span class='operator'>.</span><span class='ident'>bean</span><span class='operator'>.</span><span class='ident'>intro</span><span class='operator'>.</span><span class='ident'>constrainedproperty</span><span class='operator'>;</span>
+
+
+
+<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>beans</span><span class='operator'>.</span><span class='ident'>VetoableChangeListener</span><span class='operator'>;</span>
+
+<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>beans</span><span class='operator'>.</span><span class='ident'>PropertyChangeEvent</span><span class='operator'>;</span>
+
+<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>beans</span><span class='operator'>.</span><span class='ident'>PropertyVetoException</span><span class='operator'>;</span>
+
+
+
+<span class='comment'>/** A VetoableChangeListener that validates that a 
+
+  *   String's value is completely numeric
+
+  */</span>
+
+<span class='keyword'>public</span> <span class='keyword'>class</span> <span class='ident'>NumberStringCheck</span> 
+
+       <span class='keyword'>implements</span> <span class='ident'>VetoableChangeListener</span> <span class='operator'>{</span>
+
+       
+
+  <span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>vetoableChange</span><span class='operator'>(</span><span class='ident'>PropertyChangeEvent</span> <span class='ident'>e</span><span class='operator'>)</span> 
+
+         <span class='keyword'>throws</span> <span class='ident'>PropertyVetoException</span> <span class='operator'>{</span>
+
+    <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>e</span><span class='operator'>.</span><span class='ident'>getPropertyName</span><span class='operator'>().</span><span class='ident'>equals</span><span class='operator'>(</span><span class='string'>"phoneNumber"</span><span class='operator'>))</span> <span class='operator'>{</span>
+
+      <span class='ident'>String</span> <span class='ident'>number</span> <span class='operator'>=</span> <span class='operator'>(</span><span class='ident'>String</span><span class='operator'>)</span> <span class='ident'>e</span><span class='operator'>.</span><span class='ident'>getNewValue</span><span class='operator'>();</span>
+
+      <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>number</span> <span class='operator'>!=</span> <span class='ident'>null</span><span class='operator'>)</span> <span class='operator'>{</span>
+
+        <span class='keyword'>int</span> <span class='ident'>len</span> <span class='operator'>=</span> <span class='ident'>number</span><span class='operator'>.</span><span class='ident'>length</span><span class='operator'>();</span>
+
+
+
+        <span class='keyword'>for</span> <span class='operator'>(</span><span class='keyword'>int</span> <span class='ident'>i</span> <span class='operator'>=</span> 0<span class='operator'>;</span> <span class='ident'>i</span> <span class='operator'><</span> <span class='ident'>len</span><span class='operator'>;</span> <span class='ident'>i</span><span class='operator'>++)</span>
+
+          <span class='keyword'>if</span> <span class='operator'>(!</span><span class='ident'>Character</span><span class='operator'>.</span><span class='ident'>isDigit</span><span class='operator'>(</span><span class='ident'>number</span><span class='operator'>.</span><span class='ident'>charAt</span><span class='operator'>(</span><span class='ident'>i</span><span class='operator'>)))</span>
+
+
+
+              <span class='keyword'>throw</span> <span class='keyword'>new</span> <span class='ident'>PropertyVetoException</span><span class='operator'>(</span><span class='ident'>number</span> <span class='operator'>+</span> 
+
+                     <span class='string'>" contains non-numeric characters"</span>, <span class='ident'>e</span><span class='operator'>);</span>
+
+      <span class='operator'>}</span>
+
+    <span class='operator'>}</span>
+
+  <span class='operator'>}</span>
+
 <span class='operator'>}</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
 </li>
 <li>Add instances of StringLengthCheck and NumberStringCheck to the Person bean as VetoableChangeListeners, as follows:
-<a name='figure.13'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 13: Registering the constraints</p><pre class='content'><span class='keyword'>package</span> <span class='ident'>effectivevaj</span><span class='operator'>.</span><span class='ident'>bean</span><span class='operator'>.</span><span class='ident'>intro</span><span class='operator'>.</span><span class='ident'>constrainedproperty</span><span class='operator'>;</span>
-
-<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>beans</span><span class='operator'>.</span><span class='ident'>PropertyVetoException</span><span class='operator'>;</span>
-
-<span class='comment'>/**
- * Test our constrained phoneNumber property
- */</span>
-<span class='keyword'>public</span> <span class='keyword'>class</span> <span class='ident'>PhoneValidate</span> <span class='operator'>{</span>
-
-  <span class='comment'>/** A convenience method to handle the exceptions for us */</span>
-  <span class='keyword'>protected</span> <span class='keyword'>static</span> <span class='keyword'>void</span> <span class='ident'>setPersonsPhoneNumber</span><span class='operator'>(</span><span class='ident'>Person</span> <span class='ident'>person</span>,
-                                              <span class='ident'>String</span> <span class='ident'>number</span><span class='operator'>){</span> 
-    <span class='keyword'>try</span> <span class='operator'>{</span>
-      <span class='ident'>person</span><span class='operator'>.</span><span class='ident'>setPhoneNumber</span><span class='operator'>(</span><span class='ident'>number</span><span class='operator'>);</span>
-      <span class='ident'>System</span><span class='operator'>.</span><span class='ident'>out</span><span class='operator'>.</span><span class='ident'>println</span><span class='operator'>(</span><span class='string'>"Set number to "</span> <span class='operator'>+</span> <span class='ident'>number</span><span class='operator'>);</span>
-    <span class='operator'>}</span>
-    <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>PropertyVetoException</span> <span class='ident'>e</span><span class='operator'>)</span> <span class='operator'>{</span>
-      <span class='ident'>System</span><span class='operator'>.</span><span class='ident'>out</span><span class='operator'>.</span><span class='ident'>println</span><span class='operator'>(</span><span class='ident'>e</span><span class='operator'>);</span>
-    <span class='operator'>}</span>
-  <span class='operator'>}</span>
-
-  <span class='comment'>/**
-   * Runs a simple test of our constrained phone property
-   */</span>
-  <span class='keyword'>public</span> <span class='keyword'>static</span> <span class='keyword'>void</span> <span class='ident'>main</span><span class='operator'>(</span><span class='ident'>String</span><span class='operator'>[]</span> <span class='ident'>args</span><span class='operator'>)</span> <span class='operator'>{</span>
-    <span class='ident'>Person</span> <span class='ident'>scott</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>Person</span><span class='operator'>();</span>
-    <span class='ident'>scott</span><span class='operator'>.</span><span class='ident'>addVetoableChangeListener</span><span class='operator'>(</span>
-            <span class='keyword'>new</span> <span class='ident'>StringLengthCheck</span><span class='operator'>(</span>7, 7<span class='operator'>));</span>
-    <span class='ident'>scott</span><span class='operator'>.</span><span class='ident'>addVetoableChangeListener</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>NumberStringCheck</span><span class='operator'>());</span>
-
-    <span class='comment'>// test a non-numeric phone number</span>
-    <span class='ident'>setPersonsPhoneNumber</span><span class='operator'>(</span><span class='ident'>scott</span>,<span class='string'>"111aaaa"</span><span class='operator'>);</span>
-
-    <span class='comment'>// test a long phone number</span>
-    <span class='ident'>setPersonsPhoneNumber</span><span class='operator'>(</span><span class='ident'>scott</span>,<span class='string'>"5551111111111"</span><span class='operator'>);</span>
-
-    <span class='comment'>// test a normal phone number</span>
-    <span class='ident'>setPersonsPhoneNumber</span><span class='operator'>(</span><span class='ident'>scott</span>,<span class='string'>"5551212"</span><span class='operator'>);</span>
-
-    <span class='comment'>// create a new person that only checks that the</span>
-    <span class='comment'>//   phoneNumber is numeric</span>
-    <span class='ident'>Person</span> <span class='ident'>nancy</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>Person</span><span class='operator'>();</span>
-    <span class='ident'>nancy</span><span class='operator'>.</span><span class='ident'>addVetoableChangeListener</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>NumberStringCheck</span><span class='operator'>());</span>
-
-    <span class='comment'>// test a non-numeric phone number</span>
-    <span class='ident'>setPersonsPhoneNumber</span><span class='operator'>(</span><span class='ident'>nancy</span>,<span class='string'>"111aaaa"</span><span class='operator'>);</span>
-
-    <span class='comment'>// test a long phone number</span>
-    <span class='ident'>setPersonsPhoneNumber</span><span class='operator'>(</span><span class='ident'>nancy</span>,<span class='string'>"5551111111111"</span><span class='operator'>);</span>
-  <span class='operator'>}</span>
+<a name='figure.13'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 13: Registering the constraints</p><pre class='content'><span class='keyword'>package</span> <span class='ident'>effectivevaj</span><span class='operator'>.</span><span class='ident'>bean</span><span class='operator'>.</span><span class='ident'>intro</span><span class='operator'>.</span><span class='ident'>constrainedproperty</span><span class='operator'>;</span>
+
+
+
+<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>beans</span><span class='operator'>.</span><span class='ident'>PropertyVetoException</span><span class='operator'>;</span>
+
+
+
+<span class='comment'>/**
+
+ * Test our constrained phoneNumber property
+
+ */</span>
+
+<span class='keyword'>public</span> <span class='keyword'>class</span> <span class='ident'>PhoneValidate</span> <span class='operator'>{</span>
+
+
+
+  <span class='comment'>/** A convenience method to handle the exceptions for us */</span>
+
+  <span class='keyword'>protected</span> <span class='keyword'>static</span> <span class='keyword'>void</span> <span class='ident'>setPersonsPhoneNumber</span><span class='operator'>(</span><span class='ident'>Person</span> <span class='ident'>person</span>,
+
+                                              <span class='ident'>String</span> <span class='ident'>number</span><span class='operator'>){</span> 
+
+    <span class='keyword'>try</span> <span class='operator'>{</span>
+
+      <span class='ident'>person</span><span class='operator'>.</span><span class='ident'>setPhoneNumber</span><span class='operator'>(</span><span class='ident'>number</span><span class='operator'>);</span>
+
+      <span class='ident'>System</span><span class='operator'>.</span><span class='ident'>out</span><span class='operator'>.</span><span class='ident'>println</span><span class='operator'>(</span><span class='string'>"Set number to "</span> <span class='operator'>+</span> <span class='ident'>number</span><span class='operator'>);</span>
+
+    <span class='operator'>}</span>
+
+    <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>PropertyVetoException</span> <span class='ident'>e</span><span class='operator'>)</span> <span class='operator'>{</span>
+
+      <span class='ident'>System</span><span class='operator'>.</span><span class='ident'>out</span><span class='operator'>.</span><span class='ident'>println</span><span class='operator'>(</span><span class='ident'>e</span><span class='operator'>);</span>
+
+    <span class='operator'>}</span>
+
+  <span class='operator'>}</span>
+
+
+
+  <span class='comment'>/**
+
+   * Runs a simple test of our constrained phone property
+
+   */</span>
+
+  <span class='keyword'>public</span> <span class='keyword'>static</span> <span class='keyword'>void</span> <span class='ident'>main</span><span class='operator'>(</span><span class='ident'>String</span><span class='operator'>[]</span> <span class='ident'>args</span><span class='operator'>)</span> <span class='operator'>{</span>
+
+    <span class='ident'>Person</span> <span class='ident'>scott</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>Person</span><span class='operator'>();</span>
+
+    <span class='ident'>scott</span><span class='operator'>.</span><span class='ident'>addVetoableChangeListener</span><span class='operator'>(</span>
+
+            <span class='keyword'>new</span> <span class='ident'>StringLengthCheck</span><span class='operator'>(</span>7, 7<span class='operator'>));</span>
+
+    <span class='ident'>scott</span><span class='operator'>.</span><span class='ident'>addVetoableChangeListener</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>NumberStringCheck</span><span class='operator'>());</span>
+
+
+
+    <span class='comment'>// test a non-numeric phone number</span>
+
+    <span class='ident'>setPersonsPhoneNumber</span><span class='operator'>(</span><span class='ident'>scott</span>,<span class='string'>"111aaaa"</span><span class='operator'>);</span>
+
+
+
+    <span class='comment'>// test a long phone number</span>
+
+    <span class='ident'>setPersonsPhoneNumber</span><span class='operator'>(</span><span class='ident'>scott</span>,<span class='string'>"5551111111111"</span><span class='operator'>);</span>
+
+
+
+    <span class='comment'>// test a normal phone number</span>
+
+    <span class='ident'>setPersonsPhoneNumber</span><span class='operator'>(</span><span class='ident'>scott</span>,<span class='string'>"5551212"</span><span class='operator'>);</span>
+
+
+
+    <span class='comment'>// create a new person that only checks that the</span>
+
+    <span class='comment'>//   phoneNumber is numeric</span>
+
+    <span class='ident'>Person</span> <span class='ident'>nancy</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>Person</span><span class='operator'>();</span>
+
+    <span class='ident'>nancy</span><span class='operator'>.</span><span class='ident'>addVetoableChangeListener</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>NumberStringCheck</span><span class='operator'>());</span>
+
+
+
+    <span class='comment'>// test a non-numeric phone number</span>
+
+    <span class='ident'>setPersonsPhoneNumber</span><span class='operator'>(</span><span class='ident'>nancy</span>,<span class='string'>"111aaaa"</span><span class='operator'>);</span>
+
+
+
+    <span class='comment'>// test a long phone number</span>
+
+    <span class='ident'>setPersonsPhoneNumber</span><span class='operator'>(</span><span class='ident'>nancy</span>,<span class='string'>"5551111111111"</span><span class='operator'>);</span>
+
+  <span class='operator'>}</span>
+
 <span class='operator'>}</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
 </li></ul>
 <p>As you can see from the previous test, not only can we plug in several validations, but we can also use different sets of validations for each instance of a class. The previous example will print the following to System.out:</p>
 <p class='figcap'>Constrained test output</p>
-<pre>java.beans.PropertyVetoException: 111aaaa contains 
-  non-numeric characters
-java.beans.PropertyVetoException: Improper length: must be 
-  in range 7-7
-Set number to 5551212
-java.beans.PropertyVetoException: 111aaaa contains 
-  non-numeric characters
-Set number to 5551111111111
+<pre>java.beans.PropertyVetoException: 111aaaa contains 
+
+  non-numeric characters
+
+java.beans.PropertyVetoException: Improper length: must be 
+
+  in range 7-7
+
+Set number to 5551212
+
+java.beans.PropertyVetoException: 111aaaa contains 
+
+  non-numeric characters
+
+Set number to 5551111111111
+
 </p>
 <p>Tool support for constrained properties is pretty much non-existent. Eventually, tools should support attaching validation vetoers to your beans, but we may not see this behavior for some time.</p>
 1.3.6 How Can a Tool Tell if a Property is Bound or Constrained?
@@ -702,56 +1017,43 @@ If the introspection process discovers a BeanInfo class, it queries that BeanInf
 Finally, the BeanInfo class provides a BeanDescriptor, which describes the overall bean, possibly including a Customizer (which provides customized editing for the entire bean) and icons to represent the bean in the bean-builder tool’s palette. BeanInfo classes are tedious to write, but fortunately, many tools, such as VisualAge for Java, generate them for you.
 Keep in mind that once you define a BeanInfo class, it is in charge of describing bean features. If you add new methods to your bean, bean builder tools will not know about them unless you add the features to the BeanInfo class as well.
 				</a>
-				<!-- #EndEditable "content" -->
-				<div id="footer">
-					<p>&nbsp;</p>
-					<hr/>
-					<p>Copyright &copy; 1996-2009, Scott Stanchfield. All Rights Reserved.<br/>
-					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
-					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
-					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
-					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../images/cssplay_button.png" width="88" /></a></p>
-					<p>
-					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
-					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../images/feed-icon-14x14.png" width="14" />Want 
-					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
-					</p>
-				</div>
-			</div>
-		</div>
-		<div id="bottom"/>
-		<div id="navigation">
-			<ul>
-				<li><a href="../index.html">Home</a></li>
-				<li><a href="index.html">Articles</a></li>
-				<li><a href="../tools/index.html">Tools</a></li>
-				<li><a href="../evaj/index.html">Effective VisualAge for Java</a></li>
-				<li><a href="../eclipse/index.html">Eclipse Tips</a></li>
-				<li><a href="../vaj/index.html">VisualAge Tips</a></li>
-				<!--
-				<li><a href="resume.html">Resume</a></li>
-				-->
-				<li><a href="../publications.html">Publications</a></li>
-			</ul>
-			<p>&nbsp;</p>
-			<div style="margin-left:10px">
-<script type="text/javascript"><!--
-google_ad_client = "pub-1721904981084162";
-/* Homepage Gutter */
-google_ad_slot = "0044274311";
-google_ad_width = 120;
-google_ad_height = 600;
-//-->
-</script>
-<script type="text/javascript"
-src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script>
-</div>
-		</div>
-		<div id="bottomcorner"/>
-		<div id="topcorner"/>
-		</div>
-		<p>&nbsp;</p>
-	</body>
-<!-- #EndTemplate -->
-</html>
+				<!-- #EndEditable "content" -->
+				<div id="footer">
+					<p>&nbsp;</p>
+					<hr/>
+					<p>Copyright &copy; 1996-2013, Scott Stanchfield. All Rights Reserved.<br/>
+					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
+					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
+					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
+					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../images/cssplay_button.png" width="88" /></a></p>
+					<p>
+					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
+					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../images/feed-icon-14x14.png" width="14" />Want 
+					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div id="bottom"/>
+		<div id="navigation">
+			<ul>
+				<li><a href="../index.html">Home</a></li>
+				<li><a href="index.html">Articles</a></li>
+				<li><a href="../tools/index.html">Tools</a></li>
+				<li><a href="../evaj/index.html">Effective VisualAge for Java</a></li>
+				<li><a href="../eclipse/index.html">Eclipse Tips</a></li>
+				<li><a href="../vaj/index.html">VisualAge Tips</a></li>
+				<!--
+				<li><a href="resume.html">Resume</a></li>
+				-->
+				<li><a href="../publications.html">Publications</a></li>
+			</ul>
+			<p>&nbsp;</p>
+		</div>
+		<div id="bottomcorner"/>
+		<div id="topcorner"/>
+		</div>
+		<p>&nbsp;</p>
+	</body>
+<!-- #EndTemplate -->
+</html>

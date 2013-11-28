@@ -1,33 +1,36 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+
 
 <!-- #BeginTemplate "../master.dwt" -->
 
-	<head>
-		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-		<!-- #BeginEditable "doctitle" -->
+	<head>
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+		<!-- #BeginEditable "doctitle" -->
+
 		<title>Layering Applications - Scott Stanchfield</title>
-		<!-- #EndEditable -->
-		<link href="../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
-		<!-- #BeginEditable "head" -->
-		<!-- #EndEditable -->
-		<style type="text/css">
-
-.style1 {
-	vertical-align: middle;
-}
-</style>
-	</head>
-
-	<body>
-		<div id="header">
-			<h1>JavaDude.com</h1>
-			<h4>-- Scott Stanchfield</h4>
-		</div>
-		<div id="content">
-			<div id="topBar">&nbsp;</div>
-			<div id="contentIndent">
-				<!-- #BeginEditable "content" -->
+		<!-- #EndEditable -->
+		<link href="../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
+		<!-- #BeginEditable "head" -->
+		<!-- #EndEditable -->
+		<style type="text/css">
+
+.style1 {
+	vertical-align: middle;
+}
+</style>
+	</head>
+
+	<body>
+		<div id="header">
+			<h1>JavaDude.com</h1>
+			<h4>-- Scott Stanchfield</h4>
+		</div>
+		<div id="content">
+			<div id="topBar">&nbsp;</div>
+			<div id="contentIndent">
+				<!-- #BeginEditable "content" -->
+
 <h1>Layering Applications</h1>
 <h2>Introduction</h2>
 <p><i>Note that this is a quick, initial pass at this article, in response to a 
@@ -107,18 +110,30 @@ place, <i>it doesn't matter <b>what</b> the components actually <b>are</b> or <b
 do</b>, as long as they respect that communication!</i></p>
 <p>Think about this for a moment. Suppose we define:</p>
 <p class='figcap'>Customer definition as an interface</p>
-<pre>public interface Customer {
-  public String getName();
-  public void setName(String name);
-  ...
-}
-
-public interface CustomerManager {
-  public Customer   load(int id);
-  public Customer   store(Customer customer);
-  public Customer[] findByName(String namePattern);
-  public Customer   createCustomer(String name, float creditLimit);
-  public void       deleteCustomer(Customer customer);
+<pre>public interface Customer {
+
+  public String getName();
+
+  public void setName(String name);
+
+  ...
+
+}
+
+
+
+public interface CustomerManager {
+
+  public Customer   load(int id);
+
+  public Customer   store(Customer customer);
+
+  public Customer[] findByName(String namePattern);
+
+  public Customer   createCustomer(String name, float creditLimit);
+
+  public void       deleteCustomer(Customer customer);
+
 }</pre>
 <p>Notice how this <i>does not</i> say anything about <i>how</i> or <i>where</i>
 the customer is stored. All we're doing here is specifying the basic CRUD 
@@ -211,12 +226,18 @@ get the time...)</p>
 exceptions.</p>
 <p>Let's just think about our CustomerManager:</p>
 <p class='figcap'>A manager -- needs some exceptions...</p>
-<pre>public interface CustomerManager {
-  public Customer   load(int id);
-  public Customer   store(Customer customer);
-  public Customer[] findByName(String namePattern);
-  public Customer   createCustomer(String name, float creditLimit);
-  public void       deleteCustomer(Customer customer);
+<pre>public interface CustomerManager {
+
+  public Customer   load(int id);
+
+  public Customer   store(Customer customer);
+
+  public Customer[] findByName(String namePattern);
+
+  public Customer   createCustomer(String name, float creditLimit);
+
+  public void       deleteCustomer(Customer customer);
+
 }</pre>
 <p>This definition has some serious problems. If anything goes wrong, the caller 
 needs to know about it. So we'll need to declare some thrown exceptions for 
@@ -227,16 +248,26 @@ SQLExceptions (btw: SQL is properly pronounced "squeal", no Ned Beatty
 references, please.)</p>
 <p>So we could write a class that looks like:</p>
 <p class='figcap'>A JDBC-based customer manager</p>
-<pre>public class CustomerManagerUsingJDBC implements CustomerManager {
-  public Customer   load(int id) throws SQLException {
-    ...
-  }
-
-  public Customer   store(Customer customer) throws SQLException {
-    ...
-  }
-
-  ...
+<pre>public class CustomerManagerUsingJDBC implements CustomerManager {
+
+  public Customer   load(int id) throws SQLException {
+
+    ...
+
+  }
+
+
+
+  public Customer   store(Customer customer) throws SQLException {
+
+    ...
+
+  }
+
+
+
+  ...
+
 }</pre>
 <p>and then modify the interface to also throw those exceptions. Ok so far, and 
 we set up the business logic to catch SQLExceptions as necessary.</p>
@@ -244,16 +275,26 @@ we set up the business logic to catch SQLExceptions as necessary.</p>
 <p>But things get nasty if we try to change the implementation to use Enterprise 
 JavaBeans:</p>
 <p class='figcap'>An EJB-based customer manager</p>
-<pre>public class CustomerManagerUsingEJB implements CustomerManager {
-  public Customer   load(int id) throws EJBException, RemoteException {
-    ...
-  }
-
-  public Customer   store(Customer customer) throws EJBException, RemoteException {
-    ...
-  }
-
-  ...
+<pre>public class CustomerManagerUsingEJB implements CustomerManager {
+
+  public Customer   load(int id) throws EJBException, RemoteException {
+
+    ...
+
+  }
+
+
+
+  public Customer   store(Customer customer) throws EJBException, RemoteException {
+
+    ...
+
+  }
+
+
+
+  ...
+
 }</pre>
 <p>Accessing EJBs could throw EJBException or RemoteException. Ok, so we'll 
 modify the interface to use EJB, then change the code in the business logic.</p>
@@ -273,63 +314,112 @@ to change the business logic to "match" its exceptions.</p>
 <p>Those are a few simple cases. Ok, let's define custom exceptions to deal with 
 this.</p>
 <p class='figcap'>A custom exception for our application</p>
-<pre>public class MyApplicationException extends Exception {
-  private Throwable nestedException;
-
-  public MyApplicationException (String message, Throwable nestedException) {
-    super(message);
-    this.nestedException = nestedException;
-  }
-  public Throwable getNestedException() {
-    return nestedException;
-  }
-}
-
-public class CustomerException extends MyApplicationException {
-  public CustomerException(String message, Throwable nestedException) {
-    super(message, nestedException);
-  }
-}
-
-public class NotFoundException extends MyApplicationException {
-  public NotFoundException(String message, Throwable nestedException) {
-    super(message, nestedException);
-  }
+<pre>public class MyApplicationException extends Exception {
+
+  private Throwable nestedException;
+
+
+
+  public MyApplicationException (String message, Throwable nestedException) {
+
+    super(message);
+
+    this.nestedException = nestedException;
+
+  }
+
+  public Throwable getNestedException() {
+
+    return nestedException;
+
+  }
+
+}
+
+
+
+public class CustomerException extends MyApplicationException {
+
+  public CustomerException(String message, Throwable nestedException) {
+
+    super(message, nestedException);
+
+  }
+
+}
+
+
+
+public class NotFoundException extends MyApplicationException {
+
+  public NotFoundException(String message, Throwable nestedException) {
+
+    super(message, nestedException);
+
+  }
+
 }</pre>
 <p>Now we define the interface as follows. Note that this is how we <i>should</i>
 have defined it in the first place, so it won't require changes.</p>
 <p class='figcap'>Using logical exceptions in the customer manager</p>
-<pre>public interface CustomerManager {
-  public Customer   load(int id) throws CustomerException, NotFoundException {
-    ...
-  }
-
-  public Customer   store(Customer customer) throws CustomerException {
-    ...
-  }
-
-  ...
+<pre>public interface CustomerManager {
+
+  public Customer   load(int id) throws CustomerException, NotFoundException {
+
+    ...
+
+  }
+
+
+
+  public Customer   store(Customer customer) throws CustomerException {
+
+    ...
+
+  }
+
+
+
+  ...
+
 }</pre>
 <p>Now the interface is <i>totally generic</i>, with respect to how we store the 
 data! A sample JDBC implementation might look like:</p>
 <p class='figcap'>Using logical exceptions in the JDBC-based customer manager</p>
-<pre>public class CustomerManagerUsingJDBC implements CustomerManager {
-  public Customer   load(int id) throws CustomerException, NotFoundException {
-    try {
-      // JDBC to try to fetch data
-      if (resultSetIsEmpty)
-        throw new NotFoundException("Customer " + id + " not found", null);
-    }
-    catch(NotFoundException e) {
-      throw e;
-    }
-    catch(SQLException e) {
-      throw new CustomerException("oops!", e);
-    }
-    ...
-  }
-
-  ...
+<pre>public class CustomerManagerUsingJDBC implements CustomerManager {
+
+  public Customer   load(int id) throws CustomerException, NotFoundException {
+
+    try {
+
+      // JDBC to try to fetch data
+
+      if (resultSetIsEmpty)
+
+        throw new NotFoundException("Customer " + id + " not found", null);
+
+    }
+
+    catch(NotFoundException e) {
+
+      throw e;
+
+    }
+
+    catch(SQLException e) {
+
+      throw new CustomerException("oops!", e);
+
+    }
+
+    ...
+
+  }
+
+
+
+  ...
+
 }</pre>
 <p>The idea is to catch the specific exception and wrap it in an application 
 exception. This allows the business logic to worry about the <i>concept</i> of 
@@ -351,42 +441,74 @@ interfaces of EJBs. It should use <i>your application interfaces!</i></p>
 <p>Entity beans are really just another way to store data.</p>
 <p>Start with our interfaces again:</p>
 <p class='figcap'>Exceptions in the customer</p>
-<pre>public interface Customer {
-  public String getName()          throws CustomerException;
-  public void setName(String name) throws CustomerException;
-  ...
-}
-
-public interface CustomerManager {
-  public Customer   load(int id)
-                      throws CustomerException, NotFoundException;
-  public Customer   store(Customer customer) 
-                      throws CustomerException;
-  public Customer[] findByName(String namePattern) 
-                      throws CustomerException, NotFoundException;
-  public Customer   createCustomer(String name, float creditLimit) 
-                      throws CustomerException;
-  public void       deleteCustomer(Customer customer) 
-                      throws CustomerException;
+<pre>public interface Customer {
+
+  public String getName()          throws CustomerException;
+
+  public void setName(String name) throws CustomerException;
+
+  ...
+
+}
+
+
+
+public interface CustomerManager {
+
+  public Customer   load(int id)
+
+                      throws CustomerException, NotFoundException;
+
+  public Customer   store(Customer customer) 
+
+                      throws CustomerException;
+
+  public Customer[] findByName(String namePattern) 
+
+                      throws CustomerException, NotFoundException;
+
+  public Customer   createCustomer(String name, float creditLimit) 
+
+                      throws CustomerException;
+
+  public void       deleteCustomer(Customer customer) 
+
+                      throws CustomerException;
+
 }</pre>
 <p>The key here is the cooperation between the implementations of Customer and 
 CustomerManager. First, our Customer implementation might look like:</p>
 <p class='figcap'>Entity bean implementation of customer</p>
-<pre>public class CustomerAsEntityBean implements Customer {
-  private EntityCustomer entityCustomer;
-  public CustomerAsEntityBean(EntityCustomer entityCustomer) {
-    this.entityCustomer = entityCustomer;
-  }
-
-  public String getName() throws CustomerException {
-    try {
-      return entityCustomer.getName();
-    }
-    catch(Exception e) { // EJBException, RemoteException
-      throw new CustomerException(e);
-    }
-  }
-  ...
+<pre>public class CustomerAsEntityBean implements Customer {
+
+  private EntityCustomer entityCustomer;
+
+  public CustomerAsEntityBean(EntityCustomer entityCustomer) {
+
+    this.entityCustomer = entityCustomer;
+
+  }
+
+
+
+  public String getName() throws CustomerException {
+
+    try {
+
+      return entityCustomer.getName();
+
+    }
+
+    catch(Exception e) { // EJBException, RemoteException
+
+      throw new CustomerException(e);
+
+    }
+
+  }
+
+  ...
+
 }</pre>
 <p>This customer is a <i>proxy</i> for our Entity Bean. Note that all requests 
 are merely passed through to the entity bean.</p>
@@ -415,23 +537,40 @@ cares about is that it can ask a Customer for pieces of information and deal
 with problems accessing that data.</p>
 <p>The final piece necessary to make this work is a data manager:</p>
 <p class='figcap'>New EJB-based customer manager</p>
-<pre>public class CustomerManagerUsingEJB interface CustomerManager {
-  public Customer   load(int id)
-                      throws CustomerException, NotFoundException {
-    
-    try {
-      // set up naming context
-      // grab home interface for entity
-      // find entity (store as entityCustomer)
-      return new CustomerAsEntityBean(entityCustomer);
-    }
-    catch(FinderException e) { 
-      throw new NotFoundException("Customer " + id + " not found", e);
-    }
-    catch(Exception e) { //EJBException, RemoteException
-    }
-  }
-  ...
+<pre>public class CustomerManagerUsingEJB interface CustomerManager {
+
+  public Customer   load(int id)
+
+                      throws CustomerException, NotFoundException {
+
+    
+
+    try {
+
+      // set up naming context
+
+      // grab home interface for entity
+
+      // find entity (store as entityCustomer)
+
+      return new CustomerAsEntityBean(entityCustomer);
+
+    }
+
+    catch(FinderException e) { 
+
+      throw new NotFoundException("Customer " + id + " not found", e);
+
+    }
+
+    catch(Exception e) { //EJBException, RemoteException
+
+    }
+
+  }
+
+  ...
+
 }</pre>
 <p>Now all your business logic cares about is that it can ask <i>some</i>
 CustomerManager for <i>some</i> Customer. It doesn't need to even know that EJB 
@@ -445,110 +584,143 @@ a Factory class. We'll use the Factory Method pattern (see <i>Design Patterns</i
 by Gamma et al) to implement this.</p>
 <p>A simple factory might look as follows:</p>
 <p class='figcap'>Sample application factory</p>
-<pre>public class MyApplicationFactory {
-  private static CustomerManager customerManager =
-                   new CustomerManagerUsingEJB();
-  private static ApplicationLogic applicationLogic =
-                   new ApplicationLogicAsSessionBean();
-
-  public static CustomerManager getCustomerManager() {
-    return customerManager;
-  }
-  
-  public static ApplicationLogic getLogic() {
-    return applicationLogic;
-  }
+<pre>public class MyApplicationFactory {
+
+  private static CustomerManager customerManager =
+
+                   new CustomerManagerUsingEJB();
+
+  private static ApplicationLogic applicationLogic =
+
+                   new ApplicationLogicAsSessionBean();
+
+
+
+  public static CustomerManager getCustomerManager() {
+
+    return customerManager;
+
+  }
+
+  
+
+  public static ApplicationLogic getLogic() {
+
+    return applicationLogic;
+
+  }
+
 }</pre>
 <p>You could even make things more flexible, keeping the names of the actual 
 classes to use in a property file (I'll eventually provoide much more detail on 
 how this works, and better error handling)</p>
 <p class='figcap'>Property-file-based application factory</p>
-<pre>public class MyApplicationFactory {
-  private static CustomerManager customerManager;
-  private static ApplicationLogic applicationLogic;
-
-  // note: needs **much** better error handling...
-  //       this is just to give the idea... 
-  static {
-    try {
-      InputStream in = 
-        MyApplicationFactory.getResourceAsStream(
-                               "application.properties");
-      Properties p = new Properties();
-      p.load(in);
-      in.close();
-      customerManager = 
-        Class.forName(p.getProperty("manager.customer")).
-              newInstance();
-      applicationLogic = 
-        Class.forName(p.getProperty("logic.application")).
-              newInstance();
-    }
-    catch(Exception e) {
-      // report error
-    }
-  }
- 
-  public static CustomerManager getCustomerManager() {
-    return customerManager;
-  }
-  
-  public static ApplicationLogic getLogic() {
-    return applicationLogic;
-  }
+<pre>public class MyApplicationFactory {
+
+  private static CustomerManager customerManager;
+
+  private static ApplicationLogic applicationLogic;
+
+
+
+  // note: needs **much** better error handling...
+
+  //       this is just to give the idea... 
+
+  static {
+
+    try {
+
+      InputStream in = 
+
+        MyApplicationFactory.getResourceAsStream(
+
+                               "application.properties");
+
+      Properties p = new Properties();
+
+      p.load(in);
+
+      in.close();
+
+      customerManager = 
+
+        Class.forName(p.getProperty("manager.customer")).
+
+              newInstance();
+
+      applicationLogic = 
+
+        Class.forName(p.getProperty("logic.application")).
+
+              newInstance();
+
+    }
+
+    catch(Exception e) {
+
+      // report error
+
+    }
+
+  }
+
+ 
+
+  public static CustomerManager getCustomerManager() {
+
+    return customerManager;
+
+  }
+
+  
+
+  public static ApplicationLogic getLogic() {
+
+    return applicationLogic;
+
+  }
+
 }</pre>
 <p>&nbsp;</p>
 <p>(more detail to come, including some simple examples)</p>
-				<!-- #EndEditable "content" -->
-				<div id="footer">
-					<p>&nbsp;</p>
-					<hr/>
-					<p>Copyright &copy; 1996-2009, Scott Stanchfield. All Rights Reserved.<br/>
-					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
-					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
-					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
-					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../images/cssplay_button.png" width="88" /></a></p>
-					<p>
-					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
-					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../images/feed-icon-14x14.png" width="14" />Want 
-					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
-					</p>
-				</div>
-			</div>
-		</div>
-		<div id="bottom"/>
-		<div id="navigation">
-			<ul>
-				<li><a href="../index.html">Home</a></li>
-				<li><a href="index.html">Articles</a></li>
-				<li><a href="../tools/index.html">Tools</a></li>
-				<li><a href="../evaj/index.html">Effective VisualAge for Java</a></li>
-				<li><a href="../eclipse/index.html">Eclipse Tips</a></li>
-				<li><a href="../vaj/index.html">VisualAge Tips</a></li>
-				<!--
-				<li><a href="resume.html">Resume</a></li>
-				-->
-				<li><a href="../publications.html">Publications</a></li>
-			</ul>
-			<p>&nbsp;</p>
-			<div style="margin-left:10px">
-<script type="text/javascript"><!--
-google_ad_client = "pub-1721904981084162";
-/* Homepage Gutter */
-google_ad_slot = "0044274311";
-google_ad_width = 120;
-google_ad_height = 600;
-//-->
-</script>
-<script type="text/javascript"
-src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script>
-</div>
-		</div>
-		<div id="bottomcorner"/>
-		<div id="topcorner"/>
-		</div>
-		<p>&nbsp;</p>
-	</body>
-<!-- #EndTemplate -->
-</html>
+				<!-- #EndEditable "content" -->
+				<div id="footer">
+					<p>&nbsp;</p>
+					<hr/>
+					<p>Copyright &copy; 1996-2013, Scott Stanchfield. All Rights Reserved.<br/>
+					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
+					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
+					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
+					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../images/cssplay_button.png" width="88" /></a></p>
+					<p>
+					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
+					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../images/feed-icon-14x14.png" width="14" />Want 
+					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div id="bottom"/>
+		<div id="navigation">
+			<ul>
+				<li><a href="../index.html">Home</a></li>
+				<li><a href="index.html">Articles</a></li>
+				<li><a href="../tools/index.html">Tools</a></li>
+				<li><a href="../evaj/index.html">Effective VisualAge for Java</a></li>
+				<li><a href="../eclipse/index.html">Eclipse Tips</a></li>
+				<li><a href="../vaj/index.html">VisualAge Tips</a></li>
+				<!--
+				<li><a href="resume.html">Resume</a></li>
+				-->
+				<li><a href="../publications.html">Publications</a></li>
+			</ul>
+			<p>&nbsp;</p>
+		</div>
+		<div id="bottomcorner"/>
+		<div id="topcorner"/>
+		</div>
+		<p>&nbsp;</p>
+	</body>
+<!-- #EndTemplate -->
+</html>

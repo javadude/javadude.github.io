@@ -1,33 +1,36 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+
 
 <!-- #BeginTemplate "../master.dwt" -->
 
-	<head>
-		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-		<!-- #BeginEditable "doctitle" -->
+	<head>
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+		<!-- #BeginEditable "doctitle" -->
+
 		<title>Converting a Grammar from LALR to LL - Scott Stanchfield</title>
-		<!-- #EndEditable -->
-		<link href="../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
-		<!-- #BeginEditable "head" -->
-		<!-- #EndEditable -->
-		<style type="text/css">
-
-.style1 {
-	vertical-align: middle;
-}
-</style>
-	</head>
-
-	<body>
-		<div id="header">
-			<h1>JavaDude.com</h1>
-			<h4>-- Scott Stanchfield</h4>
-		</div>
-		<div id="content">
-			<div id="topBar">&nbsp;</div>
-			<div id="contentIndent">
-				<!-- #BeginEditable "content" -->
+		<!-- #EndEditable -->
+		<link href="../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
+		<!-- #BeginEditable "head" -->
+		<!-- #EndEditable -->
+		<style type="text/css">
+
+.style1 {
+	vertical-align: middle;
+}
+</style>
+	</head>
+
+	<body>
+		<div id="header">
+			<h1>JavaDude.com</h1>
+			<h4>-- Scott Stanchfield</h4>
+		</div>
+		<div id="content">
+			<div id="topBar">&nbsp;</div>
+			<div id="contentIndent">
+				<!-- #BeginEditable "content" -->
+
 
 <h1>Converting a Grammar from LALR to LL</h1>
 <p>[from a post of mine in a thread about automated tools to convert from LALR
@@ -45,8 +48,10 @@ minor headaches as well):</p>
         k-token lookahead. For example, if k=1 (LL(1)), the following is
         ambiguous:</p>
 <p class='figcap'>Ambiguous rule for k=1</p>
-<pre>a: A B C
- | A D E
+<pre>a: A B C
+
+ | A D E
+
  ;   </pre>
         <p>The above ambiguity will disappear if you specify k=2 -- the parser
         will look at the &quot;B&quot; or &quot;D&quot; after the &quot;A&quot;
@@ -69,9 +74,12 @@ minor headaches as well):</p>
                 decision on which alternative based on &quot;is the next token B
                 or D?&quot; Note that this could also be written</p>
 <p class='figcap'>Alternative left factoring</p>
-<pre>a: A a_rest;
-a_rest: B C
-      | D E
+<pre>a: A a_rest;
+
+a_rest: B C
+
+      | D E
+
       ;</pre>
                 <p>if you prefer. However, this creates another function call (ANTLR
                 generates recursive-descent parsers.) Use your judgement as to
@@ -86,8 +94,10 @@ a_rest: B C
                 use me. Otherwise, try the next possibility&quot;</p>
                 <p>Say you may have a silly rule like</p>
 <p class='figcap'>Silly rule</p>
-<pre>a: A A A A A A B
- | (A)+ B
+<pre>a: A A A A A A B
+
+ | (A)+ B
+
  ;</pre>
                 <p>Basically, we want to do a certain action if we see 6 A's
                 then a B. Any other number of A's followed by a B does something
@@ -98,8 +108,10 @@ a_rest: B C
                 splitting up that would make the meaning unclear (or, don't say
                 it, a counter in the (A)+...) By changing the rule to</p>
 <p class='figcap'>Try the first rule</p>
-<pre>a: (A A A A A A B)?
- | (A)+ B
+<pre>a: (A A A A A A B)?
+
+ | (A)+ B
+
  ;</pre>
                 <p>You tell ANTLR to construct a parser that will
                 &quot;try&quot; the first alt, and if it works, use it.
@@ -117,8 +129,10 @@ a_rest: B C
         <p>This one requires a bit of thought, but usually not too much.</p>
         <p>Suppose we have a rule</p>
 <p class='figcap'>Left-recursive rule</p>
-<pre>a: a B C
- | //nothing
+<pre>a: a B C
+
+ | //nothing
+
  ;</pre>
         <p>Think about what that means -- any number of &quot;B C&quot; pairs.
         Just rewrite it as</p>
@@ -131,9 +145,12 @@ a_rest: B C
         possible to avoid recursive calls -- they save on performance!)</p>
         <p>Left recursion is also prevalent in expression rules. Things like</p>
 <p class='figcap'>Left-recursive expression rule</p>
-<pre>expr : expr &quot;+&quot; expr
-     | expr &quot;-&quot; expr
-     | expr &quot;*&quot; expr
+<pre>expr : expr &quot;+&quot; expr
+
+     | expr &quot;-&quot; expr
+
+     | expr &quot;*&quot; expr
+
      ;</pre>
         <p>and so on.</p>
         <p>To rewrite the expression rules in LL(k) form, you'll need to break
@@ -141,9 +158,12 @@ a_rest: B C
         &quot;primary&quot; that just lists the &quot;atomic&quot; elements of
         an expression, like variable, constant and (expr):</p>
 <p class='figcap'>Primary part of an expression</p>
-<pre>primary : variable
-        | constant
-        | LPAREN expr RPAREN
+<pre>primary : variable
+
+        | constant
+
+        | LPAREN expr RPAREN
+
         ;</pre>
         <p>then work your way _down_ the precedence table, starting with the
         highest-level precedence operators, like NOT:</p>
@@ -175,61 +195,49 @@ parsing try to use label _names_ instead of label _numbers_ (as in yacc) this'll
 save tons of headache when you need to make a mod like adding a rule reference
 to a rule.</p>
 <p class='figcap'>Action code</p>
-<pre>yacc :    a: B C {$$ = do($1, $2);}
+<pre>yacc :    a: B C {$$ = do($1, $2);}
+
 ANTLR:    a: b:B c:C &lt;&lt;$0 = do($b, $c);&gt;&gt;</pre>
 <p>(keep in mind that you can only label terminals -- if you need a result from
 a subrule, pass it back as a return value)</p>
 <p>Good luck!&nbsp;</p>
-				<!-- #EndEditable "content" -->
-				<div id="footer">
-					<p>&nbsp;</p>
-					<hr/>
-					<p>Copyright &copy; 1996-2009, Scott Stanchfield. All Rights Reserved.<br/>
-					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
-					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
-					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
-					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../images/cssplay_button.png" width="88" /></a></p>
-					<p>
-					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
-					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../images/feed-icon-14x14.png" width="14" />Want 
-					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
-					</p>
-				</div>
-			</div>
-		</div>
-		<div id="bottom"/>
-		<div id="navigation">
-			<ul>
-				<li><a href="../index.html">Home</a></li>
-				<li><a href="index.html">Articles</a></li>
-				<li><a href="../tools/index.html">Tools</a></li>
-				<li><a href="../evaj/index.html">Effective VisualAge for Java</a></li>
-				<li><a href="../eclipse/index.html">Eclipse Tips</a></li>
-				<li><a href="../vaj/index.html">VisualAge Tips</a></li>
-				<!--
-				<li><a href="resume.html">Resume</a></li>
-				-->
-				<li><a href="../publications.html">Publications</a></li>
-			</ul>
-			<p>&nbsp;</p>
-			<div style="margin-left:10px">
-<script type="text/javascript"><!--
-google_ad_client = "pub-1721904981084162";
-/* Homepage Gutter */
-google_ad_slot = "0044274311";
-google_ad_width = 120;
-google_ad_height = 600;
-//-->
-</script>
-<script type="text/javascript"
-src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script>
-</div>
-		</div>
-		<div id="bottomcorner"/>
-		<div id="topcorner"/>
-		</div>
-		<p>&nbsp;</p>
-	</body>
-<!-- #EndTemplate -->
-</html>
+				<!-- #EndEditable "content" -->
+				<div id="footer">
+					<p>&nbsp;</p>
+					<hr/>
+					<p>Copyright &copy; 1996-2013, Scott Stanchfield. All Rights Reserved.<br/>
+					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
+					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
+					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
+					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../images/cssplay_button.png" width="88" /></a></p>
+					<p>
+					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
+					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../images/feed-icon-14x14.png" width="14" />Want 
+					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div id="bottom"/>
+		<div id="navigation">
+			<ul>
+				<li><a href="../index.html">Home</a></li>
+				<li><a href="index.html">Articles</a></li>
+				<li><a href="../tools/index.html">Tools</a></li>
+				<li><a href="../evaj/index.html">Effective VisualAge for Java</a></li>
+				<li><a href="../eclipse/index.html">Eclipse Tips</a></li>
+				<li><a href="../vaj/index.html">VisualAge Tips</a></li>
+				<!--
+				<li><a href="resume.html">Resume</a></li>
+				-->
+				<li><a href="../publications.html">Publications</a></li>
+			</ul>
+			<p>&nbsp;</p>
+		</div>
+		<div id="bottomcorner"/>
+		<div id="topcorner"/>
+		</div>
+		<p>&nbsp;</p>
+	</body>
+<!-- #EndTemplate -->
+</html>
