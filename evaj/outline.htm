@@ -1,0 +1,1601 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- #BeginTemplate "../master.dwt" -->
+
+	<head>
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+		<!-- #BeginEditable "doctitle" -->
+		<title>Effective VisualAge for Java: Outline - Scott Stanchfield</title>
+		<!-- #EndEditable -->
+		<link href="../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
+		<!-- #BeginEditable "head" -->
+		<!-- #EndEditable -->
+		<style type="text/css">
+
+.style1 {
+	vertical-align: middle;
+}
+</style>
+	</head>
+
+	<body>
+		<div id="header">
+			<h1>JavaDude.com</h1>
+			<h4>-- Scott Stanchfield</h4>
+		</div>
+		<div id="content">
+			<div id="topBar">&nbsp;</div>
+			<div id="contentIndent">
+				<!-- #BeginEditable "content" -->
+<h1>Outline</h1>
+<h1><a href="http://www.amazon.com/exec/obidos/ASIN/0471317306/scottstanchfshom"><img alt="book cover" src="../images/effectivevaj.jpg" style="float:left" width="113" height="140"/></a>Effective VisualAge for Java, Version 3</h1>
+            <h2>by Scott Stanchfield and Isabelle Mauny</h2>
+            <p>ISBN: 0-471-31730-6</p>
+<ul>
+    <li>What is an IDE?
+        <ul>
+            <li>Enter the IDE</li>
+            <li>IDE Benefits</li>
+        </ul>
+    </li>
+    <li>Files, Be Gone!</li>
+    <li>Through the Eyes of VisualAge for Java
+        <ul>
+            <li>Repository, Workspace, and Workbench</li>
+            <li>The Repository</li>
+            <li>The Workspace</li>
+            <li>The Workbench</li>
+            <li>Teamwork in VisualAge for Java</li>
+        </ul>
+    </li>
+    <li>Method-Level Interaction</li>
+    <li>Incremental Compilation</li>
+    <li>Hello World!&nbsp;</li>
+</ul>
+<hr/>
+<h3>Chapter 2 Creating Code</h3>
+<ul>
+    <li>Looking at Your Code in the Workbench
+        <ul>
+            <li>Projects, Packages, Types, and Methods</li>
+        </ul>
+    </li>
+    <li>Choosing Appropriate Names
+        <ul>
+            <li>Basic Conventions</li>
+            <li>Types</li>
+            <li>Variables and Methods</li>
+            <li>Packages</li>
+            <li>Projects</li>
+        </ul>
+    </li>
+    <li>Workbench Layout</li>
+    <li>Creating Projects
+        <ul>
+            <li>Adding Elements from the Repository</li>
+        </ul>
+    </li>
+    <li>Creating Packages</li>
+    <li>Creating Classes
+        <ul>
+            <li>Creating Applications and Applets</li>
+        </ul>
+    </li>
+    <li>Creating Interfaces</li>
+    <li>Creating Fields
+        <ul>
+            <li>The Create Field SmartGuide</li>
+            <li>Direct Field Entry</li>
+            <li>Fields for JavaBean Component Properties</li>
+        </ul>
+    </li>
+    <li>Creating Methods
+        <ul>
+            <li>The Create Method SmartGuide</li>
+            <li>Manual Method Entry</li>
+            <li>Creating a Method Using Save</li>
+            <li>Method Templates</li>
+            <li>Generating Required Methods</li>
+            <li>Creating Accessor Methods for Fields</li>
+            <li>Overriding Methods</li>
+        </ul>
+    </li>
+    <li>Editing Your Code
+        <ul>
+            <li>Basic Editing
+                <ul>
+                    <li>Cursor Movement</li>
+                    <li>Selecting Code</li>
+                    <li>Copy/Cut/Paste</li>
+                    <li>Undo and Redo</li>
+                </ul>
+            </li>
+            <li>Saving Your Changes</li>
+            <li>Searching in the Source/Comment Pane
+                <ul>
+                    <li>Find/Replace</li>
+                    <li>Incremental Find</li>
+                </ul>
+            </li>
+            <li>Code Completion
+                <ul>
+                    <li>Keyword Completion</li>
+                    <li>Macros</li>
+                </ul>
+            </li>
+            <li>Compilation Errors
+                <ul>
+                    <li>Other ways to tell if you have errors</li>
+                    <li>Getting Rid of the Error Dialog</li>
+                </ul>
+            </li>
+            <li>Formatting Your Code</li>
+            <li>Key Bindings
+                <ul>
+                    <li>The Whatis Command</li>
+                </ul>
+            </li>
+            <li>Miscellaneous Commands
+                <ul>
+                    <li>Goto Line Number</li>
+                    <li>Open Selection</li>
+                    <li>Revert to Saved</li>
+                    <li>Commenting Code</li>
+                    <li>Indenting Code</li>
+                    <li>Sorting Selected Lines</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>Program Element Properties
+        <ul>
+            <li>Applet Parameters</li>
+            <li>Program Parameters</li>
+            <li>Class Path Parameters</li>
+            <li>Code Generation Parameters</li>
+            <li>Class Information</li>
+        </ul>
+    </li>
+    <li>Running Your Code
+        <ul>
+            <li>The Console</li>
+        </ul>
+    </li>
+    <li>Reorganizing Program Elements
+        <ul>
+            <li>Copying Elements</li>
+            <li>Moving Elements</li>
+            <li>Renaming Elements</li>
+            <li>Fixing/Migrating References</li>
+        </ul>
+    </li>
+</ul>
+<hr/>
+<h3>Chapter 3 Navigating Your Code</h3>
+<ul>
+    <li>Browsers, Pages, and Panes
+        <ul>
+            <li>Tree Panes
+                <ul>
+                    <li>Expanding and Collapsing Nodes</li>
+                    <li>Opening Elements in a New Browser</li>
+                    <li>Filtering the View</li>
+                </ul>
+            </li>
+            <li>List Panes</li>
+            <li>Graph Panes</li>
+            <li>Actions on Program Elements
+                <ul>
+                    <li>Projects</li>
+                    <li>Packages</li>
+                    <li>Classes and Interfaces</li>
+                    <li>Fields</li>
+                    <li>Methods</li>
+                </ul>
+            </li>
+            <li>Cloning and Locking Windows</li>
+            <li>Multiple Windows versus Single Window</li>
+        </ul>
+    </li>
+    <li>The Workbench
+        <ul>
+            <li>The Projects Page
+                <ul>
+                    <li>Setting Bookmarks</li>
+                </ul>
+            </li>
+            <li>The Packages Page
+                <ul>
+                    <li>List versus Tree Views</li>
+                    <li>Inheritance Filters</li>
+                    <li>Overriding the Easy Way</li>
+                </ul>
+            </li>
+            <li>The Classes and Interfaces Pages</li>
+            <li>The Managing Page</li>
+            <li>The All Problems Page</li>
+        </ul>
+    </li>
+    <li>The Project Browser
+        <ul>
+            <li>The Editions Page</li>
+        </ul>
+    </li>
+    <li>The Package Browser</li>
+    <li>The Class Browser</li>
+    <li>The Interface Browser</li>
+    <li>The Method Browser</li>
+    <li>Searching Your Workspace
+        <ul>
+            <li>Using the Class Selection Dialog</li>
+            <li>The Go To Command</li>
+            <li>Searching for Program Elements</li>
+            <li>Doing a Simple Search</li>
+            <li>Defining Working Sets</li>
+            <li>Search Results Window</li>
+            <li>Impact Analysis</li>
+            <li>Using Find/Replace</li>
+            <li>Using Text Search/Replace</li>
+        </ul>
+    </li>
+    <li>The Log</li>
+    <li>Customizing VisualAge for Java
+        <ul>
+            <li>General</li>
+            <li>General-&gt;Cache</li>
+            <li>General-&gt;Key Bindings</li>
+            <li>Appearance</li>
+            <li>Appearance-&gt;Lists</li>
+            <li>Coding</li>
+            <li>Coding-&gt;Compiler</li>
+            <li>Coding-&gt;Code Assist</li>
+            <li>Coding-&gt;Debugging</li>
+            <li>Coding-&gt;Formatter</li>
+            <li>Coding-&gt;Formatter-&gt;Spacing</li>
+            <li>Coding-&gt;Indentation</li>
+            <li>Coding-&gt;Keyword Completions and Coding-&gt;Macros</li>
+            <li>Coding-&gt;Managing</li>
+            <li>Coding-&gt;Method Javadoc and Type Javadoc</li>
+            <li>Help</li>
+            <li>Help-&gt;Tips and Help-&gt;Warnings</li>
+            <li>Resources</li>
+            <li>Resources-&gt;Resource Associations</li>
+            <li>RMI Registry</li>
+            <li>Visual Composition</li>
+            <li>Visual Composition-&gt;Code Generation</li>
+            <li>Visual Composition-&gt;Quick Form Manager</li>
+            <li>Remote Access to Tool API</li>
+            <li>Tools and Features&nbsp;</li>
+        </ul>
+    </li>
+</ul>
+<hr/>
+<h3>Chapter 4 Using Version Control</h3>
+<ul>
+    <li>Where does VisualAge Keep Code ?
+        <ul>
+            <li>The Repository</li>
+            <li>The Workspace</li>
+            <li>Enterprise versus Professional Edition</li>
+        </ul>
+    </li>
+    <li>Overview of Versioning
+        <ul>
+            <li>How VisualAge Associates Program Elements</li>
+            <li>Performing Version Control Tasks
+                <ul>
+                    <li>Creating Projects and Packages</li>
+                    <li>Versioning Life Cycle</li>
+                    <li>Working with Editions</li>
+                    <li>Packaging the Application</li>
+                    <li>Reconciling Changes</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>Working with a Team
+        <ul>
+            <li>Setting Up the Team Environment</li>
+            <li>Migrating From Professional to Enterprise</li>
+            <li>You Need Discipline and Communication</li>
+            <li>Forming The Team
+                <ul>
+                    <li>Developers and Owners</li>
+                    <li>Setting Component Ownership</li>
+                </ul>
+            </li>
+            <li>Development Cycle
+                <ul>
+                    <li>Creating Rolling Baselines</li>
+                    <li>Creating Scratch Editions</li>
+                    <li>Delivering The Application</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>Grouping Multiple Projects
+        <ul>
+            <li>Creating Solution Maps</li>
+            <li>Solution Maps and Ownership</li>
+            <li>Exporing/Importing Solution Maps</li>
+        </ul>
+    </li>
+    <li>Managing Resources</li>
+    <li>Extracting Repository Information</li>
+    <li>A Bit of Administration
+        <ul>
+            <li>Purging Program Elements</li>
+            <li>Compacting the Repository</li>
+            <li>Managing Multiple Repositories</li>
+        </ul>
+    </li>
+    <li>Understanding the IDE Startup Process</li>
+    <li>Integration with External Software Configuration Management (SCM) Tools
+        <ul>
+            <li>What Has Changed in Version 3.5&nbsp;</li>
+        </ul>
+    </li>
+</ul>
+<hr/>
+<h3>Chapter 5 Testing And Debugging</h3>
+<ul>
+    <li>The Integrated Debugger
+        <ul>
+            <li>The Debugger Window
+                <ul>
+                    <li>The Debug Page</li>
+                    <li>The Breakpoints Page</li>
+                    <li>The Exceptions Page</li>
+                </ul>
+            </li>
+            <li>Managing Breakpoints
+                <ul>
+                    <li>Configuring Thread Breakpoints</li>
+                    <li>Attaching Expressions to Breakpoints</li>
+                    <li>Configuring Iteration Breakpoints</li>
+                    <li>Globally Enabling/Disabling Breakpoints</li>
+                </ul>
+            </li>
+            <li>The Debugger Commands
+                <ul>
+                    <li>Rewinding Execution</li>
+                </ul>
+            </li>
+            <li>Handling Threads</li>
+            <li>Monitoring and Inspecting Variables
+                <ul>
+                    <li>Watching Variables and Expressions</li>
+                    <li>The Inspector Window</li>
+                    <li>The Evaluation Window</li>
+                </ul>
+            </li>
+            <li>Modifying Code While Debugging
+                <ul>
+                    <li>Modifying Method Contents</li>
+                    <li>Modifying Variable Values</li>
+                </ul>
+            </li>
+            <li>Handling Exceptions</li>
+            <li>Debugging External Classes</li>
+            <li>Debugging System Programs</li>
+            <li>Debugging Program Initialization</li>
+        </ul>
+    </li>
+    <li>The Scrapbook
+        <ul>
+            <li>Handling Scrapbook Pages</li>
+            <li>Interacting With the Code</li>
+            <li>Understanding Java Contexts</li>
+            <li>Runtime Behavior</li>
+            <li>Importing External Code</li>
+        </ul>
+    </li>
+    <li>The Distributed Debugger
+        <ul>
+            <li>Debugger Architecture</li>
+            <li>Installing the Distributed Debugger</li>
+            <li>Debugging Interpreted Java Code
+                <ul>
+                    <li>Exporting Code for Debugging</li>
+                    <li>Starting the Debugger</li>
+                    <li>The Debugger Client</li>
+                    <li>Setting Breakpoints</li>
+                    <li>Stepping in the Code</li>
+                    <li>Monitoring Variables and Expressions&nbsp;</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+<hr/>
+<h3>Chapter 6 Integrating With The File System</h3>
+<ul>
+    <li>General Concepts</li>
+    <li>Exporting Code
+        <ul>
+            <li>Exporting HTML for Applets</li>
+            <li>Consideration for JavaBeans Components</li>
+            <li>Strategies for Debugging</li>
+            <li>Preserving Visual Composition Data</li>
+            <li>Deploying Jar Files</li>
+        </ul>
+    </li>
+    <li>Importing Code
+        <ul>
+            <li>Importing from a Directory</li>
+            <li>Importing Files With Errors</li>
+        </ul>
+    </li>
+    <li>Using Repository Interchange Files
+        <ul>
+            <li>Exporting Interchange Files</li>
+            <li>Importing Interchange Files</li>
+            <li>Migrating from Professional to Enterprise</li>
+        </ul>
+    </li>
+    <li>Managing Resource Files
+        <ul>
+            <li>Loading Resources in your Program</li>
+            <li>Sharing Resources</li>
+            <li>Resources and Export/Import</li>
+            <li>Resources and Repository Interchange Files</li>
+        </ul>
+    </li>
+    <li>Creating HTML Documentation
+        <ul>
+            <li>Changing Method and Type Javadoc Comments&nbsp;</li>
+        </ul>
+    </li>
+</ul>
+<hr/>
+<h3>Chapter 7 Introduction To JavaBean Components</h3>
+<ul>
+    <li>Beans are Vain Classes</li>
+    <li>What Makes a Class a Bean?</li>
+    <li>Bean Features
+        <ul>
+            <li>Properties
+                <ul>
+                    <li>Simple Properties</li>
+                    <li>Indexed Properties</li>
+                    <li>Bound and Constrained Properties</li>
+                    <li>Bound Properties: Reporting Property-State Changes</li>
+                    <li>Constrained Properties: Property Validation by
+                        Delegation</li>
+                    <li>How Can a Tool Tell is a Property is Bound or
+                        Constrained?</li>
+                </ul>
+            </li>
+            <li>Event Sets
+                <ul>
+                    <li>An Event Class</li>
+                    <li>An Event-Listener Interface</li>
+                    <li>An Event-Source Bean</li>
+                    <li>A Sample Event Listener</li>
+                    <li>Determining Which Events Are Fired</li>
+                </ul>
+            </li>
+            <li>Methods</li>
+        </ul>
+    </li>
+    <li>Bean-Builder Tools and Beans
+        <ul>
+            <li>Introspection and the Role of BeanInfo Classes&nbsp;</li>
+        </ul>
+    </li>
+</ul>
+<hr/>
+<h3>Chapter 8 The BeanInfo Editor</h3>
+<ul>
+    <li>Birth of a Bean</li>
+    <li>The BeanInfo Editor</li>
+    <li>Basic Use of the BeanInfo Editor</li>
+    <li>Working with Properties
+        <ul>
+            <li>Adding and Extending Properties</li>
+            <li>Bound Properties</li>
+            <li>Constrained Properties</li>
+            <li>Modifying Properties</li>
+            <li>Deleting Properties</li>
+            <li>Changing the Type of a Property</li>
+            <li>Changing a Property's Bound or Constrained Status</li>
+        </ul>
+    </li>
+    <li>Working with Event Sets
+        <ul>
+            <li>Adding Support for Existing Events</li>
+            <li>Creating New Events
+                <ul>
+                    <li>Generating Event Support Classes</li>
+                    <li>Adding Details to the Generated Event Class</li>
+                    <li>Firing the Generated Events</li>
+                </ul>
+            </li>
+            <li>Deleting Event Sets</li>
+        </ul>
+    </li>
+    <li>Working with Methods
+        <ul>
+            <li>Creating Methods through the BeanInfo Editor</li>
+            <li>Deleting Methods</li>
+        </ul>
+    </li>
+    <li>Synchronization of a Bean and its BeanInfo
+        <ul>
+            <li>Adding Features to a BeanInfo Class&nbsp;</li>
+        </ul>
+    </li>
+</ul>
+<hr/>
+<h3>Chapter 9 Extension And Composition</h3>
+<ul>
+    <li>Creating Beans through Extension
+        <ul>
+            <li>General Strategies for Easily Extendible Beans</li>
+            <li>A Simple Extension</li>
+            <li>Extending to Bind an Unbound Property</li>
+            <li>Binding Swing Components</li>
+        </ul>
+    </li>
+    <li>Creating Beans through Composition
+        <ul>
+            <li>A Simple Delegation Scenario&nbsp;</li>
+        </ul>
+    </li>
+</ul>
+<hr/>
+<h3>Chapter 10 Bean Composition In The VCE</h3>
+<ul>
+    <li>I Didn't Mean to Do That!</li>
+    <li>Basic VCE Operation</li>
+    <li>The Beans Palette
+        <ul>
+            <li>Customizing the Beans Palette
+                <ul>
+                    <li>Adding Individual Beans to the Palette</li>
+                    <li>Adding Several Beans from a Project to the Palette</li>
+                    <li>Adding to the Beans Palette During JAR Import</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>The Design Area
+        <ul>
+            <li>Dropping Beans</li>
+            <li>Selecting Beans</li>
+            <li>Popup Menus for Beans in the Design Area</li>
+            <li>Naming Beans</li>
+            <li>Moving Beans</li>
+            <li>Copying Beans</li>
+            <li>Deleting Beans</li>
+            <li>Morphing Beans</li>
+            <li>Changing the Definition of a Used Bean</li>
+        </ul>
+    </li>
+    <li>The Beans List</li>
+    <li>Property Sheets
+        <ul>
+            <li>Expert and Hidden Properties</li>
+            <li>Multiple Selection and the Property Sheet</li>
+            <li>Resetting Property Values</li>
+        </ul>
+    </li>
+    <li>Using Beans to Compose Beans
+        <ul>
+            <li>Break It Down!</li>
+            <li>Promoting Features
+                <ul>
+                    <li>Promoting a Property</li>
+                    <li>Promoting an Event</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>Creating an Application or Applet
+        <ul>
+            <li>Creating a Visual Application from Scratch
+                <ul>
+                    <li>Create a Visual Class</li>
+                    <li>Visually Compose the Class</li>
+                </ul>
+            </li>
+            <li>The Create Applet SmartGuide
+                <ul>
+                    <li>The Create Applet Page</li>
+                    <li>The Applet Properties Page</li>
+                    <li>The Events Page</li>
+                    <li>The Code Writer Page</li>
+                    <li>The Parameters Page</li>
+                    <li>The Applet Info Page</li>
+                </ul>
+            </li>
+            <li>The Create Application SmartGuide
+                <ul>
+                    <li>The Create Application Page</li>
+                    <li>The Applications Details Page</li>
+                    <li>Customizing the Menu Bar</li>
+                    <li>Customizing the Tool Bar</li>
+                    <li>Generating Code&nbsp;</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+<hr/>
+<h3>Chapter 11 Layout Management</h3>
+<ul>
+    <li>GUI Design versus GUI Implementation</li>
+    <li>Absolute Positioning of Components
+        <ul>
+            <li>Alignment Tools</li>
+            <li>Distribution Tools</li>
+            <li>Sizing Tools</li>
+        </ul>
+    </li>
+    <li>Layout Management in the VCE
+        <ul>
+            <li>FlowLayout</li>
+            <li>BorderLayout</li>
+            <li>GridLayout</li>
+            <li>CardLayout</li>
+            <li>BoxLayout
+                <ul>
+                    <li>Box Beans</li>
+                </ul>
+            </li>
+            <li>GridBagLayout</li>
+        </ul>
+    </li>
+    <li>A Useful GUI Pattern</li>
+    <li>Quick Form
+        <ul>
+            <li>Generating a Quick Form
+                <ul>
+                    <li>Defining a bean for our Quick Form</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>Custom Layout Managers
+        <ul>
+            <li>The Public Default Constructor</li>
+            <li>Layout Constraints</li>
+            <li>Layout Parameters</li>
+            <li>Using the Custom Layout Manager</li>
+        </ul>
+    </li>
+    <li>Focus Ordering in the VCE
+        <ul>
+            <li>AWT Tab Ordering</li>
+            <li>Swing Tab Ordering&nbsp;</li>
+        </ul>
+    </li>
+</ul>
+<hr/>
+<h3>Chapter 12 Connections</h3>
+<ul>
+    <li>Types of Connections
+        <ul>
+            <li>Connection Sources and Targets</li>
+            <li>Event Connections
+                <ul>
+                    <li>Event-to-Method Connections</li>
+                    <li>Event-to-Code Connections</li>
+                    <li>Property-to-Method and Property-to-Code Connections</li>
+                    <li>Event-to-Property Connections</li>
+                </ul>
+            </li>
+            <li>Connection Parameters
+                <ul>
+                    <li>Setting Constant Parameter Values</li>
+                    <li>Passing Event Data</li>
+                    <li>Parameter Connections</li>
+                </ul>
+            </li>
+            <li>Property-to-Property Connections
+                <ul>
+                    <li>Target Property Initialization</li>
+                    <li>Synchronization of Bound Properties</li>
+                    <li>An Example</li>
+                    <li>Property-to-Property versus PropertyChangeEvent-to-Property</li>
+                    <li>Changing Property-to-Property Direction</li>
+                    <li>Changing Source and Target Events</li>
+                </ul>
+            </li>
+            <li>Result Connections</li>
+            <li>Exceptions During Connection Processing
+                <ul>
+                    <li>Handling Specific Connection Exceptions</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>Renaming Connections</li>
+    <li>Changing the Source or Target Bean</li>
+    <li>Changing Connection Shape</li>
+    <li>Order of Connection Execution</li>
+</ul>
+<hr/>
+<h3>Chapter 13 Variables And Instances</h3>
+<ul>
+    <li>Tearing-off Properties
+        <ul>
+            <li>Manually Reaching our Goal</li>
+            <li>Using Tear-Off Properties to Automate the Process</li>
+        </ul>
+    </li>
+    <li>Casting Using Variables
+        <ul>
+            <li>Casting Example: Manipulating a CardLayout</li>
+        </ul>
+    </li>
+    <li>Variables as Plugs for External Classes</li>
+    <li>When a Variable Changes</li>
+    <li>Switching Between Variables and Instances</li>
+    <li>Variable Initialization</li>
+</ul>
+<hr/>
+<h3>Chapter 14 Design Patterns For The VCE</h3>
+<ul>
+    <li>General Strategies
+        <ul>
+            <li>Less is More</li>
+            <li>Code is Ok, If it is Visible</li>
+            <li>Breakdown for Maintenance</li>
+            <li>Separation is Key</li>
+        </ul>
+    </li>
+    <li>Connection Patterns
+        <ul>
+            <li>Factorization Patterns
+                <ul>
+                    <li>Trigger Pattern</li>
+                    <li>Funnel Pattern</li>
+                    <li>Enabler Pattern</li>
+                </ul>
+            </li>
+            <li>Conditional Patterns
+                <ul>
+                    <li>Visual Assertion Pattern</li>
+                    <li>Conditional Fork Pattern</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>GUI Composition Patterns
+        <ul>
+            <li>Encapsulated Promotion</li>
+            <li>Hook Pattern</li>
+            <li>Event Catcher</li>
+            <li>Event Percolation Pattern</li>
+        </ul>
+    </li>
+    <li>Boolean and Arithmetic Operations</li>
+</ul>
+<hr/>
+<h3>Chapter 15 Model-View-Controller In The VCE</h3>
+<p>Available online at <a href="../articles/vaddmvc1/mvc1.htm">MVC In VisualAge 
+for Java</a>.</p>
+<ul>
+    <li>What Is MVC?</li>
+    <li>Interaction Between Components</li>
+    <li>Delegates - Combining View and Controller</li>
+    <li>Why is MVC So Important?</li>
+    <li>Implementing MVC in VisualAge for Java</li>
+    <li>Defining a Model Interface
+        <ul>
+            <li>Bound Properties and GUI Components</li>
+            <li>Making Things Easier in VisualAge for Java</li>
+        </ul>
+    </li>
+    <li>Example Models</li>
+    <li>Defining SimpleAddressData</li>
+    <li>Defining AddressDataModel</li>
+    <li>Defining HashAddressBook</li>
+    <li>Defining AddressBookModel</li>
+    <li>Filling in the Implementation Details for HashAddressBook</li>
+    <li>Creating Delegates</li>
+    <li>A Delegate for AddressBook</li>
+    <li>Connecting as an Application</li>
+    <li>Running the Application</li>
+    <li>Fixing the Problem
+        <ul>
+            <li>Adding a Simple Copy to the add() Method</li>
+            <li>Using the Prototype Pattern</li>
+            <li>Using a Factory Model</li>
+        </ul>
+    </li>
+    <li>Adding Another Delegate
+        <ul>
+            <li>Using the New Delegate&nbsp;</li>
+        </ul>
+    </li>
+</ul>
+<hr/>
+<h3>Chapter 16 Advanced Model-View-Controller Techniques</h3>
+<p>Available online at <a href="../articles/vaddmvc2/mvc2.html">Advanced MVC</a>.</p>
+<ul>
+    <li>Advanced MVC Strategies</li>
+    <li>Advanced Models and Delegate
+        <ul>
+            <li>Models as Proxies
+                <ul>
+                    <li>Models as Simple Filters</li>
+                    <li>Filtering Existing Data</li>
+                    <li>Narrowing your Phone List</li>
+                    <li>Filtering is Only the Beginning</li>
+                    <li>Models as Joins</li>
+                    <li>Thinking About More Proxies</li>
+                </ul>
+            </li>
+            <li>Selection Models
+                <ul>
+                    <li>Enter the Selection Model</li>
+                    <li>Implementing a Selection Model</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>Food for Thought
+        <ul>
+            <li>Documentation</li>
+            <li>Advanced Delegates&nbsp;</li>
+        </ul>
+    </li>
+</ul>
+<hr/>
+<h3>Chapter 17 Factory Beans</h3>
+<ul>
+    <li>When to Use Factory Bean
+        <ul>
+            <li>Temporary Storage Creation</li>
+            <li>Lazy Instantiation</li>
+        </ul>
+    </li>
+    <li>Implementing Event Percolation</li>
+</ul>
+<hr/>
+<h3>Chapter 18 Using AWT And Swing In The VCE</h3>
+<ul>
+    <li>Heavyweight and Lightweight Components</li>
+    <li>AWT versus Swing and MVC</li>
+    <li>Swing Borders and Icons</li>
+    <li>Look and Feel</li>
+    <li>Top-level Components</li>
+    <li>Menus
+        <ul>
+            <li>Swing Menu Construction</li>
+        </ul>
+    </li>
+    <li>Dialogs</li>
+    <li>Grouping Radio Buttons</li>
+    <li>Scrolling Swing Components</li>
+    <li>JTabbedPane</li>
+    <li>Swing Model Usage</li>
+    <li>TableColumn</li>
+    <li>Desktop Panes and Internal Frames</li>
+    <li>Using Swing 1.1.1 in VisualAge for Java, version 3.0
+        <ul>
+            <li>Current Swing Support</li>
+            <li>Setting up Swing 1.1.1 in VisualAge for Java, version 3.0</li>
+            <li>Writing Swing 1.1.1 Applications in VisualAge for Java, version
+                3.0</li>
+            <li>Migrating Swing Code to VisualAge for Java, version 3.5&nbsp;</li>
+        </ul>
+    </li>
+</ul>
+<hr/>
+<h3>Chapter 19 Handwritten Code vs. Generated Code</h3>
+<p><b>Note: A large section of this chapter was omitted due to space
+limitations.</b> This section, &quot;Understanding the Generated Code&quot;,
+appears online at <a href="file:///C:/webs/javadude.com/vaj/index.html">http://www.javadude.com/vaj</a>
+under &quot;Understanding the Generated Code&quot;<b><i>.</i></b></p>
+<ul>
+    <li>Adding User Code to Generated Methods
+        <ul>
+            <li>General Advice: Do Not Do It!</li>
+            <li>Where It Is Safe to Add User Code</li>
+            <li>Keep Clean Separation!</li>
+        </ul>
+    </li>
+    <li>Keep Interfaces Simple</li>
+    <li>Use Beans Consistently</li>
+</ul>
+<hr/>
+<h3>Chapter 20 Bean Customization</h3>
+<ul>
+    <li>Property Editors
+        <ul>
+            <li>Saving the Last Property Value in Bean Builders
+                <ul>
+                    <li>The setValue() Method</li>
+                    <li>The getValue() Method</li>
+                </ul>
+            </li>
+            <li>Starting Simple: String Editors
+                <ul>
+                    <li>The getJavaInitializationString() Method</li>
+                </ul>
+            </li>
+            <li>Using the Property Editor
+                <ul>
+                    <li>Explicit Property Editor Association Using BeanInfo</li>
+                    <li>Explicit Property Editor Registration</li>
+                    <li>Using Naming Conventions to Edit Properties</li>
+                    <li>Recommended Registration Strategies</li>
+                    <li>How the VCE Locates Property Editors</li>
+                </ul>
+            </li>
+            <li>Making the Property Editor a Bit Nicer...</li>
+            <li>Taking Control of the Property Edit</li>
+            <li>A More Natural Interface</li>
+            <li>The Final Touch</li>
+            <li>Locating Property Editors, Revisited</li>
+        </ul>
+    </li>
+    <li>Customizers
+        <ul>
+            <li>Simple and Direct Property Edits
+                <ul>
+                    <li>Customizers Assist Inter-Property Relationships</li>
+                </ul>
+            </li>
+            <li>Problems with Complex Property Edits</li>
+        </ul>
+    </li>
+    <li>When to Provide Property Editors and Customizers</li>
+</ul>
+<hr/>
+<h3>Chapter 21 Database Programming</h3>
+<ul>
+    <li>Populating Data in a Table
+        <ul>
+            <li>Checking Prerequisites
+                <ul>
+                    <li>Adding the Access Bean Feature</li>
+                    <li>Adding JDBC Drivers to the Class Path</li>
+                </ul>
+            </li>
+            <li>Creating the InsertClassics Application GUI</li>
+            <li>Customizing the Modify Bean
+                <ul>
+                    <li>Creating a Package for the Database Access Class</li>
+                    <li>Creating a Modify Bean</li>
+                    <li>Defining the Database Connection</li>
+                    <li>Using DataSources</li>
+                    <li>Defining a DataSource</li>
+                    <li>Testing a DataSource Programmatically</li>
+                    <li>Using a DataSource in a Database Connection</li>
+                    <li>Defining the SQL Specification</li>
+                    <li>A Look at the Generated Code</li>
+                </ul>
+            </li>
+            <li>Completing the Application
+                <ul>
+                    <li>Registering a Quick Form</li>
+                    <li>Using Quick Form on the Modify Bean</li>
+                    <li>Finalizing the Application</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>Displaying a List of Rows
+        <ul>
+            <li>Creating the GUI</li>
+            <li>Customizing the Select Bean
+                <ul>
+                    <li>Choosing Database Tables</li>
+                    <li>Defining Joins</li>
+                    <li>Defining Conditions</li>
+                    <li>Selecting Columns to Show</li>
+                    <li>Ordering the Rows</li>
+                    <li>Reviewing the Mapping</li>
+                    <li>Testing the SQL Statement</li>
+                </ul>
+            </li>
+            <li>Changing Caching Options
+                <ul>
+                    <li>Navigating in the ResultSet</li>
+                    <li>Handling Exceptions</li>
+                </ul>
+            </li>
+            <li>Completing the GUI
+                <ul>
+                    <li>Creating Table Columns Manually</li>
+                    <li>Using the Select Bean to Update Data</li>
+                </ul>
+            </li>
+            <li>Understanding Other Expert Properties</li>
+            <li>Using the Database Application SmartGuide</li>
+            <li>Using the Selector Beans</li>
+        </ul>
+    </li>
+    <li>Querying Data with Stored Procedures
+        <ul>
+            <li>Configuring DB2</li>
+            <li>Invoking the Stored Procedure Builder</li>
+            <li>Creating a Database Connection</li>
+            <li>Creating a Stored Procedure</li>
+            <li>Special Considerations for VisualAge</li>
+            <li>Calling the Stored Procedure from an Application</li>
+        </ul>
+    </li>
+    <li>Developing SQLJ Programs
+        <ul>
+            <li>Prerequisites</li>
+            <li>Editing SQLJ Files
+                <ul>
+                    <li>Using a Different Editor</li>
+                    <li>Creating SQLJ Files</li>
+                    <li>The Translation Process</li>
+                    <li>Setting the Right Translator</li>
+                    <li>Changing Translation Options</li>
+                    <li>Calling Translate</li>
+                </ul>
+            </li>
+            <li>Profile Customization</li>
+            <li>Debugging SQLJ Programs
+                <ul>
+                    <li>Deploying the Code</li>
+                    <li>Creating an Environment File</li>
+                    <li>Debugging the Application</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+<hr/>
+<h3>Chapter 22 Developing Distributed Applications</h3>
+<ul>
+    <li>Overview of Distributed Objects</li>
+    <li>Developing RMI Applications
+        <ul>
+            <li>Writing the Remote Interface</li>
+            <li>Creating the Server Application</li>
+            <li>Generating RMI Stubs and Skeletons</li>
+            <li>Creating a Client Application</li>
+            <li>Running the Application</li>
+        </ul>
+        <ul>
+            <li>The Transition to CORBA</li>
+        </ul>
+    </li>
+    <li>Developing CORBA Applications
+        <ul>
+            <li>Pre-requisites</li>
+            <li>The IDL Page</li>
+            <li>Creating the Counter Interface
+                <ul>
+                    <li>Creating an IDL Group</li>
+                    <li>Adding an IDL Object</li>
+                </ul>
+            </li>
+            <li>The Evil Reserved Package</li>
+            <li>Installing a Third-party ORB</li>
+            <li>Setting Compiling Options</li>
+            <li>Generating the Java Classes</li>
+            <li>Versioning the IDL and Generated Classes</li>
+            <li>Importing and Exporting IDL Files</li>
+            <li>Searching IDL</li>
+        </ul>
+    </li>
+</ul>
+<hr/>
+<h3>Chapter 23 Enterprise Programming</h3>
+<ul>
+    <li>Introduction to Enterprise Beans
+        <ul>
+            <li>Enterprise JavaBeans Architecture</li>
+            <li>Enterprise Beans Types
+                <ul>
+                    <li>Session Beans</li>
+                    <li>Entity Beans</li>
+                </ul>
+            </li>
+            <li>Enterprise Beans and &quot;Normal&quot; Beans</li>
+        </ul>
+    </li>
+    <li>Developing a Simple Session Bean
+        <ul>
+            <li>Introduction to the EJBs Page</li>
+            <li>The Hello World Enterprise Bean
+                <ul>
+                    <li>Adding an EJB Group</li>
+                    <li>The Evil Reserved Package</li>
+                    <li>Creating the Session Bean</li>
+                    <li>Adding Business Logic</li>
+                </ul>
+            </li>
+            <li>Modifying the Deployment Descriptor</li>
+            <li>Testing the Hello World Bean
+                <ul>
+                    <li>Generating Deployment Code and Test Client</li>
+                    <li>Setting Up the Execution Environment</li>
+                    <li>Running the Test Client</li>
+                    <li>Using the TestClient in Version 3.5</li>
+                    <li>Modifying Code on the Fly</li>
+                </ul>
+            </li>
+            <li>Creating a Client Application</li>
+            <li>Using Access Beans
+                <ul>
+                    <li>Creating a Java Bean Wrapper Access Bean</li>
+                    <li>A Look at the Access Bean Code</li>
+                    <li>Modifying the Client Program</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>Working With Entity Beans
+        <ul>
+            <li>Creating the Song Entity Bean
+                <ul>
+                    <li>Creating the Entity Bean</li>
+                    <li>Defining Container-Managed Fields</li>
+                    <li>Modifying ejbCreate Methods</li>
+                </ul>
+            </li>
+            <li>Database Mapping
+                <ul>
+                    <li>Introducing VisualAge Mapping Tools</li>
+                    <li>Using the Top-Down Approach
+                        <ul>
+                            <li>Handling the Database Schema</li>
+                            <li>Creating the Schema in the Database</li>
+                            <li>Converting Java Types to SQL Types</li>
+                            <li>Handling the Schema Map</li>
+                        </ul>
+                    </li>
+                    <li>Using the Meet-in-the-Middle Approach
+                        <ul>
+                            <li>Import the Database Schema</li>
+                            <li>Creating the Schema Map</li>
+                            <li>Saving the Mapping Information</li>
+                        </ul>
+                    </li>
+                    <li>Testing an Entity Bean</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>Using Inheritance and Associations
+        <ul>
+            <li>Enterprise Beans Inheritance
+                <ul>
+                    <li>Looking at the Generated Code</li>
+                    <li>Using Single Table Mapping</li>
+                    <li>Using Root Leaf Mapping
+                        <ul>
+                            <li>Creating the Tables</li>
+                            <li>Defining Foreign-Key Relationships</li>
+                            <li>Mapping Tables to Enterprise Beans</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>EJB Associations
+                <ul>
+                    <li>A Look at the Generated Code</li>
+                    <li>Modifying the ejbCreate and ejbPostCreate Methods</li>
+                    <li>Completing the Table Mapping</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>Deployment Considerations
+        <ul>
+            <li>Deploying to WebSphere Advanced Edition</li>
+            <li>Deploying to Other Application Servers</li>
+            <li>Deploying to Component Broker</li>
+        </ul>
+    </li>
+    <li>Troubleshooting
+        <ul>
+            <li>Deleting an Entity CMP Field</li>
+            <li>Deleting Enterprise Beans</li>
+            <li>Renaming Enterprise Beans</li>
+            <li>Changing an EJB Package Name</li>
+            <li>Importing Enterprise Beans Definitions to the EJB Page</li>
+            <li>Transporting EJBs Definition</li>
+        </ul>
+    </li>
+    <li>Migrating from Version 3.02 to Version 3.5</li>
+    <li>Advanced Topics
+        <ul>
+            <li>Declaring Const Methods</li>
+            <li>Defining Environment Variables</li>
+            <li>Creating Finder Methods</li>
+            <li>Creating an EJB Home Factory&nbsp;</li>
+        </ul>
+    </li>
+</ul>
+<hr/>
+<h3>Chapter 24 Developing Servlets And Java Server Pages</h3>
+<ul>
+    <li>Installing and Testing the Environment
+        <ul>
+            <li>Prerequisites</li>
+            <li>Using the WebSphere Test Environment
+                <ul>
+                    <li>Starting the WebSphere Test Environment (version 3.02)</li>
+                    <li>Stopping the WebSphere Test Environment (version 3.02)</li>
+                    <li>Starting/Stopping the WebSphere Test Environment
+                        (version 3.5)</li>
+                </ul>
+            </li>
+            <li>Testing the Installation</li>
+        </ul>
+    </li>
+    <li>Configuring the WebSphere Test Environment
+        <ul>
+            <li>Modifying the HTTP Port and Document Root Properties</li>
+        </ul>
+    </li>
+    <li>Developing Servlets
+        <ul>
+            <li>Quick Introduction to Servlets</li>
+            <li>Creating the Calcday Servlet
+                <ul>
+                    <li>A Reusable Basic Servlet</li>
+                    <li>Creating the Day Bean</li>
+                    <li>Creating the CalcdayServlet</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>Testing Servlets
+        <ul>
+            <li>Using the Servlet Wizard (version 3.5 only)</li>
+            <li>Unit Testing with Servlet Launcher</li>
+            <li>Calling a Servlet from an HTML Page</li>
+        </ul>
+    </li>
+    <li>Debugging Servlets</li>
+    <li>Developing JSP Components
+        <ul>
+            <li>Quick Intro to JSP Components</li>
+            <li>Choosing the Right JSP Compiler (version 3.02 only)</li>
+            <li>Modifying the CalcdayServlet</li>
+            <li>Completing the JSP Files</li>
+            <li>Running and Debugging JavaServer Pages
+                <ul>
+                    <li>Setting JSP Debugging Options</li>
+                    <li>Working with the JSP Execution Monitor</li>
+                    <li>Debugging JSP Components</li>
+                    <li>Dealing with JSP Syntax Errors</li>
+                    <li>Dealing with JSP Java Errors</li>
+                    <li>Stepping in JSP Source Code</li>
+                    <li>Import Troubleshooting</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>Calling Enterprise Beans From Servlets
+        <ul>
+            <li>Creating the Song Access Bean</li>
+            <li>Testing the Access Bean</li>
+            <li>Creating the ListSongs servlet</li>
+            <li>Completing the ListSongs JSP Component</li>
+            <li>Testing the Whole Solution</li>
+        </ul>
+    </li>
+    <li>Advanced Configuration
+        <ul>
+            <li>Setting Servlet Engine Properties
+                <ul>
+                    <li>Changing Transport Definitions (version 3.5 only)</li>
+                    <li>Changing Hostname Bindings</li>
+                </ul>
+            </li>
+            <li>Working with Web Applications</li>
+            <li>Creating Your Own Web Application</li>
+            <li>Customizing Default Servlets in A Web Application</li>
+            <li>Adding User Servlets to a Web Application</li>
+            <li>Starting the Servlet Engine Manually (version 3.02 only)&nbsp;</li>
+        </ul>
+    </li>
+</ul>
+<hr/>
+<h3>Chapter 25 Tool Integration</h3>
+<p>An early version of this chapter is available online at <a href="file:///C:/webs/javadude.com/vaj/index.html">http://www.javadude.com/vaj</a>.
+See &quot;Using the Tool API&quot;.</p>
+<ul>
+    <li>Features
+        <ul>
+            <li>Creating Features
+                <ul>
+                    <li>Step 1: Export the Projects</li>
+                    <li>Step 2: Copy the Project Resources</li>
+                    <li>Step 3: Create Help HTML</li>
+                    <li>Step 4: Create the Control File</li>
+                    <li>Step 5: Delete the Projects from Your Workspace</li>
+                    <li>Step 6: Shutdown and Restart VisualAge for Java</li>
+                    <li>Step 7: Add the Feature</li>
+                    <li>Step 8: I Say Zip it! Zip it Good!</li>
+                    <li>Updating Existing Features</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>Tool Integration
+        <ul>
+            <li>Developing Tools
+                <ul>
+                    <li>Step 1: Add the Tool API Feature</li>
+                    <li>Step 2: Write the Tool Code</li>
+                    <li>Step 3: Export the Code</li>
+                    <li>Step 4: Copy Resources and Help</li>
+                    <li>Step 5: Create the Control File</li>
+                    <li>Tool Contexts</li>
+                    <li>Sample Control Files</li>
+                    <li>Step 6: Shutdown and Restart VisualAge for Java</li>
+                    <li>Step 7: Run it!</li>
+                    <li>Step 8: When a New Tool Comes Along, You Must Zip It!</li>
+                    <li>Updating Existing Tools</li>
+                </ul>
+            </li>
+            <li>VCE Tool Setup</li>
+            <li>Testing and Execution</li>
+        </ul>
+    </li>
+    <li>Writing a Tool
+        <ul>
+            <li>Version Considerations</li>
+            <li>The Tool API Packages</li>
+            <li>Are We Running in VisualAge for Java?
+                <ul>
+                    <li>A Simple Example</li>
+                </ul>
+            </li>
+            <li>Interfaces Everywhere!</li>
+            <li>Connecting to the Workspace</li>
+            <li>Are We Running Team Version Control?</li>
+            <li>Workspace and Repository Contents
+                <ul>
+                    <li>Workspace and Repository Models</li>
+                    <li>The Workspace Interface</li>
+                    <li>The Repository Interface</li>
+                    <li>Working with Projects</li>
+                    <li>Working with Packages</li>
+                    <li>Working with Types</li>
+                </ul>
+            </li>
+            <li>Running a Class</li>
+            <li>Helping the User Pick an Object
+                <ul>
+                    <li>Common Parameters</li>
+                    <li>Workspace Prompting Methods</li>
+                </ul>
+            </li>
+            <li>Exporting and Importing
+                <ul>
+                    <li>Import and Export Specifications</li>
+                </ul>
+            </li>
+            <li>Generating Code
+                <ul>
+                    <li>The Code Generation Interfaces</li>
+                    <li>Code Generation Tasks</li>
+                </ul>
+            </li>
+            <li>Storing Tool Options
+                <ul>
+                    <li>Setting Tool Data</li>
+                    <li>Checking to See If Tool Data Exists</li>
+                    <li>Reading the Tool Data</li>
+                    <li>Deleting the Tool Data</li>
+                    <li>Storing Other Files</li>
+                    <li>Workspace and Repository Data</li>
+                </ul>
+            </li>
+            <li>Miscellaneous Features</li>
+            <li>Removing Features and Tools</li>
+        </ul>
+    </li>
+    <li>Internationalization and Features/Tools</li>
+</ul>
+<hr/>
+<h3>Appendix A Internationalization</h3>
+<ul>
+    <li>What is Internationalization?
+        <ul>
+            <li>What Must Be Internationalized?</li>
+        </ul>
+    </li>
+    <li>String Internationalization
+        <ul>
+            <li>The Externalize Strings Command</li>
+            <li>Where Did All My Strings Go?</li>
+            <li>Now What?</li>
+            <li>Changing VCE Properties After Externalizing Strings</li>
+        </ul>
+    </li>
+    <li>General Internationalization Strategy</li>
+</ul>
+<hr/>
+<h3>Appendix B Maintenance And Troubleshooting</h3>
+<ul>
+    <li>Performance
+        <ul>
+            <li>Fragmentation and Disk Speed</li>
+            <li>Workspace and Repository Size
+                <ul>
+                    <li>Keeping a Lean Workspace</li>
+                    <li>Warehousing</li>
+                    <li>Purging</li>
+                </ul>
+            </li>
+            <li>System Resources</li>
+        </ul>
+    </li>
+    <li>Maintenance and Recovery
+        <ul>
+            <li>Backups
+                <ul>
+                    <li>The Repository</li>
+                    <li>The Workspace</li>
+                    <li>Other Files</li>
+                </ul>
+            </li>
+            <li>Corrupt Workspace Recovery
+                <ul>
+                    <li>Recovering Workspaces that VisualAge Could Not</li>
+                </ul>
+            </li>
+            <li>Version Upgrades&nbsp;</li>
+        </ul>
+    </li>
+</ul>
+<hr/>
+<h3>Appendix C Overview of Changes in VisualAge for Java</h3>
+<ul>
+    <li>Changes Between Versions 3.02 and 3.5
+        <ul>
+            <li>The Workbench</li>
+            <li>Editor</li>
+            <li>Version Control</li>
+            <li>Removed Features</li>
+            <li>WebSphere Test Environment</li>
+            <li>Database Programming</li>
+            <li>Other Features</li>
+        </ul>
+    </li>
+    <li>Changes Between Versions 2.0 and 3.02
+        <ul>
+            <li>The Workbench</li>
+            <li>Keyboard Features</li>
+            <li>Code Assist</li>
+            <li>Editor</li>
+            <li>Searching</li>
+            <li>Import/Export</li>
+            <li>Debugging</li>
+            <li>Scrapbook</li>
+            <li>VCE</li>
+            <li>BeanInfo</li>
+            <li>WebSphere Test Environment</li>
+            <li>Other Features</li>
+            <li>Tool API&nbsp;</li>
+        </ul>
+    </li>
+</ul>
+<hr/>
+<h3>Appendix D The CD ROM</h3>
+<ul>
+    <li>System Requirements
+        <ul>
+            <li>Prerequisites for VisualAge for Java, Version 3.5
+                <ul>
+                    <li>Installation of VisualAge for Java, Version 3.5</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>The CD-ROM Organization</li>
+    <li>IBM's VisualAge for Java
+        <ul>
+            <li>Why We Included the Professional Edition</li>
+            <li>Installing VisualAge for Java</li>
+        </ul>
+    </li>
+    <li>Instantiations' VA Assist/J
+        <ul>
+            <li>Features of VA Assist/J
+                <ul>
+                    <li>Version Control Enhancements</li>
+                    <li>Browser/Ergonomic Enhancements</li>
+                    <li>Visual Composition Enhancements</li>
+                    <li>Import and Export Enhancements</li>
+                </ul>
+            </li>
+            <li>Installing VA Assist/J</li>
+        </ul>
+    </li>
+    <li>The Book's Sample Code
+        <ul>
+            <li>License and Disclaimer for the Sample Code</li>
+            <li>Installing the Sample Code</li>
+            <li>Sample Code Contents</li>
+        </ul>
+    </li>
+    <li>Tools and Features
+        <ul>
+            <li>License and Disclaimer for Tools and Features</li>
+            <li>Tool Installation</li>
+            <li>Tool Descriptions&nbsp;</li>
+        </ul>
+    </li>
+</ul>
+<hr/>
+<h3>Appendix E VisualAge for Java Resources</h3>
+<ul>
+    <li>Web Sites</li>
+    <li>Frequently-Asked Questions
+        <ul>
+            <li>jGuru.com VisualAge for Java FAQ</li>
+            <li>IBM VisualAge Developer Domain FAQ</li>
+        </ul>
+    </li>
+    <li>Newsgroups
+        <ul>
+            <li>VisualAge for Java Newsgroups</li>
+            <li>Java Newsgroups</li>
+            <li>Newsgroup Archives</li>
+        </ul>
+    </li>
+    <li>Books</li>
+</ul>
+&nbsp; 
+						<!-- #EndEditable "content" -->
+				<div id="footer">
+					<p>&nbsp;</p>
+					<hr/>
+					<p>Copyright &copy; 1996-2009, Scott Stanchfield. All Rights Reserved.<br/>
+					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
+					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
+					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
+					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../images/cssplay_button.png" width="88" /></a></p>
+					<p>
+					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
+					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../images/feed-icon-14x14.png" width="14" />Want 
+					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div id="bottom"/>
+		<div id="navigation">
+			<ul>
+				<li><a href="../index.html">Home</a></li>
+				<li><a href="../articles/index.html">Articles</a></li>
+				<li><a href="../tools/index.html">Tools</a></li>
+				<li><a href="index.html">Effective VisualAge for Java</a></li>
+				<li><a href="../eclipse/index.html">Eclipse Tips</a></li>
+				<li><a href="../vaj/index.html">VisualAge Tips</a></li>
+				<!--
+				<li><a href="resume.html">Resume</a></li>
+				-->
+				<li><a href="../publications.html">Publications</a></li>
+			</ul>
+			<p>&nbsp;</p>
+			<div style="margin-left:10px">
+<script type="text/javascript"><!--
+google_ad_client = "pub-1721904981084162";
+/* Homepage Gutter */
+google_ad_slot = "0044274311";
+google_ad_width = 120;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+		</div>
+		<div id="bottomcorner"/>
+		<div id="topcorner"/>
+		</div>
+		<p>&nbsp;</p>
+	</body>
+<!-- #EndTemplate -->
+</html>
