@@ -1,0 +1,432 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- #BeginTemplate "../master.dwt" -->
+
+	<head>
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+		<!-- #BeginEditable "doctitle" -->
+		<title>Context-Sensitive Scanning in ANTLR - Scott Stanchfield</title>
+		<!-- #EndEditable -->
+		<link href="../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
+		<!-- #BeginEditable "head" -->
+		<!-- #EndEditable -->
+		<style type="text/css">
+
+.style1 {
+	vertical-align: middle;
+}
+</style>
+	</head>
+
+	<body>
+		<div id="header">
+			<h1>JavaDude.com</h1>
+			<h4>-- Scott Stanchfield</h4>
+		</div>
+		<div id="content">
+			<div id="topBar">&nbsp;</div>
+			<div id="contentIndent">
+				<!-- #BeginEditable "content" -->
+
+<h1>Context-Sensitive Scanning in ANTLR</h1>
+<p>The other day I was working on a DSL in xtext, and I really wanted to use a
+<em>lot</em> of keywords. This would make content-assist incredibly helpful and 
+easy, as well as making model-creation trivial.</p>
+				<p>The trouble is that as the number of keywords increases, the 
+				number of possible identifier names decreases.</p>
+				<p>Unless we start thinking context-sensitive.</p>
+				<p>Traditional approaches usually follow either:</p>
+				<ul>
+					<li>The lexer has states and selects the token type based 
+					on the state. The parser sets these states to trigger 
+					different tokens in different contexts.<ul>
+						<li>Lookahead of &gt; 1 token kills this approach pretty 
+						quickly.</li>
+						<li>The &quot;push&quot; nature of most lexers usually means 
+						that a &quot;fixup&quot; layer between the lexer and parser is 
+						required to deal with the state changes (and lookahead 
+						can make this fixup layer quite painful)</li>
+						<li>The state switching must be coded in the parser 
+						grammar, which can add significant noise.</li>
+					</ul>
+					</li>
+					<li>The lexer has states as above, but switches based on 
+					what it sees (with no input from the parser)<ul>
+						<li>This eliminates the lookahead issues</li>
+						<li>But we&#39;re not as context-sensitive; we can only 
+						depend on character sequences rather than more complex 
+						parser contexts</li>
+					</ul>
+					</li>
+					<li>The lexer returns tokens as normal, and the parser 
+					adds all keywords to an identifier rule:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+					identifier : IDENT | DO | FOR | ... | WHILE ;</em><ul>
+						<li>The token types really aren&#39;t correct (though we can 
+						create new tokens for the AST)</li>
+						<li>It&#39;s easy to get out of sync with the lexer, 
+						forgetting a token</li>
+						<li>In tools like xtext, the generated content assist 
+						would list all keywords when an IDENT is needed rather 
+						than just state &quot;identifier&quot; or &quot;name&quot;</li>
+					</ul>
+					</li>
+				</ul>
+				<p>I thought about it for a while and came up with what I think 
+				is a very elegant and simple solution. I was starting to write a 
+				paper on the idea, but after a <em>lot</em> of web searching I 
+				found a few examples of pretty much what I&#39;m thinking, albeit 
+				with different implementations.</p>
+				<h2>The Basic Idea</h2>
+				<p>The concept breaks down as follows:</p>
+				<ul>
+					<li>Let&#39;s have the parser &quot;pull&quot; tokens from the 
+					lexer, 
+					rather than the lexer &quot;pushing&quot; tokens into a stream for 
+					the parser to consume later. This gives us control at the 
+					point a token is needed. (Lookahead is still a problem, but 
+					we&#39;ll fix that)</li>
+					<li>When the parser requests a token, it passes a list of 
+					possible token types to the nextToken() method. This 
+					provides the context that the parser knows about.</li>
+					<li>The lexer <em>only </em>attempts to build those 
+					specific types of tokens. If IDENT is the only token type 
+					provided, only the IDENT lexer rule would attempt to match 
+					characters from the input stream.</li>
+					<li>If the lexer does not match the requested tokens, it 
+					resets its input buffer to allow the parser to make a 
+					different contextual request)</li>
+				</ul>
+				<p>Poof. We now have context-sensitive scanning. But let&#39;s take 
+				the idea a little further...</p>
+				<ul>
+					<li>What if we could have multiple lexers working on the 
+					same input buffer?</li>
+					<li>The parser could define a mapping of which tokens belong 
+					to which lexers, possibly aliasing token names that are 
+					used in multiple lexers.</li>
+					<li>When the parser requests a token, it asks a specific 
+					lexer for that token. Each token request can attempt to 
+					match multiple tokens, which could be in one or more 
+					lexers.</li>
+					<li>If a lexer doesn&#39;t match any requested input, the 
+					lexer input buffer is reset so other lexers can have a 
+					go at it.</li>
+					<li>And... once we have this setup, we can now have a parser
+					<em>call</em> rules in other parser objects directly. 
+					Imagine if we wanted to embed SQL inside a Java class, we 
+					could have a Java parser directly calling a SQL parser, 
+					rather than embedding the SQL rules in a Java grammar (or 
+					using grammar inheritance).</li>
+				</ul>
+				<p>NOTE: <em>Doing this could make error correction and 
+				reporting trickier... which context is used to help resynch</em> 
+				when we have nested language contexts... (I think error reports 
+				would need to just display the next <em>n</em> characters of 
+				input rather than the name of the token, as we can&#39;t really tell 
+				which token is next if there&#39;s no match...)</p>
+				<p>That&#39;s the basic idea. Let&#39;s look into some examples and 
+				details.</p>
+				<h2>Details</h2>
+				<p>I haven&#39;t tried coding anything up, but here are some details 
+				of what I&#39;m thinking for discussion.</p>
+				<h3>Text Stream Input Buffer</h3>
+				<p>The stream being used for input will be shared between one or 
+				more lexers.</p>
+				<p>Only one lexer at a time will access the input buffer.</p>
+				<p>The buffer position can be queried and reset. OTTOMH I&#39;m 
+				thinking that the buffer will have a stack of remembered 
+				positions to allow for different lookahead under nested parser 
+				calls. Gotta think about lookahead, and that lookahead can 
+				actually be coming from multiple parsers!</p>
+				<h3>Lexers</h3>
+				<p>The biggest change in this approach is that instead of the 
+				lexer being an autonomous entity that figures out which token 
+				comes next all on its own. Instead, parsers explicitly pass a 
+				list of tokens that are possible in the current context, and the 
+				lexer returns the first that matches from that list. (This could 
+				make ambiguity reporting trickier -- perhaps when generating the 
+				lexer we can determine which lexer rules are ambiguous with each 
+				other and then use this information when generating the parser 
+				to flag ambiguous token references?)</p>
+				<p>I think of this as &quot;pull scanning&quot; rather than the 
+				traditional &quot;push scanning&quot;.</p>
+				<p class="figcap">The lexer&#39;s nextToken() method</p>
+				<pre>// kinda pseudo-codey
+// basic idea: take list of possible token types from parser
+//             return first that matches or null if none match
+public Token nextToken(int... possibleTokenTypes) {
+    Token token;
+    while (true) {
+        for (int tokenType : possibleTokenTypes) {
+            switch (tokenType) {
+                case INT: token = INT(); if (token != null) return token; break;
+                case IDENT: token = IDENT(); if (token != null) return token; break;
+                ...
+            }
+        }
+        // attempt to gobble whitespace if no token matched
+        // hmmm... whitespace may be contextual
+        //         gotta think on this part a bit, but basically we should
+        //         try to gobble whitespace if we haven&#39;t seen a valid token
+        if (WS()) continue;
+        if (SL_COMMENT()) continue;
+
+        return null; // if nothing matches
+    }
+}</pre>
+				<p>After I thought about this, I did some research and saw that 
+				this approach has been used in the yapps parser generator (<a href="http://theory.stanford.edu/~amitp/yapps/yapps-doc/node5.html#SECTION00052000000000000000">http://theory.stanford.edu/~amitp/yapps/yapps-doc/node5.html#SECTION00052000000000000000</a>). 
+				So much for that SIGPLAN paper I was gonna write...</p>
+				<p>This is significantly more flexible than the traditional 
+				start states that tools like flex allow. The contextual state 
+				truly depends on the parser state and lookahead is not an issue 
+				(as the parser actually requests context-sensitive lookahead).</p>
+				<h3>Parsers</h3>
+				<p>Each parser would have a lookahead method, something like the 
+				following.</p>
+				<p class="figcap">The parser&#39;s lookahead() method</p>
+				<pre>void lookahead(int la, Lexer lexer, int... possibleTokens) {
+    if (lt[la] != null) {
+        if (lt[la].context == possibleTokens) // order counts!
+            return; // already have valid lookahead token
+        // otherwise reset the buffer for the next attempt
+        lt[la] = null;
+        buffer.reset(lt[la-1].end+1);
+        // need to reset to char after last accepted token
+        // note that different scanner states might have different whitespace
+        // gobbling...
+    }
+    lt[la] = lexer.nextToken(possibleTokens);
+}
+void consume(Lexer lexer, int type) {
+  lt1 = lookahead(1, lexer, type);
+  if (lt1.type == type)
+    // shift lts &amp; return
+  throw mismatch
+}</pre>
+				<p>Now we can add contextual token requests to generated rules. 
+				Perhaps we have a language where you could have context 
+				sensitive keyword &quot;field&quot; describing a field in a bean, but 
+				&quot;field&quot; could also be an identifier (like the name of the type 
+				containing the field)</p>
+				<p class="figcap">Simple DSL with context-sensitive keywords</p>
+				<pre>type field { // type is keyword; field is ident
+    field name;  // field is keyword; name is ident 
+    field type;  // field is keyword; type is ident
+}</pre>
+				<p>This is really contrived but my brain is a little tired... 
+				Note I&#39;ll start this example having keywords defined in a 
+				separate lexer. This isn&#39;t necessary, but helps to demonstrate 
+				the possible use of mutiple lexers.</p>
+				<p>Note that I haven&#39;t dug around in the generated code in a 
+				while, but hopefully these bits will help understand the concept 
+				so if y&#39;all like the idea you can carry it forward.</p>
+				<p class="figcap">Definition of member rule</p>
+				<pre>type
+  : TYPE IDENT LB field* RB ;
+
+field : FIELD IDENT SEMI;</pre>
+				<p class="figcap">Oversimplified rule methods</p>
+				<pre>public void type() {
+    consume(lexer1, TYPE);
+    // we will only attempt to lookup IDENT in this context
+    //   no other lexer rules will be attempted
+    consume(lexer2, IDENT);
+    consume(lexer2, LB);
+    while(matches) {
+        field();
+    }
+    consume(lexer2, RB);
+}
+    
+public void field() {
+    consume(lexer1, FIELD);
+    consume(lexer2, IDENT);
+    consume(lexer2, SEMI);
+}</pre>
+				<p>Something more interesting might have alts. Suppose we 
+				allowed assignments in that DSL:</p>
+				<p class="figcap">Evil example of doom</p>
+				<pre>type field { // type is keyword; field is ident
+    field name;  // field is keyword; name is ident 
+    field type;  // field is keyword; type is ident
+    name = &#39;Scott&#39;; // name is ident!
+}</pre>
+				<p>Now this gets trickier. We&#39;re contextual based on LA2. We 
+				might have grammar rules like:</p>
+				<p class="figcap">Grammar rules for evilness</p>
+				<pre>type
+  : TYPE IDENT LB member* RB ;
+
+member
+  : field
+  | assign
+  ;
+
+field : FIELD IDENT SEMI;
+assign : IDENT EQUALS STRING SEMI;</pre>
+				<p>Let&#39;s assume all tokens are in the same lexer (just to show 
+				multi-token-type calls to nextToken). We might have code like</p>
+				<p class="figcap">Generated rule methods for evil example</p>
+				<pre>public void type() {
+    consume(lexer, TYPE);
+    consume(lexer, IDENT);
+    consume(lexer, LB);
+    while(matches) {
+        member();
+    }
+    consume(lexer, RB);
+}
+    
+public void member() {
+    Token lt1 = lookahead(1, lexer, FIELD, IDENT);
+    if (lt1 == null)
+       error!
+    if (lt1.type == FIELD) {
+        // might be a field definition... check lt2
+        Token lt2 = lookahead(2, lexer, IDENT);
+        if (lt2 != null) {
+            field();
+            return;
+        }
+    }
+    Token lt2 = lookahead(2, lexer, EQUALS);
+    if (lt2 == null)
+        error!
+    assign();  
+}
+
+public void field() {
+    consume(lexer, FIELD);
+    consume(lexer, IDENT);
+    consume(lexer, SEMI);
+}
+public void assign() {
+    consume(lexer, IDENT);
+    consume(lexer, EQUALS);
+    consume(lexer, STRING);
+    consume(lexer, SEMI);
+}</pre>
+				<p>If we had multiple lexers, the code might be a little 
+				different:</p>
+				<p class="figcap">Generated rule methods for evil example (multiple lexers)</p>
+				<pre>public void type() {
+    consume(lexer1, TYPE);
+    consume(lexer2, IDENT);
+    consume(lexer2, LB);
+    while(matches) {
+        member();
+    }
+    consume(lexer2, RB);
+}
+    
+public void member() {
+    Token lt1 = lookahead(1, lexer1, FIELD);
+    if (lt1 != null) {
+        // might be a field definition... check lt2
+        Token lt2 = lookahead(2, lexer2, IDENT);
+        if (lt2 != null) {
+            field();
+            return;
+        }
+    }
+    lt1 = lookahead(1, lexer2, IDENT);
+    if (lt1 == null)
+        error!
+    Token lt2 = lookahead(2, lexer2, EQUALS);
+    if (lt2 == null)
+        error!
+    assign();  
+}
+
+public void field() {
+    consume(lexer1, FIELD);
+    consume(lexer2, IDENT);
+    consume(lexer2, SEMI);
+}
+public void assign() {
+    consume(lexer2, IDENT);
+    consume(lexer2, EQUALS);
+    consume(lexer2, STRING);
+    consume(lexer2, SEMI);
+}</pre>
+				<h2>Wrapup</h2>
+				<p>Hopefully this gets the idea across. I think we could very 
+				easily allow context-sensitive keywords in ANTLR is we wanted 
+				to. In addition, this might actually improve the performance of 
+				lexers by only attempting to match tokens that might be valid in 
+				the current parser context.</p>
+				<p>&nbsp;</p>
+<h2>Similar Ideas</h2>
+<p>Here are a couple of similar ideas I found online. I came up with the idea 
+independently, but I can&#39;t claim it&#39;s original. Sigh...</p>
+				<p>(It took quite a bit of digging with various search terms to 
+				find...)</p>
+				<ul>
+					<li>
+					<a href="http://theory.stanford.edu/~amitp/yapps/yapps-doc/node5.html#SECTION00052000000000000000">
+					http://theory.stanford.edu/~amitp/yapps/yapps-doc/node5.html#SECTION00052000000000000000</a><br />
+&nbsp;&nbsp;&nbsp; The &quot;yapps&quot; parser generator for python. Its parser requests 
+					specific possible tokens, very similar to my idea.</li>
+					<li>
+					<a href="http://compilers.iecc.com/comparch/article/97-11-117">
+					http://compilers.iecc.com/comparch/article/97-11-117</a><br />
+&nbsp;&nbsp;&nbsp; A comp.compilers discussion from 1997, ironically one I 
+					contributed to. There are references to a couple of ideas 
+					similar to this.</li>
+				</ul>
+				<!-- #EndEditable "content" -->
+				<div id="footer">
+					<p>&nbsp;</p>
+					<hr/>
+					<p>Copyright &copy; 1996-2010, Scott Stanchfield. All Rights Reserved.<br/>
+					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
+					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
+					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
+					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../images/cssplay_button.png" width="88" /></a></p>
+					<p>
+					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
+					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../images/feed-icon-14x14.png" width="14" />Want 
+					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div id="bottom"/>
+		<div id="navigation">
+			<ul>
+				<li><a href="../index.html">Home</a></li>
+				<li><a href="index.html">Articles</a></li>
+				<li><a href="../tools/index.html">Tools</a></li>
+				<li><a href="../evaj/index.html">Effective VisualAge for Java</a></li>
+				<li><a href="../eclipse/index.html">Eclipse Tips</a></li>
+				<li><a href="../vaj/index.html">VisualAge Tips</a></li>
+				<!--
+				<li><a href="resume.html">Resume</a></li>
+				-->
+				<li><a href="../publications.html">Publications</a></li>
+			</ul>
+			<p>&nbsp;</p>
+			<div style="margin-left:10px">
+<script type="text/javascript"><!--
+google_ad_client = "pub-1721904981084162";
+/* Homepage Gutter */
+google_ad_slot = "0044274311";
+google_ad_width = 120;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+		</div>
+		<div id="bottomcorner"/>
+		<div id="topcorner"/>
+		</div>
+		<p>&nbsp;</p>
+	</body>
+<!-- #EndTemplate -->
+</html>

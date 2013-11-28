@@ -1,0 +1,426 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- #BeginTemplate "../../master.dwt" -->
+
+	<head>
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+		<!-- #BeginEditable "doctitle" -->
+		<title>PCCTS Tutorial: Statements - Scott Stanchfield</title>
+		<!-- #EndEditable -->
+		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
+		<!-- #BeginEditable "head" -->
+		<!-- #EndEditable -->
+		<style type="text/css">
+
+.style1 {
+	vertical-align: middle;
+}
+</style>
+	</head>
+
+	<body>
+		<div id="header">
+			<h1>JavaDude.com</h1>
+			<h4>-- Scott Stanchfield</h4>
+		</div>
+		<div id="content">
+			<div id="topBar">&nbsp;</div>
+			<div id="contentIndent">
+				<!-- #BeginEditable "content" -->
+
+<h1>Statements</h1>
+<p>There are seven statements in XL (I told you it was a small language): assignment, exit, procedure call, return, if-then, loop and I/O.</p>
+<pre>statement
+  : assignmentStatement
+  | exitStatement
+  | procedureCallStatement
+  | returnStatement
+  | ifStatement
+  | loopStatement
+  | ioStatement
+  ;
+           </pre>
+<hr/>
+<h2>Assignment Statement</h2>
+<p>The assignment statement is pretty much like Pascal's assignment statement, except that there are no type conversions allowed.</p>
+<pre>assignmentStatement
+  : variableReference BECOMES expression SEMI
+  ;
+           </pre>
+<p>Very simple, but the pieces (variable and expression) are somewhat complex -- we'll look at them after all the statements are done. We'll look at <code>variableReference</code> later...</p>
+<hr/>
+<h2>Exit Statement</h2>
+<p>The exit statement tells a loop it's done. It looks like</p>
+<pre>exitStatement
+  : EXIT WHEN expression SEMI
+  ;
+           </pre>
+<hr/>
+<h2>Procedure Call Statement</h2>
+<p>A procedure call takes the form</p>
+<pre>procedureCallStatement
+  : IDENT {actualParameters} SEMI
+  ;
+
+actualParameters
+  : LPAREN { expression (COMMA expression)* } RPAREN
+  ;
+           </pre>
+<p>I extended XL just a bit for this. The original XL compiler I wrote had</p>
+<pre>actualParameters
+  : LPAREN expression (COMMA expression)* RPAREN
+  ;
+           </pre>
+<p>which basically means that if you have parens, you <b>must</b> have at least one expression in them. I thought it would be nice to allow <b>myfunc()</b> as a valid procedure call.</p>
+<hr/>
+<h2>Return Statement</h2>
+<p>The XL return statement tells a procedure or function to return immediately. Keeping in mind that I did not implement functions (yet, at least), <b>return</b> cannot take an expression argument. Therefore, it's just</p>
+<pre>returnStatement
+  : RETURN SEMI
+  ;
+           </pre>
+<hr/>
+<h2>If Statement</h2>
+<p>The XL &quot;if-then-elsif-else-end if&quot; statement is a fairly simple <b>if</b> type statement. This is because it is defined as a closed <b>if</b> statement; that is, there is a definite &quot;I'm done&quot; part to the <b>if</b> statement. Those
+of you who are familiar with the &quot;dangling <b>else</b>&quot; conflict present in the C language may realize that if you close the <b>if</b> statement, the conflict disappears. First, I'll present the rule for XL, then I'll talk a bit about how to do
+the <b>if</b> statement for C.</p>
+<p>XL's <b>if</b> statement looks like:</p>
+<pre>ifStatement
+  : IF expression THEN
+      ( statement )*
+      ( ELSIF expression THEN
+        ( statement )*
+      )*
+      { ELSE ( statement )* }
+    END IF SEMI
+  ;
+           </pre>
+<p>Which is the most straightforward way to write the rule. However, you may notice some redundancy in the rule -- there are two separate places where we'll need to deal with <b>expression</b> evaluation. Not a big deal now, but we'd need to duplicate
+code later. After staring at the rule for a bit, we might try splitting out the &quot;<b>expression</b> THEN possible ELSE&quot; stuff into a separate rule, and call it recursively if we get an ELSIF. In other words:</p>
+<pre>ifStatement
+  : IF ifPart END IF SEMI
+  ;
+
+ifPart
+  : expression THEN
+    ( statement )*
+    { ELSIF ifPart
+    | ELSE (statement)*
+    }
+  ;
+           </pre>
+<p>Which is much less redundant.</p>
+<p>Earlier, I threatened to look at the &quot;dangling else&quot; problem. In PCCTS, this is an easy problem to solve. Basically, the problem is that in a statement like</p>
+<pre>if (x)
+    if (y)
+        myfunc();
+    else
+        yourfunc();
+           </pre>
+<p>It isn't terribly apparent (to the compiler at least) which <b>if</b>-condition owns the &quot;else&quot; clause. The compiler can't tell if the inner <b>if</b> is an &quot;if-without-an-else&quot; inside an &quot;if-with-an-else,&quot; or vice-versa.</p>
+<p>On the other hand, the language designers decided that the else will be owned by its most recent <b>if</b> that can possibly own it. In this case, the <b>else</b> would clearly belong to the <b>(y)</b> condition. However, the compiler doesn't know
+this.</p>
+<p>In a yacc grammar, an if-statement for C might be written</p>
+<pre>ifStatement
+  : IF LPAREN expression RPAREN statementList
+  | IF LPAREN expression RPAREN statementList
+      ELSE statementList
+  ;
+           </pre>
+<p>which causes yacc to report a &quot;shift/reduce&quot; conflict -- yacc can't tell if you intended to have an &quot;if-without-else&quot; (the first alternative) be nested inside an &quot;if-with-else&quot; (the second alternative.) It doesn't know if
+it should reduce the first alternative when it sees the ELSE, or whether it should keep looking (shift the ELSE.) Fortunately, yacc's default is to shift the else, basically grouping the ELSE with its closest IF, which is exactly what we want.</p>
+<p>To get yacc to stop reporting this (and explicitly specify which alternative we intend) requires the use of either some very messy (and hard-to-follow) rules, or explicit precedence assignment. Neither is pretty, or very readable for someone else.</p>
+<p>In PCCTS, the C if statement would look like</p>
+<pre>ifStatement
+  : IF LPAREN expression RPAREN (statement)*
+    { ELSE (statement)* }
+  ;
+           </pre>
+<p>which, of course, causes ANTLR to report a conflict. To get rid of this conflict in PCCTS, we can use a syntactic predicate (aka &quot;guess&quot; mode) which basically says &quot;try this -- if it works, use it. Otherwise, try the next alt.&quot;</p>
+<p>Applying a nice syntactic predicate to the <code>ifStatement</code> rule above yields</p>
+<pre>ifStatement
+  : IF LPAREN expression RPAREN (statement)*
+    { (ELSE)? ELSE (statement)*}
+  ;
+           </pre>
+<p>which can a bit easier to read if you break the {...} subrule into a &quot;this-or-nothing&quot; subrule.</p>
+<pre>ifStatement
+  : IF LPAREN expression RPAREN (statement)*
+    ( (ELSE)? ELSE (statement)*
+    | ( ) // nothing
+    )
+  ;
+           </pre>
+<p>The predicate says &quot;try matching an ELSE. If you can, then use the first alt. Otherwise, use the second alt (the &quot;nothing&quot; alternative.) Note that we will be using the more compact <b>{...}</b> form for our compiler.</p>
+<hr/>
+<h2>Loop Statement</h2>
+<p>The loop statement in XL is pretty simple. (Anyone sick of the word &quot;simple&quot; yet? But it's true, really it is.) It's a set of statements enclosed by <b>loop</b> and <b>end</b> <b>loop</b>, with an optional <b>while</b> clause in front of it.
+It looks like</p>
+<pre>loopStatement
+  : {WHILE expression} LOOP
+        ( statement )*
+    END LOOP SEMI
+  ;
+           </pre>
+<p>Not too bad, eh? Well, just to confuse matters a bit, what would happen if XL allowed an <b>END</b> statement, like in BASIC? (BASIC's <b>END</b> statement exits the program immediately.) Come to think of it, what the heck, let's add one!</p>
+<pre>endStatement
+  : END SEMI
+  ;
+           </pre>
+<p>Now why would I be mentioning this here? Let's look at some XL sample code:</p>
+<pre>program sponge =
+    var x : integer := 1;
+
+    begin
+        while x &lt; 10 loop
+            x := x + 1;
+            end;
+        end loop
+    end sponge.
+           </pre>
+<p>Kind of contrived (and useless, I know), and simple, until you look closer...</p>
+<p>What happens when the parser sees the <b>end</b> inside the loop? Let's look at the <code>loopStatement</code> rule again (repeated here 'cause you're a programmer which means you're too lazy to turn back a page):</p>
+<pre>loopStatement
+  : {WHILE expression} LOOP
+        ( statement )*
+    END LOOP SEMI
+  ;
+           </pre>
+<p>Assuming k=1 lookahead, we have a problem: how does the parser determine that the <b>end</b> in loop is an <code>endStatement</code> and not the <b>end</b> that is the first part of <b>end</b> <b>loop</b>? The answer is simple: with k=1 lookahead, it
+can't. It will always try to make it an <code>endStatement</code>, and will get a syntax error on <b>loop</b>. (Try this in the final recognizer, just for kicks.) You'll also get a conflict warning in ANTLR. (Note that you'll have the same conflict with <b>end
+if</b> in <code>ifStatement</code> -- our solution should, and will, handle both situations.)</p>
+<p>So how do we solve this? Two possibilities: use k=2 lookahead, or use a syntactic predicate.</p>
+<p>To use k=2 lookahead, you'd just need to specify <b>-k 2 </b>on the ANTLR command line. This will make the ANTLR run take a bit more time, but should only affect checks that require two-token lookahead.</p>
+<p>In our grammar, we only have one place (this one) that causes a conflict. (Remember that our <code>ifStatement</code> is closed with an <b>end</b> <b>if</b>, so there's no dangling <b>else</b> conflict.) So let's fix the problem in that spot using
+syntactic predicates. (I also want to cover syntactic predicates a bit, so I won't go with the easier -k 2 fix... In real life, I think it might make a slightly faster parser to use -k 2 for this case. Syntactic predicates should probably be reserved for
+cases when you don't know how much lookaead you'll really need, or the known lookahead is lengthy.)</p>
+<p>We can tell ANTLR exactly how to distinguish an <code>endStatement</code> from the end of a loop. How? Simple (for me at least, 'cause I already know...):</p>
+<pre>statement
+  : (END SEMI)? endStatement
+  | assignmentStatement
+    . . .
+  ;
+           </pre>
+<p>Now what the heck does that mean? Basically, it says &quot;try to match <b>END</b>, then <b>SEMI</b>.&quot; If it works, then we really want the <code>endStatement</code>. If we didn't get a match, try the next alternative, and so on...</p>
+<p>There's one problem that I have with the above statement. I don't like spelling out <b>END</b> <b>SEMI</b> in a rule other than <code>endStatement</code>. It just seems like bad isolation of rules. I'm a bit picky at times, though. What I'd rather do
+is say to myself, hmmm, <b>END</b> <b>SEMI</b> is an <code>endStatement</code>, so why not put that inside the ( )? -- like this:</p>
+<pre>statement
+  : (endStatement)? endStatement
+  | assignmentStatement
+    . . .
+  ;
+           </pre>
+<p>(Note: This will be a bit less efficient than spelling it out -- the &quot;guess&quot; that ANTLR will make will need to make a function call to <code>endStatement</code> to check for <b>END</b> <b>SEMI</b> rather than just directly check for <b>END</b>
+<b>SEMI</b> in the statement rule. However, as long as you don't do this too much, the penalty for a function call is minimal on most machines nowadays. Just keep it to a minimum!)</p>
+<p>Does that look redundant to you? It does to me. Fortunately, ANTLR provides a shortcut: if the contents of the syntactic predicate are the same as the thing it's predicting, you only need to specify the predicate:</p>
+<pre>statement
+  : (endStatement)?
+  | assignmentStatement
+    . . .
+  ;
+           </pre>
+<p>Much better now, isn't it. Let's keep this in XL. I encourage you to play with the recognizer grammar a bit to explore this conflict and its solution.</p>
+<p>What if <code>endStatement</code> were a bit more involved, such as</p>
+<pre>endStatement
+  : END SEMI expression SEMI
+  ;
+           </pre>
+<p>(Kinda useless, but so are most examples.) All we need to predict it are the <b>END</b> and <b>SEMI</b>. If we keep the predicate as it is, <b>(endStatement)?</b>, the &quot;guess&quot; would keep going through expression (which could be pretty long)
+and the next SEMI. That would be mighty wasteful. So, in a case where we want to limit the lookahead, it's probably better to sacrifice readability a bit and limit the lookahead to just END SEMI:</p>
+<pre>statement
+  : (END SEMI)? endStatement
+  | assignmentStatement
+    . . .
+  ;
+           </pre>
+<p>(Look familiar?) You may ask &quot;why not just put the <b>(END SEMI)?</b> in the <code>endStatement</code> rule itself?&quot; Unfortunately, ANTLR complains about a rule like</p>
+<pre>endStatement
+  : (END SEMI)? END SEMI expression SEMI
+  ;
+           </pre>
+<p>basically telling you &quot;why bother with a predicate -- there's only one alternative!&quot; I think I'd prefer to be able to specify it like this, and have ANTLR hoist the predicate up into the statement rule (and possibly optimize it out of the <code>endStatement</code>
+rule altogether.) But let's work with the great tool we currently have, shall we?</p>
+<p>So, we end up with two new rules:</p>
+<pre>loopStatement
+  : {WHILE expression} LOOP
+        (statement)*
+    END LOOP SEMI
+  ;
+
+endStatement
+  : END SEMI
+  ;
+           </pre>
+<p>and we modify the <code>statement</code> rule to look like</p>
+<pre>statement
+  : (endStatement)?
+  | assignmentStatement
+  | exitStatement
+  | procedureCallStatement
+  | returnStatement
+  | ifStatement
+  | loopStatement
+  | ioStatement 
+  ;
+           </pre>
+<p>But is the order important in the <code>statement</code> rule? Of course, but it's not so obvious until you look at what the generated code will say. The following isn't actual generated code, but pseudocode that will show what happens in the statement
+rule:</p>
+<pre>statement
+{
+    if next token is END and guess(endStatement) worked
+        do endStatement
+    else if next token is IDENT
+        do assignmentStatement
+    else if next token is EXIT
+        do exitStatement
+    else if next token is IDENT
+        do procedureCallStatement
+    else if next token is RETURN
+        do returnStatement
+    else if next token is IF
+        do ifStatement
+    else if next token is (WHILE or LOOP)
+        do loopStatement
+    else if next token is (PUT or GET)
+        do ioStatement (defined later)
+}
+           </pre>
+<p>A few things to notice here:</p>
+<ul>
+    <li>Most of the conditions in this code are simple, one-test comparisons</li>
+    <li>The condition for <code>endStatement</code> is much more complex</li>
+    <li>Oooops! I see a conflict between <code>assignmentStatement</code> and <code>procedureCallStatement</code> -- hold this thought for a minute...</li>
+    <li>Notice that <code>loopStatement</code>'s lookup condition had two parts to it: WHILE or LOOP -- this is because the WHILE section is optional, making the FIRST set for <code>loopStatement</code> be {WHILE, LOOP} (<code>ioStatement</code> will be
+        defined in a bit as a GET or PUT call...)</li>
+    <li>All of the conditions are evaluated in the order that the rules are specified</li>
+    <li>All of the conditions except <code>assignmentStatement</code> and <code>procedureCallStatement</code> have a unique test condition; their FIRST sets are disjoint</li>
+</ul>
+<p>Our goal when parsing is to make things as fast as possible. Therefore, based on the above information, we should</p>
+<ul>
+    <li>Order the rules such that the most likely/most used rules come first -- that means less conditions to test</li>
+    <li>Order the rules such that rules with nasty conditions come later. Note that if the nasty condition is required to disambiguate two alternatives, it needs to be in the first of the two alternatives</li>
+</ul>
+<p>If possible, determine which statements are more likely to be used. Do some statistical sampling of user code (if possible) and order the rules accordingly. In this case, I think it's less likely that the user would use an END statement, and on top of
+that, it's more complex, so let's put it at the bottom of the list.</p>
+<p>We also need to disambiguate <code>assigmentStatement</code> and <code>procedureCallStatement</code>. Recall that they look like:</p>
+<pre>assignmentStatement
+  : variable BECOMES expression SEMI
+  ;
+
+procedureCallStatement
+  : IDENT {actualParameters} SEMI
+  ;
+           </pre>
+<p>So, how do we tell them apart? First, let's look at the FIRST sets of each (the sets that contain all tokens that can be the first terminal in a rule.) Impossible until we define <code>variableReference</code>, so let's do that now (sorry about the
+jumping around here..)</p>
+<pre>variableReference
+  : IDENT
+    ( LBRACKET expression RBRACKET
+    | DOT IDENT
+    )*
+  ;
+           </pre>
+<p>which says a variable reference is an IDENT followed by any number of array or field dereferences.</p>
+<p>Without going into a long discussion about FIRST sets, what is the FIRST set of <code>assignmentStatement</code>? By inspection, it's whatever the FIRST set is of <code>variableReference</code>, which is {IDENT}. Again, by inspection, the FIRST set of <code>procedureCallStatement</code>
+is also {IDENT}. There, the conflict becomes very clear. On one token alone, IDENT, the parser cannot determine which rule is proper. Looking at the pseudocode above, it becomes obvious that the parser will, in fact, always choose whichever rule is
+specified first with a FIRST set of {IDENT}, which is bad. So, we need to add a predicate to one of the rules. But which one? Lets look at what would be needed for each. What makes each unique? <code>assignmentStatement</code> could start out with</p>
+<pre>IDENT BECOMES . . . // just ident := expression
+IDENT LBRACKET . . .     // starting with array reference
+IDENT DOT . . .          // starting with field reference
+           </pre>
+<p>and <code>procedureCallStatement</code> could start out with (after looking at <code>actualParameters</code>)</p>
+<pre>IDENT SEMI    // No parameters (or parens)
+IDENT LPAREN . . . // parameters (or just parens)
+           </pre>
+<p>Obviously, they are unique with two tokens of lookahead. So, we're back to the decision of &quot;do we bump lookahead to k=2, or use predicates.&quot; k=2 would resolve the conflict, but my gut says we should use a syntactic predicate here. But which
+one?</p>
+<p>The predicates would look like:</p>
+<pre>statement
+  : . . .
+  |(IDENT (BECOMES|LBRACKET|DOT))? assignmentStatement
+  |(IDENT (SEMI|LPAREN))? procedureCallStatement
+           </pre>
+<p>Well, the predicate for <code>procedureCallStatement</code> is actually a bit simpler. We probably should use it and put its alternative ahead of the one for <code>assignmentStatement</code>.\ If your research proves that <code>assignmentStatements</code>
+are found in code more often than <code>procedureCallStatements</code>, you may want to reconsider, though.</p>
+<p>So what do we end up with? Using our basic rule of &quot;keep the simple stuff near the top&quot; and adding syntactic predicates for <code>endStatement</code> and <code>procedureCallStatement</code>, we get (without taking into account statistical
+frequency of each statement):</p>
+<pre>statement
+  : exitStatement
+  | returnStatement
+  | ifStatement
+  | loopStatement
+  | ioStatement
+  | (IDENT (LPAREN|SEMI))? procedureCallStatement
+  | assignmentStatement
+  | (endStatement)?
+  ;
+           </pre>
+<p>Now, on to our final statement...</p>
+<hr/>
+<h2>I/O Statement</h2>
+<p>The I/O statement is really a procedure call to four predefined functions, <b>get</b>, <b>put</b>, <b>skipLine</b> and <b>newLine</b>. These really should be handled just like any other procedure call, but I'm putting them here just because that's how
+I did it the first time around, and because I don't want to mess with special pre-defined identifiers in the symbol table later...</p>
+<pre>ioStatement
+  : PUT LPAREN expression RPAREN SEMI
+  | GET LPAREN variable RPAREN SEMI
+  | SKIPLINE {LPAREN RPAREN} SEMI
+  | NEWLINE {LPAREN RPAREN} SEMI
+  ;
+           </pre>
+<p>Note that I was nice and allow the user to put &quot;()&quot; after <b>skipLine</b> and <b>newLine</b>, just like we did for procedure calls in general.</p>
+<p>Easy enough. Now onto the sticky stuff: <a href="pccts7.html">expressions</a>.</p>
+
+				<!-- #EndEditable "content" -->
+				<div id="footer">
+					<p>&nbsp;</p>
+					<hr/>
+					<p>Copyright &copy; 1996-2009, Scott Stanchfield. All Rights Reserved.<br/>
+					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
+					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
+					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
+					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../../images/cssplay_button.png" width="88" /></a></p>
+					<p>
+					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
+					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../../images/feed-icon-14x14.png" width="14" />Want 
+					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div id="bottom"/>
+		<div id="navigation">
+			<ul>
+				<li><a href="../../index.html">Home</a></li>
+				<li><a href="../index.html">Articles</a></li>
+				<li><a href="../../tools/index.html">Tools</a></li>
+				<li><a href="../../evaj/index.html">Effective VisualAge for Java</a></li>
+				<li><a href="../../eclipse/index.html">Eclipse Tips</a></li>
+				<li><a href="../../vaj/index.html">VisualAge Tips</a></li>
+				<!--
+				<li><a href="resume.html">Resume</a></li>
+				-->
+				<li><a href="../../publications.html">Publications</a></li>
+			</ul>
+			<p>&nbsp;</p>
+			<div style="margin-left:10px">
+<script type="text/javascript"><!--
+google_ad_client = "pub-1721904981084162";
+/* Homepage Gutter */
+google_ad_slot = "0044274311";
+google_ad_width = 120;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+		</div>
+		<div id="bottomcorner"/>
+		<div id="topcorner"/>
+		</div>
+		<p>&nbsp;</p>
+	</body>
+<!-- #EndTemplate -->
+</html>

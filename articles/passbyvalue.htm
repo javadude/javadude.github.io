@@ -1,0 +1,769 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+
+
+
+<!-- #BeginTemplate "../master.dwt" -->
+
+
+
+	<head>
+
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+		<!-- #BeginEditable "doctitle" -->
+
+		<title>Java is Pass-by-Value, Dammit! - Scott Stanchfield</title>
+
+		<!-- #EndEditable -->
+
+		<link href="../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
+
+		<!-- #BeginEditable "head" -->
+
+		<style type="text/css">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		.style1 {
+
+			margin-bottom: 0px;
+
+		}
+
+		.style2 {
+
+	text-decoration: underline;
+
+}
+
+		</style>
+
+		<!-- #EndEditable -->
+
+		<style type="text/css">
+
+
+
+.style1 {
+
+	vertical-align: middle;
+
+}
+
+</style>
+
+	</head>
+
+
+
+	<body>
+
+		<div id="header">
+
+			<h1>JavaDude.com</h1>
+
+			<h4>-- Scott Stanchfield</h4>
+
+		</div>
+
+		<div id="content">
+
+			<div id="topBar">&nbsp;</div>
+
+			<div id="contentIndent">
+
+				<!-- #BeginEditable "content" -->
+
+<h1>Java is Pass-by-Value, Dammit!</h1>
+
+<h2>Serbo-Croation Translation Available! Woohoo!</h2>
+<p>Jovana Milutinovich gratiously offered to translate this article to Serbo-Croation! 
+You can read the translation here: <a href="http://science.webhostinggeeks.com/java-je-prenos">http://science.webhostinggeeks.com/java-je-prenos</a>. Thanks a million, Jovana!</p>
+
+<h2>Introduction</h2>
+
+<p>I finally decided to write up a little something about Java&#39;s parameter 
+
+passing. I&#39;m really tired of hearing folks (incorrectly) state "primitives are 
+
+passed by value, objects are passed by reference".</p>
+
+<p>I&#39;m a compiler guy at heart. The terms "pass-by-value" semantics and 
+
+"pass-by-reference" semantics have very precise definitions, and they&#39;re often 
+
+horribly abused when folks talk about Java. I want to correct that... The 
+
+following is how I&#39;d describe these </p>
+
+<dl>
+
+  <dt><b>Pass-by-value</b></dt>
+
+  <dd>The actual parameter (or argument expression) is fully evaluated and the 
+
+  resulting value is <i>copied</i> into a location being used to hold the formal 
+
+  parameter&#39;s value during method/function execution. That location is typically 
+
+  a chunk of memory on the runtime stack for the application (which is how Java 
+
+  handles it), but other languages could choose parameter storage differently.</dd>
+
+  <dt><b>Pass-by-reference</b></dt>
+
+  <dd>The formal parameter merely acts as an <i>alias</i> for the actual 
+
+  parameter. Anytime the method/function uses the formal parameter (for reading 
+
+  or writing), it is actually using the actual parameter.</dd>
+
+</dl>
+
+<p>Java is <b><i>strictly</i></b> pass-by-value, exactly as in C. Read the Java 
+
+Language Specification (JLS). It&#39;s spelled out, and it&#39;s correct. In
+
+<a href="http://java.sun.com/docs/books/jls/third_edition/html/classes.html#8.4.1">
+
+http://java.sun.com/docs/books/jls/third_edition/html/classes.html#8.4.1</a>:</p>
+
+				<blockquote>When the method or constructor is invoked
+
+				<a href="http://java.sun.com/docs/books/jls/third_edition/html/expressions.html#20448">
+
+				(�15.12)</a>, the <strong><em>values</em></strong> 
+
+				of the actual argument expressions initialize newly created 
+
+				parameter variables, each of the declared <em>Type,</em> before 
+
+				execution of the body of the method or constructor. The <em>
+
+				Identifier</em> that appears<em> </em>in the <em>DeclaratorId</em> 
+
+				may be used as a simple name in the body of the method or 
+
+				constructor to refer to the formal parameter.</blockquote>
+
+				<p>[In the above, <em><strong>values</strong></em> 
+
+				is my emphasis, not theirs]</p>
+
+				<p>In short: Java <b><i>has</i></b> pointers and is strictly pass-by-value. 
+
+There&#39;s no funky rules. It&#39;s simple, clean, and clear. (Well, as clear as the 
+
+evil C++-like syntax will allow ;)</p>
+
+				<p><i>Note: See the
+
+<a href="#A Note on Remote Method Invocation">note at the end of this article</a> 
+
+	for the semantics of remote method invocation (RMI). What is typically 
+
+	called "pass by reference" for remote objects is actually incredibly bad 
+
+	semantics.</i></p>
+
+<hr/>
+
+<h2><i>The Litmus Test</i></h2>
+
+<p>There&#39;s a simple "litmus test" for whether a language supports 
+
+pass-by-reference semantics:</p>
+
+<p><i>Can you write a traditional swap(a,b) method/function in 
+
+the language?</i></p>
+
+<p>A traditional swap method or function takes two arguments and swaps them such 
+
+that variables passed into the function are changed outside the function. Its 
+
+basic structure looks like</p>
+
+<a name='figure.1'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 1: (Non-Java) Basic swap function structure</p><pre class='content'><span class='ident'>swap</span><span class='operator'>(</span><span class='ident'>Type</span> <span class='ident'>arg1</span>, <span class='ident'>Type</span> <span class='ident'>arg2</span><span class='operator'>)</span> <span class='operator'>{</span>
+    <span class='ident'>Type</span> <span class='ident'>temp</span> <span class='operator'>=</span> <span class='ident'>arg1</span><span class='operator'>;</span>
+    <span class='ident'>arg1</span> <span class='operator'>=</span> <span class='ident'>arg2</span><span class='operator'>;</span>
+    <span class='ident'>arg2</span> <span class='operator'>=</span> <span class='ident'>temp</span><span class='operator'>;</span>
+<span class='operator'>}</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+<p>If you can write such a method/function in your language such that calling</p>
+
+<a name='figure.2'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 2: (Non-Java) Calling the swap function</p><pre class='content'><span class='ident'>Type</span> <span class='ident'>var1</span> <span class='operator'>=</span> <span class='operator'>...;</span>
+<span class='ident'>Type</span> <span class='ident'>var2</span> <span class='operator'>=</span> <span class='operator'>...;</span>
+<span class='ident'>swap</span><span class='operator'>(</span><span class='ident'>var1</span>,<span class='ident'>var2</span><span class='operator'>);</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+<p>actually switches the values of the variables var1 and var2, the language 
+
+supports pass-by-reference semantics.</p>
+
+<p>For example, in Pascal, you can write</p>
+
+<a name='figure.3'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 3: (Pascal) Swap function</p><pre class='content'><span class='ident'>procedure</span> <span class='ident'>swap</span><span class='operator'>(</span><span class='ident'>var</span> <span class='ident'>arg1</span>, <span class='ident'>arg2</span><span class='operator'>:</span> <span class='ident'>SomeType</span><span class='operator'>);</span>
+
+    <span class='ident'>var</span>
+        <span class='ident'>temp</span> <span class='operator'>:</span> <span class='ident'>SomeType</span><span class='operator'>;</span>
+    <span class='ident'>begin</span>
+        <span class='ident'>temp</span> <span class='operator'>:=</span> <span class='ident'>arg1</span><span class='operator'>;</span>
+        <span class='ident'>arg1</span> <span class='operator'>:=</span> <span class='ident'>arg2</span><span class='operator'>;</span>
+        <span class='ident'>arg2</span> <span class='operator'>:=</span> <span class='ident'>temp</span><span class='operator'>;</span>
+    <span class='ident'>end</span><span class='operator'>;</span>
+
+<span class='operator'>...</span>
+
+<span class='operator'>{</span> <span class='ident'>in</span> <span class='ident'>some</span> <span class='ident'>other</span> <span class='ident'>procedure</span><span class='operator'>/</span><span class='ident'>function</span><span class='operator'>/</span><span class='ident'>program</span> <span class='operator'>}</span>
+
+<span class='ident'>var</span>
+    <span class='ident'>var1</span>, <span class='ident'>var2</span> <span class='operator'>:</span> <span class='ident'>SomeType</span><span class='operator'>;</span>
+
+<span class='ident'>begin</span>
+    <span class='ident'>var1</span> <span class='operator'>:=</span> <span class='operator'>...;</span> <span class='operator'>{</span> <span class='ident'>value</span> <span class='string'>"A"</span> <span class='operator'>}</span>
+    <span class='ident'>var2</span> <span class='operator'>:=</span> <span class='operator'>...;</span> <span class='operator'>{</span> <span class='ident'>value</span> <span class='string'>"B"</span> <span class='operator'>}</span> 
+    <span class='ident'>swap</span><span class='operator'>(</span><span class='ident'>var1</span>, <span class='ident'>var2</span><span class='operator'>);</span>
+    <span class='operator'>{</span> <span class='ident'>now</span> <span class='ident'>var1</span> <span class='ident'>has</span> <span class='ident'>value</span> <span class='string'>"B"</span> <span class='ident'>and</span> <span class='ident'>var2</span> <span class='ident'>has</span> <span class='ident'>value</span> <span class='string'>"A"</span> <span class='operator'>}</span>
+<span class='ident'>end</span><span class='operator'>;</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+<p>or in C++ you could write</p>
+
+<a name='figure.4'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 4: (C++) Swap function</p><pre class='content'><span class='keyword'>void</span> <span class='ident'>swap</span><span class='operator'>(</span><span class='ident'>SomeType</span><span class='operator'>&amp;</span> <span class='ident'>arg1</span>, <span class='ident'>Sometype</span><span class='operator'>&amp;</span> <span class='ident'>arg2</span><span class='operator'>)</span> <span class='operator'>{</span>
+    <span class='ident'>SomeType</span> <span class='ident'>temp</span> <span class='operator'>=</span> <span class='ident'>arg1</span><span class='operator'>;</span>
+    <span class='ident'>arg1</span> <span class='operator'>=</span> <span class='ident'>arg2</span><span class='operator'>;</span>
+    <span class='ident'>arg2</span> <span class='operator'>=</span> <span class='ident'>temp</span><span class='operator'>;</span>
+<span class='operator'>}</span>
+
+<span class='operator'>...</span>
+
+<span class='ident'>SomeType</span> <span class='ident'>var1</span> <span class='operator'>=</span> <span class='operator'>...;</span> <span class='comment'>// value "A"</span>
+<span class='ident'>SomeType</span> <span class='ident'>var2</span> <span class='operator'>=</span> <span class='operator'>...;</span> <span class='comment'>// value "B"</span>
+<span class='ident'>swap</span><span class='operator'>(</span><span class='ident'>var1</span>, <span class='ident'>var2</span><span class='operator'>);</span> <span class='comment'>// swaps their values!</span>
+<span class='comment'>// now var1 has value "B" and var2 has value "A"</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+<p>(Please let me know if my Pascal or C++ has lapsed and I&#39;ve messed up the 
+
+syntax...)</p>
+
+<p>But you cannot do this in Java!</p>
+
+<hr/>
+
+<h2><i>Now the details...</i></h2>
+
+<p>The problem we&#39;re facing here is statements like</p>
+
+<p><i>In Java, Objects are 
+
+	passed by reference, and primitives are passed by value.</i></p>
+
+	<p>This is half 
+
+	incorrect. Everyone can easily agree that primitives are passed by value; 
+
+	there&#39;s no such thing in Java as a pointer/reference to a primitive.</p><p>
+
+	However,
+
+<i>Objects are not passed by reference</i>. A correct statement would be <i>
+
+	Object references are passed by value</i>.</p><p>This may seem like splitting 
+
+	hairs, bit it is <i>far</i> from it. There is a world of difference in 
+
+	meaning. The following examples should help make the distinction.</p><p>In Java, 
+
+	take the case of</p>
+
+<a name='figure.5'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 5: (Java) Pass-by-value example</p><pre class='content'><span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>foo</span><span class='operator'>(</span><span class='ident'>Dog</span> <span class='ident'>d</span><span class='operator'>)</span> <span class='operator'>{</span>
+    <span class='ident'>d</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>Dog</span><span class='operator'>(</span><span class='string'>"Fifi"</span><span class='operator'>);</span> <span class='comment'>// creating the "Fifi" dog</span>
+<span class='operator'>}</span>
+
+
+
+<span class='ident'>Dog</span> <span class='ident'>aDog</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>Dog</span><span class='operator'>(</span><span class='string'>"Max"</span><span class='operator'>);</span> <span class='comment'>// creating the "Max" dog</span>
+<span class='comment'>// at this point, aDog points to the "Max" dog</span>
+<span class='ident'>foo</span><span class='operator'>(</span><span class='ident'>aDog</span><span class='operator'>);</span>
+<span class='comment'>// aDog still points to the "Max" dog</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+<p>the variable passed in (aDog) <b><i>is not</i></b> modified! After calling 
+
+foo, aDog
+
+<b><i>still</i></b> points to the "Max" Dog!</p>
+
+<p>Many people mistakenly think/state that something like</p>
+
+<a name='figure.6'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 6: (Java) Still pass-by-value...</p><pre class='content'><span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>foo</span><span class='operator'>(</span><span class='ident'>Dog</span> <span class='ident'>d</span><span class='operator'>)</span> <span class='operator'>{</span> 
+    <span class='ident'>d</span><span class='operator'>.</span><span class='ident'>setName</span><span class='operator'>(</span><span class='string'>"Fifi"</span><span class='operator'>);</span>
+<span class='operator'>}</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+<p>shows that Java does in fact pass objects by reference.</p>
+
+<p>The mistake they make is in the definition of</p>
+
+<a name='figure.7'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 7: (Java) Defining a Dog pointer</p><pre class='content'><span class='ident'>Dog</span> <span class='ident'>d</span><span class='operator'>;</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+<p>itself. When you write that definition, you are defining a <i>pointer</i> to a Dog object, <i>not</i> a 
+
+Dog object itself.</p>
+
+				<h3>On Pointers versus References...</h3>
+
+				<p>The problem here is that the folks at Sun made a naming 
+
+				mistake.</p>
+
+				<p>In programming language design, a "pointer" is a variable 
+
+				that indirectly tracks the location of some piece of data. The 
+
+				value of a pointer is often the memory address of the data 
+
+				you&#39;re interested in. Some languages allow you to manipulate 
+
+				that address; others do not.</p>
+
+				<p>A "reference" is an alias to another variable. Any 
+
+				manipulation done to the reference variable directly changes the 
+
+				original variable.</p>
+
+				<p>Check out the second sentence of
+
+				<a href="http://java.sun.com/docs/books/jls/third_edition/html/typesValues.html#4.3.1">
+
+				http://java.sun.com/docs/books/jls/third_edition/html/typesValues.html#4.3.1</a>.</p>
+
+				<blockquote>"The reference values (often just <em>references</em>) 
+
+				are <em>pointers</em> to these objects, and a special null 
+
+				reference, which refers to no object"</blockquote>
+
+				<p>They emphasize "pointers" in their description... 
+
+				Interesting...</p>
+
+				<p>When they originally were creating Java, they had "pointer" 
+
+				in mind (you can see some remnants of this in things like<br />
+
+				NullPointerException).</p>
+
+				<p>Sun wanted to push Java as a secure language, and one of 
+
+				Java&#39;s advantages was that it does not allow pointer arithmetic 
+
+				as C++ does.</p>
+
+				<p>They went so far as to try a different name for the concept, 
+
+				formally calling them "references". A big mistake and it&#39;s 
+
+				caused even more confusion in the process.</p>
+
+				<p>There&#39;s a good explanation of reference variables at
+
+				<a href="http://www.cprogramming.com/tutorial/references.html">
+
+				http://www.cprogramming.com/tutorial/references.html</a>. (C++ 
+
+				specific, but it says the right thing about the concept of a 
+
+				reference variable.)</p>
+
+				<p>The word "reference" in programming language design 
+
+				originally comes from how you pass data to 
+
+				subroutines/functions/procedures/methods. A reference parameter 
+
+				is an alias to a variable passed as a parameter.</p>
+
+				<p>In the end, Sun made a naming mistake that&#39;s caused 
+
+				confusion. Java has pointers, and if you accept that, it makes 
+
+				the way Java behaves make much more sense.</p>
+
+				<h3>Calling Methods</h3>
+
+<p>Calling</p>
+
+<a name='figure.8'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 8: (Java) Passing a pointer by value</p><pre class='content'><span class='ident'>foo</span><span class='operator'>(</span><span class='ident'>d</span><span class='operator'>);</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+<p>passes the <b><i>value of d</i></b> to foo; it does not pass the object that 
+
+d points to!</p><p>The value of the pointer being passed is similar to a memory 
+
+				address. Under the covers it may be a tad different, but you can think of it in 
+
+	exactly the same way. The value uniquely identifies some object on the heap.</p>
+
+<p><b><i>However, </i></b>it makes no difference how pointers are <b><i>
+
+implemented</i></b>
+
+under the covers. You program with them <b><i>exactly</i></b> the same way in 
+
+Java as you would in C or C++. The syntax is just slightly different (another 
+
+poor choice in Java&#39;s design; they should have used the same -> syntax for 
+
+de-referencing as C++).</p>
+
+<p>In Java,</p>
+
+<a name='figure.9'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 9: (Java) A pointer</p><pre class='content'><span class='ident'>Dog</span> <span class='ident'>d</span><span class='operator'>;</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+<p>is <b><i>exactly</i></b> like C++&#39;s</p>
+
+<a name='figure.10'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 10: (C++) A pointer</p><pre class='content'><span class='ident'>Dog</span> <span class='operator'>*</span><span class='ident'>d</span><span class='operator'>;</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+<p>And using</p>
+
+<a name='figure.11'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 11: (Java) Following a pointer and calling a method</p><pre class='content'><span class='ident'>d</span><span class='operator'>.</span><span class='ident'>setName</span><span class='operator'>(</span><span class='string'>"Fifi"</span><span class='operator'>);</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+<p>is exactly like C++&#39;s</p>
+
+<a name='figure.12'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 12: (C++) Following a pointer and calling a method</p><pre class='content'><span class='ident'>d</span><span class='operator'>-></span><span class='ident'>setName</span><span class='operator'>(</span><span class='string'>"Fifi"</span><span class='operator'>);</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+<p>To sum up: Java <b><i>has</i></b> pointers, and the <b><i>value</i></b> of 
+
+the <b><i>pointer</i></b> is passed in. There&#39;s no way to actually pass an 
+
+object itself as a parameter. You can only pass a pointer to an object.</p><p>Keep 
+
+	in mind, when you call</p>
+
+<a name='figure.13'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 13: (Java) Even more still passing a pointer by value</p><pre class='content'><span class='ident'>foo</span><span class='operator'>(</span><span class='ident'>d</span><span class='operator'>);</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+<p>you&#39;re not passing an object; you&#39;re passing a <i>pointer</i> to the object.</p>
+
+<p>For a slightly different (but still correct) take on this issue, please see 
+
+<a target="_top" href="http://www-106.ibm.com/developerworks/library/j-praxis/pr1.html">
+
+http://www-106.ibm.com/developerworks/library/j-praxis/pr1.html</a>. It&#39;s from 
+
+Peter Haggar&#39;s excellent book, <i>Practical Java</i>.)</p>
+
+<hr/>
+
+<h2><i><a name="A Note on Remote Method Invocation">A Note on Remote Method 
+
+Invocation</a> (RMI)</i></h2>
+
+<p>When passing parameters to remote methods, things get a bit more complex. 
+
+First, we&#39;re (usually) dealing with passing data between two independent virtual 
+
+machines, which might be on separate physical machines as well. Passing the 
+
+value of a pointer wouldn&#39;t do any good, as the target virtual machine doesn&#39;t 
+
+have access to the caller&#39;s heap.</p><p>You&#39;ll often hear "pass by value" and "pass 
+
+	by reference" used with respect to RMI. These terms have more of a "logical" 
+
+	meaning, and really aren&#39;t correct for the intended use.</p><p>Here&#39;s what is 
+
+	usually meant by these phrases with regard to RMI. Note that this is <i>not</i> 
+
+	proper usage of "pass by value" and "pass by reference" semantics:</p><dl>
+
+  <dt><b>RMI Pass-by-value</b></dt>
+
+  <dd>The actual parameter is <i>serialized</i> and passed using a network 
+
+  protocol to the target remote object. Serialization essentially "squeezes" the 
+
+  data out of an object/primitive. On the receiving end, that data is used to 
+
+  build a "clone" of the original object or primitive. Note that this process 
+
+  can be rather expensive if the actual parameters point to large objects (or 
+
+  large graphs of objects).<br/>
+
+  <b>This isn&#39;t quite the right use of "pass-by-value"; I 
+
+  think it should really be called something like "pass-by-memento". (See 
+
+  "Design Patterns" by Gamma et al for a description of the Memento pattern).</b>
+
+  <br/>
+
+  &nbsp;</dd>
+
+  <dt><b>RMI Pass-by-reference</b></dt>
+
+  <dd class="style1">The actual parameter, which<i> is itself a remote object</i>,<i> </i>is 
+
+  represented by a proxy. The proxy keeps track of where the actual parameter 
+
+  lives, and anytime the target method uses the formal parameter, <i>another 
+
+  remote method invocation occurs</i> to "call back" to the actual parameter. 
+
+  This can be useful if the actual parameter points to a large object (or graph 
+
+  of objects) and there are few call backs.<br/>
+
+  <b>This isn&#39;t quite the right use of "pass-by-reference" (again, you cannot 
+
+  change the actual parameter itself). I think it should 
+
+  be called something like "pass-by-proxy". (Again, see "Design Patterns" 
+
+  for descriptions of the Proxy pattern).</b></dd>
+
+</dl>
+
+<p>&nbsp;</p>
+
+
+
+<hr/>
+
+<h2>Follow up from stackoverflow.com</h2>
+
+
+
+<i>I posted the following as some clarification when a discussion on this article arose on http://stackoverflow.com.</i>
+
+
+
+<p>The Java Spec says that everything in java is pass-by-value. There is no such thing as "pass-by-reference" in java.</p>
+
+
+
+<p>The key to understanding this is that something like</p>
+
+
+
+<a name='figure.14'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 14: (Java) Not a Dog; a pointer to a Dog</p><pre class='content'><span class='ident'>Dog</span> <span class='ident'>myDog</span><span class='operator'>;</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+
+
+<p>is not a Dog; it's actually a pointer to a Dog.</p>
+
+
+
+<p>What that means, is when you have</p>
+
+
+
+<a name='figure.15'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 15: (Java) Passing the Dog's location</p><pre class='content'><span class='ident'>Dog</span> <span class='ident'>myDog</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>Dog</span><span class='operator'>(</span><span class='string'>"Rover"</span><span class='operator'>);</span>
+<span class='ident'>foo</span><span class='operator'>(</span><span class='ident'>myDog</span><span class='operator'>);</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+
+
+<p>you're essentially passing the address of the created Dog object to the foo method. (I say essentially b/c java pointers aren't direct addresses, but it's easiest to think of them that way)</p>
+
+
+
+<p>Suppose the Dog object resides at memory address 42. This means we pass 42 to the method.</p>
+
+
+
+<p>If the Method were defined as</p>
+
+
+
+<a name='figure.16'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 16: (Java) Looking at the called method in detail</p><pre class='content'><span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>foo</span><span class='operator'>(</span><span class='ident'>Dog</span> <span class='ident'>someDog</span><span class='operator'>)</span> <span class='operator'>{</span>
+    <span class='ident'>someDog</span><span class='operator'>.</span><span class='ident'>setName</span><span class='operator'>(</span><span class='string'>"Max"</span><span class='operator'>);</span>     <span class='comment'>// AAA</span>
+    <span class='ident'>someDog</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>Dog</span><span class='operator'>(</span><span class='string'>"Fifi"</span><span class='operator'>);</span>  <span class='comment'>// BBB</span>
+    <span class='ident'>someDog</span><span class='operator'>.</span><span class='ident'>setName</span><span class='operator'>(</span><span class='string'>"Rowlf"</span><span class='operator'>);</span>   <span class='comment'>// CCC</span>
+<span class='operator'>}</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+
+
+<p>Let's look at what's happening.</p>
+
+
+
+<p>the parameter someDog is set to the value 42</p>
+
+
+
+<dl>
+
+<dt>at line "AAA"</dt>
+
+<dd>someDog is followed to the Dog it points to (the Dog object at address 42) 
+
+that Dog (the one at address 42) is asked to change his name to Max </dd>
+
+<dt>at line "BBB"</dt>
+
+<dd>a new Dog is created. Let's say he's at address 74 
+
+we assign the parameter someDog to 74</dd> 
+
+<dt>at line "CCC"</dt>
+
+<dd>someDog is followed to the Dog it points to (the Dog object at address 74) 
+
+that Dog (the one at address 74) is asked to change his name to Rowlf 
+
+then, we return</dd> 
+
+</dl>
+
+
+
+
+
+<p>Now let's think about what happens outside the method:</p>
+
+
+
+<p><em><strong>Did myDog change?</strong></em></p>
+
+
+
+<p>There's the key.</p>
+
+
+
+<p>Keeping in mind that myDog is a pointer, and not an actual Dog, the answer is NO. myDog still has the value 42; it's still pointing to the original Dog.</p>
+
+
+
+<p>It's perfectly valid to follow an address and change what's at the end of it; that does not change the variable, however.</p>
+
+
+
+<p>Java works exactly like C. You can assign a pointer, pass the pointer to a method, follow the pointer in the method and change the data that was pointed to. However, you cannot change where that pointer points.</p>
+
+
+
+<p>In C++, Ada, Pascal and other languages that support pass-by-reference, you can actually change the variable that was passed.</p>
+
+
+
+<p>If Java had pass-by-reference semantics, the foo method we defined above would have changed where myDog was pointing when it assigned someDog on line BBB.</p>
+
+
+
+<p>Think of reference parameters as being aliases for the variable passed in. When that alias is assigned, so is the variable that was passed in.</p>
+
+
+
+
+
+
+
+				</a>
+
+				<!-- #EndEditable "content" -->
+
+				<div id="footer">
+
+					<p>&nbsp;</p>
+
+					<hr/>
+
+					<p>Copyright &copy; 1996-2009, Scott Stanchfield. All Rights Reserved.<br/>
+
+					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
+
+					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
+
+					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
+
+					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../images/cssplay_button.png" width="88" /></a></p>
+
+					<p>
+
+					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
+
+					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../images/feed-icon-14x14.png" width="14" />Want 
+
+					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
+
+					</p>
+
+				</div>
+
+			</div>
+
+		</div>
+
+		<div id="bottom"/>
+
+		<div id="navigation">
+
+			<ul>
+
+				<li><a href="../index.html">Home</a></li>
+
+				<li><a href="index.html">Articles</a></li>
+
+				<li><a href="../tools/index.html">Tools</a></li>
+
+				<li><a href="../evaj/index.html">Effective VisualAge for Java</a></li>
+
+				<li><a href="../eclipse/index.html">Eclipse Tips</a></li>
+
+				<li><a href="../vaj/index.html">VisualAge Tips</a></li>
+
+				<!--
+
+				<li><a href="resume.html">Resume</a></li>
+
+				-->
+
+				<li><a href="../publications.html">Publications</a></li>
+
+			</ul>
+
+			<p>&nbsp;</p>
+
+			<div style="margin-left:10px">
+
+<script type="text/javascript"><!--
+
+google_ad_client = "pub-1721904981084162";
+
+/* Homepage Gutter */
+
+google_ad_slot = "0044274311";
+
+google_ad_width = 120;
+
+google_ad_height = 600;
+
+//-->
+
+</script>
+
+<script type="text/javascript"
+
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+
+</script>
+
+</div>
+
+		</div>
+
+		<div id="bottomcorner"/>
+
+		<div id="topcorner"/>
+
+		</div>
+
+		<p>&nbsp;</p>
+
+	</body>
+
+<!-- #EndTemplate -->
+
+</html>
+

@@ -1,0 +1,419 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- #BeginTemplate "../../master.dwt" -->
+
+	<head>
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+		<!-- #BeginEditable "doctitle" -->
+		<title>PCCTS Tutorial: Parsing  - Scott Stanchfield</title>
+		<!-- #EndEditable -->
+		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
+		<!-- #BeginEditable "head" -->
+		<!-- #EndEditable -->
+		<style type="text/css">
+
+.style1 {
+	vertical-align: middle;
+}
+</style>
+	</head>
+
+	<body>
+		<div id="header">
+			<h1>JavaDude.com</h1>
+			<h4>-- Scott Stanchfield</h4>
+		</div>
+		<div id="content">
+			<div id="topBar">&nbsp;</div>
+			<div id="contentIndent">
+				<!-- #BeginEditable "content" -->
+
+<h1>Parsing</h1>
+<h3>Introduction</h3>
+<p>We'll look at each language element and put together some rules for it. In some cases, I may look at how the same construct would be implemented for other languages, showing some difficulties and how to overcome them. At least that's my plan. We'll see
+where I end up...</p>
+<h3>Lexical Elements of XL</h3>
+<h4>Whitespace</h4>
+<p>XL declares that blank spaces, tabs, and end-of-line constitute whitespace. Oh, and don't forget the ever (un)popular carriage-returns that DOS is so fond of. You should always handle this, especially if you will be running on UNIX and there is even a <i>chance</i>
+that someone will run a file that has been touched by DOS through your parser. Let's write regular expressions for the whitespace tokens:</p>
+<pre>#token BLANK   &quot;\ &quot; &lt;&lt;skip();&gt;&gt;
+#token TAB     &quot;\t&quot; &lt;&lt;skip();&gt;&gt;
+#token EVIL_CR &quot;\r&quot; &lt;&lt;skip();&gt;&gt;
+#token NEWLINE &quot;\n&quot; &lt;&lt;skip();&gt;&gt;
+           </pre>
+<p>The <code>#token</code> tag tells DLG that we are defining a new token. Following <code>#token</code> is an identifier that can be used in the ANTLR grammar to say &quot;this type of token comes here.&quot; Then comes a regular expression for the
+token, in double quotes. (See the PCCTS reference for details on regular expression syntax.) Finally, you can add action code inside <code>&lt;&lt;</code> and <code>&gt;&gt;</code> This code will be executed as soon as DLG matches the regular expression.</p>
+<p>The XL specification says &quot;whitespace is ignored,&quot; so we put a call to <b>skip()</b> in the action code for these rules. Because we are ignoring whitespace, we really don't need to assign token identifiers -- the <b>skip()</b> statement tells
+DLG <b>not</b> to pass the token to the parser. So we can re-write these rules as</p>
+<pre>#token &quot;\ &quot; &lt;&lt;skip();&gt;&gt;
+#token &quot;\t&quot; &lt;&lt;skip();&gt;&gt;
+#token &quot;\r&quot; &lt;&lt;skip();&gt;&gt;
+#token &quot;\n&quot; &lt;&lt;skip();&gt;&gt;
+           </pre>
+<p>Those of you familiar with regular expression are probably thinking &quot;why does he have these are three separate rules?&quot; And you're right -- using regular expression character classes, we can re-write all of these as</p>
+<pre>#token &quot;[\ \t\r\n]&quot; &lt;&lt;skip();&gt;&gt;
+           </pre>
+<p>but let's think a bit more on this -- we want to do something with the &quot;newline&quot; character, &quot;\n&quot;. We want to tell DLG to increment our current line number, so error messages can be friendlier and tell the user which line the error
+was found. So we add a call to <b>newline()</b> to the action code for &quot;\n&quot; and end up with</p>
+<pre>#token &quot;[\ \t\r]&quot; &lt;&lt;skip();&gt;&gt;
+#token &quot;\n&quot; &lt;&lt;skip(); newline();&gt;&gt;
+           </pre>
+<p>as our whitespace rules.</p>
+<hr/>
+<h4>Comments</h4>
+<p>We got lucky in XL, but I'll bore you with C comments in a minute...</p>
+<p>XL defines comments as &quot;all text from // to the end of the current line.&quot; So, we get an expression like</p>
+<pre>#token &quot;// ~[\n]* \n&quot; &lt;&lt;skip(); newline();&gt;&gt;
+           </pre>
+<p>A few things to notice about this rule:</p>
+<ul>
+    <li>We really don't need the final &quot;\n&quot; -- our rule for &quot;\n&quot; above handles it already. I added it here to show that you need to watch out -- anywhere you have a &quot;\n&quot; in a regular expression, you need to do whatever it is
+        you want to do when you get a newline; in this case, call the <b>newline()</b> function.</li>
+    <li>Space inside DLG regular expressions are not significant unless they are escaped. This means you can separate parts of a regular expression to make it more readable. In other words, I recommend adding spaces -- it'll help others understand your
+        regular expressions more readily.</li>
+    <li>Those of you familiar with lex will notice that we can't just say &quot;.*&quot; to represent all non-newline characters. &quot;~[]&quot; in DLG means &quot;any character except end-of-file&quot; which is too broad for us. Therefore, we need to
+        say &quot;anything other than \n&quot; which is &quot;~[\n]&quot;.</li>
+    <li>A comment at end-of-file (without a \n after it) will not be matched, as no newline exists. To remedy this problem, we change the definition to
+        <pre>#token &quot;// ~[\n@]* [\n@]&quot; &lt;&lt;skip(); newline();&gt;&gt;
+                                  </pre>
+        <p>as DLG uses &quot;@&quot; to mean end-of-file.</p></li>
+</ul>
+<p>I threatened to do C-style comments, so I will. SOMEBODY, PLEASE VERIFY I GOT THIS RIGHT, AS I'M TYPING AT LIGHT SPEED RIGHT NOW WHILE CHANGING A DIAPER...</p>
+<p>Let's assume we are using a C compiler that does not keep track of nested comments -- &quot;/*&quot; starts a comment, and &quot;*/&quot; ends a comment. It doesn't matter if it supports the C++ style comments or not -- they'll get gobbled just as well
+as the rest of a comment.</p>
+<p>We can approach this two ways. We can make one evil regular expression for a comment, or use #lexclass to define a separate state that the scanner will enter when it encounters a comment. In my humble opinion (IMHO), the lexclass method is more
+desirable for the following reasons:</p>
+<ol>
+    <li>It's more readable -- simpler regular expressions are always easier to figure out when the next person has to maintain your compiler or parser</li>
+    <li>Comments can get big, and you can overflow your token text buffer very quickly. The lexclass method lets you watch out for this...</li>
+</ol>
+<p>First, let's write a rule that finds the start of a C comment. (Note -- these rules will not go into <i>our</i> XL compiler, but I thought you might like to see them anyway...) This rule should appear in your main lexclass (by default, it's called
+START, which is what I'll use here.)</p>
+<pre>#lexclass START
+#token &quot;/ \*&quot; &lt;&lt;skip(); mode(C_STYLE_COMMENT);&gt;&gt;
+           </pre>
+<p>The order of the <b>skip()</b> and <b>mode()</b> calls in the action code doesn't matter. Under the covers, they just set some flags for DLG. (I recommend trying to be consistent on the order you use, just for clarity.) The regular expression for the
+comment starter needs to escape the &quot;*&quot; as it is a special character in DLG expressions...</p>
+<p>The call to <b>mode(C_STYLE_COMMENT)</b> will cause DLG to look for its next match in the rules defined under <b>#lexclass C_STYLE_COMMENT</b>, so let's look at that definition:</p>
+<pre>#lexclass C_STYLE_COMMENT
+#token &quot;\* /&quot; &lt;&lt;skip(); mode(START);&gt;&gt;
+#token &quot;~[]&quot; &lt;&lt;skip();&gt;&gt;
+           </pre>
+<p>These two rules say the following:</p>
+<ol>
+    <li>If I see &quot;*/&quot;, skip it (don't pass a token to the parser) and switch back to my START mode -- we are done with the comment.</li>
+    <li>If I see any other character, skip it and stay in comment mode.</li>
+</ol>
+<p>There is a big problem here. We ignored &quot;\n&quot; &quot;But&quot;, someone may say, &quot;we already defined a rule for it above.&quot; Sorry -- because we are in a different lexclass, DLG will not match the previous &quot;\n&quot; rule -- it will
+only match rules found in the current lexclass. So we need to modify the lexclass C_STYLE_COMMENT to look like:</p>
+<pre>#lexclass C_STYLE_COMMENT
+#token &quot;\* /&quot; &lt;&lt;skip(); mode(START);&gt;&gt;
+#token &quot;\n&quot; &lt;&lt;skip(); newline();&gt;&gt;
+#token &quot;~[]&quot; &lt;&lt;skip();&gt;&gt;
+           </pre>
+<p>Let's try something else -- suppose you were writing a funky C compiler that allowed nested comments that had to match comment levels. You need to keep track of the comment level before returning. You can do this as follows: First, define a
+comment_level integer variable in your parser class (we'll see how to do that later.) Then, your lexical rules become:</p>
+<pre>#lexclass START
+#token &quot;/ \*&quot; &lt;&lt;
+                  skip(); 
+                  mode(C_STYLE_COMMENT); 
+                  comment_level=1;
+              &gt;&gt;
+
+#lexclass C_STYLE_COMMENT
+#token &quot;\* /&quot; &lt;&lt;
+                  skip(); 
+                  comment_level--; 
+                  if (comment_level == 0)
+                      mode(START);
+              &gt;&gt;
+#token &quot;/ \*&quot; &lt;&lt;skip(); comment_level++;&gt;&gt;
+#token &quot;\n&quot;   &lt;&lt;skip(); newline();&gt;&gt;
+#token &quot;~[]&quot;  &lt;&lt;skip();&gt;&gt;
+           </pre>
+<p>This can also be accomplished by using a mode-stack (see the PCCTS Notes for New Users doc for information on using this.) Perhaps I'll add this to the tutorial at a later date.</p>
+<p>Simple enough, eh? The moral of this story is &quot;use lexclasses wisely and they can help you immensely.&quot;</p>
+<p>Note that in the above lexclasses, we should add checking to see if end-of-file was found inside a comment.</p>
+<hr/>
+<h4>Literals</h4>
+<p>In XL, there are three types of literals: <b>Integer</b>, <b>Character</b> and <b>String</b>.</p>
+<p><b>Integer literals</b> are simple -- they are just a series of digits:</p>
+<pre>#token INTLIT &quot;[0-9]+&quot;
+           </pre>
+<p>Note that this token definition is different than our others. First, we added a token identifier, <b>INTLIT</b>. This will be used in our grammar to say &quot;an integer literal comes here.&quot; Second, there is no action code -- we are not skipping
+it, counting a newline, or doing anything else with it. We just associate the sequence of digits with token id <b>INTLIT</b>. That's it. The &quot;+&quot; in the regular expression means &quot;one or more -- <i>at least</i> one!&quot;</p>
+<p><b>Character literals</b> as fairly simple as well:</p>
+<pre>#token CHARLIT &quot;\' ~[] \'&quot;
+           </pre>
+<p>Basically, an apostrophe followed by any character, followed by another apostrophe. In the grammar, we will use <b>CHARLIT</b> to refer to a character literal.</p>
+<p><b>String literals</b> are a bit trickier, and are probably easiest to implement using a lexclass:</p>
+<pre>#lexclass START
+#token           &quot;\&quot;&quot;    &lt;&lt;skip(); mode(STRING);&gt;&gt;
+
+#lexclass STRING
+#token           &quot;\&quot;\&quot;&quot;  &lt;&lt;more(); replchar('\&quot;');&gt;&gt;
+#token BADSTRING &quot;\n&quot;    &lt;&lt;
+                             replchar('\0'); 
+                             newline(); 
+                             mode(START);
+                             /* error message */ 
+                         &gt;&gt;
+#token STRINGLIT &quot;\&quot;&quot;    &lt;&lt;
+                             // truncate quote
+                             replchar('\0');
+                             mode(START);
+                         &gt;&gt;
+#token           &quot;~[]&quot; &lt;&lt;more();&gt;&gt;
+           </pre>
+<p>Lots going on here, right? Not really... Let's break it down:</p>
+<p>First, we enter a string when we see a double quote. We have a <b>skip()</b> in the action code so we can strip off the leading quote. The <b>mode(STRING)</b> switches us to <b>STRING</b> mode. So far, so good.</p>
+<p>What can we see inside a string? Remember, from the spec, two double-quotes is a literal double quote. So we match them, and replace them with (surprise) a single double-quote character. The call to <b>more() </b>says &quot;DLG -- we have started
+building a token, but we're not done. Keep appending characters...&quot; The call to <b>replchar</b> replaces the matched text (the two double quotes) with a single double-quote.</p>
+<p>But what if we see an end-of-line inside a string? This is illegal, and we'll assume it ends the string. So, we replace it with a null to end the string early, call <b>newline()</b> to count the line (remember, we need to do this no matter where we see
+&quot;\n&quot;!), switch back to <b>START</b> mode and write an error message. The token id <b>BADSTRING</b> will be passed to the parser as an incomplete string, so we can at least try to continue parsing... Whew!</p>
+<p>What if we see a single double-quote in a string? It ends the string! So, we want to strip it, return the <b>STRINGLIT</b> token, and go back to our <b>START</b> state. We can't use <b>skip()</b> to drop the trailing quote, because that would stop us
+from returning the token to the parser. So, we replace the end quote with a null (\0) to end the string early. Then we switch back to the <b>START</b> state, returning a <b>STRINGLIT</b> token.</p>
+<p>Finally, any other character is just apended to the STRINGLIT by issuing a more() call.</p>
+<p>We'll address handling the <b>BADSTRING</b> token later...</p>
+<p>Note that this assumes a fairly short string -- one that will fit in a token string buffer. A better thing to do would be to check the current buffer length before appending characters to the string, but I'll leave that as an exercise for the
+masochistic reader. (In general, I'm going to go light on error handling to help clarity, but I'll try to point out where it should be added in places like this.)</p>
+<hr/>
+<h4>Keywords</h4>
+<p>XL reserves all keywords -- I may add later what to do with unreserved keywords (for evil languages like PL/1 -- hey! I <i>like</i> to program in PL/1, but I'd hate to write that compiler!)</p>
+<p>There are several ways to implement keywords. The simplest is to just add them in the DLG specification. A more efficient method would be to use a &quot;perfect hashing function&quot; to differentiate between keywords and identifiers. See the PCCTS
+Notes for New Users for some information on how to do this. I'll stick with the simple method for now...</p>
+<p>Note that you can directly specify keywords in the grammar, but if you do, you cannot use SORCERER to identify tokens. Since I'm heading that way eventually, let's spell 'em out...</p>
+<p>This is easy, so I'll just spell it out:</p>
+<pre>#token PROGRAM   &quot;program&quot;
+#token BEGIN     &quot;begin&quot;
+#token END       &quot;end&quot;
+#token VAR       &quot;var&quot;
+#token CONSTANT  &quot;constant&quot;
+#token TYPE      &quot;type&quot;
+#token RECORD    &quot;record&quot;
+#token ARRAY     &quot;array&quot;
+#token OF        &quot;of&quot;
+#token PROCEDURE &quot;procedure&quot;
+#token PUT       &quot;put&quot;
+#token GET       &quot;get&quot;
+#token SKIPLINE  &quot;skipLine&quot;
+#token NEWLINE   &quot;newLine&quot;
+#token EXIT      &quot;exit&quot;
+#token WHEN      &quot;when&quot;
+#token RETURN    &quot;return&quot;
+#token IF        &quot;if&quot;
+#token THEN      &quot;then&quot;
+#token ELSE      &quot;else&quot;
+#token ELSIF     &quot;elsif&quot;
+#token WHILE     &quot;while&quot;
+#token LOOP      &quot;loop&quot;
+#token AND       &quot;and&quot;
+#token OR        &quot;or&quot;
+#token INTEGER   &quot;Integer&quot;
+#token BOOLEAN   &quot;Boolean&quot;
+           </pre>
+<p>What would happen in the following token definition (not in XL, but present in Pascal):</p>
+<pre>#token FILE &quot;file&quot;
+           </pre>
+<p>The problem with that is that <b>FILE</b> is a standard decl in stdio.h. That creates a &quot;re-defined&quot; situation. I like to avoid this by adding &quot;_&quot; or &quot;_kw&quot; to the end of token ids that cause me grief. Keep this in mind
+when you are writing a parser, even if you use yacc... This got especially bad when I tried making a compiler and using Mircosoft's MFC at the same time. Whew! Nasty conflicts!</p>
+<p>Also, I have added pre-defined things like type names (<b>INTEGER</b>, for example) and functions (<b>PUT</b> for example) as keywords. This will make it easier for our small compiler, but not terribly realistic. These really should be defined in the
+symbol table as &quot;predefined functions&quot; and matched using identifier rules, but we're taking the easy way out for now.</p>
+<p>We'll use these identifiers in the grammar where keywords would appear.</p>
+<hr/>
+<h4>Operators</h4>
+<p>XL defines several operators, and we'll define them as well... Note that several have a &quot;\&quot; in them to escape DLG regular expression metacharacters. Be careful! If you don't escape something, you'll get some weird DLG errors later.</p>
+<pre>#token DOT        &quot;.&quot;
+#token BECOMES    &quot;:=&quot;
+#token COLON      &quot;:&quot;
+#token SEMI       &quot;;&quot;
+#token COMMA      &quot;,&quot;
+#token EQUALS     &quot;=&quot;
+#token LBRACKET   &quot;\[&quot;
+#token RBRACKET   &quot;\]&quot;
+#token DOTDOT     &quot;..&quot;
+#token LPAREN     &quot;\(&quot;
+#token RPAREN     &quot;\)&quot;
+#token NOT_EQUALS &quot;/=&quot;
+#token LT         &quot;&lt;&quot;
+#token LTE        &quot;&lt;=&quot;
+#token GT         &quot;&gt;&quot;
+#token GTE        &quot;&gt;=&quot;
+#token PLUS       &quot;\+&quot;
+#token MINUS      &quot;\-&quot;
+#token TIMES      &quot;\*&quot;
+#token DIV        &quot;/&quot;
+#token MOD        &quot;mod&quot;
+#token NOT        &quot;not&quot;
+           </pre>
+<hr/>
+<h4>Identifiers</h4>
+<p>Finally, we talk about identifiers. Basically, they are any sequence of letters and digits that's left. So we get a regular expression like:</p>
+<pre>#token IDENT &quot;[a-zA-Z] [a-zA-Z0-9]*&quot;
+           </pre>
+<p>Very simple. Note that there is no action code here, especially not any that would perform symbol table lookup. I'm very adamant in pushing my view that scanner to parser communication should be a one-way street. This is especially important in
+multiple-lookahead parsers. If your parser decides when to push and pop scope (a likely scenario), and your scanner is reading two or more tokens ahead, you may be looking at a token in the scanner before its proper scope was pushed or popped. In
+addition, things like semantic predicates let you make more pointed decisions about how to parse identifiers in the grammar, rather than changing the token type in the scanner.</p>
+<hr/>
+<h4>Putting the Lexical Elements Together</h4>
+<p>What do we have so far? Let's look at it in one lump, shall we?</p>
+<pre>#lexclass START // Not really necessary, but
+                // good commentary nonetheless
+
+// White Space
+#token &quot;[\ \t\r]&quot;     &lt;&lt;skip();&gt;&gt;
+#token &quot;\n&quot;           &lt;&lt;skip(); newline();&gt;&gt;
+
+// Comments
+#token &quot;// ~[\n]* \n&quot; &lt;&lt;skip(); newline();&gt;&gt;
+
+// Literals
+#token INTLIT  &quot;[0-9]+&quot;
+#token CHARLIT &quot;\' ~[] \'&quot;
+#token         &quot;\&quot;&quot; &lt;&lt; // start STRINGLIT
+                        skip();
+                        mode(STRING);
+                    &gt;&gt;
+
+// Keywords
+#token PROGRAM   &quot;program&quot;
+#token BEGIN     &quot;begin&quot;
+#token END       &quot;end&quot;
+#token VAR       &quot;var&quot;
+#token CONSTANT  &quot;constant&quot;
+#token TYPE      &quot;type&quot;
+#token RECORD    &quot;record&quot;
+#token ARRAY     &quot;array&quot;
+#token OF        &quot;of&quot;
+#token PROCEDURE &quot;procedure&quot;
+#token PUT       &quot;put&quot;
+#token GET       &quot;get&quot;
+#token SKIPLINE  &quot;skipLine&quot;
+#token NEWLINE   &quot;newLine&quot;
+#token EXIT      &quot;exit&quot;
+#token WHEN      &quot;when&quot;
+#token RETURN    &quot;return&quot;
+#token IF        &quot;if&quot;
+#token THEN      &quot;then&quot;
+#token ELSE      &quot;else&quot;
+#token ELSIF     &quot;elsif&quot;
+#token WHILE     &quot;while&quot;
+#token LOOP      &quot;loop&quot;
+#token AND       &quot;and&quot;
+#token OR        &quot;or&quot;
+#token INTEGER  &quot;Integer&quot;
+#token BOOLEAN &quot;Boolean&quot; 
+
+// Operators
+#token DOT        &quot;.&quot;
+#token BECOMES    &quot;:=&quot;
+#token COLON      &quot;:&quot;
+#token SEMI       &quot;;&quot;
+#token COMMA      &quot;,&quot;
+#token EQUALS     &quot;=&quot;
+#token LBRACKET   &quot;\[&quot;
+#token RBRACKET   &quot;\]&quot;
+#token DOTDOT     &quot;..&quot;
+#token LPAREN     &quot;\(&quot;
+#token RPAREN     &quot;\)&quot;
+#token NOT_EQUALS &quot;/=&quot;
+#token LT         &quot;&lt;&quot;
+#token LTE        &quot;&lt;=&quot;
+#token GT         &quot;&gt;&quot;
+#token GTE        &quot;&gt;=&quot;
+#token PLUS       &quot;\+&quot;
+#token MINUS      &quot;\-&quot;
+#token TIMES      &quot;\*&quot;
+#token DIV        &quot;/&quot;
+#token MOD        &quot;mod&quot;
+#token NOT        &quot;not&quot;
+
+// Identifiers
+#token IDENT &quot;[a-zA-Z] [a-zA-Z0-9]*&quot;
+
+// String Literal Processing
+// Separate Scanner class!
+#lexclass STRING
+#token           &quot;\&quot;\&quot;&quot; &lt;&lt;
+                            more();
+                            replchar('\&quot;');
+                        &gt;&gt;
+#token BADSTRING &quot;\n&quot;   &lt;&lt;
+                            replchar('\0');
+                            newline();
+                            mode(START);
+                            /* error message */
+                        &gt;&gt;
+#token STRINGLIT &quot;\&quot;&quot;   &lt;&lt;
+                            replchar('\0');
+                            mode(START);
+                        &gt;&gt;
+#token           &quot;~[]&quot;  &lt;&lt;more();&gt;&gt;
+
+#tokclass STRING_LITERAL {STRINGLIT BADSTRING}
+           </pre>
+<p>Whoops! How'd that <code>#tokclass</code> sneak in there? I thought it would be nice to show how <code>#tokclass</code> is used while we are here. Remember that I mentioned that we want the parser to try to treat the incomplete string as a normal
+string? Chances are that if someone forgot the closing quote, it could cause other big problems, but we should at least <b>try</b> to keep going. So, in the grammar, we'll use <b>STRING_LITERAL</b>, which could be <b>either</b> <b>STRINGLIT</b> or <b>BADSTRING</b>.
+It's kind of shorthand for a rule that says</p>
+<pre>string_literal
+  : STRINGLIT
+  | BADSTRING
+  ;
+       </pre>
+<p>except in actuality, it is more efficient because a set inclusion test is used instead of a function call for the sub rule. But I digest...</p>
+<p>Let's move on to the <a href="pccts5.html">grammar</a>.</p>
+
+				<!-- #EndEditable "content" -->
+				<div id="footer">
+					<p>&nbsp;</p>
+					<hr/>
+					<p>Copyright &copy; 1996-2009, Scott Stanchfield. All Rights Reserved.<br/>
+					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
+					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
+					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
+					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../../images/cssplay_button.png" width="88" /></a></p>
+					<p>
+					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
+					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../../images/feed-icon-14x14.png" width="14" />Want 
+					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div id="bottom"/>
+		<div id="navigation">
+			<ul>
+				<li><a href="../../index.html">Home</a></li>
+				<li><a href="../index.html">Articles</a></li>
+				<li><a href="../../tools/index.html">Tools</a></li>
+				<li><a href="../../evaj/index.html">Effective VisualAge for Java</a></li>
+				<li><a href="../../eclipse/index.html">Eclipse Tips</a></li>
+				<li><a href="../../vaj/index.html">VisualAge Tips</a></li>
+				<!--
+				<li><a href="resume.html">Resume</a></li>
+				-->
+				<li><a href="../../publications.html">Publications</a></li>
+			</ul>
+			<p>&nbsp;</p>
+			<div style="margin-left:10px">
+<script type="text/javascript"><!--
+google_ad_client = "pub-1721904981084162";
+/* Homepage Gutter */
+google_ad_slot = "0044274311";
+google_ad_width = 120;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+		</div>
+		<div id="bottomcorner"/>
+		<div id="topcorner"/>
+		</div>
+		<p>&nbsp;</p>
+	</body>
+<!-- #EndTemplate -->
+</html>

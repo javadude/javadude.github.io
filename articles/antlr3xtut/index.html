@@ -1,0 +1,235 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- #BeginTemplate "../../master.dwt" -->
+
+	<head>
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+		<!-- #BeginEditable "doctitle" -->
+		<title>ANTLR 3.x Tutorial - Scott Stanchfield</title>
+		<!-- #EndEditable -->
+		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
+		<!-- #BeginEditable "head" -->
+		<style type="text/css">
+.style2 {
+	border-style: solid;
+	border-width: 2px;
+}
+</style>
+		<!-- #EndEditable -->
+		<style type="text/css">
+.style1 {
+	vertical-align: middle;
+}
+</style>
+	</head>
+
+	<body>
+		<div id="header">
+			<h1>JavaDude.com</h1>
+			<h4>-- Scott Stanchfield</h4>
+		</div>
+		<div id="content">
+			<div id="topBar">&nbsp;</div>
+			<div id="contentIndent">
+				<!-- #BeginEditable "content" -->
+
+<h1>ANTLR 3.x Tutorial</h1>
+				<p>Many folks have asked me to convert my ANTLR 2.x tutorial to 
+				ANTLR 3.x. I started doing it and got reaaaaaaaaaalllly tired of 
+				typing. Being a bear of very little patience, I decided to go a 
+				different route, one which I think will prove even more 
+				effective. Go laziness!</p>
+				<p>This version of the tutorial is video-based. Using Camtasia 
+				Studio (the best screen/video capture software in the world!) 
+				I&#39;ve recorded my babbling on while creating a parser for the XL 
+				language in ANTLR 3.x in Eclipse.</p>
+				<p>Note: I&#39;m adding more videos as I get time. Subscribe to my 
+				<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
+				<img alt="RSS Feed for JavaDude.com" height="14" src="../../images/feed-icon-14x14.png" width="14" class="style1" /> RSS 
+				feed</a> to be notified.</p>
+				<h2>Videos</h2>
+				<p>I&#39;ve uploaded the following videos to vimeo. Each is 
+				listed below with a short description. I recommend you watch 
+				them in order as they assume knowledge of previous videos.</p>
+				<p>Vimeo video group: <a href="http://vimeo.com/groups/29150">
+				http://vimeo.com/groups/29150</a></p>
+				<h4>Video License</h4>
+				<p>
+				
+				<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/us/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/3.0/us/88x31.png" /></a><span xmlns:dc="http://purl.org/dc/elements/1.1/" href="http://purl.org/dc/dcmitype/MovingImage" property="dc:title" rel="dc:type"><br />
+				ANTLR 3.x Tutorial</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://javadude.com/articles/antlr3xtut" property="cc:attributionName" rel="cc:attributionURL">
+				Scott Stanchfield</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/us/">
+				Creative Commons Attribution-Noncommercial-No Derivative Works 
+				3.0 United States License</a>.<br />
+				<br />
+				Feel free to watch the videos and point friends to them, but you 
+				cannot use them as part of any commercial product nor can you 
+				create derivative works. Follow the link above to see the 
+				complete license text.</p>
+				<h4>Concepts - What I should have recorded first but forgot 
+				until I was 6 steps in...</h4>
+				<ul>
+					<li><a href="http://vimeo.com/groups/29150/videos/8324793">
+					Concepts: What is ANTLR, Lexing, Parsing, Trees etc - 
+					http://vimeo.com/groups/29150/videos/8324793</a></li>
+				</ul>
+				<h4>Prologue - Getting Eclipse set up for ANTLR 3.x development</h4>
+				<ul>
+					<li><a href="http://vimeo.com/groups/29150/videos/8001326">
+					Prologue 1: Setting up Eclipse for use with ANTLR 3.x - 
+					http://vimeo.com/groups/29150/videos/8001326</a></li>
+					<li><a href="http://vimeo.com/groups/29150/videos/8015802">
+					Prologue 2: Creating an ANTLR 3.x project in Eclipse - 
+					http://vimeo.com/groups/29150/videos/8015802</a></li>
+				</ul>
+				<h4>Creating an XL Recognizer</h4>
+				<ul>
+					<li><a href="http://vimeo.com/groups/29150/videos/8137747">
+					Part 1 - Starting to implement XL - 
+					http://vimeo.com/groups/29150/videos/8137747</a> </li>
+					<li><a href="http://vimeo.com/groups/29150/videos/8138136">
+					Part 2 - Let&#39;s check out the generated code - 
+					http://vimeo.com/groups/29150/videos/8138136</a></li>
+					<li><a href="http://vimeo.com/groups/29150/videos/8138418">Part 3 - Parsing expressions - 
+					http://vimeo.com/groups/29150/videos/8138418</a><ul>
+							<li>NOTE: I noticed I messed up the expression tree 
+							a bit. That&#39;s what I get for doing this on the fly 
+							;) The tree for 3+2*6+4 should look like</li>
+					</ul>
+					<pre>&nbsp;                    +
+                   / \
+                  +   4
+                 / \
+                3   *
+                   / \
+                  2   6</pre>
+					</li>
+					<li><a href="http://vimeo.com/groups/29150/videos/8138774">Part 4 - Ifs, loops, and comments - 
+					http://vimeo.com/groups/29150/videos/8138774</a></li>
+					<li><a href="http://vimeo.com/groups/29150/videos/8139003">Part 5 - Procedures and Functions - 
+					http://vimeo.com/groups/29150/videos/8139003</a></li>
+					<li>
+					<a href="http://www.vimeo.com/groups/29150/videos/8139310">Part 6 - Type declarations, scanner fragments, cleaning up 
+					token text - 
+					http://www.vimeo.com/groups/29150/videos/8139310</a></li>
+				</ul>
+				<h4>Interpreting Expressions</h4>
+				<ul>
+					<li><a href="http://vimeo.com/groups/29150/videos/8377320">
+					Part 7 - Interpreting expressions while parsing the input - 
+					http://vimeo.com/groups/29150/videos/8377320</a></li>
+					<li><a href="http://vimeo.com/groups/29150/videos/8377479">
+					Part 8 - Interpreting expressions using the GoF Interpreter 
+					Pattern - http://vimeo.com/groups/29150/videos/8377479</a></li>
+					<li><a href="http://vimeo.com/groups/29150/videos/8377605">
+					Part 9 - Interpreting expressions using an ANTLR Tree Parser 
+					- http://vimeo.com/groups/29150/videos/8377605</a></li>
+				</ul>
+				<h2>Sample Code</h2>
+				<p>The following are snapshots of the sample code at various 
+				points during the tutorial.</p>
+				<ul>
+					<li>After part 6 (recognizer):
+					<a href="antlr3xtut-part6.zip">antlr3xtut-part6.zip</a></li>
+					<li>After part 9 (expression interpreters):
+					<a href="antlr3xtut-part9.zip">antlr3xtut-part9.zip</a></li>
+				</ul>
+				<h4>Software License</h4>
+				<p>All sample code is licensed under the Eclipse Public License, 
+				version 1.0.</p>
+				<p>See <a href="http://www.eclipse.org/legal/epl-v10.html">
+				http://www.eclipse.org/legal/epl-v10.html</a> for details.</p>
+				<p>ANTLR is licensed under a BSD License:</p>
+				<table cellpadding="4" cellspacing="4" class="style2" style="width: 100%">
+					<tr>
+						<td>ANTLR 3 License<br />
+						<br />
+						[The BSD License]<br />
+						Copyright (c) 2003-2008, Terence Parr<br />
+						All rights reserved. <br />
+						Redistribution and use in source and binary forms, with 
+						or without modification, are permitted provided that the 
+						following conditions are met: <br />
+						<br />
+						Redistributions of source code must retain the above 
+						copyright notice, this list of conditions and the 
+						following disclaimer. <br />
+						Redistributions in binary form must reproduce the above 
+						copyright notice, this list of conditions and the 
+						following disclaimer in the documentation and/or other 
+						materials provided with the distribution. <br />
+						Neither the name of the author nor the names of its 
+						contributors may be used to endorse or promote products 
+						derived from this software without specific prior 
+						written permission. <br />
+						THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND 
+						CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED 
+						WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+						WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A 
+						PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE 
+						COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY 
+						DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR 
+						CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
+						PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF 
+						USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER 
+						CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
+						CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
+						NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE 
+						USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+						OF SUCH DAMAGE. </td>
+					</tr>
+				</table>
+				<!-- #EndEditable "content" -->
+				<div id="footer">
+					<p>&nbsp;</p>
+					<hr/>
+					<p>Copyright &copy; 1996-2009, Scott Stanchfield. All Rights Reserved.<br/>
+					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
+					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
+					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
+					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../../images/cssplay_button.png" width="88" /></a></p>
+					<p>
+					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
+					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../../images/feed-icon-14x14.png" width="14" />Want 
+					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div id="bottom"/>
+		<div id="navigation">
+			<ul>
+				<li><a href="../../index.html">Home</a></li>
+				<li><a href="../index.html">Articles</a></li>
+				<li><a href="../../tools/index.html">Tools</a></li>
+				<li><a href="../../evaj/index.html">Effective VisualAge for Java</a></li>
+				<li><a href="../../eclipse/index.html">Eclipse Tips</a></li>
+				<li><a href="../../vaj/index.html">VisualAge Tips</a></li>
+				<!--
+				<li><a href="resume.html">Resume</a></li>
+				-->
+				<li><a href="../../publications.html">Publications</a></li>
+			</ul>
+			<p>&nbsp;</p>
+			<div style="margin-left:10px">
+<script type="text/javascript"><!--
+google_ad_client = "pub-1721904981084162";
+/* Homepage Gutter */
+google_ad_slot = "0044274311";
+google_ad_width = 120;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+		</div>
+		<div id="bottomcorner"/>
+		<div id="topcorner"/>
+		</div>
+		<p>&nbsp;</p>
+	</body>
+<!-- #EndTemplate -->
+</html>

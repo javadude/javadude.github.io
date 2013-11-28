@@ -1,0 +1,222 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- #BeginTemplate "../../master.dwt" -->
+
+	<head>
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+		<!-- #BeginEditable "doctitle" -->
+		<title>PCCTS Tutorial: Introduction  - Scott Stanchfield</title>
+		<!-- #EndEditable -->
+		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
+		<!-- #BeginEditable "head" -->
+		<!-- #EndEditable -->
+		<style type="text/css">
+
+.style1 {
+	vertical-align: middle;
+}
+</style>
+	</head>
+
+	<body>
+		<div id="header">
+			<h1>JavaDude.com</h1>
+			<h4>-- Scott Stanchfield</h4>
+		</div>
+		<div id="content">
+			<div id="topBar">&nbsp;</div>
+			<div id="contentIndent">
+				<!-- #BeginEditable "content" -->
+
+
+<h1>Introduction</h1>
+						<h2>In other words, the part you'll never read...)</h2>
+
+<p>I need to warn you up front that I can be a bit long-winded, so bear with me
+while I try to describe a bit about what PCCTS is, how you can write parsers and
+compilers using it, what type of code it will produce, the color of the moon on
+an October evening and why &quot;42&quot; is such an important number (or so
+says Douglas Adams.)
+</p>
+
+<p>Ok. Call me nuts. I just sick of all the whining about how hard it is to
+learn PCCTS. (So the whining is valid -- it's a <i>bit</i> hard to learn. <i>I</i>
+only had the cat to whine to.) I remembered learning it a few years ago using
+the &quot;Advanced Tutorial&quot; but things have changed significantly since
+then. Back then, I used PCCTS for a compiler course. I loved it and have loved
+it ever since. I figured, &quot;Hey, I've got a simple compiler written in PCCTS,
+so why not revise it and write it as a tutorial?&quot; So here it is.
+</p>
+
+<p>I want this tutorial to really help people, so I'm asking for input. Email me
+at&nbsp; <a href="mailto:scott@javadude.com">scott@javadude.com</a> with any
+suggestions or comments you may have, and I just might do some more work on
+this.
+</p>
+<hr/>
+
+
+<h2>History of this document</h2>
+<div>
+  <center>
+
+  <table border="1" cellpadding="9" cellspacing="1" width="100%">
+
+    <tr>
+      <td>12/31/97</td>
+      <td>
+        <ul>
+          <li>Changed page layouts
+          </li>
+        </ul>
+      </td>
+    </tr>
+
+    <tr>
+      <td>11/24/97</td>
+      <td>
+        <ul>
+          <li>Added source code from my original compiler project at Hopkins.
+          </li>
+        </ul>
+      </td>
+    </tr>
+
+    <tr>
+      <td>9/8/97</td>
+      <td>
+        <ul>
+          <li>Finished up pretty-up changes using FrontPage 98 beta.&nbsp; No
+            new content.
+          </li>
+          <li>Made zip &amp; tgz of new HTML
+          </li>
+          <li>Removed old zips of non-style-sheet pages (the tutorial no longer
+            uses style sheets.)
+          </li>
+        </ul>
+      </td>
+    </tr>
+
+    <tr>
+      <td>12/21/96 - part 2</td>
+      <td>Marathon session time!
+        <ul>
+          <li>The recognizer section is now (fairly) complete.
+          </li>
+          <li>The sample code works
+          </li>
+          <li>All code and HTML can be downloaded, complete with makefile and
+            VC++ project file.
+          </li>
+        </ul>
+      </td>
+    </tr>
+
+    <tr>
+      <td>12/21/96 - part 1</td>
+      <td>
+        <ul>
+          <li>I noticed that the definition of XL didn't really make sense with
+            regard to unary adding operators. The precedence said mult-ops had a
+            higher precedence. So an expression like<br/>
+            &nbsp;&nbsp;-a * b<br/>
+            is interpreted as<br/>
+            &nbsp;&nbsp;-(a * b)<br/>
+            technically it's a wash, as the expression will evaluate the same
+            anyway. However, logic dictates that a unary op applies to the
+            single thing to its right, so I switched the precedences. Isn't
+            precedence fun!
+          </li>
+        </ul>
+      </td>
+    </tr>
+
+    <tr>
+      <td>12/15/96</td>
+      <td>
+        <ul>
+          <li>Started this history (Now I'll try to keep a record.)
+          </li>
+          <li>Cleaned up &lt; and &gt; symbols. Some browsers had trouble when I
+            didn't use the symbolic names for them.
+          </li>
+          <li>My birthday, 30 years ago...
+          </li>
+        </ul>
+      </td>
+    </tr>
+
+    <tr>
+      <td>12/??/96</td>
+      <td>
+        <ul>
+          <li>Put the first part of this tutorial on the web. (So I don't keep
+            good records...)
+          </li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+
+  </center>
+</div>
+
+<p>And now let's talk about the <a href="pccts2.html">language we'll be
+compiling.</a>
+</p>
+&nbsp; 
+						<!-- #EndEditable "content" -->
+				<div id="footer">
+					<p>&nbsp;</p>
+					<hr/>
+					<p>Copyright &copy; 1996-2009, Scott Stanchfield. All Rights Reserved.<br/>
+					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
+					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
+					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
+					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../../images/cssplay_button.png" width="88" /></a></p>
+					<p>
+					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
+					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../../images/feed-icon-14x14.png" width="14" />Want 
+					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div id="bottom"/>
+		<div id="navigation">
+			<ul>
+				<li><a href="../../index.html">Home</a></li>
+				<li><a href="../index.html">Articles</a></li>
+				<li><a href="../../tools/index.html">Tools</a></li>
+				<li><a href="../../evaj/index.html">Effective VisualAge for Java</a></li>
+				<li><a href="../../eclipse/index.html">Eclipse Tips</a></li>
+				<li><a href="../../vaj/index.html">VisualAge Tips</a></li>
+				<!--
+				<li><a href="resume.html">Resume</a></li>
+				-->
+				<li><a href="../../publications.html">Publications</a></li>
+			</ul>
+			<p>&nbsp;</p>
+			<div style="margin-left:10px">
+<script type="text/javascript"><!--
+google_ad_client = "pub-1721904981084162";
+/* Homepage Gutter */
+google_ad_slot = "0044274311";
+google_ad_width = 120;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+		</div>
+		<div id="bottomcorner"/>
+		<div id="topcorner"/>
+		</div>
+		<p>&nbsp;</p>
+	</body>
+<!-- #EndTemplate -->
+</html>

@@ -1,0 +1,278 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- #BeginTemplate "../../master.dwt" -->
+
+	<head>
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+		<!-- #BeginEditable "doctitle" -->
+		<title>PCCTS Tutorial: Expressions  - Scott Stanchfield</title>
+		<!-- #EndEditable -->
+		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
+		<!-- #BeginEditable "head" -->
+		<!-- #EndEditable -->
+		<style type="text/css">
+
+.style1 {
+	vertical-align: middle;
+}
+</style>
+	</head>
+
+	<body>
+		<div id="header">
+			<h1>JavaDude.com</h1>
+			<h4>-- Scott Stanchfield</h4>
+		</div>
+		<div id="content">
+			<div id="topBar">&nbsp;</div>
+			<div id="contentIndent">
+				<!-- #BeginEditable "content" -->
+
+<h1>Expressions</h1>
+<p>XL expressions are pretty similar to any old expressions you'd find in any old language (or in any new language, for that matter.) The stuff we do here will be pretty much the same in any parser or compiler you write in PCCTS, so pay attention! I know
+you're falling asleep after reading thirty-odd pages of drivel, but hang with me for a little longer!</p>
+<p>There are a few things to notice about using PCCTS when you write expressions. The big one is that PCCTS is an LL(k) parser-generator. That means several things, but the biggest (with regard to expressions) is that left recursion is <b>not</b> allowed.
+See some compiler books for the details; in a nutshell</p>
+<pre>a : a PLUS a ;
+           </pre>
+<p>would generate code like</p>
+<pre>a()
+{
+    a();
+    match(PLUS);
+    a();
+}
+           </pre>
+<p>which would obviously recursively call itself until you run out of stack space. There are several ways around this. You have probably seen the following type of code used to describe parts of expressions:</p>
+<pre>a
+  : a PLUS a
+  | t
+  ;
+           </pre>
+<p>To get rid of the left-recursion that renders LL(k) grammars helpless, you can use some wonderfully-mechanical algorithms to turn it into</p>
+<pre>a      : a1 a_tail ;
+a1     : t ;
+a_tail : PLUS t a_tail
+       | // nothing
+       ;
+           </pre>
+<p>Yuck! It works, but how long did you have to think about it to understand what it means?</p>
+<p>Notice that the mechanically-generated code utilizes tail-recursion (recursion as the last element of a rule, also know as right-recursion) to keep adding (PLUS t) to the end of the &quot;a&quot; thing we are creating. Eventually, it ends with the
+empty (epsilon) production in place of <code>a_tail</code></p>
+<p>Thinking about right-recursion, recall that right recursion can always be replaced very easily by a loop. (From where do you recall this? I dunno. Some programming class.) In PCCTS, we have the advantage of being able to use ()* and ()+ closures using
+EBNF notation. In other words, we can easily represent loops. So, a rule like</p>
+<pre>a_tail
+  : PLUS t a_tail
+  | // nothing
+  ;
+           </pre>
+<p>can be re-written as</p>
+<pre>a_tail
+  : (PLUS t)*
+  ;
+           </pre>
+<p>which is much better so far. Now look what we have:</p>
+<pre>a      : a1 a_tail ;
+a1     : t ;
+a_tail : (PLUS t)* ;
+           </pre>
+<p>Notice something about <code>a_tail</code> now? Without the tail recursion, it's only used in one place, so we can substitute it. And while we're at it, let's substitute <code>a1</code> in place as well, yielding</p>
+<pre>a : t (PLUS t)* ;
+           </pre>
+<p>When we look at that, we see that that's exactly what we wanted. Basically, PLUS is associative, so the order in which you add things really doesn't matter. You can keep saying &quot;PLUS something else&quot; at the end of our PLUS expression. The
+above notation is actually very good, because it matches what your brain does as it adds new parts to the expression as it reads left-to-right.</p>
+<p>The moral of the above nonsense is that an expression-like rule such as</p>
+<pre>a : a OPERATOR
+  | t
+  ;
+           </pre>
+<p>can be re-written</p>
+<pre>a : t (OPERATOR t)* ;
+           </pre>
+<p>Now that we're armed, lets start organizing for our attack on XL's expression rules!</p>
+<hr/>
+<h2>Precedence</h2>
+<p>In the description of XL above, we defined that the operators have the following precedences:</p>
+<div>
+    <center>
+
+    <table border="1" cellpadding="9" cellspacing="1" width="100%"><tr><td>Boolean negation
+    </td><td><b>not</b>
+    </td></tr><tr><td>Unary adding operators
+    </td><td>+ -
+    </td></tr><tr><td>Multiplying operators
+    </td><td>* / <b>mod</b>
+    </td></tr><tr><td>Binary adding operators
+    </td><td>+ -
+    </td></tr><tr><td>Relational operators
+    </td><td>= /= &lt; &lt;= &gt; &gt;=
+    </td></tr><tr><td>Logical operators
+    </td><td><b>and</b> <b>or</b>
+    </td></tr></table>
+
+    </center>
+</div>
+<p>What exactly does this mean? Well, it means that if we see a <b>not</b> somewhere in an expression, we should resolve it before we resolve any other operators (unless, of course, there are specific precedences specified by using parentheses.) So if we
+had an expression like</p>
+<pre>a and x or not y and 2 + -q * s &lt; 10
+           </pre>
+<p>we would first evaluate the &quot;not&quot; (let's use parentheses to specify evaluation grouping)</p>
+<pre>a and x or (not y) and 2 + -q * s &lt; 10
+           </pre>
+<p>then take care of the unary -</p>
+<pre>a and x or (not y) and 2 + (-q) * s &lt; 10
+           </pre>
+<p>then the *</p>
+<pre>a and x or (not y) and 2 + ((-q) * s) &lt; 10
+           </pre>
+<p>then the binary +</p>
+<pre>a and x or (not y) and(2 + ((-q) * s)) &lt; 10
+           </pre>
+<p>then the relational &lt;</p>
+<pre>a and x or (not y) and((2 + ((-q) * s)) &lt; 10)
+           </pre>
+<p>then the boolean <b>and</b> and <b>or</b></p>
+<pre>(((a and x) or (not y)) and ((2 + ((-q) * s)) &lt; 10))
+           </pre>
+<p>Whoa! Is that right? In most languages, <b>and</b> has a higher precedence than <b>or</b>. But in our precedence chart for XL, <b>and</b> and <b>or</b> have the same precedence. So while we might <i>expect</i> to see the evaluation proceed like</p>
+<pre>((a and x) or ((not y) and ((2 + ((-q) * s)) &lt; 10)))
+           </pre>
+<p>that's not how it goes, because <b>and</b> and <b>or</b> have the same precedence, we have to just read them left to right. (In this situation, XL's design is less intuitive because of the preponderance of other languages that give <b>and</b> a higher
+precedence than <b>or</b>. But that was the language designer's choice, and we'll live with it.)</p>
+<p>So what do we do with these precedences? Basically</p>
+<ul>
+    <li>each level of precedence represents a rule in the grammar</li>
+    <li>Each operator in that precedence level is one alternative in that rule</li>
+    <li>The rules will nest with the highest precedence operators being the most-deeply nested rules</li>
+    <li>Each precedence level will only imbed the next higher precedence level.</li>
+    <li>The highest precedence level will only use &quot;primitive&quot; expression elements, such as variable references and literals.</li>
+</ul>
+<p>So lets start at the top of the precedence chart. I'm going to go out on a limb and avoid the terms <b>term</b>, <b>factor</b>, <b>simple expression</b>. I could never remember which was supposed to be which from a mathematics point of view. Instead,
+I'll follow Sun's lead in their Java grammar, and use more descriptive names.</p>
+<p>We need to start with our primitive expression elements. In XL, these are constant values, variable references, and parenthesized expressions. Remember, parenthesizing an expression basically makes it the most important thing that is currently being
+evaluated.</p>
+<pre>primitiveElement
+  : constantValue
+  | variableReference
+  | LPAREN expression RPAREN
+  ;
+           </pre>
+<p>So far so good. Now, let's just walk down the precedence chart. First, boolean negation:</p>
+<pre>booleanNegationExpression
+  : (NOT)* primitiveElement
+  ;
+           </pre>
+<p>Notice that the <b>NOT</b> is optional here, and you can have as many of them as you like. That is because we want to be able to just pass any expression element through a rule without modifying it, enabling us to have an expression just be a <code>primitiveElement</code>
+if that's what the user wants. Next, we have unary PLUS and MINUS:</p>
+<pre>// in the grammar
+signExpression
+  : (PLUS|MINUS)* booleanNegationExpression
+  ;
+           </pre>
+<p>Something I like to do (and this is strictly style preference) is to define a token class for each operator set, which would make this:</p>
+<pre>// in the scanner specification
+#tokclass ADD_OP {PLUS MINUS}
+
+// in the grammar
+signExpression
+  : (ADD_OP)* booleanNegationExpression
+  ;
+           </pre>
+<p>which I personally find a bit more readable, but you might think differently. Just another possibility. Notice that the ( )* can evaluate to &quot;no operators,&quot; meaning that <code>booleanNegationExpression</code> can be passed straight through
+this precedence level without any modification.</p>
+<p>Let us have as many plusses or minuses in front of our expression so far. Next, we have our multiplying operators, *, / and mod:</p>
+<pre>// in the scanner specification
+#tokclass MULT_OP {TIMES DIV MOD}
+
+// in the grammar
+multiplyingExpression
+  : signExpression (MULT_OP signExpression)*
+  ;
+           </pre>
+<p>Which lets us keep tacking on multiplying operators ad nauseum.</p>
+<p>Notice that this precedence rule imbedded the previous rule, and again, can let it just pass <code>signExpression</code> right on through without modifying it. By now, things should be seeming a bit more clear. Next, we move onto the binary adding
+operations:</p>
+<pre>// use same ADD_OP in the scanner specification
+ 
+// in the grammar
+addingExpression
+  : multiplyingExpression (ADD_OP multiplyingExpression)*
+  ;
+           </pre>
+<p>Will we have a conflict between an ADD_OP acting as a binary add operator and one acting as a unary operator? No. The reason is that if we see one in between two partial expressions, it must be a binary operator. If we see another right after it (and
+any number of them after that) they must be working (covertly) as unary operators. Next we have the relational operators:</p>
+<pre>// in the scanner specification
+#tokclass RELATIONAL_OP {EQUALS NOT_EQUALS GT GTE LT LTE}
+
+// in the grammar
+relationalExpression
+  : addingExpression (RELATIONAL_OP addingExpression)*
+  ;
+           </pre>
+<p>Finally, we get to the operators with the lowest precedence. At this level, we can call the result a full expression. This level encompasses <b>and</b> and <b>or</b> operators:</p>
+<pre>// in the scanner specification
+#tokclass BOOLEAN_OP {AND OR}
+
+// in the grammar
+expression
+  : relationalExpression (BOOLEAN_OP relationalExpression)*
+  ;
+           </pre>
+<p>Tack on as many and/or partial expressions as you like...</p>
+<p>Now that we've gotten through expressions, it really doesn't seem so bad. The precedence table actually made it easier, rather than more confusing.</p>
+<p>At this point, we have specified the entire grammar for an XL parser. We'll see the whole grammar together soon, but first we need to discuss <a href="pccts8.html">the code that holds it all together</a>.</p>
+
+				<!-- #EndEditable "content" -->
+				<div id="footer">
+					<p>&nbsp;</p>
+					<hr/>
+					<p>Copyright &copy; 1996-2009, Scott Stanchfield. All Rights Reserved.<br/>
+					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
+					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
+					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
+					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../../images/cssplay_button.png" width="88" /></a></p>
+					<p>
+					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
+					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../../images/feed-icon-14x14.png" width="14" />Want 
+					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div id="bottom"/>
+		<div id="navigation">
+			<ul>
+				<li><a href="../../index.html">Home</a></li>
+				<li><a href="../index.html">Articles</a></li>
+				<li><a href="../../tools/index.html">Tools</a></li>
+				<li><a href="../../evaj/index.html">Effective VisualAge for Java</a></li>
+				<li><a href="../../eclipse/index.html">Eclipse Tips</a></li>
+				<li><a href="../../vaj/index.html">VisualAge Tips</a></li>
+				<!--
+				<li><a href="resume.html">Resume</a></li>
+				-->
+				<li><a href="../../publications.html">Publications</a></li>
+			</ul>
+			<p>&nbsp;</p>
+			<div style="margin-left:10px">
+<script type="text/javascript"><!--
+google_ad_client = "pub-1721904981084162";
+/* Homepage Gutter */
+google_ad_slot = "0044274311";
+google_ad_width = 120;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+		</div>
+		<div id="bottomcorner"/>
+		<div id="topcorner"/>
+		</div>
+		<p>&nbsp;</p>
+	</body>
+<!-- #EndTemplate -->
+</html>
