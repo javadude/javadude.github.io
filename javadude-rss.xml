@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" media="screen" href="/~d/styles/rss2full.xsl"?><?xml-stylesheet type="text/css" media="screen" href="http://feeds.feedburner.com/~d/styles/itemcontent.css"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+<channel>
+  
+  <title>JavaDude.com - Scott Stanchfield</title>
+  <link>http://javadude.com</link>
+  <description>Java fun and antics</description>
+  <category>Java</category>
+  <category>ANTLR</category>
+  <category>Eclipse</category>
+  <category>Tutorial</category>
+  <category>Video</category>
+  <category>Training</category>
+  <category>Education</category>
+  <category>Software</category>
+  <category>Parsing</category>
+  <category>Compilers</category>
+  <atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="self" type="application/rss+xml" href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield" /><feedburner:info xmlns:feedburner="http://rssnamespace.org/feedburner/ext/1.0" uri="javadudecom-scottstanchfield" /><atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="hub" href="http://pubsubhubbub.appspot.com/" /><item>
+    <guid>https://vimeo.com/55994862</guid>
+    <title>Java Enumerations - APL Java Users Group, Laurel, MD</title>
+    <link>https://vimeo.com/55994862</link>
+    <description>A JUG talk from May 2009 I presented on enumerations in Java.</description>
+  </item>
+  <atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="self" type="application/rss+xml" href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield" /><feedburner:info xmlns:feedburner="http://rssnamespace.org/feedburner/ext/1.0" uri="javadudecom-scottstanchfield" /><atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="hub" href="http://pubsubhubbub.appspot.com/" /><item>
+    <guid>http://vimeo.com/30524425</guid>
+    <title>Template Method and Strategy in Java - Columbia MD Java Users Group</title>
+    <link>http://vimeo.com/30524425</link>
+    <description>New to Design Patterns? Learning Template Method and Strategy is a good starting point! This is from a lecture I gave on 10/13/2011 for the Columbia, Maryland Java Users Group</description>
+  </item>
+  <item>
+    <guid>http://vimeo.com/27961743</guid>
+    <title>Installing the Android Development Tools</title>
+    <link>http://vimeo.com/27961743</link>
+    <description>This video walks through setup of the Android Development tooling in Eclipse and a simple "Hello World" application</description>
+  </item>
+  <item>
+    <guid>http://vimeo.com/17426779</guid>
+    <title>Dynamic Proxies in Java - Columbia MD Java Users Group</title>
+    <link>http://vimeo.com/17426779</link>
+    <description>Everything you ever wanted to know about Dynamic Proxies in Java but didn't know to ask. This is from a lecture I gave on 12/02/2010 for the Columbia, Maryland Java Users Group</description>
+  </item>
+  <item>
+    <guid>http://vimeo.com/8876702</guid>
+    <title>Annotations Part 6 - Code Generation - JavaBean boilerplate example</title>
+    <link>http://vimeo.com/8876702</link>
+    <description>This example demonstrates how boilerplate code needed for JavaBeans can be generated. This is from a lecture I gave on 1/19/2010 for the Columbia, Maryland Java Users Group</description>
+  </item>
+  <item>
+    <guid>http://vimeo.com/8876665</guid>
+    <title>Annotations Part 5 - Code Generation - RMI interface example</title>
+    <link>http://vimeo.com/8876665</link>
+    <description>This example demonstrates how an RMI interface can be generated from an annotated basic interface. This is from a lecture I gave on 1/19/2010 for the Columbia, Maryland Java Users Group</description>
+  </item>
+  <item>
+    <guid>http://vimeo.com/8875933</guid>
+    <title>Annotations Part 4 - Runtime Annotations - UI action setup example</title>
+    <link>http://vimeo.com/8875933</link>
+    <description>This example demonstrates how annotated methods can be automatically set up as ActionListeners in a user interface. This is from a lecture I gave on 1/19/2010 for the Columbia, Maryland Java Users Group</description>
+  </item>
+  <item>
+    <guid>http://vimeo.com/8875911</guid>
+    <title>Annotations Part 3 - Runtime Annotations - Unit test example</title>
+    <link>http://vimeo.com/8875911</link>
+    <description>Example of annotations that are loaded at runtime and used by reflective code. The example is simple unit tester ala junit. This is from a lecture I gave on 1/19/2010 for the Columbia, Maryland Java Users Group</description>
+  </item>
+  <item>
+    <guid>http://vimeo.com/8875891</guid>
+    <title>Annotations Part 2 - Classfile Annotations</title>
+    <link>http://vimeo.com/8875891</link>
+    <description>Creation of custom annotations that stay in the classfile. This is from a lecture I gave on 1/19/2010 for the Columbia, Maryland Java Users Group</description>
+  </item>
+  <item>
+    <guid>http://vimeo.com/8875862</guid>
+    <title>Annotations Part 1 - Introduction</title>
+    <link>http://vimeo.com/8875862</link>
+    <description>Overview of annotations. This is from a lecture I gave on 1/19/2010 for the Columbia, Maryland Java Users Group</description>
+  </item>
+  <item>
+    <guid>http://vimeo.com/groups/29150/videos/8377605</guid>
+    <title>ANTLR 3.x tutorial Part 9: Interpreting Expressions using an ANTLR TreeWalker</title>
+    <link>http://vimeo.com/groups/29150/videos/8377605</link>
+    <description>Yet another way to interpret the expressions uses ANTLR's built-in tree-generation and tree-walker grammars.</description>
+  </item>
+  <item>
+    <guid>http://vimeo.com/groups/29150/videos/8377479</guid>
+    <title>ANTLR 3.x tutorial Part 8: Interpreting Expressions using the GoF Interpreter Pattern</title>
+    <link>http://vimeo.com/groups/29150/videos/8377479</link>
+    <description>Here we interpret the expressions using the "Interpreter" Design Pattern from the Gang-of-Four's "Design Patterns" book.</description>
+  </item>
+  <item>
+    <guid>http://vimeo.com/groups/29150/videos/8377320</guid>
+    <title>ANTLR 3.x tutorial Part 7: Interpreting Expressions while parsing the grammar</title>
+    <link>http://vimeo.com/groups/29150/videos/8377320</link>
+    <description>Let's try interpreting expressions, so we can find out what 3 + 4 * 2 + 5 should be.</description>
+  </item>
+  <item>
+    <guid>http://vimeo.com/groups/29150/videos/8324793</guid>
+    <title>ANTLR Concepts</title>
+    <link>http://vimeo.com/groups/29150/videos/8324793</link>
+    <description>What is ANTLR? What is parsing? What is a translator? A compiler?</description>
+  </item>
+  <item>
+    <guid>http://vimeo.com/groups/29150/videos/8139310</guid>
+    <title>ANTLR 3.x tutorial Part 6: XL Recognizer continued</title>
+    <link>http://vimeo.com/groups/29150/videos/8139310</link>
+    <description>Part 6 of creating a recognizer for XL in ANTLR 3.x</description>
+  </item>
+  <item>
+    <guid>http://vimeo.com/groups/29150/videos/8139003</guid>
+    <title>ANTLR 3.x tutorial Part 5: XL Recognizer continued</title>
+    <link>http://vimeo.com/groups/29150/videos/8139003</link>
+    <description>Part 5 of creating a recognizer for XL in ANTLR 3.x</description>
+  </item>
+  <item>
+    <guid>http://vimeo.com/groups/29150/videos/8138774</guid>
+    <title>ANTLR 3.x tutorial Part 4: XL Recognizer continued</title>
+    <link>http://vimeo.com/groups/29150/videos/8138774</link>
+    <description>Part 4 of creating a recognizer for XL in ANTLR 3.x</description>
+  </item>
+  <item>
+    <guid>http://vimeo.com/groups/29150/videos/8138418</guid>
+    <title>ANTLR 3.x tutorial Part 3: XL Recognizer continued</title>
+    <link>http://vimeo.com/groups/29150/videos/8138418</link>
+    <description>Part 3 of creating a recognizer for XL in ANTLR 3.x</description>
+  </item>
+  <item>
+    <guid>http://vimeo.com/groups/29150/videos/8138136</guid>
+    <title>ANTLR 3.x tutorial Part 2: XL Recognizer continued</title>
+    <link>http://vimeo.com/groups/29150/videos/8138136</link>
+    <description>Part 2 of creating a recognizer for XL in ANTLR 3.x</description>
+  </item>
+  <item>
+    <guid>http://vimeo.com/groups/29150/videos/8137747</guid>
+    <title>ANTLR 3.x tutorial Part 1: XL Recognizer</title>
+    <link>http://vimeo.com/groups/29150/videos/8137747</link>
+    <description>Part 1 of creating a recognizer for XL in ANTLR 3.x</description>
+  </item>
+  <item>
+    <guid>http://vimeo.com/groups/29150/videos/8015802</guid>
+    <title>Creating and Executing an ANTLR 3.x Grammar in Eclipse</title>
+    <link>http://vimeo.com/groups/29150/videos/8015802</link>
+    <description>Let's create and execute a dummy grammar just to see the mechanics in Eclipse.</description>
+  </item>
+  <item>
+    <guid>http://vimeo.com/groups/29150/videos/8001326</guid>
+    <title>Setting up ANTLR 3.x in Eclipse</title>
+    <link>http://vimeo.com/groups/29150/videos/8001326</link>
+    <description>How do we set up Eclipse for developing ANTLR 3.x parsers?</description>
+  </item>
+</channel>
+</rss>

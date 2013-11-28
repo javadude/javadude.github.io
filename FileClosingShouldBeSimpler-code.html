@@ -1,0 +1,981 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>File Closing in Java Really Should be Simpler...</title>
+		<link href="style/style1.css" media="all" rel="stylesheet" title="CSS" type="text/css"/>
+</head>
+
+<body style='padding:10px'>
+<h1>File Closing in Java Really Should be Simpler ...</h1>
+
+<h2>How to properly close files in Java</h2>
+
+<h5>Scott Stanchfield<br />
+The Johns Hopkins University Applied Physics Laboratory<br />
+Laurel, MD</h5>
+<p>It amazes me that one of the hardest things to do properly
+in Java is close a file or a database connection. Seriously, it's much harder
+than you might think.</p>
+<p>This article goes through the gory detail on properly closing files. There's 
+a lot of explanation on why this is necessary and how I came to these 
+conclusions. If you're not interested in the why's and how's, feel free to jump 
+to <a href="#Final_Implementations">Final_Implementations</a> at the end to see 
+what you should be doing. I hope you continue reading, as I hope the detail will 
+make it easier to understand some of the issues involved in writing correct 
+exception handling code.</p>
+
+<p>Note that there are very similar issues when closing JDBC connections, 
+statements and result sets. The techniques described here can also be 
+applied when writing JDBC code. (I may write a further article on that 
+sometime.) You may also want to look into Spring's JdbcTemplate class.</p>
+<p>[CHECK: IS THE WORDING ON THE FOLLOWING PARAGRAPH OK/SUFFICIENT? SHOULD IT 
+STATE NSA OR JUST &quot;OUR SPONSOR&quot;?]</p>
+<p>I've been working on this framework for several years and have used different 
+implementations of these ideas for my personal and professional work. Most 
+recently, I incorporated the AutoFileCloser described here at the Johns Hopkins 
+University Applied Physics Lab (APL) for use on an NSA research project. APL and 
+the NSA have graciously allowed me to release this latest version of 
+AutoFileCloser and write this article.</p>
+<h3>Copyright</h3>
+<p>[CHECK: WHAT SHOULD COPYRIGHT STATEMENT BE? ME? APL? NSA? SOME COMBINATION? 
+LICENSE TERMS? I'D PREFER ECLIPSE PUBLIC LICENSE
+<a href="http://www.eclipse.org/org/documents/epl-v10.php">
+http://www.eclipse.org/org/documents/epl-v10.php</a>. NOTE THAT I WILL LIKELY 
+INCLUDE THE CODE IN THIS ARTICLE IN A DOWNLOADABLE JAR WITH SOURCE AS A SEPARATE 
+ZIP FILE INCLUDING COPYRIGHT STATEMENTS IN ALL SOURCE]</p>
+<h3>What's the problem?</h3>
+<p>Suppose you write a little application with code like the
+following:</p>
+<p class="figcap">evil|Bad I/O example</p>
+
+<pre>try {
+	FileReader r = new FileReader("somefile.txt");
+	// process r
+	r.close();
+} catch (IOException e) {
+	// report and/or log error
+}</pre>
+
+<p>Sure, it looks reasonable at first
+glance, but then so did COBOL.</p>
+
+<p>The first, and possibly most obvious
+problem is the position of the close() call. If <i>anything</i>
+goes wrong, throwing an exception between the open and close of the file, the
+close() call will be skipped! This has the potential of leaving file handles allocated
+in the OS.</p>
+<p>Classes in the Java libraries such as FileReader have a finalize() method that will 
+close() the system resource when the FileReader is garbage collected. 
+Unfortunately, 
+there is no way to determine when this will occur, and if the FileReader object 
+is held for a long segment of code it may delay the finalize() even further. In a 
+multi-user system, this can quickly cause resource allocation issues. Even in a 
+single-use system, there could be multiple applications in contention for 
+resource handles. It's critical that these resources be freed as soon as you're 
+finished using them.</p>
+
+<h3>Using finally to ensure we try to close</h3>
+<p>The first, and most important change,
+is to move the close() call into a finally block. Java's finally block is <i>always</i> executed:</p>
+
+<ul>
+ <li>If the
+     try completes successfully, finally is run after it.</li>
+ <li>If an
+     exception is thrown in the try block and caught by a catch block, the finally
+     runs after the catch block.</li>
+ <li>If an
+     exception is thrown in the try block and <i>not</i>
+     caught by a catch block, the finally runs immediately before passing the
+     exception on to the containing block or calling method.</li>
+</ul>
+
+<p>Moving the close() call to the finally block looks as follows:</p>
+<p class="figcap">evil|Getting better...</p>
+
+<pre>FileReader r = null;
+try {
+	r = new FileReader("somefile.txt");
+	// read from r
+} catch (IOException e) {
+	// report and/or log error
+} finally {
+	if (r != null)
+		try {
+			r.close();
+		} catch (IOException e) {
+			// report and/or log error
+		}
+}</pre>
+
+<p>Isn't that pretty? We're now set up so that no matter what happens in the outer try block, we'll at least attempt to
+close the file (assuming it was opened successfully;   that's what the null check is
+for).</p>
+
+<p>But unfortunately, this still isn't
+quite right.</p>
+<h3>Pending exceptions</h3>
+
+<p>Java only keeps track of a single
+exception being thrown. What happens if an exception is thrown during the file
+read <i>and</i> during the file close? <i>The last exception wins</i>. If an 
+exception is thrown in both places, the caller will be notified of the close 
+error, and not the read error.</p>
+
+<p>This is not a good situation; we're
+probably more interested in the exception that was thrown in the try block than
+we are the one thrown during the close. So let's modify things a bit more.</p>
+<p class="figcap">Keeping track of the pending exception</p>
+
+<pre>`  FileReader r = null;
+`1 Throwable pending = null;
+`  try {
+`      r = new FileReader("somefile.txt");
+`      // read from r
+`3 } catch (ThreadDeath t) {
+`3     throw t;
+`2 } catch (Throwable t) {
+`2     pending = t;
+`  } finally {
+`      if (r != null)
+`          try {
+`              r.close();
+`          } catch (ThreadDeath t) {
+`              throw t;
+`          } catch (Throwable t) {
+`              // report and/or log error
+`4             if (pending == null)
+`4                 pending = t;
+`          }
+`5     if (pending != null)
+`5         if (pending instanceof SomeWrapperException)
+`5             throw (SomeWrapperException) pending;
+`5         else 
+`5             throw new SomeWrapperException(pending);
+`  }</pre>
+
+<p>Wow. That's some fun code to noodle
+through. What's happening? (The numbers below map to the numbers in the
+comments in the above code)</p>
+
+<ol>
+ <li>We need to keep track of the exception we care about and want to return to 
+ the caller.</li>
+ <li>Because
+     the pending exception could be any exception, we need to catch Throwable</li>
+ <li>Catching
+     Throwable is normally a bad idea; it includes ThreadDeath, which needs to be re-thrown 
+ for proper thread notification of impending thread doom and destruction. We set up a
+     catch block just so we can rethrow it.</li>
+ <li>If we
+     get an exception during the close call, we check to see if we already are
+     tracking a pending exception. If not (and <i>only</i> if not), we can track the close 
+ exception. If we're already
+     tracking an exception, we should log the close error so we still know it
+     happened.</li>
+ <li>If we have a pending exception, we need to convert it 
+ to a type of exception that can exit the method. We can create a custom exception for this
+     (checked or unchecked; depends on your preference), or 
+     wrap it in RuntimeException. If
+     the pending exception is already the same type as the wrapper, we can just re-throw
+     it.</li>
+</ol>
+
+<p>Isn't that fun? Before we look into
+how to simplify it, let's make things a little worse </p>
+
+<p>Suppose you have nested streams; perhaps you want to wrap an output stream in a buffer for better performance.</p>
+<p class="figcap">Nested stream handling</p>
+
+<pre>`  FileReader r = null;
+`1 BufferedReader br = null;
+`  Throwable pending = null;
+`  try {
+`      r = new FileReader("somefile.txt");
+`1     br = new BufferedReader(r);
+`      // read from br
+`  } catch (ThreadDeath t) {
+`      throw t;
+`  } catch (Throwable t) {
+`      pending = t;
+`  } finally {
+`2     if (br != null)
+`          try {
+`              br.close();
+`          } catch (ThreadDeath t) {
+`              throw t;
+`          } catch (Throwable t) {
+`              // report and/or log error
+`              if (pending == null)
+`                  pending = t;
+`          }
+`3     if (r != null)
+`          try {
+`              r.close();
+`          } catch (ThreadDeath t) {
+`              throw t;
+`          } catch (Throwable t) {
+`              // report and/or log error
+`              if (pending == null)
+`                  pending = t;
+`          }
+`      if (pending != null)
+`          if (pending instanceof SomeWrapperException)
+`              throw (SomeWrapperException) pending;
+`          else
+`              throw new SomeWrapperException(pending);
+`  }</pre>
+
+<p>Crikey! That's
+a lot of code just to do a simple read from a file. Let's look at a few details
+in there:</p>
+
+<ol>
+ <li>We
+     declare and open the stream wrapper as we normally would (we declare it outside the try so we have access to it in the finally).</li>
+ <li>We
+     try to close the outermost wrapper first. If this succeeds, it will 
+ automatically try to close nested streams.</li>
+    <li>We try to close the nested stream.</li>
+</ol>
+<p>If a stream is already closed, further close() calls will be ignored (per the 
+contract of Java's Closeable interface).</p>
+<p>If the wrapping stream wasn't properly closed, it is important to try to 
+close the nested stream explicitly to try to free up the underlying system 
+resource.</p>
+<p>We now have proper file closing!</p>
+
+<p>But let's get real. How many folks
+are going to go this far? Even if they do, how many will get it right <i>every</i> time they write it?</p>
+
+<h3>Simplifying things</h3>
+
+<p>Let's find a way to factor out the necessary boilerplate so we can 
+concentrate on our I/O design. We need to figure out which parts of this 
+algorithm stay the same whenever we use it, and which parts differ.</p>
+<p class="figcap">Where are the variants?</p>
+
+<pre>``// PSEUDO-CODE -- NOT JAVA!``
+``// VARIANT: DECLARE THE STREAMS AND WRAPPERS``
+Throwable pending = null;
+try {
+	``// VARIANT: OPEN AND PROCESS THE STREAMS``
+} catch (ThreadDeath t) {
+	throw t;
+} catch (Throwable t) {
+	pending = t;
+} finally {
+	``// VARIANT: FOR EACH STREAM (OR WRAPPER)``
+	if (STREAM != null)
+		try {
+			``STREAM``.close();
+		} catch (ThreadDeath t) {
+			throw t;
+		} catch (Throwable t) {
+			// report and/or log error
+			if (pending == null)
+				pending = t;
+		}
+	``// END VARIANT: FOR EACH STREAM WRAPPER``
+	if (pending != null)
+		if (pending instanceof SomeWrapperException)
+			throw (SomeWrapperException) pending;
+		else
+			throw new SomeWrapperException(pending);
+}</pre>
+
+<p>Hmm  looks like a good bit of that
+doesn't vary. What if we use a List of Closeables rather than separate variables 
+for each stream?</p>
+<p class="figcap">Collapsing the variants</p>
+
+<pre>``// PSEUDO-CODE -- NOT JAVA!``
+List&lt;Closeable&gt; streams = new ArrayList&lt;Closeable&gt;();
+Throwable pending = null;
+try {
+	``// VARIANT: OPEN AND PROCESS THE STREAMS``
+	``//     STORE EACH STREAM IN streams LIST``
+} catch (ThreadDeath t) {
+	throw t;
+} catch (Throwable t) {
+	pending = t;
+} finally {
+	for (Closeable c : streams) {
+		try {
+			c.close();
+		} catch (ThreadDeath t) {
+			throw t;
+		} catch (Throwable t) {
+			// report and/or log error
+			if (pending == null)
+				pending = t;
+		}
+	}
+	streams.clear();
+	if (pending != null)
+		if (pending instanceof SomeWrapperException)
+			throw (SomeWrapperException) pending;
+		else
+			throw new SomeWrapperException(pending);
+}</pre>
+<p>We're now down to a single spot
+that varies! Everything else is <i>exactly</i>
+the same for all uses (assuming you use the same exception type for all uses;  
+if not, we'll see how we can fix that later).</p>
+
+<p>We now have a template for dealing with file closing. Hmmm... I think there's 
+a design pattern out there that might fit; in fact, it's named &quot;Template 
+Method&quot;.</p>
+
+<p>The Template Method pattern is useful
+when you have <i>an algorithm with
+replaceable steps</i>. Some common steps of the algorithm always stay
+the same (and you usually want to enforce that they stay the same); some
+steps of the algorithm might need to be changed for different usage.</p>
+
+<p>The "standard" implementation defines overridable "hook" methods for each
+variant step. The Template Method invokes these hook methods; subclasses can
+override the hooks to change the behavior of the algorithm.</p>
+<p class="figcap">File closing using a template method</p>
+<pre>public abstract class AutoFileCloser {
+	// hook method; subclasses override to specify their work
+	protected abstract void doWork() throws Throwable;
+	private List&lt;Closeable&gt; streams = new ArrayList&lt;Closeable&gt;();
+	protected final void watch(Closeable closeable) {
+		streams.add(0, closeable);
+	}
+	// template method
+	public final void go() throws SomeWrapperException {
+		Throwable pending = null;
+		try {
+			doWork();
+		} catch (ThreadDeath t) {
+			throw t;
+		} catch (Throwable t) {
+			pending = t;
+		} finally {
+			for (Closeable c : streams) {
+				try {
+					c.close();
+				} catch (ThreadDeath t) {
+					throw t;
+				} catch (Throwable t) {
+					// report and/or log error
+					if (pending == null)
+						pending = t;
+				}
+			}
+			streams.clear();
+			if (pending != null)
+				if (pending instanceof SomeWrapperException)
+					throw (SomeWrapperException) pending;
+				else
+					throw new SomeWrapperException(pending);
+		}
+	}
+}</pre>
+
+<p>The go()
+method is final; this represents the constant parts of the Template Method that we
+do not want subclasses to be able to change. The watch() method&nbsp; (which 
+will be invoked in the subclass' doWork()) adds the streams 
+to the front of the list. The ensures that streams will be closed in the 
+opposite order in which they are opened.</p>
+
+<p>With this definition in place, we can
+do the following:</p>
+<p class="figcap">Using the template method for some I/O</p>
+
+<pre>private static class MyWork extends AutoFileCloser {
+	@Override protected void doWork() throws Throwable {
+		FileReader r = new FileReader("someFile.txt");
+		BufferedReader br = new BufferedReader(r);
+		watch(r);
+		watch(br);
+		// process br
+	}
+}
+new MyWork().go();</pre>
+
+<p>Now that's much better, but we still
+can make some improvements. If we make watch() a generic method, we can collapse
+the "new"s and the watch() calls:</p>
+<p class="figcap">Using a generic method to collapse instantiation and watching</p>
+
+<pre>protected final &lt;T extends Closeable&gt; T watch(T closeable) {
+	streams.add(0, closeable);
+	return closeable;
+}
+
+// and then in the doWork()
+
+FileReader r = watch(new FileReader("someFile.txt"));
+BufferedReader br = watch(new BufferedReader(r));</pre>
+
+<p>When calling the AutoFileCloser,
+I prefer to use an anonymous inner class:</p>
+<p class="figcap">Calling AutoFileCloser as an anonymous inner class</p>
+
+<pre>new AutoFileCloser() {
+	@Override protected void doWork() throws Throwable {
+		FileReader r = watch(new FileReader("someFile.txt"));
+		BufferedReader br = watch(new BufferedReader(r));
+		// process br
+	}}.go();</pre>
+
+<p><em>Note: I like to collapse the closing }} together when I write anonymous inner classes. This makes it stand out: &quot;something unusually ugly is 
+happening here; maybe I should read more carefully!&quot;</em></p>
+<p>I'm not really keen on the dangling go() call. Let's move the go() contents
+to the AutoFileCloser constructor. The usage then
+looks like:</p>
+<p class="figcap">Moving the work to AutoFileCloser's constructor</p>
+
+<pre>new AutoFileCloser() {
+	@Override protected void doWork() throws Throwable {
+		FileReader r = watch(new FileReader("someFile.txt"));
+		BufferedReader br = watch(new BufferedReader(r));
+		// process br
+	}};</pre>
+
+<p>Tada!
+We now have correct file closing that is not much more complex than what we started
+with at the beginning of this article!</p>
+
+<p>This also works with multiple nested streams:</p>
+<p class="figcap">Nested streams in AutoFileCloser</p>
+
+<pre>new AutoFileCloser() {
+	@Override protected void doWork() throws Throwable {
+		FileReader r = watch(new FileReader("someFile.txt"));
+		BufferedReader br = watch(new BufferedReader(r));
+		FileWriter w = watch(new FileWriter("someOtherFile.txt"));
+		BufferedWriter bw = watch(new BufferedWriter(w));
+		// read from br and write to bw
+	}};</pre>
+
+<h3>Exception wrapping</h3>
+<p>There are several approaches we can take to wrap and throw exceptions so they 
+can be handled outside the AutoFileCloser:</p>
+
+<ul>
+
+<li>Wrap in RuntimeException. Many folks don't like this idea because it's normally used to 
+represent what I call &quot;programmer stupidity errors&quot; (whoops! forgot that null 
+check!).</li>
+
+<li>Wrap in
+a custom unchecked exception (extend RuntimeException). This allows you to catch a specific exception for your project(s) but not
+need to have throws clauses throughout your call chains.</li>
+
+ <li>Wrap in a
+     custom checked exception wrapper. This requires callers to handle the custom
+     exception; you'll need to either have a try/catch block handle it or a
+     throws clause in every method in your call chain</li>
+</ul>
+
+<p>There is much debate on checked vs. unchecked exceptions; I tend to fall on 
+the &quot;unchecked&quot; side of the debate, but I want this file-closing framework to 
+work no matter which type of exception you prefer.</p>
+<p>You may decide that you
+want to capture <i>all</i> exceptions thrown, not just the last pending 
+exception.</p>
+<p class="figcap">Catching multiple exceptions</p>
+
+<pre>// An exception that tracks multiple causes
+// If you change this to a checked exception, you'll need
+//   to declare the AutoFileCloser constructor as throws MultiException
+public class MultiException extends RuntimeException {
+	private static final long serialVersionUID = 1L;
+	private List&lt;Throwable&gt; causes;
+	public MultiException(Throwable cause) {
+		super(cause);
+	}
+	public MultiException(String message, Throwable cause) {
+		super(message, cause);
+	}
+	public List&lt;Throwable&gt; getCauses() {
+		if (causes == null)
+			return Collections.singletonList(getCause());
+		return Collections.unmodifiableList(causes);
+	}
+	public void addCause(Throwable newCause) {
+		if (causes == null) {
+			causes = new ArrayList&lt;Throwable&gt;();
+			causes.add(getCause());
+		}
+		causes.add(newCause);
+	}
+	// you may want to also override printStackTrace to include
+	//   the additional causes
+}
+
+public abstract class AutoFileCloser {
+	protected abstract void doWork() throws Throwable;
+	private List&lt;Closeable&gt; streams = new ArrayList&lt;Closeable&gt;();
+	protected final &lt;T extends Closeable&gt; T watch(T closeable) {
+		streams.add(0, closeable);
+		return closeable;
+	}
+	public AutoFileCloser() {
+		MultiException pending = null;
+		try {
+			doWork();
+		} catch (ThreadDeath t) {
+			throw t;
+		} catch (Throwable t) {
+			pending = new MultiException(t);
+		} finally {
+			for (Closeable closeable : streams) {
+				try {
+					closeable.close();
+				} catch (ThreadDeath t) {
+					throw t;
+				} catch (Throwable t) {
+					if (pending == null)
+						pending = new MultiException(t);
+					else
+						pending.addCause(t);
+				}
+			}
+			streams.clear();
+			if (pending != null) {
+				throw pending;
+			}
+		}
+	}
+}</pre>
+
+<p>But what if you want to use different
+exception types in different instances of AutoFileCloser?
+Pattern time again!</p>
+
+<p>We'll need to add some more hooks.
+There are four places we need to deal with the exception. I'll use the non-MultiException approach here; doing this for different types
+of MultiExceptions would be similar.</p>
+<p class="figcap">Using different types of exceptions in AutoFileCloser</p>
+
+<pre>public abstract class AutoFileCloser {
+	protected abstract void doWork() throws Throwable;
+	private List&lt;Closeable&gt; streams = new ArrayList&lt;Closeable&gt;();
+	protected final &lt;T extends Closeable&gt; T watch(T closeable) {
+		streams.add(0, closeable);
+		return closeable;
+	}
+	public AutoFileCloser() ``throws SomeWrapperException`` {
+		Throwable pending = null;
+		try {
+			doWork();
+		} catch (ThreadDeath t) {
+			throw t;
+		} catch (Throwable t) {
+			pending = t;
+		} finally {
+			for (Closeable c : streams) {
+				try {
+					c.close();
+				} catch (ThreadDeath t) {
+					throw t;
+				} catch (Throwable t) {
+					// report and/or log error
+					if (pending == null)
+						pending = t;
+				}
+			}
+			streams.clear();
+			if (pending != null)
+				if (pending ``instanceof SomeWrapperException``)
+					throw ``(SomeWrapperException)`` pending;
+				else
+					throw ``new SomeWrapperException`` (pending);
+		}
+	}
+}</pre>
+
+<p>To deal with that throws clause, we're going to need generics. We start by making the class generic:</p>
+<p class="figcap">Making AutoFileCloser generic</p>
+
+<pre>public abstract class AutoFileCloser&lt;WrapperExceptionType extends Throwable&gt; {
+	public AutoFileCloser() throws WrapperExceptionType {
+	...
+}</pre>
+
+<p>That takes care of the throws clause.
+Now we need to deal with the pending exception test-and-wrap. It would be nice if we
+could just say</p>
+<p class="figcap">Pending exception wrapping</p>
+
+<pre>``// DOES NOT WORK IN JAVA...``
+if (pending != null)
+	if (pending instanceof WrapperExceptionType)
+		throw (WrapperExceptionType) pending;
+	else
+		throw ``new SomeWrapperException`` (pending);</pre>
+
+<p>This will not work in Java. Java erases the passed-in type of WrapperExceptionType; 
+it's not available at runtime. (It's erased to Throwable, from the type 
+parameter declaration).</p>
+
+<p>We need an object that tells us the type of the exception. We can do this by passing a Class
+object into the AutoFileCloser constructor. We declare this as Class&lt;WrapperExceptionType&gt; 
+so the user can only pass in the proper class.</p>
+<p class="figcap">Passing in the exception type</p>
+
+<pre>public AutoFileCloser(Class&lt;WrapperExceptionType&gt; wrapperExceptionType)
+		throws WrapperExceptionType {
+	...
+}</pre>
+
+<p>And now we can fixup
+that pending block a bit more</p>
+<p class="figcap">The pending block is getting a little better...</p>
+
+<pre>if (pending != null)
+	if (wrapperExceptionType.isAssignableFrom(pending.getClass()))
+		throw wrapperExceptionType.cast(pending);
+	else
+		throw ``new SomeWrapperException`` (pending);</pre>
+
+<p>One more location
+to fix! We add another hook method that's responsible for wrapping a Throwable. 
+The subclass must implement this method to create the proper exception.</p>
+<p class="figcap">Asking the subclass to wrap an exception</p>
+
+<pre>protected abstract WrapperExceptionType wrap(Throwable t);</pre>
+
+<p>The final pending block is</p>
+<p class="figcap">The final pending exception block</p>
+
+<pre>if (pending != null)
+	if (wrapperExceptionType.isAssignableFrom(pending.getClass()))
+		throw wrapperExceptionType.cast(pending);
+	else
+		throw wrap(pending);</pre>
+
+<p>As an example, if we have a custom
+exception called OopsException, we can now use it as
+follows:</p>
+<p class="figcap">Sample using OopsException</p>
+
+<pre>new AutoFileCloser&lt;OopsException&gt;(OopsException.class) {
+	@Override protected void doWork() throws Throwable {
+		// process streams
+	}
+	@Override protected OopsException wrap(Throwable t) {
+		return new OopsException(t);
+	}};</pre>
+
+<p>If you need to use OopsException in an AutoFileCloser more than once, you can create a
+concrete class for it:</p>
+<p class="figcap">A concrete AutoFileCloser with an explicit exception</p>
+
+<pre>public abstract class AutoFileCloserThrowsOops 
+		extends AutoFileCloser&lt;OopsException&gt; {
+	public AutoFileCloserThrowsOops() throws OopsException {
+		super(OopsException.class);
+	}
+	@Override protected OopsException wrap(Throwable t) {
+		return new OopsException(t);
+	}
+}</pre>
+
+<p>and then use
+it as follows:</p>
+<p class="figcap">Using our common subclass</p>
+
+<pre>new AutoFileCloserThrowsOops() {
+	@Override protected void doWork() throws Throwable {
+		// process streams
+	}};</pre>
+
+<p>Much nicer, eh?</p>
+<h3>Returning a value</h3>
+<p>Things get a little trickier if you want to return a value from your doWork() 
+method. I'll demonstrate two approaches:</p>
+<ul>
+	<li>You can declare a final variable in the same method in which you use 
+	AutoFileCloser, or a field in the class that acts as a handle to a "container" object
+	(such as a Map or StringBuilder). These are accessible from within 
+	your doWork(). This is my preferred method of returning values from doWork().</li>
+	<li>You can modify AutoFileCloser to return a value (though you'll need to 
+	use a method such as &quot;go&quot; to return it).</li>
+</ul>
+
+<h4>Setting a return value via a container</h4>
+<p>This is a simple example of reading an entire file into a String. (It's actually part of the 
+code I used to format the source code figures in this article. Yep - I'm eating my own dog food here!).</p>
+<p class="figcap">Setting a return value via a container</p>
+<pre>// example: fully reading a file into a StringBuilder
+// The StringBuilder content is marked final, allowing it to be
+//   accessed from within our anonymous inner class
+final StringBuilder content = new StringBuilder();
+new AutoFileCloser() {
+	@Override protected void doWork() throws Throwable {
+		FileReader fr = watch(new FileReader(file));
+		char[] buf = new char[8192];
+		int n;
+		while ((n = fr.read(buf)) != -1)
+			content.append(buf, 0, n);
+	}};
+</pre>
+<h4>Returning a value from AutoFileCloser </h4>
+<p>In this version, we modify AutoFileCloser to return a value. Because we 
+cannot return a value from the constructor, this approach requires us to move 
+the Template Method back to go() as we started with.</p>
+
+<p class="figcap">Returning a value from AutoFileCloser</p>
+<pre>public abstract class AutoFileCloser&lt;ResultType&gt; {
+	...
+	// replace the constructor with go()
+	public ResultType go() {
+		Throwable pending = null;
+		try {
+			return doWork();
+			... // catches/finally et al
+		}
+		// can never get here, but needed to make compiler happy
+		return null; 
+	}
+}
+
+// and then using it
+String content = new AutoFileCloser&lt;String&gt;() {
+	@Override protected String doWork() throws Throwable {
+		final StringBuilder content = new StringBuilder();
+		FileReader fr = watch(new FileReader(file));
+		char[] buf = new char[8192];
+		int n;
+		while ((n = fr.read(buf)) != -1)
+			content.append(buf, 0, n);
+		return content.toString();
+	}}.go();
+</pre>
+
+<p>This is more complex than the final-variable approach, but this may prove useful under some circumstances. Note that
+if you define AutoFileCloser this way and don't have a value to return, you should pass Void as the ResultType,
+and your doWork() will need to return null.</p>
+
+<h2><a name="Final_Implementations">Final Implementations</a></h2>
+
+<h3>AutoFileCloser throwing RuntimeException</h3>
+<p>Here's the simplest version of the AutoFileCloser. You override it to define 
+a doWork() method that performs your stream processing. The doWork() method can 
+throw any type of exception. If an exception is thrown, it is wrapped in a 
+RuntimeException to be handled by the caller or a caller further up the stack.</p>
+<p class="figcap">AutoFileCloser using RuntimeException as wrapper</p>
+<pre>import java.io.Closeable;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+public abstract class AutoFileCloser {
+	protected abstract void doWork() throws Throwable;
+	private List&lt;Closeable&gt; streams = new ArrayList&lt;Closeable&gt;();
+	protected final &lt;T extends Closeable&gt; T watch(T closeable) {
+		streams.add(0, closeable);
+		return closeable;
+	}
+	public AutoFileCloser(){
+		Throwable pending = null;
+		try {
+			doWork();
+		} catch (ThreadDeath t) {
+			throw t;
+		} catch (Throwable t) {
+			pending = t;
+		} finally {
+			for (Closeable c : streams) {
+				try {
+					c.close();
+				} catch (ThreadDeath t) {
+					throw t;
+				} catch (Throwable t) {
+					// report and/or log error
+					if (pending == null)
+						pending = t;
+				}
+			}
+			streams.clear();
+			if (pending != null)
+				if (pending instanceof RuntimeException)
+					throw (RuntimeException) pending;
+				else
+					throw new RuntimeException(pending);
+		}
+	}
+}
+
+// example usage
+new AutoFileCloser() {
+	@Override protected void doWork() throws Throwable {
+		FileReader fr = watch(new FileReader("somefile.txt"));
+		// process fr
+	}};
+</pre>
+
+<h3>AutoFileCloser with Generic Exception</h3>
+<p>This version of AutoFileCloser is a little more complex. It can be used in 
+different contexts that require different types of wrapper exceptions. These 
+wrapper exceptions can be checked or unchecked exceptions. The subclass needs to 
+implement the wrap() method to define how exceptions be wrapped.</p>
+<p class="figcap">AutoFileCloser with Generic Exception</p>
+<pre>
+import java.io.Closeable;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+public abstract class AutoFileCloser&lt;WrapperExceptionType extends Throwable&gt; {
+	protected abstract void doWork() throws Throwable;
+	private List&lt;Closeable&gt; streams = new ArrayList&lt;Closeable&gt;();
+	protected final &lt;T extends Closeable&gt; T watch(T closeable) {
+		streams.add(0, closeable);
+		return closeable;
+	}
+	protected abstract WrapperExceptionType wrap(Throwable t);
+	public AutoFileCloser(Class&lt;WrapperExceptionType&gt; wrapperExceptionType)
+			throws WrapperExceptionType {
+		Throwable pending = null;
+		try {
+			doWork();
+		} catch (ThreadDeath t) {
+			throw t;
+		} catch (Throwable t) {
+			pending = t;
+		} finally {
+			for (Closeable c : streams) {
+				try {
+					c.close();
+				} catch (ThreadDeath t) {
+					throw t;
+				} catch (Throwable t) {
+					// report and/or log error
+					if (pending == null)
+						pending = t;
+				}
+			}
+			streams.clear();
+			if (pending != null)
+				if (wrapperExceptionType.isAssignableFrom(pending.getClass()))
+					throw wrapperExceptionType.cast(pending);
+				else
+					throw wrap(pending);
+		}
+
+	}
+}
+
+// example usage
+//   (can declare "throws OopsException" instead of try/catch)
+try {
+	new AutoFileCloser&lt;OopsException&gt;(OopsException.class) {
+		@Override protected void doWork() throws Throwable {
+			FileReader fr = watch(new FileReader("somefile.txt"));
+			// process fr
+		}
+	};
+} catch (OopsException e) {
+	// handle exception
+}
+
+// example concrete subclass with OopsException
+public static abstract class AutoFileCloserThrowsOops 
+		extends AutoFileCloser&lt;OopsException&gt; {
+    public AutoFileCloserThrowsOops() throws OopsException {
+        super(OopsException.class);
+    }
+    @Override protected OopsException wrap(Throwable t) {
+        return new OopsException(t);
+    }
+}
+
+// example using concrete subclass
+//   (can declare "throws OopsException" instead of try/catch)
+try {
+	new AutoFileCloserThrowsOops() {
+		@Override protected void doWork() throws Throwable {
+			FileReader fr = watch(new FileReader("somefile.txt"));
+			// process fr
+		}
+	};
+} catch (OopsException e) {
+	// process
+}
+</pre>
+
+
+<h3>AutoFileCloser with MultiException (and MultiException implementation)</h3>
+<p>This final implementation throws a MultiException, an exception that can 
+track more than one exception that has been thrown.</p>
+<p class="figcap">AutoFileCloser throwing MultiException</p>
+<pre>// An exception that tracks multiple causes
+// If you change this to a checked exception, you'll need
+//   to declare the AutoFileCloser constructor as throws MultiException
+public class MultiException extends RuntimeException {
+	private static final long serialVersionUID = 1L;
+	private List&lt;Throwable&gt; causes;
+	public MultiException(Throwable cause) {
+		super(cause);
+	}
+	public MultiException(String message, Throwable cause) {
+		super(message, cause);
+	}
+	public List&lt;Throwable&gt; getCauses() {
+		if (causes == null)
+			return Collections.singletonList(getCause());
+		return Collections.unmodifiableList(causes);
+	}
+	public void addCause(Throwable newCause) {
+		if (causes == null) {
+			causes = new ArrayList&lt;Throwable&gt;();
+			causes.add(getCause());
+		}
+		causes.add(newCause);
+	}
+}
+
+public abstract class AutoFileCloser {
+	protected abstract void doWork() throws Throwable;
+	private List&lt;Closeable&gt; streams = new ArrayList&lt;Closeable&gt;();
+	protected final &lt;T extends Closeable&gt; T watch(T closeable) {
+		streams.add(0, closeable);
+		return closeable;
+	}
+	public AutoFileCloser() {
+		MultiException pending = null;
+		try {
+			doWork();
+		} catch (ThreadDeath t) {
+			throw t;
+		} catch (Throwable t) {
+			pending = new MultiException(t);
+		} finally {
+			for (Closeable closeable : streams) {
+				try {
+					closeable.close();
+				} catch (ThreadDeath t) {
+					throw t;
+				} catch (Throwable t) {
+					if (pending == null)
+						pending = new MultiException(t);
+					else
+						pending.addCause(t);
+				}
+			}
+			streams.clear();
+			if (pending != null) {
+				throw pending;
+			}
+		}
+	}
+}</pre>
+
+<h2>Conclusion</h2>
+<p>File closing is difficult, but by applying the proper patterns you can create 
+a framework to simplify and ensure proper closing every time. If you have any 
+questions, comments or ideas, please email me at scott@javadude.com.</p>
+
+</body>
+
+</html>

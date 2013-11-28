@@ -1,0 +1,50 @@
+<%@taglib uri="http://javadude.com/jsptags/highlight" prefix="highlight" %>
+
+<html>
+<head>
+<link href="style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
+</head>
+
+<highlight:java caption="Java - sample" file="robots.txt"></highlight:java>
+
+<p>Let's test a reference to the previous figure: See <highlight:prevFigure/> for a code example.</p>
+<p>Let's test a reference to the next figure: See <highlight:nextFigure/> for a code example.</p>
+
+<highlight:java file="robots.txt"></highlight:java>
+<%-- <highlight:java file="stuff.txt" start="1"/> --%>
+<%--<highlight:java file="stuff.txt" end="1"/>--%>
+<highlight:java file="stuff.txt" start="2" end="3" tabSize="8"/>
+<p>Let's test a reference to the previous figure: See <highlight:prevFigure/> for a code example.</p>
+<highlight:java file="stuff.txt" section="foo" caption="section example"/>
+
+<p>Let's test a reference to the next figure: See <highlight:nextFigure/> for a code example.</p>
+<h2>With caption</h2>
+<highlight:java caption="Java - sample">for (int i = 0; i &lt; 10; i++) {
+	/* blah blah 
+	blah */
+	if (x instanceof ${param.name}) {
+		// blah blah blah
+		class Fee implements Fie {
+			$xxxx = yyyy;
+			yyyy = @xxxx;
+			plah("adsadsadad");
+		}
+	}
+}</highlight:java>
+<h2>Without caption</h2>
+<highlight:java tabSize="4">for (int i = 0; i &lt; 10; i++) {
+	/* blah blah 
+	   blah */
+	if (x instanceof ${param.name}) {
+		// blah blah blah
+		class Fee implements Fie {
+			plah("adsadsadad");
+			xxx = 		42qwqewq	34;
+			yyyyyyy =	3			22;
+			a=			11111111	1;
+		}
+	}
+}</highlight:java>
+
+<highlight:figureTable/>
+</html>

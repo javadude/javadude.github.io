@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- #BeginTemplate "../../master.dwt" -->
+
+	<head>
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+		<!-- #BeginEditable "doctitle" -->
+		<title>VAJ: Triggers - Scott Stanchfield</title>
+		<!-- #EndEditable -->
+		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
+		<!-- #BeginEditable "head" -->
+		<!-- #EndEditable -->
+		<style type="text/css">
+
+.style1 {
+	vertical-align: middle;
+}
+</style>
+	</head>
+
+	<body>
+		<div id="header">
+			<h1>JavaDude.com</h1>
+			<h4>-- Scott Stanchfield</h4>
+		</div>
+		<div id="content">
+			<div id="topBar">&nbsp;</div>
+			<div id="contentIndent">
+				<!-- #BeginEditable "content" -->
+<h1>Triggers</h1>
+<p>So you're working in VisualAge's Visual Composition Editor (VCE) and you're getting <em>really</em> tired of setting up the same six connections for umpteen buttons that do <em>almost</em> exactly the same thing?&nbsp; Here's a trick that will save
+your wrists from the evil connection daemons...</p>
+<p>I apologize for this one assuming some knowledge of the Visual Composition Editor.&nbsp;&nbsp; Eventually I'll set this up as a full tutorial example that assumes no knowledge and walks you completely through the example.</p>
+<h2>I'm writing this stupid calculator and all the buttons connections are the same...</h2>
+<p>So there I was, writing a four-function calculator as an example of how you could write a decently-complex application with around six lines of code.&nbsp; I keep adding connections to the number buttons.&nbsp; They're all the same, except the number
+on the key is different.&nbsp; very frustrating to do this 10 times!</p>
+<h2>I factor stuff when I write code, why can't I do it in the VCE?</h2>
+<p>The more I thought about this, the more I thought about it...</p>
+<p>Then it hit me!</p>
+<p>Properties can fire change events!&nbsp; What if I defined an object whose sole purpose in life is to do all the common work,&nbsp; triggered when its property changes?&nbsp; And instead of having each of the other buttons do three or four connections,
+just have them do <em>one</em> connection on actionPerformed, setting the property of the trigger object to their &quot;this&quot; property?</p>
+<h2>I'm lost, Scott... Please speak in English.</h2>
+<p>Better yet, I'll give an example.</p>
+<p>Let's create a simple application that has a phone pad, where each button will have three actions when its pushed:</p>
+<ol>
+    <li>Append its text to a label on the screen.</li>
+    <li>Make a tone.</li>
+    <li>Have Michael Caine say the number.</li>
+</ol>
+<p>Because we don't have the tools handy for all of these, nor do I have the patience to type directions for them right now, just create an object that has three methods features</p>
+<ul>
+  <li>appendToLabel(String text)</li>
+  <li>makeTone(String text)</li>
+  <li>speak(String text)</li>
+</ul>
+<p>and just define them to be something like <tt>System.out.println(&quot;I'm appending &quot;+text)</tt> and so on...</p>
+<p>Add one of these beans to the design area of the VCE (drop it somewhere outside the Frame so it's not contained by any other bean.)</p>
+<p>Create a subclass of Frame and design it in the VCE.&nbsp;&nbsp; Make the Frame have a GridLayout with columns=3 and rows=0.&nbsp; (Remember, this means &quot;3 columns, any number of rows&quot;)</p>
+<p>Add twelve buttons to the frame, and label them as follows:</p>
+<pre>1	2	3
+4	5	6
+7	8	9
+*	0	#</pre>
+<p>Now instead of hooking up those three connections for every darn button, we'll create a trigger that can do most of the work for us!</p>
+<p>Define a bean in VisualAge that's a subclass of <tt>java.lang.Object</tt> that only has one property -- a reference to a java.awt.Button.&nbsp; Name the property <strong>button</strong> and make sure you specify that it is a <strong>bound</strong>
+property.&nbsp; (The easiest way to do this is to open the Class to Bean Info (<strong>Open To-&gt;Bean Info</strong> from the class' pop-up menu) and press the &quot;Add new propery feature&quot; on the toolbar.)</p>
+<p>Specifying the property as <strong>bound</strong> sets up some event handling that will be triggered any time the property value changes.</p>
+<p>After you have defined the property, go to its setButton method:</p>
+<pre>public void setButton(java.awt.Button button) {
+    /* Get the old property value for fire property change event. */
+    java.awt.Button oldValue = fieldButton;
+    /* Set the button property (attribute) to the new value. */
+    fieldButton = button;
+    /* Fire (signal/notify) the button property change event. */
+    firePropertyChange(&quot;button&quot;, oldValue, button);
+    return;
+}                </pre>
+<p>Make a simple change -- change the line</p>
+<pre>java.awt.Button oldValue = fieldButton;</pre>
+<p>to</p>
+<pre>java.awt.Button oldValue = null;</pre>
+<p>This makes sure that when you set the property, it's really seen as a change when firePropertyChange is called.&nbsp; Otherwise, if you press the same button twice in a row, the property change event will not get fired the second time.</p>
+<p>Next, set up connections for the &quot;real work&quot;.&nbsp; Connect the button <strong><em>event</em></strong> to the methods you want to call.&nbsp; <strong>Make sure you select the button <em>method</em> and not the <em>property</em></strong>.&nbsp; If
+you select the &quot;Connect-&gt;Button&quot; from the pop-up menu of the trigger, you're really telling VisualAge to make a &quot;property-to-something&quot; connection.&nbsp; We really want an &quot;event-to-something&quot; connection.&nbsp; For this
+example it won't matter, as VisualAge will know what you really mean.&nbsp; But if you wanted the change to be used to set another bean's property to something else like a constant, VisualAge would make a property-to-property connection, which is
+incorrect.</p>
+<p>Read that paragraph fifty times until you're really lost.</p>
+<p>Bottom line: don't select the &quot;Connect-&gt;button&quot; option from the trigger's pop-up menu; <em><strong>do</strong></em> select the &quot;Connect-&gt;All features&quot; option and select &quot;button&quot; from the <em><strong>event</strong></em>
+pane.</p>
+<p>So make three connections from the trigger to call the three methods in the &quot;kernel&quot; object (the one with&nbsp; appendToLabel, makeTone, speak.)&nbsp; Tear off the button property of the trigger, and use its <em><strong>label</strong></em>
+property as the parameter to those connections.</p>
+<p>Finally, set up a connection from each button's actionPerformed event to the button <strong><em>property</em></strong> of the trigger object, setting the button property to the &quot;this&quot; property of the Button.&nbsp; (An alternative for this
+particular example would be to have the trigger have a String property and set it to the Button's label property.)</p>
+<p>You've just saved two connections per button <em>minus</em> the three connections that the trigger is source for; 21 connections saved!</p>
+<h2>But you've added an extra event in the process.&nbsp; Isn't that slower?</h2>
+<p>Yes, we've added an extra event.&nbsp; But that's not going to add any noticeable delay unless you're using a 4MHz machine.&nbsp; OK, maybe 33MHz... I dunno.</p>
+<p>The key here is that we'll take a negligible time hit for a monster gain in maintainability.&nbsp; The fewer connections you have, the fewer mistakes you could make, and the easier it is to make a change.</p>
+				<!-- #EndEditable "content" -->
+				<div id="footer">
+					<p>&nbsp;</p>
+					<hr/>
+					<p>Copyright &copy; 1996-2009, Scott Stanchfield. All Rights Reserved.<br/>
+					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
+					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
+					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
+					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../../images/cssplay_button.png" width="88" /></a></p>
+					<p>
+					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
+					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../../images/feed-icon-14x14.png" width="14" />Want 
+					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div id="bottom"/>
+		<div id="navigation">
+			<ul>
+				<li><a href="../../index.html">Home</a></li>
+				<li><a href="../../articles/index.html">Articles</a></li>
+				<li><a href="../../tools/index.html">Tools</a></li>
+				<li><a href="../../evaj/index.html">Effective VisualAge for Java</a></li>
+				<li><a href="../../eclipse/index.html">Eclipse Tips</a></li>
+				<li><a href="../index.html">VisualAge Tips</a></li>
+				<!--
+				<li><a href="resume.html">Resume</a></li>
+				-->
+				<li><a href="../../publications.html">Publications</a></li>
+			</ul>
+			<p>&nbsp;</p>
+			<div style="margin-left:10px">
+<script type="text/javascript"><!--
+google_ad_client = "pub-1721904981084162";
+/* Homepage Gutter */
+google_ad_slot = "0044274311";
+google_ad_width = 120;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+		</div>
+		<div id="bottomcorner"/>
+		<div id="topcorner"/>
+		</div>
+		<p>&nbsp;</p>
+	</body>
+<!-- #EndTemplate -->
+</html>

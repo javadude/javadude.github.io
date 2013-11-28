@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- #BeginTemplate "../../master.dwt" -->
+
+	<head>
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+		<!-- #BeginEditable "doctitle" -->
+		<title>VAJ: Faking ActionListeners - Scott Stanchfield</title>
+		<!-- #EndEditable -->
+		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
+		<!-- #BeginEditable "head" -->
+		<!-- #EndEditable -->
+		<style type="text/css">
+
+.style1 {
+	vertical-align: middle;
+}
+</style>
+	</head>
+
+	<body>
+		<div id="header">
+			<h1>JavaDude.com</h1>
+			<h4>-- Scott Stanchfield</h4>
+		</div>
+		<div id="content">
+			<div id="topBar">&nbsp;</div>
+			<div id="contentIndent">
+				<!-- #BeginEditable "content" -->
+<h1>Faking ActionListeners</h1>
+<p>I was teaching a class last week, and someone asked me the following question:</p>
+<p>&quot;I've got a button that does the exact same thing as a menu item.&nbsp; Can I just send an event that makes it look like the menu item was selected?&quot;</p>
+<p>After pondering for a minute, I tried the following and it worked!</p>
+<h2>Making&nbsp; a fakeAction method</h2>
+<p>Create a method as follows:</p>
+<pre>public void fakeAction(Component c) {
+    getToolkit().getSystemEventQueue().postEvent(
+      new ActionEvent(c, ActionEvent.ACTION_PERFORMED, &quot;&quot;));
+}            </pre>
+<p>(It's your choice if you want to explicitly qualify java.awt.event.ActionEvent or import it in your class.)</p>
+<p>After you've defined this method, set up connections as you normally would for the menu action.&nbsp; Then, for the button, connect its actionPerformed() event to the <em><strong>script</strong></em> fakeAction.&nbsp; (Set up an event-to-script
+connection -- start the connection from the button's actionPerformed() event, end it on an empty spot in the design area, selecting <em>event-to-script</em> as the type of connection.</p>
+<p>This connection will require a parameter.&nbsp; Just connect the parameter <em><strong>c</strong></em> to the <em><strong>this</strong></em> property of the menu item that has the desired action.</p>
+<p>This can apply to any two (or more) components that require the same action.</p>
+<h2>Generalizing</h2>
+<p>We can generalize this by putting this method into a class called something like Mimic.&nbsp;&nbsp; I haven't written this yet, so I'll leave it as an exercise for the interested reader...</p>
+<p>You may also want to start adding other methods into this for mimicking other events (like itemStateChanged and so on.)&nbsp; You might also think about providing overloaded versions that take extra parameters so you can change the actions slightly.&nbsp;
+For instance, a four-function calculator's number buttons all do nearly the same thing, just with a different number value.</p>
+				<!-- #EndEditable "content" -->
+				<div id="footer">
+					<p>&nbsp;</p>
+					<hr/>
+					<p>Copyright &copy; 1996-2009, Scott Stanchfield. All Rights Reserved.<br/>
+					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
+					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
+					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
+					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../../images/cssplay_button.png" width="88" /></a></p>
+					<p>
+					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
+					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../../images/feed-icon-14x14.png" width="14" />Want 
+					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div id="bottom"/>
+		<div id="navigation">
+			<ul>
+				<li><a href="../../index.html">Home</a></li>
+				<li><a href="../../articles/index.html">Articles</a></li>
+				<li><a href="../../tools/index.html">Tools</a></li>
+				<li><a href="../../evaj/index.html">Effective VisualAge for Java</a></li>
+				<li><a href="../../eclipse/index.html">Eclipse Tips</a></li>
+				<li><a href="../index.html">VisualAge Tips</a></li>
+				<!--
+				<li><a href="resume.html">Resume</a></li>
+				-->
+				<li><a href="../../publications.html">Publications</a></li>
+			</ul>
+			<p>&nbsp;</p>
+			<div style="margin-left:10px">
+<script type="text/javascript"><!--
+google_ad_client = "pub-1721904981084162";
+/* Homepage Gutter */
+google_ad_slot = "0044274311";
+google_ad_width = 120;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+		</div>
+		<div id="bottomcorner"/>
+		<div id="topcorner"/>
+		</div>
+		<p>&nbsp;</p>
+	</body>
+<!-- #EndTemplate -->
+</html>

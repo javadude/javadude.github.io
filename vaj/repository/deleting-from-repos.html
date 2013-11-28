@@ -1,0 +1,187 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- #BeginTemplate "../../master.dwt" -->
+
+	<head>
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+		<!-- #BeginEditable "doctitle" -->
+		<title>VAJ: Deleting From the Repository - Scott Stanchfield</title>
+		<!-- #EndEditable -->
+		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
+		<!-- #BeginEditable "head" -->
+		<!-- #EndEditable -->
+		<style type="text/css">
+
+.style1 {
+	vertical-align: middle;
+}
+</style>
+	</head>
+
+	<body>
+		<div id="header">
+			<h1>JavaDude.com</h1>
+			<h4>-- Scott Stanchfield</h4>
+		</div>
+		<div id="content">
+			<div id="topBar">&nbsp;</div>
+			<div id="contentIndent">
+				<!-- #BeginEditable "content" -->
+<h1>Deleting from the Repository</h1>
+<h2><i>Note: This tip contains descriptions of deletions from both versions of
+VisualAge for Java. Make sure you follow the directions for your version
+of the tool!</i></h2>
+
+<p>One of the most glaring omissions from version 1.0 of this great tool is that you cannot easily delete from the repository.&nbsp; Here's the only way I know of that you can clean things up!</p>
+<p>The following procedure shrunk my repository from 36MB to 18MB! That's gotta help performance
+somewhere!</p>
+<h2>What is in the repository?</h2>
+<p>In the repository you have</p>
+<ul>
+  <li>TWO versions of the JDK (one for PM, one for Win32)</li>
+  <li>About 4MB of examples (more for Enterprise version)</li>
+  <li>IBM UVM Class Libraries (used in the Visual Composition editor, mainly as property editors)</li>
+  <li>Your code</li>
+</ul>
+<h2>What do you need to keep?</h2>
+<p>You need to keep:</p>
+<ul>
+  <li>The version of the JDK that your platform uses
+    <ul>
+      <li><strong><tt>Sun Class Libraries PM</tt></strong> for OS/2</li>
+      <li><strong><tt>Sun Class Libraries Win32</tt></strong> for Windows</li>
+    </ul>
+  </li>
+  <li>IBM <strong><tt>UVM Class Libraries</tt></strong> (used a lot by VAge)</li>
+  <li>(for version 2.0) <strong><tt>IBM IDE Utility Class Libraries</tt></strong> (for tool integration)</li>
+  <li>EAB Project (VisualAge Enterprise)
+    <ul>
+      <li>(Thanks to Scott Wadler for pointing this out!)</li>
+    </ul>
+  </li>
+  <li>The example projects.&nbsp; You can delete these, but deleting them <em>seems</em> to cause some sort of problem in the VCE sometimes.&nbsp; Safer to just keep them.</li>
+  <li>Any code you want to keep</li>
+</ul>
+<h2>Deletion Procedures</h2>
+<p>The deletion procedure varies for version 1.x and 2.x of VisualAge for Java.&nbsp;&nbsp; Follow the section appropriate to the version of the tool that you are using.</p>
+<h2><a name="Deletion Procedure, VisualAge for Java Version 2.0">Deletion Procedure, VisualAge for Java Version 2.x</a></h2>
+<p><strong>Note:</strong> If you are running version 1.x of VisualAge for Java, see <a href="#Deletion Procedure, VisualAge for Java Version 1.x">Deletion Procedure, VisualAge for Java Version 1.x</a>.&nbsp; You cannot use the 2.x procedure for version
+1.x.</p>
+<p>V2.0 has three respository functions called &quot;purge&quot;, &quot;restore&quot; and &quot;compact.&quot;</p>
+<p>&quot;Purge&quot; marks projects, packages, classes/interfaces and methods as &quot;garbage&quot;.&nbsp; If you decide to get them back, you can &quot;restore&quot; these marked objects.&nbsp; They still exist in the repository.&nbsp; You cannot purge
+versions of objects that are referenced in your workspace.</p>
+<p>&quot;Compact&quot; removes all purged items from the repository.&nbsp; They CANNOT be recovered.&nbsp; Note that you cannot compact unless _all_ objects in your workspace have been versioned.&nbsp; &quot;Compact&quot; also gets rid of &quot;open&quot;
+editions of methods.&nbsp; These are all those timestamped versions of methods that you can replace while working on methods.</p>
+<p>There's a trick with &quot;purge&quot;, though.</p>
+<p>If you purge a project, you ONLY purge the project object from the repository.&nbsp; It _does_not_ affect any of the packages, class/interfaces or methods referenced in that project.</p>
+<p>If you purge a _package_, all versions of objects referenced in that package are purged (as long as those versions aren't used somewhere else, like in a different version of the package.)</p>
+<h3>Deletion Procedure, 2.x</h3>
+<p>If you want to get rid of excess baggage in the repository, I recommend the following actions:</p>
+<ol>
+    <li>add everything you want to keep to your workspace (this makes sure you don't accidently purge something you wanted, as its in the orkspace and VAJ won't let you purge it.)</li>
+    <li>make sure everything in your workspace is versioned</li>
+    <li>bring up repository explorer</li>
+    <li>purge versions of projects you don't want any more (purge is on the popup menu for packages and projects in the repos explorer)</li>
+    <li>purge versions of packages you don't want any more</li>
+    <li>compact the repository (Admin-&gt;Compact repository)1</li>
+</ol>
+<p>The compact may give you time to get that Columbian coffee DIRECT, so give it some time...</p>
+<h3>If you are running version 2.x STOP HERE!&nbsp; DO NOT follow any of the following text!</h3>
+<h2><a name="Deletion Procedure, VisualAge for Java Version 1.x">Deletion Procedure, VisualAge for Java Version 1.x</a></h2>
+<p><strong>Note:</strong> If you are running version 2.x of VisualAge for Java, see <a href="#Deletion Procedure, VisualAge for Java Version 2.0">Deletion Procedure, VisualAge for Java Version 2.x</a>.&nbsp; <em><strong>Do not </strong></em>use the 1.x
+procedure for version 2.x!!!!!!!!!!!!!!</p>
+<h3>A BIG NOTE</h3>
+<p>The stuff you export in interchange file <em><strong>ONLY KEEPS THE LATEST VERSION</strong></em>! If you think you'll ever need older versions of your source, either <em><strong>DO NOT</strong></em> do this cleanup, or make sure you keep the
+ivj.dat.old file around somewhere safe.</p>
+<h3>Deletion Procedure, 1.x</h3>
+<p>WARNING: I cannot take responsibility is this procedure does not work for you!&nbsp;&nbsp; Make sure you back up your repository file (\IBMVJava\ide\repository\ivj.dat) before doing this!</p>
+<p>To clean things up:</p>
+<ol>
+    <li>Back up your repository (mentioned above) to some place safe.</li>
+    <li>Make sure all of your projects in the workspace are versioned</li>
+    <li>Make sure <em><strong>all</strong></em> projects (<em><strong>except</strong></em> the &quot;wrong&quot; JDK) that you want to keep are in your workspace. Add them from the repository if you want.&nbsp; (Just don't add whatever JDK they list --
+        It'll be either <strong><tt>Sun Class Libraries PM</tt></strong> (for OS/2) or <strong><tt>Sun Class Libraries Win32</tt></strong> (for Windows))</li>
+    <li>Make sure any projects you don't want are deleted from the workspace.</li>
+    <li>Export all the JDK, BDK and IBM samples to some samples.dat file using Interchange format. This is just to keep them around if you want to use them someday. I kept all mine in the \IBMVJava\ide\repository dir. After this export is complete, delete
+        these projects from your workspace.</li>
+    <li>Export all the things you want to keep to a core.dat interchange file. Again, I stuck mine in the repository dir</li>
+    <li>Make sure that the only things in your workspace are the things you exported to the core.dat file.&nbsp; And do not edit or even touch any files in the workspace until the repository switch is over.&nbsp; Otherwise you run the risk of getting
+        consistency problems between the workspace and repository, which sometimes causes a few things to act funky.</li>
+    <li>Exit VisualAge for Java</li>
+    <li>Go into the \IBMVJava\ide\repository dir</li>
+    <li>Rename ivj.dat ivj.dat.old to play it safe...</li>
+    <li>Rename core.dat to ivj.dat</li>
+</ol>
+<p>And you're done!&nbsp; Go into VisualAge and you'll only see the stuff that was in core.dat!</p>
+<h3>Further Deletions for version 1.x</h3>
+<p>Now that you have a clean repository and workspace, save a coy of each.</p>
+<ol>
+    <li>Copy \IBMVJava\ide\repository\ivj.dat to base.dat.</li>
+    <li>Copy \IBMVJava\ide\program\ide.icx to base.icx.</li>
+</ol>
+<p>Further cleanups can follow this simpler procedure:</p>
+<ol>
+    <li>Rename your repository (\IBMVJava\ide\repository\ivj.dat) file to all.dat.</li>
+    <li>Copy your saved base.dat file to \IBMVJava\ide\repository\ivj.dat.</li>
+    <li>Copy your saved base.icx file to \IBMVJava\ide\program\ide.icx. This will replace your workspace with the saved workspace (which corresponds to the saved repository.)</li>
+    <li>Start VisualAge for Java.</li>
+    <li>Import the code you want to keep from all.dat. Remember that repository files are interchange files, so you can do this by selecting &quot;Interchange File&quot; as the import format. You can select any projects or packages to import from the
+        all.dat file, as well as which versions of those projects and packages to keep.</li>
+    <li>Add the projects and packages to your workspace from the repository.</li>
+</ol>
+<p>This procedure allows you to easily save multiple versions of code in your repository while removing those that you dont want to keep.</p>
+<p>I know it's a bit of a pain to do this, but right now it's the only way to get garbage out of the repository.</p>
+				<!-- #EndEditable "content" -->
+				<div id="footer">
+					<p>&nbsp;</p>
+					<hr/>
+					<p>Copyright &copy; 1996-2009, Scott Stanchfield. All Rights Reserved.<br/>
+					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
+					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
+					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
+					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../../images/cssplay_button.png" width="88" /></a></p>
+					<p>
+					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
+					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../../images/feed-icon-14x14.png" width="14" />Want 
+					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div id="bottom"/>
+		<div id="navigation">
+			<ul>
+				<li><a href="../../index.html">Home</a></li>
+				<li><a href="../../articles/index.html">Articles</a></li>
+				<li><a href="../../tools/index.html">Tools</a></li>
+				<li><a href="../../evaj/index.html">Effective VisualAge for Java</a></li>
+				<li><a href="../../eclipse/index.html">Eclipse Tips</a></li>
+				<li><a href="../index.html">VisualAge Tips</a></li>
+				<!--
+				<li><a href="resume.html">Resume</a></li>
+				-->
+				<li><a href="../../publications.html">Publications</a></li>
+			</ul>
+			<p>&nbsp;</p>
+			<div style="margin-left:10px">
+<script type="text/javascript"><!--
+google_ad_client = "pub-1721904981084162";
+/* Homepage Gutter */
+google_ad_slot = "0044274311";
+google_ad_width = 120;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+		</div>
+		<div id="bottomcorner"/>
+		<div id="topcorner"/>
+		</div>
+		<p>&nbsp;</p>
+	</body>
+<!-- #EndTemplate -->
+</html>

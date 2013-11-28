@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- #BeginTemplate "../../master.dwt" -->
+
+	<head>
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+		<!-- #BeginEditable "doctitle" -->
+		<title>VAJ: Visual Assertions - Scott Stanchfield</title>
+		<!-- #EndEditable -->
+		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
+		<!-- #BeginEditable "head" -->
+		<!-- #EndEditable -->
+		<style type="text/css">
+
+.style1 {
+	vertical-align: middle;
+}
+</style>
+	</head>
+
+	<body>
+		<div id="header">
+			<h1>JavaDude.com</h1>
+			<h4>-- Scott Stanchfield</h4>
+		</div>
+		<div id="content">
+			<div id="topBar">&nbsp;</div>
+			<div id="contentIndent">
+				<!-- #BeginEditable "content" -->
+<h1>Visual Assertions</h1>
+<p>Here's a simple way to do conditional connections in the VCE, though not the most &quot;normal&quot;...&nbsp; hey, I'm weird, what can I say...</p>
+<p>Define a &quot;conditional&quot; method to choose whether or not we want to do something.&nbsp; For example: &quot;is the sky blue.&quot;</p>
+<pre>public void assertSkyBlue() {
+    if (!skyBlue)
+      throw new RuntimeException(&quot;&quot;);
+  }
+          </pre>
+<p>Note that this doesn't do anything except throw an exception if the sky isn't blue.</p>
+<p><strong>If you use this approach, <em>do not</em> call the method<tt> isSkyBlue()</tt></strong> -- that implies it's a boolean property of a JavaBean...</p>
+<p>VisualAge thinks of this as</p>
+<pre>  sky isn't blue == exceptionOccurred
+  sky is blue    == normal result          </pre>
+<p>So we can bastardize this into making a conditional connection.&nbsp; To try it:</p>
+<ul>
+  <li>create a new <tt>Frame</tt> or <tt>Applet</tt> bean</li>
+  <li>edit it in the VCE</li>
+  <li>drop a <tt>Button</tt> and a <tt>TextField</tt> on the frame/applet</li>
+  <li>connect <tt>actionPerformed</tt> from the <tt>Button</tt> to an event-to-script method (outside of the applet/frame)</li>
+  <li>choose <tt>testSkyBlue</tt> as your script.</li>
+  <li>define the following in your class (edit the source...)<br/>
+        <tt>public void testSkyBlue() {<br/>
+        &nbsp;&nbsp;&nbsp; if (!skyBlue)<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; throw new RuntimeException(&quot;&quot;);<br/>
+        &nbsp;&nbsp;&nbsp; skyBlue = !skyBlue;<br/>
+        }</tt></li>
+  <li>create a connection from &quot;normal result&quot; <em><strong>of the last connection</strong></em> to <tt>setText</tt> of the <tt>TextField</tt></li>
+  <li>set the parameter of the connection to some constant string</li>
+</ul>
+<p>When you run this, you'll see that it takes two button presses to set the text.</p>
+<p>This example isn't terribly interesting, but it shows that it works.</p>
+<p>However, exceptions are somewhat expensive -- make sure the &quot;normal&quot; behavior you expect is the one that does not throw the exception.&nbsp; Then again, in a GUI app it's not really noticeable.</p>
+				<!-- #EndEditable "content" -->
+				<div id="footer">
+					<p>&nbsp;</p>
+					<hr/>
+					<p>Copyright &copy; 1996-2009, Scott Stanchfield. All Rights Reserved.<br/>
+					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
+					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
+					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
+					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../../images/cssplay_button.png" width="88" /></a></p>
+					<p>
+					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
+					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../../images/feed-icon-14x14.png" width="14" />Want 
+					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div id="bottom"/>
+		<div id="navigation">
+			<ul>
+				<li><a href="../../index.html">Home</a></li>
+				<li><a href="../../articles/index.html">Articles</a></li>
+				<li><a href="../../tools/index.html">Tools</a></li>
+				<li><a href="../../evaj/index.html">Effective VisualAge for Java</a></li>
+				<li><a href="../../eclipse/index.html">Eclipse Tips</a></li>
+				<li><a href="../index.html">VisualAge Tips</a></li>
+				<!--
+				<li><a href="resume.html">Resume</a></li>
+				-->
+				<li><a href="../../publications.html">Publications</a></li>
+			</ul>
+			<p>&nbsp;</p>
+			<div style="margin-left:10px">
+<script type="text/javascript"><!--
+google_ad_client = "pub-1721904981084162";
+/* Homepage Gutter */
+google_ad_slot = "0044274311";
+google_ad_width = 120;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+		</div>
+		<div id="bottomcorner"/>
+		<div id="topcorner"/>
+		</div>
+		<p>&nbsp;</p>
+	</body>
+<!-- #EndTemplate -->
+</html>

@@ -1,0 +1,31 @@
+<project name='javadude.com' default='createFigures'>
+	<macrodef name="highlight">
+		<attribute name="file"/>
+		<sequential>
+			<highlightCode file="@{file}-code.html" 
+							out="@{file}.html" 
+							tabsize="4"/>
+		</sequential>
+	</macrodef> 
+	<target name='createFigures'>
+		<taskdef name="highlightCode"
+					classpath="bin;lib/antlr-runtime-3.1.3.jar" 
+					classname="com.javadude.javamage.HighlightCodeTask" />
+		<highlight file="FileClosingShouldBeSimpler" /> 
+		<highlight file="sample" /> 
+		<highlight file="articles/comments" /> 
+		<highlight file="articles/importondemandisevil" /> 
+		<highlight file="articles/javabeanattributes" /> 
+		<highlight file="articles/layering" /> 
+		<highlight file="eclipse/convertingtojava" /> 
+		<highlight file="eclipse/sortingpropertysheetentries" /> 
+		<highlight file="articles/propedit/index" /> 
+		<highlight file="articles/lalrtoll" /> 
+		<highlight file="tools/swtawtlayouts/index" /> 
+		<highlight file="tools/tabsplitter/splitterlayout" /> 
+		<highlight file="tools/antxr/index" /> 
+		<highlightCode file="articles/passbyvalue-code.html" 
+						out="articles/passbyvalue.htm" 
+						tabsize="4"/>
+	</target>
+</project>

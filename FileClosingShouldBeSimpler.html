@@ -1,0 +1,933 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>File Closing in Java Really Should be Simpler...</title>
+		<link href="style/style1.css" media="all" rel="stylesheet" title="CSS" type="text/css"/>
+</head>
+
+<body style='padding:10px'>
+<h1>File Closing in Java Really Should be Simpler ...</h1>
+
+<h2>How to properly close files in Java</h2>
+
+<h5>Scott Stanchfield<br />
+The Johns Hopkins University Applied Physics Laboratory<br />
+Laurel, MD</h5>
+<p>It amazes me that one of the hardest things to do properly
+in Java is close a file or a database connection. Seriously, it's much harder
+than you might think.</p>
+<p>This article goes through the gory detail on properly closing files. There's 
+a lot of explanation on why this is necessary and how I came to these 
+conclusions. If you're not interested in the why's and how's, feel free to jump 
+to <a href="#Final_Implementations">Final_Implementations</a> at the end to see 
+what you should be doing. I hope you continue reading, as I hope the detail will 
+make it easier to understand some of the issues involved in writing correct 
+exception handling code.</p>
+
+<p>Note that there are very similar issues when closing JDBC connections, 
+statements and result sets. The techniques described here can also be 
+applied when writing JDBC code. (I may write a further article on that 
+sometime.) You may also want to look into Spring's JdbcTemplate class.</p>
+<p>[CHECK: IS THE WORDING ON THE FOLLOWING PARAGRAPH OK/SUFFICIENT? SHOULD IT 
+STATE NSA OR JUST &quot;OUR SPONSOR&quot;?]</p>
+<p>I've been working on this framework for several years and have used different 
+implementations of these ideas for my personal and professional work. Most 
+recently, I incorporated the AutoFileCloser described here at the Johns Hopkins 
+University Applied Physics Lab (APL) for use on an NSA research project. APL and 
+the NSA have graciously allowed me to release this latest version of 
+AutoFileCloser and write this article.</p>
+<h3>Copyright</h3>
+<p>[CHECK: WHAT SHOULD COPYRIGHT STATEMENT BE? ME? APL? NSA? SOME COMBINATION? 
+LICENSE TERMS? I'D PREFER ECLIPSE PUBLIC LICENSE
+<a href="http://www.eclipse.org/org/documents/epl-v10.php">
+http://www.eclipse.org/org/documents/epl-v10.php</a>. NOTE THAT I WILL LIKELY 
+INCLUDE THE CODE IN THIS ARTICLE IN A DOWNLOADABLE JAR WITH SOURCE AS A SEPARATE 
+ZIP FILE INCLUDING COPYRIGHT STATEMENTS IN ALL SOURCE]</p>
+<h3>What's the problem?</h3>
+<p>Suppose you write a little application with code like the
+following:</p>
+<a name='figure.1'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_evil'></b><b class='xb3 color_evil'></b><b class='xb4 color_evil'></b></b><div class='xboxcontent'><p class='header_evil'>Figure 1: Bad I/O example</p><pre class='content'><span class='highlight'><span class='comment'>// THIS IS EVIL CODE -- DO NOT DO THIS!!!</span></span>
+<span class='keyword'>try</span> <span class='operator'>{</span>
+    <span class='ident'>FileReader</span> <span class='ident'>r</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>FileReader</span><span class='operator'>(</span><span class='string'>"somefile.txt"</span><span class='operator'>);</span>
+    <span class='comment'>// process r</span>
+    <span class='ident'>r</span><span class='operator'>.</span><span class='ident'>close</span><span class='operator'>();</span>
+<span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>IOException</span> <span class='ident'>e</span><span class='operator'>)</span> <span class='operator'>{</span>
+    <span class='comment'>// report and/or log error</span>
+<span class='operator'>}</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+
+<p>Sure, it looks reasonable at first
+glance, but then so did COBOL.</p>
+
+<p>The first, and possibly most obvious
+problem is the position of the close() call. If <i>anything</i>
+goes wrong, throwing an exception between the open and close of the file, the
+close() call will be skipped! This has the potential of leaving file handles allocated
+in the OS.</p>
+<p>Classes in the Java libraries such as FileReader have a finalize() method that will 
+close() the system resource when the FileReader is garbage collected. 
+Unfortunately, 
+there is no way to determine when this will occur, and if the FileReader object 
+is held for a long segment of code it may delay the finalize() even further. In a 
+multi-user system, this can quickly cause resource allocation issues. Even in a 
+single-use system, there could be multiple applications in contention for 
+resource handles. It's critical that these resources be freed as soon as you're 
+finished using them.</p>
+
+<h3>Using finally to ensure we try to close</h3>
+<p>The first, and most important change,
+is to move the close() call into a finally block. Java's finally block is <i>always</i> executed:</p>
+
+<ul>
+ <li>If the
+     try completes successfully, finally is run after it.</li>
+ <li>If an
+     exception is thrown in the try block and caught by a catch block, the finally
+     runs after the catch block.</li>
+ <li>If an
+     exception is thrown in the try block and <i>not</i>
+     caught by a catch block, the finally runs immediately before passing the
+     exception on to the containing block or calling method.</li>
+</ul>
+
+<p>Moving the close() call to the finally block looks as follows:</p>
+<a name='figure.2'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_evil'></b><b class='xb3 color_evil'></b><b class='xb4 color_evil'></b></b><div class='xboxcontent'><p class='header_evil'>Figure 2: Getting better...</p><pre class='content'><span class='highlight'><span class='comment'>// THIS IS EVIL CODE -- DO NOT DO THIS!!!</span></span>
+<span class='ident'>FileReader</span> <span class='ident'>r</span> <span class='operator'>=</span> <span class='ident'>null</span><span class='operator'>;</span>
+<span class='keyword'>try</span> <span class='operator'>{</span>
+    <span class='ident'>r</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>FileReader</span><span class='operator'>(</span><span class='string'>"somefile.txt"</span><span class='operator'>);</span>
+    <span class='comment'>// read from r</span>
+<span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>IOException</span> <span class='ident'>e</span><span class='operator'>)</span> <span class='operator'>{</span>
+    <span class='comment'>// report and/or log error</span>
+<span class='operator'>}</span> <span class='keyword'>finally</span> <span class='operator'>{</span>
+    <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>r</span> <span class='operator'>!=</span> <span class='ident'>null</span><span class='operator'>)</span>
+        <span class='keyword'>try</span> <span class='operator'>{</span>
+            <span class='ident'>r</span><span class='operator'>.</span><span class='ident'>close</span><span class='operator'>();</span>
+        <span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>IOException</span> <span class='ident'>e</span><span class='operator'>)</span> <span class='operator'>{</span>
+            <span class='comment'>// report and/or log error</span>
+        <span class='operator'>}</span>
+<span class='operator'>}</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+
+<p>Isn't that pretty? We're now set up so that no matter what happens in the outer try block, we'll at least attempt to
+close the file (assuming it was opened successfully;   that's what the null check is
+for).</p>
+
+<p>But unfortunately, this still isn't
+quite right.</p>
+<h3>Pending exceptions</h3>
+
+<p>Java only keeps track of a single
+exception being thrown. What happens if an exception is thrown during the file
+read <i>and</i> during the file close? <i>The last exception wins</i>. If an 
+exception is thrown in both places, the caller will be notified of the close 
+error, and not the read error.</p>
+
+<p>This is not a good situation; we're
+probably more interested in the exception that was thrown in the try block than
+we are the one thrown during the close. So let's modify things a bit more.</p>
+<a name='figure.3'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 3: Keeping track of the pending exception</p><pre class='content'>        <span class='ident'>FileReader</span> <span class='ident'>r</span> <span class='operator'>=</span> <span class='ident'>null</span><span class='operator'>;</span>
+<span class='callout'>/* 1 */</span> <span class='ident'>Throwable</span> <span class='ident'>pending</span> <span class='operator'>=</span> <span class='ident'>null</span><span class='operator'>;</span>
+        <span class='keyword'>try</span> <span class='operator'>{</span>
+            <span class='ident'>r</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>FileReader</span><span class='operator'>(</span><span class='string'>"somefile.txt"</span><span class='operator'>);</span>
+            <span class='comment'>// read from r</span>
+<span class='callout'>/* 3 */</span> <span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>ThreadDeath</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+<span class='callout'>/* 3 */</span>     <span class='keyword'>throw</span> <span class='ident'>t</span><span class='operator'>;</span>
+<span class='callout'>/* 2 */</span> <span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>Throwable</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+<span class='callout'>/* 2 */</span>     <span class='ident'>pending</span> <span class='operator'>=</span> <span class='ident'>t</span><span class='operator'>;</span>
+        <span class='operator'>}</span> <span class='keyword'>finally</span> <span class='operator'>{</span>
+            <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>r</span> <span class='operator'>!=</span> <span class='ident'>null</span><span class='operator'>)</span>
+                <span class='keyword'>try</span> <span class='operator'>{</span>
+                    <span class='ident'>r</span><span class='operator'>.</span><span class='ident'>close</span><span class='operator'>();</span>
+                <span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>ThreadDeath</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+                    <span class='keyword'>throw</span> <span class='ident'>t</span><span class='operator'>;</span>
+                <span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>Throwable</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+                    <span class='comment'>// report and/or log error</span>
+<span class='callout'>/* 4 */</span>             <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>pending</span> <span class='operator'>==</span> <span class='ident'>null</span><span class='operator'>)</span>
+<span class='callout'>/* 4 */</span>                 <span class='ident'>pending</span> <span class='operator'>=</span> <span class='ident'>t</span><span class='operator'>;</span>
+                <span class='operator'>}</span>
+<span class='callout'>/* 5 */</span>     <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>pending</span> <span class='operator'>!=</span> <span class='ident'>null</span><span class='operator'>)</span>
+<span class='callout'>/* 5 */</span>         <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>pending</span> <span class='keyword'>instanceof</span> <span class='ident'>SomeWrapperException</span><span class='operator'>)</span>
+<span class='callout'>/* 5 */</span>             <span class='keyword'>throw</span> <span class='operator'>(</span><span class='ident'>SomeWrapperException</span><span class='operator'>)</span> <span class='ident'>pending</span><span class='operator'>;</span>
+<span class='callout'>/* 5 */</span>         <span class='keyword'>else</span> 
+<span class='callout'>/* 5 */</span>             <span class='keyword'>throw</span> <span class='keyword'>new</span> <span class='ident'>SomeWrapperException</span><span class='operator'>(</span><span class='ident'>pending</span><span class='operator'>);</span>
+        <span class='operator'>}</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+
+<p>Wow. That's some fun code to noodle
+through. What's happening? (The numbers below map to the numbers in the
+comments in the above code)</p>
+
+<ol>
+ <li>We need to keep track of the exception we care about and want to return to 
+ the caller.</li>
+ <li>Because
+     the pending exception could be any exception, we need to catch Throwable</li>
+ <li>Catching
+     Throwable is normally a bad idea; it includes ThreadDeath, which needs to be re-thrown 
+ for proper thread notification of impending thread doom and destruction. We set up a
+     catch block just so we can rethrow it.</li>
+ <li>If we
+     get an exception during the close call, we check to see if we already are
+     tracking a pending exception. If not (and <i>only</i> if not), we can track the close 
+ exception. If we're already
+     tracking an exception, we should log the close error so we still know it
+     happened.</li>
+ <li>If we have a pending exception, we need to convert it 
+ to a type of exception that can exit the method. We can create a custom exception for this
+     (checked or unchecked; depends on your preference), or 
+     wrap it in RuntimeException. If
+     the pending exception is already the same type as the wrapper, we can just re-throw
+     it.</li>
+</ol>
+
+<p>Isn't that fun? Before we look into
+how to simplify it, let's make things a little worse </p>
+
+<p>Suppose you have nested streams; perhaps you want to wrap an output stream in a buffer for better performance.</p>
+<a name='figure.4'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 4: Nested stream handling</p><pre class='content'>        <span class='ident'>FileReader</span> <span class='ident'>r</span> <span class='operator'>=</span> <span class='ident'>null</span><span class='operator'>;</span>
+<span class='callout'>/* 1 */</span> <span class='ident'>BufferedReader</span> <span class='ident'>br</span> <span class='operator'>=</span> <span class='ident'>null</span><span class='operator'>;</span>
+        <span class='ident'>Throwable</span> <span class='ident'>pending</span> <span class='operator'>=</span> <span class='ident'>null</span><span class='operator'>;</span>
+        <span class='keyword'>try</span> <span class='operator'>{</span>
+            <span class='ident'>r</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>FileReader</span><span class='operator'>(</span><span class='string'>"somefile.txt"</span><span class='operator'>);</span>
+<span class='callout'>/* 1 */</span>     <span class='ident'>br</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>BufferedReader</span><span class='operator'>(</span><span class='ident'>r</span><span class='operator'>);</span>
+            <span class='comment'>// read from br</span>
+        <span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>ThreadDeath</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+            <span class='keyword'>throw</span> <span class='ident'>t</span><span class='operator'>;</span>
+        <span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>Throwable</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+            <span class='ident'>pending</span> <span class='operator'>=</span> <span class='ident'>t</span><span class='operator'>;</span>
+        <span class='operator'>}</span> <span class='keyword'>finally</span> <span class='operator'>{</span>
+<span class='callout'>/* 2 */</span>     <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>br</span> <span class='operator'>!=</span> <span class='ident'>null</span><span class='operator'>)</span>
+                <span class='keyword'>try</span> <span class='operator'>{</span>
+                    <span class='ident'>br</span><span class='operator'>.</span><span class='ident'>close</span><span class='operator'>();</span>
+                <span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>ThreadDeath</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+                    <span class='keyword'>throw</span> <span class='ident'>t</span><span class='operator'>;</span>
+                <span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>Throwable</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+                    <span class='comment'>// report and/or log error</span>
+                    <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>pending</span> <span class='operator'>==</span> <span class='ident'>null</span><span class='operator'>)</span>
+                        <span class='ident'>pending</span> <span class='operator'>=</span> <span class='ident'>t</span><span class='operator'>;</span>
+                <span class='operator'>}</span>
+<span class='callout'>/* 3 */</span>     <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>r</span> <span class='operator'>!=</span> <span class='ident'>null</span><span class='operator'>)</span>
+                <span class='keyword'>try</span> <span class='operator'>{</span>
+                    <span class='ident'>r</span><span class='operator'>.</span><span class='ident'>close</span><span class='operator'>();</span>
+                <span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>ThreadDeath</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+                    <span class='keyword'>throw</span> <span class='ident'>t</span><span class='operator'>;</span>
+                <span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>Throwable</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+                    <span class='comment'>// report and/or log error</span>
+                    <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>pending</span> <span class='operator'>==</span> <span class='ident'>null</span><span class='operator'>)</span>
+                        <span class='ident'>pending</span> <span class='operator'>=</span> <span class='ident'>t</span><span class='operator'>;</span>
+                <span class='operator'>}</span>
+            <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>pending</span> <span class='operator'>!=</span> <span class='ident'>null</span><span class='operator'>)</span>
+                <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>pending</span> <span class='keyword'>instanceof</span> <span class='ident'>SomeWrapperException</span><span class='operator'>)</span>
+                    <span class='keyword'>throw</span> <span class='operator'>(</span><span class='ident'>SomeWrapperException</span><span class='operator'>)</span> <span class='ident'>pending</span><span class='operator'>;</span>
+                <span class='keyword'>else</span>
+                    <span class='keyword'>throw</span> <span class='keyword'>new</span> <span class='ident'>SomeWrapperException</span><span class='operator'>(</span><span class='ident'>pending</span><span class='operator'>);</span>
+        <span class='operator'>}</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+
+<p>Crikey! That's
+a lot of code just to do a simple read from a file. Let's look at a few details
+in there:</p>
+
+<ol>
+ <li>We
+     declare and open the stream wrapper as we normally would (we declare it outside the try so we have access to it in the finally).</li>
+ <li>We
+     try to close the outermost wrapper first. If this succeeds, it will 
+ automatically try to close nested streams.</li>
+    <li>We try to close the nested stream.</li>
+</ol>
+<p>If a stream is already closed, further close() calls will be ignored (per the 
+contract of Java's Closeable interface).</p>
+<p>If the wrapping stream wasn't properly closed, it is important to try to 
+close the nested stream explicitly to try to free up the underlying system 
+resource.</p>
+<p>We now have proper file closing!</p>
+
+<p>But let's get real. How many folks
+are going to go this far? Even if they do, how many will get it right <i>every</i> time they write it?</p>
+
+<h3>Simplifying things</h3>
+
+<p>Let's find a way to factor out the necessary boilerplate so we can 
+concentrate on our I/O design. We need to figure out which parts of this 
+algorithm stay the same whenever we use it, and which parts differ.</p>
+<a name='figure.5'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 5: Where are the variants?</p><pre class='content'><span class='highlight'><span class='comment'>// PSEUDO-CODE -- NOT JAVA!</span></span>
+<span class='highlight'><span class='comment'>// VARIANT: DECLARE THE STREAMS AND WRAPPERS</span></span>
+<span class='ident'>Throwable</span> <span class='ident'>pending</span> <span class='operator'>=</span> <span class='ident'>null</span><span class='operator'>;</span>
+<span class='keyword'>try</span> <span class='operator'>{</span>
+    <span class='highlight'><span class='comment'>// VARIANT: OPEN AND PROCESS THE STREAMS</span></span>
+<span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>ThreadDeath</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+    <span class='keyword'>throw</span> <span class='ident'>t</span><span class='operator'>;</span>
+<span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>Throwable</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+    <span class='ident'>pending</span> <span class='operator'>=</span> <span class='ident'>t</span><span class='operator'>;</span>
+<span class='operator'>}</span> <span class='keyword'>finally</span> <span class='operator'>{</span>
+    <span class='highlight'><span class='comment'>// VARIANT: FOR EACH STREAM (OR WRAPPER)</span></span>
+    <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>STREAM</span> <span class='operator'>!=</span> <span class='ident'>null</span><span class='operator'>)</span>
+        <span class='keyword'>try</span> <span class='operator'>{</span>
+            <span class='highlight'><span class='ident'>STREAM</span></span><span class='operator'>.</span><span class='ident'>close</span><span class='operator'>();</span>
+        <span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>ThreadDeath</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+            <span class='keyword'>throw</span> <span class='ident'>t</span><span class='operator'>;</span>
+        <span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>Throwable</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+            <span class='comment'>// report and/or log error</span>
+            <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>pending</span> <span class='operator'>==</span> <span class='ident'>null</span><span class='operator'>)</span>
+                <span class='ident'>pending</span> <span class='operator'>=</span> <span class='ident'>t</span><span class='operator'>;</span>
+        <span class='operator'>}</span>
+    <span class='highlight'><span class='comment'>// END VARIANT: FOR EACH STREAM WRAPPER</span></span>
+    <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>pending</span> <span class='operator'>!=</span> <span class='ident'>null</span><span class='operator'>)</span>
+        <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>pending</span> <span class='keyword'>instanceof</span> <span class='ident'>SomeWrapperException</span><span class='operator'>)</span>
+            <span class='keyword'>throw</span> <span class='operator'>(</span><span class='ident'>SomeWrapperException</span><span class='operator'>)</span> <span class='ident'>pending</span><span class='operator'>;</span>
+        <span class='keyword'>else</span>
+            <span class='keyword'>throw</span> <span class='keyword'>new</span> <span class='ident'>SomeWrapperException</span><span class='operator'>(</span><span class='ident'>pending</span><span class='operator'>);</span>
+<span class='operator'>}</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+
+<p>Hmm  looks like a good bit of that
+doesn't vary. What if we use a List of Closeables rather than separate variables 
+for each stream?</p>
+<a name='figure.6'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 6: Collapsing the variants</p><pre class='content'><span class='highlight'><span class='comment'>// PSEUDO-CODE -- NOT JAVA!</span></span>
+<span class='ident'>List</span><span class='operator'>&lt;</span><span class='ident'>Closeable</span><span class='operator'>&gt;</span> <span class='ident'>streams</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>ArrayList</span><span class='operator'>&lt;</span><span class='ident'>Closeable</span><span class='operator'>&gt;();</span>
+<span class='ident'>Throwable</span> <span class='ident'>pending</span> <span class='operator'>=</span> <span class='ident'>null</span><span class='operator'>;</span>
+<span class='keyword'>try</span> <span class='operator'>{</span>
+    <span class='highlight'><span class='comment'>// VARIANT: OPEN AND PROCESS THE STREAMS</span></span>
+    <span class='highlight'><span class='comment'>//     STORE EACH STREAM IN streams LIST</span></span>
+<span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>ThreadDeath</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+    <span class='keyword'>throw</span> <span class='ident'>t</span><span class='operator'>;</span>
+<span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>Throwable</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+    <span class='ident'>pending</span> <span class='operator'>=</span> <span class='ident'>t</span><span class='operator'>;</span>
+<span class='operator'>}</span> <span class='keyword'>finally</span> <span class='operator'>{</span>
+    <span class='keyword'>for</span> <span class='operator'>(</span><span class='ident'>Closeable</span> <span class='ident'>c</span> <span class='operator'>:</span> <span class='ident'>streams</span><span class='operator'>)</span> <span class='operator'>{</span>
+        <span class='keyword'>try</span> <span class='operator'>{</span>
+            <span class='ident'>c</span><span class='operator'>.</span><span class='ident'>close</span><span class='operator'>();</span>
+        <span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>ThreadDeath</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+            <span class='keyword'>throw</span> <span class='ident'>t</span><span class='operator'>;</span>
+        <span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>Throwable</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+            <span class='comment'>// report and/or log error</span>
+            <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>pending</span> <span class='operator'>==</span> <span class='ident'>null</span><span class='operator'>)</span>
+                <span class='ident'>pending</span> <span class='operator'>=</span> <span class='ident'>t</span><span class='operator'>;</span>
+        <span class='operator'>}</span>
+    <span class='operator'>}</span>
+    <span class='ident'>streams</span><span class='operator'>.</span><span class='ident'>clear</span><span class='operator'>();</span>
+    <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>pending</span> <span class='operator'>!=</span> <span class='ident'>null</span><span class='operator'>)</span>
+        <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>pending</span> <span class='keyword'>instanceof</span> <span class='ident'>SomeWrapperException</span><span class='operator'>)</span>
+            <span class='keyword'>throw</span> <span class='operator'>(</span><span class='ident'>SomeWrapperException</span><span class='operator'>)</span> <span class='ident'>pending</span><span class='operator'>;</span>
+        <span class='keyword'>else</span>
+            <span class='keyword'>throw</span> <span class='keyword'>new</span> <span class='ident'>SomeWrapperException</span><span class='operator'>(</span><span class='ident'>pending</span><span class='operator'>);</span>
+<span class='operator'>}</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+<p>We're now down to a single spot
+that varies! Everything else is <i>exactly</i>
+the same for all uses (assuming you use the same exception type for all uses;  
+if not, we'll see how we can fix that later).</p>
+
+<p>We now have a template for dealing with file closing. Hmmm... I think there's 
+a design pattern out there that might fit; in fact, it's named &quot;Template 
+Method&quot;.</p>
+
+<p>The Template Method pattern is useful
+when you have <i>an algorithm with
+replaceable steps</i>. Some common steps of the algorithm always stay
+the same (and you usually want to enforce that they stay the same); some
+steps of the algorithm might need to be changed for different usage.</p>
+
+<p>The "standard" implementation defines overridable "hook" methods for each
+variant step. The Template Method invokes these hook methods; subclasses can
+override the hooks to change the behavior of the algorithm.</p>
+<a name='figure.7'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 7: File closing using a template method</p><pre class='content'><span class='keyword'>public</span> <span class='keyword'>abstract</span> <span class='keyword'>class</span> <span class='ident'>AutoFileCloser</span> <span class='operator'>{</span>
+    <span class='comment'>// hook method; subclasses override to specify their work</span>
+    <span class='keyword'>protected</span> <span class='keyword'>abstract</span> <span class='keyword'>void</span> <span class='ident'>doWork</span><span class='operator'>()</span> <span class='keyword'>throws</span> <span class='ident'>Throwable</span><span class='operator'>;</span>
+    <span class='keyword'>private</span> <span class='ident'>List</span><span class='operator'>&lt;</span><span class='ident'>Closeable</span><span class='operator'>&gt;</span> <span class='ident'>streams</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>ArrayList</span><span class='operator'>&lt;</span><span class='ident'>Closeable</span><span class='operator'>&gt;();</span>
+    <span class='keyword'>protected</span> <span class='keyword'>final</span> <span class='keyword'>void</span> <span class='ident'>watch</span><span class='operator'>(</span><span class='ident'>Closeable</span> <span class='ident'>closeable</span><span class='operator'>)</span> <span class='operator'>{</span>
+        <span class='ident'>streams</span><span class='operator'>.</span><span class='ident'>add</span><span class='operator'>(</span>0, <span class='ident'>closeable</span><span class='operator'>);</span>
+    <span class='operator'>}</span>
+    <span class='comment'>// template method</span>
+    <span class='keyword'>public</span> <span class='keyword'>final</span> <span class='keyword'>void</span> <span class='ident'>go</span><span class='operator'>()</span> <span class='keyword'>throws</span> <span class='ident'>SomeWrapperException</span> <span class='operator'>{</span>
+        <span class='ident'>Throwable</span> <span class='ident'>pending</span> <span class='operator'>=</span> <span class='ident'>null</span><span class='operator'>;</span>
+        <span class='keyword'>try</span> <span class='operator'>{</span>
+            <span class='ident'>doWork</span><span class='operator'>();</span>
+        <span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>ThreadDeath</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+            <span class='keyword'>throw</span> <span class='ident'>t</span><span class='operator'>;</span>
+        <span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>Throwable</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+            <span class='ident'>pending</span> <span class='operator'>=</span> <span class='ident'>t</span><span class='operator'>;</span>
+        <span class='operator'>}</span> <span class='keyword'>finally</span> <span class='operator'>{</span>
+            <span class='keyword'>for</span> <span class='operator'>(</span><span class='ident'>Closeable</span> <span class='ident'>c</span> <span class='operator'>:</span> <span class='ident'>streams</span><span class='operator'>)</span> <span class='operator'>{</span>
+                <span class='keyword'>try</span> <span class='operator'>{</span>
+                    <span class='ident'>c</span><span class='operator'>.</span><span class='ident'>close</span><span class='operator'>();</span>
+                <span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>ThreadDeath</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+                    <span class='keyword'>throw</span> <span class='ident'>t</span><span class='operator'>;</span>
+                <span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>Throwable</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+                    <span class='comment'>// report and/or log error</span>
+                    <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>pending</span> <span class='operator'>==</span> <span class='ident'>null</span><span class='operator'>)</span>
+                        <span class='ident'>pending</span> <span class='operator'>=</span> <span class='ident'>t</span><span class='operator'>;</span>
+                <span class='operator'>}</span>
+            <span class='operator'>}</span>
+            <span class='ident'>streams</span><span class='operator'>.</span><span class='ident'>clear</span><span class='operator'>();</span>
+            <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>pending</span> <span class='operator'>!=</span> <span class='ident'>null</span><span class='operator'>)</span>
+                <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>pending</span> <span class='keyword'>instanceof</span> <span class='ident'>SomeWrapperException</span><span class='operator'>)</span>
+                    <span class='keyword'>throw</span> <span class='operator'>(</span><span class='ident'>SomeWrapperException</span><span class='operator'>)</span> <span class='ident'>pending</span><span class='operator'>;</span>
+                <span class='keyword'>else</span>
+                    <span class='keyword'>throw</span> <span class='keyword'>new</span> <span class='ident'>SomeWrapperException</span><span class='operator'>(</span><span class='ident'>pending</span><span class='operator'>);</span>
+        <span class='operator'>}</span>
+    <span class='operator'>}</span>
+<span class='operator'>}</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+
+<p>The go()
+method is final; this represents the constant parts of the Template Method that we
+do not want subclasses to be able to change. The watch() method&nbsp; (which 
+will be invoked in the subclass' doWork()) adds the streams 
+to the front of the list. The ensures that streams will be closed in the 
+opposite order in which they are opened.</p>
+
+<p>With this definition in place, we can
+do the following:</p>
+<a name='figure.8'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 8: Using the template method for some I/O</p><pre class='content'><span class='keyword'>private</span> <span class='keyword'>static</span> <span class='keyword'>class</span> <span class='ident'>MyWork</span> <span class='keyword'>extends</span> <span class='ident'>AutoFileCloser</span> <span class='operator'>{</span>
+    <span class='specialIdent'>@Override</span> <span class='keyword'>protected</span> <span class='keyword'>void</span> <span class='ident'>doWork</span><span class='operator'>()</span> <span class='keyword'>throws</span> <span class='ident'>Throwable</span> <span class='operator'>{</span>
+        <span class='ident'>FileReader</span> <span class='ident'>r</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>FileReader</span><span class='operator'>(</span><span class='string'>"someFile.txt"</span><span class='operator'>);</span>
+        <span class='ident'>BufferedReader</span> <span class='ident'>br</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>BufferedReader</span><span class='operator'>(</span><span class='ident'>r</span><span class='operator'>);</span>
+        <span class='ident'>watch</span><span class='operator'>(</span><span class='ident'>r</span><span class='operator'>);</span>
+        <span class='ident'>watch</span><span class='operator'>(</span><span class='ident'>br</span><span class='operator'>);</span>
+        <span class='comment'>// process br</span>
+    <span class='operator'>}</span>
+<span class='operator'>}</span>
+<span class='keyword'>new</span> <span class='ident'>MyWork</span><span class='operator'>().</span><span class='ident'>go</span><span class='operator'>();</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+
+<p>Now that's much better, but we still
+can make some improvements. If we make watch() a generic method, we can collapse
+the "new"s and the watch() calls:</p>
+<a name='figure.9'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 9: Using a generic method to collapse instantiation and watching</p><pre class='content'><span class='keyword'>protected</span> <span class='keyword'>final</span> <span class='operator'>&lt;</span><span class='ident'>T</span> <span class='keyword'>extends</span> <span class='ident'>Closeable</span><span class='operator'>&gt;</span> <span class='ident'>T</span> <span class='ident'>watch</span><span class='operator'>(</span><span class='ident'>T</span> <span class='ident'>closeable</span><span class='operator'>)</span> <span class='operator'>{</span>
+    <span class='ident'>streams</span><span class='operator'>.</span><span class='ident'>add</span><span class='operator'>(</span>0, <span class='ident'>closeable</span><span class='operator'>);</span>
+    <span class='keyword'>return</span> <span class='ident'>closeable</span><span class='operator'>;</span>
+<span class='operator'>}</span>
+
+<span class='comment'>// and then in the doWork()</span>
+
+<span class='ident'>FileReader</span> <span class='ident'>r</span> <span class='operator'>=</span> <span class='ident'>watch</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>FileReader</span><span class='operator'>(</span><span class='string'>"someFile.txt"</span><span class='operator'>));</span>
+<span class='ident'>BufferedReader</span> <span class='ident'>br</span> <span class='operator'>=</span> <span class='ident'>watch</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>BufferedReader</span><span class='operator'>(</span><span class='ident'>r</span><span class='operator'>));</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+
+<p>When calling the AutoFileCloser,
+I prefer to use an anonymous inner class:</p>
+<a name='figure.10'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 10: Calling AutoFileCloser as an anonymous inner class</p><pre class='content'><span class='keyword'>new</span> <span class='ident'>AutoFileCloser</span><span class='operator'>()</span> <span class='operator'>{</span>
+    <span class='specialIdent'>@Override</span> <span class='keyword'>protected</span> <span class='keyword'>void</span> <span class='ident'>doWork</span><span class='operator'>()</span> <span class='keyword'>throws</span> <span class='ident'>Throwable</span> <span class='operator'>{</span>
+        <span class='ident'>FileReader</span> <span class='ident'>r</span> <span class='operator'>=</span> <span class='ident'>watch</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>FileReader</span><span class='operator'>(</span><span class='string'>"someFile.txt"</span><span class='operator'>));</span>
+        <span class='ident'>BufferedReader</span> <span class='ident'>br</span> <span class='operator'>=</span> <span class='ident'>watch</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>BufferedReader</span><span class='operator'>(</span><span class='ident'>r</span><span class='operator'>));</span>
+        <span class='comment'>// process br</span>
+    <span class='operator'>}}.</span><span class='ident'>go</span><span class='operator'>();</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+
+<p><em>Note: I like to collapse the closing }} together when I write anonymous inner classes. This makes it stand out: &quot;something unusually ugly is 
+happening here; maybe I should read more carefully!&quot;</em></p>
+<p>I'm not really keen on the dangling go() call. Let's move the go() contents
+to the AutoFileCloser constructor. The usage then
+looks like:</p>
+<a name='figure.11'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 11: Moving the work to AutoFileCloser's constructor</p><pre class='content'><span class='keyword'>new</span> <span class='ident'>AutoFileCloser</span><span class='operator'>()</span> <span class='operator'>{</span>
+    <span class='specialIdent'>@Override</span> <span class='keyword'>protected</span> <span class='keyword'>void</span> <span class='ident'>doWork</span><span class='operator'>()</span> <span class='keyword'>throws</span> <span class='ident'>Throwable</span> <span class='operator'>{</span>
+        <span class='ident'>FileReader</span> <span class='ident'>r</span> <span class='operator'>=</span> <span class='ident'>watch</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>FileReader</span><span class='operator'>(</span><span class='string'>"someFile.txt"</span><span class='operator'>));</span>
+        <span class='ident'>BufferedReader</span> <span class='ident'>br</span> <span class='operator'>=</span> <span class='ident'>watch</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>BufferedReader</span><span class='operator'>(</span><span class='ident'>r</span><span class='operator'>));</span>
+        <span class='comment'>// process br</span>
+    <span class='operator'>}};</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+
+<p>Tada!
+We now have correct file closing that is not much more complex than what we started
+with at the beginning of this article!</p>
+
+<p>This also works with multiple nested streams:</p>
+<a name='figure.12'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 12: Nested streams in AutoFileCloser</p><pre class='content'><span class='keyword'>new</span> <span class='ident'>AutoFileCloser</span><span class='operator'>()</span> <span class='operator'>{</span>
+    <span class='specialIdent'>@Override</span> <span class='keyword'>protected</span> <span class='keyword'>void</span> <span class='ident'>doWork</span><span class='operator'>()</span> <span class='keyword'>throws</span> <span class='ident'>Throwable</span> <span class='operator'>{</span>
+        <span class='ident'>FileReader</span> <span class='ident'>r</span> <span class='operator'>=</span> <span class='ident'>watch</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>FileReader</span><span class='operator'>(</span><span class='string'>"someFile.txt"</span><span class='operator'>));</span>
+        <span class='ident'>BufferedReader</span> <span class='ident'>br</span> <span class='operator'>=</span> <span class='ident'>watch</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>BufferedReader</span><span class='operator'>(</span><span class='ident'>r</span><span class='operator'>));</span>
+        <span class='ident'>FileWriter</span> <span class='ident'>w</span> <span class='operator'>=</span> <span class='ident'>watch</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>FileWriter</span><span class='operator'>(</span><span class='string'>"someOtherFile.txt"</span><span class='operator'>));</span>
+        <span class='ident'>BufferedWriter</span> <span class='ident'>bw</span> <span class='operator'>=</span> <span class='ident'>watch</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>BufferedWriter</span><span class='operator'>(</span><span class='ident'>w</span><span class='operator'>));</span>
+        <span class='comment'>// read from br and write to bw</span>
+    <span class='operator'>}};</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+
+<h3>Exception wrapping</h3>
+<p>There are several approaches we can take to wrap and throw exceptions so they 
+can be handled outside the AutoFileCloser:</p>
+
+<ul>
+
+<li>Wrap in RuntimeException. Many folks don't like this idea because it's normally used to 
+represent what I call &quot;programmer stupidity errors&quot; (whoops! forgot that null 
+check!).</li>
+
+<li>Wrap in
+a custom unchecked exception (extend RuntimeException). This allows you to catch a specific exception for your project(s) but not
+need to have throws clauses throughout your call chains.</li>
+
+ <li>Wrap in a
+     custom checked exception wrapper. This requires callers to handle the custom
+     exception; you'll need to either have a try/catch block handle it or a
+     throws clause in every method in your call chain</li>
+</ul>
+
+<p>There is much debate on checked vs. unchecked exceptions; I tend to fall on 
+the &quot;unchecked&quot; side of the debate, but I want this file-closing framework to 
+work no matter which type of exception you prefer.</p>
+<p>You may decide that you
+want to capture <i>all</i> exceptions thrown, not just the last pending 
+exception.</p>
+<a name='figure.13'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 13: Catching multiple exceptions</p><pre class='content'><span class='comment'>// An exception that tracks multiple causes</span>
+<span class='comment'>// If you change this to a checked exception, you'll need</span>
+<span class='comment'>//   to declare the AutoFileCloser constructor as throws MultiException</span>
+<span class='keyword'>public</span> <span class='keyword'>class</span> <span class='ident'>MultiException</span> <span class='keyword'>extends</span> <span class='ident'>RuntimeException</span> <span class='operator'>{</span>
+    <span class='keyword'>private</span> <span class='keyword'>static</span> <span class='keyword'>final</span> <span class='keyword'>long</span> <span class='ident'>serialVersionUID</span> <span class='operator'>=</span> 1<span class='ident'>L</span><span class='operator'>;</span>
+    <span class='keyword'>private</span> <span class='ident'>List</span><span class='operator'>&lt;</span><span class='ident'>Throwable</span><span class='operator'>&gt;</span> <span class='ident'>causes</span><span class='operator'>;</span>
+    <span class='keyword'>public</span> <span class='ident'>MultiException</span><span class='operator'>(</span><span class='ident'>Throwable</span> <span class='ident'>cause</span><span class='operator'>)</span> <span class='operator'>{</span>
+        <span class='keyword'>super</span><span class='operator'>(</span><span class='ident'>cause</span><span class='operator'>);</span>
+    <span class='operator'>}</span>
+    <span class='keyword'>public</span> <span class='ident'>MultiException</span><span class='operator'>(</span><span class='ident'>String</span> <span class='ident'>message</span>, <span class='ident'>Throwable</span> <span class='ident'>cause</span><span class='operator'>)</span> <span class='operator'>{</span>
+        <span class='keyword'>super</span><span class='operator'>(</span><span class='ident'>message</span>, <span class='ident'>cause</span><span class='operator'>);</span>
+    <span class='operator'>}</span>
+    <span class='keyword'>public</span> <span class='ident'>List</span><span class='operator'>&lt;</span><span class='ident'>Throwable</span><span class='operator'>&gt;</span> <span class='ident'>getCauses</span><span class='operator'>()</span> <span class='operator'>{</span>
+        <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>causes</span> <span class='operator'>==</span> <span class='ident'>null</span><span class='operator'>)</span>
+            <span class='keyword'>return</span> <span class='ident'>Collections</span><span class='operator'>.</span><span class='ident'>singletonList</span><span class='operator'>(</span><span class='ident'>getCause</span><span class='operator'>());</span>
+        <span class='keyword'>return</span> <span class='ident'>Collections</span><span class='operator'>.</span><span class='ident'>unmodifiableList</span><span class='operator'>(</span><span class='ident'>causes</span><span class='operator'>);</span>
+    <span class='operator'>}</span>
+    <span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>addCause</span><span class='operator'>(</span><span class='ident'>Throwable</span> <span class='ident'>newCause</span><span class='operator'>)</span> <span class='operator'>{</span>
+        <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>causes</span> <span class='operator'>==</span> <span class='ident'>null</span><span class='operator'>)</span> <span class='operator'>{</span>
+            <span class='ident'>causes</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>ArrayList</span><span class='operator'>&lt;</span><span class='ident'>Throwable</span><span class='operator'>&gt;();</span>
+            <span class='ident'>causes</span><span class='operator'>.</span><span class='ident'>add</span><span class='operator'>(</span><span class='ident'>getCause</span><span class='operator'>());</span>
+        <span class='operator'>}</span>
+        <span class='ident'>causes</span><span class='operator'>.</span><span class='ident'>add</span><span class='operator'>(</span><span class='ident'>newCause</span><span class='operator'>);</span>
+    <span class='operator'>}</span>
+    <span class='comment'>// you may want to also override printStackTrace to include</span>
+    <span class='comment'>//   the additional causes</span>
+<span class='operator'>}</span>
+
+<span class='keyword'>public</span> <span class='keyword'>abstract</span> <span class='keyword'>class</span> <span class='ident'>AutoFileCloser</span> <span class='operator'>{</span>
+    <span class='keyword'>protected</span> <span class='keyword'>abstract</span> <span class='keyword'>void</span> <span class='ident'>doWork</span><span class='operator'>()</span> <span class='keyword'>throws</span> <span class='ident'>Throwable</span><span class='operator'>;</span>
+    <span class='keyword'>private</span> <span class='ident'>List</span><span class='operator'>&lt;</span><span class='ident'>Closeable</span><span class='operator'>&gt;</span> <span class='ident'>streams</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>ArrayList</span><span class='operator'>&lt;</span><span class='ident'>Closeable</span><span class='operator'>&gt;();</span>
+    <span class='keyword'>protected</span> <span class='keyword'>final</span> <span class='operator'>&lt;</span><span class='ident'>T</span> <span class='keyword'>extends</span> <span class='ident'>Closeable</span><span class='operator'>&gt;</span> <span class='ident'>T</span> <span class='ident'>watch</span><span class='operator'>(</span><span class='ident'>T</span> <span class='ident'>closeable</span><span class='operator'>)</span> <span class='operator'>{</span>
+        <span class='ident'>streams</span><span class='operator'>.</span><span class='ident'>add</span><span class='operator'>(</span>0, <span class='ident'>closeable</span><span class='operator'>);</span>
+        <span class='keyword'>return</span> <span class='ident'>closeable</span><span class='operator'>;</span>
+    <span class='operator'>}</span>
+    <span class='keyword'>public</span> <span class='ident'>AutoFileCloser</span><span class='operator'>()</span> <span class='operator'>{</span>
+        <span class='ident'>MultiException</span> <span class='ident'>pending</span> <span class='operator'>=</span> <span class='ident'>null</span><span class='operator'>;</span>
+        <span class='keyword'>try</span> <span class='operator'>{</span>
+            <span class='ident'>doWork</span><span class='operator'>();</span>
+        <span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>ThreadDeath</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+            <span class='keyword'>throw</span> <span class='ident'>t</span><span class='operator'>;</span>
+        <span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>Throwable</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+            <span class='ident'>pending</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>MultiException</span><span class='operator'>(</span><span class='ident'>t</span><span class='operator'>);</span>
+        <span class='operator'>}</span> <span class='keyword'>finally</span> <span class='operator'>{</span>
+            <span class='keyword'>for</span> <span class='operator'>(</span><span class='ident'>Closeable</span> <span class='ident'>closeable</span> <span class='operator'>:</span> <span class='ident'>streams</span><span class='operator'>)</span> <span class='operator'>{</span>
+                <span class='keyword'>try</span> <span class='operator'>{</span>
+                    <span class='ident'>closeable</span><span class='operator'>.</span><span class='ident'>close</span><span class='operator'>();</span>
+                <span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>ThreadDeath</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+                    <span class='keyword'>throw</span> <span class='ident'>t</span><span class='operator'>;</span>
+                <span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>Throwable</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+                    <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>pending</span> <span class='operator'>==</span> <span class='ident'>null</span><span class='operator'>)</span>
+                        <span class='ident'>pending</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>MultiException</span><span class='operator'>(</span><span class='ident'>t</span><span class='operator'>);</span>
+                    <span class='keyword'>else</span>
+                        <span class='ident'>pending</span><span class='operator'>.</span><span class='ident'>addCause</span><span class='operator'>(</span><span class='ident'>t</span><span class='operator'>);</span>
+                <span class='operator'>}</span>
+            <span class='operator'>}</span>
+            <span class='ident'>streams</span><span class='operator'>.</span><span class='ident'>clear</span><span class='operator'>();</span>
+            <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>pending</span> <span class='operator'>!=</span> <span class='ident'>null</span><span class='operator'>)</span> <span class='operator'>{</span>
+                <span class='keyword'>throw</span> <span class='ident'>pending</span><span class='operator'>;</span>
+            <span class='operator'>}</span>
+        <span class='operator'>}</span>
+    <span class='operator'>}</span>
+<span class='operator'>}</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+
+<p>But what if you want to use different
+exception types in different instances of AutoFileCloser?
+Pattern time again!</p>
+
+<p>We'll need to add some more hooks.
+There are four places we need to deal with the exception. I'll use the non-MultiException approach here; doing this for different types
+of MultiExceptions would be similar.</p>
+<a name='figure.14'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 14: Using different types of exceptions in AutoFileCloser</p><pre class='content'><span class='keyword'>public</span> <span class='keyword'>abstract</span> <span class='keyword'>class</span> <span class='ident'>AutoFileCloser</span> <span class='operator'>{</span>
+    <span class='keyword'>protected</span> <span class='keyword'>abstract</span> <span class='keyword'>void</span> <span class='ident'>doWork</span><span class='operator'>()</span> <span class='keyword'>throws</span> <span class='ident'>Throwable</span><span class='operator'>;</span>
+    <span class='keyword'>private</span> <span class='ident'>List</span><span class='operator'>&lt;</span><span class='ident'>Closeable</span><span class='operator'>&gt;</span> <span class='ident'>streams</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>ArrayList</span><span class='operator'>&lt;</span><span class='ident'>Closeable</span><span class='operator'>&gt;();</span>
+    <span class='keyword'>protected</span> <span class='keyword'>final</span> <span class='operator'>&lt;</span><span class='ident'>T</span> <span class='keyword'>extends</span> <span class='ident'>Closeable</span><span class='operator'>&gt;</span> <span class='ident'>T</span> <span class='ident'>watch</span><span class='operator'>(</span><span class='ident'>T</span> <span class='ident'>closeable</span><span class='operator'>)</span> <span class='operator'>{</span>
+        <span class='ident'>streams</span><span class='operator'>.</span><span class='ident'>add</span><span class='operator'>(</span>0, <span class='ident'>closeable</span><span class='operator'>);</span>
+        <span class='keyword'>return</span> <span class='ident'>closeable</span><span class='operator'>;</span>
+    <span class='operator'>}</span>
+    <span class='keyword'>public</span> <span class='ident'>AutoFileCloser</span><span class='operator'>()</span> <span class='highlight'><span class='keyword'>throws</span> <span class='ident'>SomeWrapperException</span></span> <span class='operator'>{</span>
+        <span class='ident'>Throwable</span> <span class='ident'>pending</span> <span class='operator'>=</span> <span class='ident'>null</span><span class='operator'>;</span>
+        <span class='keyword'>try</span> <span class='operator'>{</span>
+            <span class='ident'>doWork</span><span class='operator'>();</span>
+        <span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>ThreadDeath</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+            <span class='keyword'>throw</span> <span class='ident'>t</span><span class='operator'>;</span>
+        <span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>Throwable</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+            <span class='ident'>pending</span> <span class='operator'>=</span> <span class='ident'>t</span><span class='operator'>;</span>
+        <span class='operator'>}</span> <span class='keyword'>finally</span> <span class='operator'>{</span>
+            <span class='keyword'>for</span> <span class='operator'>(</span><span class='ident'>Closeable</span> <span class='ident'>c</span> <span class='operator'>:</span> <span class='ident'>streams</span><span class='operator'>)</span> <span class='operator'>{</span>
+                <span class='keyword'>try</span> <span class='operator'>{</span>
+                    <span class='ident'>c</span><span class='operator'>.</span><span class='ident'>close</span><span class='operator'>();</span>
+                <span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>ThreadDeath</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+                    <span class='keyword'>throw</span> <span class='ident'>t</span><span class='operator'>;</span>
+                <span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>Throwable</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+                    <span class='comment'>// report and/or log error</span>
+                    <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>pending</span> <span class='operator'>==</span> <span class='ident'>null</span><span class='operator'>)</span>
+                        <span class='ident'>pending</span> <span class='operator'>=</span> <span class='ident'>t</span><span class='operator'>;</span>
+                <span class='operator'>}</span>
+            <span class='operator'>}</span>
+            <span class='ident'>streams</span><span class='operator'>.</span><span class='ident'>clear</span><span class='operator'>();</span>
+            <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>pending</span> <span class='operator'>!=</span> <span class='ident'>null</span><span class='operator'>)</span>
+                <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>pending</span> <span class='highlight'><span class='keyword'>instanceof</span> <span class='ident'>SomeWrapperException</span></span><span class='operator'>)</span>
+                    <span class='keyword'>throw</span> <span class='highlight'><span class='operator'>(</span><span class='ident'>SomeWrapperException</span><span class='operator'>)</span></span> <span class='ident'>pending</span><span class='operator'>;</span>
+                <span class='keyword'>else</span>
+                    <span class='keyword'>throw</span> <span class='highlight'><span class='keyword'>new</span> <span class='ident'>SomeWrapperException</span></span> <span class='operator'>(</span><span class='ident'>pending</span><span class='operator'>);</span>
+        <span class='operator'>}</span>
+    <span class='operator'>}</span>
+<span class='operator'>}</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+
+<p>To deal with that throws clause, we're going to need generics. We start by making the class generic:</p>
+<a name='figure.15'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 15: Making AutoFileCloser generic</p><pre class='content'><span class='keyword'>public</span> <span class='keyword'>abstract</span> <span class='keyword'>class</span> <span class='ident'>AutoFileCloser</span><span class='operator'>&lt;</span><span class='ident'>WrapperExceptionType</span> <span class='keyword'>extends</span> <span class='ident'>Throwable</span><span class='operator'>&gt;</span> <span class='operator'>{</span>
+    <span class='keyword'>public</span> <span class='ident'>AutoFileCloser</span><span class='operator'>()</span> <span class='keyword'>throws</span> <span class='ident'>WrapperExceptionType</span> <span class='operator'>{</span>
+    <span class='operator'>...</span>
+<span class='operator'>}</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+
+<p>That takes care of the throws clause.
+Now we need to deal with the pending exception test-and-wrap. It would be nice if we
+could just say</p>
+<a name='figure.16'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 16: Pending exception wrapping</p><pre class='content'><span class='highlight'><span class='comment'>// DOES NOT WORK IN JAVA...</span></span>
+<span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>pending</span> <span class='operator'>!=</span> <span class='ident'>null</span><span class='operator'>)</span>
+    <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>pending</span> <span class='keyword'>instanceof</span> <span class='ident'>WrapperExceptionType</span><span class='operator'>)</span>
+        <span class='keyword'>throw</span> <span class='operator'>(</span><span class='ident'>WrapperExceptionType</span><span class='operator'>)</span> <span class='ident'>pending</span><span class='operator'>;</span>
+    <span class='keyword'>else</span>
+        <span class='keyword'>throw</span> <span class='highlight'><span class='keyword'>new</span> <span class='ident'>SomeWrapperException</span></span> <span class='operator'>(</span><span class='ident'>pending</span><span class='operator'>);</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+
+<p>This will not work in Java. Java erases the passed-in type of WrapperExceptionType; 
+it's not available at runtime. (It's erased to Throwable, from the type 
+parameter declaration).</p>
+
+<p>We need an object that tells us the type of the exception. We can do this by passing a Class
+object into the AutoFileCloser constructor. We declare this as Class&lt;WrapperExceptionType&gt; 
+so the user can only pass in the proper class.</p>
+<a name='figure.17'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 17: Passing in the exception type</p><pre class='content'><span class='keyword'>public</span> <span class='ident'>AutoFileCloser</span><span class='operator'>(</span><span class='ident'>Class</span><span class='operator'>&lt;</span><span class='ident'>WrapperExceptionType</span><span class='operator'>&gt;</span> <span class='ident'>wrapperExceptionType</span><span class='operator'>)</span>
+        <span class='keyword'>throws</span> <span class='ident'>WrapperExceptionType</span> <span class='operator'>{</span>
+    <span class='operator'>...</span>
+<span class='operator'>}</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+
+<p>And now we can fixup
+that pending block a bit more</p>
+<a name='figure.18'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 18: The pending block is getting a little better...</p><pre class='content'><span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>pending</span> <span class='operator'>!=</span> <span class='ident'>null</span><span class='operator'>)</span>
+    <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>wrapperExceptionType</span><span class='operator'>.</span><span class='ident'>isAssignableFrom</span><span class='operator'>(</span><span class='ident'>pending</span><span class='operator'>.</span><span class='ident'>getClass</span><span class='operator'>()))</span>
+        <span class='keyword'>throw</span> <span class='ident'>wrapperExceptionType</span><span class='operator'>.</span><span class='ident'>cast</span><span class='operator'>(</span><span class='ident'>pending</span><span class='operator'>);</span>
+    <span class='keyword'>else</span>
+        <span class='keyword'>throw</span> <span class='highlight'><span class='keyword'>new</span> <span class='ident'>SomeWrapperException</span></span> <span class='operator'>(</span><span class='ident'>pending</span><span class='operator'>);</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+
+<p>One more location
+to fix! We add another hook method that's responsible for wrapping a Throwable. 
+The subclass must implement this method to create the proper exception.</p>
+<a name='figure.19'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 19: Asking the subclass to wrap an exception</p><pre class='content'><span class='keyword'>protected</span> <span class='keyword'>abstract</span> <span class='ident'>WrapperExceptionType</span> <span class='ident'>wrap</span><span class='operator'>(</span><span class='ident'>Throwable</span> <span class='ident'>t</span><span class='operator'>);</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+
+<p>The final pending block is</p>
+<a name='figure.20'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 20: The final pending exception block</p><pre class='content'><span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>pending</span> <span class='operator'>!=</span> <span class='ident'>null</span><span class='operator'>)</span>
+    <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>wrapperExceptionType</span><span class='operator'>.</span><span class='ident'>isAssignableFrom</span><span class='operator'>(</span><span class='ident'>pending</span><span class='operator'>.</span><span class='ident'>getClass</span><span class='operator'>()))</span>
+        <span class='keyword'>throw</span> <span class='ident'>wrapperExceptionType</span><span class='operator'>.</span><span class='ident'>cast</span><span class='operator'>(</span><span class='ident'>pending</span><span class='operator'>);</span>
+    <span class='keyword'>else</span>
+        <span class='keyword'>throw</span> <span class='ident'>wrap</span><span class='operator'>(</span><span class='ident'>pending</span><span class='operator'>);</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+
+<p>As an example, if we have a custom
+exception called OopsException, we can now use it as
+follows:</p>
+<a name='figure.21'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 21: Sample using OopsException</p><pre class='content'><span class='keyword'>new</span> <span class='ident'>AutoFileCloser</span><span class='operator'>&lt;</span><span class='ident'>OopsException</span><span class='operator'>&gt;(</span><span class='ident'>OopsException</span><span class='operator'>.</span><span class='keyword'>class</span><span class='operator'>)</span> <span class='operator'>{</span>
+    <span class='specialIdent'>@Override</span> <span class='keyword'>protected</span> <span class='keyword'>void</span> <span class='ident'>doWork</span><span class='operator'>()</span> <span class='keyword'>throws</span> <span class='ident'>Throwable</span> <span class='operator'>{</span>
+        <span class='comment'>// process streams</span>
+    <span class='operator'>}</span>
+    <span class='specialIdent'>@Override</span> <span class='keyword'>protected</span> <span class='ident'>OopsException</span> <span class='ident'>wrap</span><span class='operator'>(</span><span class='ident'>Throwable</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+        <span class='keyword'>return</span> <span class='keyword'>new</span> <span class='ident'>OopsException</span><span class='operator'>(</span><span class='ident'>t</span><span class='operator'>);</span>
+    <span class='operator'>}};</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+
+<p>If you need to use OopsException in an AutoFileCloser more than once, you can create a
+concrete class for it:</p>
+<a name='figure.22'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 22: A concrete AutoFileCloser with an explicit exception</p><pre class='content'><span class='keyword'>public</span> <span class='keyword'>abstract</span> <span class='keyword'>class</span> <span class='ident'>AutoFileCloserThrowsOops</span> 
+        <span class='keyword'>extends</span> <span class='ident'>AutoFileCloser</span><span class='operator'>&lt;</span><span class='ident'>OopsException</span><span class='operator'>&gt;</span> <span class='operator'>{</span>
+    <span class='keyword'>public</span> <span class='ident'>AutoFileCloserThrowsOops</span><span class='operator'>()</span> <span class='keyword'>throws</span> <span class='ident'>OopsException</span> <span class='operator'>{</span>
+        <span class='keyword'>super</span><span class='operator'>(</span><span class='ident'>OopsException</span><span class='operator'>.</span><span class='keyword'>class</span><span class='operator'>);</span>
+    <span class='operator'>}</span>
+    <span class='specialIdent'>@Override</span> <span class='keyword'>protected</span> <span class='ident'>OopsException</span> <span class='ident'>wrap</span><span class='operator'>(</span><span class='ident'>Throwable</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+        <span class='keyword'>return</span> <span class='keyword'>new</span> <span class='ident'>OopsException</span><span class='operator'>(</span><span class='ident'>t</span><span class='operator'>);</span>
+    <span class='operator'>}</span>
+<span class='operator'>}</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+
+<p>and then use
+it as follows:</p>
+<a name='figure.23'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 23: Using our common subclass</p><pre class='content'><span class='keyword'>new</span> <span class='ident'>AutoFileCloserThrowsOops</span><span class='operator'>()</span> <span class='operator'>{</span>
+    <span class='specialIdent'>@Override</span> <span class='keyword'>protected</span> <span class='keyword'>void</span> <span class='ident'>doWork</span><span class='operator'>()</span> <span class='keyword'>throws</span> <span class='ident'>Throwable</span> <span class='operator'>{</span>
+        <span class='comment'>// process streams</span>
+    <span class='operator'>}};</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+
+<p>Much nicer, eh?</p>
+<h3>Returning a value</h3>
+<p>Things get a little trickier if you want to return a value from your doWork() 
+method. I'll demonstrate two approaches:</p>
+<ul>
+	<li>You can declare a final variable in the same method in which you use 
+	AutoFileCloser, or a field in the class that acts as a handle to a "container" object
+	(such as a Map or StringBuilder). These are accessible from within 
+	your doWork(). This is my preferred method of returning values from doWork().</li>
+	<li>You can modify AutoFileCloser to return a value (though you'll need to 
+	use a method such as &quot;go&quot; to return it).</li>
+</ul>
+
+<h4>Setting a return value via a container</h4>
+<p>This is a simple example of reading an entire file into a String. (It's actually part of the 
+code I used to format the source code figures in this article. Yep - I'm eating my own dog food here!).</p>
+<a name='figure.24'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 24: Setting a return value via a container</p><pre class='content'><span class='comment'>// example: fully reading a file into a StringBuilder</span>
+<span class='comment'>// The StringBuilder content is marked final, allowing it to be</span>
+<span class='comment'>//   accessed from within our anonymous inner class</span>
+<span class='keyword'>final</span> <span class='ident'>StringBuilder</span> <span class='ident'>content</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>StringBuilder</span><span class='operator'>();</span>
+<span class='keyword'>new</span> <span class='ident'>AutoFileCloser</span><span class='operator'>()</span> <span class='operator'>{</span>
+    <span class='specialIdent'>@Override</span> <span class='keyword'>protected</span> <span class='keyword'>void</span> <span class='ident'>doWork</span><span class='operator'>()</span> <span class='keyword'>throws</span> <span class='ident'>Throwable</span> <span class='operator'>{</span>
+        <span class='ident'>FileReader</span> <span class='ident'>fr</span> <span class='operator'>=</span> <span class='ident'>watch</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>FileReader</span><span class='operator'>(</span><span class='ident'>file</span><span class='operator'>));</span>
+        <span class='keyword'>char</span><span class='operator'>[]</span> <span class='ident'>buf</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='keyword'>char</span><span class='operator'>[</span>8192<span class='operator'>];</span>
+        <span class='keyword'>int</span> <span class='ident'>n</span><span class='operator'>;</span>
+        <span class='keyword'>while</span> <span class='operator'>((</span><span class='ident'>n</span> <span class='operator'>=</span> <span class='ident'>fr</span><span class='operator'>.</span><span class='ident'>read</span><span class='operator'>(</span><span class='ident'>buf</span><span class='operator'>))</span> <span class='operator'>!=</span> <span class='operator'>-</span>1<span class='operator'>)</span>
+            <span class='ident'>content</span><span class='operator'>.</span><span class='ident'>append</span><span class='operator'>(</span><span class='ident'>buf</span>, 0, <span class='ident'>n</span><span class='operator'>);</span>
+    <span class='operator'>}};</span>
+</pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+<h4>Returning a value from AutoFileCloser </h4>
+<p>In this version, we modify AutoFileCloser to return a value. Because we 
+cannot return a value from the constructor, this approach requires us to move 
+the Template Method back to go() as we started with.</p>
+
+<a name='figure.25'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 25: Returning a value from AutoFileCloser</p><pre class='content'><span class='keyword'>public</span> <span class='keyword'>abstract</span> <span class='keyword'>class</span> <span class='ident'>AutoFileCloser</span><span class='operator'>&lt;</span><span class='ident'>ResultType</span><span class='operator'>&gt;</span> <span class='operator'>{</span>
+    <span class='operator'>...</span>
+    <span class='comment'>// replace the constructor with go()</span>
+    <span class='keyword'>public</span> <span class='ident'>ResultType</span> <span class='ident'>go</span><span class='operator'>()</span> <span class='operator'>{</span>
+        <span class='ident'>Throwable</span> <span class='ident'>pending</span> <span class='operator'>=</span> <span class='ident'>null</span><span class='operator'>;</span>
+        <span class='keyword'>try</span> <span class='operator'>{</span>
+            <span class='keyword'>return</span> <span class='ident'>doWork</span><span class='operator'>();</span>
+            <span class='operator'>...</span> <span class='comment'>// catches/finally et al</span>
+        <span class='operator'>}</span>
+        <span class='comment'>// can never get here, but needed to make compiler happy</span>
+        <span class='keyword'>return</span> <span class='ident'>null</span><span class='operator'>;</span> 
+    <span class='operator'>}</span>
+<span class='operator'>}</span>
+
+<span class='comment'>// and then using it</span>
+<span class='ident'>String</span> <span class='ident'>content</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>AutoFileCloser</span><span class='operator'>&lt;</span><span class='ident'>String</span><span class='operator'>&gt;()</span> <span class='operator'>{</span>
+    <span class='specialIdent'>@Override</span> <span class='keyword'>protected</span> <span class='ident'>String</span> <span class='ident'>doWork</span><span class='operator'>()</span> <span class='keyword'>throws</span> <span class='ident'>Throwable</span> <span class='operator'>{</span>
+        <span class='keyword'>final</span> <span class='ident'>StringBuilder</span> <span class='ident'>content</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>StringBuilder</span><span class='operator'>();</span>
+        <span class='ident'>FileReader</span> <span class='ident'>fr</span> <span class='operator'>=</span> <span class='ident'>watch</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>FileReader</span><span class='operator'>(</span><span class='ident'>file</span><span class='operator'>));</span>
+        <span class='keyword'>char</span><span class='operator'>[]</span> <span class='ident'>buf</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='keyword'>char</span><span class='operator'>[</span>8192<span class='operator'>];</span>
+        <span class='keyword'>int</span> <span class='ident'>n</span><span class='operator'>;</span>
+        <span class='keyword'>while</span> <span class='operator'>((</span><span class='ident'>n</span> <span class='operator'>=</span> <span class='ident'>fr</span><span class='operator'>.</span><span class='ident'>read</span><span class='operator'>(</span><span class='ident'>buf</span><span class='operator'>))</span> <span class='operator'>!=</span> <span class='operator'>-</span>1<span class='operator'>)</span>
+            <span class='ident'>content</span><span class='operator'>.</span><span class='ident'>append</span><span class='operator'>(</span><span class='ident'>buf</span>, 0, <span class='ident'>n</span><span class='operator'>);</span>
+        <span class='keyword'>return</span> <span class='ident'>content</span><span class='operator'>.</span><span class='ident'>toString</span><span class='operator'>();</span>
+    <span class='operator'>}}.</span><span class='ident'>go</span><span class='operator'>();</span>
+</pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+
+<p>This is more complex than the final-variable approach, but this may prove useful under some circumstances. Note that
+if you define AutoFileCloser this way and don't have a value to return, you should pass Void as the ResultType,
+and your doWork() will need to return null.</p>
+
+<h2><a name="Final_Implementations">Final Implementations</a></h2>
+
+<h3>AutoFileCloser throwing RuntimeException</h3>
+<p>Here's the simplest version of the AutoFileCloser. You override it to define 
+a doWork() method that performs your stream processing. The doWork() method can 
+throw any type of exception. If an exception is thrown, it is wrapped in a 
+RuntimeException to be handled by the caller or a caller further up the stack.</p>
+<a name='figure.26'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 26: AutoFileCloser using RuntimeException as wrapper</p><pre class='content'><span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>io</span><span class='operator'>.</span><span class='ident'>Closeable</span><span class='operator'>;</span>
+<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>io</span><span class='operator'>.</span><span class='ident'>FileReader</span><span class='operator'>;</span>
+<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>io</span><span class='operator'>.</span><span class='ident'>IOException</span><span class='operator'>;</span>
+<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>util</span><span class='operator'>.</span><span class='ident'>ArrayList</span><span class='operator'>;</span>
+<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>util</span><span class='operator'>.</span><span class='ident'>List</span><span class='operator'>;</span>
+
+<span class='keyword'>public</span> <span class='keyword'>abstract</span> <span class='keyword'>class</span> <span class='ident'>AutoFileCloser</span> <span class='operator'>{</span>
+    <span class='keyword'>protected</span> <span class='keyword'>abstract</span> <span class='keyword'>void</span> <span class='ident'>doWork</span><span class='operator'>()</span> <span class='keyword'>throws</span> <span class='ident'>Throwable</span><span class='operator'>;</span>
+    <span class='keyword'>private</span> <span class='ident'>List</span><span class='operator'>&lt;</span><span class='ident'>Closeable</span><span class='operator'>&gt;</span> <span class='ident'>streams</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>ArrayList</span><span class='operator'>&lt;</span><span class='ident'>Closeable</span><span class='operator'>&gt;();</span>
+    <span class='keyword'>protected</span> <span class='keyword'>final</span> <span class='operator'>&lt;</span><span class='ident'>T</span> <span class='keyword'>extends</span> <span class='ident'>Closeable</span><span class='operator'>&gt;</span> <span class='ident'>T</span> <span class='ident'>watch</span><span class='operator'>(</span><span class='ident'>T</span> <span class='ident'>closeable</span><span class='operator'>)</span> <span class='operator'>{</span>
+        <span class='ident'>streams</span><span class='operator'>.</span><span class='ident'>add</span><span class='operator'>(</span>0, <span class='ident'>closeable</span><span class='operator'>);</span>
+        <span class='keyword'>return</span> <span class='ident'>closeable</span><span class='operator'>;</span>
+    <span class='operator'>}</span>
+    <span class='keyword'>public</span> <span class='ident'>AutoFileCloser</span><span class='operator'>(){</span>
+        <span class='ident'>Throwable</span> <span class='ident'>pending</span> <span class='operator'>=</span> <span class='ident'>null</span><span class='operator'>;</span>
+        <span class='keyword'>try</span> <span class='operator'>{</span>
+            <span class='ident'>doWork</span><span class='operator'>();</span>
+        <span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>ThreadDeath</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+            <span class='keyword'>throw</span> <span class='ident'>t</span><span class='operator'>;</span>
+        <span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>Throwable</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+            <span class='ident'>pending</span> <span class='operator'>=</span> <span class='ident'>t</span><span class='operator'>;</span>
+        <span class='operator'>}</span> <span class='keyword'>finally</span> <span class='operator'>{</span>
+            <span class='keyword'>for</span> <span class='operator'>(</span><span class='ident'>Closeable</span> <span class='ident'>c</span> <span class='operator'>:</span> <span class='ident'>streams</span><span class='operator'>)</span> <span class='operator'>{</span>
+                <span class='keyword'>try</span> <span class='operator'>{</span>
+                    <span class='ident'>c</span><span class='operator'>.</span><span class='ident'>close</span><span class='operator'>();</span>
+                <span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>ThreadDeath</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+                    <span class='keyword'>throw</span> <span class='ident'>t</span><span class='operator'>;</span>
+                <span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>Throwable</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+                    <span class='comment'>// report and/or log error</span>
+                    <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>pending</span> <span class='operator'>==</span> <span class='ident'>null</span><span class='operator'>)</span>
+                        <span class='ident'>pending</span> <span class='operator'>=</span> <span class='ident'>t</span><span class='operator'>;</span>
+                <span class='operator'>}</span>
+            <span class='operator'>}</span>
+            <span class='ident'>streams</span><span class='operator'>.</span><span class='ident'>clear</span><span class='operator'>();</span>
+            <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>pending</span> <span class='operator'>!=</span> <span class='ident'>null</span><span class='operator'>)</span>
+                <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>pending</span> <span class='keyword'>instanceof</span> <span class='ident'>RuntimeException</span><span class='operator'>)</span>
+                    <span class='keyword'>throw</span> <span class='operator'>(</span><span class='ident'>RuntimeException</span><span class='operator'>)</span> <span class='ident'>pending</span><span class='operator'>;</span>
+                <span class='keyword'>else</span>
+                    <span class='keyword'>throw</span> <span class='keyword'>new</span> <span class='ident'>RuntimeException</span><span class='operator'>(</span><span class='ident'>pending</span><span class='operator'>);</span>
+        <span class='operator'>}</span>
+    <span class='operator'>}</span>
+<span class='operator'>}</span>
+
+<span class='comment'>// example usage</span>
+<span class='keyword'>new</span> <span class='ident'>AutoFileCloser</span><span class='operator'>()</span> <span class='operator'>{</span>
+    <span class='specialIdent'>@Override</span> <span class='keyword'>protected</span> <span class='keyword'>void</span> <span class='ident'>doWork</span><span class='operator'>()</span> <span class='keyword'>throws</span> <span class='ident'>Throwable</span> <span class='operator'>{</span>
+        <span class='ident'>FileReader</span> <span class='ident'>fr</span> <span class='operator'>=</span> <span class='ident'>watch</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>FileReader</span><span class='operator'>(</span><span class='string'>"somefile.txt"</span><span class='operator'>));</span>
+        <span class='comment'>// process fr</span>
+    <span class='operator'>}};</span>
+</pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+
+<h3>AutoFileCloser with Generic Exception</h3>
+<p>This version of AutoFileCloser is a little more complex. It can be used in 
+different contexts that require different types of wrapper exceptions. These 
+wrapper exceptions can be checked or unchecked exceptions. The subclass needs to 
+implement the wrap() method to define how exceptions be wrapped.</p>
+<a name='figure.27'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 27: AutoFileCloser with Generic Exception</p><pre class='content'>
+<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>io</span><span class='operator'>.</span><span class='ident'>Closeable</span><span class='operator'>;</span>
+<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>io</span><span class='operator'>.</span><span class='ident'>IOException</span><span class='operator'>;</span>
+<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>util</span><span class='operator'>.</span><span class='ident'>ArrayList</span><span class='operator'>;</span>
+<span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>util</span><span class='operator'>.</span><span class='ident'>List</span><span class='operator'>;</span>
+
+<span class='keyword'>public</span> <span class='keyword'>abstract</span> <span class='keyword'>class</span> <span class='ident'>AutoFileCloser</span><span class='operator'>&lt;</span><span class='ident'>WrapperExceptionType</span> <span class='keyword'>extends</span> <span class='ident'>Throwable</span><span class='operator'>&gt;</span> <span class='operator'>{</span>
+    <span class='keyword'>protected</span> <span class='keyword'>abstract</span> <span class='keyword'>void</span> <span class='ident'>doWork</span><span class='operator'>()</span> <span class='keyword'>throws</span> <span class='ident'>Throwable</span><span class='operator'>;</span>
+    <span class='keyword'>private</span> <span class='ident'>List</span><span class='operator'>&lt;</span><span class='ident'>Closeable</span><span class='operator'>&gt;</span> <span class='ident'>streams</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>ArrayList</span><span class='operator'>&lt;</span><span class='ident'>Closeable</span><span class='operator'>&gt;();</span>
+    <span class='keyword'>protected</span> <span class='keyword'>final</span> <span class='operator'>&lt;</span><span class='ident'>T</span> <span class='keyword'>extends</span> <span class='ident'>Closeable</span><span class='operator'>&gt;</span> <span class='ident'>T</span> <span class='ident'>watch</span><span class='operator'>(</span><span class='ident'>T</span> <span class='ident'>closeable</span><span class='operator'>)</span> <span class='operator'>{</span>
+        <span class='ident'>streams</span><span class='operator'>.</span><span class='ident'>add</span><span class='operator'>(</span>0, <span class='ident'>closeable</span><span class='operator'>);</span>
+        <span class='keyword'>return</span> <span class='ident'>closeable</span><span class='operator'>;</span>
+    <span class='operator'>}</span>
+    <span class='keyword'>protected</span> <span class='keyword'>abstract</span> <span class='ident'>WrapperExceptionType</span> <span class='ident'>wrap</span><span class='operator'>(</span><span class='ident'>Throwable</span> <span class='ident'>t</span><span class='operator'>);</span>
+    <span class='keyword'>public</span> <span class='ident'>AutoFileCloser</span><span class='operator'>(</span><span class='ident'>Class</span><span class='operator'>&lt;</span><span class='ident'>WrapperExceptionType</span><span class='operator'>&gt;</span> <span class='ident'>wrapperExceptionType</span><span class='operator'>)</span>
+            <span class='keyword'>throws</span> <span class='ident'>WrapperExceptionType</span> <span class='operator'>{</span>
+        <span class='ident'>Throwable</span> <span class='ident'>pending</span> <span class='operator'>=</span> <span class='ident'>null</span><span class='operator'>;</span>
+        <span class='keyword'>try</span> <span class='operator'>{</span>
+            <span class='ident'>doWork</span><span class='operator'>();</span>
+        <span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>ThreadDeath</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+            <span class='keyword'>throw</span> <span class='ident'>t</span><span class='operator'>;</span>
+        <span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>Throwable</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+            <span class='ident'>pending</span> <span class='operator'>=</span> <span class='ident'>t</span><span class='operator'>;</span>
+        <span class='operator'>}</span> <span class='keyword'>finally</span> <span class='operator'>{</span>
+            <span class='keyword'>for</span> <span class='operator'>(</span><span class='ident'>Closeable</span> <span class='ident'>c</span> <span class='operator'>:</span> <span class='ident'>streams</span><span class='operator'>)</span> <span class='operator'>{</span>
+                <span class='keyword'>try</span> <span class='operator'>{</span>
+                    <span class='ident'>c</span><span class='operator'>.</span><span class='ident'>close</span><span class='operator'>();</span>
+                <span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>ThreadDeath</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+                    <span class='keyword'>throw</span> <span class='ident'>t</span><span class='operator'>;</span>
+                <span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>Throwable</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+                    <span class='comment'>// report and/or log error</span>
+                    <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>pending</span> <span class='operator'>==</span> <span class='ident'>null</span><span class='operator'>)</span>
+                        <span class='ident'>pending</span> <span class='operator'>=</span> <span class='ident'>t</span><span class='operator'>;</span>
+                <span class='operator'>}</span>
+            <span class='operator'>}</span>
+            <span class='ident'>streams</span><span class='operator'>.</span><span class='ident'>clear</span><span class='operator'>();</span>
+            <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>pending</span> <span class='operator'>!=</span> <span class='ident'>null</span><span class='operator'>)</span>
+                <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>wrapperExceptionType</span><span class='operator'>.</span><span class='ident'>isAssignableFrom</span><span class='operator'>(</span><span class='ident'>pending</span><span class='operator'>.</span><span class='ident'>getClass</span><span class='operator'>()))</span>
+                    <span class='keyword'>throw</span> <span class='ident'>wrapperExceptionType</span><span class='operator'>.</span><span class='ident'>cast</span><span class='operator'>(</span><span class='ident'>pending</span><span class='operator'>);</span>
+                <span class='keyword'>else</span>
+                    <span class='keyword'>throw</span> <span class='ident'>wrap</span><span class='operator'>(</span><span class='ident'>pending</span><span class='operator'>);</span>
+        <span class='operator'>}</span>
+
+    <span class='operator'>}</span>
+<span class='operator'>}</span>
+
+<span class='comment'>// example usage</span>
+<span class='comment'>//   (can declare "throws OopsException" instead of try/catch)</span>
+<span class='keyword'>try</span> <span class='operator'>{</span>
+    <span class='keyword'>new</span> <span class='ident'>AutoFileCloser</span><span class='operator'>&lt;</span><span class='ident'>OopsException</span><span class='operator'>&gt;(</span><span class='ident'>OopsException</span><span class='operator'>.</span><span class='keyword'>class</span><span class='operator'>)</span> <span class='operator'>{</span>
+        <span class='specialIdent'>@Override</span> <span class='keyword'>protected</span> <span class='keyword'>void</span> <span class='ident'>doWork</span><span class='operator'>()</span> <span class='keyword'>throws</span> <span class='ident'>Throwable</span> <span class='operator'>{</span>
+            <span class='ident'>FileReader</span> <span class='ident'>fr</span> <span class='operator'>=</span> <span class='ident'>watch</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>FileReader</span><span class='operator'>(</span><span class='string'>"somefile.txt"</span><span class='operator'>));</span>
+            <span class='comment'>// process fr</span>
+        <span class='operator'>}</span>
+    <span class='operator'>};</span>
+<span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>OopsException</span> <span class='ident'>e</span><span class='operator'>)</span> <span class='operator'>{</span>
+    <span class='comment'>// handle exception</span>
+<span class='operator'>}</span>
+
+<span class='comment'>// example concrete subclass with OopsException</span>
+<span class='keyword'>public</span> <span class='keyword'>static</span> <span class='keyword'>abstract</span> <span class='keyword'>class</span> <span class='ident'>AutoFileCloserThrowsOops</span> 
+        <span class='keyword'>extends</span> <span class='ident'>AutoFileCloser</span><span class='operator'>&lt;</span><span class='ident'>OopsException</span><span class='operator'>&gt;</span> <span class='operator'>{</span>
+    <span class='keyword'>public</span> <span class='ident'>AutoFileCloserThrowsOops</span><span class='operator'>()</span> <span class='keyword'>throws</span> <span class='ident'>OopsException</span> <span class='operator'>{</span>
+        <span class='keyword'>super</span><span class='operator'>(</span><span class='ident'>OopsException</span><span class='operator'>.</span><span class='keyword'>class</span><span class='operator'>);</span>
+    <span class='operator'>}</span>
+    <span class='specialIdent'>@Override</span> <span class='keyword'>protected</span> <span class='ident'>OopsException</span> <span class='ident'>wrap</span><span class='operator'>(</span><span class='ident'>Throwable</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+        <span class='keyword'>return</span> <span class='keyword'>new</span> <span class='ident'>OopsException</span><span class='operator'>(</span><span class='ident'>t</span><span class='operator'>);</span>
+    <span class='operator'>}</span>
+<span class='operator'>}</span>
+
+<span class='comment'>// example using concrete subclass</span>
+<span class='comment'>//   (can declare "throws OopsException" instead of try/catch)</span>
+<span class='keyword'>try</span> <span class='operator'>{</span>
+    <span class='keyword'>new</span> <span class='ident'>AutoFileCloserThrowsOops</span><span class='operator'>()</span> <span class='operator'>{</span>
+        <span class='specialIdent'>@Override</span> <span class='keyword'>protected</span> <span class='keyword'>void</span> <span class='ident'>doWork</span><span class='operator'>()</span> <span class='keyword'>throws</span> <span class='ident'>Throwable</span> <span class='operator'>{</span>
+            <span class='ident'>FileReader</span> <span class='ident'>fr</span> <span class='operator'>=</span> <span class='ident'>watch</span><span class='operator'>(</span><span class='keyword'>new</span> <span class='ident'>FileReader</span><span class='operator'>(</span><span class='string'>"somefile.txt"</span><span class='operator'>));</span>
+            <span class='comment'>// process fr</span>
+        <span class='operator'>}</span>
+    <span class='operator'>};</span>
+<span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>OopsException</span> <span class='ident'>e</span><span class='operator'>)</span> <span class='operator'>{</span>
+    <span class='comment'>// process</span>
+<span class='operator'>}</span>
+</pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+
+
+<h3>AutoFileCloser with MultiException (and MultiException implementation)</h3>
+<p>This final implementation throws a MultiException, an exception that can 
+track more than one exception that has been thrown.</p>
+<a name='figure.28'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 28: AutoFileCloser throwing MultiException</p><pre class='content'><span class='comment'>// An exception that tracks multiple causes</span>
+<span class='comment'>// If you change this to a checked exception, you'll need</span>
+<span class='comment'>//   to declare the AutoFileCloser constructor as throws MultiException</span>
+<span class='keyword'>public</span> <span class='keyword'>class</span> <span class='ident'>MultiException</span> <span class='keyword'>extends</span> <span class='ident'>RuntimeException</span> <span class='operator'>{</span>
+    <span class='keyword'>private</span> <span class='keyword'>static</span> <span class='keyword'>final</span> <span class='keyword'>long</span> <span class='ident'>serialVersionUID</span> <span class='operator'>=</span> 1<span class='ident'>L</span><span class='operator'>;</span>
+    <span class='keyword'>private</span> <span class='ident'>List</span><span class='operator'>&lt;</span><span class='ident'>Throwable</span><span class='operator'>&gt;</span> <span class='ident'>causes</span><span class='operator'>;</span>
+    <span class='keyword'>public</span> <span class='ident'>MultiException</span><span class='operator'>(</span><span class='ident'>Throwable</span> <span class='ident'>cause</span><span class='operator'>)</span> <span class='operator'>{</span>
+        <span class='keyword'>super</span><span class='operator'>(</span><span class='ident'>cause</span><span class='operator'>);</span>
+    <span class='operator'>}</span>
+    <span class='keyword'>public</span> <span class='ident'>MultiException</span><span class='operator'>(</span><span class='ident'>String</span> <span class='ident'>message</span>, <span class='ident'>Throwable</span> <span class='ident'>cause</span><span class='operator'>)</span> <span class='operator'>{</span>
+        <span class='keyword'>super</span><span class='operator'>(</span><span class='ident'>message</span>, <span class='ident'>cause</span><span class='operator'>);</span>
+    <span class='operator'>}</span>
+    <span class='keyword'>public</span> <span class='ident'>List</span><span class='operator'>&lt;</span><span class='ident'>Throwable</span><span class='operator'>&gt;</span> <span class='ident'>getCauses</span><span class='operator'>()</span> <span class='operator'>{</span>
+        <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>causes</span> <span class='operator'>==</span> <span class='ident'>null</span><span class='operator'>)</span>
+            <span class='keyword'>return</span> <span class='ident'>Collections</span><span class='operator'>.</span><span class='ident'>singletonList</span><span class='operator'>(</span><span class='ident'>getCause</span><span class='operator'>());</span>
+        <span class='keyword'>return</span> <span class='ident'>Collections</span><span class='operator'>.</span><span class='ident'>unmodifiableList</span><span class='operator'>(</span><span class='ident'>causes</span><span class='operator'>);</span>
+    <span class='operator'>}</span>
+    <span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>addCause</span><span class='operator'>(</span><span class='ident'>Throwable</span> <span class='ident'>newCause</span><span class='operator'>)</span> <span class='operator'>{</span>
+        <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>causes</span> <span class='operator'>==</span> <span class='ident'>null</span><span class='operator'>)</span> <span class='operator'>{</span>
+            <span class='ident'>causes</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>ArrayList</span><span class='operator'>&lt;</span><span class='ident'>Throwable</span><span class='operator'>&gt;();</span>
+            <span class='ident'>causes</span><span class='operator'>.</span><span class='ident'>add</span><span class='operator'>(</span><span class='ident'>getCause</span><span class='operator'>());</span>
+        <span class='operator'>}</span>
+        <span class='ident'>causes</span><span class='operator'>.</span><span class='ident'>add</span><span class='operator'>(</span><span class='ident'>newCause</span><span class='operator'>);</span>
+    <span class='operator'>}</span>
+<span class='operator'>}</span>
+
+<span class='keyword'>public</span> <span class='keyword'>abstract</span> <span class='keyword'>class</span> <span class='ident'>AutoFileCloser</span> <span class='operator'>{</span>
+    <span class='keyword'>protected</span> <span class='keyword'>abstract</span> <span class='keyword'>void</span> <span class='ident'>doWork</span><span class='operator'>()</span> <span class='keyword'>throws</span> <span class='ident'>Throwable</span><span class='operator'>;</span>
+    <span class='keyword'>private</span> <span class='ident'>List</span><span class='operator'>&lt;</span><span class='ident'>Closeable</span><span class='operator'>&gt;</span> <span class='ident'>streams</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>ArrayList</span><span class='operator'>&lt;</span><span class='ident'>Closeable</span><span class='operator'>&gt;();</span>
+    <span class='keyword'>protected</span> <span class='keyword'>final</span> <span class='operator'>&lt;</span><span class='ident'>T</span> <span class='keyword'>extends</span> <span class='ident'>Closeable</span><span class='operator'>&gt;</span> <span class='ident'>T</span> <span class='ident'>watch</span><span class='operator'>(</span><span class='ident'>T</span> <span class='ident'>closeable</span><span class='operator'>)</span> <span class='operator'>{</span>
+        <span class='ident'>streams</span><span class='operator'>.</span><span class='ident'>add</span><span class='operator'>(</span>0, <span class='ident'>closeable</span><span class='operator'>);</span>
+        <span class='keyword'>return</span> <span class='ident'>closeable</span><span class='operator'>;</span>
+    <span class='operator'>}</span>
+    <span class='keyword'>public</span> <span class='ident'>AutoFileCloser</span><span class='operator'>()</span> <span class='operator'>{</span>
+        <span class='ident'>MultiException</span> <span class='ident'>pending</span> <span class='operator'>=</span> <span class='ident'>null</span><span class='operator'>;</span>
+        <span class='keyword'>try</span> <span class='operator'>{</span>
+            <span class='ident'>doWork</span><span class='operator'>();</span>
+        <span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>ThreadDeath</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+            <span class='keyword'>throw</span> <span class='ident'>t</span><span class='operator'>;</span>
+        <span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>Throwable</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+            <span class='ident'>pending</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>MultiException</span><span class='operator'>(</span><span class='ident'>t</span><span class='operator'>);</span>
+        <span class='operator'>}</span> <span class='keyword'>finally</span> <span class='operator'>{</span>
+            <span class='keyword'>for</span> <span class='operator'>(</span><span class='ident'>Closeable</span> <span class='ident'>closeable</span> <span class='operator'>:</span> <span class='ident'>streams</span><span class='operator'>)</span> <span class='operator'>{</span>
+                <span class='keyword'>try</span> <span class='operator'>{</span>
+                    <span class='ident'>closeable</span><span class='operator'>.</span><span class='ident'>close</span><span class='operator'>();</span>
+                <span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>ThreadDeath</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+                    <span class='keyword'>throw</span> <span class='ident'>t</span><span class='operator'>;</span>
+                <span class='operator'>}</span> <span class='keyword'>catch</span> <span class='operator'>(</span><span class='ident'>Throwable</span> <span class='ident'>t</span><span class='operator'>)</span> <span class='operator'>{</span>
+                    <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>pending</span> <span class='operator'>==</span> <span class='ident'>null</span><span class='operator'>)</span>
+                        <span class='ident'>pending</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>MultiException</span><span class='operator'>(</span><span class='ident'>t</span><span class='operator'>);</span>
+                    <span class='keyword'>else</span>
+                        <span class='ident'>pending</span><span class='operator'>.</span><span class='ident'>addCause</span><span class='operator'>(</span><span class='ident'>t</span><span class='operator'>);</span>
+                <span class='operator'>}</span>
+            <span class='operator'>}</span>
+            <span class='ident'>streams</span><span class='operator'>.</span><span class='ident'>clear</span><span class='operator'>();</span>
+            <span class='keyword'>if</span> <span class='operator'>(</span><span class='ident'>pending</span> <span class='operator'>!=</span> <span class='ident'>null</span><span class='operator'>)</span> <span class='operator'>{</span>
+                <span class='keyword'>throw</span> <span class='ident'>pending</span><span class='operator'>;</span>
+            <span class='operator'>}</span>
+        <span class='operator'>}</span>
+    <span class='operator'>}</span>
+<span class='operator'>}</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
+
+<h2>Conclusion</h2>
+<p>File closing is difficult, but by applying the proper patterns you can create 
+a framework to simplify and ensure proper closing every time. If you have any 
+questions, comments or ideas, please email me at scott@javadude.com.</p>
+
+</body>
+
+</html>
