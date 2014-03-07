@@ -16,6 +16,12 @@
   <category>Parsing</category>
   <category>Compilers</category>
   <atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="self" type="application/rss+xml" href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield" /><feedburner:info xmlns:feedburner="http://rssnamespace.org/feedburner/ext/1.0" uri="javadudecom-scottstanchfield" /><atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="hub" href="http://pubsubhubbub.appspot.com/" /><item>
+    <guid>https://vimeo.com/11887305</guid>
+    <title>Effective Eclipse - Columbia MD Java Users Group, Laurel, MD</title>
+    <link>https://vimeo.com/11887305</link>
+    <description>A JUG talk from May 2010 I presented on Eclipse tips and tricks.</description>
+  </item>
+  <atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="self" type="application/rss+xml" href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield" /><feedburner:info xmlns:feedburner="http://rssnamespace.org/feedburner/ext/1.0" uri="javadudecom-scottstanchfield" /><atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="hub" href="http://pubsubhubbub.appspot.com/" /><item>
     <guid>https://vimeo.com/55994862</guid>
     <title>Java Enumerations - APL Java Users Group, Laurel, MD</title>
     <link>https://vimeo.com/55994862</link>
