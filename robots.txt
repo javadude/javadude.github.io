@@ -1,4 +1,5 @@
 User-Agent: *
 Disallow: /misc/
 Disallow: /tacdogs/
-Disallow: /courses/
+Disallow: /courses-gen/
+Disallow: /courses-static/
