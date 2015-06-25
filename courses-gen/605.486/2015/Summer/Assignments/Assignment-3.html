@@ -26,7 +26,71 @@
 	<div class="colmask leftmenu">
 		<div class="colleft">
 			<div class="col1">
-				<p>To Be Posted - making some changes to ensure consistency among submissions</p>
+				<h1>Requirements</h1>
+				<p>Create a simple &ldquo;Jewel Matcher&rdquo; game.</p>
+				<ul>
+				<li><p>The idea behind the game is to have a grid of random shapes. You can swap any two horizontally or vertically adjacent shapes if it allows you to make a &ldquo;match&rdquo;</p>
+				</li>
+				<li><p>Three or more adjacent shapes in a row or column of the same type are considered a &ldquo;match&rdquo;</p>
+				</li>
+				<li><p>If the user has made a move that creates one or more matches</p>
+				<ul>
+				<li>Check for all possible matches - the user may have created a row and column or two rows or two columns etc. at the same time</li>
+				<li>Highlight the matching shapes for a moment (perhaps 300-500ms? find an amount that feels right to you)</li>
+				<li>Remove the matching shapes (blank them out for a moment)<ul>
+				<li>Each matched shape counts as one point to keep things simple</li>
+				</ul>
+				</li>
+				<li>Shift all shapes down (you can animate their movement if you want, but you do not need to - you can just redraw all shapes in their new positions)</li>
+				<li>Add new random shapes to fill in blanks</li>
+				</ul>
+				</li>
+				<li><p>You must have four different shapes</p>
+				<ul>
+				<li>Two must be defined using XML resources (circle and square, for example)</li>
+				<li>Two must be defined as custom shapes, similar to the triangle, <em>but</em> you cannot use triangle. Come up with two new shapes.</li>
+				</ul>
+				</li>
+				<li><p>User interaction:</p>
+				<ul>
+				<li>Tapping on a shape highlights all other shapes of the same type for a moment (again, 300-500ms?)</li>
+				<li>Dragging a shape moves it, like in the graph drawing example</li>
+				<li>If a shape is dragged onto another shape's grid area and let go<ul>
+				<li>If no matches are possible, return the shape to its old position</li>
+				<li>If any matches are possible, swap the two shapes and do the &ldquo;if the user has made a move that creates one or more matches&rdquo; logic above</li>
+				</ul>
+				</li>
+				<li>Tapping outside the grid &ldquo;pauses&rdquo; the game<ul>
+				<li>Just blank the screen and write &ldquo;Paused&rdquo;</li>
+				<li>Tapping again unpauses</li>
+				<li>(This doesn't really do anything b/c we're not timing anything&hellip;)</li>
+				</ul>
+				</li>
+				<li>Dragging outside the grid &ldquo;shuffles&rdquo; the pieces<ul>
+				<li>To keep this simple, simply remove all pieces and re-add random pieces</li>
+				</ul>
+				</li>
+				</ul>
+				</li>
+				<li><p>The grid should be 8x8 on all devices</p>
+				<ul>
+				<li>DO NOT assume the size of the grid cells; divide the screen into even squares, leaving some space around the grid</li>
+				</ul>
+				</li>
+				</ul>
+				<h1>Tips</h1>
+				<p>To select random shapes:</p>
+				<pre>&nbsp;&nbsp;&nbsp;&nbsp;private Random random = new Random();<br/>&nbsp;&nbsp;&nbsp;&nbsp;...<br/>&nbsp;&nbsp;&nbsp;&nbsp;random.nextInt(4); // returns 0-3 to choose which shape</pre>
+				<p>Use an AsyncTask to do the &ldquo;something matched&rdquo; logic.</p>
+				<ul>
+				<li>If you don't, you won't see updates to the user interface</li>
+				<li>See <a href="http://javadude.com/courses-static/605.486/2015/Summer/Code/AsyncTaskExample.zip">http://javadude.com/courses-static/605.486/2015/Summer/Code/AsyncTaskExample.zip</a> for an example of using AsyncTask<ul>
+				<li>This example demonstrates performing logic inside the UI thread (bad) and inside an AsyncTask (good)</li>
+				<li>This example contains a good bit of comments describing how AsyncTask works</li>
+				</ul>
+				</li>
+				<li>Note: You'll need to set a flag to track when you're actually running the task so you ignore user input while previous input is being processed</li>
+				</ul>
 				<h1>Submitting Your Assignment</h1>
 				<p>To submit your assignment:</p>
 				<ol>
