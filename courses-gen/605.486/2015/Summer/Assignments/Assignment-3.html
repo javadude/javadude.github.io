@@ -96,6 +96,7 @@
 				<li>This example contains a good bit of comments describing how AsyncTask works</li>
 				</ul>
 				</li>
+				<li>Note: Using this async task approach (with wait/notify), do not call get() from the UI thread on the async task or your app will deadlock (the UI would be waiting for the doInBackground to finish while it waits for the progress update to notify it&hellip;)</li>
 				<li>Note: You'll need to set a flag to track when you're actually running the task so you ignore user input while previous input is being processed</li>
 				</ul>
 				<h1>Submitting Your Assignment</h1>
