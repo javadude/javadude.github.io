@@ -20,25 +20,25 @@
   <feedburner:info xmlns:feedburner="http://rssnamespace.org/feedburner/ext/1.0" uri="javadudecom-scottstanchfield" />
   <item>
     <guid>http://javadude.com/articles/patterns/index.html#s4</guid>
-    <title>Design Patterns Brown-Bag Series</title>
+    <title>Command: Design Patterns Brown-Bag Series</title>
     <link>http://javadude.com/articles/patterns/index.html#s4</link>
     <description>Command Pattern Talk (A series of brown-bag talks I'm giving at the Johns Hopkins Applies Physics Lab on Design Patterns)</description>
   </item>
   <item>
     <guid>http://javadude.com/articles/patterns/index.html#s3</guid>
-    <title>Design Patterns Brown-Bag Series</title>
+    <title>MVC: Design Patterns Brown-Bag Series</title>
     <link>http://javadude.com/articles/patterns/index.html#s3</link>
     <description>MVC Talk (A series of brown-bag talks I'm giving at the Johns Hopkins Applies Physics Lab on Design Patterns)</description>
   </item>
   <item>
     <guid>http://javadude.com/articles/patterns/index.html#s2</guid>
-    <title>Design Patterns Brown-Bag Series</title>
+    <title>Observer: Design Patterns Brown-Bag Series</title>
     <link>http://javadude.com/articles/patterns/index.html#s2</link>
     <description>Observer Talk (A series of brown-bag talks I'm giving at the Johns Hopkins Applies Physics Lab on Design Patterns)</description>
   </item>
   <item>
     <guid>http://javadude.com/articles/patterns/index.html#1</guid>
-    <title>Design Patterns Brown-Bag Series</title>
+    <title>Introduction/Mediator: Design Patterns Brown-Bag Series</title>
     <link>http://javadude.com/articles/patterns/index.html#1</link>
     <description>Introduction/Mediator (A series of brown-bag talks I'm giving at the Johns Hopkins Applies Physics Lab on Design Patterns)</description>
   </item>
