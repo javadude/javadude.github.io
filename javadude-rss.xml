@@ -19,21 +19,21 @@
   <atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="self" type="application/rss+xml" href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield" />
   <feedburner:info xmlns:feedburner="http://rssnamespace.org/feedburner/ext/1.0" uri="javadudecom-scottstanchfield" />
   <item>
-    <guid>http://javadude.com/articles/patterns/index.html#4</guid>
+    <guid>http://javadude.com/articles/patterns/index.html#s4</guid>
     <title>Design Patterns Brown-Bag Series</title>
-    <link>http://javadude.com/articles/patterns/index.html#4</link>
+    <link>http://javadude.com/articles/patterns/index.html#s4</link>
     <description>Command Pattern Talk (A series of brown-bag talks I'm giving at the Johns Hopkins Applies Physics Lab on Design Patterns)</description>
   </item>
   <item>
-    <guid>http://javadude.com/articles/patterns/index.html#3</guid>
+    <guid>http://javadude.com/articles/patterns/index.html#s3</guid>
     <title>Design Patterns Brown-Bag Series</title>
-    <link>http://javadude.com/articles/patterns/index.html#3</link>
+    <link>http://javadude.com/articles/patterns/index.html#s3</link>
     <description>MVC Talk (A series of brown-bag talks I'm giving at the Johns Hopkins Applies Physics Lab on Design Patterns)</description>
   </item>
   <item>
-    <guid>http://javadude.com/articles/patterns/index.html#2</guid>
+    <guid>http://javadude.com/articles/patterns/index.html#s2</guid>
     <title>Design Patterns Brown-Bag Series</title>
-    <link>http://javadude.com/articles/patterns/index.html#2</link>
+    <link>http://javadude.com/articles/patterns/index.html#s2</link>
     <description>Observer Talk (A series of brown-bag talks I'm giving at the Johns Hopkins Applies Physics Lab on Design Patterns)</description>
   </item>
   <item>
