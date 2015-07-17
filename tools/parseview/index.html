@@ -1,14 +1,14 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
 
-
-<!-- #BeginTemplate "../../master.dwt" -->
-
+
+<!-- #BeginTemplate "../../master.dwt" -->
+
 	<head>
 		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 		<!-- #BeginEditable "doctitle" -->
 
-		<title>ParseView - Scott Stanchfield</title>
+		<title>ParseView - Scott Stanchfield</title>
 		<!-- #EndEditable -->
 		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
 		<!-- #BeginEditable "head" -->
@@ -31,360 +31,360 @@
 			<div id="contentIndent">
 				<!-- #BeginEditable "content" -->
 
-<h1>ParseView</h1>
-<h3>Visual Debugging for ANTLR 2.x</h3>
-<p><a href="#Operating Instructions">Operating instructions</a> are at the end
-of this page<a href="http://dmoz.org"><img alt="cool" src="images/cool1.gif" style="float:right" width="140" height="45"/></a></p>
-<h2><b>Status</b></h2>
-<p><b>Update 6/17/99.</b></p>
-<ul>
-    <li><b><a href="parseview1.2.zip">ParseView 1.2</a></b> released!
-        This source-only release will <i>only</i> work with
-        <ul>
-            <li>ANTLR 2.6.0 and later</li>
-            <li>JDK 1.1.x <i>or</i> Java 2</li>
-            <li>Swing with package names starting with <code>javax.swing</code>
-                <ul>
-                    <li>Included in Java2, or</li>
-                    <li>Swing 1.1 or later from <a href="http://java.sun.com/products/jfc">http://java.sun.com/products/jfc</a></li>
-                </ul>
-            </li>
-        </ul>
-    </li>
-    <li>You need to compile the distributed files in <a href="parseview1.2.zip">parseview1.2.zip</a>
-        and place them in your CLASSPATH. Then follow the <a href="#Operating Instructions">operating
-        instructions</a> at the end of this page.</li>
-</ul>
-<p><b>Update 1/22/99.</b></p>
-<ul>
-    <li><b>You can now download ParseView from this link: <a href="ParseView.zip">ParseView.zip</a>.
-        </b>(People had trouble finding it at <a href="http://www.antlr.org">http://www.antlr.org</a>.)</li>
-    <li>ParseView will be distributed as an add-on feature.&nbsp; Terence and I
-        decided it would be easier for me to provide updates if I controlled it.</li>
-    <li>This version of ParseView <i>only </i>works with ANTLR 2.5.x and <i>earlier</i></li>
-</ul>
-<p><b>Update 7/17/98.</b></p>
-<ul>
-    <li>I've given a first pass of the tool to Terence.&nbsp; He's checking
-        things out and making sure I didn't break ANTLR.</li>
-    <li>Developed a good debugging model for ANTLR that will make it easy to add
-        any sort of debugger you want (especially ParseView).&nbsp; The API for
-        this will eventually be documented so people can add their own
-        debuggers, simple (like just &quot;println&quot;s) or complex, like
-        ParseView.</li>
-    <li>ParseView will be a <em>free</em> part of the real ANTLR
-        distribution.&nbsp; Terence and I realized it would just be too much
-        work to try to really have this be supported the way a &quot;pay&quot;
-        tool should be.&nbsp; We just don't have that much time.&nbsp; Instead,
-        we're releasing it <em>with source</em> so others can add to it.</li>
-    <li>The source will be included with the distribution.&nbsp; Please <em><strong>refrain</strong></em>
-        from making changes just yet -- I'd like to add a few more things, like
-        breakpoints and some AST stuff before people start sending in changes to
-        integrate.</li>
-</ul>
-<p>Stay tuned to <a href="news:comp.compilers.tools.pccts">comp.compilers.tools.pccts</a>
-for more release information!</p>
-<p>Send mail to <a href="mailto:scott@javadude.com">Scott Stanchfield</a> with
-any comments, suggestions, ideas or recipes!</p>
-<p>-- Scott</p>
-<hr/>
-<h2><a name="Current State of the Tool">Current State of the Tool</a></h2>
-<p><img src="images/pv1.jpg" alt="pv1.jpg (55011 bytes)" width="593" height="437"/></p>
-<p>The tool currently supports the following features.</p>
-<ul>
-    <li>Parse Tree and Scan Tree
-        <ul>
-            <li>Rules entered</li>
-            <li>Tokens matched</li>
-            <li>Semantic Predicates
-                <ul>
-                    <li>result of the predicate evaluation</li>
-                    <li>predicting or validating</li>
-                </ul>
-            </li>
-            <li>Syntactic Predicates
-            <ul>
-                <li>when they are started</li>
-                <li>when they finish</li>
-                <li>if they failed or succeeded (color coded red or green)</li>
-                <li>Rules and tokens inside a guess are displayed with a yellow
-                    background</li>
-            </ul>
-            </li>
-            <li>Status of parse (what was matched when parser paused, line
-                numbers while parse is running)</li>
-        </ul>
-    </li>
-</ul>
-<ul>
-    <li>Controller
-        <ul>
-            <li><strong>Note:</strong> The controller currently <em>only </em>controls
-                the Parse Tree -- you cannot step using through the scan tree
-                yet.&nbsp; Sorry -- I just ran out of time...</li>
-            <li>Step to next rule entry</li>
-            <li>Step to exit of current rule</li>
-            <li>Step to next matched token</li>
-            <li>Step to next semantic predicate evaluation</li>
-            <li>Step to start/end of next syntactic predicate</li>
-            <li>Step to any of the above</li>
-            <li>Continue parse until any of the buttons are pressed</li>
-            <li>Stop the program (System.exit(0) called)</li>
-            <li>Find text in the Parse Tree (again -- not implemented for Scan
-                Tree yet)</li>
-        </ul>
-    </li>
-</ul>
-<ul>
-    <li>Character &quot;ticker&quot;
-        <ul>
-            <li>Shows consumed characters during scan at top of screen.</li>
-        </ul>
-    </li>
-</ul>
-<ul>
-    <li>VisualAge for Java Debugging Hooks
-        <ul>
-            <li>Start VisualAge for Java debugger at current position</li>
-            <li>Inspect current parser instance</li>
-        </ul>
-    </li>
-</ul>
-<hr/>
-<h2>Known Problems</h2>
-<ul>
-    <li>Swing JTree
-        <ul>
-            <li>Apparently has a limit on how many rows it will display
-                <ul>
-                    <li>I'm hoping this is a bug that Sun will fix, otherwise
-                        I'll need to go back to my own treeview again</li>
-                </ul>
-            </li>
-            <li>Sometimes doesn't properly scrollPathToVisible() -- when you
-                pause the parse you may need to adjust the scrollbars to see the
-                newest edition to the Parse or Scan trees</li>
-        </ul>
-    </li>
-    <li>&quot;Finish&quot; and &quot;Continue&quot; do pretty much the same
-        thing - I'll probably remove the &quot;Finish&quot; button</li>
-</ul>
-<hr/>
-<h2>Planned Features</h2>
-<ul>
-    <li>Socket-proxy for debugging interface
-        <ul>
-            <li>Provide a proxy listener that can gather parser events and send
-                them across a socket</li>
-            <li>Provide a debugger &quot;server&quot; that listens to a socket,
-                creates the new debugging events and sends them to real
-                listeners (like ParseView.)</li>
-            <li>This will allow
-                <ul>
-                    <li>Remote debugging</li>
-                    <li>Debugging from non-Java parsers (ie C++) w/o JNI (they
-                        can access ParseView)</li>
-                </ul>
-            </li>
-        </ul>
-    </li>
-    <li>Token ticker
-        <ul>
-            <li>Like the character ticker, but with tokens</li>
-        </ul>
-    </li>
-    <li>Breakpoints
-        <ul>
-            <li>Rule, token match, syntax error</li>
-            <li>In context -- for example, &quot;break in <tt>expression</tt> in
-                <tt>ifStatement</tt>&quot;</li>
-            <li>Source line number</li>
-            <li>Source text</li>
-            <li>Before/After manipulating an AST</li>
-            <li>On a failed/succeeded predicate</li>
-        </ul>
-    </li>
-</ul>
-<ul>
-    <li>Scanned-text view</li>
-    <li>Documentation on ANTLR 2.0 debugging API</li>
-    <li>Add a Swing toolbar for the controller buttons</li>
-</ul>
-<ul>
-    <li>Filter tree contents
-        <ul>
-            <li>&quot;show only x, y and z&quot; -- everything else is grouped
-                into larger &quot;ignore&quot; boxes in the tree that can be
-                expanded if needed.</li>
-        </ul>
-    </li>
-    <li>Scanned-text &quot;relief-map&quot; view
-        <ul>
-            <li>Really cool way to see how the source text is recognized by the
-                parser/scanner</li>
-            <li>Each rule entered adds a tier to the current &quot;hill&quot;;
-                rule exit closes current tier</li>
-            <li>Source file will be laid out as closely as possible to original
-                input as read</li>
-            <li>Shows all text that has been scanned to current breakpoint</li>
-            <li>Each top-level box represents a terminal in the grammar -- the
-                text is the text read from the source file
-                <ul>
-                    <li>white space is skipped in the view -- might add an
-                        option to display it</li>
-                </ul>
-            </li>
-            <li>ToolTips or some other mechanism will display the parse rule
-                relating to a box at any given level</li>
-            <li>Interaction between parse tree and scanned text view
-                <ul>
-                    <li>clicking on a box in the scanned text view will select
-                        the corresponding node in the parse tree</li>
-                    <li>vice-versa ('cause I'm too lazy to type the rest)</li>
-                </ul>
-            </li>
-            <li>Initial mock up -- I'll do a better mock up another time...
-                <p><img src="images/st.gif" alt="Scanned Text Panel" width="489" height="439"/></p></li>
-        </ul>
-    </li>
-</ul>
-<ul>
-    <li>AST Support
-        <ul>
-            <li>In standard tree view and graphical depiction(s)</li>
-            <li>Save current tree in a serialized form</li>
-            <li>Comparison against a serialized tree</li>
-            <li>Track accidentally lost subtrees where possible</li>
-            <li>Display ASTs before and after modification</li>
-            <li>Breakpoint settings will be added to help step through AST
-                construction</li>
-            <li>All built-in AST manipulations are tracked and reported
-                <ul>
-                    <li>Current AST states shown at all breakpoints for all ASTs
-                        available in rule</li>
-                    <li>AST manipulations in action code -- investigating ways
-                        of tracking these with minimal impact</li>
-                </ul>
-            </li>
-            <li>May add a thumbnail view with fisheye lens -- depends how daring
-                I feel the night I code it</li>
-            <li>Note: These pictures are just rough mockups to give you an idea
-                of what I'm thinking of...<img src="images/ast1.gif" alt="AST View 1" style="vertical-align:middle" width="310" height="222"/>&nbsp;&nbsp;
-                <img src="images/ast2.gif" alt="AST View 2" style="vertical-align:middle" width="330" height="291"/></li>
-        </ul>
-    </li>
-    <li>Static Grammar Analysis
-        <ul>
-            <li>first &amp; follow sets</li>
-            <li>conflict displays</li>
-            <li>derivation trees</li>
-            <li>prediction expressions</li>
-            <li>syntax (&quot;railroad&quot;) diagrams for grammar (if I feel
-                like it ;)</li>
-            <li>Available as an ANTLR option, run immediately after ANTLR
-                parsing completes</li>
-            <li>Will assist conflict resolution
-                <ul>
-                    <li>provide examples of conflicts using grammar vocabulary</li>
-                    <li>show trees with conflicts</li>
-                </ul>
-            </li>
-        </ul>
-    </li>
-    <li>Grammar Coverage Analysis
-        <ul>
-            <li>Display which rules were used during the parse</li>
-            <li>Keep track of cumulative usage across runs in an external file</li>
-            <li>Keep track of predicate usage to help balance cost of predicates</li>
-            <li>Keep track of grammar exception usage</li>
-            <li>Read Java profiling report and show overall usage information
-                <ul>
-                    <li>Grammar method usage</li>
-                    <li>Non-Grammar method usage</li>
-                    <li>Debugging methods filtered</li>
-                </ul>
-            </li>
-        </ul>
-    </li>
-</ul>
-<hr/>
-<h2><a name="Operating Instructions">Operating Instructions</a></h2>
-<p>These are brief for now; I'll add more later</p>
-<h3>Building a Parser for Debugging</h3>
-<p>Run ANTLR as you normally would, but add &quot;-debug&quot; to your command
-line.&nbsp;&nbsp; For example:</p>
-<pre>java antlr.Tool -debug java.g</pre>
-<h3>What you'll need to run ParseView</h3>
-<ul>
-    <li>You need the ANTLR distribution that contains ParseView</li>
-    <li>You need Swing 1.0.2 (see <a href="http://java.sun.com/products/jfc">http://java.sun.com/products/jfc</a>)</li>
-    <li>Your code needs to have a System.exit(0) call at its end.&nbsp; Simply
-        returning from main will not stop the program,&nbsp; as ParseView starts
-        an AWT thread which must be killed...</li>
-    <li>ParseView only works with programs that use <strong><em>both</em></strong>
-        ANTLR-generated scanners <em>and</em> parsers.&nbsp; If you use a custom
-        parser or scanner, ParseView probably won't work.&nbsp; I'll be writing
-        some adapters to make this easy to do, using the debugger interface.</li>
-</ul>
-<p>Other than that, run your parser normally.&nbsp; A ParseView window will
-appear.</p>
-<h3>The ParseView Window</h3>
-<p><img src="images/pv1.jpg" alt="pv1.jpg (55011 bytes)" width="593" height="437"/></p>
-<p>The ParseView window contains the following:</p>
-<ul>
-    <li>At the top, a line containing the consumed characters.&nbsp; This will
-        eventually also tell you lookahead characters hile moving through the
-        scan tree</li>
-    <li>The main part of the display is the Parse and Scan tree area.&nbsp;
-        (This is in a JTabbedPane because there will be a breakpoint, scanned
-        text,&nbsp; and AST view pane later)
-        <ul>
-            <li>The Parse and Scan tree views show the entered rules and all
-                tokens/characters matched in those rules</li>
-            <li>Any rules entered while in &quot;guess mode&quot; via a
-                syntactic predicate will have a yellow background</li>
-            <li>Characters that are skipped in the scan are colored gray</li>
-            <li>At each stop point, the status line will say which event has
-                happened (like a token being matched or a rule being entered or
-                exited.)</li>
-            <li>While the parse is running, the status line under the scan tree
-                will display the current line number in the source file.&nbsp; <strong>Note:</strong>
-                This will only work properly if your scanner calls newline()
-                anytime a newline sequence is detected.&nbsp; Newline sequences
-                should be &quot;\n&quot;, &quot;\r&quot; or &quot;\r\n&quot;</li>
-        </ul>
-    </li>
-    <li>The column of buttons (which will eventually be a toolbar) is the
-        controller.&nbsp; The buttons do the following:
-        <ul>
-            <li>Parser Rule - continue parse until the next time a parser rule
-                method has been entered</li>
-            <li>Parser End Rule - continue parser until the <em>current rule</em>
-                has been ended</li>
-            <li>Token - continue parse until a token has been matched</li>
-            <li>Parser Sem Pred - continue parse until a semantic predicate is
-                evaluated</li>
-            <li>Parser Guess - continue parse unti a syntactic predicate starts
-                or finishes</li>
-            <li>Finish - continue parse <em>without watching for breakpoints</em>.&nbsp;
-                Currently, this does the same as the &quot;Continue&quot;
-                button.</li>
-            <li>Any - continue parse until any of the above things are matched</li>
-            <li>Continue - continue parse until the next breakpoint or step
-                button event occurs button</li>
-            <li>Find - locate text in the parse tree -- this will pop up a
-                dialog asking for text and whether you want to start at the top
-                or find the next occurrence</li>
-            <li>VAJ Debug - halt the parser and enter the VisualAge for Java
-                debugger.&nbsp; This will only appear if you are running in
-                VisualAge for Java.</li>
-            <li>Inspect - bring up the VisualAge for Java variable inspector for
-                the Parser.&nbsp; This will only appear if you are running in
-                VisualAge for Java</li>
-            <li>System.exit() -- calls System.exit(0) to stop the parser</li>
-        </ul>
-    </li>
-</ul>
+<h1>ParseView</h1>
+<h3>Visual Debugging for ANTLR 2.x</h3>
+<p><a href="#Operating Instructions">Operating instructions</a> are at the end
+of this page<a href="http://dmoz.org"><img alt="cool" src="images/cool1.gif" style="float:right" width="140" height="45"/></a></p>
+<h2><b>Status</b></h2>
+<p><b>Update 6/17/99.</b></p>
+<ul>
+    <li><b><a href="parseview1.2.zip">ParseView 1.2</a></b> released!
+        This source-only release will <i>only</i> work with
+        <ul>
+            <li>ANTLR 2.6.0 and later</li>
+            <li>JDK 1.1.x <i>or</i> Java 2</li>
+            <li>Swing with package names starting with <code>javax.swing</code>
+                <ul>
+                    <li>Included in Java2, or</li>
+                    <li>Swing 1.1 or later from <a href="http://java.sun.com/products/jfc">http://java.sun.com/products/jfc</a></li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>You need to compile the distributed files in <a href="parseview1.2.zip">parseview1.2.zip</a>
+        and place them in your CLASSPATH. Then follow the <a href="#Operating Instructions">operating
+        instructions</a> at the end of this page.</li>
+</ul>
+<p><b>Update 1/22/99.</b></p>
+<ul>
+    <li><b>You can now download ParseView from this link: <a href="ParseView.zip">ParseView.zip</a>.
+        </b>(People had trouble finding it at <a href="http://www.antlr.org">http://www.antlr.org</a>.)</li>
+    <li>ParseView will be distributed as an add-on feature.&nbsp; Terence and I
+        decided it would be easier for me to provide updates if I controlled it.</li>
+    <li>This version of ParseView <i>only </i>works with ANTLR 2.5.x and <i>earlier</i></li>
+</ul>
+<p><b>Update 7/17/98.</b></p>
+<ul>
+    <li>I've given a first pass of the tool to Terence.&nbsp; He's checking
+        things out and making sure I didn't break ANTLR.</li>
+    <li>Developed a good debugging model for ANTLR that will make it easy to add
+        any sort of debugger you want (especially ParseView).&nbsp; The API for
+        this will eventually be documented so people can add their own
+        debuggers, simple (like just &quot;println&quot;s) or complex, like
+        ParseView.</li>
+    <li>ParseView will be a <em>free</em> part of the real ANTLR
+        distribution.&nbsp; Terence and I realized it would just be too much
+        work to try to really have this be supported the way a &quot;pay&quot;
+        tool should be.&nbsp; We just don't have that much time.&nbsp; Instead,
+        we're releasing it <em>with source</em> so others can add to it.</li>
+    <li>The source will be included with the distribution.&nbsp; Please <em><strong>refrain</strong></em>
+        from making changes just yet -- I'd like to add a few more things, like
+        breakpoints and some AST stuff before people start sending in changes to
+        integrate.</li>
+</ul>
+<p>Stay tuned to <a href="news:comp.compilers.tools.pccts">comp.compilers.tools.pccts</a>
+for more release information!</p>
+<p>Send mail to <a href="mailto:scott@javadude.com">Scott Stanchfield</a> with
+any comments, suggestions, ideas or recipes!</p>
+<p>-- Scott</p>
+<hr/>
+<h2><a name="Current State of the Tool">Current State of the Tool</a></h2>
+<p><img src="images/pv1.jpg" alt="pv1.jpg (55011 bytes)" width="593" height="437"/></p>
+<p>The tool currently supports the following features.</p>
+<ul>
+    <li>Parse Tree and Scan Tree
+        <ul>
+            <li>Rules entered</li>
+            <li>Tokens matched</li>
+            <li>Semantic Predicates
+                <ul>
+                    <li>result of the predicate evaluation</li>
+                    <li>predicting or validating</li>
+                </ul>
+            </li>
+            <li>Syntactic Predicates
+            <ul>
+                <li>when they are started</li>
+                <li>when they finish</li>
+                <li>if they failed or succeeded (color coded red or green)</li>
+                <li>Rules and tokens inside a guess are displayed with a yellow
+                    background</li>
+            </ul>
+            </li>
+            <li>Status of parse (what was matched when parser paused, line
+                numbers while parse is running)</li>
+        </ul>
+    </li>
+</ul>
+<ul>
+    <li>Controller
+        <ul>
+            <li><strong>Note:</strong> The controller currently <em>only </em>controls
+                the Parse Tree -- you cannot step using through the scan tree
+                yet.&nbsp; Sorry -- I just ran out of time...</li>
+            <li>Step to next rule entry</li>
+            <li>Step to exit of current rule</li>
+            <li>Step to next matched token</li>
+            <li>Step to next semantic predicate evaluation</li>
+            <li>Step to start/end of next syntactic predicate</li>
+            <li>Step to any of the above</li>
+            <li>Continue parse until any of the buttons are pressed</li>
+            <li>Stop the program (System.exit(0) called)</li>
+            <li>Find text in the Parse Tree (again -- not implemented for Scan
+                Tree yet)</li>
+        </ul>
+    </li>
+</ul>
+<ul>
+    <li>Character &quot;ticker&quot;
+        <ul>
+            <li>Shows consumed characters during scan at top of screen.</li>
+        </ul>
+    </li>
+</ul>
+<ul>
+    <li>VisualAge for Java Debugging Hooks
+        <ul>
+            <li>Start VisualAge for Java debugger at current position</li>
+            <li>Inspect current parser instance</li>
+        </ul>
+    </li>
+</ul>
+<hr/>
+<h2>Known Problems</h2>
+<ul>
+    <li>Swing JTree
+        <ul>
+            <li>Apparently has a limit on how many rows it will display
+                <ul>
+                    <li>I'm hoping this is a bug that Sun will fix, otherwise
+                        I'll need to go back to my own treeview again</li>
+                </ul>
+            </li>
+            <li>Sometimes doesn't properly scrollPathToVisible() -- when you
+                pause the parse you may need to adjust the scrollbars to see the
+                newest edition to the Parse or Scan trees</li>
+        </ul>
+    </li>
+    <li>&quot;Finish&quot; and &quot;Continue&quot; do pretty much the same
+        thing - I'll probably remove the &quot;Finish&quot; button</li>
+</ul>
+<hr/>
+<h2>Planned Features</h2>
+<ul>
+    <li>Socket-proxy for debugging interface
+        <ul>
+            <li>Provide a proxy listener that can gather parser events and send
+                them across a socket</li>
+            <li>Provide a debugger &quot;server&quot; that listens to a socket,
+                creates the new debugging events and sends them to real
+                listeners (like ParseView.)</li>
+            <li>This will allow
+                <ul>
+                    <li>Remote debugging</li>
+                    <li>Debugging from non-Java parsers (ie C++) w/o JNI (they
+                        can access ParseView)</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>Token ticker
+        <ul>
+            <li>Like the character ticker, but with tokens</li>
+        </ul>
+    </li>
+    <li>Breakpoints
+        <ul>
+            <li>Rule, token match, syntax error</li>
+            <li>In context -- for example, &quot;break in <tt>expression</tt> in
+                <tt>ifStatement</tt>&quot;</li>
+            <li>Source line number</li>
+            <li>Source text</li>
+            <li>Before/After manipulating an AST</li>
+            <li>On a failed/succeeded predicate</li>
+        </ul>
+    </li>
+</ul>
+<ul>
+    <li>Scanned-text view</li>
+    <li>Documentation on ANTLR 2.0 debugging API</li>
+    <li>Add a Swing toolbar for the controller buttons</li>
+</ul>
+<ul>
+    <li>Filter tree contents
+        <ul>
+            <li>&quot;show only x, y and z&quot; -- everything else is grouped
+                into larger &quot;ignore&quot; boxes in the tree that can be
+                expanded if needed.</li>
+        </ul>
+    </li>
+    <li>Scanned-text &quot;relief-map&quot; view
+        <ul>
+            <li>Really cool way to see how the source text is recognized by the
+                parser/scanner</li>
+            <li>Each rule entered adds a tier to the current &quot;hill&quot;;
+                rule exit closes current tier</li>
+            <li>Source file will be laid out as closely as possible to original
+                input as read</li>
+            <li>Shows all text that has been scanned to current breakpoint</li>
+            <li>Each top-level box represents a terminal in the grammar -- the
+                text is the text read from the source file
+                <ul>
+                    <li>white space is skipped in the view -- might add an
+                        option to display it</li>
+                </ul>
+            </li>
+            <li>ToolTips or some other mechanism will display the parse rule
+                relating to a box at any given level</li>
+            <li>Interaction between parse tree and scanned text view
+                <ul>
+                    <li>clicking on a box in the scanned text view will select
+                        the corresponding node in the parse tree</li>
+                    <li>vice-versa ('cause I'm too lazy to type the rest)</li>
+                </ul>
+            </li>
+            <li>Initial mock up -- I'll do a better mock up another time...
+                <p><img src="images/st.gif" alt="Scanned Text Panel" width="489" height="439"/></p></li>
+        </ul>
+    </li>
+</ul>
+<ul>
+    <li>AST Support
+        <ul>
+            <li>In standard tree view and graphical depiction(s)</li>
+            <li>Save current tree in a serialized form</li>
+            <li>Comparison against a serialized tree</li>
+            <li>Track accidentally lost subtrees where possible</li>
+            <li>Display ASTs before and after modification</li>
+            <li>Breakpoint settings will be added to help step through AST
+                construction</li>
+            <li>All built-in AST manipulations are tracked and reported
+                <ul>
+                    <li>Current AST states shown at all breakpoints for all ASTs
+                        available in rule</li>
+                    <li>AST manipulations in action code -- investigating ways
+                        of tracking these with minimal impact</li>
+                </ul>
+            </li>
+            <li>May add a thumbnail view with fisheye lens -- depends how daring
+                I feel the night I code it</li>
+            <li>Note: These pictures are just rough mockups to give you an idea
+                of what I'm thinking of...<img src="images/ast1.gif" alt="AST View 1" style="vertical-align:middle" width="310" height="222"/>&nbsp;&nbsp;
+                <img src="images/ast2.gif" alt="AST View 2" style="vertical-align:middle" width="330" height="291"/></li>
+        </ul>
+    </li>
+    <li>Static Grammar Analysis
+        <ul>
+            <li>first &amp; follow sets</li>
+            <li>conflict displays</li>
+            <li>derivation trees</li>
+            <li>prediction expressions</li>
+            <li>syntax (&quot;railroad&quot;) diagrams for grammar (if I feel
+                like it ;)</li>
+            <li>Available as an ANTLR option, run immediately after ANTLR
+                parsing completes</li>
+            <li>Will assist conflict resolution
+                <ul>
+                    <li>provide examples of conflicts using grammar vocabulary</li>
+                    <li>show trees with conflicts</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>Grammar Coverage Analysis
+        <ul>
+            <li>Display which rules were used during the parse</li>
+            <li>Keep track of cumulative usage across runs in an external file</li>
+            <li>Keep track of predicate usage to help balance cost of predicates</li>
+            <li>Keep track of grammar exception usage</li>
+            <li>Read Java profiling report and show overall usage information
+                <ul>
+                    <li>Grammar method usage</li>
+                    <li>Non-Grammar method usage</li>
+                    <li>Debugging methods filtered</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+<hr/>
+<h2><a name="Operating Instructions">Operating Instructions</a></h2>
+<p>These are brief for now; I'll add more later</p>
+<h3>Building a Parser for Debugging</h3>
+<p>Run ANTLR as you normally would, but add &quot;-debug&quot; to your command
+line.&nbsp;&nbsp; For example:</p>
+<pre>java antlr.Tool -debug java.g</pre>
+<h3>What you'll need to run ParseView</h3>
+<ul>
+    <li>You need the ANTLR distribution that contains ParseView</li>
+    <li>You need Swing 1.0.2 (see <a href="http://java.sun.com/products/jfc">http://java.sun.com/products/jfc</a>)</li>
+    <li>Your code needs to have a System.exit(0) call at its end.&nbsp; Simply
+        returning from main will not stop the program,&nbsp; as ParseView starts
+        an AWT thread which must be killed...</li>
+    <li>ParseView only works with programs that use <strong><em>both</em></strong>
+        ANTLR-generated scanners <em>and</em> parsers.&nbsp; If you use a custom
+        parser or scanner, ParseView probably won't work.&nbsp; I'll be writing
+        some adapters to make this easy to do, using the debugger interface.</li>
+</ul>
+<p>Other than that, run your parser normally.&nbsp; A ParseView window will
+appear.</p>
+<h3>The ParseView Window</h3>
+<p><img src="images/pv1.jpg" alt="pv1.jpg (55011 bytes)" width="593" height="437"/></p>
+<p>The ParseView window contains the following:</p>
+<ul>
+    <li>At the top, a line containing the consumed characters.&nbsp; This will
+        eventually also tell you lookahead characters hile moving through the
+        scan tree</li>
+    <li>The main part of the display is the Parse and Scan tree area.&nbsp;
+        (This is in a JTabbedPane because there will be a breakpoint, scanned
+        text,&nbsp; and AST view pane later)
+        <ul>
+            <li>The Parse and Scan tree views show the entered rules and all
+                tokens/characters matched in those rules</li>
+            <li>Any rules entered while in &quot;guess mode&quot; via a
+                syntactic predicate will have a yellow background</li>
+            <li>Characters that are skipped in the scan are colored gray</li>
+            <li>At each stop point, the status line will say which event has
+                happened (like a token being matched or a rule being entered or
+                exited.)</li>
+            <li>While the parse is running, the status line under the scan tree
+                will display the current line number in the source file.&nbsp; <strong>Note:</strong>
+                This will only work properly if your scanner calls newline()
+                anytime a newline sequence is detected.&nbsp; Newline sequences
+                should be &quot;\n&quot;, &quot;\r&quot; or &quot;\r\n&quot;</li>
+        </ul>
+    </li>
+    <li>The column of buttons (which will eventually be a toolbar) is the
+        controller.&nbsp; The buttons do the following:
+        <ul>
+            <li>Parser Rule - continue parse until the next time a parser rule
+                method has been entered</li>
+            <li>Parser End Rule - continue parser until the <em>current rule</em>
+                has been ended</li>
+            <li>Token - continue parse until a token has been matched</li>
+            <li>Parser Sem Pred - continue parse until a semantic predicate is
+                evaluated</li>
+            <li>Parser Guess - continue parse unti a syntactic predicate starts
+                or finishes</li>
+            <li>Finish - continue parse <em>without watching for breakpoints</em>.&nbsp;
+                Currently, this does the same as the &quot;Continue&quot;
+                button.</li>
+            <li>Any - continue parse until any of the above things are matched</li>
+            <li>Continue - continue parse until the next breakpoint or step
+                button event occurs button</li>
+            <li>Find - locate text in the parse tree -- this will pop up a
+                dialog asking for text and whether you want to start at the top
+                or find the next occurrence</li>
+            <li>VAJ Debug - halt the parser and enter the VisualAge for Java
+                debugger.&nbsp; This will only appear if you are running in
+                VisualAge for Java.</li>
+            <li>Inspect - bring up the VisualAge for Java variable inspector for
+                the Parser.&nbsp; This will only appear if you are running in
+                VisualAge for Java</li>
+            <li>System.exit() -- calls System.exit(0) to stop the parser</li>
+        </ul>
+    </li>
+</ul>
 				<!-- #EndEditable "content" -->
 				<div id="footer">
 					<p>&nbsp;</p>

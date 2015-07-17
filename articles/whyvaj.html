@@ -1,14 +1,14 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
 
-
-<!-- #BeginTemplate "../master.dwt" -->
-
+
+<!-- #BeginTemplate "../master.dwt" -->
+
 	<head>
 		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 		<!-- #BeginEditable "doctitle" -->
 
-		<title>Why VisualAge for Java - Scott Stanchfield</title>
+		<title>Why VisualAge for Java - Scott Stanchfield</title>
 		<!-- #EndEditable -->
 		<link href="../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
 		<!-- #BeginEditable "head" -->
@@ -31,223 +31,223 @@
 			<div id="contentIndent">
 				<!-- #BeginEditable "content" -->
 
-<h1>Why VisualAge for Java</h1>
-<h2>Introduction</h2>
-<p>So IBM has come out with yet another Integrated Development Environment for
-Java.&nbsp;&nbsp; What's the big deal, you say?&nbsp; It's not only a great set
-of tools for developing Java applications, it's an entirely different way of <em>thinking</em>
-about Java.</p>
-<h2>What is an Integrated Development Environment?</h2>
-<p>An Integrated Development Environment (IDE for short) is a collection of
-tools that allow you to do many common development tasks with a common
-interface.&nbsp; Most program development tasks involve</p>
-<ul>
-    <li>editing source code</li>
-    <li>compiling source code to create executable applications</li>
-    <li>executing applications</li>
-    <li>debugging applications.</li>
-</ul>
-<p>Before the arrival of IDEs, you would go to your favorite editor (vi, emacs,
-notepad) and create a file containing your source code.&nbsp; After finishing
-your edits, you would open up a console window and type some obscure compile
-command.&nbsp; If you get compilation errors, you would look at the line number
-mentioned in the message, switch back to your editor, find the line and correct
-the error.&nbsp; When you finally succeed in your compilation attempts, you go
-back to your console window and type a command to execute your
-application.&nbsp; If available, you might use a debugger to walk through
-execution of your application.</p>
-<p>The problem was that each of the tools in this process has a different
-interface.&nbsp;&nbsp; To develop your application, you would need to</p>
-<ul>
-    <li>learn how to use your editor</li>
-    <li>learn how to use your debugger</li>
-    <li>learn all the command-line options to the compiler</li>
-    <li>buy a voice-recognition program because all the typing gave you
-        tendonitis.</li>
-</ul>
-<p>IDEs tied all these tools together in one nice package with a common
-interface.&nbsp;&nbsp; Tasks like browsing source code would be performed in
-exactly the same way whether you were editing code or debugging it.&nbsp;
-Command-line parameters were replaced by graphical interfaces to select
-options.&nbsp; One key press or mouse click could save, compile and execute your
-application.</p>
-<h2>Ok, IDEs are Cool, but I've Already Got One...</h2>
-<p>The current breed of IDEs all have one thing in common: they are <em>file-based</em>.
-All development is assumed to take place by editing an artificial structure
-known as a file.&nbsp; Files have absolutely no relation to any programming
-construct.&nbsp; So why do we have them?&nbsp; They simply provide a container
-in which to store your source code.&nbsp;&nbsp; A more natural way to edit
-source code would be based on the programming language constructs
-themselves.&nbsp;</p>
-<p>Files are what every programmer has learned to use; it's a <em>paradigm</em>
-(&quot;That's just the way things are done!&nbsp; Period!&quot;) that can be <em>very</em>
-difficult to set aside.&nbsp; Simply because everyone is used to using files for
-development, all tools use them as the base of any programming project.&nbsp;
-This causes several problems:</p>
-<ul>
-    <li>the relationship between the language constructs and the files
-        containing them is unclear, and often meaningless</li>
-    <li>extra data can hide in a file (for example, multiple classes could be
-        defined in a single file)</li>
-    <li>determining relationships between language constructs is more difficult:
-        you must parse all files to find all the relationships, and this can be
-        painfully slow</li>
-    <li>placement of files in certain directories sometimes works it way into
-        the language definition.&nbsp; (For example, Java forces files
-        containing classes that belong to a certain package to reside in a
-        directory named after that package.)</li>
-    <li>relationships between language constructs stored in different files must
-        be maintained or specified by the user (using makefile, for example)</li>
-</ul>
-<p>By rethinking the concept of <em>what</em> you edit to create a program, many
-development tasks become significantly easier.&nbsp; VisualAge for Java provides
-just this sort of <em>paradigm shift</em> (&quot;teaching an old dog a new way
-to do an old trick&quot;).</p>
-<h2>A Repository</h2>
-<p>Instead of storing Java language constructs in a file, VisualAge stores them
-in a database call the <em>repository</em>.&nbsp; The repository stores
-information about</p>
-<ul>
-    <li>Projects (an artificial construct that allows convenient grouping for a
-        set of packages, classes and interfaces during development)</li>
-    <li>Packages</li>
-    <li>Classes</li>
-    <li>Interfaces</li>
-    <li>Methods</li>
-    <li>Variables</li>
-    <li>Visual Design</li>
-    <li>Runtime parameters</li>
-    <li>Compilation Options</li>
-</ul>
-<p>This has several advantages to a file-based scheme:</p>
-<ul>
-    <li>Relationships between language constructs are stored in the database and
-        can be quickly retrieved:
-        <ul>
-            <li>You can easily find references to or the declaration of any
-                language construct</li>
-            <li>Compilation can be performed incrementally, as the data base
-                allows VisualAge to know exactly what language constructs are
-                affected by an edit</li>
-        </ul>
-    </li>
-    <li>Programmers can concentrate on <em>what</em> they are editing instead of
-        figuring out which file to edit and where the construct in question
-        exists in that file</li>
-    <li>A list of unresolved problems is maintained, like an
-        automatically-generated to-do list</li>
-    <li>Errors in a saved construct (or changes that would cause errors in other
-        constructs) immediately update the &quot;unresolved problems&quot; list,
-        showing where one error affects other constructs</li>
-    <li>Version control information can be saved <em>for methods</em> not just
-        files.&nbsp; This provides a finer granularity of source management than
-        previously available.</li>
-</ul>
-<p>The &quot;trick&quot; is getting used to working directly with language
-constructs...</p>
-<h2>How Does This Make My Life Easier?</h2>
-<p>Once you adjust to programming language constructs such as classes instead of
-files, VisualAge really starts to improve your productivity.</p>
-<p>For example, one thing that you've probably done several times is add a
-parameter to a method.&nbsp; If you're lucky, you'll remember every place where
-that method was called and can go and change the calls to add the method.&nbsp;
-But usually there will be several calls that you forget, and won't catch them
-until you re-compile.&nbsp; Even worse, there may be many applications that you
-don't recompile for quite some time, and by that time you may forget about the
-changed parameter.</p>
-<p>In VisualAge, you add the parameter to the method and save that method.&nbsp;
-VisualAge searches through its database to find all other constructs that depend
-on that method (from other methods that invoke it to classes that implement an
-interface it was defined it) and recompile those constructs.&nbsp; Every
-location that is affected is flagged with a little red &quot;X&quot; to indicate
-a problem, giving you a visual to-do list of changes to be made.&nbsp; (The list
-of all unresolved problems is also available so you can see every problem spot,
-whether it is in your application or not.)</p>
-<p>This is especially effective when adding or changing a constructor
-parameter.&nbsp; If you are using a hierarchy view while editing, all subclasses
-that invoke the superclass constructor are flagged with a red &quot;X&quot;,
-helping to keep track of all the constructor call changes that are necessary.</p>
-<p>Incremental compilation is automatic upon saving a method, class or
-interface.&nbsp;&nbsp; This ensures that you don't forget to compile anything
-affected by a change, and immediately informs you of any problems.</p>
-<p>VisualAge provides automatic version control, making sure you can always go
-back to a working version of your code.&nbsp; VisualAge keeps track of the
-current version every time your save a method, class or interface, and you can
-explicitly checkpoint a method, class/interface, package or entire project with
-a version number/name.&nbsp; You can try a different approach in your code at
-any time by simply telling VisualAge to version your code.&nbsp; If the new
-approach doesn't prove fruitful, you can back out the changes easily.&nbsp;
-(This is especially nice if you only want to back out changes on a few methods,
-but want to keep changes in some other methods -- you can revert to previous
-versions of whichever constructs you desire!)</p>
-<p>These are just a few of the benefits of VisualAge, thanks to its repository.</p>
-<h2>What Features Does VisualAge for Java Provide?</h2>
-<p>Other features in VisualAge for Java make it a top-notch IDE!&nbsp; As you
-might expect, VisualAge for Java provides an editor and debugger, and setting
-breakpoints is as simple as double-clicking the mouse.&nbsp; Errors detected
-during compilation are linked to the source code, so you can jump right to the
-problem and correct it.&nbsp; Compilation error information is kept in the
-repository, and <em>all</em> errors in <em>any</em> source construct can be
-displayed via an &quot;unresolved problems&quot; view.</p>
-<p>VisualAge provides a myriad of ways to view your code.&nbsp; Some of the ways
-you can browse your code:</p>
-<ul>
-    <li>a master view that contains all projects, packages, classes, interfaces
-        and methods in a single tree</li>
-    <li>a view of all code within a project</li>
-    <li>a view of all code within a package</li>
-    <li>a view of all code stored in the repository and each version available</li>
-</ul>
-<p>Many of these views also allow you to view an inheritance hierarchy of your
-code, and even easily override methods just by editing a superclass
-method.&nbsp; (See <a target="_top" href="../vaj/index.html">VisualAge Tips and Tricks</a>
-for a method of doing this.)&nbsp; This is great because you have a choice of
-finding which type of browser is most comfortable for you, rather than forcing
-yourself into a single project-manager browser like most IDEs provide.</p>
-<p>VisualAge for Java provides a GUI-builder called the &quot;Visual Composition
-Editor&quot; (VCE).&nbsp; The VCE goes beyond a traditional GUI builder.&nbsp;
-Where most only allow you to design graphical interfaces, the VCE allows you to
-connect non-visual JavaBeans in the same manner you would connect visual
-JavaBeans.&nbsp; You can now have seamless integration of business-logic code
-and user-interface code, connecting them based on event processing.</p>
-<p>The VCE is the most advanced bean interaction editor I've ever seen.&nbsp;
-One of its major strengths is that when you set up a connection between beans, <em>the
-connection remains visible.</em>&nbsp;&nbsp; Most GUI builders simply generate
-the connection code, leaving you to edit the connection code yourself if you
-want to change it.&nbsp; The VCE keeps all connection information, so you can
-change the source or target of a connection, the parameters to that connection,
-or even change the order of connections from a common source bean.&nbsp; You
-truly can visually maintain your application's event processing.</p>
-<p>VisualAge for Java makes JavaBean development so easy you won't even know
-you're writing beans!&nbsp; JavaBeans aren't terribly complex to start with, but
-the tedium of writing all your BeanInfo classes and writing accessor method
-after accessor method can get tiresome very fast.&nbsp; VisualAge provides tools
-to assist bean development.&nbsp;&nbsp; Composing a bean is as simple as adding
-other beans as subcomponents, selecting which properties of which sub beans will
-be visible in the overall bean, and adding new properties, events and methods
-via the BeanInfo editor.&nbsp; And because the generated code complies with the
-JavaBeans spec, you can use your beans in any JavaBean-enabled development
-environment!</p>
-<h2>Conclusion</h2>
-<p>I've touched on only some of the reasons why VisualAge for Java is the best
-Java development environment available.&nbsp; VisualAge for Java provides all
-the tools you'll need to easily write Java applications, applets and JavaBeans.&nbsp;</p>
-<p>To try it for yourself, surf to 
-<a target="_top" href="http://www.software.ibm.com/ad/vajava">IBM's
-VisualAge for Java Home</a>.&nbsp; You can download a free &quot;Entry
-Level&quot; version, which is exactly the same as the &quot;Professional&quot;
-version with the exception that you can only work on 100 classes at once.&nbsp;
-The professional version is available through several retailers, mail-order and
-internet-order sites.&nbsp; (I recommend surfing to 
-<a target="_top" href="http://www.shopper.com">http://www.shopper.com</a>
-to find the best price.)</p>
-<p>VisualAge for Java 2.0 has just been released!&nbsp; This version provides
-many updates and enhancements to v1.0.</p>
-<p>If you are a subscriber to the 
-<a target="_top" href="http://www.software.ibm.com/vadd">VisualAge
-Developer Domain</a>, you can download the professional version free from that
-site.&nbsp;&nbsp; (NOTE: If you had subscribed to the WebRunner subscription,
-your ID has been transferred to VisualAge Developer Domain!)</p>
+<h1>Why VisualAge for Java</h1>
+<h2>Introduction</h2>
+<p>So IBM has come out with yet another Integrated Development Environment for
+Java.&nbsp;&nbsp; What's the big deal, you say?&nbsp; It's not only a great set
+of tools for developing Java applications, it's an entirely different way of <em>thinking</em>
+about Java.</p>
+<h2>What is an Integrated Development Environment?</h2>
+<p>An Integrated Development Environment (IDE for short) is a collection of
+tools that allow you to do many common development tasks with a common
+interface.&nbsp; Most program development tasks involve</p>
+<ul>
+    <li>editing source code</li>
+    <li>compiling source code to create executable applications</li>
+    <li>executing applications</li>
+    <li>debugging applications.</li>
+</ul>
+<p>Before the arrival of IDEs, you would go to your favorite editor (vi, emacs,
+notepad) and create a file containing your source code.&nbsp; After finishing
+your edits, you would open up a console window and type some obscure compile
+command.&nbsp; If you get compilation errors, you would look at the line number
+mentioned in the message, switch back to your editor, find the line and correct
+the error.&nbsp; When you finally succeed in your compilation attempts, you go
+back to your console window and type a command to execute your
+application.&nbsp; If available, you might use a debugger to walk through
+execution of your application.</p>
+<p>The problem was that each of the tools in this process has a different
+interface.&nbsp;&nbsp; To develop your application, you would need to</p>
+<ul>
+    <li>learn how to use your editor</li>
+    <li>learn how to use your debugger</li>
+    <li>learn all the command-line options to the compiler</li>
+    <li>buy a voice-recognition program because all the typing gave you
+        tendonitis.</li>
+</ul>
+<p>IDEs tied all these tools together in one nice package with a common
+interface.&nbsp;&nbsp; Tasks like browsing source code would be performed in
+exactly the same way whether you were editing code or debugging it.&nbsp;
+Command-line parameters were replaced by graphical interfaces to select
+options.&nbsp; One key press or mouse click could save, compile and execute your
+application.</p>
+<h2>Ok, IDEs are Cool, but I've Already Got One...</h2>
+<p>The current breed of IDEs all have one thing in common: they are <em>file-based</em>.
+All development is assumed to take place by editing an artificial structure
+known as a file.&nbsp; Files have absolutely no relation to any programming
+construct.&nbsp; So why do we have them?&nbsp; They simply provide a container
+in which to store your source code.&nbsp;&nbsp; A more natural way to edit
+source code would be based on the programming language constructs
+themselves.&nbsp;</p>
+<p>Files are what every programmer has learned to use; it's a <em>paradigm</em>
+(&quot;That's just the way things are done!&nbsp; Period!&quot;) that can be <em>very</em>
+difficult to set aside.&nbsp; Simply because everyone is used to using files for
+development, all tools use them as the base of any programming project.&nbsp;
+This causes several problems:</p>
+<ul>
+    <li>the relationship between the language constructs and the files
+        containing them is unclear, and often meaningless</li>
+    <li>extra data can hide in a file (for example, multiple classes could be
+        defined in a single file)</li>
+    <li>determining relationships between language constructs is more difficult:
+        you must parse all files to find all the relationships, and this can be
+        painfully slow</li>
+    <li>placement of files in certain directories sometimes works it way into
+        the language definition.&nbsp; (For example, Java forces files
+        containing classes that belong to a certain package to reside in a
+        directory named after that package.)</li>
+    <li>relationships between language constructs stored in different files must
+        be maintained or specified by the user (using makefile, for example)</li>
+</ul>
+<p>By rethinking the concept of <em>what</em> you edit to create a program, many
+development tasks become significantly easier.&nbsp; VisualAge for Java provides
+just this sort of <em>paradigm shift</em> (&quot;teaching an old dog a new way
+to do an old trick&quot;).</p>
+<h2>A Repository</h2>
+<p>Instead of storing Java language constructs in a file, VisualAge stores them
+in a database call the <em>repository</em>.&nbsp; The repository stores
+information about</p>
+<ul>
+    <li>Projects (an artificial construct that allows convenient grouping for a
+        set of packages, classes and interfaces during development)</li>
+    <li>Packages</li>
+    <li>Classes</li>
+    <li>Interfaces</li>
+    <li>Methods</li>
+    <li>Variables</li>
+    <li>Visual Design</li>
+    <li>Runtime parameters</li>
+    <li>Compilation Options</li>
+</ul>
+<p>This has several advantages to a file-based scheme:</p>
+<ul>
+    <li>Relationships between language constructs are stored in the database and
+        can be quickly retrieved:
+        <ul>
+            <li>You can easily find references to or the declaration of any
+                language construct</li>
+            <li>Compilation can be performed incrementally, as the data base
+                allows VisualAge to know exactly what language constructs are
+                affected by an edit</li>
+        </ul>
+    </li>
+    <li>Programmers can concentrate on <em>what</em> they are editing instead of
+        figuring out which file to edit and where the construct in question
+        exists in that file</li>
+    <li>A list of unresolved problems is maintained, like an
+        automatically-generated to-do list</li>
+    <li>Errors in a saved construct (or changes that would cause errors in other
+        constructs) immediately update the &quot;unresolved problems&quot; list,
+        showing where one error affects other constructs</li>
+    <li>Version control information can be saved <em>for methods</em> not just
+        files.&nbsp; This provides a finer granularity of source management than
+        previously available.</li>
+</ul>
+<p>The &quot;trick&quot; is getting used to working directly with language
+constructs...</p>
+<h2>How Does This Make My Life Easier?</h2>
+<p>Once you adjust to programming language constructs such as classes instead of
+files, VisualAge really starts to improve your productivity.</p>
+<p>For example, one thing that you've probably done several times is add a
+parameter to a method.&nbsp; If you're lucky, you'll remember every place where
+that method was called and can go and change the calls to add the method.&nbsp;
+But usually there will be several calls that you forget, and won't catch them
+until you re-compile.&nbsp; Even worse, there may be many applications that you
+don't recompile for quite some time, and by that time you may forget about the
+changed parameter.</p>
+<p>In VisualAge, you add the parameter to the method and save that method.&nbsp;
+VisualAge searches through its database to find all other constructs that depend
+on that method (from other methods that invoke it to classes that implement an
+interface it was defined it) and recompile those constructs.&nbsp; Every
+location that is affected is flagged with a little red &quot;X&quot; to indicate
+a problem, giving you a visual to-do list of changes to be made.&nbsp; (The list
+of all unresolved problems is also available so you can see every problem spot,
+whether it is in your application or not.)</p>
+<p>This is especially effective when adding or changing a constructor
+parameter.&nbsp; If you are using a hierarchy view while editing, all subclasses
+that invoke the superclass constructor are flagged with a red &quot;X&quot;,
+helping to keep track of all the constructor call changes that are necessary.</p>
+<p>Incremental compilation is automatic upon saving a method, class or
+interface.&nbsp;&nbsp; This ensures that you don't forget to compile anything
+affected by a change, and immediately informs you of any problems.</p>
+<p>VisualAge provides automatic version control, making sure you can always go
+back to a working version of your code.&nbsp; VisualAge keeps track of the
+current version every time your save a method, class or interface, and you can
+explicitly checkpoint a method, class/interface, package or entire project with
+a version number/name.&nbsp; You can try a different approach in your code at
+any time by simply telling VisualAge to version your code.&nbsp; If the new
+approach doesn't prove fruitful, you can back out the changes easily.&nbsp;
+(This is especially nice if you only want to back out changes on a few methods,
+but want to keep changes in some other methods -- you can revert to previous
+versions of whichever constructs you desire!)</p>
+<p>These are just a few of the benefits of VisualAge, thanks to its repository.</p>
+<h2>What Features Does VisualAge for Java Provide?</h2>
+<p>Other features in VisualAge for Java make it a top-notch IDE!&nbsp; As you
+might expect, VisualAge for Java provides an editor and debugger, and setting
+breakpoints is as simple as double-clicking the mouse.&nbsp; Errors detected
+during compilation are linked to the source code, so you can jump right to the
+problem and correct it.&nbsp; Compilation error information is kept in the
+repository, and <em>all</em> errors in <em>any</em> source construct can be
+displayed via an &quot;unresolved problems&quot; view.</p>
+<p>VisualAge provides a myriad of ways to view your code.&nbsp; Some of the ways
+you can browse your code:</p>
+<ul>
+    <li>a master view that contains all projects, packages, classes, interfaces
+        and methods in a single tree</li>
+    <li>a view of all code within a project</li>
+    <li>a view of all code within a package</li>
+    <li>a view of all code stored in the repository and each version available</li>
+</ul>
+<p>Many of these views also allow you to view an inheritance hierarchy of your
+code, and even easily override methods just by editing a superclass
+method.&nbsp; (See <a target="_top" href="../vaj/index.html">VisualAge Tips and Tricks</a>
+for a method of doing this.)&nbsp; This is great because you have a choice of
+finding which type of browser is most comfortable for you, rather than forcing
+yourself into a single project-manager browser like most IDEs provide.</p>
+<p>VisualAge for Java provides a GUI-builder called the &quot;Visual Composition
+Editor&quot; (VCE).&nbsp; The VCE goes beyond a traditional GUI builder.&nbsp;
+Where most only allow you to design graphical interfaces, the VCE allows you to
+connect non-visual JavaBeans in the same manner you would connect visual
+JavaBeans.&nbsp; You can now have seamless integration of business-logic code
+and user-interface code, connecting them based on event processing.</p>
+<p>The VCE is the most advanced bean interaction editor I've ever seen.&nbsp;
+One of its major strengths is that when you set up a connection between beans, <em>the
+connection remains visible.</em>&nbsp;&nbsp; Most GUI builders simply generate
+the connection code, leaving you to edit the connection code yourself if you
+want to change it.&nbsp; The VCE keeps all connection information, so you can
+change the source or target of a connection, the parameters to that connection,
+or even change the order of connections from a common source bean.&nbsp; You
+truly can visually maintain your application's event processing.</p>
+<p>VisualAge for Java makes JavaBean development so easy you won't even know
+you're writing beans!&nbsp; JavaBeans aren't terribly complex to start with, but
+the tedium of writing all your BeanInfo classes and writing accessor method
+after accessor method can get tiresome very fast.&nbsp; VisualAge provides tools
+to assist bean development.&nbsp;&nbsp; Composing a bean is as simple as adding
+other beans as subcomponents, selecting which properties of which sub beans will
+be visible in the overall bean, and adding new properties, events and methods
+via the BeanInfo editor.&nbsp; And because the generated code complies with the
+JavaBeans spec, you can use your beans in any JavaBean-enabled development
+environment!</p>
+<h2>Conclusion</h2>
+<p>I've touched on only some of the reasons why VisualAge for Java is the best
+Java development environment available.&nbsp; VisualAge for Java provides all
+the tools you'll need to easily write Java applications, applets and JavaBeans.&nbsp;</p>
+<p>To try it for yourself, surf to 
+<a target="_top" href="http://www.software.ibm.com/ad/vajava">IBM's
+VisualAge for Java Home</a>.&nbsp; You can download a free &quot;Entry
+Level&quot; version, which is exactly the same as the &quot;Professional&quot;
+version with the exception that you can only work on 100 classes at once.&nbsp;
+The professional version is available through several retailers, mail-order and
+internet-order sites.&nbsp; (I recommend surfing to 
+<a target="_top" href="http://www.shopper.com">http://www.shopper.com</a>
+to find the best price.)</p>
+<p>VisualAge for Java 2.0 has just been released!&nbsp; This version provides
+many updates and enhancements to v1.0.</p>
+<p>If you are a subscriber to the 
+<a target="_top" href="http://www.software.ibm.com/vadd">VisualAge
+Developer Domain</a>, you can download the professional version free from that
+site.&nbsp;&nbsp; (NOTE: If you had subscribed to the WebRunner subscription,
+your ID has been transferred to VisualAge Developer Domain!)</p>
 				<!-- #EndEditable "content" -->
 				<div id="footer">
 					<p>&nbsp;</p>

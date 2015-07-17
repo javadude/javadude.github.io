@@ -19,22 +19,28 @@
   <atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="self" type="application/rss+xml" href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield" />
   <feedburner:info xmlns:feedburner="http://rssnamespace.org/feedburner/ext/1.0" uri="javadudecom-scottstanchfield" />
   <item>
-    <guid>http://javadude.com/articles/patterns/3</guid>
-    <title>Design Patterns Brown-Bag Series</title>
-    <link>http://javadude.com/articles/patterns/index.html</link>
-    <description>A series of brown-bag talks I'm giving at the Johns Hopkins Applies Physics Lab on Design Patterns. (Added session 3)</description>
+    <guid>http://javadude.com/articles/patterns/index.html#s4</guid>
+    <title>Command: Design Patterns Brown-Bag Series</title>
+    <link>http://javadude.com/articles/patterns/index.html#s4</link>
+    <description>Command Pattern Talk (A series of brown-bag talks I'm giving at the Johns Hopkins Applies Physics Lab on Design Patterns)</description>
   </item>
   <item>
-    <guid>http://javadude.com/articles/patterns/2</guid>
-    <title>Design Patterns Brown-Bag Series</title>
-    <link>http://javadude.com/articles/patterns/index.html</link>
-    <description>A series of brown-bag talks I'm giving at the Johns Hopkins Applies Physics Lab on Design Patterns. (Added session 2)</description>
+    <guid>http://javadude.com/articles/patterns/index.html#s3</guid>
+    <title>MVC: Design Patterns Brown-Bag Series</title>
+    <link>http://javadude.com/articles/patterns/index.html#s3</link>
+    <description>MVC Talk (A series of brown-bag talks I'm giving at the Johns Hopkins Applies Physics Lab on Design Patterns)</description>
   </item>
   <item>
-    <guid>http://javadude.com/articles/patterns/1</guid>
-    <title>Design Patterns Brown-Bag Series</title>
-    <link>http://javadude.com/articles/patterns/index.html</link>
-    <description>A series of brown-bag talks I'm giving at the Johns Hopkins Applies Physics Lab on Design Patterns. (Added session 1)</description>
+    <guid>http://javadude.com/articles/patterns/index.html#s2</guid>
+    <title>Observer: Design Patterns Brown-Bag Series</title>
+    <link>http://javadude.com/articles/patterns/index.html#s2</link>
+    <description>Observer Talk (A series of brown-bag talks I'm giving at the Johns Hopkins Applies Physics Lab on Design Patterns)</description>
+  </item>
+  <item>
+    <guid>http://javadude.com/articles/patterns/index.html#1</guid>
+    <title>Introduction/Mediator: Design Patterns Brown-Bag Series</title>
+    <link>http://javadude.com/articles/patterns/index.html#1</link>
+    <description>Introduction/Mediator (A series of brown-bag talks I'm giving at the Johns Hopkins Applies Physics Lab on Design Patterns)</description>
   </item>
   <item>
     <guid>http://javadude.com/articles/intents-and-fragments/index.html</guid>

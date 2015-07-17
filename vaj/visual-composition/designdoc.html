@@ -1,14 +1,14 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
 
-
-<!-- #BeginTemplate "../../master.dwt" -->
-
+
+<!-- #BeginTemplate "../../master.dwt" -->
+
 	<head>
 		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 		<!-- #BeginEditable "doctitle" -->
 
-		<title>VAJ: Design Documentation - Scott Stanchfield</title>
+		<title>VAJ: Design Documentation - Scott Stanchfield</title>
 		<!-- #EndEditable -->
 		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
 		<!-- #BeginEditable "head" -->
@@ -31,79 +31,79 @@
 			<div id="contentIndent">
 				<!-- #BeginEditable "content" -->
 
-<h1>Design Documentation</h1>
-<p>VisualAge for Java can provide a very good way to help document your design!</p>
-<h2>You won't be maintaining that program forever...</h2>
-<p>Realize it or not, you <em>won't</em> be the one who maintains your program forever.&nbsp;&nbsp; Or at least you shouldn't <em>want</em> to be the one who maintains that program forever.&nbsp; Don't you want to go off and program new stuff, and leave
-the minor tweaks to someone else?</p>
-<h2>But if I'm not maintaining it, I'll have to (gack) document it!</h2>
-<p>Of course you'll need to write documentation (as well as comment your code) for someone else to easily understand what you intended to happen in your code.&nbsp; A maintenance programmer generally won't have time to thoroughly study all of your code to
-figure out what it's doing.&nbsp; Design documentation is critical to help him (that's an <em>inclusive</em> &quot;him&quot; for all you &quot;him/her&quot; types out there) target the area of the program that he (again, <em>inclusive</em>) really needs
-to look at.&nbsp; Always ask yourself: &quot;If I didn't know this (well-structured) wad of code, how would I know where to start looking to fix a problem?&quot;</p>
-<h2>So how can VisualAge help reduce my documentation burden?</h2>
-<p>Simple.&nbsp; <em>Use the Visual Composition Editor!</em></p>
-<p>When programming GUI applications, or even <em>non-GUI</em> applications, you can use the Visual Composition Editor to essentially <em>draw</em> the interactions between components in your program.&nbsp; In most cases, this can save time programming
-event logic.&nbsp; In other cases <em>it may take slightly longer than hand coding.</em>&nbsp; <em><strong>However, </strong></em>those connections <em>stay</em> long after you've washed your hands at the code.&nbsp; A maintenance programmer can say to
-himself &quot;hmm, things don't work quite right when the user uses the &quot;add&quot; button.&nbsp; Hey! I'll look at the connections <em>from</em> the add button and see what actions are triggered!&quot;</p>
-<p>This can really assist the maintenance programmer, <em>and</em> you didn't have to write a separate document stating what actions you set up for that action button!</p>
-<h2>But I still write code, right?</h2>
-<p>Obviously you'll still need to write code for your application to work.&nbsp; But I offer a few words of advice to help make your design more obvious:</p>
-<ul>
-  <li><big><strong>Use the &quot;user code&quot; blocks that VisualAge sets up <em>very</em> sparingly.</strong></big>
-        <p>VisualAge generates <em>lots</em> of methods to handle the connections that you set up.&nbsp; In each of these methods, there are one or more blocks that are delimited by comments that say something like</p>
+<h1>Design Documentation</h1>
+<p>VisualAge for Java can provide a very good way to help document your design!</p>
+<h2>You won't be maintaining that program forever...</h2>
+<p>Realize it or not, you <em>won't</em> be the one who maintains your program forever.&nbsp;&nbsp; Or at least you shouldn't <em>want</em> to be the one who maintains that program forever.&nbsp; Don't you want to go off and program new stuff, and leave
+the minor tweaks to someone else?</p>
+<h2>But if I'm not maintaining it, I'll have to (gack) document it!</h2>
+<p>Of course you'll need to write documentation (as well as comment your code) for someone else to easily understand what you intended to happen in your code.&nbsp; A maintenance programmer generally won't have time to thoroughly study all of your code to
+figure out what it's doing.&nbsp; Design documentation is critical to help him (that's an <em>inclusive</em> &quot;him&quot; for all you &quot;him/her&quot; types out there) target the area of the program that he (again, <em>inclusive</em>) really needs
+to look at.&nbsp; Always ask yourself: &quot;If I didn't know this (well-structured) wad of code, how would I know where to start looking to fix a problem?&quot;</p>
+<h2>So how can VisualAge help reduce my documentation burden?</h2>
+<p>Simple.&nbsp; <em>Use the Visual Composition Editor!</em></p>
+<p>When programming GUI applications, or even <em>non-GUI</em> applications, you can use the Visual Composition Editor to essentially <em>draw</em> the interactions between components in your program.&nbsp; In most cases, this can save time programming
+event logic.&nbsp; In other cases <em>it may take slightly longer than hand coding.</em>&nbsp; <em><strong>However, </strong></em>those connections <em>stay</em> long after you've washed your hands at the code.&nbsp; A maintenance programmer can say to
+himself &quot;hmm, things don't work quite right when the user uses the &quot;add&quot; button.&nbsp; Hey! I'll look at the connections <em>from</em> the add button and see what actions are triggered!&quot;</p>
+<p>This can really assist the maintenance programmer, <em>and</em> you didn't have to write a separate document stating what actions you set up for that action button!</p>
+<h2>But I still write code, right?</h2>
+<p>Obviously you'll still need to write code for your application to work.&nbsp; But I offer a few words of advice to help make your design more obvious:</p>
+<ul>
+  <li><big><strong>Use the &quot;user code&quot; blocks that VisualAge sets up <em>very</em> sparingly.</strong></big>
+        <p>VisualAge generates <em>lots</em> of methods to handle the connections that you set up.&nbsp; In each of these methods, there are one or more blocks that are delimited by comments that say something like</p>
     <pre><tt>// user code begin {1}
 
-// user code end</tt>                                 </pre>
-        <p>You can safely add your own code between these comments, and VisualAge will keep it (as long as you don't delete the connection in the VCE...)</p>
-        <p><strong><em>But</em>, </strong>I like to recommend that you use these as infrequently as possible!&nbsp; Why, you ask?&nbsp; Think about your poor maintenance programmer again.&nbsp;&nbsp; There is no indication that you've added code in those
-        blocks.&nbsp; Your maintenance programmer will have to dig through (potentially) <em>tons</em> of generated code to finally find the one place where you put</p>
-    <pre>setValue(10);</pre>
-        <p>in one of these blocks.&nbsp; That can be a <em>real</em> bear to find!</p></li>
-  <li><big><strong>Event-to-script connections are your friends!</strong></big>
-        <p>Rather than add code in the &quot;user code&quot; blocks, add an event-to-script connection either before or after the connection you wanted to modify.&nbsp; This adds good design documentation, as the maintenance programmer can <em>see</em>
-        that you're performing some modification.&nbsp; It's no longer hidden!</p></li>
-  <li><big><strong>Unless absolutely necessary, <em>do not</em> add your own event handling!</strong></big>
-        <p>If you are using the Visual Composition Editor to create a bean (or application/applet), it will generate lots of event handling code for you.&nbsp; I <em>strongly</em> recommend that you don't throw your own event-handling code into that bean
-        as well!&nbsp; Someone looking at your design in the Visual Composition Editor will assume that the connections are the only events being handled.&nbsp; They may not even consider that you could have set up <em>your own</em> listeners in your
-        code.</p></li>
-</ul>
-<h2>But now I have three billion connections on the screen!</h2>
-<p>This can be daunting (and can hurt performance when loading into the Visual Composition Editor.)&nbsp; But, as I stated above, unless you want to be tied to that code for the rest of your life, <em>make it easy for Mr. Maintenance Programmer!!!</em>&nbsp;
-There are a few things you can do to help this:</p>
-<ul>
-  <li>If you'll be doing a lot of editing on a class, <em>do not</em> close the class browser (which contains the Visual Composition Editor) for that class!&nbsp; If you do, you'll have to wait while VisualAge reloads/computes the connection information
-        again.</li>
-  <li>If you can't see your components because there are too many connections:
-    <ul>
-      <li>Click in an unoccupied area of the Visual Composition Editor design area.&nbsp; This makes sure that no component is selected.&nbsp; Note that the show/hide connection buttons affect the currently-selected component, or, if no component is
-                selected, <em>all</em> components in the design area.</li>
-      <li>Click on the &quot;hide connections&quot; button <img src="../images/hideconnect1.gif" alt="hideconnect.gif (1051 bytes)" style="vertical-align:middle" width="29" height="29"/>on the tool bar.&nbsp; This will hide all connections.</li>
-      <li>Click on the component that you want to see connections.</li>
-      <li>Bring up connections in one of the following ways:
-        <ul>
-          <li>Click on the &quot;show connections&quot; button <img src="../images/showconnect1.gif" alt="showconnect.gif (1041 bytes)" style="vertical-align:middle" width="28" height="29"/>on the toolbar.&nbsp; This shows all connections that involve the component.</li>
-          <li>Bring up the pop-up menu for the component.&nbsp; Choose one of the following options:
-                        <p><img src="../images/browseconn1.gif" alt="browseconn.gif (4031 bytes)" width="278" height="173"/> </p>
-            <ul>
-              <li>
-                                <p><strong>Show All</strong> and <strong>Hide All</strong> act the same as the show/hide connection buttons</p></li>
-              <li>
-                                <p><strong>Show To</strong> and <strong>Hide To</strong> shows/hides the connections that use this component as a <em>target</em>.</p></li>
-              <li>
-                                <p><strong>Show From</strong> and <strong>Hide From</strong> adds/hides the connections that use this component as a <em>source</em>.</p></li>
-              <li>
-                                <p><strong>Show To/From</strong> and <strong>Hide To/From</strong> adds/hides connections that use this component as a <em>source <strong>or</strong> target</em>.</p></li>
-            </ul>
-                        <p>Note that these show/hide actions are <em>cumulative</em>.&nbsp; That is, selecting <strong>Show To</strong> and then <strong>Show From</strong> will result in all connections using the component as a <em>target</em>
-                        or <em>source</em> being displayed.&nbsp;&nbsp; This applies to the show/hide connection buttons as well.</p></li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li>
-        <p>Note: The VisualAge development team is working on some reporting mechanisms that will display all connections.&nbsp; Note sure of a timeframe for this, though...</p>
-  </li>
-</ul>
+// user code end</tt>                                 </pre>
+        <p>You can safely add your own code between these comments, and VisualAge will keep it (as long as you don't delete the connection in the VCE...)</p>
+        <p><strong><em>But</em>, </strong>I like to recommend that you use these as infrequently as possible!&nbsp; Why, you ask?&nbsp; Think about your poor maintenance programmer again.&nbsp;&nbsp; There is no indication that you've added code in those
+        blocks.&nbsp; Your maintenance programmer will have to dig through (potentially) <em>tons</em> of generated code to finally find the one place where you put</p>
+    <pre>setValue(10);</pre>
+        <p>in one of these blocks.&nbsp; That can be a <em>real</em> bear to find!</p></li>
+  <li><big><strong>Event-to-script connections are your friends!</strong></big>
+        <p>Rather than add code in the &quot;user code&quot; blocks, add an event-to-script connection either before or after the connection you wanted to modify.&nbsp; This adds good design documentation, as the maintenance programmer can <em>see</em>
+        that you're performing some modification.&nbsp; It's no longer hidden!</p></li>
+  <li><big><strong>Unless absolutely necessary, <em>do not</em> add your own event handling!</strong></big>
+        <p>If you are using the Visual Composition Editor to create a bean (or application/applet), it will generate lots of event handling code for you.&nbsp; I <em>strongly</em> recommend that you don't throw your own event-handling code into that bean
+        as well!&nbsp; Someone looking at your design in the Visual Composition Editor will assume that the connections are the only events being handled.&nbsp; They may not even consider that you could have set up <em>your own</em> listeners in your
+        code.</p></li>
+</ul>
+<h2>But now I have three billion connections on the screen!</h2>
+<p>This can be daunting (and can hurt performance when loading into the Visual Composition Editor.)&nbsp; But, as I stated above, unless you want to be tied to that code for the rest of your life, <em>make it easy for Mr. Maintenance Programmer!!!</em>&nbsp;
+There are a few things you can do to help this:</p>
+<ul>
+  <li>If you'll be doing a lot of editing on a class, <em>do not</em> close the class browser (which contains the Visual Composition Editor) for that class!&nbsp; If you do, you'll have to wait while VisualAge reloads/computes the connection information
+        again.</li>
+  <li>If you can't see your components because there are too many connections:
+    <ul>
+      <li>Click in an unoccupied area of the Visual Composition Editor design area.&nbsp; This makes sure that no component is selected.&nbsp; Note that the show/hide connection buttons affect the currently-selected component, or, if no component is
+                selected, <em>all</em> components in the design area.</li>
+      <li>Click on the &quot;hide connections&quot; button <img src="../images/hideconnect1.gif" alt="hideconnect.gif (1051 bytes)" style="vertical-align:middle" width="29" height="29"/>on the tool bar.&nbsp; This will hide all connections.</li>
+      <li>Click on the component that you want to see connections.</li>
+      <li>Bring up connections in one of the following ways:
+        <ul>
+          <li>Click on the &quot;show connections&quot; button <img src="../images/showconnect1.gif" alt="showconnect.gif (1041 bytes)" style="vertical-align:middle" width="28" height="29"/>on the toolbar.&nbsp; This shows all connections that involve the component.</li>
+          <li>Bring up the pop-up menu for the component.&nbsp; Choose one of the following options:
+                        <p><img src="../images/browseconn1.gif" alt="browseconn.gif (4031 bytes)" width="278" height="173"/> </p>
+            <ul>
+              <li>
+                                <p><strong>Show All</strong> and <strong>Hide All</strong> act the same as the show/hide connection buttons</p></li>
+              <li>
+                                <p><strong>Show To</strong> and <strong>Hide To</strong> shows/hides the connections that use this component as a <em>target</em>.</p></li>
+              <li>
+                                <p><strong>Show From</strong> and <strong>Hide From</strong> adds/hides the connections that use this component as a <em>source</em>.</p></li>
+              <li>
+                                <p><strong>Show To/From</strong> and <strong>Hide To/From</strong> adds/hides connections that use this component as a <em>source <strong>or</strong> target</em>.</p></li>
+            </ul>
+                        <p>Note that these show/hide actions are <em>cumulative</em>.&nbsp; That is, selecting <strong>Show To</strong> and then <strong>Show From</strong> will result in all connections using the component as a <em>target</em>
+                        or <em>source</em> being displayed.&nbsp;&nbsp; This applies to the show/hide connection buttons as well.</p></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+        <p>Note: The VisualAge development team is working on some reporting mechanisms that will display all connections.&nbsp; Note sure of a timeframe for this, though...</p>
+  </li>
+</ul>
 &nbsp;<!-- #EndEditable "content" --><div id="footer">
 					<p>&nbsp;</p>
 					<hr/>

@@ -1,14 +1,14 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
 
-
-<!-- #BeginTemplate "../../master.dwt" -->
-
+
+<!-- #BeginTemplate "../../master.dwt" -->
+
 	<head>
 		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 		<!-- #BeginEditable "doctitle" -->
 
-		<title>Creating JavaBean Property Editors - Scott Stanchfield</title>
+		<title>Creating JavaBean Property Editors - Scott Stanchfield</title>
 		<!-- #EndEditable -->
 		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
 		<!-- #BeginEditable "head" -->
@@ -31,53 +31,53 @@
 			<div id="contentIndent">
 				<!-- #BeginEditable "content" -->
 
-
-<h1>Creating JavaBean Property Editors</h1>
-<p><img alt="It is good, this roof!" src="../../images/tick-roof.png" style="float:left" width="232" height="232"/>Property
-editors are a way to make your bean more user-friendly.&nbsp; Bean builder tools
-can determine quite a lot about your bean just by looking at it and its
-corresponding <tt>BeanInfo</tt> class, but they usually have only very simple
-methods of editing the properties in the bean.</p>
-<p>Many properties can be represented as a <tt>String</tt>, number or <tt>Color</tt>,
-and most Bean design tools have built-in editors for these types.&nbsp; But if a
-property is another type of object, you must tell the design tool how to edit
-it.</p>
-<p>The JavaBean spec defines a <tt>PropertyEditor</tt> interface in the <tt>java.beans</tt>
-package.&nbsp;&nbsp; This interface has several ways of reading and writing
-information about a property.&nbsp; This tutorial will walk you though several
-examples, from very simple <tt>String</tt>-validation editors to more complex
-GUIs to define properties.</p>
-<p>Unfortunately, the documentation available on property editors is rather
-sparse.&nbsp;&nbsp; Until now, that is...</p>
-<p>All source code is available for download in zip (Windows) and tar.gz (Unix)
-formats under <a href="#Source Code">Source Code</a> at the end of the article.</p>
-<p>You should be able to use any development environment that supports JavaBeans
-to work with the code in this article.&nbsp; Note that all code has been tested
-under VisualAge for Java 1.0, Visual Cafe for Java 2.1 and the November release
-of the BeanBox.&nbsp;&nbsp; VisualAge and VisualCafe both performed as expected.</p>
-<p>The BeanBox acts unexpectedly in a few cases.&nbsp; I have checked with the
-folks at JavaSoft to see if these are bugs in the BeanBox and they informed me
-that they are.&nbsp; The problems noted in BeanBox are:</p>
-<ul>
-    <li>If you provide a non-null return from <tt>getAsText()</tt> and provide a
-        non-null <tt>getCustomPropertyEditor()</tt>, the BeanBox gives you no
-        way of accessing the custom property editor GUI.</li>
-    <li>If you only provide <tt>getAsText()</tt>, <tt>setAsText()</tt>, <tt>getValue()</tt>,
-        <tt>setValue()</tt> and <tt>getJavaInitializationString()</tt>, the
-        BeanBox will ignore the property changes.&nbsp;&nbsp; (It seems like the
-        BeanBox requires <tt>PropertyChangeEvents</tt> in all cases, which is
-        not required by the way I interpret the JavaBeans spec.)</li>
-</ul>
-<h2>Making Life Easier</h2>
-<p>Before getting into the actual property editors, let's define a convenience
-"adapter" class for the <tt>PropertyEditor</tt> interface.&nbsp; This
-adapter will provide default behaviors for all the <tt>PropertyEditor</tt>
-methods, and we can use it as a convenient superclass for the rest of our
-property editors.&nbsp;&nbsp; We'll discuss the methods in this interface as we
-proceed through the article.</p>
-<p>Adapters make life a bit easier for us because we don't have to define all
-the methods ourselves; we just need to override the ones that we really care
-about.</p>
+
+<h1>Creating JavaBean Property Editors</h1>
+<p><img alt="It is good, this roof!" src="../../images/tick-roof.png" style="float:left" width="232" height="232"/>Property
+editors are a way to make your bean more user-friendly.&nbsp; Bean builder tools
+can determine quite a lot about your bean just by looking at it and its
+corresponding <tt>BeanInfo</tt> class, but they usually have only very simple
+methods of editing the properties in the bean.</p>
+<p>Many properties can be represented as a <tt>String</tt>, number or <tt>Color</tt>,
+and most Bean design tools have built-in editors for these types.&nbsp; But if a
+property is another type of object, you must tell the design tool how to edit
+it.</p>
+<p>The JavaBean spec defines a <tt>PropertyEditor</tt> interface in the <tt>java.beans</tt>
+package.&nbsp;&nbsp; This interface has several ways of reading and writing
+information about a property.&nbsp; This tutorial will walk you though several
+examples, from very simple <tt>String</tt>-validation editors to more complex
+GUIs to define properties.</p>
+<p>Unfortunately, the documentation available on property editors is rather
+sparse.&nbsp;&nbsp; Until now, that is...</p>
+<p>All source code is available for download in zip (Windows) and tar.gz (Unix)
+formats under <a href="#Source Code">Source Code</a> at the end of the article.</p>
+<p>You should be able to use any development environment that supports JavaBeans
+to work with the code in this article.&nbsp; Note that all code has been tested
+under VisualAge for Java 1.0, Visual Cafe for Java 2.1 and the November release
+of the BeanBox.&nbsp;&nbsp; VisualAge and VisualCafe both performed as expected.</p>
+<p>The BeanBox acts unexpectedly in a few cases.&nbsp; I have checked with the
+folks at JavaSoft to see if these are bugs in the BeanBox and they informed me
+that they are.&nbsp; The problems noted in BeanBox are:</p>
+<ul>
+    <li>If you provide a non-null return from <tt>getAsText()</tt> and provide a
+        non-null <tt>getCustomPropertyEditor()</tt>, the BeanBox gives you no
+        way of accessing the custom property editor GUI.</li>
+    <li>If you only provide <tt>getAsText()</tt>, <tt>setAsText()</tt>, <tt>getValue()</tt>,
+        <tt>setValue()</tt> and <tt>getJavaInitializationString()</tt>, the
+        BeanBox will ignore the property changes.&nbsp;&nbsp; (It seems like the
+        BeanBox requires <tt>PropertyChangeEvents</tt> in all cases, which is
+        not required by the way I interpret the JavaBeans spec.)</li>
+</ul>
+<h2>Making Life Easier</h2>
+<p>Before getting into the actual property editors, let's define a convenience
+"adapter" class for the <tt>PropertyEditor</tt> interface.&nbsp; This
+adapter will provide default behaviors for all the <tt>PropertyEditor</tt>
+methods, and we can use it as a convenient superclass for the rest of our
+property editors.&nbsp;&nbsp; We'll discuss the methods in this interface as we
+proceed through the article.</p>
+<p>Adapters make life a bit easier for us because we don't have to define all
+the methods ourselves; we just need to override the ones that we really care
+about.</p>
 <a name='figure.1'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 1: Sample adapter for PropertyEditor</p><pre class='content'><span class='comment'>// A simple adapter class for interface java.beans.PropertyEditor</span>
 
 <span class='keyword'>package</span> <span class='ident'>com</span><span class='operator'>.</span><span class='ident'>magelang</span><span class='operator'>.</span><span class='ident'>adapter</span><span class='operator'>;</span>
@@ -123,79 +123,79 @@ about.</p>
   <span class='keyword'>public</span> <span class='keyword'>boolean</span>   <span class='ident'>isPaintable</span><span class='operator'>()</span>                 <span class='operator'>{</span><span class='keyword'>return</span> <span class='ident'>false</span><span class='operator'>;}</span>
 
 <span class='operator'>}</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
-<p>Note that the JDK provides a class <tt>java.beans.PropertyEditorSupport</tt>
-that is very similar to this adapter (it adds better default support for
-property change notification and <tt>getAsText</tt>/<tt>setAsText</tt>.&nbsp; I
-present this simpler adapter so we can avoid talking about property change
-events until later.&nbsp; When you're really creating a property editor, you may
-want to use <tt>java.beans.PropertyEditorSupport</tt>.</p>
-<p>The negative angle to using this approach is that your property editor cannot
-be directly included in another GUI, such as a Customizer.&nbsp; If you want to
-use a property editor as a general bean as well as only a property editor, you
-can either:</p>
-<ul>
-    <li>Subclass your property editor from some component class (such as <tt>Panel</tt>)
-        directly, and implement all of the above methods in your property
-        editor, or</li>
-    <li>Create a wrapper bean for your property editor that is a component, and
-        displays the property editor's GUI (you can get the GUI by calling <tt>getCustomEditor()</tt>
-        from your wrapper...)</li>
-</ul>
-<p>Note that if you extend Panel or another GUI component, you don't need to 
-define the addPropertyChangeListener or removePropertyChangeListener methods as 
-they are defined in java.awt.Component.</p>
-<h2>Persistence in Bean Builders</h2>
-<p>It is very likely that once a user has set properties for bean, they'd like
-to see those properties appear in your property editor the next time they bring
-up the property sheet.&nbsp; To provide this capability, property editors can
-define <tt>setValue</tt>() and <tt>getValue</tt>().&nbsp; Strictly speaking,
-you're not require to provide real implementations for these methods.&nbsp; But
-if you don't, you may find some annoyed users at your door the day after
-release...</p>
-<p><tt>public void setValue(Object value)</tt> gives the bean builder a way to
-tell the property editor the current value of the property being edited.&nbsp;
-For many fields this value will initially be null, but as the user edits the
-properties, the bean builder will store the values and pass them to the property
-editor when the property sheet is displayed.&nbsp;&nbsp; The property editor can
-look at this value <em>but it should not directly modify it</em>!&nbsp;&nbsp;
-The property editor should create a new object to hold the value for the
-property, and return that new object when the bean builder asks for it.</p>
-<p><tt>public Object getValue()</tt> provides a way for a bean builder to ask
-for the property value it will store with the visual design information.&nbsp;
-This value will be kept and passed to <tt>setValue()</tt> any time the property
-sheet for the bean instance is opened.&nbsp; The property editor is responsible
-for creating an object containing the value for the property, and returning that
-object.</p>
-<h2>Starting Simple: String Editors</h2>
-<p>All Bean design tools will have some way of displaying a text field to get a <tt>String</tt>
-property value.&nbsp; There is no validation done on this text field.</p>
-<p>As our first property editor, we'll define a <tt>Color</tt> editor that has
-the user type in a color name and verify that the color name is one of the
-"basic" colors.</p>
-<p><tt>String</tt> property editors are fairly simple to program.&nbsp;
-Interaction between a <tt>String</tt> property editor and the bean builder works
-as follows</p>
-<ul>
-    <li>The bean builder tells the property editor the current value of the
-        property by calling the <tt>setValue()</tt>method</li>
-    <li>The bean builder asks "what <tt>String</tt> should be
-        displayed" by calling the <tt>getAsText()</tt> method.</li>
-    <li>When the user changes the <tt>String</tt> value, the bean builder tells
-        the property the new value by calling the <tt>setAsText()</tt> method.</li>
-    <li>The bean builder asks for the object value to store for the property by
-        calling the <tt>getValue()</tt> method.</li>
-    <li>The bean builder asks for the code that will initialize the property by
-        calling <tt>getJavaInitializationString()</tt></li>
-</ul>
-<p>One thing to note here: the bean builder is handling the interaction with the
-user, and informs the property editor when changes are made.&nbsp; The property
-editor does not need to worry about informing anyone of the property being
-changed.&nbsp; (This will become an issue when our property editor handles the
-user interaction and needs to inform the bean builder that the property value
-has changed.)</p>
-<p>Our implementation of this simple property editor looks as follows.&nbsp;
-Note that we subclass PropertyEditorAdapter so we only need to define the five
-methods mentioned above.</p>
+<p>Note that the JDK provides a class <tt>java.beans.PropertyEditorSupport</tt>
+that is very similar to this adapter (it adds better default support for
+property change notification and <tt>getAsText</tt>/<tt>setAsText</tt>.&nbsp; I
+present this simpler adapter so we can avoid talking about property change
+events until later.&nbsp; When you're really creating a property editor, you may
+want to use <tt>java.beans.PropertyEditorSupport</tt>.</p>
+<p>The negative angle to using this approach is that your property editor cannot
+be directly included in another GUI, such as a Customizer.&nbsp; If you want to
+use a property editor as a general bean as well as only a property editor, you
+can either:</p>
+<ul>
+    <li>Subclass your property editor from some component class (such as <tt>Panel</tt>)
+        directly, and implement all of the above methods in your property
+        editor, or</li>
+    <li>Create a wrapper bean for your property editor that is a component, and
+        displays the property editor's GUI (you can get the GUI by calling <tt>getCustomEditor()</tt>
+        from your wrapper...)</li>
+</ul>
+<p>Note that if you extend Panel or another GUI component, you don't need to 
+define the addPropertyChangeListener or removePropertyChangeListener methods as 
+they are defined in java.awt.Component.</p>
+<h2>Persistence in Bean Builders</h2>
+<p>It is very likely that once a user has set properties for bean, they'd like
+to see those properties appear in your property editor the next time they bring
+up the property sheet.&nbsp; To provide this capability, property editors can
+define <tt>setValue</tt>() and <tt>getValue</tt>().&nbsp; Strictly speaking,
+you're not require to provide real implementations for these methods.&nbsp; But
+if you don't, you may find some annoyed users at your door the day after
+release...</p>
+<p><tt>public void setValue(Object value)</tt> gives the bean builder a way to
+tell the property editor the current value of the property being edited.&nbsp;
+For many fields this value will initially be null, but as the user edits the
+properties, the bean builder will store the values and pass them to the property
+editor when the property sheet is displayed.&nbsp;&nbsp; The property editor can
+look at this value <em>but it should not directly modify it</em>!&nbsp;&nbsp;
+The property editor should create a new object to hold the value for the
+property, and return that new object when the bean builder asks for it.</p>
+<p><tt>public Object getValue()</tt> provides a way for a bean builder to ask
+for the property value it will store with the visual design information.&nbsp;
+This value will be kept and passed to <tt>setValue()</tt> any time the property
+sheet for the bean instance is opened.&nbsp; The property editor is responsible
+for creating an object containing the value for the property, and returning that
+object.</p>
+<h2>Starting Simple: String Editors</h2>
+<p>All Bean design tools will have some way of displaying a text field to get a <tt>String</tt>
+property value.&nbsp; There is no validation done on this text field.</p>
+<p>As our first property editor, we'll define a <tt>Color</tt> editor that has
+the user type in a color name and verify that the color name is one of the
+"basic" colors.</p>
+<p><tt>String</tt> property editors are fairly simple to program.&nbsp;
+Interaction between a <tt>String</tt> property editor and the bean builder works
+as follows</p>
+<ul>
+    <li>The bean builder tells the property editor the current value of the
+        property by calling the <tt>setValue()</tt>method</li>
+    <li>The bean builder asks "what <tt>String</tt> should be
+        displayed" by calling the <tt>getAsText()</tt> method.</li>
+    <li>When the user changes the <tt>String</tt> value, the bean builder tells
+        the property the new value by calling the <tt>setAsText()</tt> method.</li>
+    <li>The bean builder asks for the object value to store for the property by
+        calling the <tt>getValue()</tt> method.</li>
+    <li>The bean builder asks for the code that will initialize the property by
+        calling <tt>getJavaInitializationString()</tt></li>
+</ul>
+<p>One thing to note here: the bean builder is handling the interaction with the
+user, and informs the property editor when changes are made.&nbsp; The property
+editor does not need to worry about informing anyone of the property being
+changed.&nbsp; (This will become an issue when our property editor handles the
+user interaction and needs to inform the bean builder that the property value
+has changed.)</p>
+<p>Our implementation of this simple property editor looks as follows.&nbsp;
+Note that we subclass PropertyEditorAdapter so we only need to define the five
+methods mentioned above.</p>
 <a name='figure.2'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 2: Simple color editor</p><pre class='content'><span class='keyword'>package</span> <span class='ident'>coloredit</span><span class='operator'>;</span>
 
 
@@ -337,24 +337,24 @@ methods mentioned above.</p>
   <span class='operator'>}</span>
 
 <span class='operator'>}</span>  </pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
-<p>This property editor converts the passed-in <tt>Color</tt> value to a <tt>String</tt>
-representing the color name, validates that name whenever it is set, and
-converts it back to a <tt>Color</tt> object.</p>
-<h2>Using the Property Editor</h2>
-<p>There are two ways you can use property editors:</p>
-<ul>
-    <li>To provide editing capabilities for a specific property in a bean</li>
-    <li>To provide editing capabilities for all properties of a given type in
-        the bean development environment</li>
-</ul>
-<p>This article will concentrate on the first use.&nbsp; A later article will
-discuss setting up a property editor as the default editor for a given type.</p>
-<p>To associate a property editor with a bean property, you need to define a
-BeanInfo class for the bean.&nbsp; Of course this means that we need a bean, so
-let's define a simple Panel subclass that has a "color" property whose
-implementation is to set/get the Panel's background color. (We will leave the
-background property intact so operation of this property editor can be compared
-to normal Color editor operation in the bean builder you are using.)</p>
+<p>This property editor converts the passed-in <tt>Color</tt> value to a <tt>String</tt>
+representing the color name, validates that name whenever it is set, and
+converts it back to a <tt>Color</tt> object.</p>
+<h2>Using the Property Editor</h2>
+<p>There are two ways you can use property editors:</p>
+<ul>
+    <li>To provide editing capabilities for a specific property in a bean</li>
+    <li>To provide editing capabilities for all properties of a given type in
+        the bean development environment</li>
+</ul>
+<p>This article will concentrate on the first use.&nbsp; A later article will
+discuss setting up a property editor as the default editor for a given type.</p>
+<p>To associate a property editor with a bean property, you need to define a
+BeanInfo class for the bean.&nbsp; Of course this means that we need a bean, so
+let's define a simple Panel subclass that has a "color" property whose
+implementation is to set/get the Panel's background color. (We will leave the
+background property intact so operation of this property editor can be compared
+to normal Color editor operation in the bean builder you are using.)</p>
 <a name='figure.3'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 3: Panel extension to test property editor</p><pre class='content'><span class='keyword'>package</span> <span class='ident'>coloredit</span><span class='operator'>;</span>
 
 
@@ -382,12 +382,12 @@ to normal Color editor operation in the bean builder you are using.)</p>
   <span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>setColor</span><span class='operator'>(</span><span class='ident'>Color</span> <span class='ident'>color</span><span class='operator'>)</span> <span class='operator'>{</span><span class='ident'>setBackground</span><span class='operator'>(</span><span class='ident'>color</span><span class='operator'>);}</span>
 
 <span class='operator'>}</span>  </pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
-<p>The <tt>BeanInfo</tt> class for this is big and hairy, and discussion of <tt>BeanInfo</tt>
-is out of the scope of this article.&nbsp; (I'd advise you to get a tool, such
-as VisualAge for Java, that generates the <tt>BeanInfo</tt> class for you...)
-The following is the relevant part of the <tt>ColorBeanBeanInfo</tt> class that
-sets up the property editor.&nbsp; The full <tt>BeanInfo</tt> class (as
-generated by VisualAge for Java) is available in the source distribution.</p>
+<p>The <tt>BeanInfo</tt> class for this is big and hairy, and discussion of <tt>BeanInfo</tt>
+is out of the scope of this article.&nbsp; (I'd advise you to get a tool, such
+as VisualAge for Java, that generates the <tt>BeanInfo</tt> class for you...)
+The following is the relevant part of the <tt>ColorBeanBeanInfo</tt> class that
+sets up the property editor.&nbsp; The full <tt>BeanInfo</tt> class (as
+generated by VisualAge for Java) is available in the source distribution.</p>
 <a name='figure.4'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 4: ColorBeanBeanInfo</p><pre class='content'><span class='keyword'>package</span> <span class='ident'>coloredit</span><span class='operator'>;</span>
 
 
@@ -477,20 +477,20 @@ generated by VisualAge for Java) is available in the source distribution.</p>
   <span class='comment'>// and more BeanInfo stuff...</span>
 
 <span class='operator'>}</span>  </pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
-<p>When you use the ColorBean when visually designing a new bean, you can bring
-up the property sheet for the new instance of the ColorBean.&nbsp; Initially,
-the value for "color" will be "white".&nbsp; If you change
-it to one of the valid color names, the change will stick.&nbsp; If you mistype,
-the color value becomes "white" again.</p>
-<h2>Making the Property Editor a Bit Nicer...</h2>
-<p>Because we have a (small) finite set of values, a nicer user interface would
-be to give the user a list of choices.&nbsp; This is easily accomplished by
-adding a <tt>getTags()</tt> method to our color editor.&nbsp; If <tt>getTags()</tt>
-returns a null (which is the default that we defined in <tt>PropertyEditorAdapter</tt>)
-the bean builder will just present a <tt>TextField</tt> to get the value.&nbsp;
-If <tt>getTags()</tt> returns an array of <tt>String</tt>s, the bean builder
-will present a <tt>Choice</tt> component with those <tt>String</tt>
-values.&nbsp; So we can extend our <tt>ColorEditor</tt> as follows:</p>
+<p>When you use the ColorBean when visually designing a new bean, you can bring
+up the property sheet for the new instance of the ColorBean.&nbsp; Initially,
+the value for "color" will be "white".&nbsp; If you change
+it to one of the valid color names, the change will stick.&nbsp; If you mistype,
+the color value becomes "white" again.</p>
+<h2>Making the Property Editor a Bit Nicer...</h2>
+<p>Because we have a (small) finite set of values, a nicer user interface would
+be to give the user a list of choices.&nbsp; This is easily accomplished by
+adding a <tt>getTags()</tt> method to our color editor.&nbsp; If <tt>getTags()</tt>
+returns a null (which is the default that we defined in <tt>PropertyEditorAdapter</tt>)
+the bean builder will just present a <tt>TextField</tt> to get the value.&nbsp;
+If <tt>getTags()</tt> returns an array of <tt>String</tt>s, the bean builder
+will present a <tt>Choice</tt> component with those <tt>String</tt>
+values.&nbsp; So we can extend our <tt>ColorEditor</tt> as follows:</p>
 <a name='figure.5'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 5: ColorEditor extension to get color names</p><pre class='content'><span class='keyword'>package</span> <span class='ident'>coloredit</span><span class='operator'>;</span>
 
 
@@ -504,38 +504,38 @@ values.&nbsp; So we can extend our <tt>ColorEditor</tt> as follows:</p>
   <span class='operator'>}</span>
 
 <span class='operator'>}</span>  </pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
-<p>This is possible because we defined <tt>colorNames</tt> as a protected field
-(even before we thought of this extension ;)</p>
-<p>If we change the <tt>ColorBeanBeanInfo</tt> definition to use <tt>ColorEditor2</tt>,
-the property can now be edited by the user selecting the color choice in the
-property sheet.</p>
-<h2>Taking Control of the Property Edit</h2>
-<p>Up until this point, we've let the bean builder tool handle the interaction
-with the user.&nbsp; For simple properties that can be represented by <tt>String</tt>s
-this is perfectly acceptable.&nbsp; (For example, perhaps you want to have the
-user type a name and you want to make sure it's a valid word in the
-Dictionary.&nbsp; Your property editor could be similar to <tt>ColorEdit1</tt>,
-but do a spell-check on the value instead of checking the color.)&nbsp; For more
-complex properties, such as <tt>Color</tt>s, we really want something more,
-well, colorful...</p>
-<p>Let's take a small step toward a better property editor.&nbsp; We'll present
-a <tt>Choice</tt> component with the color names.&nbsp; This will require the
-following:</p>
-<ul>
-    <li>We need to create a simple GUI (the <tt>Choice</tt> component)</li>
-    <li>We need to tell the bean builder that we provide the GUI</li>
-    <li>We need to pass the GUI to the bean builder</li>
-    <li>We need to tell the bean builder when the property has changed</li>
-</ul>
-<p>Let's look at the last item first: we need to tell the bean builder when the
-property has changed.&nbsp; The <tt>PropertyEditor</tt> interface requires
-methods <tt>addPropertyListener()</tt> and <tt>removePropertyListener()</tt>,
-which let other classes ask us to inform them when a property changes.&nbsp; The
-other class, in this instance, is the bean builder itself.</p>
-<p>Let's take our <tt>PropertyEditorAdapter</tt> and extend it to add the
-property change notification support we need.&nbsp; The JDK provides a support
-class, <tt>java.beans.PropertyChangeSupport</tt>, that will help us.&nbsp; All
-we need is:</p>
+<p>This is possible because we defined <tt>colorNames</tt> as a protected field
+(even before we thought of this extension ;)</p>
+<p>If we change the <tt>ColorBeanBeanInfo</tt> definition to use <tt>ColorEditor2</tt>,
+the property can now be edited by the user selecting the color choice in the
+property sheet.</p>
+<h2>Taking Control of the Property Edit</h2>
+<p>Up until this point, we've let the bean builder tool handle the interaction
+with the user.&nbsp; For simple properties that can be represented by <tt>String</tt>s
+this is perfectly acceptable.&nbsp; (For example, perhaps you want to have the
+user type a name and you want to make sure it's a valid word in the
+Dictionary.&nbsp; Your property editor could be similar to <tt>ColorEdit1</tt>,
+but do a spell-check on the value instead of checking the color.)&nbsp; For more
+complex properties, such as <tt>Color</tt>s, we really want something more,
+well, colorful...</p>
+<p>Let's take a small step toward a better property editor.&nbsp; We'll present
+a <tt>Choice</tt> component with the color names.&nbsp; This will require the
+following:</p>
+<ul>
+    <li>We need to create a simple GUI (the <tt>Choice</tt> component)</li>
+    <li>We need to tell the bean builder that we provide the GUI</li>
+    <li>We need to pass the GUI to the bean builder</li>
+    <li>We need to tell the bean builder when the property has changed</li>
+</ul>
+<p>Let's look at the last item first: we need to tell the bean builder when the
+property has changed.&nbsp; The <tt>PropertyEditor</tt> interface requires
+methods <tt>addPropertyListener()</tt> and <tt>removePropertyListener()</tt>,
+which let other classes ask us to inform them when a property changes.&nbsp; The
+other class, in this instance, is the bean builder itself.</p>
+<p>Let's take our <tt>PropertyEditorAdapter</tt> and extend it to add the
+property change notification support we need.&nbsp; The JDK provides a support
+class, <tt>java.beans.PropertyChangeSupport</tt>, that will help us.&nbsp; All
+we need is:</p>
 <a name='figure.6'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 6: Default PropertyEditor adapter</p><pre class='content'><span class='keyword'>package</span> <span class='ident'>com</span><span class='operator'>.</span><span class='ident'>magelang</span><span class='operator'>.</span><span class='ident'>adapter</span><span class='operator'>;</span>
 
 
@@ -599,14 +599,14 @@ we need is:</p>
   <span class='operator'>}</span>
 
 <span class='operator'>}</span>  </pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
-<p>We define <tt>addPropertyChangeListener()</tt> and <tt>removePropertyChangeListener()</tt>
-to delegate their tasks to an instance of <tt>PropertyChangeSupport</tt>. We
-define an extra "helper" method, <tt>firePropertyChange()</tt>, to
-make life a bit easier for our derived property editors.</p>
-<p>Now we'll take our original ColorEdit1 and change its superclass to
-PropertyEditorChangeAdapter.&nbsp; We'll also change its name to ColorEdit3 to
-keep things clear.&nbsp; After a few more changes, our new property editor looks
-like (changes to <tt>ColorEditor1</tt> are in bold):</p>
+<p>We define <tt>addPropertyChangeListener()</tt> and <tt>removePropertyChangeListener()</tt>
+to delegate their tasks to an instance of <tt>PropertyChangeSupport</tt>. We
+define an extra "helper" method, <tt>firePropertyChange()</tt>, to
+make life a bit easier for our derived property editors.</p>
+<p>Now we'll take our original ColorEdit1 and change its superclass to
+PropertyEditorChangeAdapter.&nbsp; We'll also change its name to ColorEdit3 to
+keep things clear.&nbsp; After a few more changes, our new property editor looks
+like (changes to <tt>ColorEditor1</tt> are in bold):</p>
 <a name='figure.7'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 7: Custom color editor to select color name from list</p><pre class='content'><span class='keyword'>package</span> <span class='ident'>coloredit</span><span class='operator'>;</span>
 
 
@@ -772,40 +772,40 @@ like (changes to <tt>ColorEditor1</tt> are in bold):</p>
   <span class='operator'>}</span>
 
 <span class='operator'>}</span>  </pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
-<p>So what is it doing now?</p>
-<p>First, we define <tt>supportsCustomEditor()</tt> to return <tt>true</tt>
-(recall that the default implementation in <tt>PropertyEditorAdapter</tt>
-returns <tt>false</tt>).&nbsp;&nbsp; This method tells the bean builder that our
-property editor will have its own GUI.&nbsp;&nbsp; The bean builder will then
-call getCustomEditor() to retrieve our GUI component that does the
-editing.&nbsp; The bean builder will display this component in a dialog.</p>
-<p>Our implementation of <tt>getCustomEditor()</tt> defines our simple GUI: a <tt>Choice</tt>
-component that is loaded with the color names.&nbsp;&nbsp; To make this
-component useful, we need to register an <tt>ItemListener</tt> with it.&nbsp;
-Because some of the bean design tools do not yet support inner classes (such as
-VisualAge for Java), we've made the property editor an <tt>ItemListener</tt> to
-catch the <tt>ItemEvent</tt>.&nbsp; The action we perform when the item changes
-is to just set the text value in our property editor.</p>
-<p>The last change we made was to fire a <tt>PropertyChangeEvent</tt> when the
-text value of the property changes.&nbsp; This is accomplished by adding the <tt>firePropertyChange</tt>
-call to <tt>setTextValue()</tt>.&nbsp; <tt>firePropertyChange()</tt> checks to
-see if the old and new values are different, and, if so, fires off a <tt>PropertyChangeEvent</tt>
-to all <tt>PropertyChangeListener</tt>s (which in this case is only the bean
-builder.)</p>
-<p>If you use this <tt>ColorEditor</tt> in a bean builder, many builder will
-show a small "..." button with the property in the property
-sheet.&nbsp; Clicking this button will bring up a dialog with our <tt>Choice</tt>
-component in it.</p>
-<h2>A More Natural Interface</h2>
-<p>The interface still leaves something to be desired.&nbsp; What does
-"cyan" look like?&nbsp; Why don't we provide some buttons with the
-colors as their background?&nbsp;&nbsp; (Note: there are some versions of the
-JDK that have a bug in AWT's Button class that does not paint the background
-color of the Button.&nbsp; The current version of VisualAge for Java contains
-this AWT bug.)</p>
-<p>The interface between the property editor and the bean builder remains <em>exactly
-the same</em>.&nbsp; All we are doing is changing our GUI a bit.&nbsp;
-Differences between this editor and ColorEditor3 are in bold.</p>
+<p>So what is it doing now?</p>
+<p>First, we define <tt>supportsCustomEditor()</tt> to return <tt>true</tt>
+(recall that the default implementation in <tt>PropertyEditorAdapter</tt>
+returns <tt>false</tt>).&nbsp;&nbsp; This method tells the bean builder that our
+property editor will have its own GUI.&nbsp;&nbsp; The bean builder will then
+call getCustomEditor() to retrieve our GUI component that does the
+editing.&nbsp; The bean builder will display this component in a dialog.</p>
+<p>Our implementation of <tt>getCustomEditor()</tt> defines our simple GUI: a <tt>Choice</tt>
+component that is loaded with the color names.&nbsp;&nbsp; To make this
+component useful, we need to register an <tt>ItemListener</tt> with it.&nbsp;
+Because some of the bean design tools do not yet support inner classes (such as
+VisualAge for Java), we've made the property editor an <tt>ItemListener</tt> to
+catch the <tt>ItemEvent</tt>.&nbsp; The action we perform when the item changes
+is to just set the text value in our property editor.</p>
+<p>The last change we made was to fire a <tt>PropertyChangeEvent</tt> when the
+text value of the property changes.&nbsp; This is accomplished by adding the <tt>firePropertyChange</tt>
+call to <tt>setTextValue()</tt>.&nbsp; <tt>firePropertyChange()</tt> checks to
+see if the old and new values are different, and, if so, fires off a <tt>PropertyChangeEvent</tt>
+to all <tt>PropertyChangeListener</tt>s (which in this case is only the bean
+builder.)</p>
+<p>If you use this <tt>ColorEditor</tt> in a bean builder, many builder will
+show a small "..." button with the property in the property
+sheet.&nbsp; Clicking this button will bring up a dialog with our <tt>Choice</tt>
+component in it.</p>
+<h2>A More Natural Interface</h2>
+<p>The interface still leaves something to be desired.&nbsp; What does
+"cyan" look like?&nbsp; Why don't we provide some buttons with the
+colors as their background?&nbsp;&nbsp; (Note: there are some versions of the
+JDK that have a bug in AWT's Button class that does not paint the background
+color of the Button.&nbsp; The current version of VisualAge for Java contains
+this AWT bug.)</p>
+<p>The interface between the property editor and the bean builder remains <em>exactly
+the same</em>.&nbsp; All we are doing is changing our GUI a bit.&nbsp;
+Differences between this editor and ColorEditor3 are in bold.</p>
 <a name='figure.8'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 8: Sample color editor to select color button</p><pre class='content'><span class='keyword'>package</span> <span class='ident'>coloredit</span><span class='operator'>;</span>
 
 
@@ -981,35 +981,35 @@ Differences between this editor and ColorEditor3 are in bold.</p>
   <span class='operator'>}</span>
 
 <span class='operator'>}</span>  </pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
-<p>All we have changed is the appearance of the GUI (and how we respond to
-events.)&nbsp;&nbsp; If you are careful with how you interact with the bean
-builder, you can change the appearance of the GUI with very little effort.&nbsp;
-In this case, our GUI is now a <tt>Panel</tt> with a 2-column grid of <tt>Button</tt>s.
-Each <tt>Button</tt> has the color name and (unless the AWT background color bug
-is present) the color that will be selected.&nbsp;&nbsp; When pressed, the color
-value is set.</p>
-<h2>The Final Touch</h2>
-<p>But what about that textual color name in the property sheet?&nbsp; Shouldn't
-that appear as a color as well?&nbsp; It can!</p>
-<p>To make this possible, we need to drop the <tt>getAsText()</tt> method and
-implement the <tt>isPaintable()</tt> and <tt>paintValue()</tt> methods.&nbsp;
-Instead of passing a text value for the property back to the bean builder, we're
-telling it that we can paint a value for the property, and providing a method to
-do that painting.&nbsp; Our changes to the class are very simple:</p>
-<ul>
-    <li>remove the <tt>getAsText()</tt> method</li>
-    <li>add two imports:
+<p>All we have changed is the appearance of the GUI (and how we respond to
+events.)&nbsp;&nbsp; If you are careful with how you interact with the bean
+builder, you can change the appearance of the GUI with very little effort.&nbsp;
+In this case, our GUI is now a <tt>Panel</tt> with a 2-column grid of <tt>Button</tt>s.
+Each <tt>Button</tt> has the color name and (unless the AWT background color bug
+is present) the color that will be selected.&nbsp;&nbsp; When pressed, the color
+value is set.</p>
+<h2>The Final Touch</h2>
+<p>But what about that textual color name in the property sheet?&nbsp; Shouldn't
+that appear as a color as well?&nbsp; It can!</p>
+<p>To make this possible, we need to drop the <tt>getAsText()</tt> method and
+implement the <tt>isPaintable()</tt> and <tt>paintValue()</tt> methods.&nbsp;
+Instead of passing a text value for the property back to the bean builder, we're
+telling it that we can paint a value for the property, and providing a method to
+do that painting.&nbsp; Our changes to the class are very simple:</p>
+<ul>
+    <li>remove the <tt>getAsText()</tt> method</li>
+    <li>add two imports:
 <a name='figure.9'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 9: Imports to add</p><pre class='content'><span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>awt</span><span class='operator'>.</span><span class='ident'>Graphics</span><span class='operator'>;</span>
 
 <span class='keyword'>import</span> <span class='ident'>java</span><span class='operator'>.</span><span class='ident'>awt</span><span class='operator'>.</span><span class='ident'>Rectangle</span><span class='operator'>;</span>
 
     </pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
-    </li>
-    <li>add an <tt>isPaintable()</tt> method (recall that the default defined in
-        PropertyEditorAdapter returned false):
+    </li>
+    <li>add an <tt>isPaintable()</tt> method (recall that the default defined in
+        PropertyEditorAdapter returned false):
 <a name='figure.10'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 10: isPaintable() method</p><pre class='content'><span class='keyword'>public</span> <span class='keyword'>boolean</span> <span class='ident'>isPaintable</span><span class='operator'>()</span> <span class='operator'>{</span><span class='keyword'>return</span> <span class='ident'>true</span><span class='operator'>;}</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
-    </li>
-    <li>add a <tt>paintValue()</tt> method:
+    </li>
+    <li>add a <tt>paintValue()</tt> method:
 <a name='figure.11'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 11: paintValue() method</p><pre class='content'><span class='keyword'>public</span> <span class='keyword'>void</span> <span class='ident'>paintValue</span><span class='operator'>(</span><span class='ident'>Graphics</span> <span class='ident'>gfx</span>, <span class='ident'>Rectangle</span> <span class='ident'>box</span><span class='operator'>)</span> <span class='operator'>{</span>
 
   <span class='ident'>gfx</span><span class='operator'>.</span><span class='ident'>setColor</span><span class='operator'>(</span><span class='ident'>colors</span><span class='operator'>[</span><span class='ident'>selected</span><span class='operator'>]);</span>
@@ -1031,37 +1031,37 @@ do that painting.&nbsp; Our changes to the class are very simple:</p>
                  <span class='ident'>box</span><span class='operator'>.</span><span class='ident'>width</span><span class='operator'>-</span>9, <span class='ident'>box</span><span class='operator'>.</span><span class='ident'>height</span><span class='operator'>-</span>9, <span class='ident'>true</span><span class='operator'>);</span>
 
 <span class='operator'>}</span>    </pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
-    </li>
-</ul>
-<p>paintValue() is passed a graphics context into which its painting will be
-done, and a bounding Rectangle that tells us where we are allowed to draw within
-that graphics context.&nbsp; <em>Make sure you respect that bounding box, or the
-property sheet graphics could end up looking pretty nasty!</em>&nbsp; Our
-implementation for ColorEditor5 draws a raised box in the selected color.</p>
-<h2>PropertyEditorSupport</h2>
-<p>In this article, we define the PropertyEditorAdapter and 
-PropertyChangeAdapter to help demonstrate how property editors work. The Java 
-class libraries include a class named java.beans.PropertyEditorSupport which 
-provides this base functionality for you. I recommend that when you really 
-implement property editors, you use property editor support.</p>
-<h2>Conclusion</h2>
-<p>Property editors are a simple way to make your bean more user friendly.&nbsp;
-They can provide simple textual validations, a GUI to assist the modification of
-the property and graphical representations of the property within the property
-sheet itself.</p>
-<p>If you have any questions on how to get a property editor to work, feel free
-to email <a href="mailto:scott@javadude.com">Scott Stanchfield</a> or one of
-the other Magi.</p>
-<h2><a name="Source Code">Source Code</a></h2>
-<p>All of the source code for this article is downloadable.&nbsp; There are two
-formats you can choose:</p>
-<ul>
-    <li><a href="propedit.zip">propedit.zip</a> - a Windows-format zip
-        file (note that files are formatted using \r\n for line separators)</li>
-    <li><a href="propedit.tar.gz">propedit.tar.gz</a> - a unix-format
-        tar/gzip file (files use \n for line separators)</li>
-</ul>
-&nbsp; 
+    </li>
+</ul>
+<p>paintValue() is passed a graphics context into which its painting will be
+done, and a bounding Rectangle that tells us where we are allowed to draw within
+that graphics context.&nbsp; <em>Make sure you respect that bounding box, or the
+property sheet graphics could end up looking pretty nasty!</em>&nbsp; Our
+implementation for ColorEditor5 draws a raised box in the selected color.</p>
+<h2>PropertyEditorSupport</h2>
+<p>In this article, we define the PropertyEditorAdapter and 
+PropertyChangeAdapter to help demonstrate how property editors work. The Java 
+class libraries include a class named java.beans.PropertyEditorSupport which 
+provides this base functionality for you. I recommend that when you really 
+implement property editors, you use property editor support.</p>
+<h2>Conclusion</h2>
+<p>Property editors are a simple way to make your bean more user friendly.&nbsp;
+They can provide simple textual validations, a GUI to assist the modification of
+the property and graphical representations of the property within the property
+sheet itself.</p>
+<p>If you have any questions on how to get a property editor to work, feel free
+to email <a href="mailto:scott@javadude.com">Scott Stanchfield</a> or one of
+the other Magi.</p>
+<h2><a name="Source Code">Source Code</a></h2>
+<p>All of the source code for this article is downloadable.&nbsp; There are two
+formats you can choose:</p>
+<ul>
+    <li><a href="propedit.zip">propedit.zip</a> - a Windows-format zip
+        file (note that files are formatted using \r\n for line separators)</li>
+    <li><a href="propedit.tar.gz">propedit.tar.gz</a> - a unix-format
+        tar/gzip file (files use \n for line separators)</li>
+</ul>
+&nbsp; 
 						<!-- #EndEditable "content" -->
 				<div id="footer">
 					<p>&nbsp;</p>
