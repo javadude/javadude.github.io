@@ -1,14 +1,14 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
 
-
-<!-- #BeginTemplate "../../master.dwt" -->
-
+
+<!-- #BeginTemplate "../../master.dwt" -->
+
 	<head>
 		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 		<!-- #BeginEditable "doctitle" -->
 
-		<title>VAJ: Centering Dialogs - Scott Stanchfield</title>
+		<title>VAJ: Centering Dialogs - Scott Stanchfield</title>
 		<!-- #EndEditable -->
 		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
 		<!-- #BeginEditable "head" -->
@@ -31,21 +31,21 @@
 			<div id="contentIndent">
 				<!-- #BeginEditable "content" -->
 
-<h1>Centering Dialogs</h1>
-<p>Where does a dialog go when you <tt>show()</tt> it?</p>
-<p>Unfortunately, the default location of a displayed dialog is relative to the position it was placed in the Visual Composition Editor.</p>
-<h2>What the hell does <em>that</em> mean???</h2>
-<p>In a nutshell, if the dialog is 300 pixels to the right and 200 pixels down from the upper-left corner of the design area, it will appear at <em>absolute</em> screen location 300, 200.</p>
-<h2>This isn't good...</h2>
-<p>This can cause several problems.&nbsp; So how to deal with it?&nbsp; Let's define a subclass of <tt>Dialog</tt> that provides a method that can center it with regard to it parent <tt>Frame</tt>.</p>
-<p>When you create a dialog, you must pass it the parent <tt>Frame</tt>.&nbsp; This <tt>Frame</tt> can be obtained via the <tt>Dialog</tt>'s <tt>getParent()</tt> method.&nbsp; We'll define a subclass of <tt>Dialog</tt> called <tt>CenterableDialog</tt>
-that will look at the parent <tt>Frame</tt> and determine where to place the dialog.&nbsp; We must be careful and watch out for the screen edges too!</p>
-<h2>The <tt>CenterableDialog</tt> class...</h2>
-<p>Here's the code.&nbsp; Once you define this class, all you have to do is:</p>
-<ul>
-  <li>Use CenterableDialog wherever you would normally use Dialog</li>
-  <li>Call showCentered() instead of show() to display the dialog.&nbsp; The reason we don't override show() itself is so we can still explicitly set the dialog's position and show() it non-centered.</li>
-</ul>
+<h1>Centering Dialogs</h1>
+<p>Where does a dialog go when you <tt>show()</tt> it?</p>
+<p>Unfortunately, the default location of a displayed dialog is relative to the position it was placed in the Visual Composition Editor.</p>
+<h2>What the hell does <em>that</em> mean???</h2>
+<p>In a nutshell, if the dialog is 300 pixels to the right and 200 pixels down from the upper-left corner of the design area, it will appear at <em>absolute</em> screen location 300, 200.</p>
+<h2>This isn't good...</h2>
+<p>This can cause several problems.&nbsp; So how to deal with it?&nbsp; Let's define a subclass of <tt>Dialog</tt> that provides a method that can center it with regard to it parent <tt>Frame</tt>.</p>
+<p>When you create a dialog, you must pass it the parent <tt>Frame</tt>.&nbsp; This <tt>Frame</tt> can be obtained via the <tt>Dialog</tt>'s <tt>getParent()</tt> method.&nbsp; We'll define a subclass of <tt>Dialog</tt> called <tt>CenterableDialog</tt>
+that will look at the parent <tt>Frame</tt> and determine where to place the dialog.&nbsp; We must be careful and watch out for the screen edges too!</p>
+<h2>The <tt>CenterableDialog</tt> class...</h2>
+<p>Here's the code.&nbsp; Once you define this class, all you have to do is:</p>
+<ul>
+  <li>Use CenterableDialog wherever you would normally use Dialog</li>
+  <li>Call showCentered() instead of show() to display the dialog.&nbsp; The reason we don't override show() itself is so we can still explicitly set the dialog's position and show() it non-centered.</li>
+</ul>
 <pre>import java.awt.Dialog;
 
 import java.awt.Dimension;
@@ -154,10 +154,10 @@ public class CenterableDialog extends Dialog {
 
 }
 
-                  </pre>
-<h2>What about <tt>FileDialog</tt>?</h2>
-<p>You can use the same subclass trick on FileDialog -- it would look exactly the same as the above, except for the name of the class.</p>
-
+                  </pre>
+<h2>What about <tt>FileDialog</tt>?</h2>
+<p>You can use the same subclass trick on FileDialog -- it would look exactly the same as the above, except for the name of the class.</p>
+
 				<!-- #EndEditable "content" -->
 				<div id="footer">
 					<p>&nbsp;</p>

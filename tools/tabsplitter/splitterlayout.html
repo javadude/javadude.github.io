@@ -1,14 +1,14 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
 
-
-<!-- #BeginTemplate "../../master.dwt" -->
-
+
+<!-- #BeginTemplate "../../master.dwt" -->
+
 	<head>
 		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 		<!-- #BeginEditable "doctitle" -->
 
-		<title>SplitterLayout - Scott Stanchfield</title>
+		<title>SplitterLayout - Scott Stanchfield</title>
 		<!-- #EndEditable -->
 		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
 		<!-- #BeginEditable "head" -->
@@ -31,28 +31,28 @@
 			<div id="contentIndent">
 				<!-- #BeginEditable "content" -->
 
-<h1>SplitterLayout</h1>
-<h3>A Layout Manager for Split Windows</h3>
-<p><tt>SplitterLayout</tt> is a simple layout manager that handles segmented
-displays with optional draggable bars between them.&nbsp; In its simplest use,
-it's just a nice proportional layout manager.&nbsp; More complex uses can create
-some interesting GUIs.</p>
-<p>Here are some examples.&nbsp; I'll add more information to this page as I get
-time.&nbsp;&nbsp; <tt>SplitterLayout</tt> is available as part of the <tt>TabSplitter</tt>
-distribution.&nbsp; See <tt><a href="index.html">TabSplitter</a></tt> for
-details on how to download it.</p>
-<p>NOTE 1: All of these examples require a JDK 1.1 compatible browser. </p>
-<p>NOTE 2: Because I use AWT <tt>Window</tt>s to represent the SplitterBars as
-they are moving, they will probably appear with the words &quot;Warning Applet
-Window&quot; or something like that on them as they are being dragged.&nbsp; I'm
-trying to come up with a solution for this... Grr... Arg...</p>
-<h2>Proportional layouts with no <tt>SplitterBar</tt>s</h2>
-<p>
-<applet width="533" height="291" code="com.magelang.test.SplitterEx1.class" archive="tabsplitter.jar">
-    You either do not have Java support or it is disabled in your browser
-</applet>
-</p>
-<p>The above layout was created with the following code:</p>
+<h1>SplitterLayout</h1>
+<h3>A Layout Manager for Split Windows</h3>
+<p><tt>SplitterLayout</tt> is a simple layout manager that handles segmented
+displays with optional draggable bars between them.&nbsp; In its simplest use,
+it's just a nice proportional layout manager.&nbsp; More complex uses can create
+some interesting GUIs.</p>
+<p>Here are some examples.&nbsp; I'll add more information to this page as I get
+time.&nbsp;&nbsp; <tt>SplitterLayout</tt> is available as part of the <tt>TabSplitter</tt>
+distribution.&nbsp; See <tt><a href="index.html">TabSplitter</a></tt> for
+details on how to download it.</p>
+<p>NOTE 1: All of these examples require a JDK 1.1 compatible browser. </p>
+<p>NOTE 2: Because I use AWT <tt>Window</tt>s to represent the SplitterBars as
+they are moving, they will probably appear with the words &quot;Warning Applet
+Window&quot; or something like that on them as they are being dragged.&nbsp; I'm
+trying to come up with a solution for this... Grr... Arg...</p>
+<h2>Proportional layouts with no <tt>SplitterBar</tt>s</h2>
+<p>
+<applet width="533" height="291" code="com.magelang.test.SplitterEx1.class" archive="tabsplitter.jar">
+    You either do not have Java support or it is disabled in your browser
+</applet>
+</p>
+<p>The above layout was created with the following code:</p>
 <a name='figure.1'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 1: Layout example 1</p><pre class='content'><span class='keyword'>package</span> <span class='ident'>com</span><span class='operator'>.</span><span class='ident'>magelang</span><span class='operator'>.</span><span class='ident'>test</span><span class='operator'>;</span>
 
 
@@ -86,15 +86,15 @@ trying to come up with a solution for this... Grr... Arg...</p>
   <span class='operator'>}</span>
 
 <span class='operator'>}</span>  </pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
-<p>The quoted numbers act as proportions to determine the amount of
-space each component gets.</p>
-<h2>Adding <tt>SplitterBar</tt>s</h2>
-<p>
-<applet width="533" height="291" code="com.magelang.test.SplitterEx2.class" archive="tabsplitter.jar">
-    You either do not have Java support or it is disabled in your browser
-</applet>
-</p>
-<p>The above layout was created with the following code:</p>
+<p>The quoted numbers act as proportions to determine the amount of
+space each component gets.</p>
+<h2>Adding <tt>SplitterBar</tt>s</h2>
+<p>
+<applet width="533" height="291" code="com.magelang.test.SplitterEx2.class" archive="tabsplitter.jar">
+    You either do not have Java support or it is disabled in your browser
+</applet>
+</p>
+<p>The above layout was created with the following code:</p>
 <a name='figure.2'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 2: Layout example 2</p><pre class='content'><span class='keyword'>package</span> <span class='ident'>com</span><span class='operator'>.</span><span class='ident'>magelang</span><span class='operator'>.</span><span class='ident'>test</span><span class='operator'>;</span>
 
 
@@ -136,21 +136,21 @@ space each component gets.</p>
   <span class='operator'>}</span>
 
 <span class='operator'>}</span>  </pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
-<p>Adding Splitterbars between components allows the user to resize
-the components.&nbsp; The quoted numbers are now only used as an initial size
-for the components.</p>
-<h2>SplitterBars can contain other components!</h2>
-<p><tt>SplitterBar</tt>s are just <tt>Panel</tt>s with dragging and
-painting stuff added.&nbsp; They can contain any other components you want in
-any layout (even another <tt>SplitterLayout</tt>!)&nbsp; The following shows a
-simple &quot;movable status bar&quot; layout:</p>
-<p>
-<applet width="533" height="291" code="com.magelang.test.SplitterEx3.class" archive="tabsplitter.jar">
-    You either do not have Java support or it is disabled in your browser
-</applet>
-</p>
-<p>&nbsp;</p>
-<p>The above layout was created with the following code:</p>
+<p>Adding Splitterbars between components allows the user to resize
+the components.&nbsp; The quoted numbers are now only used as an initial size
+for the components.</p>
+<h2>SplitterBars can contain other components!</h2>
+<p><tt>SplitterBar</tt>s are just <tt>Panel</tt>s with dragging and
+painting stuff added.&nbsp; They can contain any other components you want in
+any layout (even another <tt>SplitterLayout</tt>!)&nbsp; The following shows a
+simple &quot;movable status bar&quot; layout:</p>
+<p>
+<applet width="533" height="291" code="com.magelang.test.SplitterEx3.class" archive="tabsplitter.jar">
+    You either do not have Java support or it is disabled in your browser
+</applet>
+</p>
+<p>&nbsp;</p>
+<p>The above layout was created with the following code:</p>
 <a name='figure.3'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 3: Layout example 3</p><pre class='content'><span class='keyword'>package</span> <span class='ident'>com</span><span class='operator'>.</span><span class='ident'>magelang</span><span class='operator'>.</span><span class='ident'>test</span><span class='operator'>;</span>
 
 
@@ -214,8 +214,8 @@ simple &quot;movable status bar&quot; layout:</p>
   <span class='operator'>}</span>
 
 <span class='operator'>}</span>  </pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
-
-				</a>
+
+				</a>
 				<!-- #EndEditable "content" -->
 				<div id="footer">
 					<p>&nbsp;</p>

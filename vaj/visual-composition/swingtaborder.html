@@ -1,14 +1,14 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
 
-
-<!-- #BeginTemplate "../../master.dwt" -->
-
+
+<!-- #BeginTemplate "../../master.dwt" -->
+
 	<head>
 		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 		<!-- #BeginEditable "doctitle" -->
 
-		<title>VAJ: Swing Tab Borders - Scott Stanchfield</title>
+		<title>VAJ: Swing Tab Borders - Scott Stanchfield</title>
 		<!-- #EndEditable -->
 		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
 		<!-- #BeginEditable "head" -->
@@ -31,25 +31,25 @@
 			<div id="contentIndent">
 				<!-- #BeginEditable "content" -->
 
-<h1>Swing Tabbed Borders</h1>
-<p>Turns out I needed to write a section on tab ordering for my book today, so I figured
-out a workaround for the problem of using <b>Set Tabbing...</b> in the VCE.</p><p>Import the following
-<code> ContainerOrderFocusManager</code> class into VisualAge (put it in whatever package you want)
-and add</p><pre>FocusManager.setCurrentManager(new ContainerOrderFocusManager());</pre>
-<p>
-to your <code> main()</code> (or <code> initialize()</code> if you prefer) <i>if
-you are using a Swing Container</i> such as <code>JPanel</code>, <code>JFrame</code>...<br/>
-<br/>
-(NOTE: If you have</p><pre>import java.awt.*;</pre>
-<p>
-in your code you'll need to explicitly qualify the <code> FocusManager</code> as
-<code>com.sun.java.swing.FocusManager</code> or <code>javax.swing.FocusManager</code>, because AWT
-has its own <code> FocusManager</code> class...)</p><p>This is a Swing focus manager that determines the component order based
-on component order inside a Container.</p><p>This means you can use the Tab Ordering controls in the VCE for Swing
-containers that use a null layout (<b><i>BAD IDEA</i></b>!) or <code> BorderLayout</code> or
-<code>GridBagLayout</code>. Other layout managers, such as <code> GridLayout </code> and
-<code>FlowLayout</code>, use the component order to determine order of display, so the VCE won't
-let you rearrange their tabbing order.</p><p>I've only tested it for about 10 min right now, so there could be a bug
+<h1>Swing Tabbed Borders</h1>
+<p>Turns out I needed to write a section on tab ordering for my book today, so I figured
+out a workaround for the problem of using <b>Set Tabbing...</b> in the VCE.</p><p>Import the following
+<code> ContainerOrderFocusManager</code> class into VisualAge (put it in whatever package you want)
+and add</p><pre>FocusManager.setCurrentManager(new ContainerOrderFocusManager());</pre>
+<p>
+to your <code> main()</code> (or <code> initialize()</code> if you prefer) <i>if
+you are using a Swing Container</i> such as <code>JPanel</code>, <code>JFrame</code>...<br/>
+<br/>
+(NOTE: If you have</p><pre>import java.awt.*;</pre>
+<p>
+in your code you'll need to explicitly qualify the <code> FocusManager</code> as
+<code>com.sun.java.swing.FocusManager</code> or <code>javax.swing.FocusManager</code>, because AWT
+has its own <code> FocusManager</code> class...)</p><p>This is a Swing focus manager that determines the component order based
+on component order inside a Container.</p><p>This means you can use the Tab Ordering controls in the VCE for Swing
+containers that use a null layout (<b><i>BAD IDEA</i></b>!) or <code> BorderLayout</code> or
+<code>GridBagLayout</code>. Other layout managers, such as <code> GridLayout </code> and
+<code>FlowLayout</code>, use the component order to determine order of display, so the VCE won't
+let you rearrange their tabbing order.</p><p>I've only tested it for about 10 min right now, so there could be a bug
 lurking in there. If you find any problems or have a better solution, please let me know!</p><pre>import com.sun.java.swing.DefaultFocusManager;
 
 // OR import javax.swing.DefaultFocusManager;
@@ -162,7 +162,7 @@ public class ContainerOrderFocusManager extends DefaultFocusManager {
 
     }
 
-}</pre>
+}</pre>
 				<!-- #EndEditable "content" -->
 				<div id="footer">
 					<p>&nbsp;</p>

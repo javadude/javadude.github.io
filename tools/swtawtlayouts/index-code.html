@@ -1,14 +1,14 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
 
-
-<!-- #BeginTemplate "../../master.dwt" -->
-
+
+<!-- #BeginTemplate "../../master.dwt" -->
+
 	<head>
 		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 		<!-- #BeginEditable "doctitle" -->
 
-		<title>AWT Layouts for SWT - Scott Stanchfield</title>
+		<title>AWT Layouts for SWT - Scott Stanchfield</title>
 		<!-- #EndEditable -->
 		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
 		<!-- #BeginEditable "head" -->
@@ -31,43 +31,43 @@
 			<div id="contentIndent">
 				<!-- #BeginEditable "content" -->
 
-
-<h1>AWT Layout Managers for SWT</h1>
-<h2>Description</h2>
-<p>I've converted three of the main AWT layout managers for use in SWT. You can 
-use these layouts inside <a href="http://www.eclipse.org">Eclipse</a>, or in a 
-standalone SWT application.</p>
-<ul>
-  <li>BorderLayout</li>
-  <li>GridLayout</li>
-  <li>FlowLayout</li>
-</ul>
-<p>For now, the docs are light; I just wanted to get this up for people to 
-try...</p>
-<h2>Installation</h2>
-<p>To install the SWT/AWT layout managers in eclipse.</p>
-<p>When mentioned, <i><b>installdir</b></i> refers to the directory in which you
-installed Eclipse. This is often <b>c:\eclipse</b>, but could be any directory 
-you chose.</p>
-<ol>
-    <li>Shutdown eclipse if it's running.</li>
-    <li>Download <a href="com.javadude.swt.layouts_1.0.0.zip">
-    com.javadude.swt.layouts_1.0.0.zip</a> from this site. This zip includes the  executables for
-        the layouts. I'll provide source in the future, once I clean it up ;)</li>
-    <li>Extract the zip file into the <b><i>installdir</i></b>
-        directory. This should add a com.javadude.swt.layouts directory into 
-    your <b><i>installdir</i>/plugins</b> directory.</li>
-    <li>Startup Eclipse. The plugin is loaded and should be available for use in 
-    your plugins or applications.</li>
-</ol>
-<h2>Use</h2>
-<p>First, create a plugin project that you want to use the SWT/AWT layouts in. 
-Add the &quot;JavaDude SWT/AWT Layouts Plugin&quot; as a dependency to your plugin.</p>
-<p>When writing your code, you use the layouts just like any other SWT layout. 
-Borderlayout requires that you set layout constraints on the contained 
-components. Some examples (more detailed docs and examples with appear later...)</p>
-<h3>BorderLayout Example</h3>
-<p class='figcap'>BorderLayout Example</p>
+
+<h1>AWT Layout Managers for SWT</h1>
+<h2>Description</h2>
+<p>I've converted three of the main AWT layout managers for use in SWT. You can 
+use these layouts inside <a href="http://www.eclipse.org">Eclipse</a>, or in a 
+standalone SWT application.</p>
+<ul>
+  <li>BorderLayout</li>
+  <li>GridLayout</li>
+  <li>FlowLayout</li>
+</ul>
+<p>For now, the docs are light; I just wanted to get this up for people to 
+try...</p>
+<h2>Installation</h2>
+<p>To install the SWT/AWT layout managers in eclipse.</p>
+<p>When mentioned, <i><b>installdir</b></i> refers to the directory in which you
+installed Eclipse. This is often <b>c:\eclipse</b>, but could be any directory 
+you chose.</p>
+<ol>
+    <li>Shutdown eclipse if it's running.</li>
+    <li>Download <a href="com.javadude.swt.layouts_1.0.0.zip">
+    com.javadude.swt.layouts_1.0.0.zip</a> from this site. This zip includes the  executables for
+        the layouts. I'll provide source in the future, once I clean it up ;)</li>
+    <li>Extract the zip file into the <b><i>installdir</i></b>
+        directory. This should add a com.javadude.swt.layouts directory into 
+    your <b><i>installdir</i>/plugins</b> directory.</li>
+    <li>Startup Eclipse. The plugin is loaded and should be available for use in 
+    your plugins or applications.</li>
+</ol>
+<h2>Use</h2>
+<p>First, create a plugin project that you want to use the SWT/AWT layouts in. 
+Add the &quot;JavaDude SWT/AWT Layouts Plugin&quot; as a dependency to your plugin.</p>
+<p>When writing your code, you use the layouts just like any other SWT layout. 
+Borderlayout requires that you set layout constraints on the contained 
+components. Some examples (more detailed docs and examples with appear later...)</p>
+<h3>BorderLayout Example</h3>
+<p class='figcap'>BorderLayout Example</p>
 <pre>Composite parent = ...;
 
 
@@ -102,9 +102,9 @@ southButton.setText(&quot;South&quot;);
 
 // For example:
 
-parent.setLayout(new BorderLayout(5,3));</pre>
-<h3>GridLayout Example</h3>
-<p class='figcap'>GridLayout Example</p>
+parent.setLayout(new BorderLayout(5,3));</pre>
+<h3>GridLayout Example</h3>
+<p class='figcap'>GridLayout Example</p>
 <pre>Composite parent = ...;
 
 
@@ -135,9 +135,9 @@ b2.setText(&quot;2&quot;);
 
 // For example:
 
-parent.setLayout(new GridLayout(2,0,5,3));</pre>
-<h3>FlowLayout Example</h3>
-<p class='figcap'>FlowLayout example</p>
+parent.setLayout(new GridLayout(2,0,5,3));</pre>
+<h3>FlowLayout Example</h3>
+<p class='figcap'>FlowLayout example</p>
 <pre>Composite parent = ...;
 
 
@@ -168,28 +168,28 @@ b2.setText(&quot;2&quot;);
 
 // For example:
 
-parent.setLayout(new FlowLayout(FlowLayout.RIGHT));</pre>
-<h2>Uninstalling from Eclipse</h2>
-<p>To uninstall from Eclipse, simply delete the <b><i>installdir</i>/plugins/com.javadude.swt.layouts</b> 
-directory.</p>
-<h2>License</h2>
-<p>This AWT/SWT layouts package is free for <em>any</em> use <em>other</em>
-than selling it as a stand-alone product.</p>
-<p>Note that this code is provided &quot;as-is&quot; without any warrantee or
-guarantee of suitability for any purpose. Scott Stanchfield cannot be held
-responsible for any damage caused by use this code.</p>
-<p>(In other words, use 'em for free at your own risk.)</p>
-<h2>Bug Reports/Feature Requests</h2>
-<p>Please let me know about any bugs you find or requests for what you'd like to
-see this tool do.&nbsp; Feel free to send example code to implement it as well.</p>
-<h2>Future Directions</h2>
-<ul>
-    <li>I need to document and comment the code like crazy</li>
-    <li>Providing source</li>
-    <li>Providing more complete examples</li>
-</ul>
-<p>&nbsp; </p>
-
+parent.setLayout(new FlowLayout(FlowLayout.RIGHT));</pre>
+<h2>Uninstalling from Eclipse</h2>
+<p>To uninstall from Eclipse, simply delete the <b><i>installdir</i>/plugins/com.javadude.swt.layouts</b> 
+directory.</p>
+<h2>License</h2>
+<p>This AWT/SWT layouts package is free for <em>any</em> use <em>other</em>
+than selling it as a stand-alone product.</p>
+<p>Note that this code is provided &quot;as-is&quot; without any warrantee or
+guarantee of suitability for any purpose. Scott Stanchfield cannot be held
+responsible for any damage caused by use this code.</p>
+<p>(In other words, use 'em for free at your own risk.)</p>
+<h2>Bug Reports/Feature Requests</h2>
+<p>Please let me know about any bugs you find or requests for what you'd like to
+see this tool do.&nbsp; Feel free to send example code to implement it as well.</p>
+<h2>Future Directions</h2>
+<ul>
+    <li>I need to document and comment the code like crazy</li>
+    <li>Providing source</li>
+    <li>Providing more complete examples</li>
+</ul>
+<p>&nbsp; </p>
+
 				<!-- #EndEditable "content" -->
 				<div id="footer">
 					<p>&nbsp;</p>

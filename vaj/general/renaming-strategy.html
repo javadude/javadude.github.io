@@ -1,14 +1,14 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
 
-
-<!-- #BeginTemplate "../../master.dwt" -->
-
+
+<!-- #BeginTemplate "../../master.dwt" -->
+
 	<head>
 		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 		<!-- #BeginEditable "doctitle" -->
 
-		<title>VAJ: Renaming - Scott Stanchfield</title>
+		<title>VAJ: Renaming - Scott Stanchfield</title>
 		<!-- #EndEditable -->
 		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
 		<!-- #BeginEditable "head" -->
@@ -31,29 +31,29 @@
 			<div id="contentIndent">
 				<!-- #BeginEditable "content" -->
 
-<h1>Renaming</h1>
-<h3>NOTE: This needs to be updated for version 3.0! There are some better ways to do this in 3.0!</h3>
-
-<p>VisualAge does an &quot;ok&quot; job when you move classes from package to package. <em>Most</em> references to the class will be updated, but some won't.</p>
-<p>Fortunately, VisualAge will quickly flag where the problems are so you can go change them.</p>
-<h2>A general strategy</h2>
-<ul>
-  <li>pick the right names to start with... ;)</li>
-  <li>version everything! This way you can start over if there's trouble</li>
-  <li>rather than rename, consider only moving classes to different packages. VAJ does a much better job dealing with these.</li>
-  <li>rather than rename, try moving the class to the <em>same</em> package it's in, and choose the &quot;rename&quot; box. (Haven't tried this, but it might work.) I would guess that VAJ does a better job as it considers the operation a
-        &quot;move&quot; and should fix refs</li>
-</ul>
-<h2>When renaming...</h2>
-<ul>
-  <li>rename <em>one</em> class at a time!</li>
-  <li>look for gray or red X's on VCE classes (&quot;puzzle-piece classes&quot;)</li>
-  <li>open VCE classes to the VCE</li>
-  <li>if any beans look bad (like class not found/no picture), create a new bean of the new type and drag connections from the old bean to the new one.&nbsp; You'll need to assign the properties... :(</li>
-  <li>any non-VCE classes are easy - just fix the red X's ;) This can be a <em>lot</em> of work. In general, moving classes between packages is much better supported. I think the VAJ assumption is that if you're renaming something, you really don't
-        intend it to be the same class any more, so refs aren't fixed. If you are <em>moving</em> something, it's still really the same class, so refs are <em>mostly</em> fixed.</li>
-</ul>
-<p>Note that VisualAge for Java version 2.0 has a cool bean &quot;morphing&quot; function in the VCE -- you can morph a bean of one type into another and it will retain applicable connections and property settings.</p>
+<h1>Renaming</h1>
+<h3>NOTE: This needs to be updated for version 3.0! There are some better ways to do this in 3.0!</h3>
+
+<p>VisualAge does an &quot;ok&quot; job when you move classes from package to package. <em>Most</em> references to the class will be updated, but some won't.</p>
+<p>Fortunately, VisualAge will quickly flag where the problems are so you can go change them.</p>
+<h2>A general strategy</h2>
+<ul>
+  <li>pick the right names to start with... ;)</li>
+  <li>version everything! This way you can start over if there's trouble</li>
+  <li>rather than rename, consider only moving classes to different packages. VAJ does a much better job dealing with these.</li>
+  <li>rather than rename, try moving the class to the <em>same</em> package it's in, and choose the &quot;rename&quot; box. (Haven't tried this, but it might work.) I would guess that VAJ does a better job as it considers the operation a
+        &quot;move&quot; and should fix refs</li>
+</ul>
+<h2>When renaming...</h2>
+<ul>
+  <li>rename <em>one</em> class at a time!</li>
+  <li>look for gray or red X's on VCE classes (&quot;puzzle-piece classes&quot;)</li>
+  <li>open VCE classes to the VCE</li>
+  <li>if any beans look bad (like class not found/no picture), create a new bean of the new type and drag connections from the old bean to the new one.&nbsp; You'll need to assign the properties... :(</li>
+  <li>any non-VCE classes are easy - just fix the red X's ;) This can be a <em>lot</em> of work. In general, moving classes between packages is much better supported. I think the VAJ assumption is that if you're renaming something, you really don't
+        intend it to be the same class any more, so refs aren't fixed. If you are <em>moving</em> something, it's still really the same class, so refs are <em>mostly</em> fixed.</li>
+</ul>
+<p>Note that VisualAge for Java version 2.0 has a cool bean &quot;morphing&quot; function in the VCE -- you can morph a bean of one type into another and it will retain applicable connections and property settings.</p>
 				<!-- #EndEditable "content" -->
 				<div id="footer">
 					<p>&nbsp;</p>

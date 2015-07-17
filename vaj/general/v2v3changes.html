@@ -1,14 +1,14 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
 
-
-<!-- #BeginTemplate "../../master.dwt" -->
-
+
+<!-- #BeginTemplate "../../master.dwt" -->
+
 	<head>
 		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 		<!-- #BeginEditable "doctitle" -->
 
-		<title>VAJ: V2-&gt;V3 Changes - Scott Stanchfield</title>
+		<title>VAJ: V2-&gt;V3 Changes - Scott Stanchfield</title>
 		<!-- #EndEditable -->
 		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
 		<!-- #BeginEditable "head" -->
@@ -31,603 +31,603 @@
 			<div id="contentIndent">
 				<!-- #BeginEditable "content" -->
 
-
-<h1>VAJ: V2-&gt;V3 Changes</h1>
-<p>This chapter presents a partial list of the changes made
-between VisualAge for Java versions 2.0 and 3.0. This is not a complete list,
-but we present it to give you an idea of the types of changes made. If you have
-used version 2.0 in the past, this list can serve as a quick means to find some
-very nice improvements in the tool. We do not describe these changes in detail
-here, though most of the changes appear in the book.
-</p>
-
-<p>If you know of any changes that do not appear in this list,
-please email Scott Stanchfield, <a href="mailto:scott@javadude.com">scott@javadude.com</a>.
-</p>
-
-
-<h1>The Workbench</h1>
-<ul>
-  <li>
-
-    <p>The quick start menu (available from <b>File-&gt;Quick
-    Start</b> menu item) has more options, helping you access tools to build
-    applications and applets, manage the respository, and others.<br/></p>
-  </li>
-  <li>
-
-    <p>Three new menu items appear at the top of the Workspace
-    menu. These items allow you to open a project, type or package browser
-    without changing the current selection in your browser. This is a great
-    benefit, because you don't need to save one method or class to view another.<br/></p>
-  </li>
-  <li>
-
-    <p>Resource files now appear in a tab in the project
-    browser. You can open, delete, and rename these files. You can assign which
-    program or Java class opens each type of resource file.<br/></p>
-  </li>
-  <li>
-
-    <p>A new application wizard helps you build visual
-    application.<br/></p>
-  </li>
-  <li>
-
-    <p>The run command keeps track of the last several runs.
-    You can right-click on the run button on the toolbar to choose a previous
-    class to run. This helps because you do not need to select the class again
-    to run it.<br/></p>
-  </li>
-  <li>
-
-    <p>A new Version button appears on the toolbar to version
-    the selected objects.<br/></p>
-  </li>
-  <li>
-
-    <p>Generate-&gt;Required methods command for classes adds
-    stub methods required by interfaces or abstract superclasses.<br/></p>
-  </li>
-  <li>
-
-    <p>Generate-&gt;Accessor Methods (get/set) for fields.<br/></p>
-  </li>
-  <li>
-
-    <p>Reorganize-&gt;Fix/Migrate command renames package
-    references in classes <i>and</i> in their visual design information. This is
-    useful if you rename a package, or want to move from Swing 1.0.3 to Swing
-    1.1.1.<br/></p>
-  </li>
-  <li>
-
-    <p>The Window-&gt;Orientation menu has change to provide a
-    simpler Window-&gt;Flip orientation option.<br/></p>
-  </li>
-  <li>
-
-    <p>The tree views remember their last tree expansion
-    state.<br/></p>
-  </li>
-  <li>
-
-    <p>You can now open browsers in the same window, moving
-    between windows using a forward and back button in the toolbar.<br/></p>
-  </li>
-  <li>
-
-    <p>Bookmarks are a bit easier to manage, and are more
-    visible via menus.<br/></p>
-  </li>
-  <li>
-
-    <p>The status bar is now segmented, showing a more
-    organized view of its data. You now have the choice of seeing the developer <i>or</i>
-    owner of types in the status bar by right-clicking on the user name.<br/></p>
-  </li>
-  <li>
-
-    <p>The all projects pane has filter buttons at top to
-    limit public items, static methods, and field display.<br/></p>
-  </li>
-  <li>
-
-    <p>Members panes have filter buttons at top that limit
-    public items, static methods, visibility to root minus one, and field
-    display.<br/></p>
-  </li>
-  <li>
-
-    <p>Online help format is significantly improved.<br/></p>
-  </li>
-  <li>
-
-    <p>Browsers open to last-selected tab.<br/></p>
-  </li>
-  <li>
-
-    <p>A new Problems page appears in property dialogs for
-    projects, packages, classes, showing a summary of problems.<br/></p>
-  </li>
-  <li>
-
-    <p>Reorganize-&gt;Rename for classes now has a checkbox to
-    find references to the old name.<br/></p>
-  </li>
-  <li>
-
-    <p>The console makes it easier to control termination and
-    removal of programs.<br/></p>
-  </li>
-  <li>
-
-    <p>New warning added for unconventional package names.<br/></p>
-  </li>
-  <li>
-
-    <p>Attribute filters added to allow limiting displayed
-    items in lists (protection, fields, abstract, final, constructors, etc)<br/></p>
-  </li>
-  <li>
-
-    <p>SmartGuides can add imports for selected
-    fully-qualified types.</p>
-  </li>
-</ul>
-
-
-<h1>Keyboard Features</h1>
-<ul>
-  <li>
-
-    <p>The Whatis command is available by pressing F6. You
-    then can press another key and VisualAge tells you what command it binds.<br/></p>
-  </li>
-  <li>
-
-    <p>You can run a class via a keyboard assignment. By
-    default this is bound to control-e.<br/></p>
-  </li>
-  <li>
-
-    <p>You can maximize panes using (by default) control-m.<br/></p>
-  </li>
-  <li>
-
-    <p>You can change key bindings in the options dialog.<br/></p>
-  </li>
-  <li>
-
-    <p>Multiple keys can be bound to same action.<br/></p>
-  </li>
-  <li>
-
-    <p>Emacs style key presses available.</p>
-  </li>
-</ul>
-
-
-<h1>Code Assist</h1>
-<ul>
-  <li>
-
-    <p>Available in more places<br/></p>
-  </li>
-  <li>
-
-    <p>Can choose completion using other keys.<br/></p>
-  </li>
-  <li>
-
-    <p>Can automatically insert if only one completion.<br/></p>
-  </li>
-  <li>
-
-    <p>Does not require all text to be correct in scrapbook.<br/></p>
-  </li>
-  <li>
-
-    <p>Types are now shown for fields and macros in selection
-    list.<br/></p>
-  </li>
-  <li>
-
-    <p>Now works case-insensitive, except for first character.<br/></p>
-  </li>
-  <li>
-
-    <p>Code assist available in SmartGuide fields that ask for
-    existing class or field names.<br/></p>
-  </li>
-  <li>
-
-    <p>Method parameter names now appear in tooltips.</p>
-  </li>
-</ul>
-
-
-<h1>Editor</h1>
-<ul>
-  <li>
-
-    <p>Comment a block of code.<br/></p>
-  </li>
-  <li>
-
-    <p>Incremental text search (control-i).<br/></p>
-  </li>
-  <li>
-
-    <p>Open selected text (package, class, method) object
-    browser (F3).<br/></p>
-  </li>
-  <li>
-
-    <p>Deeper undo (20 levels).<br/></p>
-  </li>
-  <li>
-
-    <p>Cursor movement no longer loses undo data.<br/></p>
-  </li>
-  <li>
-
-    <p>Backspace/delete now undo properly.<br/></p>
-  </li>
-  <li>
-
-    <p>View reference (API) help (control-h).<br/></p>
-  </li>
-  <li>
-
-    <p>Set breakpoint (control-b).<br/></p>
-  </li>
-  <li>
-
-    <p>HTML tags in documentation comments are now color
-    coded.<br/></p>
-  </li>
-  <li>
-
-    <p>Keyword completions can create entire language
-    constructs.<br/></p>
-  </li>
-  <li>
-
-    <p>Macros</p>
-    <ul>
-      <li>
-
-        <p>Any text you want</p>
-      </li>
-      <li>
-
-        <p>&lt;user&gt; - insert current user name</p>
-      </li>
-      <li>
-
-        <p>&lt;timestamp&gt; - insert current time</p>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-
-<h1>Searching</h1>
-<ul>
-  <li>
-
-    <p>Keeps track of previous searches. Can rerun previous
-    searches by right-cliking the flashlight icon in the toolbar.<br/></p>
-  </li>
-  <li>
-
-    <p>Working sets allow performing a search across a
-    specific set of projects, packages, types.<br/></p>
-  </li>
-  <li>
-
-    <p>Textual find/replace across multiple objects, and can
-    now do whole-word matching.<br/></p>
-  </li>
-  <li>
-
-    <p>Easier navigation to next occurrence (up/down buttons
-    moved to matches pane).<br/></p>
-  </li>
-  <li>
-
-    <p>Can sort results by method or class.<br/></p>
-  </li>
-  <li>
-
-    <p>Can remove some results from view.<br/></p>
-  </li>
-  <li>
-
-    <p>Can replace matches w/ something else.<br/></p>
-  </li>
-  <li>
-
-    <p>Search scope consistent across all search dialogs and
-    management query.<br/></p>
-  </li>
-  <li>
-
-    <p>Search scope is now clearly visible and modifiable.<br/></p>
-  </li>
-  <li>
-
-    <p>Common scope choices added to method popup menu search
-    items.<br/></p>
-  </li>
-  <li>
-
-    <p>Field search menus combined into single dialog.<br/></p>
-  </li>
-  <li>
-
-    <p>Has menu options for called methods and used variables
-    in methods popup.<br/></p>
-  </li>
-  <li>
-
-    <p>Restructured &quot;references to&quot; and
-    &quot;declarations of&quot; menu items.<br/></p>
-  </li>
-  <li>
-
-    <p>Management Query Improvements</p>
-    <ul>
-      <li>
-
-        <p>Simpler interface</p>
-      </li>
-      <li>
-
-        <p>Common queries added as dropdown menu.</p>
-      </li>
-      <li>
-
-        <p>Allows projects, packages, types in same search.</p>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-
-<h1>Import/Export</h1>
-<ul>
-  <li>
-
-    <p>Can automatically version after import.<br/></p>
-  </li>
-  <li>
-
-    <p>Can automatically add most recent version of project in
-    a repository import file to workspace.</p>
-  </li>
-</ul>
-
-
-<h1>Debugging</h1>
-<ul>
-  <li>
-
-    <p>More control of conditional breakpoints.</p>
-    <ul>
-      <li>
-
-        <p>Can set for a specific iteration</p>
-      </li>
-      <li>
-
-        <p>Can set for specific threads<br/></p>
-      </li>
-    </ul>
-  </li>
-  <li>
-
-    <p>Watch window added to watch variable and expression
-    values.<br/></p>
-  </li>
-  <li>
-
-    <p>Evaluation window allows you to evaluate any code
-    without modifying the source code.<br/></p>
-  </li>
-  <li>
-
-    <p>Can inspect selected thread in debugger<br/></p>
-  </li>
-  <li>
-
-    <p>Caught exceptions now appear as a debugger page instead
-    of a dialog.<br/></p>
-  </li>
-  <li>
-
-    <p>External classfile breakpoints now appear in
-    breakpoints list.<br/></p>
-  </li>
-  <li>
-
-    <p>Visible variables list can appear in its own window.</p>
-  </li>
-</ul>
-
-
-<h1>Scrapbook</h1>
-<ul>
-  <li>
-
-    <p>Goto line number (control-g).<br/></p>
-  </li>
-  <li>
-
-    <p>Execution contexts only added when needed.</p>
-  </li>
-</ul>
-
-
-<h1>VCE</h1>
-<ul>
-  <li>
-
-    <p>Use inner classes for event handling<br/></p>
-  </li>
-  <li>
-
-    <p>If import-on-demand used, generates unqualified class
-    names in most cases.<br/></p>
-  </li>
-  <li>
-
-    <p>Custom layout manager support.</p>
-  </li>
-  <li>
-
-    <p>Reset button available to unset properties.<br/></p>
-  </li>
-  <li>
-
-    <p>Fix unresolved references command.<br/></p>
-  </li>
-  <li>
-
-    <p>Generated code no longer uses custom classes (for
-    example WindowCloser)<br/></p>
-  </li>
-  <li>
-
-    <p>Can register property editors for types<br/></p>
-  </li>
-  <li>
-
-    <p>Null layout-to-GridBagLayout converter.<br/></p>
-  </li>
-  <li>
-
-    <p>Quick form generation based on a bean definition.<br/></p>
-  </li>
-  <li>
-
-    <p>Property-to-property connection code now checks if
-    source/target variable is null.<br/></p>
-  </li>
-  <li>
-
-    <p>The &quot;add beans from project&quot; option for
-    palette management now sorts by bean class name rather than package name.<br/></p>
-  </li>
-  <li>
-
-    <p>GridLayout now allows rows=0 setting.</p>
-  </li>
-</ul>
-
-
-<h1>BeanInfo</h1>
-<ul>
-  <li>
-
-    <p>Control-s works (if control-s is set to save/new --
-    otherwise use control-shift-s)<br/></p>
-  </li>
-  <li>
-
-    <p>Preferred checkbox in SmartGuides makes it easier to
-    define preferred features.<br/></p>
-  </li>
-  <li>
-
-    <p>Delete dialog now includes fields for deleting
-    properties.<br/></p>
-  </li>
-  <li>
-
-    <p>Delete dialog now selects methods by default when
-    deleting properties.</p>
-  </li>
-</ul>
-
-
-<h1>Websphere test environment</h1>
-<ul>
-  <li>
-
-    <p>In pro/enterprise on Windows/NT<br/></p>
-  </li>
-  <li>
-
-    <p>In professional edition, supports servlets and Java
-    Server Pages (JSP)<br/></p>
-  </li>
-  <li>
-
-    <p>In enterprise edition, support Enterprise JavaBeans
-    (EJB)</p>
-  </li>
-</ul>
-
-
-<h1>Other Features</h1>
-<ul>
-  <li>
-
-    <p>JSP development environment added<br/></p>
-  </li>
-  <li>
-
-    <p>Servlet development environment added to professional<br/></p>
-  </li>
-  <li>
-
-    <p>Stored Procedure builder added<br/></p>
-  </li>
-  <li>
-
-    <p>New Data Access Beans added.<br/></p>
-  </li>
-  <li>
-
-    <p>SQLJ Support provided. Can edit and compile SQLJ files.<br/></p>
-  </li>
-  <li>
-
-    <p>Enterprise edition includes EJB Development
-    Environment.</p>
-  </li>
-</ul>
-
-
-<h1>Tool API</h1>
-<ul>
-  <li>
-
-    <p>New methods added</p>
-    <ul>
-      <li>
-
-        <p>purge() in ProjectEdition/PackageEdition</p>
-      </li>
-      <li>
-
-        <p>compact() in Repository<br/></p>
-      </li>
-    </ul>
-  </li>
-  <li>
-
-    <p>Remote access<br/></p>
-  </li>
-  <li>
-
-    <p>Tool data directory</p>
-  </li>
-</ul>
-&nbsp;
-
+
+<h1>VAJ: V2-&gt;V3 Changes</h1>
+<p>This chapter presents a partial list of the changes made
+between VisualAge for Java versions 2.0 and 3.0. This is not a complete list,
+but we present it to give you an idea of the types of changes made. If you have
+used version 2.0 in the past, this list can serve as a quick means to find some
+very nice improvements in the tool. We do not describe these changes in detail
+here, though most of the changes appear in the book.
+</p>
+
+<p>If you know of any changes that do not appear in this list,
+please email Scott Stanchfield, <a href="mailto:scott@javadude.com">scott@javadude.com</a>.
+</p>
+
+
+<h1>The Workbench</h1>
+<ul>
+  <li>
+
+    <p>The quick start menu (available from <b>File-&gt;Quick
+    Start</b> menu item) has more options, helping you access tools to build
+    applications and applets, manage the respository, and others.<br/></p>
+  </li>
+  <li>
+
+    <p>Three new menu items appear at the top of the Workspace
+    menu. These items allow you to open a project, type or package browser
+    without changing the current selection in your browser. This is a great
+    benefit, because you don't need to save one method or class to view another.<br/></p>
+  </li>
+  <li>
+
+    <p>Resource files now appear in a tab in the project
+    browser. You can open, delete, and rename these files. You can assign which
+    program or Java class opens each type of resource file.<br/></p>
+  </li>
+  <li>
+
+    <p>A new application wizard helps you build visual
+    application.<br/></p>
+  </li>
+  <li>
+
+    <p>The run command keeps track of the last several runs.
+    You can right-click on the run button on the toolbar to choose a previous
+    class to run. This helps because you do not need to select the class again
+    to run it.<br/></p>
+  </li>
+  <li>
+
+    <p>A new Version button appears on the toolbar to version
+    the selected objects.<br/></p>
+  </li>
+  <li>
+
+    <p>Generate-&gt;Required methods command for classes adds
+    stub methods required by interfaces or abstract superclasses.<br/></p>
+  </li>
+  <li>
+
+    <p>Generate-&gt;Accessor Methods (get/set) for fields.<br/></p>
+  </li>
+  <li>
+
+    <p>Reorganize-&gt;Fix/Migrate command renames package
+    references in classes <i>and</i> in their visual design information. This is
+    useful if you rename a package, or want to move from Swing 1.0.3 to Swing
+    1.1.1.<br/></p>
+  </li>
+  <li>
+
+    <p>The Window-&gt;Orientation menu has change to provide a
+    simpler Window-&gt;Flip orientation option.<br/></p>
+  </li>
+  <li>
+
+    <p>The tree views remember their last tree expansion
+    state.<br/></p>
+  </li>
+  <li>
+
+    <p>You can now open browsers in the same window, moving
+    between windows using a forward and back button in the toolbar.<br/></p>
+  </li>
+  <li>
+
+    <p>Bookmarks are a bit easier to manage, and are more
+    visible via menus.<br/></p>
+  </li>
+  <li>
+
+    <p>The status bar is now segmented, showing a more
+    organized view of its data. You now have the choice of seeing the developer <i>or</i>
+    owner of types in the status bar by right-clicking on the user name.<br/></p>
+  </li>
+  <li>
+
+    <p>The all projects pane has filter buttons at top to
+    limit public items, static methods, and field display.<br/></p>
+  </li>
+  <li>
+
+    <p>Members panes have filter buttons at top that limit
+    public items, static methods, visibility to root minus one, and field
+    display.<br/></p>
+  </li>
+  <li>
+
+    <p>Online help format is significantly improved.<br/></p>
+  </li>
+  <li>
+
+    <p>Browsers open to last-selected tab.<br/></p>
+  </li>
+  <li>
+
+    <p>A new Problems page appears in property dialogs for
+    projects, packages, classes, showing a summary of problems.<br/></p>
+  </li>
+  <li>
+
+    <p>Reorganize-&gt;Rename for classes now has a checkbox to
+    find references to the old name.<br/></p>
+  </li>
+  <li>
+
+    <p>The console makes it easier to control termination and
+    removal of programs.<br/></p>
+  </li>
+  <li>
+
+    <p>New warning added for unconventional package names.<br/></p>
+  </li>
+  <li>
+
+    <p>Attribute filters added to allow limiting displayed
+    items in lists (protection, fields, abstract, final, constructors, etc)<br/></p>
+  </li>
+  <li>
+
+    <p>SmartGuides can add imports for selected
+    fully-qualified types.</p>
+  </li>
+</ul>
+
+
+<h1>Keyboard Features</h1>
+<ul>
+  <li>
+
+    <p>The Whatis command is available by pressing F6. You
+    then can press another key and VisualAge tells you what command it binds.<br/></p>
+  </li>
+  <li>
+
+    <p>You can run a class via a keyboard assignment. By
+    default this is bound to control-e.<br/></p>
+  </li>
+  <li>
+
+    <p>You can maximize panes using (by default) control-m.<br/></p>
+  </li>
+  <li>
+
+    <p>You can change key bindings in the options dialog.<br/></p>
+  </li>
+  <li>
+
+    <p>Multiple keys can be bound to same action.<br/></p>
+  </li>
+  <li>
+
+    <p>Emacs style key presses available.</p>
+  </li>
+</ul>
+
+
+<h1>Code Assist</h1>
+<ul>
+  <li>
+
+    <p>Available in more places<br/></p>
+  </li>
+  <li>
+
+    <p>Can choose completion using other keys.<br/></p>
+  </li>
+  <li>
+
+    <p>Can automatically insert if only one completion.<br/></p>
+  </li>
+  <li>
+
+    <p>Does not require all text to be correct in scrapbook.<br/></p>
+  </li>
+  <li>
+
+    <p>Types are now shown for fields and macros in selection
+    list.<br/></p>
+  </li>
+  <li>
+
+    <p>Now works case-insensitive, except for first character.<br/></p>
+  </li>
+  <li>
+
+    <p>Code assist available in SmartGuide fields that ask for
+    existing class or field names.<br/></p>
+  </li>
+  <li>
+
+    <p>Method parameter names now appear in tooltips.</p>
+  </li>
+</ul>
+
+
+<h1>Editor</h1>
+<ul>
+  <li>
+
+    <p>Comment a block of code.<br/></p>
+  </li>
+  <li>
+
+    <p>Incremental text search (control-i).<br/></p>
+  </li>
+  <li>
+
+    <p>Open selected text (package, class, method) object
+    browser (F3).<br/></p>
+  </li>
+  <li>
+
+    <p>Deeper undo (20 levels).<br/></p>
+  </li>
+  <li>
+
+    <p>Cursor movement no longer loses undo data.<br/></p>
+  </li>
+  <li>
+
+    <p>Backspace/delete now undo properly.<br/></p>
+  </li>
+  <li>
+
+    <p>View reference (API) help (control-h).<br/></p>
+  </li>
+  <li>
+
+    <p>Set breakpoint (control-b).<br/></p>
+  </li>
+  <li>
+
+    <p>HTML tags in documentation comments are now color
+    coded.<br/></p>
+  </li>
+  <li>
+
+    <p>Keyword completions can create entire language
+    constructs.<br/></p>
+  </li>
+  <li>
+
+    <p>Macros</p>
+    <ul>
+      <li>
+
+        <p>Any text you want</p>
+      </li>
+      <li>
+
+        <p>&lt;user&gt; - insert current user name</p>
+      </li>
+      <li>
+
+        <p>&lt;timestamp&gt; - insert current time</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+
+<h1>Searching</h1>
+<ul>
+  <li>
+
+    <p>Keeps track of previous searches. Can rerun previous
+    searches by right-cliking the flashlight icon in the toolbar.<br/></p>
+  </li>
+  <li>
+
+    <p>Working sets allow performing a search across a
+    specific set of projects, packages, types.<br/></p>
+  </li>
+  <li>
+
+    <p>Textual find/replace across multiple objects, and can
+    now do whole-word matching.<br/></p>
+  </li>
+  <li>
+
+    <p>Easier navigation to next occurrence (up/down buttons
+    moved to matches pane).<br/></p>
+  </li>
+  <li>
+
+    <p>Can sort results by method or class.<br/></p>
+  </li>
+  <li>
+
+    <p>Can remove some results from view.<br/></p>
+  </li>
+  <li>
+
+    <p>Can replace matches w/ something else.<br/></p>
+  </li>
+  <li>
+
+    <p>Search scope consistent across all search dialogs and
+    management query.<br/></p>
+  </li>
+  <li>
+
+    <p>Search scope is now clearly visible and modifiable.<br/></p>
+  </li>
+  <li>
+
+    <p>Common scope choices added to method popup menu search
+    items.<br/></p>
+  </li>
+  <li>
+
+    <p>Field search menus combined into single dialog.<br/></p>
+  </li>
+  <li>
+
+    <p>Has menu options for called methods and used variables
+    in methods popup.<br/></p>
+  </li>
+  <li>
+
+    <p>Restructured &quot;references to&quot; and
+    &quot;declarations of&quot; menu items.<br/></p>
+  </li>
+  <li>
+
+    <p>Management Query Improvements</p>
+    <ul>
+      <li>
+
+        <p>Simpler interface</p>
+      </li>
+      <li>
+
+        <p>Common queries added as dropdown menu.</p>
+      </li>
+      <li>
+
+        <p>Allows projects, packages, types in same search.</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+
+<h1>Import/Export</h1>
+<ul>
+  <li>
+
+    <p>Can automatically version after import.<br/></p>
+  </li>
+  <li>
+
+    <p>Can automatically add most recent version of project in
+    a repository import file to workspace.</p>
+  </li>
+</ul>
+
+
+<h1>Debugging</h1>
+<ul>
+  <li>
+
+    <p>More control of conditional breakpoints.</p>
+    <ul>
+      <li>
+
+        <p>Can set for a specific iteration</p>
+      </li>
+      <li>
+
+        <p>Can set for specific threads<br/></p>
+      </li>
+    </ul>
+  </li>
+  <li>
+
+    <p>Watch window added to watch variable and expression
+    values.<br/></p>
+  </li>
+  <li>
+
+    <p>Evaluation window allows you to evaluate any code
+    without modifying the source code.<br/></p>
+  </li>
+  <li>
+
+    <p>Can inspect selected thread in debugger<br/></p>
+  </li>
+  <li>
+
+    <p>Caught exceptions now appear as a debugger page instead
+    of a dialog.<br/></p>
+  </li>
+  <li>
+
+    <p>External classfile breakpoints now appear in
+    breakpoints list.<br/></p>
+  </li>
+  <li>
+
+    <p>Visible variables list can appear in its own window.</p>
+  </li>
+</ul>
+
+
+<h1>Scrapbook</h1>
+<ul>
+  <li>
+
+    <p>Goto line number (control-g).<br/></p>
+  </li>
+  <li>
+
+    <p>Execution contexts only added when needed.</p>
+  </li>
+</ul>
+
+
+<h1>VCE</h1>
+<ul>
+  <li>
+
+    <p>Use inner classes for event handling<br/></p>
+  </li>
+  <li>
+
+    <p>If import-on-demand used, generates unqualified class
+    names in most cases.<br/></p>
+  </li>
+  <li>
+
+    <p>Custom layout manager support.</p>
+  </li>
+  <li>
+
+    <p>Reset button available to unset properties.<br/></p>
+  </li>
+  <li>
+
+    <p>Fix unresolved references command.<br/></p>
+  </li>
+  <li>
+
+    <p>Generated code no longer uses custom classes (for
+    example WindowCloser)<br/></p>
+  </li>
+  <li>
+
+    <p>Can register property editors for types<br/></p>
+  </li>
+  <li>
+
+    <p>Null layout-to-GridBagLayout converter.<br/></p>
+  </li>
+  <li>
+
+    <p>Quick form generation based on a bean definition.<br/></p>
+  </li>
+  <li>
+
+    <p>Property-to-property connection code now checks if
+    source/target variable is null.<br/></p>
+  </li>
+  <li>
+
+    <p>The &quot;add beans from project&quot; option for
+    palette management now sorts by bean class name rather than package name.<br/></p>
+  </li>
+  <li>
+
+    <p>GridLayout now allows rows=0 setting.</p>
+  </li>
+</ul>
+
+
+<h1>BeanInfo</h1>
+<ul>
+  <li>
+
+    <p>Control-s works (if control-s is set to save/new --
+    otherwise use control-shift-s)<br/></p>
+  </li>
+  <li>
+
+    <p>Preferred checkbox in SmartGuides makes it easier to
+    define preferred features.<br/></p>
+  </li>
+  <li>
+
+    <p>Delete dialog now includes fields for deleting
+    properties.<br/></p>
+  </li>
+  <li>
+
+    <p>Delete dialog now selects methods by default when
+    deleting properties.</p>
+  </li>
+</ul>
+
+
+<h1>Websphere test environment</h1>
+<ul>
+  <li>
+
+    <p>In pro/enterprise on Windows/NT<br/></p>
+  </li>
+  <li>
+
+    <p>In professional edition, supports servlets and Java
+    Server Pages (JSP)<br/></p>
+  </li>
+  <li>
+
+    <p>In enterprise edition, support Enterprise JavaBeans
+    (EJB)</p>
+  </li>
+</ul>
+
+
+<h1>Other Features</h1>
+<ul>
+  <li>
+
+    <p>JSP development environment added<br/></p>
+  </li>
+  <li>
+
+    <p>Servlet development environment added to professional<br/></p>
+  </li>
+  <li>
+
+    <p>Stored Procedure builder added<br/></p>
+  </li>
+  <li>
+
+    <p>New Data Access Beans added.<br/></p>
+  </li>
+  <li>
+
+    <p>SQLJ Support provided. Can edit and compile SQLJ files.<br/></p>
+  </li>
+  <li>
+
+    <p>Enterprise edition includes EJB Development
+    Environment.</p>
+  </li>
+</ul>
+
+
+<h1>Tool API</h1>
+<ul>
+  <li>
+
+    <p>New methods added</p>
+    <ul>
+      <li>
+
+        <p>purge() in ProjectEdition/PackageEdition</p>
+      </li>
+      <li>
+
+        <p>compact() in Repository<br/></p>
+      </li>
+    </ul>
+  </li>
+  <li>
+
+    <p>Remote access<br/></p>
+  </li>
+  <li>
+
+    <p>Tool data directory</p>
+  </li>
+</ul>
+&nbsp;
+
 						<!-- #EndEditable "content" -->
 				<div id="footer">
 					<p>&nbsp;</p>

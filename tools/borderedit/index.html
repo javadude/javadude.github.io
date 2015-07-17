@@ -1,14 +1,14 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
 
-
-<!-- #BeginTemplate "../../master.dwt" -->
-
+
+<!-- #BeginTemplate "../../master.dwt" -->
+
 	<head>
 		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 		<!-- #BeginEditable "doctitle" -->
 
-		<title>Swing Border Editor - Scott Stanchfield</title>
+		<title>Swing Border Editor - Scott Stanchfield</title>
 		<!-- #EndEditable -->
 		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
 		<!-- #BeginEditable "head" -->
@@ -31,114 +31,114 @@
 			<div id="contentIndent">
 				<!-- #BeginEditable "content" -->
 
-<h1>Swing Border Editor</h1>
-<h3>Simple Swing Border Editing in GUI Builders</h3>
-<h2>Description</h2>
-<h3>NOTE: Make sure you read the WARNING sections under usage -- this tool is a
-tad rough around the edges, but if you enter the right stuff it'll treat you
-well ;)</h3>
-<p>Swing Border support is fairly generic in VisualAge for Java 3.5.&nbsp; I've
-written a property editor that can be used in VAJ to make border edits easy.</p>
-<h3>NOTE: The Swing Border Editor is only supported for version 3.5 of VisualAge
-for Java. It is no longer supported for version 2.0 or 3.0.</h3>
-<h2>Installation</h2>
-<p>To install the border editor in VisualAge for Java 3.5.</p>
-<p>When mentioned, <i><b>installdir</b></i> refers to the directory in which you
-installed VisualAge for Java, version 3.5. By default, this should be <b>c:\Program
-Files\IBM\VisualAge for Java</b></p>
-<ol>
-    <li>Shutdown VisualAge for Java.</li>
-    <li>Download <a href="bordereditor.zip">bordereditor.zip</a> from
-        this site.&nbsp;&nbsp; This zip includes the source and executables for
-        the border editor.</li>
-    <li>Extract bordereditor.zip into the <b><i>installdir</i>\ide\features</b>
-        directory.</li>
-    <li>Startup VisualAge for Java.&nbsp; You should see a few messages about
-        the features being installed.</li>
-    <li>Select &quot;Quick Start&quot; from the &quot;File&quot; menu of the
-        Workbench.</li>
-    <li>Select &quot;Features&quot; from the left pane of the Quick Start
-        window, then &quot;Add Feature&quot; from the right pane.</li>
-    <li>Select &quot;Javadude Swing Border Editor&quot; and press OK.</li>
-    <li>Create and save file <b><i>installdir</i>\ide\program\lib\ivj-property-editor-registry.properties</b>
-        containing the following line:</li>
-</ol>
-<pre>javax.swing.border.Border=com.javadude.bordereditor.BorderEditor</pre>
-<h2>Use</h2>
-<h3>WARNING 1: If you use this border editor, you will lose any previous border
-settings!</h3>
-<h3>WARNING 2: I haven't added any real exception handling in yet -- BE CAREFUL
-WHEN ENTERING NUMBERS IN TEXTFIELDS!&nbsp; I'll fix this when I have time.&nbsp;
-I just wanted to get this out to try.</h3>
-<h3>WARNING 3: If you use &quot;Custom&quot; borders, you're completely on your
-own for the code you write.&nbsp; Be careful.&nbsp; And make sure you either add
-<tt>import</tt> statements for any class refs, or fully-qualify them.</h3>
-<p><img src="images/bordered1.gif" alt="bordered1.gif (8132 bytes)" width="611" height="390"/></p>
-<p>Hopefully the interface is fairly obvious.</p>
-<p>You select from the type of border you want:</p>
-<ul>
-    <li>
-        <p><strong>bevel</strong> - a raised/lowered, and possibly
-        &quot;soft&quot; bevel border</p></li>
-    <li>
-        <p><strong>etched</strong> - an etched/raised line</p></li>
-    <li>
-        <p><strong>line</strong> - a varying width and color line
-        around the edge.&nbsp;&nbsp; <em><strong>NOTE: Make sure you enter valid
-        numbers or you'll see exceptions thrown in the console...&nbsp; I'll fix
-        this in the next release.</strong></em></p></li>
-    <li>
-        <p><strong>empty</strong> - empty space around the edges. <em><strong>NOTE:
-        Make sure you enter valid numbers or you'll see exceptions thrown in the
-        console...&nbsp;&nbsp; I'll fix this in the next release.</strong></em></p></li>
-    <li>
-        <p><strong>custom</strong> - you type the code -- <strong>NOTE:
-        the tool does <em>not</em> verify this code!</strong></p></li>
-    <li>
-        <p><strong>none</strong> - the layout will be set to
-        &quot;null&quot;.&nbsp;&nbsp; Note that this is <em>not</em> the same as
-        the &quot;default&quot; layout for the border.&nbsp; There is currently
-        no way in VAJ to &quot;unset&quot; a property once it has been set.</p></li>
-</ul>
-<p>Fill in the details for the border type you want, then choose if
-you want that border titled or not.&nbsp; If you want it titled, select the
-parameters for the titling.</p>
-<p>As you make changes, they will be reflected in the border
-editor's border so you can see what the result will look like.</p>
-<p>When you press &quot;Ok&quot; you should see the new border appear in the VCE
-around the component being edited.</p>
-<h2>Uninstalling from VisualAge for Java, version 3.5</h2>
-<p>To uninstall from version 3.5:</p>
-<ol>
-    <li>Delete the</li>
-</ol>
-<blockquote>
-    <pre>javax.swing.border.Border=com.javadude.bordereditor.BorderEditor</pre>
-    <p>line from <b><i>installdir</i>\ide\program\lib\ivj-property-editor-registry.properties</b></p>
-</blockquote>
-<ol>
-    <li>Delete the added features (<b>File-&gt;Quick
-        Start-&gt;Features-&gt;Delete Feature</b>)</li>
-</ol>
-<h2>License</h2>
-<p>The Swing Border Editor for VisualAge for Java is free for <em>any</em> use <em>other</em>
-than selling it as a stand-alone product.</p>
-<p>Note that this code is provided &quot;as-is&quot; without any warrantee or
-guarantee of suitability for any purpose. Scott Stanchfield cannot be held
-responsible for any damage caused by use this code.</p>
-<p>(In other words, use 'em for free at your own risk.)</p>
-<h2>Bug Reports/Feature Requests</h2>
-<p>Please let me know about any bugs you find or requests for what you'd like to
-see this tool do.&nbsp; Feel free to send example code to implement it as well.</p>
-<h2>Future Directions</h2>
-<ul>
-    <li>I need to document and comment the code like crazy</li>
-    <li>I want to add nested borders (should be fairly easy, but I gotta think
-        about exactly how they interact first)</li>
-    <li>Good exception handling is necessary -- I'll add it in the next release.</li>
-</ul>
-&nbsp;
-
+<h1>Swing Border Editor</h1>
+<h3>Simple Swing Border Editing in GUI Builders</h3>
+<h2>Description</h2>
+<h3>NOTE: Make sure you read the WARNING sections under usage -- this tool is a
+tad rough around the edges, but if you enter the right stuff it'll treat you
+well ;)</h3>
+<p>Swing Border support is fairly generic in VisualAge for Java 3.5.&nbsp; I've
+written a property editor that can be used in VAJ to make border edits easy.</p>
+<h3>NOTE: The Swing Border Editor is only supported for version 3.5 of VisualAge
+for Java. It is no longer supported for version 2.0 or 3.0.</h3>
+<h2>Installation</h2>
+<p>To install the border editor in VisualAge for Java 3.5.</p>
+<p>When mentioned, <i><b>installdir</b></i> refers to the directory in which you
+installed VisualAge for Java, version 3.5. By default, this should be <b>c:\Program
+Files\IBM\VisualAge for Java</b></p>
+<ol>
+    <li>Shutdown VisualAge for Java.</li>
+    <li>Download <a href="bordereditor.zip">bordereditor.zip</a> from
+        this site.&nbsp;&nbsp; This zip includes the source and executables for
+        the border editor.</li>
+    <li>Extract bordereditor.zip into the <b><i>installdir</i>\ide\features</b>
+        directory.</li>
+    <li>Startup VisualAge for Java.&nbsp; You should see a few messages about
+        the features being installed.</li>
+    <li>Select &quot;Quick Start&quot; from the &quot;File&quot; menu of the
+        Workbench.</li>
+    <li>Select &quot;Features&quot; from the left pane of the Quick Start
+        window, then &quot;Add Feature&quot; from the right pane.</li>
+    <li>Select &quot;Javadude Swing Border Editor&quot; and press OK.</li>
+    <li>Create and save file <b><i>installdir</i>\ide\program\lib\ivj-property-editor-registry.properties</b>
+        containing the following line:</li>
+</ol>
+<pre>javax.swing.border.Border=com.javadude.bordereditor.BorderEditor</pre>
+<h2>Use</h2>
+<h3>WARNING 1: If you use this border editor, you will lose any previous border
+settings!</h3>
+<h3>WARNING 2: I haven't added any real exception handling in yet -- BE CAREFUL
+WHEN ENTERING NUMBERS IN TEXTFIELDS!&nbsp; I'll fix this when I have time.&nbsp;
+I just wanted to get this out to try.</h3>
+<h3>WARNING 3: If you use &quot;Custom&quot; borders, you're completely on your
+own for the code you write.&nbsp; Be careful.&nbsp; And make sure you either add
+<tt>import</tt> statements for any class refs, or fully-qualify them.</h3>
+<p><img src="images/bordered1.gif" alt="bordered1.gif (8132 bytes)" width="611" height="390"/></p>
+<p>Hopefully the interface is fairly obvious.</p>
+<p>You select from the type of border you want:</p>
+<ul>
+    <li>
+        <p><strong>bevel</strong> - a raised/lowered, and possibly
+        &quot;soft&quot; bevel border</p></li>
+    <li>
+        <p><strong>etched</strong> - an etched/raised line</p></li>
+    <li>
+        <p><strong>line</strong> - a varying width and color line
+        around the edge.&nbsp;&nbsp; <em><strong>NOTE: Make sure you enter valid
+        numbers or you'll see exceptions thrown in the console...&nbsp; I'll fix
+        this in the next release.</strong></em></p></li>
+    <li>
+        <p><strong>empty</strong> - empty space around the edges. <em><strong>NOTE:
+        Make sure you enter valid numbers or you'll see exceptions thrown in the
+        console...&nbsp;&nbsp; I'll fix this in the next release.</strong></em></p></li>
+    <li>
+        <p><strong>custom</strong> - you type the code -- <strong>NOTE:
+        the tool does <em>not</em> verify this code!</strong></p></li>
+    <li>
+        <p><strong>none</strong> - the layout will be set to
+        &quot;null&quot;.&nbsp;&nbsp; Note that this is <em>not</em> the same as
+        the &quot;default&quot; layout for the border.&nbsp; There is currently
+        no way in VAJ to &quot;unset&quot; a property once it has been set.</p></li>
+</ul>
+<p>Fill in the details for the border type you want, then choose if
+you want that border titled or not.&nbsp; If you want it titled, select the
+parameters for the titling.</p>
+<p>As you make changes, they will be reflected in the border
+editor's border so you can see what the result will look like.</p>
+<p>When you press &quot;Ok&quot; you should see the new border appear in the VCE
+around the component being edited.</p>
+<h2>Uninstalling from VisualAge for Java, version 3.5</h2>
+<p>To uninstall from version 3.5:</p>
+<ol>
+    <li>Delete the</li>
+</ol>
+<blockquote>
+    <pre>javax.swing.border.Border=com.javadude.bordereditor.BorderEditor</pre>
+    <p>line from <b><i>installdir</i>\ide\program\lib\ivj-property-editor-registry.properties</b></p>
+</blockquote>
+<ol>
+    <li>Delete the added features (<b>File-&gt;Quick
+        Start-&gt;Features-&gt;Delete Feature</b>)</li>
+</ol>
+<h2>License</h2>
+<p>The Swing Border Editor for VisualAge for Java is free for <em>any</em> use <em>other</em>
+than selling it as a stand-alone product.</p>
+<p>Note that this code is provided &quot;as-is&quot; without any warrantee or
+guarantee of suitability for any purpose. Scott Stanchfield cannot be held
+responsible for any damage caused by use this code.</p>
+<p>(In other words, use 'em for free at your own risk.)</p>
+<h2>Bug Reports/Feature Requests</h2>
+<p>Please let me know about any bugs you find or requests for what you'd like to
+see this tool do.&nbsp; Feel free to send example code to implement it as well.</p>
+<h2>Future Directions</h2>
+<ul>
+    <li>I need to document and comment the code like crazy</li>
+    <li>I want to add nested borders (should be fairly easy, but I gotta think
+        about exactly how they interact first)</li>
+    <li>Good exception handling is necessary -- I'll add it in the next release.</li>
+</ul>
+&nbsp;
+
 						<!-- #EndEditable "content" -->
 				<div id="footer">
 					<p>&nbsp;</p>

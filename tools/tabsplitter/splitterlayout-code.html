@@ -1,14 +1,14 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
 
-
-<!-- #BeginTemplate "../../master.dwt" -->
-
+
+<!-- #BeginTemplate "../../master.dwt" -->
+
 	<head>
 		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 		<!-- #BeginEditable "doctitle" -->
 
-		<title>SplitterLayout - Scott Stanchfield</title>
+		<title>SplitterLayout - Scott Stanchfield</title>
 		<!-- #EndEditable -->
 		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
 		<!-- #BeginEditable "head" -->
@@ -31,29 +31,29 @@
 			<div id="contentIndent">
 				<!-- #BeginEditable "content" -->
 
-<h1>SplitterLayout</h1>
-<h3>A Layout Manager for Split Windows</h3>
-<p><tt>SplitterLayout</tt> is a simple layout manager that handles segmented
-displays with optional draggable bars between them.&nbsp; In its simplest use,
-it's just a nice proportional layout manager.&nbsp; More complex uses can create
-some interesting GUIs.</p>
-<p>Here are some examples.&nbsp; I'll add more information to this page as I get
-time.&nbsp;&nbsp; <tt>SplitterLayout</tt> is available as part of the <tt>TabSplitter</tt>
-distribution.&nbsp; See <tt><a href="index.html">TabSplitter</a></tt> for
-details on how to download it.</p>
-<p>NOTE 1: All of these examples require a JDK 1.1 compatible browser. </p>
-<p>NOTE 2: Because I use AWT <tt>Window</tt>s to represent the SplitterBars as
-they are moving, they will probably appear with the words &quot;Warning Applet
-Window&quot; or something like that on them as they are being dragged.&nbsp; I'm
-trying to come up with a solution for this... Grr... Arg...</p>
-<h2>Proportional layouts with no <tt>SplitterBar</tt>s</h2>
-<p>
-<applet width="533" height="291" code="com.magelang.test.SplitterEx1.class" archive="tabsplitter.jar">
-    You either do not have Java support or it is disabled in your browser
-</applet>
-</p>
-<p>The above layout was created with the following code:</p>
-<p class='figcap'>Layout example 1</p>
+<h1>SplitterLayout</h1>
+<h3>A Layout Manager for Split Windows</h3>
+<p><tt>SplitterLayout</tt> is a simple layout manager that handles segmented
+displays with optional draggable bars between them.&nbsp; In its simplest use,
+it's just a nice proportional layout manager.&nbsp; More complex uses can create
+some interesting GUIs.</p>
+<p>Here are some examples.&nbsp; I'll add more information to this page as I get
+time.&nbsp;&nbsp; <tt>SplitterLayout</tt> is available as part of the <tt>TabSplitter</tt>
+distribution.&nbsp; See <tt><a href="index.html">TabSplitter</a></tt> for
+details on how to download it.</p>
+<p>NOTE 1: All of these examples require a JDK 1.1 compatible browser. </p>
+<p>NOTE 2: Because I use AWT <tt>Window</tt>s to represent the SplitterBars as
+they are moving, they will probably appear with the words &quot;Warning Applet
+Window&quot; or something like that on them as they are being dragged.&nbsp; I'm
+trying to come up with a solution for this... Grr... Arg...</p>
+<h2>Proportional layouts with no <tt>SplitterBar</tt>s</h2>
+<p>
+<applet width="533" height="291" code="com.magelang.test.SplitterEx1.class" archive="tabsplitter.jar">
+    You either do not have Java support or it is disabled in your browser
+</applet>
+</p>
+<p>The above layout was created with the following code:</p>
+<p class='figcap'>Layout example 1</p>
 <pre>package com.magelang.test;
 
 
@@ -86,17 +86,17 @@ public class SplitterEx1 extends Applet {
 
   }
 
-}  </pre>
-<p>The quoted numbers act as proportions to determine the amount of
-space each component gets.</p>
-<h2>Adding <tt>SplitterBar</tt>s</h2>
-<p>
-<applet width="533" height="291" code="com.magelang.test.SplitterEx2.class" archive="tabsplitter.jar">
-    You either do not have Java support or it is disabled in your browser
-</applet>
-</p>
-<p>The above layout was created with the following code:</p>
-<p class='figcap'>Layout example 2</p>
+}  </pre>
+<p>The quoted numbers act as proportions to determine the amount of
+space each component gets.</p>
+<h2>Adding <tt>SplitterBar</tt>s</h2>
+<p>
+<applet width="533" height="291" code="com.magelang.test.SplitterEx2.class" archive="tabsplitter.jar">
+    You either do not have Java support or it is disabled in your browser
+</applet>
+</p>
+<p>The above layout was created with the following code:</p>
+<p class='figcap'>Layout example 2</p>
 <pre>package com.magelang.test;
 
 
@@ -137,23 +137,23 @@ public class SplitterEx2 extends Applet {
 
   }
 
-}  </pre>
-<p>Adding Splitterbars between components allows the user to resize
-the components.&nbsp; The quoted numbers are now only used as an initial size
-for the components.</p>
-<h2>SplitterBars can contain other components!</h2>
-<p><tt>SplitterBar</tt>s are just <tt>Panel</tt>s with dragging and
-painting stuff added.&nbsp; They can contain any other components you want in
-any layout (even another <tt>SplitterLayout</tt>!)&nbsp; The following shows a
-simple &quot;movable status bar&quot; layout:</p>
-<p>
-<applet width="533" height="291" code="com.magelang.test.SplitterEx3.class" archive="tabsplitter.jar">
-    You either do not have Java support or it is disabled in your browser
-</applet>
-</p>
-<p>&nbsp;</p>
-<p>The above layout was created with the following code:</p>
-<p class='figcap'>Layout example 3</p>
+}  </pre>
+<p>Adding Splitterbars between components allows the user to resize
+the components.&nbsp; The quoted numbers are now only used as an initial size
+for the components.</p>
+<h2>SplitterBars can contain other components!</h2>
+<p><tt>SplitterBar</tt>s are just <tt>Panel</tt>s with dragging and
+painting stuff added.&nbsp; They can contain any other components you want in
+any layout (even another <tt>SplitterLayout</tt>!)&nbsp; The following shows a
+simple &quot;movable status bar&quot; layout:</p>
+<p>
+<applet width="533" height="291" code="com.magelang.test.SplitterEx3.class" archive="tabsplitter.jar">
+    You either do not have Java support or it is disabled in your browser
+</applet>
+</p>
+<p>&nbsp;</p>
+<p>The above layout was created with the following code:</p>
+<p class='figcap'>Layout example 3</p>
 <pre>package com.magelang.test;
 
 
@@ -216,8 +216,8 @@ public class SplitterEx3 extends Applet {
 
   }
 
-}  </pre>
-
+}  </pre>
+
 				<!-- #EndEditable "content" -->
 				<div id="footer">
 					<p>&nbsp;</p>
