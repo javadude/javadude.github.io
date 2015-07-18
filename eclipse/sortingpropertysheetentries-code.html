@@ -1,14 +1,14 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
 
-
-<!-- #BeginTemplate "../master.dwt" -->
-
+
+<!-- #BeginTemplate "../master.dwt" -->
+
 	<head>
 		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 		<!-- #BeginEditable "doctitle" -->
 
-		<title>Sorting Property Sheet Entries - Scott Stanchfield</title>
+		<title>Sorting Property Sheet Entries - Scott Stanchfield</title>
 		<!-- #EndEditable -->
 		<link href="../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
 		<!-- #BeginEditable "head" -->
@@ -31,28 +31,28 @@
 			<div id="contentIndent">
 				<!-- #BeginEditable "content" -->
 
-
-<h1>Sorting Property Sheet Entries</h1>
-<p>The easiest way I've figured out to do this is by modifying the PropertySheetEntry used for your page.</p>
-
-<h2>The GEF Setup</h2>
-<p><a href="http://www.eclipse.org/gef">GEF</a> supplies a custom PropertySheetEntry called UndoablePropertySheetEntry, and you can just subclass it. This is significantly easier than the straight Eclipse version, because Eclipse's PropertySheetEntry defines createChildEntries() as PRIVATE; you cannot override it. The GEF UndoablePropertySheetEntry defines it as PROTECTED.</p>
-
-<p>(Note: See my "Rules of Reuse" article at
-<a href="../articles/index.html" target="_top">http://www.javadude.com/articles</a> for why private methods are evil. This is a prime example of a great place to override, killed by a method being made private).</p>
-
-<p>First, define your subclass. It overrides:</p>
-<dl>
-  <dt><b>getDisplayName</b>()</dt>
-  <dd>removes colon-based prefixes before returning the name to display</dd>
-
-  <dt><b>createChildEntry</b>()</dt>
-  <dd>tells the property sheet entry logic to use instances of your
-      subclass so any kid entries sort the same way
-      <br/>(hooray for the factory method pattern!)</dd>
-</dl>
-
-<p class='figcap'>CustomSortPropertySheetEntry</p>
+
+<h1>Sorting Property Sheet Entries</h1>
+<p>The easiest way I've figured out to do this is by modifying the PropertySheetEntry used for your page.</p>
+
+<h2>The GEF Setup</h2>
+<p><a href="http://www.eclipse.org/gef">GEF</a> supplies a custom PropertySheetEntry called UndoablePropertySheetEntry, and you can just subclass it. This is significantly easier than the straight Eclipse version, because Eclipse's PropertySheetEntry defines createChildEntries() as PRIVATE; you cannot override it. The GEF UndoablePropertySheetEntry defines it as PROTECTED.</p>
+
+<p>(Note: See my "Rules of Reuse" article at
+<a href="../articles/index.html" target="_top">http://www.javadude.com/articles</a> for why private methods are evil. This is a prime example of a great place to override, killed by a method being made private).</p>
+
+<p>First, define your subclass. It overrides:</p>
+<dl>
+  <dt><b>getDisplayName</b>()</dt>
+  <dd>removes colon-based prefixes before returning the name to display</dd>
+
+  <dt><b>createChildEntry</b>()</dt>
+  <dd>tells the property sheet entry logic to use instances of your
+      subclass so any kid entries sort the same way
+      <br/>(hooray for the factory method pattern!)</dd>
+</dl>
+
+<p class='figcap'>CustomSortPropertySheetEntry</p>
 <pre>import org.eclipse.gef.commands.CommandStack;
 
 import org.eclipse.gef.internal.ui.properties.UndoablePropertySheetEntry;
@@ -145,11 +145,11 @@ public class CustomSortPropertySheetEntry extends UndoablePropertySheetEntry {
 
 }
 
-</pre>
-
-<p>You then install this in your getAdapter() for whatever you need to display (like an editor's content)</p>
-
-<p class='figcap'>Sample getAdapter()</p>
+</pre>
+
+<p>You then install this in your getAdapter() for whatever you need to display (like an editor's content)</p>
+
+<p class='figcap'>Sample getAdapter()</p>
 <pre>public Object getAdapter(Class type) {
 
     if (type == IPropertySheetPage.class) {
@@ -166,26 +166,26 @@ public class CustomSortPropertySheetEntry extends UndoablePropertySheetEntry {
 
 }
 
-</pre>
-
-
-<h2>The Non-GEF Setup</h2>
-<p><i>[I've entered feature request 24694 for putting createChildEntry() in Eclipse's PropertySheetEntry the same way they do in GEF's UndoablePropertySheetEntry -- that'll make the non-GEF version much simpler]
-</i></p>
-
-<p>If you can't/don't want to use GEF, you must create your own PropertySheetEntry class to do this function. The easiest way to do this is to copy Eclipse's PropertySheetEntry and inside its createChildEntries() method REPLACE the following line</p>
-<p class='figcap'>Creating property sheet entry</p>
-<pre>PropertySheetEntry entry = new PropertySheetEntry(); </pre>
-  <p>with a creation of your own class</p>
-<p class='figcap'>Creating custom sort property sheet entry</p>
-<pre>CustomSortPropertySheetEntry entry = new CustomSortPropertySheetEntry(); </pre>
-  <p>You install this the same way you would use the GEF version. </p>
-
-
-<h2>Doing your custom sort</h2>
-<p>Now all you need to do is prefix your property descriptor display names to set up the sort order. For example, if you want the order to be</p>
-
-<p class='figcap'>Fields in the order you want</p>
+</pre>
+
+
+<h2>The Non-GEF Setup</h2>
+<p><i>[I've entered feature request 24694 for putting createChildEntry() in Eclipse's PropertySheetEntry the same way they do in GEF's UndoablePropertySheetEntry -- that'll make the non-GEF version much simpler]
+</i></p>
+
+<p>If you can't/don't want to use GEF, you must create your own PropertySheetEntry class to do this function. The easiest way to do this is to copy Eclipse's PropertySheetEntry and inside its createChildEntries() method REPLACE the following line</p>
+<p class='figcap'>Creating property sheet entry</p>
+<pre>PropertySheetEntry entry = new PropertySheetEntry(); </pre>
+  <p>with a creation of your own class</p>
+<p class='figcap'>Creating custom sort property sheet entry</p>
+<pre>CustomSortPropertySheetEntry entry = new CustomSortPropertySheetEntry(); </pre>
+  <p>You install this the same way you would use the GEF version. </p>
+
+
+<h2>Doing your custom sort</h2>
+<p>Now all you need to do is prefix your property descriptor display names to set up the sort order. For example, if you want the order to be</p>
+
+<p class='figcap'>Fields in the order you want</p>
 <pre>id
 
 x
@@ -196,11 +196,11 @@ width
 
 height
 
-</pre>
-
-<p>then you can use</p>
-
-<p class='figcap'>Prefixed property descriptor entries</p>
+</pre>
+
+<p>then you can use</p>
+
+<p class='figcap'>Prefixed property descriptor entries</p>
 <pre>a1:id
 
 a2:x
@@ -211,10 +211,10 @@ a4:width
 
 a5:height
 
-</pre>
-
-<p>as the actual display names of the property descriptors. The PropertySheetEntry will perform a sort on the display names, but call (your overridden) getDisplayName() which chops the prefix before it's actually displayed.</p>
-
+</pre>
+
+<p>as the actual display names of the property descriptors. The PropertySheetEntry will perform a sort on the display names, but call (your overridden) getDisplayName() which chops the prefix before it's actually displayed.</p>
+
 				<!-- #EndEditable "content" -->
 				<div id="footer">
 					<p>&nbsp;</p>

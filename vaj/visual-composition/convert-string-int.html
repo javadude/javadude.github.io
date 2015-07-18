@@ -1,14 +1,14 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
 
-
-<!-- #BeginTemplate "../../master.dwt" -->
-
+
+<!-- #BeginTemplate "../../master.dwt" -->
+
 	<head>
 		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 		<!-- #BeginEditable "doctitle" -->
 
-		<title>VAJ: Converting Strings to Ints - Scott Stanchfield</title>
+		<title>VAJ: Converting Strings to Ints - Scott Stanchfield</title>
 		<!-- #EndEditable -->
 		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
 		<!-- #BeginEditable "head" -->
@@ -31,35 +31,35 @@
 			<div id="contentIndent">
 				<!-- #BeginEditable "content" -->
 
-<h1>Converting Strings to Ints</h1>
-<h2>Question:</h2>
-<p>You've got a TextField in your visual design area and you want to pass an integer that's typed into it to a method that takes an int value.&nbsp; What do you do???</p>
-<h2>The hard way...</h2>
-<p>You <em>could</em> define a script method that calls <tt>Integer.parseInt(valueFromTextField)</tt>.&nbsp;&nbsp; You could use that script method to make the connection for the int parameter you need.</p>
-<p>But that's overkill...</p>
-<h2>The easy way... cheat a little...</h2>
-<p>First, let me state that what I'm about to tell you is considered &quot;bad style&quot;.&nbsp; However, that only really applies to when you're coding this stuff by hand.&nbsp; That said...</p>
-<p>It is possible to call <em><strong>static</strong></em> methods via a reference to some instance of a class.&nbsp; For example:</p>
+<h1>Converting Strings to Ints</h1>
+<h2>Question:</h2>
+<p>You've got a TextField in your visual design area and you want to pass an integer that's typed into it to a method that takes an int value.&nbsp; What do you do???</p>
+<h2>The hard way...</h2>
+<p>You <em>could</em> define a script method that calls <tt>Integer.parseInt(valueFromTextField)</tt>.&nbsp;&nbsp; You could use that script method to make the connection for the int parameter you need.</p>
+<p>But that's overkill...</p>
+<h2>The easy way... cheat a little...</h2>
+<p>First, let me state that what I'm about to tell you is considered &quot;bad style&quot;.&nbsp; However, that only really applies to when you're coding this stuff by hand.&nbsp; That said...</p>
+<p>It is possible to call <em><strong>static</strong></em> methods via a reference to some instance of a class.&nbsp; For example:</p>
 <pre>Integer someInteger = new Integer();
 
-int crud = someInteger.parseInt(&quot;1234&quot;);         </pre>
-<p>To make matters even weirder, you can call the method <em>even if you don't have an instance of the class!</em>&nbsp; For example:</p>
+int crud = someInteger.parseInt(&quot;1234&quot;);         </pre>
+<p>To make matters even weirder, you can call the method <em>even if you don't have an instance of the class!</em>&nbsp; For example:</p>
 <pre>Integer someInteger = null;
 
-int crud = someInteger.parseInt(&quot;1234&quot;)         </pre>
-<p><strong>This <em>will not </em>result in a NullPointerException!</strong>&nbsp; Pretty neat, eh?&nbsp; More like pretty sneaky...</p>
-<h2>Yeah, yeah, get on with it!</h2>
-<p>So how can this help us?&nbsp; Suppose we have a <tt>TextField</tt> <tt>field1</tt> and want to pass the integer value of that field to a method <tt>doSomething(int x)</tt> (suppose it's a method in some bean in the design area)&nbsp; when <tt>button1</tt>
-is pressed:</p>
-<ul>
-  <li>Create a <em>variable</em> of type <tt>java.lang.Integer</tt> and drop it on the design area in the VCE.</li>
-  <li>Connect event <tt>actionPerformed</tt> of <tt>button1</tt> to <tt>doSomething(int)</tt> (wherever it's defined).&nbsp; Note that the connection will be a dotted line because parameter x has not been passed a value</li>
-  <li>Connect parameter <tt>x</tt> of that connection you just created to method <tt>parseInt(String s)</tt> in that <tt>Integer</tt> variable.</li>
-  <li>Connect the <tt>s </tt>parameter of the <tt>parseInt</tt> connection to the text property of <tt>field1</tt>.</li>
-</ul>
-<p>And you've now converted a String to an int!</p>
-<h2>But what about the &quot;et al&quot;?</h2>
-<p>You can do similar processing for most of the primitive types, again by dropping a variable of the Wrapper class (Double, Float...) and connecting to the appropriate conversion method.</p>
+int crud = someInteger.parseInt(&quot;1234&quot;)         </pre>
+<p><strong>This <em>will not </em>result in a NullPointerException!</strong>&nbsp; Pretty neat, eh?&nbsp; More like pretty sneaky...</p>
+<h2>Yeah, yeah, get on with it!</h2>
+<p>So how can this help us?&nbsp; Suppose we have a <tt>TextField</tt> <tt>field1</tt> and want to pass the integer value of that field to a method <tt>doSomething(int x)</tt> (suppose it's a method in some bean in the design area)&nbsp; when <tt>button1</tt>
+is pressed:</p>
+<ul>
+  <li>Create a <em>variable</em> of type <tt>java.lang.Integer</tt> and drop it on the design area in the VCE.</li>
+  <li>Connect event <tt>actionPerformed</tt> of <tt>button1</tt> to <tt>doSomething(int)</tt> (wherever it's defined).&nbsp; Note that the connection will be a dotted line because parameter x has not been passed a value</li>
+  <li>Connect parameter <tt>x</tt> of that connection you just created to method <tt>parseInt(String s)</tt> in that <tt>Integer</tt> variable.</li>
+  <li>Connect the <tt>s </tt>parameter of the <tt>parseInt</tt> connection to the text property of <tt>field1</tt>.</li>
+</ul>
+<p>And you've now converted a String to an int!</p>
+<h2>But what about the &quot;et al&quot;?</h2>
+<p>You can do similar processing for most of the primitive types, again by dropping a variable of the Wrapper class (Double, Float...) and connecting to the appropriate conversion method.</p>
 				<!-- #EndEditable "content" -->
 				<div id="footer">
 					<p>&nbsp;</p>

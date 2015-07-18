@@ -1,14 +1,14 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
 
-
-<!-- #BeginTemplate "../../master.dwt" -->
-
+
+<!-- #BeginTemplate "../../master.dwt" -->
+
 	<head>
 		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 		<!-- #BeginEditable "doctitle" -->
 
-		<title>VAJ: Calling the Debugger - Scott Stanchfield</title>
+		<title>VAJ: Calling the Debugger - Scott Stanchfield</title>
 		<!-- #EndEditable -->
 		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
 		<!-- #BeginEditable "head" -->
@@ -31,36 +31,36 @@
 			<div id="contentIndent">
 				<!-- #BeginEditable "content" -->
 
-
-<h1>Calling the Debugger</h1>
-<h3><b><i>Submitted by:</i>Christoph Elek, Cool IBM Support Dude</b></h3>
-
-<p>Some of you may have seen the following, I am just adding a tip for the
-others.
-</p>
-
-<p>You can call the debugger during the runtime with this method:
-</p>
-
-<pre>com.ibm.uvm.tools.DebugSupport.halt();</pre>
-
-<p>which is the same as the <tt>self.halt()</tt>of Smalltalk.
-</p>
-
-<p>I use it at the beginning of a <tt>try</tt>...<tt>catch</tt> block and I step
-over and into to check what line raises my exception.
-</p>
-
-<p>Take a look at this package, you may find interesting stuff
-</p>
-
-
-<h4>Note from Scott:</h4>
-
-<p>You probably want to call it using reflection.&nbsp; Note that I haven't
-tested this code yet so it may contain a typo...
-</p>
-
+
+<h1>Calling the Debugger</h1>
+<h3><b><i>Submitted by:</i>Christoph Elek, Cool IBM Support Dude</b></h3>
+
+<p>Some of you may have seen the following, I am just adding a tip for the
+others.
+</p>
+
+<p>You can call the debugger during the runtime with this method:
+</p>
+
+<pre>com.ibm.uvm.tools.DebugSupport.halt();</pre>
+
+<p>which is the same as the <tt>self.halt()</tt>of Smalltalk.
+</p>
+
+<p>I use it at the beginning of a <tt>try</tt>...<tt>catch</tt> block and I step
+over and into to check what line raises my exception.
+</p>
+
+<p>Take a look at this package, you may find interesting stuff
+</p>
+
+
+<h4>Note from Scott:</h4>
+
+<p>You probably want to call it using reflection.&nbsp; Note that I haven't
+tested this code yet so it may contain a typo...
+</p>
+
 <pre>  try {
 
     Class debugSupport = Class.forName(&quot;com.ibm.uvm.tools.DebugSupport&quot;);
@@ -71,14 +71,14 @@ tested this code yet so it may contain a typo...
 
   }
 
-  catch (Exception ignoreMe) {}     </pre>
-
-<p>This allows you to compile it and run outside of VisualAge.&nbsp; If run
-inside VisualAge (where the uvm classes live) it will invoke the debugger.&nbsp;
-When run outside, it will not find the class (don't export the uvm stuff...) and
-drop into the empty exception handler.
-</p>
-
+  catch (Exception ignoreMe) {}     </pre>
+
+<p>This allows you to compile it and run outside of VisualAge.&nbsp; If run
+inside VisualAge (where the uvm classes live) it will invoke the debugger.&nbsp;
+When run outside, it will not find the class (don't export the uvm stuff...) and
+drop into the empty exception handler.
+</p>
+
 				<!-- #EndEditable "content" -->
 				<div id="footer">
 					<p>&nbsp;</p>

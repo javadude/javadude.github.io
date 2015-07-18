@@ -1,14 +1,14 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
 
-
-<!-- #BeginTemplate "../../master.dwt" -->
-
+
+<!-- #BeginTemplate "../../master.dwt" -->
+
 	<head>
 		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 		<!-- #BeginEditable "doctitle" -->
 
-		<title>VAJ: Visual Casts - Scott Stanchfield</title>
+		<title>VAJ: Visual Casts - Scott Stanchfield</title>
 		<!-- #EndEditable -->
 		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
 		<!-- #BeginEditable "head" -->
@@ -31,23 +31,23 @@
 			<div id="contentIndent">
 				<!-- #BeginEditable "content" -->
 
-<h1>Visual Casts</h1>
-<p>So you can access the <strong>layout</strong> property of your container, and you <em>know</em> it's a <tt>java.awt.CardLayout</tt>, and you <em>want</em> to use it's <tt>next()</tt> method via a button press...</p>
-<p>Problem is, <strong>layout</strong> is of type <tt>java.awt.LayoutManager</tt>; the Visual Composition Editor won't give you access to the methods defined in <tt>java.awt.CardLayout</tt>...</p>
-<h2>There's a trick lurking here...</h2>
-<p>VisualAge provides a really nifty feature called property-to-property connections.&nbsp;&nbsp; These are very useful, as they do the following:</p>
-<ul>
-  <li>initialize one variable to the value of another when the GUI starts</li>
-  <li>if the source property is <strong>bound</strong> (that is, it fires a property-change event when its value changes) the target property will be updated when the source property changes</li>
-</ul>
-<p>VisualAge has a nifty way of setting up property-to-property connections called &quot;Tear-Off Properties&quot;.&nbsp; If you bring up the pop-up menu for a bean in the Visual Composition Editor design area and select &quot;Tear-Off Property,&quot; it
-will give you a list of all properties for the bean.&nbsp; Select the one you want to tear off (in our example, <strong>layout</strong>).</p>
-<p>This creates a new variable on the design area that is connected to the source bean via a property-to-property connection.&nbsp; We can access the layout of the bean using this variable.</p>
-<p>Next, <strong><em>change the type of the variable</em></strong>.&nbsp; Select &quot;Change type&quot; from the pop-up of the variable you created during the tear-off.&nbsp;&nbsp; For the new type, type in <tt>java.awt.CardLayout</tt>.</p>
-<p>VisualAge will warn you that this might cause problems.&nbsp; What it's really saying is that you are viewing the property as a different type, and therefore <em>might</em> get a ClassCastException if you're not careful.&nbsp; If you know for sure that
-the property will cast properly, continue with it!</p>
-<p>In our example, because we had set the layout to <tt>java.awt.CardLayout</tt> we know this will be fine...</p>
-<p>Now, you can use that variable to access the <tt>next()</tt> method!&nbsp; You have just performed a cast completely within the Visual Composition Editor!</p>
+<h1>Visual Casts</h1>
+<p>So you can access the <strong>layout</strong> property of your container, and you <em>know</em> it's a <tt>java.awt.CardLayout</tt>, and you <em>want</em> to use it's <tt>next()</tt> method via a button press...</p>
+<p>Problem is, <strong>layout</strong> is of type <tt>java.awt.LayoutManager</tt>; the Visual Composition Editor won't give you access to the methods defined in <tt>java.awt.CardLayout</tt>...</p>
+<h2>There's a trick lurking here...</h2>
+<p>VisualAge provides a really nifty feature called property-to-property connections.&nbsp;&nbsp; These are very useful, as they do the following:</p>
+<ul>
+  <li>initialize one variable to the value of another when the GUI starts</li>
+  <li>if the source property is <strong>bound</strong> (that is, it fires a property-change event when its value changes) the target property will be updated when the source property changes</li>
+</ul>
+<p>VisualAge has a nifty way of setting up property-to-property connections called &quot;Tear-Off Properties&quot;.&nbsp; If you bring up the pop-up menu for a bean in the Visual Composition Editor design area and select &quot;Tear-Off Property,&quot; it
+will give you a list of all properties for the bean.&nbsp; Select the one you want to tear off (in our example, <strong>layout</strong>).</p>
+<p>This creates a new variable on the design area that is connected to the source bean via a property-to-property connection.&nbsp; We can access the layout of the bean using this variable.</p>
+<p>Next, <strong><em>change the type of the variable</em></strong>.&nbsp; Select &quot;Change type&quot; from the pop-up of the variable you created during the tear-off.&nbsp;&nbsp; For the new type, type in <tt>java.awt.CardLayout</tt>.</p>
+<p>VisualAge will warn you that this might cause problems.&nbsp; What it's really saying is that you are viewing the property as a different type, and therefore <em>might</em> get a ClassCastException if you're not careful.&nbsp; If you know for sure that
+the property will cast properly, continue with it!</p>
+<p>In our example, because we had set the layout to <tt>java.awt.CardLayout</tt> we know this will be fine...</p>
+<p>Now, you can use that variable to access the <tt>next()</tt> method!&nbsp; You have just performed a cast completely within the Visual Composition Editor!</p>
 				<!-- #EndEditable "content" -->
 				<div id="footer">
 					<p>&nbsp;</p>

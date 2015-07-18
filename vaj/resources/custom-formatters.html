@@ -1,14 +1,14 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
 
-
-<!-- #BeginTemplate "../../master.dwt" -->
-
+
+<!-- #BeginTemplate "../../master.dwt" -->
+
 	<head>
 		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 		<!-- #BeginEditable "doctitle" -->
 
-		<title>VAJ: Custom Formatters - Scott Stanchfield</title>
+		<title>VAJ: Custom Formatters - Scott Stanchfield</title>
 		<!-- #EndEditable -->
 		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
 		<!-- #BeginEditable "head" -->
@@ -31,40 +31,40 @@
 			<div id="contentIndent">
 				<!-- #BeginEditable "content" -->
 
-
-<h1>Custom Formatters</h1>
-<h3>If you want your code formatter added to this list, send me an email (<a href="mailto:thetick@javadude.com">scott@javadude.com</a>)
-and I'll add it!</h3>
-<h3>Note: Custom Code Formatters are only supported in
-VisualAge 3.5 and above using VA Assist 2.0.7.</h3>
-<p>VA Assist 2.0.7 now supports custom code formatters for use in VisualAge for
-Java. If you don't have VA Assist, I <b><i>highly</i></b> recommend it! You can
-get it from <a href="http://www.instantiations.com">http://www.instantiations.com</a>.
-(It's free if you're using VisualAge for Java, professional edition!)</p>
-<h2>VA Assist Custom Code Formatter Documentation</h2>
-<p>You can read the documentation on VA Assist's Custom Code formatter support
-at</p>
-<p><a href="http://www.instantiations.com/assist/docs/browser_custom_formatter.htm">http://www.instantiations.com/assist/docs/browser_custom_formatter.htm</a><br/>
-<br/>
-<a href="http://www.instantiations.com/assist/docs/options_formatter_custom.htm">http://www.instantiations.com/assist/docs/options_formatter_custom.htm</a></p>
-<h2><a name="Creating a Custom Code Formatter">Creating a Custom Code Formatter</a></h2>
-<p>To create a custom code formatter:</p>
-<ol>
-    <li>Create a project in your workspace named <i>LFC</i>.<br/>
-        &nbsp;</li>
-    <li>Import the lfc.jar file into your LFC project. This is typically found
-        in <i>c:\Program Files\IBM\VisualAge for Java\ide\program\lib\lfc.jar</i>,
-        but that location may vary depending on where you installed VisualAge
-        for Java.<br/>
-        &nbsp;</li>
-    <li>Create a new project to contain your custom formatter. You can name this
-        whatever you'd like. For purposes of explanation, we'll assume you name
-        it <i>My Formatter</i>.<br/>
-        &nbsp;</li>
-    <li>Create a class (any name, any package) to use as your custom formatter.
-        It should look as follows. The code inside the format method can do
-        anything you would like. This example just calls the default formatter
-        and adds a comment (just to prove the custom formatter was called.)
+
+<h1>Custom Formatters</h1>
+<h3>If you want your code formatter added to this list, send me an email (<a href="mailto:thetick@javadude.com">scott@javadude.com</a>)
+and I'll add it!</h3>
+<h3>Note: Custom Code Formatters are only supported in
+VisualAge 3.5 and above using VA Assist 2.0.7.</h3>
+<p>VA Assist 2.0.7 now supports custom code formatters for use in VisualAge for
+Java. If you don't have VA Assist, I <b><i>highly</i></b> recommend it! You can
+get it from <a href="http://www.instantiations.com">http://www.instantiations.com</a>.
+(It's free if you're using VisualAge for Java, professional edition!)</p>
+<h2>VA Assist Custom Code Formatter Documentation</h2>
+<p>You can read the documentation on VA Assist's Custom Code formatter support
+at</p>
+<p><a href="http://www.instantiations.com/assist/docs/browser_custom_formatter.htm">http://www.instantiations.com/assist/docs/browser_custom_formatter.htm</a><br/>
+<br/>
+<a href="http://www.instantiations.com/assist/docs/options_formatter_custom.htm">http://www.instantiations.com/assist/docs/options_formatter_custom.htm</a></p>
+<h2><a name="Creating a Custom Code Formatter">Creating a Custom Code Formatter</a></h2>
+<p>To create a custom code formatter:</p>
+<ol>
+    <li>Create a project in your workspace named <i>LFC</i>.<br/>
+        &nbsp;</li>
+    <li>Import the lfc.jar file into your LFC project. This is typically found
+        in <i>c:\Program Files\IBM\VisualAge for Java\ide\program\lib\lfc.jar</i>,
+        but that location may vary depending on where you installed VisualAge
+        for Java.<br/>
+        &nbsp;</li>
+    <li>Create a new project to contain your custom formatter. You can name this
+        whatever you'd like. For purposes of explanation, we'll assume you name
+        it <i>My Formatter</i>.<br/>
+        &nbsp;</li>
+    <li>Create a class (any name, any package) to use as your custom formatter.
+        It should look as follows. The code inside the format method can do
+        anything you would like. This example just calls the default formatter
+        and adds a comment (just to prove the custom formatter was called.)
         <pre>package <i>your-package-name</i>;
 
 
@@ -227,60 +227,60 @@ public class <i>YourFormatterClassName</i> {
 
   }
 
-}</pre>
-    </li>
-    <li>Create code in your class' format() method to format the passed-in code
-        string and return it. We recommend you do any String modification in a
-        StringBuffer rather than using Strings, as it's more efficient.
-        <p>For a simple example of a custom formatter, see the JavaDude Sample
-        Code Formatters below. You can call the default IBM VisualAge for Java
-        formatter if you'd like (see the sample formatters for an example), or
-        you can do all of the formatting yourself.<br/>
-        &nbsp;&nbsp;</p></li>
-    <li>Change the name of the Custom Formatter class under <b>Window-&gt;Options-&gt;Coding-&gt;Formatter-&gt;Custom</b>.
-        (This page is added by VA Assist and is not available in the standard
-        VisualAge for Java installation.) If your custom formatter is in the
-        workspace, it will automatically appear in the drop-down list.<br/>
-        &nbsp;</li>
-    <li>When you press control-w in the editor, your custom formatter will be
-        called! (Note that it may also be called when importing, exporting, or
-        viewing your entire class, depending on the other VA Assist options that
-        you have set.<br/>
-        &nbsp;</li>
-    <li>After testing your custom formatter, you can export it to any directory
-        or jar on your workspace classpath (See <b>Window-&gt;Options-&gt;Resources</b>).
-        Once you have exported the custom formatter, you can delete it and and
-        the LFC project from your workspace.<br/>
-        &nbsp;</li>
-    <li>Once you have a formatter you like, send me a note at <a href="mailto:thetick@javadude.com">scott@javadude.com</a>
-        and I'll add it to the list at the bottom of the page!</li>
-</ol>
-<h2>Sample Custom Code Formatters</h2>
-<p>The file <a href="sample-code-formatters.zip">sample-code-formatters.zip</a>
-contains some sample custom formatters. These formatters do not have any real
-functionality in them, but can be used as templates when creating your own
-custom code formatters.</p>
-<p>To use them:</p>
-<ol>
-    <li>Stop VisualAge for Java</li>
-    <li>Download <a href="sample-code-formatters.zip">sample-code-formatters.zip</a>
-        from this site.</li>
-    <li>Unzip it into the directory in which you installed VisualAge for Java.
-        This will typically be <b>c:\Program Files\IBM\VisualAge for Java</b></li>
-    <li>Restart VisualAge for Java (You may see a brief message that the
-        JavaDude Custom Code Formatter Samples feature is being installed.</li>
-    <li>Make sure you have the LFC project set up (follow steps 1 and 2 under <a href="#Creating a Custom Code Formatter">Creating
-        a Custom Code Formatter</a> above).</li>
-    <li>Choose <b>File-&gt;Quick Start-&gt;Features-&gt;Add Feature</b>.</li>
-    <li>Select the JavaDude Custom Code Formatter Samples feature and press ok.</li>
-</ol>
-<p>You can try these sample formatters using the <b>Window-&gt;Options-&gt;Coding-&gt;Formatter-&gt;Custom</b>
-options.</p>
-<h2>Useful Custom Code Formatters</h2>
-<h3>JIndent Plug-in</h3>
-<p>If you own JIndent, you can find an adapter for it at <a href="http://sourceforge.net/projects/vajindent">JIndent
-Plugin for VisualAge for Java</a>.</p>
-
+}</pre>
+    </li>
+    <li>Create code in your class' format() method to format the passed-in code
+        string and return it. We recommend you do any String modification in a
+        StringBuffer rather than using Strings, as it's more efficient.
+        <p>For a simple example of a custom formatter, see the JavaDude Sample
+        Code Formatters below. You can call the default IBM VisualAge for Java
+        formatter if you'd like (see the sample formatters for an example), or
+        you can do all of the formatting yourself.<br/>
+        &nbsp;&nbsp;</p></li>
+    <li>Change the name of the Custom Formatter class under <b>Window-&gt;Options-&gt;Coding-&gt;Formatter-&gt;Custom</b>.
+        (This page is added by VA Assist and is not available in the standard
+        VisualAge for Java installation.) If your custom formatter is in the
+        workspace, it will automatically appear in the drop-down list.<br/>
+        &nbsp;</li>
+    <li>When you press control-w in the editor, your custom formatter will be
+        called! (Note that it may also be called when importing, exporting, or
+        viewing your entire class, depending on the other VA Assist options that
+        you have set.<br/>
+        &nbsp;</li>
+    <li>After testing your custom formatter, you can export it to any directory
+        or jar on your workspace classpath (See <b>Window-&gt;Options-&gt;Resources</b>).
+        Once you have exported the custom formatter, you can delete it and and
+        the LFC project from your workspace.<br/>
+        &nbsp;</li>
+    <li>Once you have a formatter you like, send me a note at <a href="mailto:thetick@javadude.com">scott@javadude.com</a>
+        and I'll add it to the list at the bottom of the page!</li>
+</ol>
+<h2>Sample Custom Code Formatters</h2>
+<p>The file <a href="sample-code-formatters.zip">sample-code-formatters.zip</a>
+contains some sample custom formatters. These formatters do not have any real
+functionality in them, but can be used as templates when creating your own
+custom code formatters.</p>
+<p>To use them:</p>
+<ol>
+    <li>Stop VisualAge for Java</li>
+    <li>Download <a href="sample-code-formatters.zip">sample-code-formatters.zip</a>
+        from this site.</li>
+    <li>Unzip it into the directory in which you installed VisualAge for Java.
+        This will typically be <b>c:\Program Files\IBM\VisualAge for Java</b></li>
+    <li>Restart VisualAge for Java (You may see a brief message that the
+        JavaDude Custom Code Formatter Samples feature is being installed.</li>
+    <li>Make sure you have the LFC project set up (follow steps 1 and 2 under <a href="#Creating a Custom Code Formatter">Creating
+        a Custom Code Formatter</a> above).</li>
+    <li>Choose <b>File-&gt;Quick Start-&gt;Features-&gt;Add Feature</b>.</li>
+    <li>Select the JavaDude Custom Code Formatter Samples feature and press ok.</li>
+</ol>
+<p>You can try these sample formatters using the <b>Window-&gt;Options-&gt;Coding-&gt;Formatter-&gt;Custom</b>
+options.</p>
+<h2>Useful Custom Code Formatters</h2>
+<h3>JIndent Plug-in</h3>
+<p>If you own JIndent, you can find an adapter for it at <a href="http://sourceforge.net/projects/vajindent">JIndent
+Plugin for VisualAge for Java</a>.</p>
+
 				<!-- #EndEditable "content" -->
 				<div id="footer">
 					<p>&nbsp;</p>

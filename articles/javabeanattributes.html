@@ -1,14 +1,14 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
 
-
-<!-- #BeginTemplate "../master.dwt" -->
-
+
+<!-- #BeginTemplate "../master.dwt" -->
+
 	<head>
 		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 		<!-- #BeginEditable "doctitle" -->
 
-		<title>JavaBean Attributes - Scott Stanchfield</title>
+		<title>JavaBean Attributes - Scott Stanchfield</title>
 		<!-- #EndEditable -->
 		<link href="../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
 		<!-- #BeginEditable "head" -->
@@ -31,66 +31,66 @@
 			<div id="contentIndent">
 				<!-- #BeginEditable "content" -->
 
-
-<h1>JavaBean Attributes</h1>
-<h2>Introduction</h2>
-<p>Sun's BeanInfo descriptors were designed with builder-specific 
-extension in mind. Developers of bean builders could allow bean authors to add 
-extra metadata to describe the beans, and the builder tool could take advantage 
-of the extra metadata for enhanced functionality.</p>
-<p>A good example of this is VisualAge for Java's use of 
-"preferred" as an attribute. VisualAge users wanted some way to specify that a 
-property, method, or event appear on the "short list" of features that appear 
-during connection creation (without requiring a popup dialog with a list of all 
-features). IBM added support for a "preferred" attribute, and if bean authors 
-set "preferred" to Boolean.TRUE, VisualAge added the feature to the "short 
-list".</p>
-<p>(Note that eventually Sun added the isPreferred() method to 
-FeatureDescriptor for this same function.)</p>
-<p>Unfortunately, these extensions are not well documented, and 
-difficult to find. I've collected the following definitions from various sources 
-(the Sun Java source code, Sun's bean builder source, and various web searches) 
-to help create a common place to define commonly-used BeanInfo attributes.</p>
-<p><b><i>If you know of any commonly-used beaninfo attribute that 
-is not listed here, or if you see an error in one of these descriptions, please 
-email me at <a href="mailto:scott@javadude.com">scott@javadude.com</a>.</i></b></p>
-<h2>Commonly-Used BeanInfo Attributes</h2>
-<p>Sun has a BeanInfo generator that generates the BeanInfo for 
-Swing etc using a javadoc @beaninfo tag. It sets up several kinds of attributes. 
-I've found the following list of commonly-used attributes. We should reuse where 
-possible. (I gathered this list doing some web searches, looking at source code 
-for sun's bean builder, etc...)</p>
-<p>The format of the following table is</p>
-<table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" width="100%">
-  <tr>
-    <td><b>attributeName<br/>
-    </b>(Who defined it)<p>ApplicableDescriptors</p></td>
-    <td>Description, possible values, examples</td>
-  </tr>
-</table>
-<p>Note that in the following table I use FeatureDescriptors for <i>
-ApplicableDescriptors</i> to refer to attributes that apply to <i>any</i> 
-feature descriptor. This includes BeanDescriptor, PropertyDescriptor, 
-MethodDescriptor, and EventSetDescriptor.</p>
-<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse" width="100%">
-  <tr>
-    <td><b>enumerationValues</b><br/>
-    (Sun)<p>PropertyDescriptors</p></td>
-    <td>
-	<p>Defines an Object[] that specifies a list of valid values. 
-	This function could be provided by implementing a custom PropertyEditor (see 
-	my
-	<a href="propedit/index.html">Property Editor Tutorial</a>), but that's 
-	really overkill.</p>
-	<p>The Object[] contains sets of three values:</p>
-    <ul>
-      <li>name - A displayable name for the value</li>
-      <li>value - the actual property value to use, (an Object of the property's 
-	  type) </li>
-      <li>java initialization string - a string that can be used when generating 
-	  code</li>
-    </ul>
-    <p>For example:</p>
+
+<h1>JavaBean Attributes</h1>
+<h2>Introduction</h2>
+<p>Sun's BeanInfo descriptors were designed with builder-specific 
+extension in mind. Developers of bean builders could allow bean authors to add 
+extra metadata to describe the beans, and the builder tool could take advantage 
+of the extra metadata for enhanced functionality.</p>
+<p>A good example of this is VisualAge for Java's use of 
+"preferred" as an attribute. VisualAge users wanted some way to specify that a 
+property, method, or event appear on the "short list" of features that appear 
+during connection creation (without requiring a popup dialog with a list of all 
+features). IBM added support for a "preferred" attribute, and if bean authors 
+set "preferred" to Boolean.TRUE, VisualAge added the feature to the "short 
+list".</p>
+<p>(Note that eventually Sun added the isPreferred() method to 
+FeatureDescriptor for this same function.)</p>
+<p>Unfortunately, these extensions are not well documented, and 
+difficult to find. I've collected the following definitions from various sources 
+(the Sun Java source code, Sun's bean builder source, and various web searches) 
+to help create a common place to define commonly-used BeanInfo attributes.</p>
+<p><b><i>If you know of any commonly-used beaninfo attribute that 
+is not listed here, or if you see an error in one of these descriptions, please 
+email me at <a href="mailto:scott@javadude.com">scott@javadude.com</a>.</i></b></p>
+<h2>Commonly-Used BeanInfo Attributes</h2>
+<p>Sun has a BeanInfo generator that generates the BeanInfo for 
+Swing etc using a javadoc @beaninfo tag. It sets up several kinds of attributes. 
+I've found the following list of commonly-used attributes. We should reuse where 
+possible. (I gathered this list doing some web searches, looking at source code 
+for sun's bean builder, etc...)</p>
+<p>The format of the following table is</p>
+<table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" width="100%">
+  <tr>
+    <td><b>attributeName<br/>
+    </b>(Who defined it)<p>ApplicableDescriptors</p></td>
+    <td>Description, possible values, examples</td>
+  </tr>
+</table>
+<p>Note that in the following table I use FeatureDescriptors for <i>
+ApplicableDescriptors</i> to refer to attributes that apply to <i>any</i> 
+feature descriptor. This includes BeanDescriptor, PropertyDescriptor, 
+MethodDescriptor, and EventSetDescriptor.</p>
+<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse" width="100%">
+  <tr>
+    <td><b>enumerationValues</b><br/>
+    (Sun)<p>PropertyDescriptors</p></td>
+    <td>
+	<p>Defines an Object[] that specifies a list of valid values. 
+	This function could be provided by implementing a custom PropertyEditor (see 
+	my
+	<a href="propedit/index.html">Property Editor Tutorial</a>), but that's 
+	really overkill.</p>
+	<p>The Object[] contains sets of three values:</p>
+    <ul>
+      <li>name - A displayable name for the value</li>
+      <li>value - the actual property value to use, (an Object of the property's 
+	  type) </li>
+      <li>java initialization string - a string that can be used when generating 
+	  code</li>
+    </ul>
+    <p>For example:</p>
 <a name='figure.1'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 1: Enumeration values</p><pre class='content'><span class='ident'>Object</span><span class='operator'>[]</span> <span class='ident'>enumerationValues</span> <span class='operator'>=</span> <span class='keyword'>new</span> <span class='ident'>Object</span><span class='operator'>[]</span> <span class='operator'>{</span>
 
     <span class='string'>"vertical"</span>,   <span class='keyword'>new</span> <span class='ident'>Integer</span><span class='operator'>(</span><span class='ident'>JSlider</span><span class='operator'>.</span><span class='ident'>VERTICAL</span><span class='operator'>)</span>,   <span class='string'>"JSlider.VERTICAL"</span>,
@@ -100,197 +100,197 @@ MethodDescriptor, and EventSetDescriptor.</p>
 <span class='operator'>};</span>
 
 <span class='ident'>propertyDescriptor</span><span class='operator'>.</span><span class='ident'>setValue</span><span class='operator'>(</span><span class='string'>"enumerationValues"</span>, <span class='ident'>enumerationValues</span><span class='operator'>);</span> </pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
-    </td>
-  </tr>
-  <tr>
-    <td><b>propertyorder<br/>
-    </b>(?)<p>BeanDescriptors</p></td>
-    <td>Defines the order in which properties should be displayed by builder 
-	tools.<p>I've heard reference to this attribute but haven't found how it's 
-	formatted. It sounded like it has been used as a list of indices into the 
-	property descriptor array, but I'm not sure.</p>
-    <p>I've also heard some folks mention that it might be more useful as a 
-	Comparator object; again, no examples seen.</p></td>
-  </tr>
-  <tr>
-    <td><b>isContainer</b><br/>
-    (Sun)<p>BeanDescriptors</p></td>
-    <td>Helps a GUI builder determine if it should treat a bean as a container; 
-	should it allow other beans to be dropped in it?<p>This was added primarily 
-	for Swing. All Swing components inherit from java.awt.Container (that's a 
-	long story -- in short, AWT's design was flawed because Container was a 
-	class instead of an interface...).</p>
-    <p>For Swing components, bean builder tools couldn't decide if they should 
-	allow other components to be dropped into a JButton. They needed some 
-	indication on the intended use of a Swing component.</p>
-    <dl>
-      <dt><b>Boolean.TRUE</b></dt>
-      <dd>GUI builder should allow use as a container</dd>
-      <dt><b>Boolean.FALSE</b></dt>
-      <dd>otherwise</dd>
-    </dl>
-    </td>
-  </tr>
-  <tr>
-    <td><b>containerDelegate</b><br/>
-    (Sun)<p>BeanDescriptors</p></td>
-    <td>Sometimes the actual container that objects can be added to isn't 
-	directly the bean being displayed on a builder. JFrame, for example, does 
-	not allow you to add components directly to it. Instead, you need to add 
-	those components to its contentPane.<p>To support this, Sun added a 
-	containerDelegate attribute to BeanDescriptors. Its value is the name of a 
-	method that takes no arguments and returns a Container.</p>
-    <p>For example (similar to JFrame's BeanInfo, defining its BeanDescriptor)</p>
+    </td>
+  </tr>
+  <tr>
+    <td><b>propertyorder<br/>
+    </b>(?)<p>BeanDescriptors</p></td>
+    <td>Defines the order in which properties should be displayed by builder 
+	tools.<p>I've heard reference to this attribute but haven't found how it's 
+	formatted. It sounded like it has been used as a list of indices into the 
+	property descriptor array, but I'm not sure.</p>
+    <p>I've also heard some folks mention that it might be more useful as a 
+	Comparator object; again, no examples seen.</p></td>
+  </tr>
+  <tr>
+    <td><b>isContainer</b><br/>
+    (Sun)<p>BeanDescriptors</p></td>
+    <td>Helps a GUI builder determine if it should treat a bean as a container; 
+	should it allow other beans to be dropped in it?<p>This was added primarily 
+	for Swing. All Swing components inherit from java.awt.Container (that's a 
+	long story -- in short, AWT's design was flawed because Container was a 
+	class instead of an interface...).</p>
+    <p>For Swing components, bean builder tools couldn't decide if they should 
+	allow other components to be dropped into a JButton. They needed some 
+	indication on the intended use of a Swing component.</p>
+    <dl>
+      <dt><b>Boolean.TRUE</b></dt>
+      <dd>GUI builder should allow use as a container</dd>
+      <dt><b>Boolean.FALSE</b></dt>
+      <dd>otherwise</dd>
+    </dl>
+    </td>
+  </tr>
+  <tr>
+    <td><b>containerDelegate</b><br/>
+    (Sun)<p>BeanDescriptors</p></td>
+    <td>Sometimes the actual container that objects can be added to isn't 
+	directly the bean being displayed on a builder. JFrame, for example, does 
+	not allow you to add components directly to it. Instead, you need to add 
+	those components to its contentPane.<p>To support this, Sun added a 
+	containerDelegate attribute to BeanDescriptors. Its value is the name of a 
+	method that takes no arguments and returns a Container.</p>
+    <p>For example (similar to JFrame's BeanInfo, defining its BeanDescriptor)</p>
 <a name='figure.2'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 2: Container delegate</p><pre class='content'><span class='ident'>beanDescriptor</span><span class='operator'>.</span><span class='ident'>setValue</span><span class='operator'>(</span><span class='string'>"containerDelegate"</span>, <span class='string'>"getContentPane"</span><span class='operator'>);</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
-    </td>
-  </tr>
-  <tr>
-    <td><b>preferred<br/>
-    </b>(IBM, now others and in FeatureDescriptor)<p>FeatureDescriptors</p></td>
-    <td>I'm pretty sure I started this one ;)<p>VisualAge for Java users asked 
-	for a way to specify that a property should be included on the "short list" 
-	of properties that comes up in a popup menu when making connections (instead 
-	of having to bring up a dialog). I suggested to IBM that they use a property 
-	descriptor attribute, so they started looking for an attribute named 
-	"preferred" and set up support in VAJ to set it.</p>
-    <p>This is now available directly in FeatureDescriptor as the isPreferred() 
-	method. For compatability, bean builder tools should check isPreferred() <i>
-    and</i> the "preferred" attribute of a feature.</p>
-    <dl>
-      <dt><b>Boolean.TRUE</b></dt>
-      <dd>The feature is considered one that will be used/changed often in a 
-	  builder. If there is a simplified way to work with features, this feature 
-	  should be accessible there.</dd>
-      <dt><b>Boolean.FALSE</b></dt>
-      <dd>otherwise</dd>
-    </dl>
-    </td>
-  </tr>
-  <tr>
-    <td><b>lateSetting</b><br/>
-    (Borland)<p>PropertyDescriptors</p></td>
-    <td>This attribute provides a hint to a bean builder that the property 
-	should be set "late". Borland defines this as "after the add calls".<p>
-    Personally I think this is bad design -- a proper bean shouldn't care in 
-	which order its properties are set...</p>
-    <dl>
-      <dt><b>Boolean.TRUE</b></dt>
-      <dd>The bean builder should set up code to set the property as late as 
-	  possible, preferably after any child components have been added to the 
-	  bean instance in question.</dd>
-      <dt><b>Boolean.FALSE</b></dt>
-      <dd>otherwise</dd>
-    </dl>
-    </td>
-  </tr>
-  <tr>
-    <td><b>details</b><br/>
-    (InstallShield)<p>FeatureDescriptors</p></td>
-    <td>Specifies help text for a bean property.<p>This appears to be intended 
-	to be <i>end user </i>help text, <i><b>not</b></i> bean builder help text 
-	(like the name and description in a FeatureDescriptor).<br/>
-	&nbsp;</p></td>
-  </tr>
-  <tr>
-    <td><b>category</b><br/>
-    (NetBeans)<p>FeatureDescriptors</p></td>
-    <td>Specifies a single "categories" to which the described feature belongs. 
-	This allows builder tools to organize features at build time or run time.<p>
-	(Thanks to Richard Bair for pointing this out)</p></td>
-  </tr>
-  <tr>
-    <td><b>categories</b><br/>
-    (InstallShield)<p>FeatureDescriptors</p></td>
-    <td>Specifies a list of "categories" to which the described feature belongs. 
-	This allows builder tools to organize features at build time or run time.<p>
-    The format used by InstallShield is</p>
+    </td>
+  </tr>
+  <tr>
+    <td><b>preferred<br/>
+    </b>(IBM, now others and in FeatureDescriptor)<p>FeatureDescriptors</p></td>
+    <td>I'm pretty sure I started this one ;)<p>VisualAge for Java users asked 
+	for a way to specify that a property should be included on the "short list" 
+	of properties that comes up in a popup menu when making connections (instead 
+	of having to bring up a dialog). I suggested to IBM that they use a property 
+	descriptor attribute, so they started looking for an attribute named 
+	"preferred" and set up support in VAJ to set it.</p>
+    <p>This is now available directly in FeatureDescriptor as the isPreferred() 
+	method. For compatability, bean builder tools should check isPreferred() <i>
+    and</i> the "preferred" attribute of a feature.</p>
+    <dl>
+      <dt><b>Boolean.TRUE</b></dt>
+      <dd>The feature is considered one that will be used/changed often in a 
+	  builder. If there is a simplified way to work with features, this feature 
+	  should be accessible there.</dd>
+      <dt><b>Boolean.FALSE</b></dt>
+      <dd>otherwise</dd>
+    </dl>
+    </td>
+  </tr>
+  <tr>
+    <td><b>lateSetting</b><br/>
+    (Borland)<p>PropertyDescriptors</p></td>
+    <td>This attribute provides a hint to a bean builder that the property 
+	should be set "late". Borland defines this as "after the add calls".<p>
+    Personally I think this is bad design -- a proper bean shouldn't care in 
+	which order its properties are set...</p>
+    <dl>
+      <dt><b>Boolean.TRUE</b></dt>
+      <dd>The bean builder should set up code to set the property as late as 
+	  possible, preferably after any child components have been added to the 
+	  bean instance in question.</dd>
+      <dt><b>Boolean.FALSE</b></dt>
+      <dd>otherwise</dd>
+    </dl>
+    </td>
+  </tr>
+  <tr>
+    <td><b>details</b><br/>
+    (InstallShield)<p>FeatureDescriptors</p></td>
+    <td>Specifies help text for a bean property.<p>This appears to be intended 
+	to be <i>end user </i>help text, <i><b>not</b></i> bean builder help text 
+	(like the name and description in a FeatureDescriptor).<br/>
+	&nbsp;</p></td>
+  </tr>
+  <tr>
+    <td><b>category</b><br/>
+    (NetBeans)<p>FeatureDescriptors</p></td>
+    <td>Specifies a single "categories" to which the described feature belongs. 
+	This allows builder tools to organize features at build time or run time.<p>
+	(Thanks to Richard Bair for pointing this out)</p></td>
+  </tr>
+  <tr>
+    <td><b>categories</b><br/>
+    (InstallShield)<p>FeatureDescriptors</p></td>
+    <td>Specifies a list of "categories" to which the described feature belongs. 
+	This allows builder tools to organize features at build time or run time.<p>
+    The format used by InstallShield is</p>
 <a name='figure.3'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 3: InstallShield categories</p><pre class='content'><span class='string'>"'/Some Category' '/Another Category' '/Some Category/Sub Category'"</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
-    </td>
-  </tr>
-  <tr>
-    <td><b>persistenceDelegate<br/>
-    </b>(Sun)<p>BeanDescriptor </p></td>
-    <td>Specifies an instance of a class that extends PersistenceDelegate that 
-	can be used to persist an instance of this bean. A bean builder should use 
-	the specified delegate instead of Java's serialization mechanism for saving 
-	the state of the bean if using persistence as the means to generate an 
-	application.<p>Note that the value is an <i>instance</i> of a class, <b>not</b> 
-    the name of a class or a Class object.</p></td>
-  </tr>
-  <tr>
-    <td><b>proxyComponent<br/>
-    </b>(Sun)<p>BeanDescriptor</p></td>
-    <td>Returns the name of a visual component class that should be used to 
-	visually represent a non-visual component.<p>For example, suppose you define 
-	a Person bean that's <i>not</i> an AWT/Swing component. You could define a 
-	PersonRepresentation that extends (for example) and define that that object 
-	should be used to display the Person in a GUI builder.</p>
-    <p>The bean builder will create a unique instance of the proxy for each bean 
-	instance, Any manipulation done on the proxy is also performed on the bean.</p>
-    <p><i>Note: I'm still a tad unclear on the actual mapping of operations like 
-	"add" when adding a child to the visual component. I'm still examining the 
-	Sun bean builder code to get a better idea of this.</i><br/>
-	&nbsp;</p></td>
-  </tr>
-  <tr>
-    <td><b>transient<br/>
-    </b>(Sun)<p>PropertyDescriptor</p></td>
-    <td>Indicates that a property's value shouldn't be persisted/added to 
-	generated code.<p>I'm not sure about this one -- why consider it a 
-	property??? debugging in builder???</p>
-    <p>Sun's bean builder code has a comment about this being used to workaround 
-	an introspector bug. hmmm...<br/>
-	&nbsp;</p></td>
-  </tr>
-  <tr>
-    <td><b>visualUpdate</b><br/>
-    (Sun)<p>PropertyDescriptors<br/>
-    MethodDescriptors</p></td>
-    <td>I didn't see this in Sun's bean builder, but it's in the Swing javadoc 
-	@beaninfo descriptions.<p>This appears to be an indication that calling the 
-	method will require updating the visuals of the GUI.</p>
-    <p>I'm not sure at this point if this means the called method will perform 
-	the update, or if a builder should perform/generate the update code... I'm 
-	thinking the former, but I'm not sure.</p></td>
-  </tr>
-</table>
-<p>
-<!--I'd recommend that we use the attribute mechanism for default value as well; that way, we could actually get rid of UnifiedPropertyDescriptor and just have PublicFieldPropertyDescriptor and StyleBitPropertyDescriptor inherit directly from PropertyDescriptor... We could add 
-
-
-defaultValue (Object)
-    Holds the constant default value (of the property's type)
-resetValueMethod (method name) 
-    Names the method that can be used to reset the value to its default 
-    Method would have sig void methodName(String propertyName)
-    This also would be a good way to deal with public fields and style bits. Rather than needing a    separate class for it, we could just add some attributes like
-isPublicField (true/false) 
-    true if the property is represented by a public field 
-    false otherwise
-publicFieldName (String) 
-    the name of the field that represents this property
-isStyleBit (true/false) 
-    true if the property is represented as a style bit 
-    false otherwise
-styleBitMask (Long? Integer?) 
-    mask to apply to retrieved value to get the true/false value of the style bit
-styleBitShift (Integer) 
-    number of bits to shift the resulting masked value left (+) or right(-) 
-    (not sure if this is necessary...)
-
-To add descriptive text for enumerations we could add
-    enumerationValuesDescriptions (String[]) 
-        Single Strings mapping to each enumerationValue triple
-
-And how about
-iconURLs (Object[]) - feature/bean descriptors 
-allows user to associate icons with beans, properties, methods, events 
-would be pairs of icon type (ICON_COLOR_16x16...) and urls 
-new Object[] {new Integer(ICON_COLOR_16x16), "icons/foo.gif", new Integer(ICON_COLOR_32x32), "icons/fee.gif"}
-I think we should implement the getIcon methods as follows. These methods would appear in bean/property/method/event descriptors:
-public URL getIconURL(int iconType) { if getValue("iconURLs") exists for this feature return the appropriate URL}
-public Image getIcon(int iconType) { URL url = getIconURL(iconType); if (url != null) read the icon and return an AWT image for it else // for bean descriptor only return super.getIcon(int iconType) // non-bean descriptors return null; there's no existing getIcon}" --></p>
-
+    </td>
+  </tr>
+  <tr>
+    <td><b>persistenceDelegate<br/>
+    </b>(Sun)<p>BeanDescriptor </p></td>
+    <td>Specifies an instance of a class that extends PersistenceDelegate that 
+	can be used to persist an instance of this bean. A bean builder should use 
+	the specified delegate instead of Java's serialization mechanism for saving 
+	the state of the bean if using persistence as the means to generate an 
+	application.<p>Note that the value is an <i>instance</i> of a class, <b>not</b> 
+    the name of a class or a Class object.</p></td>
+  </tr>
+  <tr>
+    <td><b>proxyComponent<br/>
+    </b>(Sun)<p>BeanDescriptor</p></td>
+    <td>Returns the name of a visual component class that should be used to 
+	visually represent a non-visual component.<p>For example, suppose you define 
+	a Person bean that's <i>not</i> an AWT/Swing component. You could define a 
+	PersonRepresentation that extends (for example) and define that that object 
+	should be used to display the Person in a GUI builder.</p>
+    <p>The bean builder will create a unique instance of the proxy for each bean 
+	instance, Any manipulation done on the proxy is also performed on the bean.</p>
+    <p><i>Note: I'm still a tad unclear on the actual mapping of operations like 
+	"add" when adding a child to the visual component. I'm still examining the 
+	Sun bean builder code to get a better idea of this.</i><br/>
+	&nbsp;</p></td>
+  </tr>
+  <tr>
+    <td><b>transient<br/>
+    </b>(Sun)<p>PropertyDescriptor</p></td>
+    <td>Indicates that a property's value shouldn't be persisted/added to 
+	generated code.<p>I'm not sure about this one -- why consider it a 
+	property??? debugging in builder???</p>
+    <p>Sun's bean builder code has a comment about this being used to workaround 
+	an introspector bug. hmmm...<br/>
+	&nbsp;</p></td>
+  </tr>
+  <tr>
+    <td><b>visualUpdate</b><br/>
+    (Sun)<p>PropertyDescriptors<br/>
+    MethodDescriptors</p></td>
+    <td>I didn't see this in Sun's bean builder, but it's in the Swing javadoc 
+	@beaninfo descriptions.<p>This appears to be an indication that calling the 
+	method will require updating the visuals of the GUI.</p>
+    <p>I'm not sure at this point if this means the called method will perform 
+	the update, or if a builder should perform/generate the update code... I'm 
+	thinking the former, but I'm not sure.</p></td>
+  </tr>
+</table>
+<p>
+<!--I'd recommend that we use the attribute mechanism for default value as well; that way, we could actually get rid of UnifiedPropertyDescriptor and just have PublicFieldPropertyDescriptor and StyleBitPropertyDescriptor inherit directly from PropertyDescriptor... We could add 
+
+
+defaultValue (Object)
+    Holds the constant default value (of the property's type)
+resetValueMethod (method name) 
+    Names the method that can be used to reset the value to its default 
+    Method would have sig void methodName(String propertyName)
+    This also would be a good way to deal with public fields and style bits. Rather than needing a    separate class for it, we could just add some attributes like
+isPublicField (true/false) 
+    true if the property is represented by a public field 
+    false otherwise
+publicFieldName (String) 
+    the name of the field that represents this property
+isStyleBit (true/false) 
+    true if the property is represented as a style bit 
+    false otherwise
+styleBitMask (Long? Integer?) 
+    mask to apply to retrieved value to get the true/false value of the style bit
+styleBitShift (Integer) 
+    number of bits to shift the resulting masked value left (+) or right(-) 
+    (not sure if this is necessary...)
+
+To add descriptive text for enumerations we could add
+    enumerationValuesDescriptions (String[]) 
+        Single Strings mapping to each enumerationValue triple
+
+And how about
+iconURLs (Object[]) - feature/bean descriptors 
+allows user to associate icons with beans, properties, methods, events 
+would be pairs of icon type (ICON_COLOR_16x16...) and urls 
+new Object[] {new Integer(ICON_COLOR_16x16), "icons/foo.gif", new Integer(ICON_COLOR_32x32), "icons/fee.gif"}
+I think we should implement the getIcon methods as follows. These methods would appear in bean/property/method/event descriptors:
+public URL getIconURL(int iconType) { if getValue("iconURLs") exists for this feature return the appropriate URL}
+public Image getIcon(int iconType) { URL url = getIconURL(iconType); if (url != null) read the icon and return an AWT image for it else // for bean descriptor only return super.getIcon(int iconType) // non-bean descriptors return null; there's no existing getIcon}" --></p>
+
 				<!-- #EndEditable "content" -->
 				<div id="footer">
 					<p>&nbsp;</p>

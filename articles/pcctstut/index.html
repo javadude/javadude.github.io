@@ -1,14 +1,14 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
 
-
-<!-- #BeginTemplate "../../master.dwt" -->
-
+
+<!-- #BeginTemplate "../../master.dwt" -->
+
 	<head>
 		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 		<!-- #BeginEditable "doctitle" -->
 
-		<title>A PCCTS Tutorial - Scott Stanchfield</title>
+		<title>A PCCTS Tutorial - Scott Stanchfield</title>
 		<!-- #EndEditable -->
 		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
 		<!-- #BeginEditable "head" -->
@@ -31,111 +31,111 @@
 			<div id="contentIndent">
 				<!-- #BeginEditable "content" -->
 
-
-<h1>A PCCTS Tutorial</h1>
-						<h2>THIS IS THE PCCTS 1.33 TUTORIAL!</h2>
-<h3>&nbsp;</h3>
-				<h3><a href="../antlr3xtut">Look Here for the ANTLR 3.x Video Tutorial</a></h3>
-				<h3><a href="../antlrtut/index.html">Look Here for the ANTLR 2.x Tutorial!</a></h3>
-<h2>Source Code</h2>
-<h3>Tutorial Examples and HTML</h3>
-<p>Before starting the tutorial, I just wanted to point out that all the source
-code for the examples contained within is available via the following
-links.&nbsp; In addition, the entire HTML source for this tutorial (minus this
-paragraph as I'm too lazy to re-zip it right now) is also available as a zip.</p>
-<h3>My Original Compiler Project</h3>
-<p>Someone sent me a note asking for my original compiler project.&nbsp; I
-figured &quot;what the heck&quot; and dug it up and sent it to him.&nbsp; Then I
-figured &quot;what the heck&quot; again and decided to post it here.&nbsp; If
-you download this and try it and it still works, please let me know!</p>
-<p>A few notes on this project's contents:</p>
-<ul>
-    <li>The project consisted of
-        <ul>
-            <li>A compiler, <tt>xl</tt>, which compiles <tt>*.xl</tt> files into
-                <tt>*.o</tt> files</li>
-            <li>An interpreter, <tt>go</tt>, which executes the <tt>*.o</tt>
-                files</li>
-            <li>A disassembler, <tt>dis</tt>, which disassembles <tt>*.o</tt>
-                files (extra credit!)</li>
-        </ul>
-    </li>
-    <li>I have not touched it since the class, and I'm not terribly sure exactly
-        what's there...</li>
-    <li>I <em>think</em> I had ok comments in the code -- hopefully it's
-        readable...</li>
-    <li>Some of the code is rather wide -- sorry about this, but I set it up to
-        print nicely landscape</li>
-    <li>It doesn't exactly match the recognizer built for this tutorial (I
-        started from scratch when doing the tutorial.</li>
-    <li>Much of the source code in this zip is the actual PCCTS 1.20 support
-        code (including a simple symbol table.)&nbsp; I think there shoud be
-        everything present here to actually compile and run this, but I haven't
-        tried it in years so I can't guarantee it.</li>
-    <li>Keep in mind that I've learned a lot since I took the course, so some
-        things in the course compiler may be weird.</li>
-    <li>I used PCCTS 1.20 for the course, and some features like semantic
-        predicates were not quite working right.&nbsp; Therefore I had to do a
-        few things differently than I would had predicates worked
-        properly.&nbsp; (Now 1.33 is available and works well.)</li>
-    <li>I wrote the compiler project on an Amiga 2000.&nbsp; (Yup, that's right,
-        I'm an Amiga fanatic.&nbsp; Unfortunately I had to turn to the dark side
-        and use a PC for application/speed reasons.&nbsp; A 25MHz Amiga may have
-        performed as well as a 66MHz PC, but now I've got a 233MHz PII...)
-        <ul>
-            <li>I used the SAS/C/C++ compiler.&nbsp; The file SCOPTIONS is just
-                a compiler option file</li>
-            <li>The makefile <em>should</em> be pretty close to what you'd need
-                on Unix (the Amiga really acted like a unix machine wrt how you
-                run commands and compiling stuff.&nbsp; Using PCCTS was just a
-                matter of changing the compiler name in the PCCTS makefile.&nbsp;
-                Really!&nbsp;&nbsp; It was <em>that</em> easy)</li>
-        </ul>
-    </li>
-    <li>The test directory contains:
-        <ul>
-            <li><tt>*.xl</tt> files: the sample source files (I think they
-                should be the same as the ones provided in this tut but I
-                haven't checked.)</li>
-            <li><tt>ast</tt> dir: outputs displaying the ASTs generated from the
-                sources</li>
-            <li><tt>dis</tt> dir: disassembly outputs</li>
-            <li><tt>err</tt> dir: compiler messages for each source file</li>
-            <li><tt>o</tt> dir: compiler-generated object files</li>
-        </ul>
-    </li>
-</ul>
-<h3>Source Code Links</h3>
-<h4>PKZip/WinZip format (.zip)</h4>
-<ul>
-    <li><a href="archive/recog1.zip">base recognizer</a></li>
-    <li><a href="archive/recog2.zip">recognizer after cleanup</a></li>
-    <li><a href="archive/tests.zip">sample XL code for testing</a></li>
-    <li><a href="archive/pcctstut.zip">HTML</a></li>
-    <li><a href="archive/xl.zip">my full (original) compiler project</a></li>
-</ul>
-<h4>Unix tar, gzipped (.tgz)</h4>
-<ul>
-    <li><a href="archive/recog1.tgz">base recognizer</a></li>
-    <li><a href="archive/recog2.tgz">recognizer after cleanup</a></li>
-    <li><a href="archive/tests.tgz">sample XL code for testing</a></li>
-    <li><a href="archive/pcctstut.tgz">HTML</a></li>
-    <li><a href="archive/xl.tgz">my full (original) compiler project</a></li>
-</ul>
-<h3>Tutorial Parts</h3>
-<ul>
-    <li><a href="intro.html">Introduction</a></li>
-    <li><a href="pccts2.html">A Simple Language</a></li>
-    <li><a href="pccts3.html">Organization</a></li>
-    <li><a href="pccts4.html">Recognition</a></li>
-    <li><a href="pccts5.html">Grammar</a></li>
-    <li><a href="pccts6.html">Statements</a></li>
-    <li><a href="pccts7.html">Expressions</a></li>
-    <li><a href="pccts8.html">PCCTS Glue</a></li>
-    <li><a href="pccts9.html">Compiling it All</a></li>
-</ul>
-&nbsp;
-
+
+<h1>A PCCTS Tutorial</h1>
+						<h2>THIS IS THE PCCTS 1.33 TUTORIAL!</h2>
+<h3>&nbsp;</h3>
+				<h3><a href="../antlr3xtut">Look Here for the ANTLR 3.x Video Tutorial</a></h3>
+				<h3><a href="../antlrtut/index.html">Look Here for the ANTLR 2.x Tutorial!</a></h3>
+<h2>Source Code</h2>
+<h3>Tutorial Examples and HTML</h3>
+<p>Before starting the tutorial, I just wanted to point out that all the source
+code for the examples contained within is available via the following
+links.&nbsp; In addition, the entire HTML source for this tutorial (minus this
+paragraph as I'm too lazy to re-zip it right now) is also available as a zip.</p>
+<h3>My Original Compiler Project</h3>
+<p>Someone sent me a note asking for my original compiler project.&nbsp; I
+figured &quot;what the heck&quot; and dug it up and sent it to him.&nbsp; Then I
+figured &quot;what the heck&quot; again and decided to post it here.&nbsp; If
+you download this and try it and it still works, please let me know!</p>
+<p>A few notes on this project's contents:</p>
+<ul>
+    <li>The project consisted of
+        <ul>
+            <li>A compiler, <tt>xl</tt>, which compiles <tt>*.xl</tt> files into
+                <tt>*.o</tt> files</li>
+            <li>An interpreter, <tt>go</tt>, which executes the <tt>*.o</tt>
+                files</li>
+            <li>A disassembler, <tt>dis</tt>, which disassembles <tt>*.o</tt>
+                files (extra credit!)</li>
+        </ul>
+    </li>
+    <li>I have not touched it since the class, and I'm not terribly sure exactly
+        what's there...</li>
+    <li>I <em>think</em> I had ok comments in the code -- hopefully it's
+        readable...</li>
+    <li>Some of the code is rather wide -- sorry about this, but I set it up to
+        print nicely landscape</li>
+    <li>It doesn't exactly match the recognizer built for this tutorial (I
+        started from scratch when doing the tutorial.</li>
+    <li>Much of the source code in this zip is the actual PCCTS 1.20 support
+        code (including a simple symbol table.)&nbsp; I think there shoud be
+        everything present here to actually compile and run this, but I haven't
+        tried it in years so I can't guarantee it.</li>
+    <li>Keep in mind that I've learned a lot since I took the course, so some
+        things in the course compiler may be weird.</li>
+    <li>I used PCCTS 1.20 for the course, and some features like semantic
+        predicates were not quite working right.&nbsp; Therefore I had to do a
+        few things differently than I would had predicates worked
+        properly.&nbsp; (Now 1.33 is available and works well.)</li>
+    <li>I wrote the compiler project on an Amiga 2000.&nbsp; (Yup, that's right,
+        I'm an Amiga fanatic.&nbsp; Unfortunately I had to turn to the dark side
+        and use a PC for application/speed reasons.&nbsp; A 25MHz Amiga may have
+        performed as well as a 66MHz PC, but now I've got a 233MHz PII...)
+        <ul>
+            <li>I used the SAS/C/C++ compiler.&nbsp; The file SCOPTIONS is just
+                a compiler option file</li>
+            <li>The makefile <em>should</em> be pretty close to what you'd need
+                on Unix (the Amiga really acted like a unix machine wrt how you
+                run commands and compiling stuff.&nbsp; Using PCCTS was just a
+                matter of changing the compiler name in the PCCTS makefile.&nbsp;
+                Really!&nbsp;&nbsp; It was <em>that</em> easy)</li>
+        </ul>
+    </li>
+    <li>The test directory contains:
+        <ul>
+            <li><tt>*.xl</tt> files: the sample source files (I think they
+                should be the same as the ones provided in this tut but I
+                haven't checked.)</li>
+            <li><tt>ast</tt> dir: outputs displaying the ASTs generated from the
+                sources</li>
+            <li><tt>dis</tt> dir: disassembly outputs</li>
+            <li><tt>err</tt> dir: compiler messages for each source file</li>
+            <li><tt>o</tt> dir: compiler-generated object files</li>
+        </ul>
+    </li>
+</ul>
+<h3>Source Code Links</h3>
+<h4>PKZip/WinZip format (.zip)</h4>
+<ul>
+    <li><a href="archive/recog1.zip">base recognizer</a></li>
+    <li><a href="archive/recog2.zip">recognizer after cleanup</a></li>
+    <li><a href="archive/tests.zip">sample XL code for testing</a></li>
+    <li><a href="archive/pcctstut.zip">HTML</a></li>
+    <li><a href="archive/xl.zip">my full (original) compiler project</a></li>
+</ul>
+<h4>Unix tar, gzipped (.tgz)</h4>
+<ul>
+    <li><a href="archive/recog1.tgz">base recognizer</a></li>
+    <li><a href="archive/recog2.tgz">recognizer after cleanup</a></li>
+    <li><a href="archive/tests.tgz">sample XL code for testing</a></li>
+    <li><a href="archive/pcctstut.tgz">HTML</a></li>
+    <li><a href="archive/xl.tgz">my full (original) compiler project</a></li>
+</ul>
+<h3>Tutorial Parts</h3>
+<ul>
+    <li><a href="intro.html">Introduction</a></li>
+    <li><a href="pccts2.html">A Simple Language</a></li>
+    <li><a href="pccts3.html">Organization</a></li>
+    <li><a href="pccts4.html">Recognition</a></li>
+    <li><a href="pccts5.html">Grammar</a></li>
+    <li><a href="pccts6.html">Statements</a></li>
+    <li><a href="pccts7.html">Expressions</a></li>
+    <li><a href="pccts8.html">PCCTS Glue</a></li>
+    <li><a href="pccts9.html">Compiling it All</a></li>
+</ul>
+&nbsp;
+
 						<!-- #EndEditable "content" -->
 				<div id="footer">
 					<p>&nbsp;</p>
