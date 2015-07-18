@@ -1,14 +1,14 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
 
-
-<!-- #BeginTemplate "../../../master.dwt" -->
-
+
+<!-- #BeginTemplate "../../../master.dwt" -->
+
 	<head>
 		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 		<!-- #BeginEditable "doctitle" -->
 
-		<title>VAJ: Using CVS - Scott Stanchfield</title>
+		<title>VAJ: Using CVS - Scott Stanchfield</title>
 		<!-- #EndEditable -->
 		<link href="../../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
 		<!-- #BeginEditable "head" -->
@@ -31,191 +31,191 @@
 			<div id="contentIndent">
 				<!-- #BeginEditable "content" -->
 
-<h1>Using CVS</h1>
-
-<h2><i>Note: This article represents the views of a user of vaj2cvs, and is
-presented here by permission of the author, Peter Gassmann.</i></h2>
-
-<p>11.02.2000&nbsp;&nbsp;&nbsp; <a href="mailto:peter.gassmann@acm.org">peter.gassmann@acm.org</a>
-</p>
-
-<p>This document describes the development process when using the VisualAge to
-CVS bridge (vaj2cvs, developed by Kevin J. Grittner) in VisualAge for Java. The
-process is based on the following assumptions :
-</p>
-<ul>
-  <li><b>Collective Code Ownership</b><br/>
-    Any class may be changed by anybody in the team
-  </li>
-  <li><b>Continuous integration</b><br/>
-    Integration should be done very frequent, at least daily.
-  </li>
-  <li><b>Integrated Unit Tests run at 100%</b><br/>
-    The integrated code and its unit tests have to run at 100% ! Integration is
-    allowed only if all unit tests are working.
-  </li>
-</ul>
-
-<p>The above assumptions are described in more detail in the eXtreme Programming
-(XP) methodology.
-</p>
-
-<p>The mentioned batch-files are simple shell-scripts which use a command-line
-version of CVS to commit and update non-java files. This is necessary because
-VisualAge (and the CVS Bridge) do not provide functionality to fully integrate
-non-java files.
-</p>
-
-
-<h2>Overall process</h2>
-<ol>
-  <li>Start of work (morning)
-  </li>
-  <li>Work (all day)
-  </li>
-  <li>Integration (evening)
-  </li>
-</ol>
-
-
-<h2>Start of work (morning)</h2>
-<ol>
-  <li>Start VisualAge
-  </li>
-  <li>Do a CVS-checkout on all needed projects
-  </li>
-  <li>If anything has been changed (look at the CVS output), create a version in
-    VisualAge (&quot;after update&quot;), to be able to throw away your changes,
-    or to find out what you have changed during the day.
-  </li>
-  <li>Invoke the batch-file &quot;update properties from CVS&quot; to update the
-    non-java files
-  </li>
-  <li>Run AllAllTests (system test) -&gt; must be running at 100%. If not, a
-    prerequisite is not met. Get in contact with the other team members. It
-    might be necessary to install a new database or something like that.
-  </li>
-  <li>Start working
-  </li>
-</ol>
-
-
-<h2>Work (all day)</h2>
-
-
-<h3>Creating a new class :</h3>
-<ol>
-  <li>Add the class to VisualAge
-  </li>
-  <li>Invoke CVS-add on the new class immediately, but do not invoke CVS-commit
-    !!! This way the class will be added when you do a commit of the complete
-    project (or on individual classes) during integration.
-  </li>
-  <li>Continue working on that class
-  </li>
-</ol>
-
-<p>If you forget to add a new class in CVS, it will be recognized by CVS during
-a checkout. A class which only exists locally will be marked with a questionmark
-('?') at the beginning of the respective line in the CVS output.
-</p>
-
-
-<h3>Deleting a class</h3>
-<ol>
-  <li>Delete the class using CVS-remove, but do not invoke CVS-commit !!! This
-    way the class will be removed in CVS when you do a commit of the complete
-    project (or on individual classes) during integration.
-  </li>
-</ol>
-
-
-<h3>Renaming a class</h3>
-<ol>
-  <li>Copy the class using VisualAge Reorganize -&gt; Copy. Do not use rename,
-    because then you can't remove the old class directly from CVS !
-  </li>
-  <li>Invoke CVS-add on the copy of the class (the new class)
-  </li>
-  <li>Delete the old class  see deleting a class
-  </li>
-</ol>
-
-
-<h2>Integration (evening)</h2>
-
-<p>The integration process should not be performed by different people at the
-same time, to avoid conflicts ! Make sure that no one else is integrating at the
-same time as you are !
-</p>
-<ol>
-  <li>Run all tests (AllAllTests). They should run at 100%.
-  </li>
-  <li>Create a version of the project in VisualAge (&quot;before
-    integration&quot;)
-  </li>
-  <li>Invoke CVS-checkout on the project, this way you get all changes others
-    have made in the repository since your start of work. Vaj2cvs will merge all
-    changes automatically, where possible. I've you've forgotten to add a new
-    class during the day, you will see the class on top of the list generated by
-    vaj2cvs, marked with a '?' at the beginning of the line.
-  </li>
-  <li>CVS-update might report a conflict on a class. This happens when the same
-    line of code has been changed locally and by somebody else. Vaj2cvs will
-    popup a dialog, where you must select the code you want to use. If you don't
-    select the code you want to use, the tool might fail, and the update will
-    not be correct ! However, you might just comment out the block of code in
-    question (marked by &gt;&gt;&gt;&gt;&gt; and &lt;&lt;&lt;&lt;&lt;), and then
-    change it after having finished the update.
-  <br/>
-  <b>Attention : After having selected the code (or commented out) after the
-  conflict, vaj2cvs will mark the class as a CVS version. As a consequence,
-  commit won't be possible. But the class has not been changed in CVS ! Edit the
-  class proforma (just add a blank somewhere and save). This way you can invoke
-  CVS-commit afterwards and the tool will send the changed version containing
-  the conflict fix to the CVS repository.</b>
-  </li>
-  <li>If you want to find out what has changed, just invoke VisualAge -&gt;
-    Compare with and select the version you created (&quot;before
-    integration&quot;). Now you can see which classes have changed how during
-    the day.
-  </li>
-  <li>Run the update_m2_props.bat batch-file to update the configuration-files
-    as well. The newest version will be needed in the tests.
-  </li>
-  <li>Run all tests. Fix'em until they run at 100%. If you have commented out a
-    block because of a CVS conflict, now you need to fix that as well.
-  </li>
-  <li>Invoke CVS-commit on all classes with the Version-information &quot;before
-    integration&quot;, these classes need to be committed anyhow.
-  </li>
-  <li>Invoke CVS-commit on all classes with no Version-information (those with a
-    timestamp).
-  </li>
-  <li>Alternatively to step 6 and 7, you could also invoke CVS-commit on the
-    project. But this way you wont be able to add individual comments to each
-    changed class.
-  </li>
-  <li>Check again if all classes have been committed, eg. no class has a version
-    of &quot;before integration&quot; or no version (just a timestamp).
-  </li>
-  <li>Create another VisualAge version &quot;after integration&quot;. This
-    version enables you to find out what has changed since your last integration
-    after the update in the morning.
-  </li>
-  <li>Invoke the batch-file &quot;commit properties to CVS&quot; to commit
-    changed non-java files
-  </li>
-</ol>
-&nbsp;
-
-
-<h2>A bug in VisualAge</h2>
-
-<p>There is a bug in VisualAge for Java (version 2.x, Version 3.0) regarding
-recompilation of constants. Suppose you have the following code :
-</p>
-
+<h1>Using CVS</h1>
+
+<h2><i>Note: This article represents the views of a user of vaj2cvs, and is
+presented here by permission of the author, Peter Gassmann.</i></h2>
+
+<p>11.02.2000&nbsp;&nbsp;&nbsp; <a href="mailto:peter.gassmann@acm.org">peter.gassmann@acm.org</a>
+</p>
+
+<p>This document describes the development process when using the VisualAge to
+CVS bridge (vaj2cvs, developed by Kevin J. Grittner) in VisualAge for Java. The
+process is based on the following assumptions :
+</p>
+<ul>
+  <li><b>Collective Code Ownership</b><br/>
+    Any class may be changed by anybody in the team
+  </li>
+  <li><b>Continuous integration</b><br/>
+    Integration should be done very frequent, at least daily.
+  </li>
+  <li><b>Integrated Unit Tests run at 100%</b><br/>
+    The integrated code and its unit tests have to run at 100% ! Integration is
+    allowed only if all unit tests are working.
+  </li>
+</ul>
+
+<p>The above assumptions are described in more detail in the eXtreme Programming
+(XP) methodology.
+</p>
+
+<p>The mentioned batch-files are simple shell-scripts which use a command-line
+version of CVS to commit and update non-java files. This is necessary because
+VisualAge (and the CVS Bridge) do not provide functionality to fully integrate
+non-java files.
+</p>
+
+
+<h2>Overall process</h2>
+<ol>
+  <li>Start of work (morning)
+  </li>
+  <li>Work (all day)
+  </li>
+  <li>Integration (evening)
+  </li>
+</ol>
+
+
+<h2>Start of work (morning)</h2>
+<ol>
+  <li>Start VisualAge
+  </li>
+  <li>Do a CVS-checkout on all needed projects
+  </li>
+  <li>If anything has been changed (look at the CVS output), create a version in
+    VisualAge (&quot;after update&quot;), to be able to throw away your changes,
+    or to find out what you have changed during the day.
+  </li>
+  <li>Invoke the batch-file &quot;update properties from CVS&quot; to update the
+    non-java files
+  </li>
+  <li>Run AllAllTests (system test) -&gt; must be running at 100%. If not, a
+    prerequisite is not met. Get in contact with the other team members. It
+    might be necessary to install a new database or something like that.
+  </li>
+  <li>Start working
+  </li>
+</ol>
+
+
+<h2>Work (all day)</h2>
+
+
+<h3>Creating a new class :</h3>
+<ol>
+  <li>Add the class to VisualAge
+  </li>
+  <li>Invoke CVS-add on the new class immediately, but do not invoke CVS-commit
+    !!! This way the class will be added when you do a commit of the complete
+    project (or on individual classes) during integration.
+  </li>
+  <li>Continue working on that class
+  </li>
+</ol>
+
+<p>If you forget to add a new class in CVS, it will be recognized by CVS during
+a checkout. A class which only exists locally will be marked with a questionmark
+('?') at the beginning of the respective line in the CVS output.
+</p>
+
+
+<h3>Deleting a class</h3>
+<ol>
+  <li>Delete the class using CVS-remove, but do not invoke CVS-commit !!! This
+    way the class will be removed in CVS when you do a commit of the complete
+    project (or on individual classes) during integration.
+  </li>
+</ol>
+
+
+<h3>Renaming a class</h3>
+<ol>
+  <li>Copy the class using VisualAge Reorganize -&gt; Copy. Do not use rename,
+    because then you can't remove the old class directly from CVS !
+  </li>
+  <li>Invoke CVS-add on the copy of the class (the new class)
+  </li>
+  <li>Delete the old class  see deleting a class
+  </li>
+</ol>
+
+
+<h2>Integration (evening)</h2>
+
+<p>The integration process should not be performed by different people at the
+same time, to avoid conflicts ! Make sure that no one else is integrating at the
+same time as you are !
+</p>
+<ol>
+  <li>Run all tests (AllAllTests). They should run at 100%.
+  </li>
+  <li>Create a version of the project in VisualAge (&quot;before
+    integration&quot;)
+  </li>
+  <li>Invoke CVS-checkout on the project, this way you get all changes others
+    have made in the repository since your start of work. Vaj2cvs will merge all
+    changes automatically, where possible. I've you've forgotten to add a new
+    class during the day, you will see the class on top of the list generated by
+    vaj2cvs, marked with a '?' at the beginning of the line.
+  </li>
+  <li>CVS-update might report a conflict on a class. This happens when the same
+    line of code has been changed locally and by somebody else. Vaj2cvs will
+    popup a dialog, where you must select the code you want to use. If you don't
+    select the code you want to use, the tool might fail, and the update will
+    not be correct ! However, you might just comment out the block of code in
+    question (marked by &gt;&gt;&gt;&gt;&gt; and &lt;&lt;&lt;&lt;&lt;), and then
+    change it after having finished the update.
+  <br/>
+  <b>Attention : After having selected the code (or commented out) after the
+  conflict, vaj2cvs will mark the class as a CVS version. As a consequence,
+  commit won't be possible. But the class has not been changed in CVS ! Edit the
+  class proforma (just add a blank somewhere and save). This way you can invoke
+  CVS-commit afterwards and the tool will send the changed version containing
+  the conflict fix to the CVS repository.</b>
+  </li>
+  <li>If you want to find out what has changed, just invoke VisualAge -&gt;
+    Compare with and select the version you created (&quot;before
+    integration&quot;). Now you can see which classes have changed how during
+    the day.
+  </li>
+  <li>Run the update_m2_props.bat batch-file to update the configuration-files
+    as well. The newest version will be needed in the tests.
+  </li>
+  <li>Run all tests. Fix'em until they run at 100%. If you have commented out a
+    block because of a CVS conflict, now you need to fix that as well.
+  </li>
+  <li>Invoke CVS-commit on all classes with the Version-information &quot;before
+    integration&quot;, these classes need to be committed anyhow.
+  </li>
+  <li>Invoke CVS-commit on all classes with no Version-information (those with a
+    timestamp).
+  </li>
+  <li>Alternatively to step 6 and 7, you could also invoke CVS-commit on the
+    project. But this way you wont be able to add individual comments to each
+    changed class.
+  </li>
+  <li>Check again if all classes have been committed, eg. no class has a version
+    of &quot;before integration&quot; or no version (just a timestamp).
+  </li>
+  <li>Create another VisualAge version &quot;after integration&quot;. This
+    version enables you to find out what has changed since your last integration
+    after the update in the morning.
+  </li>
+  <li>Invoke the batch-file &quot;commit properties to CVS&quot; to commit
+    changed non-java files
+  </li>
+</ol>
+&nbsp;
+
+
+<h2>A bug in VisualAge</h2>
+
+<p>There is a bug in VisualAge for Java (version 2.x, Version 3.0) regarding
+recompilation of constants. Suppose you have the following code :
+</p>
+
 <pre><tt>
 
 public class ClassA{
@@ -232,25 +232,25 @@ public class ClassB{
 
 }
 
-</tt></pre>
-
-<p>When you change the value of CONSTANT_A you would generally assume that the
-value of CONSTANT_B would reflect the change as well. However, VisualAge does in
-the above situation not recompile ClassB automatically if a change is made in
-ClassA. Therefore, CONSTANT_B does not have the value as expected. Now if you do
-a checkout from CVS of ClassA with a new value for CONSTANT_A, this will not be
-reflected in ClassB ! In this situation, you need to force a recompile in
-VisualAge. The easiest way to do this is to version the project, delete the
-project from the workspace and add it again. This could also be done just for
-packages or classes.
-</p>
-
-<p>If this problem happens frequently in your project, write a test which
-exposes the problem and which displays an appropriate message. Run this test as
-the first test in AllAllTests, so it will be immediately clear what the problem
-is.
-</p>
-
+</tt></pre>
+
+<p>When you change the value of CONSTANT_A you would generally assume that the
+value of CONSTANT_B would reflect the change as well. However, VisualAge does in
+the above situation not recompile ClassB automatically if a change is made in
+ClassA. Therefore, CONSTANT_B does not have the value as expected. Now if you do
+a checkout from CVS of ClassA with a new value for CONSTANT_A, this will not be
+reflected in ClassB ! In this situation, you need to force a recompile in
+VisualAge. The easiest way to do this is to version the project, delete the
+project from the workspace and add it again. This could also be done just for
+packages or classes.
+</p>
+
+<p>If this problem happens frequently in your project, write a test which
+exposes the problem and which displays an appropriate message. Run this test as
+the first test in AllAllTests, so it will be immediately clear what the problem
+is.
+</p>
+
 				<!-- #EndEditable "content" -->
 				<div id="footer">
 					<p>&nbsp;</p>

@@ -1,14 +1,14 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
 
-
-<!-- #BeginTemplate "../../master.dwt" -->
-
+
+<!-- #BeginTemplate "../../master.dwt" -->
+
 	<head>
 		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 		<!-- #BeginEditable "doctitle" -->
 
-		<title>PCCTS Tutorial: PCCTS Glue  - Scott Stanchfield</title>
+		<title>PCCTS Tutorial: PCCTS Glue  - Scott Stanchfield</title>
 		<!-- #EndEditable -->
 		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
 		<!-- #BeginEditable "head" -->
@@ -31,16 +31,16 @@
 			<div id="contentIndent">
 				<!-- #BeginEditable "content" -->
 
-
-<h1>PCCTS Glue</h1>
-<p>I like to call the code that wraps the scanner specification and grammar specification together into a PCCTS &quot;grammar&quot; file the &quot;PCCTS glue.&quot; It's a bit messy at first, but if we really think about what it does, step-by-step, at
-least some of the mystery should disappear.</p>
-<p>First, let's look at the overall design of a PCCTS-based parser.</p>
-<p>Let's consider what information we already have. We have already defined how we want to group input characters into tokens in our scanner definition. We have defined the syntax of our language in our grammar definition. But what gets generated when
-these definitions are processed by DLG and ANTLR?</p>
-<p>We need the startup code (a &quot;main&quot; function), a shell class to hold the parser definition, and references to all the fun definitions that ANTLR and DLG need to create an executable. Without saying much more (I may later), we have the
-following. Note that we'll be changing some of it later when we add trees, symbols and other compiler goodies...</p>
-<pre>
+
+<h1>PCCTS Glue</h1>
+<p>I like to call the code that wraps the scanner specification and grammar specification together into a PCCTS &quot;grammar&quot; file the &quot;PCCTS glue.&quot; It's a bit messy at first, but if we really think about what it does, step-by-step, at
+least some of the mystery should disappear.</p>
+<p>First, let's look at the overall design of a PCCTS-based parser.</p>
+<p>Let's consider what information we already have. We have already defined how we want to group input characters into tokens in our scanner definition. We have defined the syntax of our language in our grammar definition. But what gets generated when
+these definitions are processed by DLG and ANTLR?</p>
+<p>We need the startup code (a &quot;main&quot; function), a shell class to hold the parser definition, and references to all the fun definitions that ANTLR and DLG need to create an executable. Without saying much more (I may later), we have the
+following. Note that we'll be changing some of it later when we add trees, symbols and other compiler goodies...</p>
+<pre>
 #header
 
 &lt;&lt;
@@ -183,8 +183,8 @@ class XLParser
 
 } // end grammar class
 
-         </pre>
-<p>Now we know everything that needs to go into our recognizer. Let's <a href="pccts9.html">put it together and compile/test it</a>!</p>
+         </pre>
+<p>Now we know everything that needs to go into our recognizer. Let's <a href="pccts9.html">put it together and compile/test it</a>!</p>
 				<!-- #EndEditable "content" -->
 				<div id="footer">
 					<p>&nbsp;</p>

@@ -1,14 +1,14 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
 
-
-<!-- #BeginTemplate "../../master.dwt" -->
-
+
+<!-- #BeginTemplate "../../master.dwt" -->
+
 	<head>
 		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 		<!-- #BeginEditable "doctitle" -->
 
-		<title>Applying MVC in VisualAge for Java - Scott Stanchfield</title>
+		<title>Applying MVC in VisualAge for Java - Scott Stanchfield</title>
 		<!-- #EndEditable -->
 		<link href="../../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
 		<!-- #BeginEditable "head" -->
@@ -31,874 +31,874 @@
 			<div id="contentIndent">
 				<!-- #BeginEditable "content" -->
 
-
-<h1>Applying MVC in VisualAge for Java</h1>
-	<h2>Downloads</h2>
-<ul>
-<li><a href="mvc1_dat.zip">Zipped VAJ respository of sample code</a></li>
-<li><a href="mvc1.zip">Normal zip of sample code</a></li>
-</ul>
-
-<p><a href="bio.html">Scott Stanchfield</a>
-</p>
-<p><i>I originally wrote this article for IBM's VisualAge Developer Domain, but 
-support for VisualAge has been stopped and IBM has removed the article.</i></p>
-
-<table border="1">
-
-  <tr>
-    <td><b><i>A Note on reading this article as a tutorial:</i></b>
-      There are several steps you need to take to create the address book
-      application outlined in this article. Along the way, the text describes
-      exactly what you need to do, intermixed with descriptions of why you need
-      to do this. Each major step is preceded by a box like this marked
-      &quot;Your Action!&quot;. This should help ensure that you don't miss any
-      steps. Note the details of the action follow the box.</td>
-  </tr>
-</table>
-
-<p>The Model-View-Controller (MVC) design paradigm is an incredibly useful tool
-in writing maintainable programs. MVC lets you separate your business logic from
-your Graphical User Interface (GUI), making it easier to modify either one
-without affecting the other. Initially, MVC requires a little extra planning and
-coding, but the long-term benefits are well worth it.
-</p>
-
-<p>When MVC was first publicized, visual composition tools were limited in
-capability and not nearly as popular as they are today. The visual composition
-tools of today, such as the VisualAge for Java Visual Composition Editor (VCE),
-support true visual programming, enabling you to visually create much of an
-application's GUI and business logic.</p>
-
-<p>Unfortunately, this kind of simple visual programming has eroded solid design
-techniques. Many developers simply sit down at their desk, open the VCE, and
-start clicking the mouse. Rather than thinking through GUI and application
-designs, they experiment. Eventually they get things to &quot;look right,&quot;
-then draw lines to &quot;make the application work.&quot;</p>
-
-<p>This article discusses the MVC design paradigm and demonstrates its
-application in visual programming. Keep in mind that MVC is but a single
-technique in a developer's design arsenal, and should be used in combination
-with other techniques, including object-oriented analysis and design.</p>
-
-<p>You can download the <a href="mvc1_dat.zip">VAJ repository sample code for this article</a>, or <a href="mvc1.zip">plain zipped sample code for this article</a>. The sample code uses AWT components, but all
-techniques apply equally to Swing and to other GUI component libraries.
-</p>
-
-
-<h2>What is MVC?</h2>
-
-<p>The MVC paradigm was introduced by Smalltalk developers at Xerox PARC (Palo
-Alto Research Center) in the late 1970's. The basic idea is to split your
-application into three distinct parts, each of which can be replaced without
-affecting the others:</p>
-<ul>
-  <li><b>Model</b> - the data of your application, along with the business logic
-    that defines how to change and access that data. The model can be shared
-    among any number of view and controller objects.</li>
-  <li><b>View</b> - The means of presenting the model's data to the outside
-    world. This could take the form of a GUI, generated speech, audible tones,
-    printouts, or even non-user oriented output, such as turning on an air
-    conditioner.</li>
-  <li><b>Controller</b> - The means of gathering user or other environmental
-    input and providing feedback to the model, normally changing some of the
-    data in that model.</li>
-</ul>
-
-
-<h2>Interaction Between Components</h2>
-
-<p>Let's examine the interaction between these three pieces. Initially, the
-view, and possibly the controller, ask the model for its current state. The view
-may present data to the user, and the controller may check the data to help
-decide how to handle user interaction.</p>
-
-<p><em>Figure 1. Model and user interface communication</em>
-</p>
-
-<p><img alt="fig1" src="images/fig01.gif" width="487" height="243"/>
-</p>
-
-<p>As seen in Figure 1, the view and controller will typically
-&quot;listen&quot; for changes to the model. The Java language implements this
-notification using events. Whenever the model says &quot;I have changed,&quot;
-the view and controller can ask for the new state of the model's data, then
-update their presentation to the user.</p>
-
-<p><i>Figure 2. Controller to model communication</i>
-</p>
-
-<p><img alt="fig2" src="images/fig02.gif" width="488" height="245"/>
-</p>
-
-<p>Figure 2 shows user interaction in the application. If the user decides to
-interact, the controller takes charge. It watches for user input, such as
-clicking or moving the mouse or pressing keyboard keys. It decides what the
-interaction means, and asks the model to update its data and/or the view to
-change the way it displays the data.</p>
-
-<p>For example, you could have a view that displays a set of data in a Swing
-JList component. You add a scrollbar as a controller, which directs the view to
-change which items are displayed. Further, you could add <i>another</i>
-controller, perhaps a Swing JTextField, to take user input and ask the model to
-add the new value to the set. Of course this would cause the model to shout
-&quot;I have changed!&quot;, to which the view responds by asking for the set of
-data.</p>
-
-<p>The above scenario has two controllers. One watches for mouse interaction
-with a scrollbar, while the other accepts user input to add to the model. You
-can have any number of controllers, and any number of views in your application.</p>
-
-<p>Suppose you have an application that presents information from a database in
-a table and pie chart. The table can be scrolled using horizontal and vertical
-scroll bars, and new data can be entered via a pair of text fields. The MVC
-pattern might be applied as shown in Figure 3.</p>
-
-<p><em>Figure 3. Multiple views and controllers</em>
-</p>
-
-<p><img alt="fig3" src="images/fig03.gif" width="500" height="300"/>
-</p>
-
-<p>This example includes a model, two views and three controllers. The scrollbar
-controllers update only the table view, while the text field controller updates
-the model.</p>
-
-
-<h2>Delegates - Combining View and Controller</h2>
-
-<p>You may be concerned at this point about separation between the scrollbars
-and the table they scroll. In theory this separation is good, but in practice it
-can make life much more difficult:</p>
-<ul>
-  <li>You need to separate the GUI among multiple VCE sessions, and provide
-    promoted variables and events to communicate between the controller GUI and
-    the view GUI
-  </li>
-  <li>Where does an AWT TextField go? It acts like a view to display existing
-    data, and like a controller to change the data.</li>
-  <li>Many components have built-in support for user interaction such as
-    scrolling.</li>
-  <li>Interaction between multiple controllers and views can be quite heavy and
-    complex.
-  </li>
-</ul>
-
-<p>Because of such issues, the MVC paradigm is often simplified by <i>combining</i>
-views and controllers. There are several names for this approach -- this article
-uses the name <i>delegate</i> to refer to a combined view/controller. (This is
-the term used by Sun in describing the Swing GUI components.). This combination
-into a delegate is shown in&nbsp; Figure 4.</p>
-
-<p><em>Figure 4. Combining view and controller into a delegate</em>
-</p>
-
-<p><img alt="fig4" src="images/fig04.gif" width="437" height="310"/>
-</p>
-
-<p>In a delegate, the view and controller communicate as necessary to perform
-their duty. It is a good idea to keep this communication separate when possible,
-but often it's impossible to break a component into a view or a controller. And,
-in practice, the separation doesn't provide nearly as significant a benefit as
-separation of the Model and Delegate.</p>
-
-<p>The delegate <i>as a whole</i> communicates with the model in the same way
-described earlier for the view and controller. The separation between the model
-and the user interaction of the delegate is the key to the success of this
-model. Although this version of MVC is somewhat simplified by the combination of
-the view and controller into the delegate, the design is still MVC-based. You
-can use it to create some interesting and very flexible applications in
-VisualAge for Java.</p>
-
-
-<h2>Why is MVC So Important?</h2>
-
-<p>By this point you may be thinking, &quot;Sounds like neat theory, but it also
-sounds like a lot of work!&quot; You're right on the first point, but as you'll
-see later, implementation in VisualAge for Java is actually very easy! Another
-question might be &quot;Why is MVC so important that Scott would take the time
-to write this article?&quot; Development typically occupies 10% or less of a
-program's life cycle. Therefore, program maintenance should be a developer's <i>number
-one</i> concern. A clean, understandable design is a good start, but to be
-really effective, the design should separate business logic from user interface.</p>
-
-<p>Think about some of the possible ways a program changes over time:</p>
-<ul>
-  <li>The current state of GUI design evolves, and a company decides to update
-    their GUIs. (Often this is referred to as &quot;making the GUI look more
-    professional.&quot;)</li>
-  <li>A company changes network architectures, and wants to port their
-    applications.</li>
-  <li>A company decides to create a limited-feature demo of their application.</li>
-  <li>A company wants to add a new way of examining existing data.
-  </li>
-</ul>
-
-<p>Changes like these often involve <i>either</i> the GUI <i>or</i> the business
-logic of an application. If the GUI code and business logic are tightly coupled,
-making these changes can be quite difficult. Using an MVC-based design makes the
-changes less extensive, and more importantly, more isolated, reducing the chance
-of introducing bugs in unrelated code.</p>
-
-<p>Using an MVC-based design, the above changes are fairly simple:</p>
-<ul>
-  <li>Updating the GUI requires <i>only</i> changing GUI code. The stable
-    business logic is not touched.</li>
-  <li>Updating network architectures, perhaps changing from a two-tier to a
-    three-tier database architecture requires modifying only part of the model.
-    The stable GUI is not touched.</li>
-  <li>Creating a limited feature demo might merely be a matter of subclassing
-    the model to block access to some features. Again, no change to the GUI.</li>
-  <li>Adding a new way to examine data is simply a matter of adding a new view.
-    Often <i>no </i>change to the model is necessary, nor is it necessary to
-    change other views!
-  </li>
-</ul>
-
-<p>A final thought on the importance of MVC: by separating the business logic
-from the GUI, you can also separate the coding tasks. Separate developers can
-work on each part, for instance -- a GUI specialist coding the GUI and a domain
-expert coding the business logic.</p>
-
-
-<h2>Implementing MVC in VisualAge for Java</h2>
-
-<p><i><b>Note: This article assumes VisualAge for Java, version 3.0. </b>The
-techniques explained will also work with VisualAge for Java version 2.x, but you
-cannot use the Quick Form support to create your GUI.</i>
-</p>
-
-<p>Now that we've laid out the concepts and rationale, let's look at
-implementation details by walking through a simple address book application.
-Being good MVC designers, we decide to split the application into models and
-delegates. We design the application with a two-level model:
-</p>
-<ul>
-  <li><b>Address Book</b> - A model that stores a collection of addresses. The
-    interface that defines this model requires methods to add and look up
-    individual address records.</li>
-  <li><b>Address Data</b> - A model that represents a single address record.
-    Many of these will be stored in an <b>Address Book</b>.
-  </li>
-</ul>
-
-<p>We choose this two-level model because it helps show that MVC can be applied
-at many levels in an application. You can use MVC when creating GUI components
-(such as Sun's Swing components), as a good division of labor for your entire
-application, or at any level in between. Models can contain references to other
-models and delegates can contain references to other delegates.
-</p>
-
-<p>To understand the creation of this application, you can break the design into
-four phases:
-</p>
-<ol>
-  <li><b>Define a model interface</b> - Define how the model and delegate
-    communicate. Defining a protocol (or contract) between them is best
-    represented in Java by writing an interface class.</li>
-  <li><b>Define concrete model(s)</b> - Implement the interface to create actual
-    model classes for use in an application.</li>
-  <li><b>Create delegate(s)</b> - Create a delegate (GUI) class that has a
-    variable of the model interface type. The GUI can communicate with the
-    model, and any model class that implements that interface can be plugged in
-    at run time.</li>
-  <li><b>Connect as an application</b> - Finally, create an application by
-    simply connecting one or more delegate classes with a concrete model class.
-  </li>
-</ol>
-
-<p>We will create a concrete model that stores the data in a hash table, but the
-actual data location does not matter. In part 2 of this series, we implement
-filtering and sorting models and discuss how you can use data from other
-sources, stored in data bases or on other machines.
-</p>
-
-
-<h2>Defining a Model Interface</h2>
-
-<p>The first step in defining an MVC application is to define how your model and
-delegate will communicate:</p>
-<ul>
-  <li>How will the model inform the delegates that it has changed?</li>
-  <li>What data can the delegates obtain from the model, and how do they access
-    it?</li>
-  <li>What data can the delegates request be changed, and how do they request
-    it?
-  </li>
-</ul>
-
-
-<h2>Model-to-Delegate Change Notification</h2>
-
-<p>Several issues are involved with change notification. The first and most
-important is the granularity of the notification. You can notify at several
-levels. For example:</p>
-<ul>
-  <li>You can fire an event that says &quot;something's changed,&quot; without
-    giving details. The delegate then needs to examine <i>all</i> the data to
-    determine what has changed. This is effective if the delegates will normally
-    need to reread all the data after any change. For example, Swing provides a
-    generic ChangeEvent for just this purpose.</li>
-  <li>You can simply use JavaBean bound properties as the available data in your
-    bean. PropertyChangeEvents are fired any time one of the properties changes,
-    which effectively limits the scope of the change notification. This approach
-    works well when you have a one-to-one correspondence between properties and
-    the GUI components that represent them to the user.</li>
-  <li>You can create a custom event class and listener interface that captures
-    specific information about the nature of a change. For example, Swing's
-    TreeModel fires a TreeModelEvent to its TreeModelListeners. The TreeModel
-    can be more specific about the type of change, telling its listeners that
-    nodes were added or removed from other nodes, structure has changed for some
-    subtree, and so forth. This allows the delegate to update its presentation
-    more efficiently; if the updated area doesn't affect the current display,
-    nothing changes.
-  </li>
-</ul>
-
-
-<h2>Bound Properties and GUI Components</h2>
-
-<p>We can take advantage of the JavaBean specification's definition of bound
-properties to assist in creation of our models. Bound properties are properties
-that fire a PropertyChangeEvent any time their value changes. We can use this as
-the &quot;I've changed&quot; notification from our model.</p>
-
-<p>We can also take advantage of bound properties in our GUI components.
-VisualAge for Java provides excellent support for bound properties in the form
-of property-to-property connections. Two bound properties connected via a
-property-to-property connection will update each other's values when they
-change.
-</p>
-
-<p>Assuming we have bound properties in the model and in the delegate, much of
-the communication between a model&nbsp; and a delegate can be accomplished
-through a property-to-property connection!
-</p>
-
-<p>The problem is that Swing and AWT <i>do not</i> bind properties that should
-be bound. For example, TextField does not bind its <i>text</i> property.
-Fortunately, we'll be using the Quick Form dialog in the VCE, and that makes
-dealing with changes in a TextField easy. For Swing components, however, we
-would need to create a BoundJTextField. For a discussion on how to do this, see <a href="http://www.javadude.com/vaj/javabeans/binding_a_non-bound_property.htm">Binding
-a Non-Bound Property</a> at the <a href="http://www.javadude.com/vaj">VisualAge
-Tips and Tricks</a> site. Note that this article will be using a TextField.</p>
-
-
-<h2>Making Things Easier in VisualAge</h2>
-
-<p>VisualAge for Java provides excellent tools for developing <i>classes</i>,
-but not much support for developing <i>interfaces</i>. The above four-step
-process assumes we define the interface first, then implement that interface
-with concrete classes. Because we're using bound properties in our model, it
-would be much easier to <i>start</i> with a concrete model. The BeanInfo editor
-in VisualAge for Java provides a very easy way to define a bean with bound
-properties. We will use the BeanInfo editor to flesh out a concrete model, then
-create a model interface based on that concrete class.
-</p>
-
-<p>Once we have the interface, we can implement any other models we like and
-plug them into our application.
-</p>
-
-<p>To create this interface, you can use the AutoGut tool, a plug-in for
-VisualAge for Java. AutoGut examines a class and creates an interface by
-&quot;gutting&quot; the methods from that class. We'll walk through the use of
-AutoGut in a moment, but first you need to download and install the tool. You
-can get AutoGut from <a href="http://www.javadude.com/tools/autogut">http://www.javadude.com/tools/autogut</a>.
-Follow the instructions on that page to install the tool.
-</p>
-
-
-<h2>Example Models</h2>
-
-<p>Using the JavaBean bound property approach mentioned above, we will create an
-example that tracks telephone and address information for various users. Two
-levels of models are involved -- a small model to track a particular address
-record, and an overall model to track <i>all</i> addresses.</p>
-<ul>
-  <li><b>AddressDataModel</b> - A model that represents a single address record.
-    This will contain the following properties (all are of type String and are
-    read/write/bound)
-    <ul>
-      <li><i>name</i></li>
-      <li><i>address</i></li>
-      <li><i>city</i></li>
-      <li><i>state</i></li>
-      <li><i>country</i></li>
-      <li><i>postalCode</i></li>
-      <li><i>businessPhone</i></li>
-      <li><i>homePhone</i>
-      </li>
-    </ul></li>
-  <li><b>AddressBookModel</b> - A model that represents a collection of
-    addresses. This will contain the following methods:
-    <ul>
-      <li>public AddressDataModel find(String name) throws Exception
-        <ul>
-          <li>Locate a name in the address book. If not found, throw a simple
-            exception.
-          </li>
-        </ul></li>
-      <li>public void add(AddressDataModel data) - Add a new record in the
-        address book.
-      </li>
-    </ul></li>
-
-    <li><p><b>AddressBookModel</b> also contains the following property:</p>
-    <ul>
-      <li><i>addresses</i> - Bound, indexed, read-only String
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<p>We implement these models by first creating the following two concrete
-implementations of the models:</p>
-<ul>
-  <li><b>SimpleAddressData</b> - an implementation of AddressDataModel that uses
-    String variables to store the address information.
-  </li>
-  <li><b>HashAddressBook</b> - an implementation of AddressBookModel that stores
-    addresses in a Hashtable.
-  </li>
-</ul>
-
-<p>By defining these two classes and gutting them, we can automatically create
-the required interfaces
-</p>
-
-
-<h2>Defining SimpleAddressData</h2>
-
-<table border="1" cellpadding="5">
-
-  <tr>
-    <td><i><b>Your Action! </b></i>Create the SimpleAddressData
-      class including all of its properties.</td>
-  </tr>
-</table>
-
-<p>Create a new class in VisualAge for Java. Start doing this by pressing the
-green &quot;C&quot; button on the toolbar, as shown in Figure 5.
-</p>
-
-<p><i>Figure 5. Starting the Create Class SmartGuide</i>
-</p>
-
-<p><img alt="fig5" src="images/fig05.gif" width="640" height="96"/>
-</p>
-
-<p>Then fill in the class details as shown in Figure 6. You can use whatever
-package you want to if you're following along (this applies to all examples in
-this article). Note that we do not check the &quot;Compose this class
-visually&quot; box, but we do check &quot;Browse this class when finished.&quot;
-Once you have filled in the details, press the <b>Next</b> button to move to the
-second page of the Create Class SmartGuide.
-</p>
-
-<p><i>Figure 6. Create Class SmartGuide for SimpleAddressData (page 1)</i>
-</p>
-
-<p><img alt="fig6" src="images/fig06.gif" width="448" height="639"/>
-</p>
-
-<p>On the second page of the SmartGuide, shown in Figure 7, we make the class
-implement Serializable. This is the sole requirement to make the class be a
-JavaBean. To support better code generation, we import java.io (avoiding full
-qualification of Serializable in the class declaration) and java.beans (to
-assist when adding properties). When you have finished entering the information
-on this page, press the <b>Finish</b> button to continue.
-</p>
-
-<p><i>Figure 7. Create Class SmartGuide for SimpleAddressData (page 2)</i>
-</p>
-
-<p><img alt="fig7" src="images/fig07.gif" width="448" height="639"/>
-</p>
-
-<p>This SmartGuide creates the SimpleAddressData class and opens it to a class
-browser. Select the BeanInfo tab of the class browser to open the BeanInfo
-editor.
-</p>
-
-<p>Once in the BeanInfo Editor, press the &quot;P&quot; on the toolbar to add a
-property, as shown in Figure 8.
-</p>
-
-<p><i>Figure 8. Starting the New Property Feature SmartGuide in the BeanInfo
-Editor.</i>
-</p>
-
-<p><img alt="fig8" src="images/fig08.gif" width="640" height="480"/>
-</p>
-
-<p>This invokes the New Property Feature SmartGuide. You will use this
-SmartGuide to add properties to your class. We start with the <i>name</i>
-property. Enter its information as shown in Figure 9. You should only need to
-change the property name; the rest of the fields should come up with the proper
-defaults.
-</p>
-
-<p><i>Figure 9. Creating the name property</i>
-</p>
-
-<p><img alt="fig9" src="images/fig09.gif" width="448" height="343"/>
-</p>
-
-<p>Press the <b>Next</b> button after you fill in the property name, and you'll
-see the second page of the New Property Feature SmartGuide. Fill in the
-information shown in Figure 10, and press <b>Finish</b>. We checked the
-preferred box to make the property easier to access.
-</p>
-
-<p><i>Figure 10. FiIling in the name property's bean information</i>
-</p>
-
-<p><img alt="fig10" src="images/fig10.gif" width="448" height="343"/>
-</p>
-
-<p>Repeat the property creation for the following properties in the
-SimpleAddressData bean.
-</p>
-
-<table border="1" cellpadding="3">
-
-  <tr>
-    <td>
-
-      <p>Property</p></td>
-    <td>
-
-      <p>Display Name</p></td>
-    <td>
-
-      <p>Short Description</p></td>
-  </tr>
-
-  <tr>
-    <td><i>address</i></td>
-    <td>address</td>
-    <td>the street where the person lives</td>
-  </tr>
-
-  <tr>
-    <td><i>city</i></td>
-    <td>city</td>
-    <td>the city where the person lives</td>
-  </tr>
-
-  <tr>
-    <td><i>state</i></td>
-    <td>state / province</td>
-    <td>the state or province where the person lives</td>
-  </tr>
-
-  <tr>
-    <td><i>country</i></td>
-    <td>country</td>
-    <td>the country where the person lives</td>
-  </tr>
-
-  <tr>
-    <td><i>postalCode</i></td>
-    <td>zip / postal code</td>
-    <td>the zip or postal code where the person lives</td>
-  </tr>
-
-  <tr>
-    <td><i>businessPhone</i></td>
-    <td>business phone</td>
-    <td>the person's business telephone number</td>
-  </tr>
-
-  <tr>
-    <td><i>homePhone</i></td>
-    <td>home phone</td>
-    <td>the person's home telephone number</td>
-  </tr>
-</table>
-
-<p>Congratulations! You now have your first concrete model. You can now close
-the class browser for SimpleAddressData.
-</p>
-
-
-<h2>Defining AddressDataModel</h2>
-
-<table border="1" cellpadding="5">
-
-  <tr>
-    <td><i><b>Your Action! </b></i>Create the AddressDataModel
-      interface using the AutoGut tool.</td>
-  </tr>
-</table>
-
-<p>Now we can easily create our model interface for our address data records.
-Assuming you installed AutoGut (<a href="http://www.javadude.com/tools/autogut">http://www.javadude.com/tools/autogut</a>)
-as mentioned earlier in this article, bring up the popup menu for
-SimpleAddressData and select <b>Tools-&gt;Create Interface from Class</b>, as
-shown in Figure 11.
-</p>
-
-<p><i>Figure 11. Starting AutoGut</i>
-</p>
-
-<p><img alt="fig11" src="images/fig11.gif" width="640" height="480"/>
-</p>
-
-<p>This invokes the AutoGut tool, seen in Figure 12. Fill in the information
-shown in Figure 12 and press the <b>Ok</b> button. Note that if you choose a
-package that is in the workspace, the project field will automatically fill in
-for you.
-</p>
-
-<p><i>Figure 12. Specifying the interface to create</i>
-</p>
-
-<p><img alt="fig12" src="images/fig12.gif" width="506" height="255"/>
-</p>
-
-<p>AutoGut can only work on a single class at a time; if there are multiple
-classes selected it will fill in the name of the first-selected class. When you
-press the <b>Ok </b>button, AutoGut will create the specified interface in the
-specified package and project (creating the package and project if they do not
-exist). AutoGut copies the method declarations of all <i>public</i> methods
-(excluding constructors) from the class to the new interface. If you check the
-&quot;Remove fire methods&quot; box, it skips any methods that begin with the
-word &quot;fire&quot;.
-</p>
-
-<p>In this example, we do not need to modify the resulting interface. However,
-keep in mind that AutoGut does not currently copy import statements to the new
-interface, and you may need to add those import statements by hand.
-</p>
-
-<p>We now have an interface that represents any piece of address data.
-</p>
-
-<table border="1" cellpadding="5">
-
-  <tr>
-    <td><i>Your Action! </i>Make AddressDataModel extend
-      Serializable.</td>
-  </tr>
-</table>
-
-<p>You need to change the definition of AddressDataModel slightly to ensure
-other beans that use it can serialize their referenced components. Modify the
-AddressDataModel interface definition to look like the following. The bold text
-shows the changes.
-</p>
-
-<pre><b>imPORT 69,140,9,132,235,61</b></pre><p>
-ss SmartGuide (press the &quot;C&quot;, shown in figure 5 above) then filling
-in the SmartGuide as shown in Figures 13 and 14. This is much easier if you
-select the target package (in the example code, <i>com.javadude.articles.vaddmvc1</i>)
-before you press the &quot;C&quot;, and VisualAge will fill in the project and
-package for you.
-</p>
-
-<p><i>Figure 13. Defining HashAddressBook (page 1)</i>
-</p>
-
-<p><img alt="fig13" src="images/fig13.gif" width="448" height="639"/>
-</p>
-
-<p><i>Figure 14. Defining HashAddressBook (page 2)</i>
-</p>
-
-<p><img alt="fig14" src="images/fig14.gif" width="448" height="639"/>
-</p>
-
-<p>Note that we import java.util in the second page of the SmartGuide. We need
-this for the Hashtable.
-</p>
-
-<p>Once the class browser appears, select the BeanInfo tab. We need to add a
-property and two methods. First, start adding a property by pressing the
-&quot;P&quot; on the toolbar (shown in Figure 8 above). Fill in the first page
-of the SmartGuide as shown in Figure 15. Note the <b>Indexed</b> box is checked
-and the <b>Writeable</b> box is <i>not</i> checked. Note that when you choose
-the property type, <i>do not</i> type the open and close square brackets (&quot;
-[ ] &quot;). These are added by VisualAge when you check the <b>Indexed</b> box.
-You should press the <b>Browse...</b> button to choose AddressDataModel from the
-list. Note that in this example, the full name of the Property type is
-com.javadude.articles.vaddmvc1.AddressDataModel; the field isn't long enough to
-display the whole thing. By using interface AddressDataModel as the type, we can
-store any kind of address data in this address book, as long as that address
-data implements AddressDataModel. This includes, but is not limited to,
-SimpleAddressData, as it implements AddressDataModel.&nbsp;
-</p>
-
-<p><i>Figure 15. Defining the addresses property</i>
-</p>
-
-<p><img alt="fig15" src="images/fig15.gif" width="448" height="343"/>
-</p>
-
-<p>On the second page of the SmartGuide, enter &quot;addresses&quot; as the
-display name, &quot;list of all addresses&quot; as the description (both without
-quotes), and check the <b>Preferred</b> box.
-</p>
-
-<p>Next, we need to add the find and add methods.
-</p>
-
-<table border="1" cellpadding="5">
-
-  <tr>
-    <td><b><i>Your Action! </i></b>Add find() and add() methods to
-      the HashAddressBook class.</td>
-  </tr>
-</table>
-
-<p>While still in the BeanInfo Editor, press the &quot;M&quot; button on the
-toolbar to open the New Method Feature SmartGuide. Enter the information shown
-in Figure 16 and press the <b>Next</b> button. Note that the return type is
-AddressDataModel, <i>not</i> SimpleAddressData. This allows us to lookup
-whatever type of data is stored, as long as the data implements interface
-AddressDataModel.
-</p>
-
-<p><i>Figure 16. Adding the find() method</i>
-</p>
-
-<p><img alt="fig16" src="images/fig16.gif" width="448" height="310"/>
-</p>
-
-<p>After entering the data and pressing <b>Next</b>, you are presented with a
-parameter page for each parameter indicated. Because you only specified one as
-the <b>Parameter count </b>on the first page, we only see one parameter page. On
-this page, shown in Figure 17, specify the name, type, and descriptive
-information for the name parameter. Then press <b>Next</b>.
-</p>
-
-<p><i>Figure 17. Specifying the parameter to the find() method</i>
-</p>
-
-<p><img alt="fig17" src="images/fig17.gif" width="448" height="310"/>
-</p>
-
-<p>Finally, we see the Bean Information page for the find method, shown in
-figure 18. Enter the information show, and press <b>Finish</b>. The BeanInfo
-Editor then creates the find() method for us.
-</p>
-
-<p><i>Figure 18. Specifying the details for the find() method</i>
-</p>
-
-<p><img alt="fig18" src="images/fig18.gif" width="448" height="310"/>
-</p>
-
-<p>Repeat this process for the add() method, as shown in Figures 19, 20, and 21.
-</p>
-
-<p><i>Figure 19. Starting to create the add() method</i>
-</p>
-
-<p><img alt="fig19" src="images/fig19.gif" width="448" height="310"/>
-</p>
-
-<p><i>Figure 20. Specifying the parameter to the add() method</i>
-</p>
-
-<p><img alt="fig20" src="images/fig20.gif" width="448" height="310"/>
-</p>
-
-<p>Note that the parameter is of type AddressDataModel, not SimpleAddressData!
-</p>
-
-<p><i>Figure 21. Specifying the details for the add() method</i>
-</p>
-
-<p><img alt="fig21" src="images/fig21.gif" width="448" height="310"/>
-</p>
-
-
-<h2>Defining AddressBookModel</h2>
-
-<table border="1" cellpadding="5">
-
-  <tr>
-    <td><b><i>Your Action! </i></b>Run AutoGut to create
-      AddressBookModel from the HashAddressBook class.</td>
-  </tr>
-</table>
-
-<p>Like AddressDataModel, AddressBookModel is an interface. Create
-AddressBookModel the same we you created AddressDataModel: using AutoGut. To do
-this, bring up the popup menu for HashAddressBook and select <b>Tools-&gt;Create
-Interface from Class</b>. This invokes AutoGut (seen in Figure 12 above).
-Specify AddressBookModel for the interface name, and choose the same package
-that contains your other classes and interfaces (the sample code uses <i>com.javadude.articles.vaddmvc1</i>).
-</p>
-
-<table border="1" cellpadding="5">
-
-  <tr>
-    <td><b><i>Your Action! </i></b>Edit AddressBookModel to extend
-      Serializable.</td>
-  </tr>
-</table>
-
-<p>Again, we need to add &quot;extends Serializable&quot; to the created
-interface. Edit AddressBookModel's interface definition to look as follows. The
-changes are in bold text.
-</p>
-
+
+<h1>Applying MVC in VisualAge for Java</h1>
+	<h2>Downloads</h2>
+<ul>
+<li><a href="mvc1_dat.zip">Zipped VAJ respository of sample code</a></li>
+<li><a href="mvc1.zip">Normal zip of sample code</a></li>
+</ul>
+
+<p><a href="bio.html">Scott Stanchfield</a>
+</p>
+<p><i>I originally wrote this article for IBM's VisualAge Developer Domain, but 
+support for VisualAge has been stopped and IBM has removed the article.</i></p>
+
+<table border="1">
+
+  <tr>
+    <td><b><i>A Note on reading this article as a tutorial:</i></b>
+      There are several steps you need to take to create the address book
+      application outlined in this article. Along the way, the text describes
+      exactly what you need to do, intermixed with descriptions of why you need
+      to do this. Each major step is preceded by a box like this marked
+      &quot;Your Action!&quot;. This should help ensure that you don't miss any
+      steps. Note the details of the action follow the box.</td>
+  </tr>
+</table>
+
+<p>The Model-View-Controller (MVC) design paradigm is an incredibly useful tool
+in writing maintainable programs. MVC lets you separate your business logic from
+your Graphical User Interface (GUI), making it easier to modify either one
+without affecting the other. Initially, MVC requires a little extra planning and
+coding, but the long-term benefits are well worth it.
+</p>
+
+<p>When MVC was first publicized, visual composition tools were limited in
+capability and not nearly as popular as they are today. The visual composition
+tools of today, such as the VisualAge for Java Visual Composition Editor (VCE),
+support true visual programming, enabling you to visually create much of an
+application's GUI and business logic.</p>
+
+<p>Unfortunately, this kind of simple visual programming has eroded solid design
+techniques. Many developers simply sit down at their desk, open the VCE, and
+start clicking the mouse. Rather than thinking through GUI and application
+designs, they experiment. Eventually they get things to &quot;look right,&quot;
+then draw lines to &quot;make the application work.&quot;</p>
+
+<p>This article discusses the MVC design paradigm and demonstrates its
+application in visual programming. Keep in mind that MVC is but a single
+technique in a developer's design arsenal, and should be used in combination
+with other techniques, including object-oriented analysis and design.</p>
+
+<p>You can download the <a href="mvc1_dat.zip">VAJ repository sample code for this article</a>, or <a href="mvc1.zip">plain zipped sample code for this article</a>. The sample code uses AWT components, but all
+techniques apply equally to Swing and to other GUI component libraries.
+</p>
+
+
+<h2>What is MVC?</h2>
+
+<p>The MVC paradigm was introduced by Smalltalk developers at Xerox PARC (Palo
+Alto Research Center) in the late 1970's. The basic idea is to split your
+application into three distinct parts, each of which can be replaced without
+affecting the others:</p>
+<ul>
+  <li><b>Model</b> - the data of your application, along with the business logic
+    that defines how to change and access that data. The model can be shared
+    among any number of view and controller objects.</li>
+  <li><b>View</b> - The means of presenting the model's data to the outside
+    world. This could take the form of a GUI, generated speech, audible tones,
+    printouts, or even non-user oriented output, such as turning on an air
+    conditioner.</li>
+  <li><b>Controller</b> - The means of gathering user or other environmental
+    input and providing feedback to the model, normally changing some of the
+    data in that model.</li>
+</ul>
+
+
+<h2>Interaction Between Components</h2>
+
+<p>Let's examine the interaction between these three pieces. Initially, the
+view, and possibly the controller, ask the model for its current state. The view
+may present data to the user, and the controller may check the data to help
+decide how to handle user interaction.</p>
+
+<p><em>Figure 1. Model and user interface communication</em>
+</p>
+
+<p><img alt="fig1" src="images/fig01.gif" width="487" height="243"/>
+</p>
+
+<p>As seen in Figure 1, the view and controller will typically
+&quot;listen&quot; for changes to the model. The Java language implements this
+notification using events. Whenever the model says &quot;I have changed,&quot;
+the view and controller can ask for the new state of the model's data, then
+update their presentation to the user.</p>
+
+<p><i>Figure 2. Controller to model communication</i>
+</p>
+
+<p><img alt="fig2" src="images/fig02.gif" width="488" height="245"/>
+</p>
+
+<p>Figure 2 shows user interaction in the application. If the user decides to
+interact, the controller takes charge. It watches for user input, such as
+clicking or moving the mouse or pressing keyboard keys. It decides what the
+interaction means, and asks the model to update its data and/or the view to
+change the way it displays the data.</p>
+
+<p>For example, you could have a view that displays a set of data in a Swing
+JList component. You add a scrollbar as a controller, which directs the view to
+change which items are displayed. Further, you could add <i>another</i>
+controller, perhaps a Swing JTextField, to take user input and ask the model to
+add the new value to the set. Of course this would cause the model to shout
+&quot;I have changed!&quot;, to which the view responds by asking for the set of
+data.</p>
+
+<p>The above scenario has two controllers. One watches for mouse interaction
+with a scrollbar, while the other accepts user input to add to the model. You
+can have any number of controllers, and any number of views in your application.</p>
+
+<p>Suppose you have an application that presents information from a database in
+a table and pie chart. The table can be scrolled using horizontal and vertical
+scroll bars, and new data can be entered via a pair of text fields. The MVC
+pattern might be applied as shown in Figure 3.</p>
+
+<p><em>Figure 3. Multiple views and controllers</em>
+</p>
+
+<p><img alt="fig3" src="images/fig03.gif" width="500" height="300"/>
+</p>
+
+<p>This example includes a model, two views and three controllers. The scrollbar
+controllers update only the table view, while the text field controller updates
+the model.</p>
+
+
+<h2>Delegates - Combining View and Controller</h2>
+
+<p>You may be concerned at this point about separation between the scrollbars
+and the table they scroll. In theory this separation is good, but in practice it
+can make life much more difficult:</p>
+<ul>
+  <li>You need to separate the GUI among multiple VCE sessions, and provide
+    promoted variables and events to communicate between the controller GUI and
+    the view GUI
+  </li>
+  <li>Where does an AWT TextField go? It acts like a view to display existing
+    data, and like a controller to change the data.</li>
+  <li>Many components have built-in support for user interaction such as
+    scrolling.</li>
+  <li>Interaction between multiple controllers and views can be quite heavy and
+    complex.
+  </li>
+</ul>
+
+<p>Because of such issues, the MVC paradigm is often simplified by <i>combining</i>
+views and controllers. There are several names for this approach -- this article
+uses the name <i>delegate</i> to refer to a combined view/controller. (This is
+the term used by Sun in describing the Swing GUI components.). This combination
+into a delegate is shown in&nbsp; Figure 4.</p>
+
+<p><em>Figure 4. Combining view and controller into a delegate</em>
+</p>
+
+<p><img alt="fig4" src="images/fig04.gif" width="437" height="310"/>
+</p>
+
+<p>In a delegate, the view and controller communicate as necessary to perform
+their duty. It is a good idea to keep this communication separate when possible,
+but often it's impossible to break a component into a view or a controller. And,
+in practice, the separation doesn't provide nearly as significant a benefit as
+separation of the Model and Delegate.</p>
+
+<p>The delegate <i>as a whole</i> communicates with the model in the same way
+described earlier for the view and controller. The separation between the model
+and the user interaction of the delegate is the key to the success of this
+model. Although this version of MVC is somewhat simplified by the combination of
+the view and controller into the delegate, the design is still MVC-based. You
+can use it to create some interesting and very flexible applications in
+VisualAge for Java.</p>
+
+
+<h2>Why is MVC So Important?</h2>
+
+<p>By this point you may be thinking, &quot;Sounds like neat theory, but it also
+sounds like a lot of work!&quot; You're right on the first point, but as you'll
+see later, implementation in VisualAge for Java is actually very easy! Another
+question might be &quot;Why is MVC so important that Scott would take the time
+to write this article?&quot; Development typically occupies 10% or less of a
+program's life cycle. Therefore, program maintenance should be a developer's <i>number
+one</i> concern. A clean, understandable design is a good start, but to be
+really effective, the design should separate business logic from user interface.</p>
+
+<p>Think about some of the possible ways a program changes over time:</p>
+<ul>
+  <li>The current state of GUI design evolves, and a company decides to update
+    their GUIs. (Often this is referred to as &quot;making the GUI look more
+    professional.&quot;)</li>
+  <li>A company changes network architectures, and wants to port their
+    applications.</li>
+  <li>A company decides to create a limited-feature demo of their application.</li>
+  <li>A company wants to add a new way of examining existing data.
+  </li>
+</ul>
+
+<p>Changes like these often involve <i>either</i> the GUI <i>or</i> the business
+logic of an application. If the GUI code and business logic are tightly coupled,
+making these changes can be quite difficult. Using an MVC-based design makes the
+changes less extensive, and more importantly, more isolated, reducing the chance
+of introducing bugs in unrelated code.</p>
+
+<p>Using an MVC-based design, the above changes are fairly simple:</p>
+<ul>
+  <li>Updating the GUI requires <i>only</i> changing GUI code. The stable
+    business logic is not touched.</li>
+  <li>Updating network architectures, perhaps changing from a two-tier to a
+    three-tier database architecture requires modifying only part of the model.
+    The stable GUI is not touched.</li>
+  <li>Creating a limited feature demo might merely be a matter of subclassing
+    the model to block access to some features. Again, no change to the GUI.</li>
+  <li>Adding a new way to examine data is simply a matter of adding a new view.
+    Often <i>no </i>change to the model is necessary, nor is it necessary to
+    change other views!
+  </li>
+</ul>
+
+<p>A final thought on the importance of MVC: by separating the business logic
+from the GUI, you can also separate the coding tasks. Separate developers can
+work on each part, for instance -- a GUI specialist coding the GUI and a domain
+expert coding the business logic.</p>
+
+
+<h2>Implementing MVC in VisualAge for Java</h2>
+
+<p><i><b>Note: This article assumes VisualAge for Java, version 3.0. </b>The
+techniques explained will also work with VisualAge for Java version 2.x, but you
+cannot use the Quick Form support to create your GUI.</i>
+</p>
+
+<p>Now that we've laid out the concepts and rationale, let's look at
+implementation details by walking through a simple address book application.
+Being good MVC designers, we decide to split the application into models and
+delegates. We design the application with a two-level model:
+</p>
+<ul>
+  <li><b>Address Book</b> - A model that stores a collection of addresses. The
+    interface that defines this model requires methods to add and look up
+    individual address records.</li>
+  <li><b>Address Data</b> - A model that represents a single address record.
+    Many of these will be stored in an <b>Address Book</b>.
+  </li>
+</ul>
+
+<p>We choose this two-level model because it helps show that MVC can be applied
+at many levels in an application. You can use MVC when creating GUI components
+(such as Sun's Swing components), as a good division of labor for your entire
+application, or at any level in between. Models can contain references to other
+models and delegates can contain references to other delegates.
+</p>
+
+<p>To understand the creation of this application, you can break the design into
+four phases:
+</p>
+<ol>
+  <li><b>Define a model interface</b> - Define how the model and delegate
+    communicate. Defining a protocol (or contract) between them is best
+    represented in Java by writing an interface class.</li>
+  <li><b>Define concrete model(s)</b> - Implement the interface to create actual
+    model classes for use in an application.</li>
+  <li><b>Create delegate(s)</b> - Create a delegate (GUI) class that has a
+    variable of the model interface type. The GUI can communicate with the
+    model, and any model class that implements that interface can be plugged in
+    at run time.</li>
+  <li><b>Connect as an application</b> - Finally, create an application by
+    simply connecting one or more delegate classes with a concrete model class.
+  </li>
+</ol>
+
+<p>We will create a concrete model that stores the data in a hash table, but the
+actual data location does not matter. In part 2 of this series, we implement
+filtering and sorting models and discuss how you can use data from other
+sources, stored in data bases or on other machines.
+</p>
+
+
+<h2>Defining a Model Interface</h2>
+
+<p>The first step in defining an MVC application is to define how your model and
+delegate will communicate:</p>
+<ul>
+  <li>How will the model inform the delegates that it has changed?</li>
+  <li>What data can the delegates obtain from the model, and how do they access
+    it?</li>
+  <li>What data can the delegates request be changed, and how do they request
+    it?
+  </li>
+</ul>
+
+
+<h2>Model-to-Delegate Change Notification</h2>
+
+<p>Several issues are involved with change notification. The first and most
+important is the granularity of the notification. You can notify at several
+levels. For example:</p>
+<ul>
+  <li>You can fire an event that says &quot;something's changed,&quot; without
+    giving details. The delegate then needs to examine <i>all</i> the data to
+    determine what has changed. This is effective if the delegates will normally
+    need to reread all the data after any change. For example, Swing provides a
+    generic ChangeEvent for just this purpose.</li>
+  <li>You can simply use JavaBean bound properties as the available data in your
+    bean. PropertyChangeEvents are fired any time one of the properties changes,
+    which effectively limits the scope of the change notification. This approach
+    works well when you have a one-to-one correspondence between properties and
+    the GUI components that represent them to the user.</li>
+  <li>You can create a custom event class and listener interface that captures
+    specific information about the nature of a change. For example, Swing's
+    TreeModel fires a TreeModelEvent to its TreeModelListeners. The TreeModel
+    can be more specific about the type of change, telling its listeners that
+    nodes were added or removed from other nodes, structure has changed for some
+    subtree, and so forth. This allows the delegate to update its presentation
+    more efficiently; if the updated area doesn't affect the current display,
+    nothing changes.
+  </li>
+</ul>
+
+
+<h2>Bound Properties and GUI Components</h2>
+
+<p>We can take advantage of the JavaBean specification's definition of bound
+properties to assist in creation of our models. Bound properties are properties
+that fire a PropertyChangeEvent any time their value changes. We can use this as
+the &quot;I've changed&quot; notification from our model.</p>
+
+<p>We can also take advantage of bound properties in our GUI components.
+VisualAge for Java provides excellent support for bound properties in the form
+of property-to-property connections. Two bound properties connected via a
+property-to-property connection will update each other's values when they
+change.
+</p>
+
+<p>Assuming we have bound properties in the model and in the delegate, much of
+the communication between a model&nbsp; and a delegate can be accomplished
+through a property-to-property connection!
+</p>
+
+<p>The problem is that Swing and AWT <i>do not</i> bind properties that should
+be bound. For example, TextField does not bind its <i>text</i> property.
+Fortunately, we'll be using the Quick Form dialog in the VCE, and that makes
+dealing with changes in a TextField easy. For Swing components, however, we
+would need to create a BoundJTextField. For a discussion on how to do this, see <a href="http://www.javadude.com/vaj/javabeans/binding_a_non-bound_property.htm">Binding
+a Non-Bound Property</a> at the <a href="http://www.javadude.com/vaj">VisualAge
+Tips and Tricks</a> site. Note that this article will be using a TextField.</p>
+
+
+<h2>Making Things Easier in VisualAge</h2>
+
+<p>VisualAge for Java provides excellent tools for developing <i>classes</i>,
+but not much support for developing <i>interfaces</i>. The above four-step
+process assumes we define the interface first, then implement that interface
+with concrete classes. Because we're using bound properties in our model, it
+would be much easier to <i>start</i> with a concrete model. The BeanInfo editor
+in VisualAge for Java provides a very easy way to define a bean with bound
+properties. We will use the BeanInfo editor to flesh out a concrete model, then
+create a model interface based on that concrete class.
+</p>
+
+<p>Once we have the interface, we can implement any other models we like and
+plug them into our application.
+</p>
+
+<p>To create this interface, you can use the AutoGut tool, a plug-in for
+VisualAge for Java. AutoGut examines a class and creates an interface by
+&quot;gutting&quot; the methods from that class. We'll walk through the use of
+AutoGut in a moment, but first you need to download and install the tool. You
+can get AutoGut from <a href="http://www.javadude.com/tools/autogut">http://www.javadude.com/tools/autogut</a>.
+Follow the instructions on that page to install the tool.
+</p>
+
+
+<h2>Example Models</h2>
+
+<p>Using the JavaBean bound property approach mentioned above, we will create an
+example that tracks telephone and address information for various users. Two
+levels of models are involved -- a small model to track a particular address
+record, and an overall model to track <i>all</i> addresses.</p>
+<ul>
+  <li><b>AddressDataModel</b> - A model that represents a single address record.
+    This will contain the following properties (all are of type String and are
+    read/write/bound)
+    <ul>
+      <li><i>name</i></li>
+      <li><i>address</i></li>
+      <li><i>city</i></li>
+      <li><i>state</i></li>
+      <li><i>country</i></li>
+      <li><i>postalCode</i></li>
+      <li><i>businessPhone</i></li>
+      <li><i>homePhone</i>
+      </li>
+    </ul></li>
+  <li><b>AddressBookModel</b> - A model that represents a collection of
+    addresses. This will contain the following methods:
+    <ul>
+      <li>public AddressDataModel find(String name) throws Exception
+        <ul>
+          <li>Locate a name in the address book. If not found, throw a simple
+            exception.
+          </li>
+        </ul></li>
+      <li>public void add(AddressDataModel data) - Add a new record in the
+        address book.
+      </li>
+    </ul></li>
+
+    <li><p><b>AddressBookModel</b> also contains the following property:</p>
+    <ul>
+      <li><i>addresses</i> - Bound, indexed, read-only String
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>We implement these models by first creating the following two concrete
+implementations of the models:</p>
+<ul>
+  <li><b>SimpleAddressData</b> - an implementation of AddressDataModel that uses
+    String variables to store the address information.
+  </li>
+  <li><b>HashAddressBook</b> - an implementation of AddressBookModel that stores
+    addresses in a Hashtable.
+  </li>
+</ul>
+
+<p>By defining these two classes and gutting them, we can automatically create
+the required interfaces
+</p>
+
+
+<h2>Defining SimpleAddressData</h2>
+
+<table border="1" cellpadding="5">
+
+  <tr>
+    <td><i><b>Your Action! </b></i>Create the SimpleAddressData
+      class including all of its properties.</td>
+  </tr>
+</table>
+
+<p>Create a new class in VisualAge for Java. Start doing this by pressing the
+green &quot;C&quot; button on the toolbar, as shown in Figure 5.
+</p>
+
+<p><i>Figure 5. Starting the Create Class SmartGuide</i>
+</p>
+
+<p><img alt="fig5" src="images/fig05.gif" width="640" height="96"/>
+</p>
+
+<p>Then fill in the class details as shown in Figure 6. You can use whatever
+package you want to if you're following along (this applies to all examples in
+this article). Note that we do not check the &quot;Compose this class
+visually&quot; box, but we do check &quot;Browse this class when finished.&quot;
+Once you have filled in the details, press the <b>Next</b> button to move to the
+second page of the Create Class SmartGuide.
+</p>
+
+<p><i>Figure 6. Create Class SmartGuide for SimpleAddressData (page 1)</i>
+</p>
+
+<p><img alt="fig6" src="images/fig06.gif" width="448" height="639"/>
+</p>
+
+<p>On the second page of the SmartGuide, shown in Figure 7, we make the class
+implement Serializable. This is the sole requirement to make the class be a
+JavaBean. To support better code generation, we import java.io (avoiding full
+qualification of Serializable in the class declaration) and java.beans (to
+assist when adding properties). When you have finished entering the information
+on this page, press the <b>Finish</b> button to continue.
+</p>
+
+<p><i>Figure 7. Create Class SmartGuide for SimpleAddressData (page 2)</i>
+</p>
+
+<p><img alt="fig7" src="images/fig07.gif" width="448" height="639"/>
+</p>
+
+<p>This SmartGuide creates the SimpleAddressData class and opens it to a class
+browser. Select the BeanInfo tab of the class browser to open the BeanInfo
+editor.
+</p>
+
+<p>Once in the BeanInfo Editor, press the &quot;P&quot; on the toolbar to add a
+property, as shown in Figure 8.
+</p>
+
+<p><i>Figure 8. Starting the New Property Feature SmartGuide in the BeanInfo
+Editor.</i>
+</p>
+
+<p><img alt="fig8" src="images/fig08.gif" width="640" height="480"/>
+</p>
+
+<p>This invokes the New Property Feature SmartGuide. You will use this
+SmartGuide to add properties to your class. We start with the <i>name</i>
+property. Enter its information as shown in Figure 9. You should only need to
+change the property name; the rest of the fields should come up with the proper
+defaults.
+</p>
+
+<p><i>Figure 9. Creating the name property</i>
+</p>
+
+<p><img alt="fig9" src="images/fig09.gif" width="448" height="343"/>
+</p>
+
+<p>Press the <b>Next</b> button after you fill in the property name, and you'll
+see the second page of the New Property Feature SmartGuide. Fill in the
+information shown in Figure 10, and press <b>Finish</b>. We checked the
+preferred box to make the property easier to access.
+</p>
+
+<p><i>Figure 10. FiIling in the name property's bean information</i>
+</p>
+
+<p><img alt="fig10" src="images/fig10.gif" width="448" height="343"/>
+</p>
+
+<p>Repeat the property creation for the following properties in the
+SimpleAddressData bean.
+</p>
+
+<table border="1" cellpadding="3">
+
+  <tr>
+    <td>
+
+      <p>Property</p></td>
+    <td>
+
+      <p>Display Name</p></td>
+    <td>
+
+      <p>Short Description</p></td>
+  </tr>
+
+  <tr>
+    <td><i>address</i></td>
+    <td>address</td>
+    <td>the street where the person lives</td>
+  </tr>
+
+  <tr>
+    <td><i>city</i></td>
+    <td>city</td>
+    <td>the city where the person lives</td>
+  </tr>
+
+  <tr>
+    <td><i>state</i></td>
+    <td>state / province</td>
+    <td>the state or province where the person lives</td>
+  </tr>
+
+  <tr>
+    <td><i>country</i></td>
+    <td>country</td>
+    <td>the country where the person lives</td>
+  </tr>
+
+  <tr>
+    <td><i>postalCode</i></td>
+    <td>zip / postal code</td>
+    <td>the zip or postal code where the person lives</td>
+  </tr>
+
+  <tr>
+    <td><i>businessPhone</i></td>
+    <td>business phone</td>
+    <td>the person's business telephone number</td>
+  </tr>
+
+  <tr>
+    <td><i>homePhone</i></td>
+    <td>home phone</td>
+    <td>the person's home telephone number</td>
+  </tr>
+</table>
+
+<p>Congratulations! You now have your first concrete model. You can now close
+the class browser for SimpleAddressData.
+</p>
+
+
+<h2>Defining AddressDataModel</h2>
+
+<table border="1" cellpadding="5">
+
+  <tr>
+    <td><i><b>Your Action! </b></i>Create the AddressDataModel
+      interface using the AutoGut tool.</td>
+  </tr>
+</table>
+
+<p>Now we can easily create our model interface for our address data records.
+Assuming you installed AutoGut (<a href="http://www.javadude.com/tools/autogut">http://www.javadude.com/tools/autogut</a>)
+as mentioned earlier in this article, bring up the popup menu for
+SimpleAddressData and select <b>Tools-&gt;Create Interface from Class</b>, as
+shown in Figure 11.
+</p>
+
+<p><i>Figure 11. Starting AutoGut</i>
+</p>
+
+<p><img alt="fig11" src="images/fig11.gif" width="640" height="480"/>
+</p>
+
+<p>This invokes the AutoGut tool, seen in Figure 12. Fill in the information
+shown in Figure 12 and press the <b>Ok</b> button. Note that if you choose a
+package that is in the workspace, the project field will automatically fill in
+for you.
+</p>
+
+<p><i>Figure 12. Specifying the interface to create</i>
+</p>
+
+<p><img alt="fig12" src="images/fig12.gif" width="506" height="255"/>
+</p>
+
+<p>AutoGut can only work on a single class at a time; if there are multiple
+classes selected it will fill in the name of the first-selected class. When you
+press the <b>Ok </b>button, AutoGut will create the specified interface in the
+specified package and project (creating the package and project if they do not
+exist). AutoGut copies the method declarations of all <i>public</i> methods
+(excluding constructors) from the class to the new interface. If you check the
+&quot;Remove fire methods&quot; box, it skips any methods that begin with the
+word &quot;fire&quot;.
+</p>
+
+<p>In this example, we do not need to modify the resulting interface. However,
+keep in mind that AutoGut does not currently copy import statements to the new
+interface, and you may need to add those import statements by hand.
+</p>
+
+<p>We now have an interface that represents any piece of address data.
+</p>
+
+<table border="1" cellpadding="5">
+
+  <tr>
+    <td><i>Your Action! </i>Make AddressDataModel extend
+      Serializable.</td>
+  </tr>
+</table>
+
+<p>You need to change the definition of AddressDataModel slightly to ensure
+other beans that use it can serialize their referenced components. Modify the
+AddressDataModel interface definition to look like the following. The bold text
+shows the changes.
+</p>
+
+<pre><b>imPORT 69,140,9,132,235,61</b></pre><p>
+ss SmartGuide (press the &quot;C&quot;, shown in figure 5 above) then filling
+in the SmartGuide as shown in Figures 13 and 14. This is much easier if you
+select the target package (in the example code, <i>com.javadude.articles.vaddmvc1</i>)
+before you press the &quot;C&quot;, and VisualAge will fill in the project and
+package for you.
+</p>
+
+<p><i>Figure 13. Defining HashAddressBook (page 1)</i>
+</p>
+
+<p><img alt="fig13" src="images/fig13.gif" width="448" height="639"/>
+</p>
+
+<p><i>Figure 14. Defining HashAddressBook (page 2)</i>
+</p>
+
+<p><img alt="fig14" src="images/fig14.gif" width="448" height="639"/>
+</p>
+
+<p>Note that we import java.util in the second page of the SmartGuide. We need
+this for the Hashtable.
+</p>
+
+<p>Once the class browser appears, select the BeanInfo tab. We need to add a
+property and two methods. First, start adding a property by pressing the
+&quot;P&quot; on the toolbar (shown in Figure 8 above). Fill in the first page
+of the SmartGuide as shown in Figure 15. Note the <b>Indexed</b> box is checked
+and the <b>Writeable</b> box is <i>not</i> checked. Note that when you choose
+the property type, <i>do not</i> type the open and close square brackets (&quot;
+[ ] &quot;). These are added by VisualAge when you check the <b>Indexed</b> box.
+You should press the <b>Browse...</b> button to choose AddressDataModel from the
+list. Note that in this example, the full name of the Property type is
+com.javadude.articles.vaddmvc1.AddressDataModel; the field isn't long enough to
+display the whole thing. By using interface AddressDataModel as the type, we can
+store any kind of address data in this address book, as long as that address
+data implements AddressDataModel. This includes, but is not limited to,
+SimpleAddressData, as it implements AddressDataModel.&nbsp;
+</p>
+
+<p><i>Figure 15. Defining the addresses property</i>
+</p>
+
+<p><img alt="fig15" src="images/fig15.gif" width="448" height="343"/>
+</p>
+
+<p>On the second page of the SmartGuide, enter &quot;addresses&quot; as the
+display name, &quot;list of all addresses&quot; as the description (both without
+quotes), and check the <b>Preferred</b> box.
+</p>
+
+<p>Next, we need to add the find and add methods.
+</p>
+
+<table border="1" cellpadding="5">
+
+  <tr>
+    <td><b><i>Your Action! </i></b>Add find() and add() methods to
+      the HashAddressBook class.</td>
+  </tr>
+</table>
+
+<p>While still in the BeanInfo Editor, press the &quot;M&quot; button on the
+toolbar to open the New Method Feature SmartGuide. Enter the information shown
+in Figure 16 and press the <b>Next</b> button. Note that the return type is
+AddressDataModel, <i>not</i> SimpleAddressData. This allows us to lookup
+whatever type of data is stored, as long as the data implements interface
+AddressDataModel.
+</p>
+
+<p><i>Figure 16. Adding the find() method</i>
+</p>
+
+<p><img alt="fig16" src="images/fig16.gif" width="448" height="310"/>
+</p>
+
+<p>After entering the data and pressing <b>Next</b>, you are presented with a
+parameter page for each parameter indicated. Because you only specified one as
+the <b>Parameter count </b>on the first page, we only see one parameter page. On
+this page, shown in Figure 17, specify the name, type, and descriptive
+information for the name parameter. Then press <b>Next</b>.
+</p>
+
+<p><i>Figure 17. Specifying the parameter to the find() method</i>
+</p>
+
+<p><img alt="fig17" src="images/fig17.gif" width="448" height="310"/>
+</p>
+
+<p>Finally, we see the Bean Information page for the find method, shown in
+figure 18. Enter the information show, and press <b>Finish</b>. The BeanInfo
+Editor then creates the find() method for us.
+</p>
+
+<p><i>Figure 18. Specifying the details for the find() method</i>
+</p>
+
+<p><img alt="fig18" src="images/fig18.gif" width="448" height="310"/>
+</p>
+
+<p>Repeat this process for the add() method, as shown in Figures 19, 20, and 21.
+</p>
+
+<p><i>Figure 19. Starting to create the add() method</i>
+</p>
+
+<p><img alt="fig19" src="images/fig19.gif" width="448" height="310"/>
+</p>
+
+<p><i>Figure 20. Specifying the parameter to the add() method</i>
+</p>
+
+<p><img alt="fig20" src="images/fig20.gif" width="448" height="310"/>
+</p>
+
+<p>Note that the parameter is of type AddressDataModel, not SimpleAddressData!
+</p>
+
+<p><i>Figure 21. Specifying the details for the add() method</i>
+</p>
+
+<p><img alt="fig21" src="images/fig21.gif" width="448" height="310"/>
+</p>
+
+
+<h2>Defining AddressBookModel</h2>
+
+<table border="1" cellpadding="5">
+
+  <tr>
+    <td><b><i>Your Action! </i></b>Run AutoGut to create
+      AddressBookModel from the HashAddressBook class.</td>
+  </tr>
+</table>
+
+<p>Like AddressDataModel, AddressBookModel is an interface. Create
+AddressBookModel the same we you created AddressDataModel: using AutoGut. To do
+this, bring up the popup menu for HashAddressBook and select <b>Tools-&gt;Create
+Interface from Class</b>. This invokes AutoGut (seen in Figure 12 above).
+Specify AddressBookModel for the interface name, and choose the same package
+that contains your other classes and interfaces (the sample code uses <i>com.javadude.articles.vaddmvc1</i>).
+</p>
+
+<table border="1" cellpadding="5">
+
+  <tr>
+    <td><b><i>Your Action! </i></b>Edit AddressBookModel to extend
+      Serializable.</td>
+  </tr>
+</table>
+
+<p>Again, we need to add &quot;extends Serializable&quot; to the created
+interface. Edit AddressBookModel's interface definition to look as follows. The
+changes are in bold text.
+</p>
+
 <pre><b>import java.io.*;</b>
 
 
 
 public interface AddressBookModel <b>extends Serializable</b> {
 
-}</pre>
-
-<table border="1" cellpadding="5">
-
-  <tr>
-    <td><i><b>Your Action! </b></i>Add AddressBookModel to the
-      &quot;implements&quot; clause of HashAddressBook.</td>
-  </tr>
-</table>
-
-<p>We need to add AddressBookModel to the implements clause of HashAddressBook.
-Edit HashAddressBook and change its declaration to look as follows. The bold
-text indicates the change. You do not need to change anything else in this
-declaration.
-</p>
-
+}</pre>
+
+<table border="1" cellpadding="5">
+
+  <tr>
+    <td><i><b>Your Action! </b></i>Add AddressBookModel to the
+      &quot;implements&quot; clause of HashAddressBook.</td>
+  </tr>
+</table>
+
+<p>We need to add AddressBookModel to the implements clause of HashAddressBook.
+Edit HashAddressBook and change its declaration to look as follows. The bold
+text indicates the change. You do not need to change anything else in this
+declaration.
+</p>
+
 <pre>public class HashAddressBook implements Serializable<b>, AddressBookModel</b> {
 
   ...
 
-}</pre>
-
-<p>Now we can use a HashAddressBook instance anywhere we need to talk to an
-AddressBookModel.
-</p>
-
-
-<h2>Filling in the Implementation Details for HashAddressBook</h2>
-
-<table border="1" cellpadding="5">
-
-  <tr>
-    <td><i><b>Your Action! </b></i>Fill in the details for
-      HashAddressBook.</td>
-  </tr>
-</table>
-
-<p>So far, we have defined our concrete models and model interfaces. The
-interfaces are finished, but our HashAddressBook is missing the details it needs
-to perform its task.
-</p>
-
-<p>First, edit the class definition for HashAddressBook add add the text in
-bold.
-</p>
-
-<pre>
+}</pre>
+
+<p>Now we can use a HashAddressBook instance anywhere we need to talk to an
+AddressBookModel.
+</p>
+
+
+<h2>Filling in the Implementation Details for HashAddressBook</h2>
+
+<table border="1" cellpadding="5">
+
+  <tr>
+    <td><i><b>Your Action! </b></i>Fill in the details for
+      HashAddressBook.</td>
+  </tr>
+</table>
+
+<p>So far, we have defined our concrete models and model interfaces. The
+interfaces are finished, but our HashAddressBook is missing the details it needs
+to perform its task.
+</p>
+
+<p>First, edit the class definition for HashAddressBook add add the text in
+bold.
+</p>
+
+<pre>
 public class HashAddressBook implements Serializable, AddressBookModel {
 
 <b>  private Hashtable records = new Hashtable();
@@ -907,16 +907,16 @@ public class HashAddressBook implements Serializable, AddressBookModel {
 
 </b>	...
 
-}</pre>
-
-<p>This creates a Hashtable named <i>records</i> in which we store our
-addresses, and a count of how many addresses we have. We need <i>count</i> to
-help us process the <i>addresses</i> property, as we'll see in a moment.
-</p>
-
-<p>Next, edit the add method and change its code to the following:
-</p>
-
+}</pre>
+
+<p>This creates a Hashtable named <i>records</i> in which we store our
+addresses, and a count of how many addresses we have. We need <i>count</i> to
+help us process the <i>addresses</i> property, as we'll see in a moment.
+</p>
+
+<p>Next, edit the add method and change its code to the following:
+</p>
+
 <pre>public void add(AddressDataModel address) {
 
 <b>  if (records.get(address.getName()) == null)
@@ -927,15 +927,15 @@ help us process the <i>addresses</i> property, as we'll see in a moment.
 
   firePropertyChange(&quot;addresses&quot;,null, getAddresses());
 
-</b>}</pre>
-
-<p>This code stores the record in the hash table, and increments the count if
-there wasn't already a record with the same key.
-</p>
-
-<p>Now, edit the find() method and change its code to the following:
-</p>
-
+</b>}</pre>
+
+<p>This code stores the record in the hash table, and increments the count if
+there wasn't already a record with the same key.
+</p>
+
+<p>Now, edit the find() method and change its code to the following:
+</p>
+
 <pre>public AddressDataModel find(String name) {
 
 <b>  AddressDataModel data = (AddressDataModel)records.get(name);
@@ -946,25 +946,25 @@ there wasn't already a record with the same key.
 
   return data;
 
-</b>}</pre>
-
-<p>The find() method searches for an entry and returns it, or throws an
-exception if not found. Note that we're using RuntimeException for convenience
-here. You can replace it with a custom exception, perhaps a
-PhoneListingNotFoundException. Keep in mind that this would affect your model
-interface, as you would need to add a throws clause to the method declaration.
-For this example, we stay with a RuntimeException, which does not require a
-throws clause.
-</p>
-
-<p>Finally, we modify the getAddresses() method. This method returns the list of
-addresses in the model. For this particular model, our data is stored in a
-Hashtable. The getAddresses() method simply creates an array with the
-Hashtable's contents and returns it. Note that a more efficient implementation
-could provide a cache array -- once we generate the array, keep it until a new
-address is added.
-</p>
-
+</b>}</pre>
+
+<p>The find() method searches for an entry and returns it, or throws an
+exception if not found. Note that we're using RuntimeException for convenience
+here. You can replace it with a custom exception, perhaps a
+PhoneListingNotFoundException. Keep in mind that this would affect your model
+interface, as you would need to add a throws clause to the method declaration.
+For this example, we stay with a RuntimeException, which does not require a
+throws clause.
+</p>
+
+<p>Finally, we modify the getAddresses() method. This method returns the list of
+addresses in the model. For this particular model, our data is stored in a
+Hashtable. The getAddresses() method simply creates an array with the
+Hashtable's contents and returns it. Note that a more efficient implementation
+could provide a cache array -- once we generate the array, keep it until a new
+address is added.
+</p>
+
 <pre>public AddressDataModel[] getAddresses() {
 
 <b>  // convert the contents of the Hashtable into an array
@@ -981,1127 +981,1127 @@ address is added.
 
   return result;
 
-</b>}</pre>
-
-<p>The getAddress(int index) method will work ok as it is, as it calls the above
-getAddress() method. Note that there is no setAddresses(); the add() method acts
-like a way to change the address list.
-</p>
-
-<table border="1" cellpadding="5">
-
-  <tr>
-    <td><b><i>Your Action! </i></b>Pat yourself on the back; you
-      are done with the models!</td>
-  </tr>
-</table>
-
-
-<h2>Creating Delegates</h2>
-
-<p>Now the fun part: developing a delegate! We'll create a simple GUI to present
-the models, and connect the GUI components to those models.</p>
-
-<p>This article explains how the GUI and the model are connected, but does not
-discuss the layout design of these GUIs in this article. For details on layout
-management, see my article &quot;Effective Layout Management&quot; at <a href="http://developer.java.sun.com/developer/onlineTraining/GUI/AWTLayoutMgr/index.html">http://developer.java.sun.com/developer/onlineTraining/GUI/AWTLayoutMgr/index.html</a>.
-</p>
-
-<p>The first delegate we create represents a single AddressDataModel instance,
-allowing the user to easily edit the data. This delegate contains fields for
-each property in the AddressDataModel, with property-to-property connections
-between those fields and the model.
-</p>
-
-<p>VisualAge for Java, version 3.0, provides a tool that can automatically
-create this delegate for us. This option is called Quick Form, and we'll walk
-through using it now.
-</p>
-
-<p><b><i>Note:</i></b> Unfortunately, Quick Form generates a GridBagLayout for
-the form. While this is highly unsettling for me, it is automated, so I can live
-with the results as it makes it easier for everyone to generate this delegate.
-</p>
-
-<table border="1" cellpadding="5">
-
-  <tr>
-    <td><i><b>Your Action! </b></i>Create the AddressDataModel
-      class.</td>
-  </tr>
-</table>
-
-<p>To create this delegate, first create a class named AddressDataEntryFormUI.
-We're borrowing the naming convention of using &quot;UI&quot; from Swing's
-Model-Delegate implementation. Create the class using the Create Class
-SmartGuide, and fill in the details as shown in Figures 22 and 23.
-</p>
-
-<p><i>Figure 22. Creating class AddressDataEntryFormUI</i>
-</p>
-
-<p><img alt="fig22" src="images/fig22.gif" width="448" height="639"/>
-</p>
-
-<p>Notice that this time we checked the box marked <b>Compose the class visually</b>.
-IBM fixed this option with the release of VisualAge for Java 3.0. It used to
-disable the <b>Next</b> button when checked, but now it works correctly. Note
-that we have also specified java.awt.Panel as the superclass.
-</p>
-
-<p><i>Figure 23. Specifying the imports and interfaces for
-AddressDataEntryFormUI</i>
-</p>
-
-<p><img alt="fig23" src="images/fig23.gif" width="448" height="639"/>
-</p>
-
-<p>Here we chose some extra imports to cover the AWT GUI that we're creating.
-Again, we're creating a JavaBean, so we must implement Serializable. When you
-press the <b>Finish</b> button, the class is generated and opened to the VCE.
-</p>
-
-<table border="1" cellpadding="5">
-
-  <tr>
-    <td><b><i>Your Action! </i></b>Add a variable for the model
-      interface to the visual design.</td>
-  </tr>
-</table>
-
-<p>The visual design looks as pictured in Figure 24. Select the <b>Choose
-Bean...</b> option as shown in figure 24.
-</p>
-
-<p><i>Figure 24. Invoking the Choose Bean dialog</i>
-</p>
-
-<p><img alt="fig24" src="images/fig24.gif" width="640" height="480"/>
-</p>
-
-<p>This brings up the Choose Bean dialog, seen in Figure 25, so we can choose to
-drop a <i>variable</i> of type AddressDataModel in the visual design. <b><i>Make
-sure you select &quot;Variable&quot; as the Bean Type!</i></b> This will let us
-plug in any instance of any class that implements AddressDataModel.
-</p>
-
-<p><i>Figure 25. Choosing a variable to drop in the VCE</i>
-</p>
-
-<p><img alt="fig25" src="images/fig25.gif" width="332" height="256"/>
-</p>
-
-<p>When you press <b>Ok</b>, the mouse becomes a crosshair pointer. Drop it
-somewhere outside the dotted-line panel and you'll see a resulting design like
-that in Figure 26.
-</p>
-
-<p><i>Figure 26. A variable in the VCE</i>
-</p>
-
-<p><img alt="fig26" src="images/fig26.gif" width="640" height="480"/>
-</p>
-
-<p>Now the fun part. We'll use the <b>Quick Form</b> command to create a form
-that represents all of the properties in the variable. We want the GUI to look
-something like the GUI pictured in Figure 27.
-</p>
-
-<p><i>Figure 27. An entry form GUI</i>
-</p>
-
-<p><img alt="fig27" src="images/fig27.gif" width="337" height="215"/>
-</p>
-
-<p>Quick Form uses GridBagLayout to display its contents, but we'd like that
-GridBagLayout to reside in the top section of our panel.
-</p>
-
-<table border="1" cellpadding="5">
-
-  <tr>
-    <td><b><i>Your Action! </i></b>Change the panel's layout to
-      BorderLayout.</td>
-  </tr>
-</table>
-
-<p>We need to set the layout of our panel to BorderLayout, and place the
-resulting Quick Form in the NORTH. Double-click inside the dotted rectangle
-representing our panel and change the layout property as shown in Figure 28.
-</p>
-
-<p><i>Figure 28. Set the layout to BorderLayout</i>
-</p>
-
-<p><img alt="fig28" src="images/fig28.gif" width="232" height="449"/>
-</p>
-
-<table border="1" cellpadding="5">
-
-  <tr>
-    <td><b><i>Your Action! </i></b>Use Quick Form to create the
-      GUI.</td>
-  </tr>
-</table>
-
-<p>To create the form, bring up the popup menu for variable <i>anAddressDataModel</i>
-and choose <b>Quick Form</b>, as shown in figure 29.
-</p>
-
-<p><i>Figure 29. Starting the Quick Form generation</i>
-</p>
-
-<p><img alt="fig29" src="images/fig29.gif" width="267" height="311"/>
-</p>
-
-<p>Choosing this option invokes the Quick Form dialog, seen in Figure 30.
-</p>
-
-<p><i>Figure 30. Choosing a Quick Form</i>
-</p>
-
-<p><img alt="fig30" src="images/fig30.gif" width="448" height="671"/>
-</p>
-
-<p>In the Quick Form dialog, you select the parent container in which you want
-to create the form (you are given a choice of all empty Containers in your
-visual design) and the type of form to create.
-</p>
-
-<p>The two available quick forms, TextField and Label, don't help us much here.
-We need to set up a quick form definition that will provide a two-way update
-between the TextField to the String property. Press the <b>Manage Quick Forms</b>
-button. This displays the Quick Form Manager dialog (Figure 31), to which you
-can add new forms. Note that the Quick Form Manager can also be accessed from
-the main options dialog (<b>Window-&gt;Options</b>).
-</p>
-
-<p><i>Figure 31. Managing new Quick Forms</i>
-</p>
-
-<p><img alt="fig31" src="images/fig31.gif" width="329" height="419"/>
-</p>
-
-<p>Press the <b>Register New...</b> button to create a new Quick Form property
-definition. This displays the Register Quick Form dialog, as seen in Figure 32.
-</p>
-
-<p><i>Figure 32. Defining the TextField&lt;-&gt;Sting form</i>
-</p>
-
-<p><img alt="fig32" src="images/fig32.gif" width="349" height="447"/>
-</p>
-
-<p>Fill in the details specified above. This definition can be used for any
-String property in the model, and it will <i>update</i> that String property
-whenever the text in the TextField changes.
-</p>
-
-<p><b><i>Note:</i></b> If you were developing a Swing GUI and wanted to use a
-BoundJTextField as defined in <a href="http://www.javadude.com/vaj/javabeans/binding_a_non-bound_property.htm">Binding
-a Non-Bound Property</a>, you would specify BoundJTextField as the visual bean, <i>text
-</i>as the target property, and <i>text</i> as the target event. This means that
-whenever the <i>text</i> property in the BoundJTextField changes, send the data
-to the String property.
-</p>
-
-<p>After filling in the Quick Form definition, press the <b>Ok</b> button, and
-you'll be returned to the Quick Form Manager dialog (Figure 31). Press <b>Ok</b>
-again and you'll be returned to the Quick Form SmartGuide page in Figure 33.
-</p>
-
-<p><i>Figure 33. Changing the form used for the properties</i>
-</p>
-
-<p><img alt="fig33" src="images/fig33.gif" width="448" height="671"/>
-</p>
-
-<p>You need to select <i>each</i> property in turn, and change the quick form
-listed in the right-side List to Two-wayTextField. Make sure you do this for <i>each</i>
-property.
-</p>
-
-<p>When finished, press the <b>Next</b> button to continue.to the Quick Form
-Layout page, seen in Figure 34.
-</p>
-
-<p><i>Figure 34. Defining the Quick Form Layout</i>
-</p>
-
-<p><img alt="fig34" src="images/fig34.gif" width="448" height="671"/>
-</p>
-
-<p>Here's the tricky part. All those parameters.
-</p>
-
-<p><b>Number of columns per row. </b>Specifies how many <i>properties</i> appear
-in each row. Each property is represented by a Label/TextField pair. Because we
-want at most two properties in a row (for City/State and Country/PostalCode), we
-set this value to two.
-</p>
-
-<p><b>Layout style.</b> In this instance we have no choice. The resulting
-GridBagLayout will be placed into the parent, which has a BorderLayout. (The
-selected radio button should really be <b>GridBag into panel</b>, meaning that
-the Quick Form dialog creates a <i>new</i> panel for the form, and drops <i>that
-panel</i> into our selected parent. This is the action that is performed
-anyway.) If the selected parent container does not have a layout or is a
-GridBagLayout, you can select either choice:
-</p>
-<ul>
-  <li><b>GridBag into panel.</b> Quick Form creates a new panel to contain the
-    form and drops that new panel into the selected parent container.
-  </li>
-  <li><b>Free flow into parent.</b> Quick Form creates the form components and
-    drops them into the parent container. This option is only available if the
-    parent container has a null layout or a GridBagLayout. <i>Never select this
-    option for a null layout or the resulting form is absolutely positioned; it
-    will not resize when the user resizes the window</i> (note that you can
-    change the parent container's layout to GridBagLayout afterwards and the VCE
-    will attempt to set the constraints on all components. This usually works
-    well, but does not always have the effect you want.)
-  </li>
-</ul>
-
-<p><b>Properties to quick form.</b> On the previous page, you selected which
-properties to add to the quick form. On this page, you select the order and
-constraints for those properties.
-</p>
-<ul>
-  <li>First, use the <b>Up</b>/<b>Down</b> buttons to change the order of the
-    properties to <i>name</i>, <i>address</i>, <i>city</i>, <i>state</i>, <i>country</i>,
-    <i>postalCode</i>, <i>homePhone</i>, <i>businessPhone</i>. This defines the
-    left-to-right, top-to-bottom order of the displayed component pairs for each
-    property.
-  </li>
-  <li>Next, select each property and define their <b>Property quick form details</b>.
-    For all properties, we leave <b>Include label</b> selected (which adds a
-    Label for property) and set <b>Alignment</b> to <b>Left</b>. Set the <b>Label
-    text</b> and <b>Columns to span</b> as defined in the following table.
-
-    <table border="1" cellpadding="5">
-
-      <tr>
-        <td>
-
-          <p><b>Property</b></p></td>
-        <td>
-
-          <p><b>Label text</b></p></td>
-        <td>
-
-          <p><b>Columns to span</b></p></td>
-      </tr>
-
-      <tr>
-        <td><i>name</i></td>
-        <td>Name</td>
-        <td>2</td>
-      </tr>
-
-      <tr>
-        <td><i>address</i></td>
-        <td>Address</td>
-        <td>2</td>
-      </tr>
-
-      <tr>
-        <td><i>city</i></td>
-        <td>City</td>
-        <td>1</td>
-      </tr>
-
-      <tr>
-        <td><i>state</i></td>
-        <td>State/Province</td>
-        <td>1</td>
-      </tr>
-
-      <tr>
-        <td><i>country</i></td>
-        <td>Country</td>
-        <td>1</td>
-      </tr>
-
-      <tr>
-        <td><i>postalCode</i></td>
-        <td>Zip/Postal Code</td>
-        <td>1</td>
-      </tr>
-
-      <tr>
-        <td><i>homePhone</i></td>
-        <td>Home</td>
-        <td>2</td>
-      </tr>
-
-      <tr>
-        <td><i>businessPhone</i></td>
-        <td>Business</td>
-        <td>2</td>
-      </tr>
-    </table>
-
-  </li>
-  <li>Here's some quick details on what these details do. Note that the details
-    may vary slightly for different kinds of GUI beans used.
-    <ul>
-      <li><b>Bean used.</b> Shows the GUI bean you selected on the previous page
-        for the selected property.
-      </li>
-      <li><b>Include label.</b> Specifies if you want to have a Label component
-        appear above or to the left of the GUI bean.
-      </li>
-      <li><b>Alignment.</b> Does the label appear above (<b>Top</b>) or to the <b>Left</b>
-        of the GUI bean?
-      </li>
-      <li><b>Label text.</b> The text to appear in the label. This is initially
-        the name of the property, first-letter capitalized.
-      </li>
-      <li><b>Columns to span.</b> How many property columns should this
-        component span in the resulting layout. In this example. those with
-        value 1 give room for a second property in that row. Those with value 2
-        (the <b>Number of columns per row</b> value) take an entire row to
-        display.
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<p><b>Preview.</b> Shows what the resulting form will look like. Note that this
-dialog is fairly narrow, and the resulting layout can expand based on the window
-size.
-</p>
-
-<p>Press the <b>Next</b> button to continue. The final page of the Quick Form
-dialog gives you a chance to save this form definition. This is useful if you
-want to create this same form again in other GUIs. Leave the options as it (no
-save) and press <b>Finish</b>. In general, it is a much better idea to create
-reusable classes like this delegate and drop an instance of the class in another
-GUI, rather than constantly recreate the form using Quick Form.
-</p>
-
-<p>The resulting form appears in Figure 35. Note that it resides in the NORTH
-part of the BorderLayout. The VCE treats NORTH as the first component of the
-BorderLayout, so when we generate the Quick Form its panel is dropped in the
-NORTH section.
-</p>
-
-<p><i>Figure 35. The resulting form</i>
-</p>
-
-<p><img alt="fig35" src="images/fig35.gif" width="640" height="480"/>
-</p>
-
-<p>Note the generated property-to-property connections. Each of these
-connections flows <i>from</i> the variable to the GUI. This means that any time
-the <i>variable</i> changes, all property values are passed to the GUI. Because
-we used a quick form that specified <i>textValueChanged</i> as the target event,
-bound text fields in the GUI, any time the text in the field changes, the data
-in the object that the variable points to is updated.
-</p>
-
-<p>There's one more thing we need to do to finish this delegate.
-</p>
-
-<table border="1" cellpadding="5">
-
-  <tr>
-    <td><i><b>Your Action! </b></i>Expose the variable by promoting
-      its <i>this</i> property.</td>
-  </tr>
-</table>
-
-<p>The final step in our AddressDataEntryFormUI delegate is to make the model
-variable accessible <i>outside</i> this bean. We do this by
-&quot;promoting&quot; it, as follows. Bring up the popup menu for the variable
-and choose <b>Promote Bean Feature...</b>, seen in Figure 36.
-</p>
-
-<p><i>Figure 36. Starting to promote a feature</i>
-</p>
-
-<p><img alt="fig36" src="images/fig36.gif" width="248" height="327"/>
-</p>
-
-<p>This option allows you to make a feature of a <i>contained bean</i> visible
-as a feature of the bean we're creating. In this case, we want to make the
-variable visible, so we promote its <i>this</i> property. We call the resulting
-property <i>model</i>. In the Promote features dialog, select <i>this</i> under
-the Property list, and then press the <b>&gt;&gt;</b> button, as shown in Figure
-37.
-</p>
-
-<p><i>Figure 37. Selecting this</i>
-</p>
-
-<p><img alt="fig37" src="images/fig37.gif" width="330" height="294"/>
-</p>
-
-<p>Then, double-click on the Promote Name for the <i>this</i> property and
-change it to <i>model</i>, as seen in Figure 38.
-</p>
-
-<p><i>Figure 38. Changing the promote name</i>
-</p>
-
-<p><img alt="fig38" src="images/fig38.gif" width="325" height="193"/>
-</p>
-
-<table border="1">
-
-  <tr>
-    <td><b><i>Note: It is very important that you do not
-      press Enter or simply click the Ok button when you are done changing the
-      name!</i></b> If the name you choose happens to conflict with a name you
-      chose in the visual design the promotion dialog will attempt to promote
-      the property, report an error, but still perform part of the promotion!
-
-      <p>After typing the new name, click on an empty part of the dialog, like
-      the spot where the cursor is in Figure 38. This validates the name before
-      ending the dialog.</p></td>
-  </tr>
-</table>
-
-<p>When finished, press the <b>Ok</b> button.
-</p>
-
-<p>Promoting the <i>this</i> feature creates getModel() and setModel() methods
-that directly access the <i>anAddressDataModel</i> variable. We can now access
-all the form data from the <i>outside</i> of the AddressDataEntryFormUI bean!
-</p>
-
-<p>Note that after creating the form, you can modify the GUI components as you
-like. For example, you could change the fonts of the labels to look as shown in
-Figure 39. The Quick Form is a one-time generation.
-</p>
-
-<p><b><i>Save the bean!</i> </b>You should really save the bean as often as you
-think about it in the VCE.
-</p>
-
-<p><i>Figure 39. Improving the look of the delegate.</i>
-</p>
-
-<p><img alt="fig39" src="images/fig39.gif" width="640" height="480"/>
-</p>
-
-<p>This is a very simple design with only property-to-property connections, and <i>any</i>
-AddressDataModel implementer can be plugged in from the outside.
-</p>
-
-
-<h2>A Delegate for AddressBook</h2>
-
-<table border="1" cellpadding="5">
-
-  <tr>
-    <td><i><b>Your Action! </b></i>Create the AddressBookUI class.</td>
-  </tr>
-</table>
-
-<p>Our AddressBookUI delegate will contain an instance of our
-AddressDataEntryFormUI delegate, as well as buttons to add and look up names. We
-start by creating AddressBookUI, extending java.awt.Panel. Note that we always
-use Panel (or JPanel for Swing GUIs) as the superclass of a delegate. This
-allows us to drop an instance of this delegate <i>inside</i> another delegate or
-application if we want to later. We are not limiting the GUI by using Frame,
-Dialog, or Window as the superclasss.
-</p>
-
-<p>Enter the class details as shown in Figures 40 and 41.
-</p>
-
-<p><i>Figure 40. Defining class AddressBookUI</i>
-</p>
-
-<p><img alt="fig40" src="images/fig40.gif" width="448" height="639"/>
-</p>
-
-<p><i>Figure 41. AddressBookUI imports and interfaces</i>
-</p>
-
-<p><img alt="fig41" src="images/fig41.gif" width="448" height="639"/>
-</p>
-
-<p>After you have created the class, open it to visual composition, and create
-the GUI seen in Figure 42. A description of what was done to create this GUI
-follows the diagram.
-</p>
-
-<p><b><i>Note: For the following VCE screenshots, I've turned off the toolbar
-and pane titles. </i></b>You can turn these off via <b>Window-&gt;Options-&gt;Appearance.</b>
-</p>
-
-<p><i>Figure 42. The Address Book user interface</i>
-</p>
-
-<p><img alt="fig42" src="images/fig42.gif" width="640" height="480"/>
-</p>
-
-<table border="1" cellpadding="5">
-
-  <tr>
-    <td><i><b>Your Action! </b></i>Create the AddressBookUI GUI.</td>
-  </tr>
-</table>
-
-<p>The layout of this GUI is as follows:
-</p>
-<ul>
-  <li><b>Panel</b> <b><i>BorderLayout</i></b> (<i>created by VisualAge as the
-    superclass)</i>
-    <ul>
-      <li><b>Panel</b> <b><i>BorderLayout</i></b> (<i>contentsPane</i>, created
-        by VisualAge)
-        <ul>
-          <li>CENTER=<b>AddressBookEntryFormUI</b></li>
-          <li>SOUTH=<b>Panel</b> <b><i>FlowLayout(CENTER)</i></b>
-            <ul>
-              <li><b>Button</b>s for Find and Add
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<p>Make sure you choose <b>Class</b> as the bean type when adding your
-AddressDataEntryFormUI! See Figure 43 for this option.
-</p>
-
-<p><i>Figure 43. Make sure you pick &quot;Class&quot; as the bean type -- we
-want an instance</i>
-</p>
-
-<p><img alt="fig43" src="images/fig43.gif" width="405" height="256"/>
-</p>
-
-<p><i><b>Save the bean!</b></i>
-</p>
-
-<table border="1" cellpadding="5">
-
-  <tr>
-    <td><i><b>Your Action! </b></i>Drop variables to represent the
-      address data and address book models.</td>
-  </tr>
-</table>
-
-<p>We need to be able to work with models for the overall address
-book (so we can add/remove addresses) and a specific address that we can display
-in the entry form. To do this, drop two variables in the VCE using the Choose
-Bean tool&nbsp; <img alt="choosebean" src="images/icon-choosebean.gif" style="vertical-align:middle" width="32" height="32"/>.
-Select the variables as specified in Figure 44 and 45. Make sure you select <b>Variable</b>
-as the Bean type.
-</p>
-
-<p><i>Figure 44. Adding the <b>anAddressDataModel</b> variable</i>
-</p>
-
-<p>&nbsp;<img alt="fig44" src="images/fig44.gif" width="405" height="256"/>
-</p>
-
-<p><i>Figure 45. Adding the <b>anAddressBookModel</b> variable</i>
-</p>
-
-<p>&nbsp;<img alt="fig45" src="images/fig45.gif" width="405" height="256"/>
-</p>
-
-<p>Add these variables to the design as shown in Figure 46.
-</p>
-
-<p><i>Figure 46. Placing the variables in the design area</i>
-</p>
-
-<p><img alt="fig46" src="images/fig46.gif" width="640" height="480"/>
-</p>
-
-<table border="1" cellpadding="5">
-
-  <tr>
-    <td><b><i>Your Action! </i></b>Connect the <i>anAddressDataModel</i>
-      variable to the <i>model</i> property of the entry form UI.</td>
-  </tr>
-</table>
-
-<p>We need to associate the <i>anAddressDataModel</i> variable with
-the AddressDataEntryFormUI. We want to set it up so that any time the variable
-changes, the <i>model</i> in the UI changes. We can do this using a
-property-to-property connection. Start this connection by bringing up the popup
-menu for <i>anAddressDataModel</i> and choosing <b>Connect...</b>, as seen in
-Figure 47.
-</p>
-
-<p><i>Figure 47. Starting a connection from anAddressDataModel</i>
-</p>
-
-<p><img alt="fig47" src="images/fig47.gif" width="248" height="297"/>
-</p>
-
-<p>This brings up the Start connection dialog shown in Figure 48.
-Select <b>Properties</b> at the top of the dialog and <i>this</i> as seen in
-Figure 48.
-</p>
-
-<p><i>Figure 48. Choosing the &quot;this&quot; property</i>
-</p>
-
-<p><img alt="fig48" src="images/fig48.gif" width="299" height="485"/>
-</p>
-
-<p>After selecting <i>this</i>, press <b>Ok</b> and the mouse will
-turn into a spider cursor. Move the spider cursor over the
-AddressDataEntryFormUI as shown in Figure 49.
-</p>
-
-<p><i>Figure 49. Choosing the target</i>
-</p>
-
-<p><img alt="fig49" src="images/fig49.gif" width="640" height="480"/>
-</p>
-
-<p>Click on the delegate and choose <b>Connectable Features...</b>,
-seen in Figure 50. Note that if we had made the promoted <i>model </i>property
-of the entry form delegate a preferred feature, we would see it directly in this
-popup menu. (In case you're wondering, you can do this by opening
-AddressDataEntryFormUI to the BeanInfo Editor, select <i>model</i> in the
-Features pane, change its preferred attribute in the bottom pane, then save the
-changes.)
-</p>
-
-<p><i>Figure 50. Selecting a target feature</i>
-</p>
-
-<p><img alt="fig50" src="images/fig50.gif" width="640" height="480"/>
-</p>
-
-<p>Selecting <b>Connectable Features...</b> displays the End connection dialog.
-Choose <i>model</i>, as shown in Figure 51.
-</p>
-
-<p><i>Figure 51. Choosing the model property</i>
-</p>
-
-<p><img alt="fig51" src="images/fig51.gif" width="299" height="485"/>
-</p>
-
-<p>Press <b>Ok </b>after choosing the <i>model</i> property, and you have
-completed the connection. The connection appears in Figure 52.
-</p>
-
-<p><i>Figure 52. The model connection</i>
-</p>
-
-<p><img alt="fig52" src="images/fig52.gif" width="640" height="480"/>
-</p>
-
-<table border="1" cellpadding="5">
-
-  <tr>
-    <td><b><i>Your Action! </i></b>Create the Find button
-      connections.</td>
-  </tr>
-</table>
-
-<p>We need to create the actions that the Find command should perform. These
-actions are pretty simple. The &quot;Find&quot; command should:
-</p>
-<ul>
-  <li>Call find() in the AddressBookModel
-    <ul>
-      <li>Pass in the name from the <i>name</i> property value in <i>anAddressDataModel</i>
-      </li>
-    </ul></li>
-  <li>Set <i>anAddressDataModel</i> to the result of the find method
-  </li>
-</ul>
-
-<p>To accomplish this, we create the following connections. First, choose <b>Connect-&gt;actionPerformed</b>
-from the Find button's popup menu as shown in Figure 53.
-</p>
-
-<p><i>Figure 53. Start the connection when the button is pressed (actionPerformed)</i>
-</p>
-
-<p><img alt="fig53" src="images/fig53.gif" width="386" height="285"/>
-</p>
-
-<p>&nbsp;Move the mouse to <i>anAddressBookModel</i>, as in Figure 54.
-</p>
-
-<p><i>Figure 54. Move to anAddressBookModel and click</i>
-</p>
-
-<p><img alt="fig54" src="images/fig54.gif" width="640" height="480"/>
-</p>
-
-<p>Click on <i>anAddressBookModel</i> and you'll see the End connection dialog
-in Figure 55.
-</p>
-
-<p><i>Figure 55. Choose the find() method</i>
-</p>
-
-<p><img alt="fig55" src="images/fig55.gif" width="299" height="485"/>
-</p>
-
-<p>&nbsp;Choose the find() method and press <b>Ok</b>. The resulting connection
-appears in Figure 56.
-</p>
-
-<p><i>Figure 56. The first connection - the dashed line means it's incomplete</i>
-</p>
-
-<p><img alt="fig56" src="images/fig56.gif" width="640" height="480"/>
-</p>
-
-<p>Note that the connection is dashed. This means it's incomplete. We need to
-provide a parameter to it, the name of the person to find in our phone book.
-</p>
-
-<p>Bring up the popup menu for the connection and choose <b>Connect-&gt;name</b>.
-Make sure the cursor is on the connection when you click or you won't see the
-right popup menu.
-</p>
-
-<p><i>Figure 57. Starting the parameter connection</i>
-</p>
-
-<p><img alt="fig57" src="images/fig57.gif" width="640" height="480"/>
-</p>
-
-<p>&nbsp;The cursor will once again turn into a spider. Move it to
-anAddressDataModel (Figure 58) and click.
-</p>
-
-<p><i>Figure 58. We'll get the parameter from anAddressDataModel</i>
-</p>
-
-<p><img alt="fig58" src="images/fig58.gif" width="640" height="480"/>
-</p>
-
-<p>&nbsp;Choose <i>name</i> from the list of properties in the End connection
-dialog (Figure 59).
-</p>
-
-<p><i>Figure 59. Choosing the name property as the parameter value</i>
-</p>
-
-<p><img alt="fig59" src="images/fig59.gif" width="299" height="485"/>
-</p>
-
-<p>&nbsp;The resulting connection appears in Figure 60.
-</p>
-
-<p><i>Figure 60. The parameter connection</i>
-</p>
-
-<p><img alt="fig60" src="images/fig60.gif" width="640" height="480"/>
-</p>
-
-<p>This connection grabs the name from whatever <i>anAddressDataModel</i> points
-to and passes it as the parameter to the find() method. This assumes that the
-variable has a value (we'll be setting that outside delegate). Note that the
-connection between <i>anAddressDataModel</i> and the entry form UI means that if
-the user types data in the Name field, that data is passed to the object that <i>anAddressDataModel</i>
-points to. This gives us access to the contents of the GUI, and we don't need to
-directly interact with the GUI to get the data!
-</p>
-
-<p>Finally, we need to take the result of the find() method and stick it in
-anAddressDataModel. To do this, bring up the popup menu for the green connection
-and choose <b>Connect-&gt;normalResult</b>. (This popup menu appears in Figure
-57.)
-</p>
-
-<p>Move the mouse to anAddressDataModel, click, and choose property <b>this</b>
-from the end connection dialog. This creates the connection shown in Figure 61.
-</p>
-
-<p><i>Figure 61. The complete find() processing</i>
-</p>
-
-<p><img alt="fig61" src="images/fig61.gif" width="640" height="480"/>
-</p>
-
-<p>The resulting connections mean &quot;when the Find button is pressed, set the
-<i>anAddressDataModel</i> variable to the result of finding the current name in
-the address book model&quot;.
-</p>
-
-<p>Remember that we defined our find() method as throwing an
-exception if the name was not found? You could attach the <i>exceptionOccurred</i>
-event of the connection to display a dialog stating &quot;not found&quot;. Right
-now, the exception will be ignored by handleException(). (A dialog is used in
-the example code if you are interested in how to do this.)
-</p>
-
-<table border="1" cellpadding="5">
-
-  <tr>
-    <td><b><i>Your Action! </i></b>Create the Add button
-      connections.</td>
-  </tr>
-</table>
-
-<p>Next we examine what we need for the Add button. When Add is pressed, pass
-the current value of <i>addAddressDataModel</i> to add() in <i>anAddressBookModel</i>.
-</p>
-
-<p>The Add button is very simple. Because we've walked through similar
-connections for the Find button, we will not present the screenshots.
-</p>
-
-<p>To create the Add button connections:
-</p>
-<ol>
-  <li>Choose <b>Connect-&gt;actionPerformed</b> from the Add button's popup
-    menu.
-  </li>
-  <li>Move the mouse to <i>anAddressBookModel</i> and click.
-  </li>
-  <li>Choose method add() from the end connection dialog.
-  </li>
-  <li>Choose <b>Connect-&gt;address</b> from the dashed connection's popup menu.
-  </li>
-  <li>Move the mouse to anAddressDataModel and click.
-  </li>
-  <li>Choose <i>this</i> from the list of properties. Make sure you have <b>Properties</b>
-    checked at the top of the end connections dialog.
-  </li>
-</ol>
-
-<p>The resulting connections look as shown in Figure 62. Note that I moved some
-connections slightly to make them easier to see.
-</p>
-
-<p><i>Figure 62. All the connections for the AddressBookUI</i>
-</p>
-
-<p><img alt="fig62" src="images/fig62.gif" width="640" height="480"/>
-</p>
-
-<table border="1" cellpadding="5">
-
-  <tr>
-    <td><b><i>Your Action! </i></b>Expose the variables.</td>
-  </tr>
-</table>
-
-<p>The last thing we need to do with this delegate is expose the variables so we
-can set them from the outside. We do this by promoting them, just as we did to
-create the <i>model</i> property in the AddressDataEntryFormUI. Figures 36-38
-above show use of the feature promotion dialog. Here we want to promote the <i>this</i>
-property of each variable. Promote the <i>this</i> property of <i>anAddressBookModel</i>
-as <i>addressBookModel</i>, and the <i>this</i> property of <i>anAddressDataModel</i>
-as <i>addressDataModel</i>.
-</p>
-
-<p>When finished, <b><i>save the bean</i></b>!
-</p>
-
-
-<h2>Connecting as an Application</h2>
-
-<p>Creating an application now becomes an exercise in connecting models and
-delegates. Visual applications usually subclass Frame or Window (or their Swing
-equivalents). Usually the Application's visual design is simply dropping one or
-more UIs, and one or more models, then connecting them together. This
-application is no exception.
-</p>
-
-<p>Start by creating class PhoneApplication1 as shown in Figures 63 and 64.
-</p>
-
-<p>&nbsp;<i>Figure 63. Starting the PhoneApplication1 class definition</i>
-</p>
-
-<p><img alt="fig63" src="images/fig63.gif" width="448" height="639"/>
-</p>
-
-<p><i>Figure 64. Imports and interfaces for PhoneApplication1</i>
-</p>
-
-<p><img alt="fig64" src="images/fig64.gif" width="448" height="639"/>
-</p>
-
-<p>When you press <b>Finish</b>, the VCE opens to design PhoneApplication1.
-</p>
-
-<p>To visually design the application:
-</p>
-<ol>
-  <li>Change the <i>ContentsPane</i>'s layout to GridLayout (the ContentsPane is
-    the panel in the center of the main frame), and drop an <i>instance</i> of
-    AddressBookUI in it. Make sure you select <b>Class</b> as the Bean Type when
-    choosing the AddressBookUI bean, as we want an <i>instance</i>, not a <i>variable</i>.
-  </li>
-  <li>Drop two <i>instances</i>, one of type SimpleAddressData and one of type
-    HashAddressBook in an empty part of the design area.
-  </li>
-  <li><b>Connect-&gt;this</b> from the SimpleAddressData instance to the <i>addressDataModel</i>
-    property of the AddressBookUI.
-  </li>
-  <li><b>Connect-&gt;this</b> from the HashAddressBook instance to the <i>addressBookModel</i>
-    property of the AddressBookUI.
-  </li>
-</ol>
-
-<p>The results appear in Figure 65.
-</p>
-
-<p><i>Figure 65. A finished phone book application</i>
-</p>
-
-<p><img alt="fig65" src="images/fig65.gif" width="640" height="480"/>
-</p>
-
-<p><i><b>Notes:</b></i>
-</p>
-<ul>
-  <li>
-
-    <p>To make the GUI look nicer, you can set the background color
-    of the overall panel to SystemColor.control via its property sheet.</p>
-  </li>
-  <li>
-
-    <p>When setting the background color, the TextFields inherit
-    that color (they looked gray), so I opened AddressDataEntryFormUI to the VCE
-    and set all of its TextFields' background colors to SystemColor.window.</p>
-  </li>
-</ul>
-
-<p>The results of these changes appear in Figure 66.
-</p>
-
-<p><i>Figure 66. The application after changing some background
-colors</i>
-</p>
-
-<p><img alt="fig66" src="images/fig66.gif" width="640" height="480"/>
-</p>
-
-
-<h2>Running the Application</h2>
-
-<table border="1" cellpadding="5">
-
-  <tr>
-    <td><b><i>Your Action! </i></b>Run the application!</td>
-  </tr>
-</table>
-
-<p>Finally, we're ready to run. Watch out though! It doesn't <i>quite</i> work
-right...
-</p>
-
-<p>Try adding a couple sets of address data, pressing <b>Add</b> after each.
-Then type in an existing name and press <b>Find</b>.
-</p>
-
-<p>Doesn't seem to work, does it?
-</p>
-
-<p>The problem lies in our implementation of the model. We're using a Hashtable
-to hold the data. Let's think about what the hash table is doing.
-</p>
-
-<p>We start off by creating an instance of SimpleAddressData. That's the
-simpleAddressData object in our PhoneApplication. We pass that to the
-AddressBookUI, which passes it to the AddressDataEntryFormUI. When the user
-types data into the form, that data is sent to the SimpleAddressData instance.
-So far, our data looks as shown in Figure 67.
-</p>
-
-<p><i>Figure 67. After typing in the data</i>
-</p>
-
-<p><img alt="fig67" src="images/fig67.gif" width="472" height="223"/>
-</p>
-
-<p>When the user presses the Add button, the data is added to the Hashtable,
-keyed by the name. Our data now looks as shown in Figure 68.
-</p>
-
-<p><i>Figure 68. After pressing the Add button</i>
-</p>
-
-<p><img alt="fig68" src="images/fig68.gif" width="471" height="314"/>
-</p>
-
-<p>Note that the Hashtable keeps track of the key (&quot;Scott&quot;) and a
-pointer to the value. (Technically the key is just a pointer to some Object, in
-this case a String, but that's not important here.)
-</p>
-
-<p>Now the user types the next set of address data, but do not press Add yet.
-Notice what the diagram looks like, seen in Figure 69.
-</p>
-
-<p><i>Figure 69. After typing new data</i>
-</p>
-
-<p><img alt="fig69" src="images/fig69.gif" width="432" height="318"/>
-</p>
-
-<p>Notice the problem so far. We've actually changed the object that
-&quot;Scott&quot; was keying in the Hashtable. After the user presses Add again,
-we see the resulting data state in Figure 70.
-</p>
-
-<p><i>Figure 70. Two pieces of data in the Hashtable</i>
-</p>
-
-<p><img alt="fig70" src="images/fig70.gif" width="434" height="319"/>
-</p>
-
-<p>The problem is that we only have a single piece of data, no matter how many
-keys we assign to it in the Hashtable. If we look up Scott, we find the
-last-entered data, whatever that was.
-</p>
-
-<p><b><i>This is not a problem in the MVC paradigm; it is a problem in the
-implementation of our model!</i></b>
-</p>
-
-<p>I like to use this example because it makes us think about different kinds of
-models. Some models directly <i>use</i> the data passed into them, as this one
-clearly does. Other models extract the data and store it somewhere else, perhaps
-in a database or across a network.
-</p>
-
-<p>You need to consider these types of problems when designing your model.
-Because of the differences between models, we do not want to build this
-knowledge into the model interface. We want to treat this situation as an
-implementation detail of a specific concrete model. Other models may not have
-this type of situation.
-</p>
-
-
-<h2>Fixing the Problem</h2>
-
-<p>There are several approaches you can take to solve this problem. We'll
-examine three approaches, starting with &quot;the wrong way&quot;.
-</p>
-
-<p>At the heart of all solutions to this problem is that we need to make a copy
-of the data. If you think about it carefully, you'll see that we actually need
-to copy the data when adding <i>and </i>when finding. If we return the found
-record and the user types in the next name to find, it would overwrite the name
-in the old record!
-</p>
-
-
-<h3>Adding a Simple Copy to the add() Method</h3>
-
-<p>The first simple approach would be to just make a copy of the data. We can
-modify our add() method in HashAddressBook as follows:
-</p>
-
+</b>}</pre>
+
+<p>The getAddress(int index) method will work ok as it is, as it calls the above
+getAddress() method. Note that there is no setAddresses(); the add() method acts
+like a way to change the address list.
+</p>
+
+<table border="1" cellpadding="5">
+
+  <tr>
+    <td><b><i>Your Action! </i></b>Pat yourself on the back; you
+      are done with the models!</td>
+  </tr>
+</table>
+
+
+<h2>Creating Delegates</h2>
+
+<p>Now the fun part: developing a delegate! We'll create a simple GUI to present
+the models, and connect the GUI components to those models.</p>
+
+<p>This article explains how the GUI and the model are connected, but does not
+discuss the layout design of these GUIs in this article. For details on layout
+management, see my article &quot;Effective Layout Management&quot; at <a href="http://developer.java.sun.com/developer/onlineTraining/GUI/AWTLayoutMgr/index.html">http://developer.java.sun.com/developer/onlineTraining/GUI/AWTLayoutMgr/index.html</a>.
+</p>
+
+<p>The first delegate we create represents a single AddressDataModel instance,
+allowing the user to easily edit the data. This delegate contains fields for
+each property in the AddressDataModel, with property-to-property connections
+between those fields and the model.
+</p>
+
+<p>VisualAge for Java, version 3.0, provides a tool that can automatically
+create this delegate for us. This option is called Quick Form, and we'll walk
+through using it now.
+</p>
+
+<p><b><i>Note:</i></b> Unfortunately, Quick Form generates a GridBagLayout for
+the form. While this is highly unsettling for me, it is automated, so I can live
+with the results as it makes it easier for everyone to generate this delegate.
+</p>
+
+<table border="1" cellpadding="5">
+
+  <tr>
+    <td><i><b>Your Action! </b></i>Create the AddressDataModel
+      class.</td>
+  </tr>
+</table>
+
+<p>To create this delegate, first create a class named AddressDataEntryFormUI.
+We're borrowing the naming convention of using &quot;UI&quot; from Swing's
+Model-Delegate implementation. Create the class using the Create Class
+SmartGuide, and fill in the details as shown in Figures 22 and 23.
+</p>
+
+<p><i>Figure 22. Creating class AddressDataEntryFormUI</i>
+</p>
+
+<p><img alt="fig22" src="images/fig22.gif" width="448" height="639"/>
+</p>
+
+<p>Notice that this time we checked the box marked <b>Compose the class visually</b>.
+IBM fixed this option with the release of VisualAge for Java 3.0. It used to
+disable the <b>Next</b> button when checked, but now it works correctly. Note
+that we have also specified java.awt.Panel as the superclass.
+</p>
+
+<p><i>Figure 23. Specifying the imports and interfaces for
+AddressDataEntryFormUI</i>
+</p>
+
+<p><img alt="fig23" src="images/fig23.gif" width="448" height="639"/>
+</p>
+
+<p>Here we chose some extra imports to cover the AWT GUI that we're creating.
+Again, we're creating a JavaBean, so we must implement Serializable. When you
+press the <b>Finish</b> button, the class is generated and opened to the VCE.
+</p>
+
+<table border="1" cellpadding="5">
+
+  <tr>
+    <td><b><i>Your Action! </i></b>Add a variable for the model
+      interface to the visual design.</td>
+  </tr>
+</table>
+
+<p>The visual design looks as pictured in Figure 24. Select the <b>Choose
+Bean...</b> option as shown in figure 24.
+</p>
+
+<p><i>Figure 24. Invoking the Choose Bean dialog</i>
+</p>
+
+<p><img alt="fig24" src="images/fig24.gif" width="640" height="480"/>
+</p>
+
+<p>This brings up the Choose Bean dialog, seen in Figure 25, so we can choose to
+drop a <i>variable</i> of type AddressDataModel in the visual design. <b><i>Make
+sure you select &quot;Variable&quot; as the Bean Type!</i></b> This will let us
+plug in any instance of any class that implements AddressDataModel.
+</p>
+
+<p><i>Figure 25. Choosing a variable to drop in the VCE</i>
+</p>
+
+<p><img alt="fig25" src="images/fig25.gif" width="332" height="256"/>
+</p>
+
+<p>When you press <b>Ok</b>, the mouse becomes a crosshair pointer. Drop it
+somewhere outside the dotted-line panel and you'll see a resulting design like
+that in Figure 26.
+</p>
+
+<p><i>Figure 26. A variable in the VCE</i>
+</p>
+
+<p><img alt="fig26" src="images/fig26.gif" width="640" height="480"/>
+</p>
+
+<p>Now the fun part. We'll use the <b>Quick Form</b> command to create a form
+that represents all of the properties in the variable. We want the GUI to look
+something like the GUI pictured in Figure 27.
+</p>
+
+<p><i>Figure 27. An entry form GUI</i>
+</p>
+
+<p><img alt="fig27" src="images/fig27.gif" width="337" height="215"/>
+</p>
+
+<p>Quick Form uses GridBagLayout to display its contents, but we'd like that
+GridBagLayout to reside in the top section of our panel.
+</p>
+
+<table border="1" cellpadding="5">
+
+  <tr>
+    <td><b><i>Your Action! </i></b>Change the panel's layout to
+      BorderLayout.</td>
+  </tr>
+</table>
+
+<p>We need to set the layout of our panel to BorderLayout, and place the
+resulting Quick Form in the NORTH. Double-click inside the dotted rectangle
+representing our panel and change the layout property as shown in Figure 28.
+</p>
+
+<p><i>Figure 28. Set the layout to BorderLayout</i>
+</p>
+
+<p><img alt="fig28" src="images/fig28.gif" width="232" height="449"/>
+</p>
+
+<table border="1" cellpadding="5">
+
+  <tr>
+    <td><b><i>Your Action! </i></b>Use Quick Form to create the
+      GUI.</td>
+  </tr>
+</table>
+
+<p>To create the form, bring up the popup menu for variable <i>anAddressDataModel</i>
+and choose <b>Quick Form</b>, as shown in figure 29.
+</p>
+
+<p><i>Figure 29. Starting the Quick Form generation</i>
+</p>
+
+<p><img alt="fig29" src="images/fig29.gif" width="267" height="311"/>
+</p>
+
+<p>Choosing this option invokes the Quick Form dialog, seen in Figure 30.
+</p>
+
+<p><i>Figure 30. Choosing a Quick Form</i>
+</p>
+
+<p><img alt="fig30" src="images/fig30.gif" width="448" height="671"/>
+</p>
+
+<p>In the Quick Form dialog, you select the parent container in which you want
+to create the form (you are given a choice of all empty Containers in your
+visual design) and the type of form to create.
+</p>
+
+<p>The two available quick forms, TextField and Label, don't help us much here.
+We need to set up a quick form definition that will provide a two-way update
+between the TextField to the String property. Press the <b>Manage Quick Forms</b>
+button. This displays the Quick Form Manager dialog (Figure 31), to which you
+can add new forms. Note that the Quick Form Manager can also be accessed from
+the main options dialog (<b>Window-&gt;Options</b>).
+</p>
+
+<p><i>Figure 31. Managing new Quick Forms</i>
+</p>
+
+<p><img alt="fig31" src="images/fig31.gif" width="329" height="419"/>
+</p>
+
+<p>Press the <b>Register New...</b> button to create a new Quick Form property
+definition. This displays the Register Quick Form dialog, as seen in Figure 32.
+</p>
+
+<p><i>Figure 32. Defining the TextField&lt;-&gt;Sting form</i>
+</p>
+
+<p><img alt="fig32" src="images/fig32.gif" width="349" height="447"/>
+</p>
+
+<p>Fill in the details specified above. This definition can be used for any
+String property in the model, and it will <i>update</i> that String property
+whenever the text in the TextField changes.
+</p>
+
+<p><b><i>Note:</i></b> If you were developing a Swing GUI and wanted to use a
+BoundJTextField as defined in <a href="http://www.javadude.com/vaj/javabeans/binding_a_non-bound_property.htm">Binding
+a Non-Bound Property</a>, you would specify BoundJTextField as the visual bean, <i>text
+</i>as the target property, and <i>text</i> as the target event. This means that
+whenever the <i>text</i> property in the BoundJTextField changes, send the data
+to the String property.
+</p>
+
+<p>After filling in the Quick Form definition, press the <b>Ok</b> button, and
+you'll be returned to the Quick Form Manager dialog (Figure 31). Press <b>Ok</b>
+again and you'll be returned to the Quick Form SmartGuide page in Figure 33.
+</p>
+
+<p><i>Figure 33. Changing the form used for the properties</i>
+</p>
+
+<p><img alt="fig33" src="images/fig33.gif" width="448" height="671"/>
+</p>
+
+<p>You need to select <i>each</i> property in turn, and change the quick form
+listed in the right-side List to Two-wayTextField. Make sure you do this for <i>each</i>
+property.
+</p>
+
+<p>When finished, press the <b>Next</b> button to continue.to the Quick Form
+Layout page, seen in Figure 34.
+</p>
+
+<p><i>Figure 34. Defining the Quick Form Layout</i>
+</p>
+
+<p><img alt="fig34" src="images/fig34.gif" width="448" height="671"/>
+</p>
+
+<p>Here's the tricky part. All those parameters.
+</p>
+
+<p><b>Number of columns per row. </b>Specifies how many <i>properties</i> appear
+in each row. Each property is represented by a Label/TextField pair. Because we
+want at most two properties in a row (for City/State and Country/PostalCode), we
+set this value to two.
+</p>
+
+<p><b>Layout style.</b> In this instance we have no choice. The resulting
+GridBagLayout will be placed into the parent, which has a BorderLayout. (The
+selected radio button should really be <b>GridBag into panel</b>, meaning that
+the Quick Form dialog creates a <i>new</i> panel for the form, and drops <i>that
+panel</i> into our selected parent. This is the action that is performed
+anyway.) If the selected parent container does not have a layout or is a
+GridBagLayout, you can select either choice:
+</p>
+<ul>
+  <li><b>GridBag into panel.</b> Quick Form creates a new panel to contain the
+    form and drops that new panel into the selected parent container.
+  </li>
+  <li><b>Free flow into parent.</b> Quick Form creates the form components and
+    drops them into the parent container. This option is only available if the
+    parent container has a null layout or a GridBagLayout. <i>Never select this
+    option for a null layout or the resulting form is absolutely positioned; it
+    will not resize when the user resizes the window</i> (note that you can
+    change the parent container's layout to GridBagLayout afterwards and the VCE
+    will attempt to set the constraints on all components. This usually works
+    well, but does not always have the effect you want.)
+  </li>
+</ul>
+
+<p><b>Properties to quick form.</b> On the previous page, you selected which
+properties to add to the quick form. On this page, you select the order and
+constraints for those properties.
+</p>
+<ul>
+  <li>First, use the <b>Up</b>/<b>Down</b> buttons to change the order of the
+    properties to <i>name</i>, <i>address</i>, <i>city</i>, <i>state</i>, <i>country</i>,
+    <i>postalCode</i>, <i>homePhone</i>, <i>businessPhone</i>. This defines the
+    left-to-right, top-to-bottom order of the displayed component pairs for each
+    property.
+  </li>
+  <li>Next, select each property and define their <b>Property quick form details</b>.
+    For all properties, we leave <b>Include label</b> selected (which adds a
+    Label for property) and set <b>Alignment</b> to <b>Left</b>. Set the <b>Label
+    text</b> and <b>Columns to span</b> as defined in the following table.
+
+    <table border="1" cellpadding="5">
+
+      <tr>
+        <td>
+
+          <p><b>Property</b></p></td>
+        <td>
+
+          <p><b>Label text</b></p></td>
+        <td>
+
+          <p><b>Columns to span</b></p></td>
+      </tr>
+
+      <tr>
+        <td><i>name</i></td>
+        <td>Name</td>
+        <td>2</td>
+      </tr>
+
+      <tr>
+        <td><i>address</i></td>
+        <td>Address</td>
+        <td>2</td>
+      </tr>
+
+      <tr>
+        <td><i>city</i></td>
+        <td>City</td>
+        <td>1</td>
+      </tr>
+
+      <tr>
+        <td><i>state</i></td>
+        <td>State/Province</td>
+        <td>1</td>
+      </tr>
+
+      <tr>
+        <td><i>country</i></td>
+        <td>Country</td>
+        <td>1</td>
+      </tr>
+
+      <tr>
+        <td><i>postalCode</i></td>
+        <td>Zip/Postal Code</td>
+        <td>1</td>
+      </tr>
+
+      <tr>
+        <td><i>homePhone</i></td>
+        <td>Home</td>
+        <td>2</td>
+      </tr>
+
+      <tr>
+        <td><i>businessPhone</i></td>
+        <td>Business</td>
+        <td>2</td>
+      </tr>
+    </table>
+
+  </li>
+  <li>Here's some quick details on what these details do. Note that the details
+    may vary slightly for different kinds of GUI beans used.
+    <ul>
+      <li><b>Bean used.</b> Shows the GUI bean you selected on the previous page
+        for the selected property.
+      </li>
+      <li><b>Include label.</b> Specifies if you want to have a Label component
+        appear above or to the left of the GUI bean.
+      </li>
+      <li><b>Alignment.</b> Does the label appear above (<b>Top</b>) or to the <b>Left</b>
+        of the GUI bean?
+      </li>
+      <li><b>Label text.</b> The text to appear in the label. This is initially
+        the name of the property, first-letter capitalized.
+      </li>
+      <li><b>Columns to span.</b> How many property columns should this
+        component span in the resulting layout. In this example. those with
+        value 1 give room for a second property in that row. Those with value 2
+        (the <b>Number of columns per row</b> value) take an entire row to
+        display.
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p><b>Preview.</b> Shows what the resulting form will look like. Note that this
+dialog is fairly narrow, and the resulting layout can expand based on the window
+size.
+</p>
+
+<p>Press the <b>Next</b> button to continue. The final page of the Quick Form
+dialog gives you a chance to save this form definition. This is useful if you
+want to create this same form again in other GUIs. Leave the options as it (no
+save) and press <b>Finish</b>. In general, it is a much better idea to create
+reusable classes like this delegate and drop an instance of the class in another
+GUI, rather than constantly recreate the form using Quick Form.
+</p>
+
+<p>The resulting form appears in Figure 35. Note that it resides in the NORTH
+part of the BorderLayout. The VCE treats NORTH as the first component of the
+BorderLayout, so when we generate the Quick Form its panel is dropped in the
+NORTH section.
+</p>
+
+<p><i>Figure 35. The resulting form</i>
+</p>
+
+<p><img alt="fig35" src="images/fig35.gif" width="640" height="480"/>
+</p>
+
+<p>Note the generated property-to-property connections. Each of these
+connections flows <i>from</i> the variable to the GUI. This means that any time
+the <i>variable</i> changes, all property values are passed to the GUI. Because
+we used a quick form that specified <i>textValueChanged</i> as the target event,
+bound text fields in the GUI, any time the text in the field changes, the data
+in the object that the variable points to is updated.
+</p>
+
+<p>There's one more thing we need to do to finish this delegate.
+</p>
+
+<table border="1" cellpadding="5">
+
+  <tr>
+    <td><i><b>Your Action! </b></i>Expose the variable by promoting
+      its <i>this</i> property.</td>
+  </tr>
+</table>
+
+<p>The final step in our AddressDataEntryFormUI delegate is to make the model
+variable accessible <i>outside</i> this bean. We do this by
+&quot;promoting&quot; it, as follows. Bring up the popup menu for the variable
+and choose <b>Promote Bean Feature...</b>, seen in Figure 36.
+</p>
+
+<p><i>Figure 36. Starting to promote a feature</i>
+</p>
+
+<p><img alt="fig36" src="images/fig36.gif" width="248" height="327"/>
+</p>
+
+<p>This option allows you to make a feature of a <i>contained bean</i> visible
+as a feature of the bean we're creating. In this case, we want to make the
+variable visible, so we promote its <i>this</i> property. We call the resulting
+property <i>model</i>. In the Promote features dialog, select <i>this</i> under
+the Property list, and then press the <b>&gt;&gt;</b> button, as shown in Figure
+37.
+</p>
+
+<p><i>Figure 37. Selecting this</i>
+</p>
+
+<p><img alt="fig37" src="images/fig37.gif" width="330" height="294"/>
+</p>
+
+<p>Then, double-click on the Promote Name for the <i>this</i> property and
+change it to <i>model</i>, as seen in Figure 38.
+</p>
+
+<p><i>Figure 38. Changing the promote name</i>
+</p>
+
+<p><img alt="fig38" src="images/fig38.gif" width="325" height="193"/>
+</p>
+
+<table border="1">
+
+  <tr>
+    <td><b><i>Note: It is very important that you do not
+      press Enter or simply click the Ok button when you are done changing the
+      name!</i></b> If the name you choose happens to conflict with a name you
+      chose in the visual design the promotion dialog will attempt to promote
+      the property, report an error, but still perform part of the promotion!
+
+      <p>After typing the new name, click on an empty part of the dialog, like
+      the spot where the cursor is in Figure 38. This validates the name before
+      ending the dialog.</p></td>
+  </tr>
+</table>
+
+<p>When finished, press the <b>Ok</b> button.
+</p>
+
+<p>Promoting the <i>this</i> feature creates getModel() and setModel() methods
+that directly access the <i>anAddressDataModel</i> variable. We can now access
+all the form data from the <i>outside</i> of the AddressDataEntryFormUI bean!
+</p>
+
+<p>Note that after creating the form, you can modify the GUI components as you
+like. For example, you could change the fonts of the labels to look as shown in
+Figure 39. The Quick Form is a one-time generation.
+</p>
+
+<p><b><i>Save the bean!</i> </b>You should really save the bean as often as you
+think about it in the VCE.
+</p>
+
+<p><i>Figure 39. Improving the look of the delegate.</i>
+</p>
+
+<p><img alt="fig39" src="images/fig39.gif" width="640" height="480"/>
+</p>
+
+<p>This is a very simple design with only property-to-property connections, and <i>any</i>
+AddressDataModel implementer can be plugged in from the outside.
+</p>
+
+
+<h2>A Delegate for AddressBook</h2>
+
+<table border="1" cellpadding="5">
+
+  <tr>
+    <td><i><b>Your Action! </b></i>Create the AddressBookUI class.</td>
+  </tr>
+</table>
+
+<p>Our AddressBookUI delegate will contain an instance of our
+AddressDataEntryFormUI delegate, as well as buttons to add and look up names. We
+start by creating AddressBookUI, extending java.awt.Panel. Note that we always
+use Panel (or JPanel for Swing GUIs) as the superclass of a delegate. This
+allows us to drop an instance of this delegate <i>inside</i> another delegate or
+application if we want to later. We are not limiting the GUI by using Frame,
+Dialog, or Window as the superclasss.
+</p>
+
+<p>Enter the class details as shown in Figures 40 and 41.
+</p>
+
+<p><i>Figure 40. Defining class AddressBookUI</i>
+</p>
+
+<p><img alt="fig40" src="images/fig40.gif" width="448" height="639"/>
+</p>
+
+<p><i>Figure 41. AddressBookUI imports and interfaces</i>
+</p>
+
+<p><img alt="fig41" src="images/fig41.gif" width="448" height="639"/>
+</p>
+
+<p>After you have created the class, open it to visual composition, and create
+the GUI seen in Figure 42. A description of what was done to create this GUI
+follows the diagram.
+</p>
+
+<p><b><i>Note: For the following VCE screenshots, I've turned off the toolbar
+and pane titles. </i></b>You can turn these off via <b>Window-&gt;Options-&gt;Appearance.</b>
+</p>
+
+<p><i>Figure 42. The Address Book user interface</i>
+</p>
+
+<p><img alt="fig42" src="images/fig42.gif" width="640" height="480"/>
+</p>
+
+<table border="1" cellpadding="5">
+
+  <tr>
+    <td><i><b>Your Action! </b></i>Create the AddressBookUI GUI.</td>
+  </tr>
+</table>
+
+<p>The layout of this GUI is as follows:
+</p>
+<ul>
+  <li><b>Panel</b> <b><i>BorderLayout</i></b> (<i>created by VisualAge as the
+    superclass)</i>
+    <ul>
+      <li><b>Panel</b> <b><i>BorderLayout</i></b> (<i>contentsPane</i>, created
+        by VisualAge)
+        <ul>
+          <li>CENTER=<b>AddressBookEntryFormUI</b></li>
+          <li>SOUTH=<b>Panel</b> <b><i>FlowLayout(CENTER)</i></b>
+            <ul>
+              <li><b>Button</b>s for Find and Add
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>Make sure you choose <b>Class</b> as the bean type when adding your
+AddressDataEntryFormUI! See Figure 43 for this option.
+</p>
+
+<p><i>Figure 43. Make sure you pick &quot;Class&quot; as the bean type -- we
+want an instance</i>
+</p>
+
+<p><img alt="fig43" src="images/fig43.gif" width="405" height="256"/>
+</p>
+
+<p><i><b>Save the bean!</b></i>
+</p>
+
+<table border="1" cellpadding="5">
+
+  <tr>
+    <td><i><b>Your Action! </b></i>Drop variables to represent the
+      address data and address book models.</td>
+  </tr>
+</table>
+
+<p>We need to be able to work with models for the overall address
+book (so we can add/remove addresses) and a specific address that we can display
+in the entry form. To do this, drop two variables in the VCE using the Choose
+Bean tool&nbsp; <img alt="choosebean" src="images/icon-choosebean.gif" style="vertical-align:middle" width="32" height="32"/>.
+Select the variables as specified in Figure 44 and 45. Make sure you select <b>Variable</b>
+as the Bean type.
+</p>
+
+<p><i>Figure 44. Adding the <b>anAddressDataModel</b> variable</i>
+</p>
+
+<p>&nbsp;<img alt="fig44" src="images/fig44.gif" width="405" height="256"/>
+</p>
+
+<p><i>Figure 45. Adding the <b>anAddressBookModel</b> variable</i>
+</p>
+
+<p>&nbsp;<img alt="fig45" src="images/fig45.gif" width="405" height="256"/>
+</p>
+
+<p>Add these variables to the design as shown in Figure 46.
+</p>
+
+<p><i>Figure 46. Placing the variables in the design area</i>
+</p>
+
+<p><img alt="fig46" src="images/fig46.gif" width="640" height="480"/>
+</p>
+
+<table border="1" cellpadding="5">
+
+  <tr>
+    <td><b><i>Your Action! </i></b>Connect the <i>anAddressDataModel</i>
+      variable to the <i>model</i> property of the entry form UI.</td>
+  </tr>
+</table>
+
+<p>We need to associate the <i>anAddressDataModel</i> variable with
+the AddressDataEntryFormUI. We want to set it up so that any time the variable
+changes, the <i>model</i> in the UI changes. We can do this using a
+property-to-property connection. Start this connection by bringing up the popup
+menu for <i>anAddressDataModel</i> and choosing <b>Connect...</b>, as seen in
+Figure 47.
+</p>
+
+<p><i>Figure 47. Starting a connection from anAddressDataModel</i>
+</p>
+
+<p><img alt="fig47" src="images/fig47.gif" width="248" height="297"/>
+</p>
+
+<p>This brings up the Start connection dialog shown in Figure 48.
+Select <b>Properties</b> at the top of the dialog and <i>this</i> as seen in
+Figure 48.
+</p>
+
+<p><i>Figure 48. Choosing the &quot;this&quot; property</i>
+</p>
+
+<p><img alt="fig48" src="images/fig48.gif" width="299" height="485"/>
+</p>
+
+<p>After selecting <i>this</i>, press <b>Ok</b> and the mouse will
+turn into a spider cursor. Move the spider cursor over the
+AddressDataEntryFormUI as shown in Figure 49.
+</p>
+
+<p><i>Figure 49. Choosing the target</i>
+</p>
+
+<p><img alt="fig49" src="images/fig49.gif" width="640" height="480"/>
+</p>
+
+<p>Click on the delegate and choose <b>Connectable Features...</b>,
+seen in Figure 50. Note that if we had made the promoted <i>model </i>property
+of the entry form delegate a preferred feature, we would see it directly in this
+popup menu. (In case you're wondering, you can do this by opening
+AddressDataEntryFormUI to the BeanInfo Editor, select <i>model</i> in the
+Features pane, change its preferred attribute in the bottom pane, then save the
+changes.)
+</p>
+
+<p><i>Figure 50. Selecting a target feature</i>
+</p>
+
+<p><img alt="fig50" src="images/fig50.gif" width="640" height="480"/>
+</p>
+
+<p>Selecting <b>Connectable Features...</b> displays the End connection dialog.
+Choose <i>model</i>, as shown in Figure 51.
+</p>
+
+<p><i>Figure 51. Choosing the model property</i>
+</p>
+
+<p><img alt="fig51" src="images/fig51.gif" width="299" height="485"/>
+</p>
+
+<p>Press <b>Ok </b>after choosing the <i>model</i> property, and you have
+completed the connection. The connection appears in Figure 52.
+</p>
+
+<p><i>Figure 52. The model connection</i>
+</p>
+
+<p><img alt="fig52" src="images/fig52.gif" width="640" height="480"/>
+</p>
+
+<table border="1" cellpadding="5">
+
+  <tr>
+    <td><b><i>Your Action! </i></b>Create the Find button
+      connections.</td>
+  </tr>
+</table>
+
+<p>We need to create the actions that the Find command should perform. These
+actions are pretty simple. The &quot;Find&quot; command should:
+</p>
+<ul>
+  <li>Call find() in the AddressBookModel
+    <ul>
+      <li>Pass in the name from the <i>name</i> property value in <i>anAddressDataModel</i>
+      </li>
+    </ul></li>
+  <li>Set <i>anAddressDataModel</i> to the result of the find method
+  </li>
+</ul>
+
+<p>To accomplish this, we create the following connections. First, choose <b>Connect-&gt;actionPerformed</b>
+from the Find button's popup menu as shown in Figure 53.
+</p>
+
+<p><i>Figure 53. Start the connection when the button is pressed (actionPerformed)</i>
+</p>
+
+<p><img alt="fig53" src="images/fig53.gif" width="386" height="285"/>
+</p>
+
+<p>&nbsp;Move the mouse to <i>anAddressBookModel</i>, as in Figure 54.
+</p>
+
+<p><i>Figure 54. Move to anAddressBookModel and click</i>
+</p>
+
+<p><img alt="fig54" src="images/fig54.gif" width="640" height="480"/>
+</p>
+
+<p>Click on <i>anAddressBookModel</i> and you'll see the End connection dialog
+in Figure 55.
+</p>
+
+<p><i>Figure 55. Choose the find() method</i>
+</p>
+
+<p><img alt="fig55" src="images/fig55.gif" width="299" height="485"/>
+</p>
+
+<p>&nbsp;Choose the find() method and press <b>Ok</b>. The resulting connection
+appears in Figure 56.
+</p>
+
+<p><i>Figure 56. The first connection - the dashed line means it's incomplete</i>
+</p>
+
+<p><img alt="fig56" src="images/fig56.gif" width="640" height="480"/>
+</p>
+
+<p>Note that the connection is dashed. This means it's incomplete. We need to
+provide a parameter to it, the name of the person to find in our phone book.
+</p>
+
+<p>Bring up the popup menu for the connection and choose <b>Connect-&gt;name</b>.
+Make sure the cursor is on the connection when you click or you won't see the
+right popup menu.
+</p>
+
+<p><i>Figure 57. Starting the parameter connection</i>
+</p>
+
+<p><img alt="fig57" src="images/fig57.gif" width="640" height="480"/>
+</p>
+
+<p>&nbsp;The cursor will once again turn into a spider. Move it to
+anAddressDataModel (Figure 58) and click.
+</p>
+
+<p><i>Figure 58. We'll get the parameter from anAddressDataModel</i>
+</p>
+
+<p><img alt="fig58" src="images/fig58.gif" width="640" height="480"/>
+</p>
+
+<p>&nbsp;Choose <i>name</i> from the list of properties in the End connection
+dialog (Figure 59).
+</p>
+
+<p><i>Figure 59. Choosing the name property as the parameter value</i>
+</p>
+
+<p><img alt="fig59" src="images/fig59.gif" width="299" height="485"/>
+</p>
+
+<p>&nbsp;The resulting connection appears in Figure 60.
+</p>
+
+<p><i>Figure 60. The parameter connection</i>
+</p>
+
+<p><img alt="fig60" src="images/fig60.gif" width="640" height="480"/>
+</p>
+
+<p>This connection grabs the name from whatever <i>anAddressDataModel</i> points
+to and passes it as the parameter to the find() method. This assumes that the
+variable has a value (we'll be setting that outside delegate). Note that the
+connection between <i>anAddressDataModel</i> and the entry form UI means that if
+the user types data in the Name field, that data is passed to the object that <i>anAddressDataModel</i>
+points to. This gives us access to the contents of the GUI, and we don't need to
+directly interact with the GUI to get the data!
+</p>
+
+<p>Finally, we need to take the result of the find() method and stick it in
+anAddressDataModel. To do this, bring up the popup menu for the green connection
+and choose <b>Connect-&gt;normalResult</b>. (This popup menu appears in Figure
+57.)
+</p>
+
+<p>Move the mouse to anAddressDataModel, click, and choose property <b>this</b>
+from the end connection dialog. This creates the connection shown in Figure 61.
+</p>
+
+<p><i>Figure 61. The complete find() processing</i>
+</p>
+
+<p><img alt="fig61" src="images/fig61.gif" width="640" height="480"/>
+</p>
+
+<p>The resulting connections mean &quot;when the Find button is pressed, set the
+<i>anAddressDataModel</i> variable to the result of finding the current name in
+the address book model&quot;.
+</p>
+
+<p>Remember that we defined our find() method as throwing an
+exception if the name was not found? You could attach the <i>exceptionOccurred</i>
+event of the connection to display a dialog stating &quot;not found&quot;. Right
+now, the exception will be ignored by handleException(). (A dialog is used in
+the example code if you are interested in how to do this.)
+</p>
+
+<table border="1" cellpadding="5">
+
+  <tr>
+    <td><b><i>Your Action! </i></b>Create the Add button
+      connections.</td>
+  </tr>
+</table>
+
+<p>Next we examine what we need for the Add button. When Add is pressed, pass
+the current value of <i>addAddressDataModel</i> to add() in <i>anAddressBookModel</i>.
+</p>
+
+<p>The Add button is very simple. Because we've walked through similar
+connections for the Find button, we will not present the screenshots.
+</p>
+
+<p>To create the Add button connections:
+</p>
+<ol>
+  <li>Choose <b>Connect-&gt;actionPerformed</b> from the Add button's popup
+    menu.
+  </li>
+  <li>Move the mouse to <i>anAddressBookModel</i> and click.
+  </li>
+  <li>Choose method add() from the end connection dialog.
+  </li>
+  <li>Choose <b>Connect-&gt;address</b> from the dashed connection's popup menu.
+  </li>
+  <li>Move the mouse to anAddressDataModel and click.
+  </li>
+  <li>Choose <i>this</i> from the list of properties. Make sure you have <b>Properties</b>
+    checked at the top of the end connections dialog.
+  </li>
+</ol>
+
+<p>The resulting connections look as shown in Figure 62. Note that I moved some
+connections slightly to make them easier to see.
+</p>
+
+<p><i>Figure 62. All the connections for the AddressBookUI</i>
+</p>
+
+<p><img alt="fig62" src="images/fig62.gif" width="640" height="480"/>
+</p>
+
+<table border="1" cellpadding="5">
+
+  <tr>
+    <td><b><i>Your Action! </i></b>Expose the variables.</td>
+  </tr>
+</table>
+
+<p>The last thing we need to do with this delegate is expose the variables so we
+can set them from the outside. We do this by promoting them, just as we did to
+create the <i>model</i> property in the AddressDataEntryFormUI. Figures 36-38
+above show use of the feature promotion dialog. Here we want to promote the <i>this</i>
+property of each variable. Promote the <i>this</i> property of <i>anAddressBookModel</i>
+as <i>addressBookModel</i>, and the <i>this</i> property of <i>anAddressDataModel</i>
+as <i>addressDataModel</i>.
+</p>
+
+<p>When finished, <b><i>save the bean</i></b>!
+</p>
+
+
+<h2>Connecting as an Application</h2>
+
+<p>Creating an application now becomes an exercise in connecting models and
+delegates. Visual applications usually subclass Frame or Window (or their Swing
+equivalents). Usually the Application's visual design is simply dropping one or
+more UIs, and one or more models, then connecting them together. This
+application is no exception.
+</p>
+
+<p>Start by creating class PhoneApplication1 as shown in Figures 63 and 64.
+</p>
+
+<p>&nbsp;<i>Figure 63. Starting the PhoneApplication1 class definition</i>
+</p>
+
+<p><img alt="fig63" src="images/fig63.gif" width="448" height="639"/>
+</p>
+
+<p><i>Figure 64. Imports and interfaces for PhoneApplication1</i>
+</p>
+
+<p><img alt="fig64" src="images/fig64.gif" width="448" height="639"/>
+</p>
+
+<p>When you press <b>Finish</b>, the VCE opens to design PhoneApplication1.
+</p>
+
+<p>To visually design the application:
+</p>
+<ol>
+  <li>Change the <i>ContentsPane</i>'s layout to GridLayout (the ContentsPane is
+    the panel in the center of the main frame), and drop an <i>instance</i> of
+    AddressBookUI in it. Make sure you select <b>Class</b> as the Bean Type when
+    choosing the AddressBookUI bean, as we want an <i>instance</i>, not a <i>variable</i>.
+  </li>
+  <li>Drop two <i>instances</i>, one of type SimpleAddressData and one of type
+    HashAddressBook in an empty part of the design area.
+  </li>
+  <li><b>Connect-&gt;this</b> from the SimpleAddressData instance to the <i>addressDataModel</i>
+    property of the AddressBookUI.
+  </li>
+  <li><b>Connect-&gt;this</b> from the HashAddressBook instance to the <i>addressBookModel</i>
+    property of the AddressBookUI.
+  </li>
+</ol>
+
+<p>The results appear in Figure 65.
+</p>
+
+<p><i>Figure 65. A finished phone book application</i>
+</p>
+
+<p><img alt="fig65" src="images/fig65.gif" width="640" height="480"/>
+</p>
+
+<p><i><b>Notes:</b></i>
+</p>
+<ul>
+  <li>
+
+    <p>To make the GUI look nicer, you can set the background color
+    of the overall panel to SystemColor.control via its property sheet.</p>
+  </li>
+  <li>
+
+    <p>When setting the background color, the TextFields inherit
+    that color (they looked gray), so I opened AddressDataEntryFormUI to the VCE
+    and set all of its TextFields' background colors to SystemColor.window.</p>
+  </li>
+</ul>
+
+<p>The results of these changes appear in Figure 66.
+</p>
+
+<p><i>Figure 66. The application after changing some background
+colors</i>
+</p>
+
+<p><img alt="fig66" src="images/fig66.gif" width="640" height="480"/>
+</p>
+
+
+<h2>Running the Application</h2>
+
+<table border="1" cellpadding="5">
+
+  <tr>
+    <td><b><i>Your Action! </i></b>Run the application!</td>
+  </tr>
+</table>
+
+<p>Finally, we're ready to run. Watch out though! It doesn't <i>quite</i> work
+right...
+</p>
+
+<p>Try adding a couple sets of address data, pressing <b>Add</b> after each.
+Then type in an existing name and press <b>Find</b>.
+</p>
+
+<p>Doesn't seem to work, does it?
+</p>
+
+<p>The problem lies in our implementation of the model. We're using a Hashtable
+to hold the data. Let's think about what the hash table is doing.
+</p>
+
+<p>We start off by creating an instance of SimpleAddressData. That's the
+simpleAddressData object in our PhoneApplication. We pass that to the
+AddressBookUI, which passes it to the AddressDataEntryFormUI. When the user
+types data into the form, that data is sent to the SimpleAddressData instance.
+So far, our data looks as shown in Figure 67.
+</p>
+
+<p><i>Figure 67. After typing in the data</i>
+</p>
+
+<p><img alt="fig67" src="images/fig67.gif" width="472" height="223"/>
+</p>
+
+<p>When the user presses the Add button, the data is added to the Hashtable,
+keyed by the name. Our data now looks as shown in Figure 68.
+</p>
+
+<p><i>Figure 68. After pressing the Add button</i>
+</p>
+
+<p><img alt="fig68" src="images/fig68.gif" width="471" height="314"/>
+</p>
+
+<p>Note that the Hashtable keeps track of the key (&quot;Scott&quot;) and a
+pointer to the value. (Technically the key is just a pointer to some Object, in
+this case a String, but that's not important here.)
+</p>
+
+<p>Now the user types the next set of address data, but do not press Add yet.
+Notice what the diagram looks like, seen in Figure 69.
+</p>
+
+<p><i>Figure 69. After typing new data</i>
+</p>
+
+<p><img alt="fig69" src="images/fig69.gif" width="432" height="318"/>
+</p>
+
+<p>Notice the problem so far. We've actually changed the object that
+&quot;Scott&quot; was keying in the Hashtable. After the user presses Add again,
+we see the resulting data state in Figure 70.
+</p>
+
+<p><i>Figure 70. Two pieces of data in the Hashtable</i>
+</p>
+
+<p><img alt="fig70" src="images/fig70.gif" width="434" height="319"/>
+</p>
+
+<p>The problem is that we only have a single piece of data, no matter how many
+keys we assign to it in the Hashtable. If we look up Scott, we find the
+last-entered data, whatever that was.
+</p>
+
+<p><b><i>This is not a problem in the MVC paradigm; it is a problem in the
+implementation of our model!</i></b>
+</p>
+
+<p>I like to use this example because it makes us think about different kinds of
+models. Some models directly <i>use</i> the data passed into them, as this one
+clearly does. Other models extract the data and store it somewhere else, perhaps
+in a database or across a network.
+</p>
+
+<p>You need to consider these types of problems when designing your model.
+Because of the differences between models, we do not want to build this
+knowledge into the model interface. We want to treat this situation as an
+implementation detail of a specific concrete model. Other models may not have
+this type of situation.
+</p>
+
+
+<h2>Fixing the Problem</h2>
+
+<p>There are several approaches you can take to solve this problem. We'll
+examine three approaches, starting with &quot;the wrong way&quot;.
+</p>
+
+<p>At the heart of all solutions to this problem is that we need to make a copy
+of the data. If you think about it carefully, you'll see that we actually need
+to copy the data when adding <i>and </i>when finding. If we return the found
+record and the user types in the next name to find, it would overwrite the name
+in the old record!
+</p>
+
+
+<h3>Adding a Simple Copy to the add() Method</h3>
+
+<p>The first simple approach would be to just make a copy of the data. We can
+modify our add() method in HashAddressBook as follows:
+</p>
+
 <pre>public void add(AddressDataModel address) {
 
   if (records.get(address.getName()) == null)
@@ -2130,29 +2130,29 @@ modify our add() method in HashAddressBook as follows:
 
   firePropertyChange(&quot;addresses&quot;,null, getAddresses());
 
-}</pre>
-
-<p>The find() method would perform a similar copy, returning a fresh copy of the
-retrieved data.
-</p>
-
-<p>Seems like an easy fix, but it's dead wrong. Think about the data types. Any
-AddressBookModel is supposed to store <i>any</i> type of AddressDataModel. In
-this naive patch, we <i>assume</i> that we should be storing SimpleAddressData
-objects. This is <i>not</i> an acceptable solution.
-</p>
-
-
-<h3>Using the Prototype Pattern</h3>
-
-<p>A really nifty alternative is to employ the Prototype pattern to make the
-copy. A prototype is an object that can make a copy of itself. The copy is a new
-object <i>of the same type</i> as the prototype, and contains a copy of the data
-in the prototype. In Java, we would use the Cloneable interface to represent a
-prototype, and call the clone() method in that interface to make the copy. We
-could use this in the add() method as follows:
-</p>
-
+}</pre>
+
+<p>The find() method would perform a similar copy, returning a fresh copy of the
+retrieved data.
+</p>
+
+<p>Seems like an easy fix, but it's dead wrong. Think about the data types. Any
+AddressBookModel is supposed to store <i>any</i> type of AddressDataModel. In
+this naive patch, we <i>assume</i> that we should be storing SimpleAddressData
+objects. This is <i>not</i> an acceptable solution.
+</p>
+
+
+<h3>Using the Prototype Pattern</h3>
+
+<p>A really nifty alternative is to employ the Prototype pattern to make the
+copy. A prototype is an object that can make a copy of itself. The copy is a new
+object <i>of the same type</i> as the prototype, and contains a copy of the data
+in the prototype. In Java, we would use the Cloneable interface to represent a
+prototype, and call the clone() method in that interface to make the copy. We
+could use this in the add() method as follows:
+</p>
+
 <pre>public void add(AddressDataModel address) {
 
   if (records.get(address.getName()) == null)
@@ -2165,130 +2165,130 @@ could use this in the add() method as follows:
 
   firePropertyChange(&quot;addresses&quot;,null, getAddresses());
 
-}</pre>
-
-<p>This is obviously much less code here, and making the address data Cloneable
-is an easy task (the Java VM provides support for the actual bitwise shallow
-copy). However, look at <i>what </i>needs to be Cloneable: AddressDataModel.
-</p>
-
-<p>This is not a good solution, because we're <i>requiring</i> all
-AddressDataModels to be Cloneable,&nbsp; <i>just</i> so this <i>one</i> concrete
-address book model can do its job.
-</p>
-
-<p>Once again, not an acceptable solution.
-</p>
-
-
-<h3>Using a Factory Model</h3>
-
-<p>Fortunately, an acceptable alternative is fairly easy. We define an
-additional object called a Factory. (Note that this is unrelated to Object
-Factory in the VCE). This Factory creates instances of a specific class, but
-follows a nice generic interface for flexibility. We start by defining an
-interface for this Factory. We give this interface two methods: one that creates
-an empty instance of a class, and one that creates a copy of an existing
-instance.
-</p>
-
-<table border="1" cellpadding="5">
-
-  <tr>
-    <td><b><i>Your Action! </i></b>Define the
-      AddressDataFactoryModel interface.</td>
-  </tr>
-</table>
-
-<p>Define this interface using the Create Interface SmartGuide. Press the
-&quot;I&quot; button on the toolbar to define the interface and fill in the data
-shown in Figures 71 and 72.
-</p>
-
-<p><i>Figure 71. Starting the AddressDataFactoryModel interface definition</i>
-</p>
-
-<p><img alt="fig71" src="images/fig71.gif" width="448" height="629"/>
-</p>
-
-<p><i>Figure 72. Specifying the extended interfaces for AddressDataFactoryModel</i>
-</p>
-
-<p><img alt="fig72" src="images/fig72.gif" width="448" height="629"/>
-</p>
-
-<p>Add the following method declarations to the interface (you can type them
-directly in the interface definition.)
-</p>
-
+}</pre>
+
+<p>This is obviously much less code here, and making the address data Cloneable
+is an easy task (the Java VM provides support for the actual bitwise shallow
+copy). However, look at <i>what </i>needs to be Cloneable: AddressDataModel.
+</p>
+
+<p>This is not a good solution, because we're <i>requiring</i> all
+AddressDataModels to be Cloneable,&nbsp; <i>just</i> so this <i>one</i> concrete
+address book model can do its job.
+</p>
+
+<p>Once again, not an acceptable solution.
+</p>
+
+
+<h3>Using a Factory Model</h3>
+
+<p>Fortunately, an acceptable alternative is fairly easy. We define an
+additional object called a Factory. (Note that this is unrelated to Object
+Factory in the VCE). This Factory creates instances of a specific class, but
+follows a nice generic interface for flexibility. We start by defining an
+interface for this Factory. We give this interface two methods: one that creates
+an empty instance of a class, and one that creates a copy of an existing
+instance.
+</p>
+
+<table border="1" cellpadding="5">
+
+  <tr>
+    <td><b><i>Your Action! </i></b>Define the
+      AddressDataFactoryModel interface.</td>
+  </tr>
+</table>
+
+<p>Define this interface using the Create Interface SmartGuide. Press the
+&quot;I&quot; button on the toolbar to define the interface and fill in the data
+shown in Figures 71 and 72.
+</p>
+
+<p><i>Figure 71. Starting the AddressDataFactoryModel interface definition</i>
+</p>
+
+<p><img alt="fig71" src="images/fig71.gif" width="448" height="629"/>
+</p>
+
+<p><i>Figure 72. Specifying the extended interfaces for AddressDataFactoryModel</i>
+</p>
+
+<p><img alt="fig72" src="images/fig72.gif" width="448" height="629"/>
+</p>
+
+<p>Add the following method declarations to the interface (you can type them
+directly in the interface definition.)
+</p>
+
 <pre>public AddressDataModel create();
 
-public AddressDataModel create(AddressDataModel address);</pre>
-
-<p>Note that we use the model type. The generic concept of the
-AddressDataFactoryModel is to create <i>any</i> type of AddressDataModel.
-Specific implementations of AddressDataFactoryModel will create specific types
-of AddressDataModels.
-</p>
-
-<table border="1" cellpadding="5">
-
-  <tr>
-    <td><b><i>Your Action! </i></b>Define a concrete
-      SimpleAddressDataFactory class.</td>
-  </tr>
-</table>
-
-<p>Now we create a concrete implementation of the factory model. Create class
-SimpleAddressDataFactory as shown in Figures 73 and 73.
-</p>
-
-<p><i>Figure 73. Start creating SimpleAddressDataFactory</i>
-</p>
-
-<p><img alt="fig73" src="images/fig73.gif" width="448" height="639"/>
-</p>
-
-<p><b><i>Note:</i></b> Make sure you don't specify &quot;Compose the class
-visually&quot;.
-</p>
-
-<p><i>Figure 74. Specifying interfaces to implement and imports for
-SimpleAddressDataFactory</i>
-</p>
-
-<p><img alt="fig74" src="images/fig74.gif" width="448" height="639"/>
-</p>
-
-<p>A few things to note:
-</p>
-<ul>
-  <li>We don't need to specify implements Serializable, as the implemented
-    interface does that for us. (It doesn't hurt to add it if you would like.)
-  </li>
-  <li>The <b>Methods which must be implemented</b> box causes VisualAge to
-    create stubs for our two create() methods. Now all we need to do is to fill
-    in the code.
-  </li>
-</ul>
-
-<table border="1" cellpadding="5">
-
-  <tr>
-    <td><b><i>Your Action! </i></b>Fill in the create() details.</td>
-  </tr>
-</table>
-
-<p>Edit the two create methods in SimpleAddressDataFactory to look like the
-following:
-</p>
-
+public AddressDataModel create(AddressDataModel address);</pre>
+
+<p>Note that we use the model type. The generic concept of the
+AddressDataFactoryModel is to create <i>any</i> type of AddressDataModel.
+Specific implementations of AddressDataFactoryModel will create specific types
+of AddressDataModels.
+</p>
+
+<table border="1" cellpadding="5">
+
+  <tr>
+    <td><b><i>Your Action! </i></b>Define a concrete
+      SimpleAddressDataFactory class.</td>
+  </tr>
+</table>
+
+<p>Now we create a concrete implementation of the factory model. Create class
+SimpleAddressDataFactory as shown in Figures 73 and 73.
+</p>
+
+<p><i>Figure 73. Start creating SimpleAddressDataFactory</i>
+</p>
+
+<p><img alt="fig73" src="images/fig73.gif" width="448" height="639"/>
+</p>
+
+<p><b><i>Note:</i></b> Make sure you don't specify &quot;Compose the class
+visually&quot;.
+</p>
+
+<p><i>Figure 74. Specifying interfaces to implement and imports for
+SimpleAddressDataFactory</i>
+</p>
+
+<p><img alt="fig74" src="images/fig74.gif" width="448" height="639"/>
+</p>
+
+<p>A few things to note:
+</p>
+<ul>
+  <li>We don't need to specify implements Serializable, as the implemented
+    interface does that for us. (It doesn't hurt to add it if you would like.)
+  </li>
+  <li>The <b>Methods which must be implemented</b> box causes VisualAge to
+    create stubs for our two create() methods. Now all we need to do is to fill
+    in the code.
+  </li>
+</ul>
+
+<table border="1" cellpadding="5">
+
+  <tr>
+    <td><b><i>Your Action! </i></b>Fill in the create() details.</td>
+  </tr>
+</table>
+
+<p>Edit the two create methods in SimpleAddressDataFactory to look like the
+following:
+</p>
+
 <pre>public AddressDataModel create() {
 
   return new SimpleAddressData();
 
-}</pre>
-
+}</pre>
+
 <pre>public AddressDataModel create(AddressDataModel address) {
 
   SimpleAddressData copy = new SimpleAddressData();
@@ -2311,38 +2311,38 @@ following:
 
   return copy;
 
-}</pre>
-
-<p>Although this is a very simple class, it provides us total flexibility in our
-HashAddressBook. And speaking of our HashAddressBook.
-</p>
-
-<table border="1" cellpadding="5">
-
-  <tr>
-    <td><b><i>Your Action! </i></b>Add a addressDataFactory
-      property to HashAddressBook.</td>
-  </tr>
-</table>
-
-<p>Next we need to add a property called <i>addressDataFactory</i> to our
-HashAddressBook class. This property is of type AddressDataFactoryModel, and is
-readable, writeable, bound, and preferred. Use the BeanInfo Editor to add this
-property.
-</p>
-
-<table border="1" cellpadding="5">
-
-  <tr>
-    <td><i><b>Your Action! </b></i>Update add() and find() in
-      HashAddressBook.</td>
-  </tr>
-</table>
-
-<p>Next, we can update the add() and find() method in HashAddressBook to use the
-factory model. Updated code is in bold text.
-</p>
-
+}</pre>
+
+<p>Although this is a very simple class, it provides us total flexibility in our
+HashAddressBook. And speaking of our HashAddressBook.
+</p>
+
+<table border="1" cellpadding="5">
+
+  <tr>
+    <td><b><i>Your Action! </i></b>Add a addressDataFactory
+      property to HashAddressBook.</td>
+  </tr>
+</table>
+
+<p>Next we need to add a property called <i>addressDataFactory</i> to our
+HashAddressBook class. This property is of type AddressDataFactoryModel, and is
+readable, writeable, bound, and preferred. Use the BeanInfo Editor to add this
+property.
+</p>
+
+<table border="1" cellpadding="5">
+
+  <tr>
+    <td><i><b>Your Action! </b></i>Update add() and find() in
+      HashAddressBook.</td>
+  </tr>
+</table>
+
+<p>Next, we can update the add() and find() method in HashAddressBook to use the
+factory model. Updated code is in bold text.
+</p>
+
 <pre>public void add(AddressDataModel address) {
 
   if (records.get(address.getName()) == null)
@@ -2357,8 +2357,8 @@ factory model. Updated code is in bold text.
 
   firePropertyChange(&quot;addresses&quot;,null, getAddresses());
 
-}</pre>
-
+}</pre>
+
 <pre>public AddressDataModel find(String name) {
 
   AddressDataModel data = (AddressDataModel)records.get(name);
@@ -2369,107 +2369,107 @@ factory model. Updated code is in bold text.
 
   return <b>getAddressDataFactory().create(data)</b>;
 
-}</pre>
-
-<table border="1" cellpadding="5">
-
-  <tr>
-    <td><b><i>Your Action! </i></b>Add a concrete factory to the
-      HashAddressBook in the application.</td>
-  </tr>
-</table>
-
-<p>To finish our fix:
-</p>
-<ol>
-  <li>Open PhoneApplication1 to the VCE.
-  </li>
-  <li>Drop an <i>instance</i> of SimpleAddressDataFactory in an empty spot in
-    the design area.
-  </li>
-  <li><b>Connect-&gt;this</b> from the SimpleAddressDataFactory to the <i>addressDataFactory</i>
-    property in the HashAddressBook
-  </li>
-</ol>
-
-<p>The resulting visual design appears in Figure 75.
-</p>
-
-<p><i>Figure 75. Adding SimpleAddressDataFactory to the application</i>
-</p>
-
-<p><img alt="fig75" src="images/fig75.gif" width="640" height="480"/>
-</p>
-
-<p>Overall, this was a very small change to provide the fix in a very flexible
-manner.
-</p>
-
-
-<h2>Running it Again...</h2>
-
-<table border="1" cellpadding="5">
-
-  <tr>
-    <td><b><i>Your Action! </i></b>Run PhoneApplication1 again!</td>
-  </tr>
-</table>
-
-<p>You should see appropriate results when running the application. Add several
-items, and when you look up any of them, the fields are properly found.
-</p>
-
-
-<h2>Adding Another Delegates</h2>
-
-<p>Suppose you want to add a window that displays a list of everyone in the
-phone book. You can simply plug in <i>another </i>delegate! This is where some
-of the power of MVC really starts to show.
-</p>
-
-<table border="1" cellpadding="5">
-
-  <tr>
-    <td><i><b>Your Action! </b></i>Create a phone list UI.</td>
-  </tr>
-</table>
-
-<p>Create a class named AddressBookListUI, as shown in Figures 76 and 77.
-</p>
-
-<p><i>Figure 76. Starting to define AddressBookListUI</i>
-</p>
-
-<p><img alt="fig76" src="images/fig76.gif" width="448" height="639"/>
-</p>
-
-<p><i>Figure 77. Setting imports and interfaces for AddressBookListUI</i>
-</p>
-
-<p><img alt="fig77" src="images/fig77.gif" width="448" height="639"/>
-</p>
-
-<p>After pressing <b>Finish</b>, VisualAge opens the VCE with the new class.
-</p>
-
-<p>To create this delegate:
-</p>
-<ol>
-  <li>Drop a <i>variable</i> of type AddressBookModel in the VCE and call it <i>anAddressBookModel</i>.
-  </li>
-  <li>Choose <b>Connect...</b> from the variable's popup menu.
-  </li>
-  <li>Select <b>Event</b> at the top of the Start connection dialog, and choose <i>addresses.</i>
-    This means &quot;perform this connection when the addresses property
-    changes.&quot;
-  </li>
-  <li>Click on any empty spot in the VCE design area and choose <b>Event to
-    Code...</b>
-  </li>
-  <li>Modify the code in the Event to Code dialog to look as follows. This
-    clears the current list and adds all items to it. This is not terribly
-    efficient, but easy to do for an example.
-
+}</pre>
+
+<table border="1" cellpadding="5">
+
+  <tr>
+    <td><b><i>Your Action! </i></b>Add a concrete factory to the
+      HashAddressBook in the application.</td>
+  </tr>
+</table>
+
+<p>To finish our fix:
+</p>
+<ol>
+  <li>Open PhoneApplication1 to the VCE.
+  </li>
+  <li>Drop an <i>instance</i> of SimpleAddressDataFactory in an empty spot in
+    the design area.
+  </li>
+  <li><b>Connect-&gt;this</b> from the SimpleAddressDataFactory to the <i>addressDataFactory</i>
+    property in the HashAddressBook
+  </li>
+</ol>
+
+<p>The resulting visual design appears in Figure 75.
+</p>
+
+<p><i>Figure 75. Adding SimpleAddressDataFactory to the application</i>
+</p>
+
+<p><img alt="fig75" src="images/fig75.gif" width="640" height="480"/>
+</p>
+
+<p>Overall, this was a very small change to provide the fix in a very flexible
+manner.
+</p>
+
+
+<h2>Running it Again...</h2>
+
+<table border="1" cellpadding="5">
+
+  <tr>
+    <td><b><i>Your Action! </i></b>Run PhoneApplication1 again!</td>
+  </tr>
+</table>
+
+<p>You should see appropriate results when running the application. Add several
+items, and when you look up any of them, the fields are properly found.
+</p>
+
+
+<h2>Adding Another Delegates</h2>
+
+<p>Suppose you want to add a window that displays a list of everyone in the
+phone book. You can simply plug in <i>another </i>delegate! This is where some
+of the power of MVC really starts to show.
+</p>
+
+<table border="1" cellpadding="5">
+
+  <tr>
+    <td><i><b>Your Action! </b></i>Create a phone list UI.</td>
+  </tr>
+</table>
+
+<p>Create a class named AddressBookListUI, as shown in Figures 76 and 77.
+</p>
+
+<p><i>Figure 76. Starting to define AddressBookListUI</i>
+</p>
+
+<p><img alt="fig76" src="images/fig76.gif" width="448" height="639"/>
+</p>
+
+<p><i>Figure 77. Setting imports and interfaces for AddressBookListUI</i>
+</p>
+
+<p><img alt="fig77" src="images/fig77.gif" width="448" height="639"/>
+</p>
+
+<p>After pressing <b>Finish</b>, VisualAge opens the VCE with the new class.
+</p>
+
+<p>To create this delegate:
+</p>
+<ol>
+  <li>Drop a <i>variable</i> of type AddressBookModel in the VCE and call it <i>anAddressBookModel</i>.
+  </li>
+  <li>Choose <b>Connect...</b> from the variable's popup menu.
+  </li>
+  <li>Select <b>Event</b> at the top of the Start connection dialog, and choose <i>addresses.</i>
+    This means &quot;perform this connection when the addresses property
+    changes.&quot;
+  </li>
+  <li>Click on any empty spot in the VCE design area and choose <b>Event to
+    Code...</b>
+  </li>
+  <li>Modify the code in the Event to Code dialog to look as follows. This
+    clears the current list and adds all items to it. This is not terribly
+    efficient, but easy to do for an example.
+
     <pre>public void loadList(AddressDataModel[] addresses, List list) {
 
   list.removeAll();
@@ -2480,165 +2480,165 @@ of the power of MVC really starts to show.
 
     list.addItem(addresses[i].getName());
 
-}</pre>
-
-  </li>
-  <li>Make sure <b>Pass event data</b> is checked in the Event to code dialog
-    and press <b>Ok</b> to exit the dialog. If asked to save the method pick
-    &quot;Yes&quot;.
-  </li>
-  <li>Choose <b>Connect-&gt;list</b> from the dashed connection and select
-    property <i>this</i> in the List component (the List component is the
-    rectangle in the VCE.)
-  </li>
-  <li>Promote the <i>this</i> property of the <i>variable</i> as <i>addressBookModel</i>.
-  </li>
-</ol>
-
-<p>That's it! This is a very simple view-only delegate.
-</p>
-
-
-<h3>Using the New Delegate</h3>
-
-<table border="1" cellpadding="5">
-
-  <tr>
-    <td><b><i>Your Action! </i></b>Make a copy of
-      PhoneApplication1.</td>
-  </tr>
-</table>
-
-<p>To use this delegate, we simply need to drop it in an application and wire it
-to a model. Rather than modify our original application, let's make a copy of
-it. Select Reorganize-&gt;Copy from class PhoneApplication1's popup menu in the
-Workbench (or some other browser). Choose the same package but rename the copy
-PhoneApplication2.
-</p>
-
-<p>Note that you will get an error in the copy. Edit the class definition for
-PhoneApplication2 and change the PhoneApplication1 reference to
-PhoneApplication2. (If you are not using the &quot;one inner class for all
-events, the error may appear in a different location, like in the
-initConnections() method.)
-</p>
-
-<p>Also -- <i>delete the main() method in the copy</i>. The VCE will regenerate
-a correct one when you save the class. If you don't do this, you will end up
-running the PhoneApplication1 GUI when you run PhoneApplication2.
-</p>
-
-<table border="1" cellpadding="5">
-
-  <tr>
-    <td><b><i>Your Action! </i></b>Drop in the new UI and wire it.</td>
-  </tr>
-</table>
-
-<p>Open your copy to the VCE. Then
-</p>
-<ol>
-  <li>Drop an instance of AddressBookListUI in the GUI (place it in the
-    GridLayout to the left of the entry form UI)
-  </li>
-  <li><b>Connect-&gt;this</b> from the HashAddressBook to the <i>addressBookModel</i>
-    property of the AddressBookListUI.
-  </li>
-</ol>
-
-<p>The resulting design appears in Figure 78.
-</p>
-
-<p><i>Figure 78. PhoneApplication2</i>
-</p>
-
-<p><img alt="fig78" src="images/fig78.gif" width="640" height="480"/>
-</p>
-
-<table border="1" cellpadding="5">
-
-  <tr>
-    <td><b><i>Your Action! </i></b>Run PhoneApplication2!</td>
-  </tr>
-</table>
-
-<p>When you run PhoneApplication2, any phone entries that you add will also
-appear in the list on the left. Note that selecting items in the list <i>will
-not</i> cause them to be displayed in the entry form. In the second article in
-this series we discuss how to handle selections.</p>
-
-<p>Also note that the list is not sorted. The second article also shows how you
-can add a filtering model to sort the results.
-</p>
-
-
-<h2>Changing the Model</h2>
-
-<p>You can plug in new models or modify the old model anytime you wish, <i>without
-affecting the GUIs</i>! For example, if you decide to store the address data in
-a database (a good idea, as non-persistent address data isn't terribly useful),
-you could create a new model that talks to the database and simply plug it in.</p>
-
-
-<h2>In the Next Article...</h2>
-
-<p><a href="mvc1.htm">Part 2 of this series</a> will discuss some advanced MVC techniques, including:
-</p>
-<ul>
-  <li><b>Using an alternate model to limit or extend the behavior of an
-    application</b> - Alternate models can be a great way to provide a
-    reduced-function demonstration version of your application.</li>
-  <li><b>Defining a model as a proxy for another model</b> - If your data exists
-    on another machine, you can define a model to hide the necessary networking
-    from your delegate.</li>
-  <li><b>Defining a delegate as a proxy for other delegates</b> - Similar to
-    allowing the data to exist on another platform, you can define a delegate
-    that can send view information to the &quot;real view&quot; on another
-    platform. The model never knows it's networking.</li>
-  <li><b>Defining a model to filter another model, or combine multiple models</b>
-    - One of the best benefits of MVC is the ability to define a model that
-    simply filters another model. Instead of the delegate performing extra work
-    to reduce the amount of data, you simply never pass that data to the
-    delegate. Similarly, instead of a delegate tracking multiple models, you can
-    define a model that combines data from multiple models -- the delegate
-    always thinks it's viewing a single model.</li>
-  <li><b>Providing a common selection model to allow delegates to share a
-    selected item in the model</b> - Sometimes it is desirable to have two
-    delegates display the same selection in a model, while other times you may
-    want to display two separate selections. Providing a separate selection
-    model allows you to determine how your application will behave.
-  </li>
-</ul>
-
-
-<h2>Conclusion</h2>
-
-<p>GUI builder tools have helped steer developers away from good separation of
-GUI and business logic, but fortunately it is possible to still use the MVC
-paradigm, which provides an excellent way to improve the maintainability and
-flexibility of your applications. It just takes a little extra planning and
-conscious separation of tasks.</p>
-
-<p>VisualAge for Java's Visual Composition Editor provides all the tools
-necessary to make this separation easy, using variables, bound properties, and
-property promotion to keep model details out of the GUI design process. While
-it's a little less direct than traditional &quot;GUI building&quot;, it's the
-key to a cleaner design.</p>
-
-<p>The Separating GUI from business logic helps reduce errors when adding
-features, and lets you easily change either the GUI or the business logic
-without affecting the other. Using MVC may seem like extra work during
-development, but can really save time and prevent trouble during program
-maintenance and debugging.</p>
-
-
-<h4>Downloads</h4>
-<ul>
-<li><a href="mvc1_dat.zip">Zipped VAJ respository of sample code</a></li>
-<li><a href="mvc1.zip">Normal zip of sample code</a></li>
-</ul>
-
-
+}</pre>
+
+  </li>
+  <li>Make sure <b>Pass event data</b> is checked in the Event to code dialog
+    and press <b>Ok</b> to exit the dialog. If asked to save the method pick
+    &quot;Yes&quot;.
+  </li>
+  <li>Choose <b>Connect-&gt;list</b> from the dashed connection and select
+    property <i>this</i> in the List component (the List component is the
+    rectangle in the VCE.)
+  </li>
+  <li>Promote the <i>this</i> property of the <i>variable</i> as <i>addressBookModel</i>.
+  </li>
+</ol>
+
+<p>That's it! This is a very simple view-only delegate.
+</p>
+
+
+<h3>Using the New Delegate</h3>
+
+<table border="1" cellpadding="5">
+
+  <tr>
+    <td><b><i>Your Action! </i></b>Make a copy of
+      PhoneApplication1.</td>
+  </tr>
+</table>
+
+<p>To use this delegate, we simply need to drop it in an application and wire it
+to a model. Rather than modify our original application, let's make a copy of
+it. Select Reorganize-&gt;Copy from class PhoneApplication1's popup menu in the
+Workbench (or some other browser). Choose the same package but rename the copy
+PhoneApplication2.
+</p>
+
+<p>Note that you will get an error in the copy. Edit the class definition for
+PhoneApplication2 and change the PhoneApplication1 reference to
+PhoneApplication2. (If you are not using the &quot;one inner class for all
+events, the error may appear in a different location, like in the
+initConnections() method.)
+</p>
+
+<p>Also -- <i>delete the main() method in the copy</i>. The VCE will regenerate
+a correct one when you save the class. If you don't do this, you will end up
+running the PhoneApplication1 GUI when you run PhoneApplication2.
+</p>
+
+<table border="1" cellpadding="5">
+
+  <tr>
+    <td><b><i>Your Action! </i></b>Drop in the new UI and wire it.</td>
+  </tr>
+</table>
+
+<p>Open your copy to the VCE. Then
+</p>
+<ol>
+  <li>Drop an instance of AddressBookListUI in the GUI (place it in the
+    GridLayout to the left of the entry form UI)
+  </li>
+  <li><b>Connect-&gt;this</b> from the HashAddressBook to the <i>addressBookModel</i>
+    property of the AddressBookListUI.
+  </li>
+</ol>
+
+<p>The resulting design appears in Figure 78.
+</p>
+
+<p><i>Figure 78. PhoneApplication2</i>
+</p>
+
+<p><img alt="fig78" src="images/fig78.gif" width="640" height="480"/>
+</p>
+
+<table border="1" cellpadding="5">
+
+  <tr>
+    <td><b><i>Your Action! </i></b>Run PhoneApplication2!</td>
+  </tr>
+</table>
+
+<p>When you run PhoneApplication2, any phone entries that you add will also
+appear in the list on the left. Note that selecting items in the list <i>will
+not</i> cause them to be displayed in the entry form. In the second article in
+this series we discuss how to handle selections.</p>
+
+<p>Also note that the list is not sorted. The second article also shows how you
+can add a filtering model to sort the results.
+</p>
+
+
+<h2>Changing the Model</h2>
+
+<p>You can plug in new models or modify the old model anytime you wish, <i>without
+affecting the GUIs</i>! For example, if you decide to store the address data in
+a database (a good idea, as non-persistent address data isn't terribly useful),
+you could create a new model that talks to the database and simply plug it in.</p>
+
+
+<h2>In the Next Article...</h2>
+
+<p><a href="mvc1.htm">Part 2 of this series</a> will discuss some advanced MVC techniques, including:
+</p>
+<ul>
+  <li><b>Using an alternate model to limit or extend the behavior of an
+    application</b> - Alternate models can be a great way to provide a
+    reduced-function demonstration version of your application.</li>
+  <li><b>Defining a model as a proxy for another model</b> - If your data exists
+    on another machine, you can define a model to hide the necessary networking
+    from your delegate.</li>
+  <li><b>Defining a delegate as a proxy for other delegates</b> - Similar to
+    allowing the data to exist on another platform, you can define a delegate
+    that can send view information to the &quot;real view&quot; on another
+    platform. The model never knows it's networking.</li>
+  <li><b>Defining a model to filter another model, or combine multiple models</b>
+    - One of the best benefits of MVC is the ability to define a model that
+    simply filters another model. Instead of the delegate performing extra work
+    to reduce the amount of data, you simply never pass that data to the
+    delegate. Similarly, instead of a delegate tracking multiple models, you can
+    define a model that combines data from multiple models -- the delegate
+    always thinks it's viewing a single model.</li>
+  <li><b>Providing a common selection model to allow delegates to share a
+    selected item in the model</b> - Sometimes it is desirable to have two
+    delegates display the same selection in a model, while other times you may
+    want to display two separate selections. Providing a separate selection
+    model allows you to determine how your application will behave.
+  </li>
+</ul>
+
+
+<h2>Conclusion</h2>
+
+<p>GUI builder tools have helped steer developers away from good separation of
+GUI and business logic, but fortunately it is possible to still use the MVC
+paradigm, which provides an excellent way to improve the maintainability and
+flexibility of your applications. It just takes a little extra planning and
+conscious separation of tasks.</p>
+
+<p>VisualAge for Java's Visual Composition Editor provides all the tools
+necessary to make this separation easy, using variables, bound properties, and
+property promotion to keep model details out of the GUI design process. While
+it's a little less direct than traditional &quot;GUI building&quot;, it's the
+key to a cleaner design.</p>
+
+<p>The Separating GUI from business logic helps reduce errors when adding
+features, and lets you easily change either the GUI or the business logic
+without affecting the other. Using MVC may seem like extra work during
+development, but can really save time and prevent trouble during program
+maintenance and debugging.</p>
+
+
+<h4>Downloads</h4>
+<ul>
+<li><a href="mvc1_dat.zip">Zipped VAJ respository of sample code</a></li>
+<li><a href="mvc1.zip">Normal zip of sample code</a></li>
+</ul>
+
+
 				<!-- #EndEditable "content" -->
 				<div id="footer">
 					<p>&nbsp;</p>

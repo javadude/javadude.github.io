@@ -1,14 +1,14 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
 
-
-<!-- #BeginTemplate "../master.dwt" -->
-
+
+<!-- #BeginTemplate "../master.dwt" -->
+
 	<head>
 		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 		<!-- #BeginEditable "doctitle" -->
 
-		<title>Scott's Rules of Reuse - Scott Stanchfield</title>
+		<title>Scott's Rules of Reuse - Scott Stanchfield</title>
 		<!-- #EndEditable -->
 		<link href="../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
 		<!-- #BeginEditable "head" -->
@@ -31,157 +31,157 @@
 			<div id="contentIndent">
 				<!-- #BeginEditable "content" -->
 
-<h1>Scott's Rules of Reuse</h1>
-<p>I present to you, the first publication of Scott's Rules of Reuse. Applying
-the following five rules results in an incredibly safe &amp; reusable class.
-Such a class can be reused through extension or composition keeping consistent
-use of state in the original class.</p>
-<p>Scott's Rules of&nbsp; Reuse state:</p>
-<ol>
-    <li><b>All variable data <i>must</i> be private.</b></li>
-    <li><b><i>Most</i> data <i>should</i> be JavaBean Properties.&nbsp;</b></li>
-    <li><b>Data must <i>only</i> be used in get/set methods.</b></li>
-    <li><b><i>Most</i> methods <i>should</i> be public or protected.</b></li>
-    <li><b>Final methods and class are evil.</b></li>
-</ol>
-<p>Details of Scott's Rules of Reuse follow.</p>
-<hr/>
-<h2>When to break the Rules of Reuse</h2>
-<p>As in all rules in life, rules are made to be broken. <i>However</i>, keep in
-mind that rules are <i>also</i> made to be adhered to!</p>
-<p>First, <i>never</i> break rule #1. There is <i>never</i> any valid reason to
-directly access a class' variable (non-constant) data from outside the class
-itself. You can always add a get/set method to provide this functionality.</p>
-<p>Otherwise, the rule of thumb for the other rules is &quot;if you can argue
-your case to the Supreme Court of the United States of America, <i>with Bobcat 
-Goldthwait as your Lawyer</i>, <i>and win</i>,
-then you may break the rule.&quot; These rules have some very important effects,
-and if followed, will greatly increase maintainability and reusability of your
-code.</p>
-<hr/>
-<h2>Scott's Rule of Reuse # 1:</h2>
-<h3><i>ALL VARIABLE DATA <b>MUST</b> BE PRIVATE</i></h3>
-<p>NOTE: There is only one exception to this rule: final static variables (aka
-class constants). Otherwise, <i>there are to be <b>no</b> exceptions to Scott's
-rule #1</i>. <b><i>Ever</i></b>.</p>
-<p>The reason for this is that a class must be in total control of its state. If
-someone makes a change, the class must have a chance to know about it. If we
-leave variables non-private, some other class can change our state w/o us
-knowing.</p>
-<p>The only way variables are to be changed is via methods defined in the class,
-preferably a setXXX() method. Initially the set method is simply changing the
-value. However, later on, we can add code to the set method to</p>
-<ul>
-    <li>add validation to ensure the value is acceptable</li>
-    <li>fire events to tell others that the value has changed</li>
-    <li>update other state when the value changes</li>
-    <li>log that the value has changed</li>
-</ul>
-<p>If the variable is non-private, the set method might not be called when it
-changes, so we cannot guarantee to be able to fire a property change, validate,
-etc.</p>
-<p>For more details on this rule, see <a href="accessors.html">Using Accessors</a>.</p>
-<hr/>
-<h2>Scott's Rule of Reuse # 2:</h2>
-<h3><i>MOST DATA SHOULD BE JAVABEAN PROPERTIES</i></h3>
-<p>(Details on this accidentally deleted -- I'll need to add them back later.
-The basic gist of this is that there's usually no reason to disallow <i>controlled</i>
-access to your data. By controlled, I mean access via methods. It's rare that
-you want to really disallow get, and only occasionally useful to disallow a set.
-By providing get/set methods for most (if not all) of your data, a subclass can
-easily modify the state of its superclass <i>in a safe manner</i>. </p>
-<hr/>
-<h2>Scott's Rule of Reuse # 3:</h2>
-<h3><i>DATA MUST ONLY BE USED IN GET/SET METHODS</i></h3>
-<p>NOTE: <i>There are to be <b>no</b> exceptions to Scott's rule #3 in your
-handwritten code. <b>Ever</b>.</i></p>
-<p>The only places in your code where a variable should appear are:</p>
-<ul>
-    <li>the variable definition</li>
-    <li>the get method to read it (or a single, designated access method)</li>
-    <li>the set method to modify it (or a single, designated mutation method)</li>
-</ul>
-<p>This has two very desirable effects:</p>
-<ul>
-    <li>the code in set (like firing property changes) always has a chance to
-        run, even when you're updating the variable from within its own class</li>
-    <li>subclasses can override the way the data is get/set (the subclasses
-        cannot touch the variable, but can call the superclass set with modified
-        parameters or modify the result of a call to the superclass get)</li>
-</ul>
-<p>Note that rule #3 is sometimes broken in code generated by GUI builders.
-VisualAge for Java is one that does a pretty good job following this rule,
-though.</p>
-<p>Also note that some methods act in place of get/set methods to access data.
-As long as you limit the number of places that actually do the reading and
-writing of the data to a single reader and a single writer, you are adhering to
-rule #3.</p>
-<hr/>
-<h2>Scott's Rule of Reuse # 4:</h2>
-<h3><i>MOST METHODS SHOULD BE PUBLIC OR PROTECTED</i></h3>
-<p>Note the weasel words &quot;MOST&quot; and &quot;SHOULD&quot;; there are a
-few reasonable exceptions (mainly for generated code).</p>
-<p>The reason for rule #4 is to allow subclasses to override any method they
-want. This allows your superclass to just to its job w/o worrying about what a
-subclass might need. The subclass can override <i>anything</i> that it wants,
-either extending or replacing the superclass behavior for that method.</p>
-<p>Anything that you want to &quot;hide&quot; from general public use should be
-protected; that still allows subclasses to override and call the superclass
-version (as well as allowing other classes in the same package to call them).
-All other methods should be public, letting anyone call them.</p>
-<p>Private methods should <i>only</i> be used by builder tools/wizards to
-prevent accidental overriding of implementation details, <i>or</i> in extreme
-cases of security issues. A good example I heard once was that someone
-distributed an online game and didn't want people to override pieces to cheat...</p>
-<p>If you want to make a method neither public nor protected, you had better be
-able to present your case to the Supreme Court. You're basically asserting that
-noone will <i>ever</i> want to change that behavior. You had better have an
-incredibly good reason to use such behavior.</p>
-<p>NOTE: &quot;Performance&quot; is <i>not</i> a valid reason to use private
-methods. This <i>can</i> result in a minor, almost negligible, performance
-improvement by inlining methods under some circumstances, but that minor
-improvement is a bad trade for maintainability/extensibility.</p>
-<hr/>
-<h2>Scott's Rule of Reuse # 5:</h2>
-<h3><i>FINAL METHODS/CLASSES ARE EVIL</i></h3>
-<p>The last rule of reuse concerns the use of the final keyword when applied to
-methods and classes. Final is evil. Plain and simple.</p>
-<p>When you make a method or class final, you cut off <i>any</i> chance of
-extension. This should <i>only</i> be used in exceeding rare circumstances,
-usually security-related, such as the game cheating example in rule #4. If you
-want to make a method or class final, it's Supreme Court case time again.</p>
-<p>NOTE 1: &quot;Performance&quot; is <i>not</i> a valid reason to use final
-methods. This <i>can</i> result in a minor, almost negligible, performance
-improvement by inlining methods under some circumstances, but that minor
-improvement is a bad trade for maintainability/extensibility.</p>
-<p>NOTE 2: Rule #5 does not apply to final variables -- there are very
-legitimate reasons to use final variables.</p>
-<hr/>
-<p>RE performance of inlined methods (private/final) -- there are a few
-highly-computational applications where inlining makes a noticeable difference,
-but all other methods of improving performance should be exhausted before making
-methods private or final. These other methods include but are not limited to:</p>
-<ul>
-    <li>profiling to find bottlenecks</li>
-    <li>choosing better algorithms</li>
-    <li>using other compilers that might optimize code better</li>
-    <li>using Hotspot to execute the code (it inlines where possible even if not
-        private/final)</li>
-</ul>
-<p>The above methods usually result in a higher gain than inlining can ever
-accomplish.</p>
-<hr/>
-<h2>Notes on my personal application of these rules</h2>
-<ul>
-    <li>I have upheld rule #1 for a very long time</li>
-    <li>I've really only realized the benefit of #2 and #3 fairly recently, and
-        my past code does not follow it</li>
-    <li>I've followed #4 for quite some time (generated code being the
-        exception)</li>
-    <li>I always follow #5</li>
-</ul>
-<p>And a final note, the JavaBean spec uses getters and setters to be able to
-determine &quot;properties&quot; in your bean to show them in a GUI builder.</p>
+<h1>Scott's Rules of Reuse</h1>
+<p>I present to you, the first publication of Scott's Rules of Reuse. Applying
+the following five rules results in an incredibly safe &amp; reusable class.
+Such a class can be reused through extension or composition keeping consistent
+use of state in the original class.</p>
+<p>Scott's Rules of&nbsp; Reuse state:</p>
+<ol>
+    <li><b>All variable data <i>must</i> be private.</b></li>
+    <li><b><i>Most</i> data <i>should</i> be JavaBean Properties.&nbsp;</b></li>
+    <li><b>Data must <i>only</i> be used in get/set methods.</b></li>
+    <li><b><i>Most</i> methods <i>should</i> be public or protected.</b></li>
+    <li><b>Final methods and class are evil.</b></li>
+</ol>
+<p>Details of Scott's Rules of Reuse follow.</p>
+<hr/>
+<h2>When to break the Rules of Reuse</h2>
+<p>As in all rules in life, rules are made to be broken. <i>However</i>, keep in
+mind that rules are <i>also</i> made to be adhered to!</p>
+<p>First, <i>never</i> break rule #1. There is <i>never</i> any valid reason to
+directly access a class' variable (non-constant) data from outside the class
+itself. You can always add a get/set method to provide this functionality.</p>
+<p>Otherwise, the rule of thumb for the other rules is &quot;if you can argue
+your case to the Supreme Court of the United States of America, <i>with Bobcat 
+Goldthwait as your Lawyer</i>, <i>and win</i>,
+then you may break the rule.&quot; These rules have some very important effects,
+and if followed, will greatly increase maintainability and reusability of your
+code.</p>
+<hr/>
+<h2>Scott's Rule of Reuse # 1:</h2>
+<h3><i>ALL VARIABLE DATA <b>MUST</b> BE PRIVATE</i></h3>
+<p>NOTE: There is only one exception to this rule: final static variables (aka
+class constants). Otherwise, <i>there are to be <b>no</b> exceptions to Scott's
+rule #1</i>. <b><i>Ever</i></b>.</p>
+<p>The reason for this is that a class must be in total control of its state. If
+someone makes a change, the class must have a chance to know about it. If we
+leave variables non-private, some other class can change our state w/o us
+knowing.</p>
+<p>The only way variables are to be changed is via methods defined in the class,
+preferably a setXXX() method. Initially the set method is simply changing the
+value. However, later on, we can add code to the set method to</p>
+<ul>
+    <li>add validation to ensure the value is acceptable</li>
+    <li>fire events to tell others that the value has changed</li>
+    <li>update other state when the value changes</li>
+    <li>log that the value has changed</li>
+</ul>
+<p>If the variable is non-private, the set method might not be called when it
+changes, so we cannot guarantee to be able to fire a property change, validate,
+etc.</p>
+<p>For more details on this rule, see <a href="accessors.html">Using Accessors</a>.</p>
+<hr/>
+<h2>Scott's Rule of Reuse # 2:</h2>
+<h3><i>MOST DATA SHOULD BE JAVABEAN PROPERTIES</i></h3>
+<p>(Details on this accidentally deleted -- I'll need to add them back later.
+The basic gist of this is that there's usually no reason to disallow <i>controlled</i>
+access to your data. By controlled, I mean access via methods. It's rare that
+you want to really disallow get, and only occasionally useful to disallow a set.
+By providing get/set methods for most (if not all) of your data, a subclass can
+easily modify the state of its superclass <i>in a safe manner</i>. </p>
+<hr/>
+<h2>Scott's Rule of Reuse # 3:</h2>
+<h3><i>DATA MUST ONLY BE USED IN GET/SET METHODS</i></h3>
+<p>NOTE: <i>There are to be <b>no</b> exceptions to Scott's rule #3 in your
+handwritten code. <b>Ever</b>.</i></p>
+<p>The only places in your code where a variable should appear are:</p>
+<ul>
+    <li>the variable definition</li>
+    <li>the get method to read it (or a single, designated access method)</li>
+    <li>the set method to modify it (or a single, designated mutation method)</li>
+</ul>
+<p>This has two very desirable effects:</p>
+<ul>
+    <li>the code in set (like firing property changes) always has a chance to
+        run, even when you're updating the variable from within its own class</li>
+    <li>subclasses can override the way the data is get/set (the subclasses
+        cannot touch the variable, but can call the superclass set with modified
+        parameters or modify the result of a call to the superclass get)</li>
+</ul>
+<p>Note that rule #3 is sometimes broken in code generated by GUI builders.
+VisualAge for Java is one that does a pretty good job following this rule,
+though.</p>
+<p>Also note that some methods act in place of get/set methods to access data.
+As long as you limit the number of places that actually do the reading and
+writing of the data to a single reader and a single writer, you are adhering to
+rule #3.</p>
+<hr/>
+<h2>Scott's Rule of Reuse # 4:</h2>
+<h3><i>MOST METHODS SHOULD BE PUBLIC OR PROTECTED</i></h3>
+<p>Note the weasel words &quot;MOST&quot; and &quot;SHOULD&quot;; there are a
+few reasonable exceptions (mainly for generated code).</p>
+<p>The reason for rule #4 is to allow subclasses to override any method they
+want. This allows your superclass to just to its job w/o worrying about what a
+subclass might need. The subclass can override <i>anything</i> that it wants,
+either extending or replacing the superclass behavior for that method.</p>
+<p>Anything that you want to &quot;hide&quot; from general public use should be
+protected; that still allows subclasses to override and call the superclass
+version (as well as allowing other classes in the same package to call them).
+All other methods should be public, letting anyone call them.</p>
+<p>Private methods should <i>only</i> be used by builder tools/wizards to
+prevent accidental overriding of implementation details, <i>or</i> in extreme
+cases of security issues. A good example I heard once was that someone
+distributed an online game and didn't want people to override pieces to cheat...</p>
+<p>If you want to make a method neither public nor protected, you had better be
+able to present your case to the Supreme Court. You're basically asserting that
+noone will <i>ever</i> want to change that behavior. You had better have an
+incredibly good reason to use such behavior.</p>
+<p>NOTE: &quot;Performance&quot; is <i>not</i> a valid reason to use private
+methods. This <i>can</i> result in a minor, almost negligible, performance
+improvement by inlining methods under some circumstances, but that minor
+improvement is a bad trade for maintainability/extensibility.</p>
+<hr/>
+<h2>Scott's Rule of Reuse # 5:</h2>
+<h3><i>FINAL METHODS/CLASSES ARE EVIL</i></h3>
+<p>The last rule of reuse concerns the use of the final keyword when applied to
+methods and classes. Final is evil. Plain and simple.</p>
+<p>When you make a method or class final, you cut off <i>any</i> chance of
+extension. This should <i>only</i> be used in exceeding rare circumstances,
+usually security-related, such as the game cheating example in rule #4. If you
+want to make a method or class final, it's Supreme Court case time again.</p>
+<p>NOTE 1: &quot;Performance&quot; is <i>not</i> a valid reason to use final
+methods. This <i>can</i> result in a minor, almost negligible, performance
+improvement by inlining methods under some circumstances, but that minor
+improvement is a bad trade for maintainability/extensibility.</p>
+<p>NOTE 2: Rule #5 does not apply to final variables -- there are very
+legitimate reasons to use final variables.</p>
+<hr/>
+<p>RE performance of inlined methods (private/final) -- there are a few
+highly-computational applications where inlining makes a noticeable difference,
+but all other methods of improving performance should be exhausted before making
+methods private or final. These other methods include but are not limited to:</p>
+<ul>
+    <li>profiling to find bottlenecks</li>
+    <li>choosing better algorithms</li>
+    <li>using other compilers that might optimize code better</li>
+    <li>using Hotspot to execute the code (it inlines where possible even if not
+        private/final)</li>
+</ul>
+<p>The above methods usually result in a higher gain than inlining can ever
+accomplish.</p>
+<hr/>
+<h2>Notes on my personal application of these rules</h2>
+<ul>
+    <li>I have upheld rule #1 for a very long time</li>
+    <li>I've really only realized the benefit of #2 and #3 fairly recently, and
+        my past code does not follow it</li>
+    <li>I've followed #4 for quite some time (generated code being the
+        exception)</li>
+    <li>I always follow #5</li>
+</ul>
+<p>And a final note, the JavaBean spec uses getters and setters to be able to
+determine &quot;properties&quot; in your bean to show them in a GUI builder.</p>
 				<!-- #EndEditable "content" -->
 				<div id="footer">
 					<p>&nbsp;</p>
