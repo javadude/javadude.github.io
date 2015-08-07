@@ -111,6 +111,9 @@
 				</ul>
 				<p>googleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, padding));</p>
 				</li>
+				<li><p>Note: To center your map icons over the proper lat/lng, use</p>
+				<p>markerOptions.anchor(0.5f, 0.5f);</p>
+				</li>
 				<li><p>Be sure to unbind from the service when you stop your application</p>
 				</li>
 				<li><p>You <em>do not</em> need to worry about saving/restoring data if the user presses back or home while running the application. These would be necessary in a real application, but this assignment already has a good deal of features to focus upon. In other words, it's ok if everything restarts if back/home is pressed and the application is re-entered.</p>
