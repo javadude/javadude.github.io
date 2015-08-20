@@ -19,6 +19,12 @@
   <atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="self" type="application/rss+xml" href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield" />
   <feedburner:info xmlns:feedburner="http://rssnamespace.org/feedburner/ext/1.0" uri="javadudecom-scottstanchfield" />
   <item>
+    <guid>http://javadude.com/articles/patterns/index.html#s5</guid>
+    <title>Template Method, Strategy and Null Object: Design Patterns Brown-Bag Series</title>
+    <link>http://javadude.com/articles/patterns/index.html#s5</link>
+    <description>Template Method, Strategy and Null Object Patterns Talk (A series of brown-bag talks I'm giving at the Johns Hopkins Applies Physics Lab on Design Patterns)</description>
+  </item>
+  <item>
     <guid>http://javadude.com/articles/patterns/index.html#s4</guid>
     <title>Command: Design Patterns Brown-Bag Series</title>
     <link>http://javadude.com/articles/patterns/index.html#s4</link>
