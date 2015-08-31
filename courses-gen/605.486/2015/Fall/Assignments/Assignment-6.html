@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-GB">
 	<head>
-		<title>Assignment 3 - Manipulating Graphics</title>
+		<title>Assignment 6 - TBA</title>
 		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 		<meta http-equiv="Pragma" content="no-cache" />
 		<meta http-equiv="Expires" content="0" />
@@ -19,97 +19,15 @@
 				<h3>605.486 - Mobile Application Development for the Android Platform - Fall 2015</h3>
 			</div>
 			<div class='pageName'>
-				<h2>Assignment 3 - Manipulating Graphics</h2>
+				<h2>Assignment 6 - TBA</h2>
 			</div>
 		</div>
 	</div>
 	<div class="colmask leftmenu">
 		<div class="colleft">
 			<div class="col1">
-				<h1>Requirements</h1>
-				<p>Create a simple &ldquo;Jewel Matcher&rdquo; game.</p>
-				<ul>
-				<li><p>The idea behind the game is to have a grid of random shapes. You can swap any two horizontally or vertically adjacent shapes if it allows you to make a &ldquo;match&rdquo;</p>
-				</li>
-				<li><p>Three or more adjacent shapes in a row or column of the same type are considered a &ldquo;match&rdquo;</p>
-				</li>
-				<li><p>If the user has made a move that creates one or more matches</p>
-				<ul>
-				<li>Check for all possible matches - the user may have created a row and column or two rows or two columns etc. at the same time</li>
-				<li>Highlight the matching shapes for a moment (perhaps 300-500ms? find an amount that feels right to you)</li>
-				<li>Remove the matching shapes (blank them out for a moment)<ul>
-				<li>Each matched shape counts as one point to keep things simple</li>
-				</ul>
-				</li>
-				<li>Shift all shapes down (you can animate their movement if you want, but you do not need to - you can just redraw all shapes in their new positions)</li>
-				<li>Add new random shapes to fill in blanks</li>
-				<li>Repeat until no matches remain</li>
-				</ul>
-				</li>
-				<li><p>At the start of the game, you should repeatedly do match checks and removal until no matches remain</p>
-				</li>
-				<li><p>You must have four different shapes</p>
-				<ul>
-				<li>Two must be defined using XML resources (circle and square, for example)</li>
-				<li>Two must be defined as custom shapes, similar to the triangle, <em>but</em> you cannot use triangle. Come up with two new shapes.</li>
-				</ul>
-				</li>
-				<li><p>Shapes must be separated from each other in the grid (there must be some space between them)</p>
-				</li>
-				<li><p>Your grid may or may not have lines; your call</p>
-				</li>
-				<li><p>User interaction:</p>
-				<ul>
-				<li>Tapping on a shape highlights all other shapes of the same type for a moment (again, 300-500ms?)</li>
-				<li>Dragging a shape moves it, like in the graph drawing example</li>
-				<li>If a shape is dragged onto another shape's grid area and let go<ul>
-				<li>If no matches are possible, return the shape to its old position</li>
-				<li>If any matches are possible, swap the two shapes and do the &ldquo;if the user has made a move that creates one or more matches&rdquo; logic above</li>
-				</ul>
-				</li>
-				<li>Tapping outside the grid &ldquo;pauses&rdquo; the game<ul>
-				<li>Just blank the screen and write &ldquo;Paused&rdquo;</li>
-				<li>Tapping again unpauses</li>
-				<li>(This doesn't really do anything b/c we're not timing anything&hellip;)</li>
-				</ul>
-				</li>
-				<li>Dragging outside the grid &ldquo;shuffles&rdquo; the pieces<ul>
-				<li>This means starting and ending a drag outside the grid, not dragging a piece outside the grid</li>
-				<li>To keep this simple, simply remove all pieces and re-add random pieces</li>
-				<li>Deduct 10 points when the user shuffles</li>
-				</ul>
-				</li>
-				</ul>
-				</li>
-				<li><p>The grid should be 8x8 on all devices</p>
-				<ul>
-				<li>DO NOT assume the size of the grid cells; divide the screen into even squares, leaving some space around the grid</li>
-				<li>Shapes should be scaled and centered in grid cells, changing size based on the screen resolution</li>
-				</ul>
-				</li>
-				<li><p>Do not worry about game states where making a match isn't possible (game over). (This can be a little complex to compute and I don't want to add in a lot of extra logic function)</p>
-				</li>
-				<li><p>Display the current score wherever you would like</p>
-				</li>
-				<li><p><strong>Do not</strong> use third-party libraries for this assignment! You should be drawing your shapes and board manually, like the Module 11 example shows. (Though you don't have to use a &ldquo;Thing&rdquo; class; you can organize your code differently if you would like.)</p>
-				</li>
-				<li><p><strong>Do not</strong> use Android layouts, buttons, image views, text views or any other widgets to create the game board or pieces. Again, you should be drawing everything, including your score display.</p>
-				</li>
-				</ul>
-				<h1>Tips</h1>
-				<p>To select random shapes:</p>
-				<pre>&nbsp;&nbsp;&nbsp;&nbsp;private Random random = new Random();<br/>&nbsp;&nbsp;&nbsp;&nbsp;...<br/>&nbsp;&nbsp;&nbsp;&nbsp;random.nextInt(4); // returns 0-3 to choose which shape</pre>
-				<p>Use an AsyncTask to do the &ldquo;something matched&rdquo; logic.</p>
-				<ul>
-				<li>If you don't, you won't see updates to the user interface</li>
-				<li>See <a href="http://javadude.com/courses-static/605.486/2015/Fall/Code/AsyncTaskExample-v3.zip">http://javadude.com/courses-static/605.486/2015/Fall/Code/AsyncTaskExample-v3.zip</a> for an example of using AsyncTask<ul>
-				<li>This example demonstrates performing logic inside the UI thread (bad) and inside an AsyncTask (good)</li>
-				<li>This example contains a good bit of comments describing how AsyncTask works</li>
-				</ul>
-				</li>
-				<li>Note: Using this async task approach (with wait/notify), do not call get() from the UI thread on the async task or your app will deadlock (the UI would be waiting for the doInBackground to finish while it waits for the progress update to notify it&hellip;)</li>
-				<li>Note: You'll need to set a flag to track when you're actually running the task so you ignore user input while previous input is being processed</li>
-				</ul>
+				<p>NOTE: Be sure to name this project and its packages starting with <em>lastname</em>.<em>firstname</em>.hw6.</p>
+				<p>[I'm changing this assignment for this term. I will post it when the new assignment is ready]</p>
 				<h1>Submitting Your Assignment</h1>
 				<p>To submit your assignment:</p>
 				<ol>
@@ -133,7 +51,7 @@
 				</li>
 				<li><p>Click on the Assignments link on the left navigation bar</p>
 				</li>
-				<li><p>Click on the Assignment 3 link</p>
+				<li><p>Click on the Assignment 6 link</p>
 				</li>
 				<li><p>Attach your submission and enter any notes</p>
 				</li>
