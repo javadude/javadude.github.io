@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-GB">
 	<head>
-		<title>Assignment 4 - TBA</title>
+		<title>Assignment 4 - RESTful Web Services, Google Maps and Services</title>
 		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 		<meta http-equiv="Pragma" content="no-cache" />
 		<meta http-equiv="Expires" content="0" />
@@ -19,7 +19,7 @@
 				<h3>605.486 - Mobile Application Development for the Android Platform - Fall 2015</h3>
 			</div>
 			<div class='pageName'>
-				<h2>Assignment 4 - TBA</h2>
+				<h2>Assignment 4 - RESTful Web Services, Google Maps and Services</h2>
 			</div>
 		</div>
 	</div>
@@ -27,7 +27,100 @@
 		<div class="colleft">
 			<div class="col1">
 				<p>NOTE: Be sure to name this project and its packages starting with <em>lastname</em>.<em>firstname</em>.hw4.</p>
-				<p>[I'm changing this assignment for this term. I will post it when the new assignment is ready]</p>
+				<p>In this assignment, you'll create an application to track an alien invasion. A RESTful web service is provided that tells you the current location of several alien ships. Your application will use this service to ascertain the ship locations and display them on your device using Google Maps.</p>
+				<p>Your application will use an Android service to fetch changes via the RESTful web service. The Android service will poll for changes once per second.</p>
+				<p><em>Note this this a <strong>very</strong> bad way to implement this in real life. Ideally you would use something like Google Cloud Messaging to push updates to devices rather than poll. However, I thought it was more important for you to try communicating between an Activity and an Android service than set up Google Cloud Messaging.</em></p>
+				<p><strong><em>The aliens are trying to tell us something! Figure out a way to see what they're saying!</em></strong></p>
+				<p><img src="http://javadude.com/courses-static/605.486/2015/Fall/images/assignment-5/image001.jpg" alt="" />
+				<br  />Sample Screen</p>
+				<h1>Application Parts</h1>
+				<p>For this assignment, you'll need</p>
+				<ul>
+				<li><p>In addition to the permissions described in the lectures, you'll need to add</p>
+				<p><uses-permission android:name='android.permission.ACCESS_WIFI_STATE'  /></p>
+				</li>
+				<li><p>A Service to poll for alien invasion updates</p>
+				</li>
+				<li><p>An Activity to display the map, ship icons, and the paths the ships have taken</p>
+				</li>
+				<li><p>A Parcelable representation of a UFO position</p>
+				</li>
+				<li><p>AIDL files</p>
+				<ul>
+				<li>A description of the UFO position (UFOPosition.aidl) - it only needs to contain:</li>
+				</ul>
+				<p>package lastname.firstname.hw5;</p>
+				<p>parcelable UFOPosition;</p>
+				<ul>
+				<li>A reporter interface that the service can use to communicate status updates to the activity (it will pass UFOPosition objects). The report(&hellip;) method should pass a List of UFOPosition objects.</li>
+				<li>The alien service's interface (allows add/remove of the reporter)</li>
+				</ul>
+				</li>
+				<li><p>(optional) If you'd like to implement a service manager for your service you may, but this is not required</p>
+				</li>
+				</ul>
+				<p><strong><em>Note: Use a single project for your assignment - the service and activity should be in the same project. Note that by using a single project we don't really need to use AIDL or make the UFOPosition be Parcelable (because they're in the same memory space). However, I want you to use AIDL and make UFOPosition Parcelable to demonstrate what you need do to make the Service be accessible from other projects.</em></strong></p>
+				<h1>UFOPosition</h1>
+				<p>This will be a Parcelable class (so it can be passed between the service and the activity) that contain the following information</p>
+				<ul>
+				<li>int shipNumber</li>
+				<li>double lat</li>
+				<li>double lon</li>
+				</ul>
+				<h1>The Service</h1>
+				<p>Your service must do the following:</p>
+				<ul>
+				<li>Allow Activities to bind to the service</li>
+				<li>Allow reporter instances to be added and removed</li>
+				<li>Start a thread to perform the REST requests<ul>
+				<li><strong><em>THERE SHOULD BE ONE THREAD IN YOUR SERVICE. DO NOT START A SEPARATE THREAD FOR EACH REST REQUEST.</em></strong></li>
+				<li><strong><em>Do not use AsyncTask in your service - it communicates with a UI thread, which you should not be using in your service. The REST example given in the lecture wraps the HTTP calls in an AsyncTask but that is not needed for this assignment - extract the HTTP code that's needed for the REST calls from that AsyncTask and use it directly in your service thread. </em></strong></li>
+				<li>Once per second, make a request to <a href="http://javadude.com/aliens/n.json">http://javadude.com/aliens/n.json</a> where &ldquo;n&rdquo; is a number starting at 1, and should be incremented for each request. (Note that I'm simulating REST requests by using static JSON files on my web server.) To see an example of the JSON, point your browser to <a href="http://javadude.com/aliens/1.json">http://javadude.com/aliens/1.json</a></li>
+				<li>If a request returns a 404 (HttpStatus.NOT_FOUND) status code, stop polling. <em>Do not assume the number of reports that are available.</em></li>
+				<li>Parse the returned JSON. It will be a JSONArray containing JSONObjects that represent each visible ship's position. The JSONObjects contain</li>
+				<li>&ldquo;ship&rdquo; - an int representing which ship is being reported</li>
+				<li>&ldquo;lat&rdquo; - a double representing the latitude of the ship</li>
+				<li>&ldquo;lon&rdquo; - a double representing the longitude of the ship</li>
+				<li>Create an instance of UFOPosition to hold the data for each ship</li>
+				<li>Create a List of UFOPositions and pass it to all registered reporters</li>
+				</ul>
+				</li>
+				</ul>
+				<h1>The Activity</h1>
+				<p>Your activity must do the following:</p>
+				<ul>
+				<li><p>First create an Activity that only displays a map centered on lat=38.9073, lon=-77.0365. Test this to be sure you have properly set up the google maps API and properly registered an Android key. Do not write any other code until you have this working!</p>
+				</li>
+				<li><p>Bind to your service</p>
+				</li>
+				<li><p>When the service has been connected, add a reporter to be notified of ship positions</p>
+				</li>
+				<li><p>Track the bounding box that will be large enough to contain all UFO positions that you have seen. You can use a com.google.android.gms.maps.model.LatLngBounds object for this.</p>
+				</li>
+				<li><p>When you receive a list of UFOPositions</p>
+				<ul>
+				<li>If a position represents a new ship, create a new UFO marker on the map (and whatever data you need to save its positions)</li>
+				<li>If a position represents an existing ship, update its marker's position</li>
+				<li>If the ship has been reported for more than one location, draw a line on the map representing the path from its last reported position to its current position. <em>Note: <strong>do not</strong> draw navigation directions! Only draw a straight line between points</em></li>
+				<li>If a ship was previously reported but is <em>not</em> in the current report list, remove its marker from the map. <em>Do not remove the lines that represented its path!</em></li>
+				<li>Whenever you see a new position for a UFO, add that position to your bounds so it will expand to include that position. You can do this using</li>
+				</ul>
+				<p>bounds = bounds.including(latLng);</p>
+				<ul>
+				<li>Update the map to include the new bounds using (use a value in a dimens.xml file to set the padding to something reasonable)</li>
+				</ul>
+				<p>googleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, padding));</p>
+				</li>
+				<li><p>Note: To center your map icons over the proper lat/lng, use</p>
+				<p>markerOptions.anchor(0.5f, 0.5f);</p>
+				</li>
+				<li><p>Be sure to unbind from the service when you stop your application</p>
+				</li>
+				<li><p>You <em>do not</em> need to worry about saving/restoring data if the user presses back or home while running the application. These would be necessary in a real application, but this assignment already has a good deal of features to focus upon. In other words, it's ok if everything restarts if back/home is pressed and the application is re-entered.</p>
+				</li>
+				<li><p>Get the UFO icons from <a href="http://javadude.com/courses-static/605.486/2015/Fall/ufo-icons.zip">http://javadude.com/courses-static/605.486/2015/Fall/ufo-icons.zip</a> . Rights for use of these icons are at <a href="http://icons.mysitemyway.com/terms-of-use/">http://icons.mysitemyway.com/terms-of-use/</a></p>
+				</li>
+				</ul>
 				<h1>Submitting Your Assignment</h1>
 				<p>To submit your assignment:</p>
 				<ol>
@@ -91,21 +184,21 @@
 				<p style='margin-left:20px;'><a href='../Modules/Module-10.html'>Module 10: Graphics</a></p>
 				<p style='margin-left:20px;'><a href='../Modules/Module-11.html'>Module 11: Manipulating Graphics</a></p>
 				<h3>Week 7: 10/19/15 - 10/25/15</h3>
-				<p style='margin-left:20px;'><a href='../Modules/Module-12.html'>Module 12: NFC</a></p>
-				<p style='margin-left:20px;'><a href='../Modules/Module-13.html'>Module 13: Notifications</a></p>
+				<p style='margin-left:20px;'><a href='../Modules/Module-16.html'>Module 16: Services</a></p>
+				<p style='margin-left:20px;'><a href='../Modules/Module-22.html'>Module 22: RESTful Web Services</a></p>
 				<h3>Week 8: 10/26/15 - 11/1/15</h3>
 				<p style='margin-left:20px;'><a href='../Modules/Module-14.html'>Module 14: Sensors</a></p>
 				<p style='margin-left:20px;'><a href='../Modules/Module-15.html'>Module 15: Maps</a></p>
 				<h3>Week 9: 11/2/15 - 11/8/15</h3>
-				<p style='margin-left:20px;'><a href='../Modules/Module-16.html'>Module 16: Services</a></p>
+				<p style='margin-left:20px;'><a href='../Modules/Module-12.html'>Module 12: NFC</a></p>
 				<p style='margin-left:20px;'><a href='../Modules/Module-17.html'>Module 17: Files</a></p>
 				<p style='margin-left:20px;'><a href='../Modules/Module-18.html'>Module 18: Preferences</a></p>
 				<h3>Week 10: 11/9/15 - 11/15/15</h3>
+				<p style='margin-left:20px;'><a href='../Modules/Module-13.html'>Module 13: Notifications</a></p>
 				<p style='margin-left:20px;'><a href='../Modules/Module-19.html'>Module 19: Widgets and Broadcast Receivers</a></p>
-				<p style='margin-left:20px;'><a href='../Modules/Module-20.html'>Module 20: Property Animation</a></p>
 				<p style='margin-left:20px;'><a href='../Modules/Module-21.html'>Module 21: Navigation</a></p>
 				<h3>Week 11: 11/16/15 - 11/22/15</h3>
-				<p style='margin-left:20px;'><a href='../Modules/Module-22.html'>Module 22: RESTful Web Services</a></p>
+				<p style='margin-left:20px;'><a href='../Modules/Module-20.html'>Module 20: Property Animation</a></p>
 				<p style='margin-left:20px;'><a href='../Modules/Module-23.html'>Module 23: Google Cloud Messaging</a></p>
 				<h3>Break: THANKSGIVING:<br/>&nbsp;&nbsp;11/23/15 - 11/29/15</h3>
 				<h3>Week 12: 11/30/15 - 12/6/15</h3>
@@ -125,9 +218,9 @@
 				<li><h4 style='margin-left:20px'><a href='../Assignments/Assignment-1.html'>Hello World!</a></h4></li>
 				<li><h4 style='margin-left:20px'><a href='../Assignments/Assignment-2.html'>Contact Manager</a></h4></li>
 				<li><h4 style='margin-left:20px'><a href='../Assignments/Assignment-3.html'>Manipulating Graphics</a></h4></li>
-				<li><h4 style='margin-left:20px'><a href='../Assignments/Assignment-4.html'>TBA</a></h4></li>
-				<li><h4 style='margin-left:20px'><a href='../Assignments/Assignment-5.html'>RESTful Web Services, Google Maps and Services</a></h4></li>
-				<li><h4 style='margin-left:20px'><a href='../Assignments/Assignment-6.html'>TBA</a></h4></li>
+				<li><h4 style='margin-left:20px'><a href='../Assignments/Assignment-4.html'>RESTful Web Services, Google Maps and Services</a></h4></li>
+				<li><h4 style='margin-left:20px'><a href='../Assignments/Assignment-5.html'>Widgets and Notifications</a></h4></li>
+				<li><h4 style='margin-left:20px'><a href='../Assignments/Assignment-6.html'>WebView, Files and Barcodes</a></h4></li>
 				</ol>
 				
 			</div>
