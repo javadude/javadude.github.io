@@ -28,34 +28,26 @@
 			<div class="col1">
 				<p>NOTE: Be sure to name this project and its packages starting with <em>lastname</em>.<em>firstname</em>.hw5.</p>
 				<p>In this assignment, we'll add notifications and a widget to my to-do application.</p>
-				<p>Basic idea:</p>
+				<p>Download the starter code from <a href="http://javadude.com/courses-static/605.486/2015/Fall/TodoWidgets-Starter.zip">http://javadude.com/courses-static/605.486/2015/Fall/TodoWidgets-Starter.zip</a></p>
+				<p>You will need to add support for notifications and a home-screen widget.</p>
+				<p>For an idea of what the app should look like and how it should behave, please see the class video.</p>
+				<p>Whenever an item is edited &ldquo;due&rdquo;, create, update or cancel a notification</p>
 				<ul>
-				<li><p>Whenever a new item is added, create or update a notification</p>
-				</li>
-				<li><p>(ideally this would be triggered when am item is coming due, but I don't want you to have to mess with your time settings)</p>
-				</li>
-				<li><p>there should be only one notification for the application</p>
-				</li>
-				<li><p>the notification should show the number of to-do items</p>
-				</li>
-				<li><p>the notification should show the latest three items</p>
-				</li>
-				<li><p>the notification's main &ldquo;tap&rdquo; should open the to-do list activity</p>
-				</li>
-				<li><p>include a &ldquo;new item&rdquo; button in the notification that jumps directly to the edit activity (be careful of your back stack here; be sure to test when the to-do app isn't active)</p>
-				</li>
-				<li><p>Create a homescreen widget that</p>
-				</li>
-				<li><p>shows the text of the latest to-do item</p>
-				</li>
-				<li><p>when tapped goes to edit that item (again be careful of your back stack)</p>
-				</li>
-				<li><p>has a button for going to the list</p>
-				</li>
-				<li><p>has a button for adding a new item</p>
-				</li>
+				<li>(NOTE: Ideally this would be triggered when am item is coming due, but I don't want you to have to mess with your time settings)</li>
+				<li>The notification should be persistent (ongoing)</li>
+				<li>There should be only one notification for the application</li>
+				<li>If there are no due items, cancel the notification</li>
+				<li>The notification should show number of due items</li>
+				<li>The notification should show the names of all due items</li>
+				<li>The notification's main &ldquo;tap&rdquo; should open the to-do list activity</li>
+				<li>Include a &ldquo;new item&rdquo; button in the notification that jumps directly to the edit activity (be careful of your back stack here; be sure to test when the to-do app isn't active)</li>
 				</ul>
-				<p>[More details on this assignment soon - NOTE: I may be changing this somewhat; do not start it yet!]</p>
+				<p>Create a homescreen widget that</p>
+				<ul>
+				<li>Shows either &ldquo;No Items Due&rdquo; or &ldquo;N Items Due&rdquo; (where N is the number of items due)</li>
+				<li>When tapped goes to list of all items</li>
+				<li>Has a button for adding a new item (again be careful of your back stack)</li>
+				</ul>
 				<h1>Submitting Your Assignment</h1>
 				<p>To submit your assignment:</p>
 				<ol>
