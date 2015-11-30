@@ -28,9 +28,17 @@
 			<div class="col1">
 				<p>NOTE: Be sure to name this project and its packages starting with <em>lastname</em>.<em>firstname</em>.hw6.</p>
 				<p>In this assignment, we'll create a simple file browsing app.</p>
-				<p>Use the Android file APIs to show a list of files and directories on your SD card. You can use a ListView or RecyclerView.</p>
+				<p>Use the Android file APIs to show a list of files and directories on your SD card. Use a ListView for this list.</p>
+				<p>You should display a different icon next to the file name based on if it is</p>
+				<ul>
+				<li>A directory</li>
+				<li>An HTML page (name ends with &ldquo;.html&rdquo;)</li>
+				<li>Any other kind of file</li>
+				</ul>
+				<p>(Note: use getViewTypeCount() and getItemViewType() to define three separate types of views for the list. Define three separate layout resources to use as list row views)</p>
 				<p>Tapping on a directory name changes the list to show the files in that directory. Note that you can use java.io.File.listFiles() to get child files, and java.io.File.isDirectory() to determine if a file is a directory or not.</p>
 				<p>Tapping on an HTML file (File.getName().endsWith(&ldquo;.html&rdquo;)) will display the file in a WebView. Note: You can use file.toURI().toURL() to get a URL for the file.</p>
+				<p>Tapping on anything else displays a Toast stating &ldquo;I can't handle that type of file yet&rdquo;.</p>
 				<p>For some inexplicable reason, the app will have a &ldquo;Scan&rdquo; button. When pressed, use ZXIng barcode reader to read a barcode.</p>
 				<p>Scanning a QR or other barcode will</p>
 				<ul>
