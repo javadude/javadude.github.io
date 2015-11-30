@@ -37,7 +37,7 @@
 				</ul>
 				<p>(Note: use getViewTypeCount() and getItemViewType() to define three separate types of views for the list. Define three separate layout resources to use as list row views)</p>
 				<p>Tapping on a directory name changes the list to show the files in that directory. Note that you can use java.io.File.listFiles() to get child files, and java.io.File.isDirectory() to determine if a file is a directory or not.</p>
-				<p>Tapping on an HTML file (File.getName().endsWith(&ldquo;.html&rdquo;)) will display the file in a WebView. Note: You can use file.toURI().toURL() to get a URL for the file.</p>
+				<p>Tapping on an HTML or text file (File.getName().endsWith(&ldquo;.html&rdquo;) or &ldquo;.txt&rdquo;) will display the file in a WebView. Note: You can use file.toURI().toURL() to get a URL for the file.</p>
 				<p>Tapping on anything else displays a Toast stating &ldquo;I can't handle that type of file yet&rdquo;.</p>
 				<p>For some inexplicable reason, the app will have a &ldquo;Scan&rdquo; button. When pressed, use ZXIng barcode reader to read a barcode.</p>
 				<p>Scanning a QR or other barcode will</p>
