@@ -20,6 +20,12 @@
   <atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="self" type="application/rss+xml" href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield" />
   <feedburner:info xmlns:feedburner="http://rssnamespace.org/feedburner/ext/1.0" uri="javadudecom-scottstanchfield" />
   <item>
+    <guid>http://javadude.com/articles/dsls-and-codegen/index.html</guid>
+    <title>Domain-Specific Languages and Code Generation</title>
+    <link>http://javadude.com/articles/dsls-and-codegen/index.html#s7</link>
+    <description>Tech talk for Johns Hopkins University on Domain-Specific Languages and Code Generation with ANTLR and xText</description>
+  </item>
+  <item>
     <guid>http://javadude.com/articles/patterns/index.html#s7</guid>
     <title>Factory Method, Abstract Factory, Builder: Design Patterns Brown-Bag Series</title>
     <link>http://javadude.com/articles/patterns/index.html#s7</link>
