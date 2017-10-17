@@ -1,5 +1,42 @@
 <html>
 	<body>
+		<h2><a href="tacdogs3_release_3.2.1.0.apk">tacdogs3_release_3.2.1.0.apk (10/17/2017)</a></h1>
+			<ul>
+				<li><b><i>Note - The application name no longer contains the 'a' suffix</i></b></li>
+				<li>Changed structure of Instrument and Asset Managers to make data entry easier and more organized</li>
+				<li>Created new launch icons</li>
+				<li>Added "Load Default Instruments" on Instrument Manager menu. This will create an Instrument group containing all the default surface and air sample collectors</li>
+				<li>Add options to set location of a sample to current GPS location</li>
+				<li>Improved performance by reducing number of screen updates</li>
+				<li>Improved performance by not refreshing all map overlays (shapes and images) on every edit</li>
+				<li>Fixed numeric field edits (no longer jumps cursor to start of field when backing up to a decimal point)</li>
+				<li>Fixed problem with barcode value not being filled in if the tablet is parallel to the ground</li>
+				<li>When "sample collected" box is checked, map marker icon now updates</li>
+				<li>Remove map overlays when selection is cleared</li>
+				<li>Reset screen when root task is deleted</li>
+				<li>Fix image-as-map scaling</li>
+				<li>Fix z-ordering of map overlays so markers/polygons are properly ordered</li>
+				<li>Rotate captured images based on their EXIF information (depending on device orientation, sometimes the images would display rotated or upside-down in image list and when used as a map)</li>
+				<li>Disable "open asset group", "open instrument group" and "open mission" when there are none available</li>
+				<li>Fix progress bars in upload/download/default instrument creation to work properly if device is rotated while operation is in progress</li>
+				<li>Remove double-boxed items (like some instruments) in spinners</li>
+				<li>Reduce some nested layouts for improved performance</li>
+				<li>Fixed crash in NFC tag reading caused by new agent formats</li>
+				<li>Fix upload/download duplication of JSON entry problem</li>
+				<li>Lots of other smaller bug fixes</li>
+				<li>Under the covers
+					<ul>
+						<li>Add Android support annotations to help catch null-pointer issues at compile-time</li>
+						<li>Fixed many issues reported by Android Lint</li>
+						<li>Switch to use Android Architecture Components' lifecycle-safe ViewModels to track selection and root task to fix exceptions after some device rotations</li>
+						<li>Moved "last-time-updated" processing into same transaction as edit so it only triggers a single form refresh</li>
+						<li>Setup Facebook Stetho debugging tool in debug builds</li>
+						<li>Switched form definition to multiple files to improve build performance</li>
+						<li>Attempted to merge Eclipse and Android Studio builds to provide a single-build-script approach (rather than the current partial Eclipse and partial Android-Studio build). Some bugs in the gradle builders for xText are still blocking this effort</li>
+					</ul>
+				</li>
+			</ul>
+
 		<h2><a href="tacdogs3a-3.2.0.6.apk">tacdogs3a-3.2.0.6.apk (8/18/2017)</a></h1>
 			<ul>
 				<li><b><i>Note - this copy of the app has a new id and can run alongside other versions of the app. The app names on the tablet will all start with "TacDOGS3a"</i></b></li>
