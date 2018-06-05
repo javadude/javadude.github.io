@@ -1,0 +1,271 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-GB">
+<head>
+<title>Module 1.1 - Topics</title>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+<link rel="shortcut icon" href="Static/images/favicon.ico" />
+<link rel="stylesheet" type="text/css" href="Static/screen.css" />
+</head>
+<body>
+<div id="header">
+<div class='bgBanner'>
+	<div class='brandingImgWrap'>
+		<img src='Static/images/bblogo.png' height='40px'/>
+	</div>
+	<!--
+	<div class='className'>
+		<h3>605.606 - Domain-Specific Languages - Summer 2018</h3>
+	</div>
+	-->
+	<div class='pageName'>
+		<h2>Module 1.1 - Topics</h2>
+	</div>
+</div>
+</div>
+<div class="col1">
+<h2>Overview</h2>
+<p>I currently do not have a detailed breakdown of how the topics will appear week-by-week. The following is a list of topics I would like to cover during this course, but time may not allow covering all of them.</p>
+<p>If you have other topics you would like to cover, or particular interests in any specific listed topics, please let me know so I can do my best to cover them.</p>
+<ul>
+  <li>
+    <p>What are DSLs</p>
+    <ul>
+      <li>Imperative vs declarative languages
+        <ul>
+          <li>Imperative - steps to do something</li>
+          <li>Declarative - intent of what to do</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Types of DSLs</p>
+    <ul>
+      <li>Internal
+        <ul>
+          <li>Builders</li>
+          <li>Fluent API</li>
+          <li>Specification</li>
+          <li>Embedded language (ie: SQL)</li>
+        </ul>
+      </li>
+      <li>External
+        <ul>
+          <li>Generic formats
+            <ul>
+              <li>XML</li>
+              <li>JSON</li>
+            </ul>
+          </li>
+          <li>Custom formats
+            <ul>
+              <li>Delimited</li>
+              <li>Syntax-Based</li>
+              <li>Graphical</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Uses for DSLs</p>
+    <ul>
+      <li>Semantic models
+        <ul>
+          <li>By end users</li>
+          <li>By SMEs</li>
+          <li>By programmers
+            <ul>
+              <li>Rule systems</li>
+              <li>State machines</li>
+              <li>Macros</li>
+              <li>Interpreters</li>
+            </ul>
+          </li>
+          <li>embedded
+            <ul>
+              <li>Internal</li>
+              <li>External</li>
+            </ul>
+          </li>
+          <li>Standalone
+            <ul>
+              <li>Code generation</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Internal DSLs</p>
+    <ul>
+      <li>Expression builder</li>
+      <li>Function sequence</li>
+      <li>Nested function</li>
+      <li>Method chaining</li>
+      <li>Object scoping</li>
+      <li>Annotation
+        <ul>
+          <li>Compile-time</li>
+          <li>Runtime</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>External DSLs</p>
+    <ul>
+      <li>XML and JSON as DSLs</li>
+      <li>Delimiter-directed translation concepts</li>
+      <li>Syntax-directed translation concepts
+        <ul>
+          <li>Vocabulary</li>
+          <li>Grammar</li>
+          <li>Scanner/lexer</li>
+          <li>Parser</li>
+          <li>Parse tree</li>
+          <li>Abstract syntax tree</li>
+          <li>Symbol table</li>
+          <li>Translation
+            <ul>
+              <li>Embedded</li>
+              <li>Tree-based</li>
+              <li>Benefits/drawbacks of same-level translation</li>
+            </ul>
+          </li>
+          <li>Compilation
+            <ul>
+              <li>Benefits/drawbacks of lower-level compilation</li>
+            </ul>
+          </li>
+          <li>Interpretation
+            <ul>
+              <li>Embedded</li>
+              <li>Tree-based</li>
+              <li>Benefits/drawbacks of interpretation vs translation/compilation</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Graphical DSL concepts
+        <ul>
+          <li>Alternative (non-text) representations
+            <ul>
+              <li>Tables</li>
+              <li>Graphs</li>
+              <li>Blocks</li>
+            </ul>
+          </li>
+          <li>Combining with Textual Representations
+            <ul>
+              <li>Import/export</li>
+              <li>Hand or Machine Editable</li>
+            </ul>
+          </li>
+          <li>Examples
+            <ul>
+              <li>Blockly (Google/MIT)</li>
+              <li>UML Tools</li>
+              <li>Database E-R Diagrams</li>
+            </ul>
+          </li>
+          <li>Benefits/drawbacks of graphical approaches</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Tools</p>
+    <ul>
+      <li>RegEx table</li>
+      <li>Parser Generators
+        <ul>
+          <li>LALR
+            <ul>
+              <li>lex/yacc</li>
+            </ul>
+          </li>
+          <li>LL
+            <ul>
+              <li>ANTLR</li>
+              <li>xText</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Parser Combinator</li>
+    </ul>
+  </li>
+  <li>
+    <p>Code Generation</p>
+    <ul>
+      <li>Model-Aware</li>
+      <li>Model-Ignorant</li>
+      <li>Tools
+        <ul>
+          <li>ANTLR
+            <ul>
+              <li>Inline</li>
+              <li>Tree Based</li>
+            </ul>
+          </li>
+          <li>xText
+            <ul>
+              <li>Text-Based</li>
+              <li>Java Inferencing</li>
+            </ul>
+          </li>
+          <li>MPS</li>
+        </ul>
+      </li>
+      <li>Templates</li>
+      <li>Generation Gap Pattern</li>
+    </ul>
+  </li>
+</ul>
+
+
+<h2>Objectives</h2>
+<p>By the end of this module, you will be able to:</p>
+<ul>
+<li><p>Peruse the Topic List of Doom </p></li>
+</ul>
+
+<h2>Learning Guide</h2>
+<p>Begin this module by watching all of the recorded lectures below. I strongly recommend that you watch them in 
+the order listed, as some lectures assume knowledge gained from earlier lectures.</p>
+
+<p>Refer to the <a href='Outline.html'>Course Outline</a> for any assignment start or due dates!</p>
+
+<p>Please post any questions to the Q & A section of the Discussion Board.</p>
+
+		
+
+</div>
+</div>
+<div id="footer">
+
+<h3>Content License</h3>
+<p>All non-source-code content in this course is licensed to you for your use in this course only.
+You may not distribute or reuse any content of this course for any purpose.</p> 
+
+<h3>Source Code License</h3>
+<p>Source code in this course is licensed under the Apache License, Version 2.0 (the "License");
+you may not use these files except in compliance with the License.
+You may obtain a copy of the License at</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a target="_blank" href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a></p>
+
+<p>Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</p>
+</div>
+</body>
+</html>
