@@ -1,0 +1,93 @@
+<?xml version="1.0" ?>
+<manifest identifier="MANIFEST1"
+	xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+	xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2" >
+	<organizations default="TOC1">
+		<organization identifier="TOC1" structure="hierarchical">
+			<title>Domain-Specific Languages</title>
+				<item identifier="TOC-ABOUT" identifierref="ABOUT" isvisible="true">
+					<title>About This Course</title>
+				</item>
+				<item identifier="TOC-OUTLINE" identifierref="OUTLINE" isvisible="true">
+					<title>Outline</title>
+				</item>
+				<item identifier="TOC-SYLLABUS" identifierref="SYLLABUS" isvisible="true">
+					<title>Syllabus</title>
+				</item>
+				<item identifier="TOC-DOWNLOADABLE-RESOURCES" identifierref="DOWNLOADABLE-RESOURCES" isvisible="true">
+					<title>Downloadable Resources</title>
+				</item>
+				
+				<item identifier="TOC-WEEK1"  isvisible="true">
+					<title>Week 1 - 5/30/17 - 6/5/17</title>
+					<item identifier="TOC-WEEK1-VIDEOS" identifierref="WEEK1-VIDEOS" isvisible="true">
+						<title>All Videos: 00:00</title>
+					</item>
+					<item identifier="TOC-MODULE-TOPICS" identifierref="MODULE-TOPICS" isvisible="true">
+						<title>1.1. Topics</title>
+					</item>
+				</item>
+				
+				<item identifier="TOC-WEEK2"  isvisible="true">
+					<title>Week 2 - 6/6/17 - 6/12/17</title>
+					<item identifier="TOC-WEEK2-VIDEOS" identifierref="WEEK2-VIDEOS" isvisible="true">
+						<title>All Videos: 00:00</title>
+					</item>
+					<item identifier="TOC-MODULE-TOPICS2" identifierref="MODULE-TOPICS2" isvisible="true">
+						<title>2.1. Topics - Week 2</title>
+					</item>
+					<item identifier="TOC-WEEK2-START-ASSIGNMENT" identifierref="ASSIGNMENT-A1" isvisible="true">
+						<title>START Assignment A1</title>
+					</item>
+					<item identifier="TOC-WEEK2-END-ASSIGNMENT" identifierref="ASSIGNMENT-A1" isvisible="true">
+						<title>SUBMIT Assignment A1</title>
+					</item>
+				</item>
+				
+				<item identifier="TOC-ASSIGNMENTS" isvisible="true">
+					<title>Assignments</title>
+					<item identifier="TOC-ASSIGNMENT-A1" identifierref="ASSIGNMENT-A1" isvisible="true">
+						<title>A1: Fluent APIs</title>
+					</item>
+				</item>
+		</organization>
+	</organizations>
+	<resources>
+		<resource identifier="MODULE-TOPICS" type="webcontent"
+			adlcp:scormtype="asset" href="Module-TOPICS.html">
+			<file href="Module-TOPICS.html" />
+		</resource>
+		<resource identifier="MODULE-TOPICS2" type="webcontent"
+			adlcp:scormtype="asset" href="Module-TOPICS2.html">
+			<file href="Module-TOPICS2.html" />
+		</resource>
+		<resource identifier="ASSIGNMENT-A1" type="webcontent"
+			adlcp:scormtype="asset" href="Assignment-A1.html">
+			<file href="Assignment-A1.html" />
+		</resource>
+		<resource identifier="WEEK1-VIDEOS" type="webcontent"
+			adlcp:scormtype="asset" href="Week-1-Videos.html">
+			<file href="Week-1-Videos.html" />
+		</resource>
+		<resource identifier="WEEK2-VIDEOS" type="webcontent"
+			adlcp:scormtype="asset" href="Week-2-Videos.html">
+			<file href="Week-2-Videos.html" />
+		</resource>
+		<resource identifier="ABOUT" type="webcontent"
+			adlcp:scormtype="asset" href="About.html">
+			<file href="About.html" />
+		</resource>
+		<resource identifier="OUTLINE" type="webcontent"
+			adlcp:scormtype="asset" href="Outline.html">
+			<file href="Outline.html" />
+		</resource>
+		<resource identifier="SYLLABUS" type="webcontent"
+			adlcp:scormtype="asset" href="Syllabus.html">
+			<file href="Syllabus.html" />
+		</resource>
+		<resource identifier="DOWNLOADABLE-RESOURCES" type="webcontent"
+			adlcp:scormtype="asset" href="DownloadableResources.html">
+			<file href="DownloadableResources.html" />
+		</resource>
+	</resources>
+</manifest>

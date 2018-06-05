@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-GB">
+<head>
+<title>Assignment A1 - Fluent APIs</title>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+<link rel="shortcut icon" href="Static/images/favicon.ico" />
+<link rel="stylesheet" type="text/css" href="Static/screen.css" />
+</head>
+<body>
+<div id="header">
+<div class='bgBanner'>
+	<div class='brandingImgWrap'>
+		<img src='Static/images/bblogo.png' height='40px'/>
+	</div>
+	<!--
+	<div class='className'>
+		<h3>605.606 - Domain-Specific Languages - Summer 2018</h3>
+	</div>
+	-->
+	<div class='pageName'>
+		<h2>Assignment A1 - Fluent APIs</h2>
+	</div>
+</div>
+</div>
+<div class="col1">
+<p>In this assignment, you'll create a simple fluent API to create a limited subset of Java Swing GUIs.</p>
+
+<p>Grab the starter code from <a href="Static/Assignment1.kt">Assignment1.kt</a> </p>
+<p>Create an implementation of the missing GuiBuilder class. Do not use Progressive Interfaces or Child Builders for your implementation. </p>
+<p>Note that your implementation will need to do some error checking to validate the order of function calls. This will be runtime validation; you can throw exceptions if the GUI is in error. Some cases to consider:</p>
+<ul>
+  <li>north(), south(), east(), west() and center() can only be called if the current layout is a BorderLayout. (The top-level is automatically a BorderLayout)</li>
+  <li>After calling north(), south(), east(), west() and center(), a component (button(), grid(), flow() or border()) must be the next function called</li>
+  <li>grid(), flow() and border() must be ended with an end() call</li>
+  <li>No builder functions can be called after show()</li>
+</ul>
+<p>After implementing the GuiBuilder, test it with 3-4 GUIs that you define. These GUIs should be submitted with your code.</p>
+<p>After testing, answer the following questions and submit with your code:</p>
+<ul>
+  <li>
+    <p>Compared to the "raw" approach at the top of the app</p>
+    <ul>
+      <li>How do you think your implementation affects performance?</li>
+      <li>How do you think your implementation affects maintainability (consider the builder and use of the builder separately)?</li>
+    </ul>
+  </li>
+  <li>
+  <p>Describe a case where the GUI would be ambiguous if we did not have the end() call</p></li>
+  <li>Could this builder language be implemented using Progressive Interfaces or Child Builders? If no, why not?
+    <ul>
+      <li>As-is?</li>
+      <li>With minor changes?</li>
+    </ul>
+  </li>
+  <li>
+    <p>If we added new components (like a TextField), how would the following be impacted? (For this question, assume all could be used to implement this language)</p>
+    <ul>
+      <li>Your implementation</li>
+      <li>A Progressive Interface implementation</li>
+      <li>A Child Builder implementation</li>
+    </ul>
+  </li>
+  <li>
+  <p>From the point of view of the user of your builder, how would a Progressive Interface or Child Builder make his work easier or more difficult?</p></li>
+</ul>
+<h2>Submitting Your Assignment</h2>
+		
+<p>To submit your assignment (do this outside IntelliJ/Android Studio):</p>
+<ol>
+	<li>Close the project in IntelliJ/Android Studio (and/or quit IntelliJ/Android Studio)</li>
+	<li>Find the directory for your project</li>
+	<li>Delete the build and app/build directories from the project folder</li>
+	<li>Zip the project directory. Be sure to get all files and subdirectories, including those that start with '.'.  Be sure to name the zip file lastname.firstname.hw1</li>
+	<li>Go to the Blackboard course website</li>
+	<li>Click on the <b><i>Assignment Submission</i></b> link on the left navigation bar</li>
+	<li>Click on the <b><i>Assignment A1</i></b> link</li>
+	<li>Attach your submission and enter any notes</li>
+	<li>Be sure to <b><i>submit</i></b> your assignment, not just save it!</li>
+</ol>
+</div>
+</div>
+<div id="footer">
+
+<h3>Content License</h3>
+<p>All non-source-code content in this course is licensed to you for your use in this course only.
+You may not distribute or reuse any content of this course for any purpose.</p> 
+
+<h3>Source Code License</h3>
+<p>Source code in this course is licensed under the Apache License, Version 2.0 (the "License");
+you may not use these files except in compliance with the License.
+You may obtain a copy of the License at</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a target="_blank" href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a></p>
+
+<p>Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,454 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-GB">
+<head>
+<title>Course Design Matrix - 605.606 - Domain-Specific Languages</title>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+
+<style>
+table {
+border-collapse: collapse;
+width: 95%;
+margin-left: auto;
+margin-right: auto;
+}
+table, th, td {
+border: 1px solid black;
+vertical-align: top;
+padding: 5px;
+padding-left: 15px;
+padding-right: 15px;
+text-align: left;
+margin-bottom: 20px;
+}
+.separator {
+border-left: 0px;
+border-right: 0px;
+height: 20px;
+}
+.weekheader {
+background-color: #BFDFFF;
+}
+.assignment {
+background-color:#EAF1DD;
+}
+h1 {
+font-family: Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif;
+font-size: 26px;
+font-style: normal;
+font-variant: normal;
+font-weight: 500;
+line-height: 32px;
+color: #17365D;
+}
+h1:after {
+content:' ';
+display:block;
+border:0.5px solid #4f81BD;
+}
+h2 {
+font-family: Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif;
+font-size: 20px;
+font-style: normal;
+font-variant: normal;
+font-weight: 500;
+line-height: 28.4px;
+color: #345A8A;
+}
+p,li,dd,dt {
+font-family: Cambria, Georgia, serif;
+font-size: 14px;
+font-style: normal;
+font-variant: normal;
+font-weight: 400;
+line-height: 20px;
+}
+dd {
+margin-bottom: 5px
+}
+</style>
+</head>
+<body>
+<h1>Course Design Matrix - 605.606 - Domain-Specific Languages</h1>
+<h2>Introduction</h2>
+<p>The purpose of the Course Design Matrix (CDM) is to establish the foundation of your online course. This document will guide the planning, design, and development of your course. The CDM should be updated through the course development to reflect any revisions to the course design. Please feel free to contact your instructional designer if you have any questions or need additional guidance.</p>
+
+<h2>Course Information</h2>
+<p>In the space below, provide the description of your course. The Course Description is found in the EP Course Catalog (<a target='_blank' href="http://catalog.ep.jhu.edu/">http://catalog.ep.jhu.edu/</a>), and should not be modified without written consent from your program chair.</p>
+
+<table>
+<tr>
+<td><b>Course Number/Name:</b> 605.606 Domain-Specific Languages</td>
+<td><b>Development Started:</b> May 2018</td>
+<td><b>Target Delivery:</b> Summer 2018</td>
+</tr>
+<tr>
+<td><b>Course Instructor:</b> Scott Stanchfield</td>
+<td><b>Instructor Email:</b> scott@javadude.com</td>
+<td><b>Instructor Phone:</b> 301-609-0545</td>
+</tr>
+<tr>
+<td><b>Instructional Designer:</b> N/A</td>
+<td><b>Program Chair:</b> Thomas Longstaff</td>
+<td></td>
+</tr>
+</table>
+
+<h2>Course Description</h2>
+<p>In the space below, provide the description of your course. The Course Description is found in the EP Course Catalog (<a target='_blank' href="http://catalog.ep.jhu.edu/">http://catalog.ep.jhu.edu/</a>), and should not be modified without written consent from your program chair.</p>
+
+<table>
+<tr><td><p>Domain-specific languages (DSLs) are little languages you write that look and feel like a spoken way to specify data or write code. You can use them for input and output, incorporating the jargon and nomenclature of your subject-matter experts (SMEs), as well as inside your own code to make it more expressive and fluent, and often simpler. You can use them as part of your build process to generate hundreds of classes full of otherwise tedious and error-prone boilerplate code from a small specification in a consistent manner. In this course, weâ€™ll design and implement several types of DSLs. Weâ€™ll write code to edit and import data, allowing SMEs more natural-feeling access to your software. Weâ€™ll create APIs in multiple programming languages to make it easier and more secure for others to use your libraries. Weâ€™ll generate code to improve productivity and reliability in your own software.</p>
+<p>Examples and assignments in this class will be done in several programming languages. We assume a high comfort level with Java and the ability to adapt to new languages quickly.</p></td></tr>
+</table>
+
+<h2>Course Learning Objectives</h2>
+<p>In the space below, provide the course learning objectives. Course learning objectives are measurable, observable statements that describe what the students will be able to do after completing this course.</p>
+
+<table>
+<tr><td>
+<p>By the end of this course, students will be able to:</p>
+<ul>
+<li><p>Describe the purposes for DSLs</p></li>
+<li><p>Describe the differences between internal and external DSLs.</p></li>
+<li><p>Implement internal and external DSLs using various programming languages and tools.</p></li>
+<li><p>Generate code using data obtained from DSLs.</p></li>
+</ul>
+</td></tr>
+</table>
+
+<h2>Assessment Strategy</h2>
+<p>In the space below, provide the overall assessment strategy of the course. This will include all items listed in the Learning Activities and Assessments column below. </p>
+
+<table>
+<tr><td><p>This course is graded solely on your assignment submissions. There are 5 programming assignments. Each is worth 100 points.</p>
+<p>All assignments are due according to the dates in the course outline.</p>
+<p>Late submissions will be reduced by one letter grade (10 percent) for each <em><strong>DAY</strong></em> (or partial day) late (no exceptions without timely prior coordination with the instructors). See the grading policy for assignment grading details.</p>
+<table><tr><td>
+
+<p><b>Expected Conflicts</b>: If you expect any issues with turning in work on time, please see the instructor as soon as you know. If I know 
+in advance about business travel and expected high workloads, I can work with you. However, letting me know a day or 
+two before an assignment is due is not acceptable (you've had time to work on the assignment prior to the interruption).</p>
+
+<p><b>Technical Problems with Blackboard</b>: If you encounter issues while trying to submit your 
+assignment, please immediately send me an email with your submission text and a note stating that BlackBoard is being your best friend. 
+If you submit in this manner, I will not count your submission as late.</p>
+</td></tr></table>
+<h1>Grading</h1>
+<p>Each day late results in a one-letter grade (10 percent) drop on the assignment.</p>
+<h2>Grade Scale</h2>
+<p>All assignments are worth 100 points</p>
+<p>Assignments will be graded from 0-100.</p>
+<p>NOTE: 95 is the normal "best grade" on an assignment, representing an "A". Do not think of an "A" as "I lost points"; that's the standard grade for a well-done submission. I rarely give A+ as a grade. <em>Again, do not think you have lost points if you do not get A+/100 on an assignment. A/95 is normally the highest grade you'll receive on an assignment.</em></p>
+<table>
+<thead><th>Letter Grade</th><th>Numeric Score in BlackBoard</th></thead>
+<tr><td>A+</td><td>100</td></tr>
+<tr><td>A </td><td>95</td></tr>
+<tr><td>A-</td><td>92</td></tr>
+<tr><td>B+</td><td>88</td></tr>
+<tr><td>B </td><td>85</td></tr>
+<tr><td>B-</td><td>82</td></tr>
+<tr><td>C+</td><td>78</td></tr>
+<tr><td>C </td><td>75</td></tr>
+<tr><td>C-</td><td>72</td></tr>
+<tr><td>F </td><td>0</td></tr>
+</table>
+<p>Your final grade <em><strong>WILL NOT</strong></em> include +/- designations. A+/A/A- all count as "A" and "4" for GPA purposes (and similar for other letter grades).</p>
+<p><strong>Regarding "A+" work</strong>. "A+" is not given for "extra credit". In fact, if you do extra things that are not in the assignment description (without getting an "ok" from the instructor), your grade <em>will</em> be penalized. An "A+" on an assignment means you did all functionality and have code that feels "exemplary". </p>
+<p>When grading assignments, I will write comments describing your grade, but I will usually not note specific point-value deductions. I take this approach because far too much time has been spent in the past debating deductions of "1 point" which ended up having no effect on the assignment grade.</p>
+<p>If you disagree with a grade you can ask us to review it. Tell us what your concerns are and I'll look at it. Sometimes I may miss something in your code due to the number of assignments I have to grade.</p>
+<p>This course often has full enrollment. Due to the large number of students, grading can take a significant amount of time and you may not receive feedback for 1-2 weeks. If I note a problem with a submission but do not return it at least 4 days before the next assignment is due, I will not count the same problem off on the next assignment <em>unless the problem is something that is clearly spelled out in the assignment description or grading policy</em>. For example, if you do not follow the course coding conventions spelled out in this syllabus, your grade will be maxed at A- regardless of when the previous assignment was returned.</p>
+<h2>Distribution of Grades</h2>
+<p>It is possible (and has happened in past sections of my other courses) for everyone to get an "A" in this course. I will not be applying any sort of curve or other means to artificially distribute grades.</p>
+<p>I will be looking closely at your <em>efforts</em> in this class. An "A" grade in this course requires a good deal of effort. Do not expect an "A" if you start programming a few nights before they are due...</p>
+<p>Let me repeat that. Do not expect an "A" if you start programming assignments a few nights before they are due... This has often been the reason for B and C grades in the course; students do not allow enough time to ask clarifying questions or do the coding.</p>
+<p><em><strong>Be sure to at least look over and understand the assignments at the beginning of the week they are assigned! This will give you time to ask questions.</strong></em></p>
+<p>Basically, if you do all the work well and on-time, you will get an "A" for the course. If you do all of the work on-time but are having trouble with the concepts, you'll likely get a "B" for the course. If you're in danger of a lower grade, I will speak with you as soon as it becomes apparent to me.</p></td></tr>
+</table>
+
+<h2>Course Design</h2>
+<p>For each module provide the information indicated in the column heading. For assistance, please follow the guidance provided in each field.</p>
+<table>
+<tr><td class='weekheader' colspan='5'><b>Week 1</b></td></tr>
+<tr class='weekheader'>
+<td><p><b>Module</b></p></td>
+<td><p><b>Module Learning Objectives</b></p></td>
+<!--
+<td><p><b>Teaching Strategies</b></p></td>
+<td><p><b>Learning Activities and Assesments</b></p></td>
+-->
+<td><p><b>Teaching Strategies, Module Resources and Development Notes</b></p></td>
+</tr>
+<tr>
+<td><p><b>1.1 Topics</b></p>
+<p>I currently do not have a detailed breakdown of how the topics will appear week-by-week. The following is a list of topics I would like to cover during this course, but time may not allow covering all of them.</p>
+<p>If you have other topics you would like to cover, or particular interests in any specific listed topics, please let me know so I can do my best to cover them.</p>
+<ul>
+  <li>
+    <p>What are DSLs</p>
+    <ul>
+      <li>Imperative vs declarative languages
+        <ul>
+          <li>Imperative - steps to do something</li>
+          <li>Declarative - intent of what to do</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Types of DSLs</p>
+    <ul>
+      <li>Internal
+        <ul>
+          <li>Builders</li>
+          <li>Fluent API</li>
+          <li>Specification</li>
+          <li>Embedded language (ie: SQL)</li>
+        </ul>
+      </li>
+      <li>External
+        <ul>
+          <li>Generic formats
+            <ul>
+              <li>XML</li>
+              <li>JSON</li>
+            </ul>
+          </li>
+          <li>Custom formats
+            <ul>
+              <li>Delimited</li>
+              <li>Syntax-Based</li>
+              <li>Graphical</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Uses for DSLs</p>
+    <ul>
+      <li>Semantic models
+        <ul>
+          <li>By end users</li>
+          <li>By SMEs</li>
+          <li>By programmers
+            <ul>
+              <li>Rule systems</li>
+              <li>State machines</li>
+              <li>Macros</li>
+              <li>Interpreters</li>
+            </ul>
+          </li>
+          <li>embedded
+            <ul>
+              <li>Internal</li>
+              <li>External</li>
+            </ul>
+          </li>
+          <li>Standalone
+            <ul>
+              <li>Code generation</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Internal DSLs</p>
+    <ul>
+      <li>Expression builder</li>
+      <li>Function sequence</li>
+      <li>Nested function</li>
+      <li>Method chaining</li>
+      <li>Object scoping</li>
+      <li>Annotation
+        <ul>
+          <li>Compile-time</li>
+          <li>Runtime</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>External DSLs</p>
+    <ul>
+      <li>XML and JSON as DSLs</li>
+      <li>Delimiter-directed translation concepts</li>
+      <li>Syntax-directed translation concepts
+        <ul>
+          <li>Vocabulary</li>
+          <li>Grammar</li>
+          <li>Scanner/lexer</li>
+          <li>Parser</li>
+          <li>Parse tree</li>
+          <li>Abstract syntax tree</li>
+          <li>Symbol table</li>
+          <li>Translation
+            <ul>
+              <li>Embedded</li>
+              <li>Tree-based</li>
+              <li>Benefits/drawbacks of same-level translation</li>
+            </ul>
+          </li>
+          <li>Compilation
+            <ul>
+              <li>Benefits/drawbacks of lower-level compilation</li>
+            </ul>
+          </li>
+          <li>Interpretation
+            <ul>
+              <li>Embedded</li>
+              <li>Tree-based</li>
+              <li>Benefits/drawbacks of interpretation vs translation/compilation</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Graphical DSL concepts
+        <ul>
+          <li>Alternative (non-text) representations
+            <ul>
+              <li>Tables</li>
+              <li>Graphs</li>
+              <li>Blocks</li>
+            </ul>
+          </li>
+          <li>Combining with Textual Representations
+            <ul>
+              <li>Import/export</li>
+              <li>Hand or Machine Editable</li>
+            </ul>
+          </li>
+          <li>Examples
+            <ul>
+              <li>Blockly (Google/MIT)</li>
+              <li>UML Tools</li>
+              <li>Database E-R Diagrams</li>
+            </ul>
+          </li>
+          <li>Benefits/drawbacks of graphical approaches</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Tools</p>
+    <ul>
+      <li>RegEx table</li>
+      <li>Parser Generators
+        <ul>
+          <li>LALR
+            <ul>
+              <li>lex/yacc</li>
+            </ul>
+          </li>
+          <li>LL
+            <ul>
+              <li>ANTLR</li>
+              <li>xText</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Parser Combinator</li>
+    </ul>
+  </li>
+  <li>
+    <p>Code Generation</p>
+    <ul>
+      <li>Model-Aware</li>
+      <li>Model-Ignorant</li>
+      <li>Tools
+        <ul>
+          <li>ANTLR
+            <ul>
+              <li>Inline</li>
+              <li>Tree Based</li>
+            </ul>
+          </li>
+          <li>xText
+            <ul>
+              <li>Text-Based</li>
+              <li>Java Inferencing</li>
+            </ul>
+          </li>
+          <li>MPS</li>
+        </ul>
+      </li>
+      <li>Templates</li>
+      <li>Generation Gap Pattern</li>
+    </ul>
+  </li>
+</ul>
+</td>
+<td>
+<p><b>By the end of this module, students will be able to:</b></p>
+<ul>
+<li><p>Peruse the Topic List of Doom </p></li>
+</ul>
+</td>
+<td>
+<!-- combined teaching strategies and module resources column
+</td>
+-->
+<!-- learning activities appear as assignments for the week
+<td>
+</td>
+<td>
+-->
+</td>
+</tr><tr class="separator"></tr>
+<tr><td class='weekheader' colspan='5'><b>Week 2</b></td></tr>
+<tr class='weekheader'>
+<td><p><b>Module</b></p></td>
+<td><p><b>Module Learning Objectives</b></p></td>
+<!--
+<td><p><b>Teaching Strategies</b></p></td>
+<td><p><b>Learning Activities and Assesments</b></p></td>
+-->
+<td><p><b>Teaching Strategies, Module Resources and Development Notes</b></p></td>
+</tr>
+<tr>
+<td><p><b>2.1 Topics - Week 2</b></p>
+<ul>
+  <li>Internal DSLs</li>
+  <li>Expression builder</li>
+  <li>Function sequence</li>
+  <li>Nested function</li>
+  <li>Method chaining</li>
+  <li>Object scoping</li>
+</ul>
+</td>
+<td>
+<p><b>By the end of this module, students will be able to:</b></p>
+<ul>
+<li><p>Peruse the Topic List of Doom </p></li>
+</ul>
+</td>
+<td>
+<!-- combined teaching strategies and module resources column
+</td>
+-->
+<!-- learning activities appear as assignments for the week
+<td>
+</td>
+<td>
+-->
+</td>
+</tr>
+<tr>
+<td class='assignment'><p><b>Assignment</b></p></td>
+<td colspan='4'>
+<p><b>Assignment A1: Fluent APIs</b></p>
+<p>In this assignment, you'll create a simple fluent API to create a limited subset of Java Swing GUIs.</p>
+<p>Duration: 1 week (including this week)</p>
+<p>Due end of THIS week</p>
+</td>
+</tr>
+</table>
+</body>
+</html>
