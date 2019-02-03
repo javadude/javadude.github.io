@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Android on JavaDude.com</title>
-    <link>https://www.javadude.com/tags/android/</link>
+    <link>http://javadude.com/tags/android/</link>
     <description>Recent content in Android on JavaDude.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <lastBuildDate>Mon, 06 Oct 2014 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://www.javadude.com/tags/android/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://javadude.com/tags/android/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Android Intents and Fragments</title>
-      <link>https://www.javadude.com/posts/20141006-intents-and-fragments/</link>
+      <link>http://javadude.com/posts/20141006-intents-and-fragments/</link>
       <pubDate>Mon, 06 Oct 2014 00:00:00 +0000</pubDate>
       
-      <guid>https://www.javadude.com/posts/20141006-intents-and-fragments/</guid>
+      <guid>http://javadude.com/posts/20141006-intents-and-fragments/</guid>
       <description>&lt;p&gt;A tech talk I gave for Johns Hopkins University on Oct 6, 2014 on Android Intents and Fragments.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
