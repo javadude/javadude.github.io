@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tools on JavaDude.com</title>
-    <link>https://javadude.com/categories/tools/</link>
+    <link>https://www.javadude.com/categories/tools/</link>
     <description>Recent content in Tools on JavaDude.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <lastBuildDate>Wed, 02 Nov 2005 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://javadude.com/categories/tools/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.javadude.com/categories/tools/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>ANTXR</title>
-      <link>https://javadude.com/posts/20051102-antxr/</link>
+      <link>https://www.javadude.com/posts/20051102-antxr/</link>
       <pubDate>Wed, 02 Nov 2005 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/posts/20051102-antxr/</guid>
+      <guid>https://www.javadude.com/posts/20051102-antxr/</guid>
       <description>&lt;p&gt;ANTXR: Easy XML Parsing, based on the ANTLR parser generator&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -24,10 +24,10 @@
     
     <item>
       <title>Importifier</title>
-      <link>https://javadude.com/posts/20000304-importifier/</link>
+      <link>https://www.javadude.com/posts/20000304-importifier/</link>
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/posts/20000304-importifier/</guid>
+      <guid>https://www.javadude.com/posts/20000304-importifier/</guid>
       <description>&lt;p&gt;Automatic Expansion of Java Import Statements&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -35,10 +35,10 @@
     
     <item>
       <title>Swing Border Editor</title>
-      <link>https://javadude.com/posts/20000304-border-editor/</link>
+      <link>https://www.javadude.com/posts/20000304-border-editor/</link>
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/posts/20000304-border-editor/</guid>
+      <guid>https://www.javadude.com/posts/20000304-border-editor/</guid>
       <description>&lt;p&gt;Simple Swing Border Editing in GUI Builders&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -46,10 +46,10 @@
     
     <item>
       <title>Autogut</title>
-      <link>https://javadude.com/posts/19991024-autogut/</link>
+      <link>https://www.javadude.com/posts/19991024-autogut/</link>
       <pubDate>Sun, 24 Oct 1999 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/posts/19991024-autogut/</guid>
+      <guid>https://www.javadude.com/posts/19991024-autogut/</guid>
       <description>&lt;p&gt;A VisualAge for Java plugin to create interfaces from classes&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -57,10 +57,10 @@
     
     <item>
       <title>SplitterLayout</title>
-      <link>https://javadude.com/posts/19980228-splitterlayout/</link>
+      <link>https://www.javadude.com/posts/19980228-splitterlayout/</link>
       <pubDate>Sun, 24 Oct 1999 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/posts/19980228-splitterlayout/</guid>
+      <guid>https://www.javadude.com/posts/19980228-splitterlayout/</guid>
       <description>&lt;p&gt;A Layout Manager for Split Windows&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -68,10 +68,10 @@
     
     <item>
       <title>BoxBeans</title>
-      <link>https://javadude.com/posts/19981126-boxbeans/</link>
+      <link>https://www.javadude.com/posts/19981126-boxbeans/</link>
       <pubDate>Thu, 26 Nov 1998 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/posts/19981126-boxbeans/</guid>
+      <guid>https://www.javadude.com/posts/19981126-boxbeans/</guid>
       <description>&lt;p&gt;JavaBeans for BoxLayout Visualization&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -79,10 +79,10 @@
     
     <item>
       <title>ParseView</title>
-      <link>https://javadude.com/posts/19980717-parseview/</link>
+      <link>https://www.javadude.com/posts/19980717-parseview/</link>
       <pubDate>Fri, 17 Jul 1998 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/posts/19980717-parseview/</guid>
+      <guid>https://www.javadude.com/posts/19980717-parseview/</guid>
       <description>&lt;p&gt;Visual Debugging for ANTLR 2.x&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -90,10 +90,10 @@
     
     <item>
       <title>TabSplitter</title>
-      <link>https://javadude.com/posts/19980228-tabsplitter/</link>
+      <link>https://www.javadude.com/posts/19980228-tabsplitter/</link>
       <pubDate>Sat, 28 Feb 1998 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/posts/19980228-tabsplitter/</guid>
+      <guid>https://www.javadude.com/posts/19980228-tabsplitter/</guid>
       <description>&lt;p&gt;Way Cool (And Antiquated) Tabbed Panel Component&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>

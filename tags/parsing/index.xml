@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Parsing on JavaDude.com</title>
-    <link>https://javadude.com/tags/parsing/</link>
+    <link>https://www.javadude.com/tags/parsing/</link>
     <description>Recent content in Parsing on JavaDude.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <lastBuildDate>Wed, 28 Jun 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://javadude.com/tags/parsing/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.javadude.com/tags/parsing/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>DSLs and Code Generation</title>
-      <link>https://javadude.com/posts/20170628-dsls-and-codegen/</link>
+      <link>https://www.javadude.com/posts/20170628-dsls-and-codegen/</link>
       <pubDate>Wed, 28 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/posts/20170628-dsls-and-codegen/</guid>
+      <guid>https://www.javadude.com/posts/20170628-dsls-and-codegen/</guid>
       <description>&lt;p&gt;A JHU Tech Talk from June 28, 2017.&lt;/p&gt;
 
 &lt;p&gt;What is a Domain-Specific Language? How can we use one for code-generation?&lt;/p&gt;
@@ -26,10 +26,10 @@
     
     <item>
       <title>Code Generation with xText and xTend</title>
-      <link>https://javadude.com/posts/20130730-xtext/</link>
+      <link>https://www.javadude.com/posts/20130730-xtext/</link>
       <pubDate>Tue, 30 Jul 2013 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/posts/20130730-xtext/</guid>
+      <guid>https://www.javadude.com/posts/20130730-xtext/</guid>
       <description>&lt;p&gt;A JUG talk from July 2013 I presented on new features in JCode Generation with xText and xTend.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -37,10 +37,10 @@
     
     <item>
       <title>ANTLR 3.x Tutorial</title>
-      <link>https://javadude.com/posts/20091221-antlr3tut/</link>
+      <link>https://www.javadude.com/posts/20091221-antlr3tut/</link>
       <pubDate>Mon, 21 Dec 2009 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/posts/20091221-antlr3tut/</guid>
+      <guid>https://www.javadude.com/posts/20091221-antlr3tut/</guid>
       <description>&lt;p&gt;A video tutorial on ANTLR 3.x&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -48,10 +48,10 @@
     
     <item>
       <title>An ANTLR 2.0 Tutorial</title>
-      <link>https://javadude.com/posts/20000304-antlrtut/</link>
+      <link>https://www.javadude.com/posts/20000304-antlrtut/</link>
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/posts/20000304-antlrtut/</guid>
+      <guid>https://www.javadude.com/posts/20000304-antlrtut/</guid>
       <description>&lt;p&gt;A tutorial on ANTLR 2.x&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -59,10 +59,10 @@
     
     <item>
       <title>Converting a Grammar from LALR to LL</title>
-      <link>https://javadude.com/articles/lalrtoll.html</link>
+      <link>https://www.javadude.com/articles/lalrtoll.html</link>
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/articles/lalrtoll.html</guid>
+      <guid>https://www.javadude.com/articles/lalrtoll.html</guid>
       <description>&lt;p&gt;Converting from LALR to LL can be challenging&amp;hellip; Hopefully this article will make it a weeeeee bit simpler&amp;hellip;&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
