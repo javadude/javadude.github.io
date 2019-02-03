@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on JavaDude.com</title>
+    <link>https://javadude.com/tags/</link>
+    <description>Recent content in Tags on JavaDude.com</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <lastBuildDate>Mon, 06 Oct 2014 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://javadude.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Android</title>
+      <link>https://javadude.com/tags/android/</link>
+      <pubDate>Mon, 06 Oct 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/tags/android/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Antlr</title>
+      <link>https://javadude.com/tags/antlr/</link>
+      <pubDate>Mon, 21 Dec 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/tags/antlr/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Beans</title>
+      <link>https://javadude.com/tags/beans/</link>
+      <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/tags/beans/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Code Generation</title>
+      <link>https://javadude.com/tags/code-generation/</link>
+      <pubDate>Tue, 30 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/tags/code-generation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Design</title>
+      <link>https://javadude.com/tags/design/</link>
+      <pubDate>Wed, 16 May 2001 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/tags/design/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Dsl</title>
+      <link>https://javadude.com/tags/dsl/</link>
+      <pubDate>Wed, 28 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/tags/dsl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Eclipse</title>
+      <link>https://javadude.com/tags/eclipse/</link>
+      <pubDate>Wed, 28 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/tags/eclipse/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Java</title>
+      <link>https://javadude.com/tags/java/</link>
+      <pubDate>Wed, 28 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/tags/java/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Language</title>
+      <link>https://javadude.com/tags/language/</link>
+      <pubDate>Tue, 23 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/tags/language/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Parsing</title>
+      <link>https://javadude.com/tags/parsing/</link>
+      <pubDate>Wed, 28 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/tags/parsing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Patterns</title>
+      <link>https://javadude.com/tags/patterns/</link>
+      <pubDate>Thu, 19 Nov 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/tags/patterns/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Xtext</title>
+      <link>https://javadude.com/tags/xtext/</link>
+      <pubDate>Wed, 28 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/tags/xtext/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
