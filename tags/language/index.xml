@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Language on JavaDude.com</title>
-    <link>https://javadude.com/tags/language/</link>
+    <link>https://www.javadude.com/tags/language/</link>
     <description>Recent content in Language on JavaDude.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <lastBuildDate>Tue, 23 Sep 2014 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://javadude.com/tags/language/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.javadude.com/tags/language/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Java 8 - Lambdas and Streams</title>
-      <link>https://javadude.com/posts/20140923-lambdas-and-streams/</link>
+      <link>https://www.javadude.com/posts/20140923-lambdas-and-streams/</link>
       <pubDate>Tue, 23 Sep 2014 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/posts/20140923-lambdas-and-streams/</guid>
+      <guid>https://www.javadude.com/posts/20140923-lambdas-and-streams/</guid>
       <description>&lt;p&gt;A JUG talk from September 2014 I presented on new features in Java 8: Lambdas and Streams.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -24,10 +24,10 @@
     
     <item>
       <title>Java Enumerations</title>
-      <link>https://javadude.com/posts/20121219-enumerations/</link>
+      <link>https://www.javadude.com/posts/20121219-enumerations/</link>
       <pubDate>Wed, 19 Dec 2012 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/posts/20121219-enumerations/</guid>
+      <guid>https://www.javadude.com/posts/20121219-enumerations/</guid>
       <description>&lt;p&gt;A JUG talk I presented on enumerations in Java.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -35,10 +35,10 @@
     
     <item>
       <title>Java Dynamic Proxies</title>
-      <link>https://javadude.com/posts/20101202-dynamic-proxies/</link>
+      <link>https://www.javadude.com/posts/20101202-dynamic-proxies/</link>
       <pubDate>Thu, 02 Dec 2010 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/posts/20101202-dynamic-proxies/</guid>
+      <guid>https://www.javadude.com/posts/20101202-dynamic-proxies/</guid>
       <description>&lt;p&gt;I presented a talk on Dynamic Proxies to the Columbia, Maryland Java Users Group on 12/02/2010.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -46,10 +46,10 @@
     
     <item>
       <title>Java Annotations</title>
-      <link>https://javadude.com/posts/20100120-annotations/</link>
+      <link>https://www.javadude.com/posts/20100120-annotations/</link>
       <pubDate>Wed, 20 Jan 2010 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/posts/20100120-annotations/</guid>
+      <guid>https://www.javadude.com/posts/20100120-annotations/</guid>
       <description>&lt;p&gt;I presented a talk on Java Annotations to the Columbia, Maryland Java Users Group on 1/19/2010.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -57,10 +57,10 @@
     
     <item>
       <title>ANTLR 3.x Tutorial</title>
-      <link>https://javadude.com/posts/20091221-antlr3tut/</link>
+      <link>https://www.javadude.com/posts/20091221-antlr3tut/</link>
       <pubDate>Mon, 21 Dec 2009 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/posts/20091221-antlr3tut/</guid>
+      <guid>https://www.javadude.com/posts/20091221-antlr3tut/</guid>
       <description>&lt;p&gt;A video tutorial on ANTLR 3.x&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -68,10 +68,10 @@
     
     <item>
       <title>Import on Demand is EVIL!</title>
-      <link>https://javadude.com/posts/20040522-import-on-demand-is-evil/</link>
+      <link>https://www.javadude.com/posts/20040522-import-on-demand-is-evil/</link>
       <pubDate>Sat, 22 May 2004 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/posts/20040522-import-on-demand-is-evil/</guid>
+      <guid>https://www.javadude.com/posts/20040522-import-on-demand-is-evil/</guid>
       <description>&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
 
 &lt;p&gt;There should &lt;em&gt;&lt;strong&gt;never&lt;/strong&gt;&lt;/em&gt; exist any language feature such that &lt;em&gt;&lt;strong&gt;adding&lt;/strong&gt;&lt;/em&gt; a new type to a referenced package can break your existing code. Import-on-demand is one such feature&amp;hellip; And it&amp;rsquo;s evil&amp;hellip;&lt;/p&gt;
@@ -81,10 +81,10 @@
     
     <item>
       <title>Java is Pass-by-Value, Dammit!</title>
-      <link>https://javadude.com/articles/passbyvalue.htm</link>
+      <link>https://www.javadude.com/articles/passbyvalue.htm</link>
       <pubDate>Wed, 16 May 2001 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/articles/passbyvalue.htm</guid>
+      <guid>https://www.javadude.com/articles/passbyvalue.htm</guid>
       <description>&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
 
 &lt;p&gt;I finally decided to write up a little something about Java&amp;rsquo;s parameter passing. I&amp;rsquo;m really tired of hearing folks (incorrectly) state &amp;ldquo;primitives are passed by value, objects are passed by reference&amp;rdquo;.&lt;/p&gt;
@@ -94,10 +94,10 @@
     
     <item>
       <title>An ANTLR 2.0 Tutorial</title>
-      <link>https://javadude.com/posts/20000304-antlrtut/</link>
+      <link>https://www.javadude.com/posts/20000304-antlrtut/</link>
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/posts/20000304-antlrtut/</guid>
+      <guid>https://www.javadude.com/posts/20000304-antlrtut/</guid>
       <description>&lt;p&gt;A tutorial on ANTLR 2.x&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -105,10 +105,10 @@
     
     <item>
       <title>JavaOne 2000/2001/2002</title>
-      <link>https://javadude.com/posts/20000304-javaone/</link>
+      <link>https://www.javadude.com/posts/20000304-javaone/</link>
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/posts/20000304-javaone/</guid>
+      <guid>https://www.javadude.com/posts/20000304-javaone/</guid>
       <description>&lt;p&gt;Some talks I gave at JavaOne in 2000, 2001, and 2002.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -116,10 +116,10 @@
     
     <item>
       <title>Using JavaBean Accessors</title>
-      <link>https://javadude.com/posts/20000304-accessors/</link>
+      <link>https://www.javadude.com/posts/20000304-accessors/</link>
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/posts/20000304-accessors/</guid>
+      <guid>https://www.javadude.com/posts/20000304-accessors/</guid>
       <description>&lt;p&gt;Accessors are a key ingredient to proper encapsulation.  The can restrict access to only read/write data, inform other objects of changes to data, and perform validation on new values being set.  Consistent accessor usage makes class modification easy and transparent.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -127,10 +127,10 @@
     
     <item>
       <title>Using the Right Comment in Java</title>
-      <link>https://javadude.com/posts/20000304-comments/</link>
+      <link>https://www.javadude.com/posts/20000304-comments/</link>
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/posts/20000304-comments/</guid>
+      <guid>https://www.javadude.com/posts/20000304-comments/</guid>
       <description>&lt;p&gt;Java provides three types of comments; when should we use which?&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>

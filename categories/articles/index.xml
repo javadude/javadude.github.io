@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Articles on JavaDude.com</title>
-    <link>https://javadude.com/categories/articles/</link>
+    <link>https://www.javadude.com/categories/articles/</link>
     <description>Recent content in Articles on JavaDude.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <lastBuildDate>Sat, 22 May 2004 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://javadude.com/categories/articles/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.javadude.com/categories/articles/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Import on Demand is EVIL!</title>
-      <link>https://javadude.com/posts/20040522-import-on-demand-is-evil/</link>
+      <link>https://www.javadude.com/posts/20040522-import-on-demand-is-evil/</link>
       <pubDate>Sat, 22 May 2004 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/posts/20040522-import-on-demand-is-evil/</guid>
+      <guid>https://www.javadude.com/posts/20040522-import-on-demand-is-evil/</guid>
       <description>&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
 
 &lt;p&gt;There should &lt;em&gt;&lt;strong&gt;never&lt;/strong&gt;&lt;/em&gt; exist any language feature such that &lt;em&gt;&lt;strong&gt;adding&lt;/strong&gt;&lt;/em&gt; a new type to a referenced package can break your existing code. Import-on-demand is one such feature&amp;hellip; And it&amp;rsquo;s evil&amp;hellip;&lt;/p&gt;
@@ -26,10 +26,10 @@
     
     <item>
       <title>Java is Pass-by-Value, Dammit!</title>
-      <link>https://javadude.com/articles/passbyvalue.htm</link>
+      <link>https://www.javadude.com/articles/passbyvalue.htm</link>
       <pubDate>Wed, 16 May 2001 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/articles/passbyvalue.htm</guid>
+      <guid>https://www.javadude.com/articles/passbyvalue.htm</guid>
       <description>&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
 
 &lt;p&gt;I finally decided to write up a little something about Java&amp;rsquo;s parameter passing. I&amp;rsquo;m really tired of hearing folks (incorrectly) state &amp;ldquo;primitives are passed by value, objects are passed by reference&amp;rdquo;.&lt;/p&gt;
@@ -39,10 +39,10 @@
     
     <item>
       <title>Layering Applications</title>
-      <link>https://javadude.com/posts/20010516-layering-applications/</link>
+      <link>https://www.javadude.com/posts/20010516-layering-applications/</link>
       <pubDate>Wed, 16 May 2001 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/posts/20010516-layering-applications/</guid>
+      <guid>https://www.javadude.com/posts/20010516-layering-applications/</guid>
       <description>&lt;h1 id=&#34;layering-applications&#34;&gt;Layering Applications&lt;/h1&gt;
 
 &lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
@@ -54,10 +54,10 @@
     
     <item>
       <title>An ANTLR 2.0 Tutorial</title>
-      <link>https://javadude.com/posts/20000304-antlrtut/</link>
+      <link>https://www.javadude.com/posts/20000304-antlrtut/</link>
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/posts/20000304-antlrtut/</guid>
+      <guid>https://www.javadude.com/posts/20000304-antlrtut/</guid>
       <description>&lt;p&gt;A tutorial on ANTLR 2.x&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -65,10 +65,10 @@
     
     <item>
       <title>Converting a Grammar from LALR to LL</title>
-      <link>https://javadude.com/articles/lalrtoll.html</link>
+      <link>https://www.javadude.com/articles/lalrtoll.html</link>
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/articles/lalrtoll.html</guid>
+      <guid>https://www.javadude.com/articles/lalrtoll.html</guid>
       <description>&lt;p&gt;Converting from LALR to LL can be challenging&amp;hellip; Hopefully this article will make it a weeeeee bit simpler&amp;hellip;&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -76,10 +76,10 @@
     
     <item>
       <title>Creating JavaBean Property Editors</title>
-      <link>https://javadude.com/posts/20000304-property-editors/</link>
+      <link>https://www.javadude.com/posts/20000304-property-editors/</link>
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/posts/20000304-property-editors/</guid>
+      <guid>https://www.javadude.com/posts/20000304-property-editors/</guid>
       <description>&lt;p&gt;Property editors are a way to make your bean more user-friendly.  Bean builder tools can determine quite a lot about your bean just by looking at it and its corresponding BeanInfo class, but they usually have only very simple methods of editing the properties in the bean.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -87,10 +87,10 @@
     
     <item>
       <title>JavaOne 2000/2001/2002</title>
-      <link>https://javadude.com/posts/20000304-javaone/</link>
+      <link>https://www.javadude.com/posts/20000304-javaone/</link>
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/posts/20000304-javaone/</guid>
+      <guid>https://www.javadude.com/posts/20000304-javaone/</guid>
       <description>&lt;p&gt;Some talks I gave at JavaOne in 2000, 2001, and 2002.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -98,10 +98,10 @@
     
     <item>
       <title>The JavaBean Component Model</title>
-      <link>https://javadude.com/posts/20000304-javabeans/</link>
+      <link>https://www.javadude.com/posts/20000304-javabeans/</link>
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/posts/20000304-javabeans/</guid>
+      <guid>https://www.javadude.com/posts/20000304-javabeans/</guid>
       <description>&lt;p&gt;The basics of the JavaBean Component Model&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -109,10 +109,10 @@
     
     <item>
       <title>Using JavaBean Accessors</title>
-      <link>https://javadude.com/posts/20000304-accessors/</link>
+      <link>https://www.javadude.com/posts/20000304-accessors/</link>
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/posts/20000304-accessors/</guid>
+      <guid>https://www.javadude.com/posts/20000304-accessors/</guid>
       <description>&lt;p&gt;Accessors are a key ingredient to proper encapsulation.  The can restrict access to only read/write data, inform other objects of changes to data, and perform validation on new values being set.  Consistent accessor usage makes class modification easy and transparent.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -120,10 +120,10 @@
     
     <item>
       <title>Using the Right Comment in Java</title>
-      <link>https://javadude.com/posts/20000304-comments/</link>
+      <link>https://www.javadude.com/posts/20000304-comments/</link>
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/posts/20000304-comments/</guid>
+      <guid>https://www.javadude.com/posts/20000304-comments/</guid>
       <description>&lt;p&gt;Java provides three types of comments; when should we use which?&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -131,10 +131,10 @@
     
     <item>
       <title>Effective Layout Management</title>
-      <link>https://javadude.com/posts/20000304-layouts/</link>
+      <link>https://www.javadude.com/posts/20000304-layouts/</link>
       <pubDate>Thu, 01 Jan 1998 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/posts/20000304-layouts/</guid>
+      <guid>https://www.javadude.com/posts/20000304-layouts/</guid>
       <description>&lt;p&gt;Let&amp;rsquo;s get familiar with Java Layout Managers!&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
