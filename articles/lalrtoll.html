@@ -1,232 +1,627 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1" />
+  <meta name="author" content="Scott Stanchfield">
+  <meta name="description" content="How to convert a grammar from LALR to LL.">
+  
+  <meta property="og:title" content="Converting a Grammar from LALR to LL" />
+<meta property="og:description" content="How to convert a grammar from LALR to LL." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://javadude.com/articles/lalrtoll.html" /><meta property="article:published_time" content="2000-03-04T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2000-03-04T00:00:00&#43;00:00"/>
 
 
-<!-- #BeginTemplate "../master.dwt" -->
+  <title>
+  
+       Converting a Grammar from LALR to LL | JavaDude.com 
+  
+  </title>
 
-	<head>
-		<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-		<!-- #BeginEditable "doctitle" -->
+  <link rel="canonical" href="https://javadude.com/articles/lalrtoll.html">
 
-		<title>Converting a Grammar from LALR to LL - Scott Stanchfield</title>
-		<!-- #EndEditable -->
-		<link href="../style/style1.css" media="screen" rel="stylesheet" title="CSS" type="text/css" />
-		<!-- #BeginEditable "head" -->
-		<!-- #EndEditable -->
-		<style type="text/css">
+  
+  
 
-.style1 {
-	vertical-align: middle;
-}
-</style>
-	</head>
+  
+  <link href="https://javadude.com/css/vendors-extensions/fontawesome/all.min.css" rel="stylesheet">
 
-	<body>
-		<div id="header">
-			<h1>JavaDude.com</h1>
-			<h4>-- Scott Stanchfield</h4>
-		</div>
-		<div id="content">
-			<div id="topBar">&nbsp;</div>
-			<div id="contentIndent">
-				<!-- #BeginEditable "content" -->
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:300,400,500,600">
+  <link href="https://javadude.com/css/font.css" rel="stylesheet"> 
+    
+  
+  <link href="https://javadude.com/css/vendors/bootstrap4/bootstrap.min.css" rel="stylesheet">
+  <link href="https://javadude.com/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet"> 
+  <link href="https://javadude.com/css/vendors/mdb/style.min.css" rel="stylesheet"> 
+  <link href="https://javadude.com/css/main.css" rel="stylesheet">
 
 
-<h1>Converting a Grammar from LALR to LL</h1>
-<p>[from a post of mine in a thread about automated tools to convert from LALR
-grammars to LL grammars... NOTE: These are fairly general (but pointed to PCCTS
-1.33 -- note that PCCTS 2.0 does not implement syntactic predicates with setjmp/longjmp]</p>
-<p>Toolwise, I think you're pretty much SOL. But there are several common
-algorithms available that you could probably use to write a simple tool.</p>
-<p>HOWEVER, I don't think you'd really want the code they'd generate, and
-hand-written ANTLR rules using its EBNF notation are much more maintainable.</p>
-<p>There are two &quot;big&quot; issues to deal with in the conversion (and some
-minor headaches as well):</p>
-<ul>
-    <li>Left Factoring
-        <p>an LL(k) parser cannot choose between two rules that have the same
-        k-token lookahead. For example, if k=1 (LL(1)), the following is
-        ambiguous:</p>
-<a name='figure.1'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 1: Ambiguous rule for k=1</p><pre class='content'><span class='ident'>a</span><span class='operator'>:</span> <span class='ident'>A</span> <span class='ident'>B</span> <span class='ident'>C</span>
+  
+  <link rel="shortcut icon"
+  
+      href="https://javadude.com/img/favicon.ico"
+  
+  >
 
- <span class='operator'>|</span> <span class='ident'>A</span> <span class='ident'>D</span> <span class='ident'>E</span>
 
- <span class='operator'>;</span>   </pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
-        <p>The above ambiguity will disappear if you specify k=2 -- the parser
-        will look at the &quot;B&quot; or &quot;D&quot; after the &quot;A&quot;
-        to determine which way to go. But, this can be inefficient, as the
-        parser must look 2 tokens ahead in every prediction expression!</p>
-        <p>An LALR(1) parser doesn't have trouble with this because it is
-        essentially &quot;trying all the alts at once&quot; and deciding which
-        to use when it has enough info.</p>
-        <p>An LL(k) parser predicts which alt to take based on the next k tokens
-        it sees in the input stream.</p>
-        <p>So what to do in a general case? There are a few possibilities:</p>
-        <ul>
-            <li>up the value of k -- performance hit and only covers an certain
-                set of cases</li>
-            <li>Left factor -- in the above example (in ANTLR) this would result
-                in (format it as you will):
-<a name='figure.2'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 2: Left factored rule</p><pre class='content'><span class='ident'>a</span><span class='operator'>:</span> <span class='ident'>A</span> <span class='operator'>(</span><span class='ident'>B</span> <span class='ident'>C</span> <span class='operator'>|</span> <span class='ident'>D</span> <span class='ident'>E</span><span class='operator'>);</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
-                <p>Now the parser just matches &quot;A&quot;, then makes another
-                decision on which alternative based on &quot;is the next token B
-                or D?&quot; Note that this could also be written</p>
-<a name='figure.3'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 3: Alternative left factoring</p><pre class='content'><span class='ident'>a</span><span class='operator'>:</span> <span class='ident'>A</span> <span class='ident'>a_rest</span><span class='operator'>;</span>
+  
+  
 
-<span class='ident'>a_rest</span><span class='operator'>:</span> <span class='ident'>B</span> <span class='ident'>C</span>
+  <style type="text/css">
+      @media (min-width: 800px) and (max-width: 850px) {
+              .navbar:not(.top-nav-collapse) {
+                  background: #1C2331!important;
+              }
+          }
+  </style>
 
-      <span class='operator'>|</span> <span class='ident'>D</span> <span class='ident'>E</span>
 
-      <span class='operator'>;</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
-                <p>if you prefer. However, this creates another function call (ANTLR
-                generates recursive-descent parsers.) Use your judgement as to
-                when to create separate rules as opposed to subrules. Ask
-                &quot;is it readable? Does it make more sense to keep stuff in
-                one rule?&quot; and so on...</p>
-                <p>3.Add syntactic predicates -- there may be cases when it is
-                very difficult/impossible to left factor, or you really need
-                &quot;infinite lookahead&quot; (C++ is a great example of this
-                with decl vs. expr) Syntactic predicates are a feature of ANTLR
-                that says &quot;if my first k tokens match, try me -- if I work,
-                use me. Otherwise, try the next possibility&quot;</p>
-                <p>Say you may have a silly rule like</p>
-<a name='figure.4'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 4: Silly rule</p><pre class='content'><span class='ident'>a</span><span class='operator'>:</span> <span class='ident'>A</span> <span class='ident'>A</span> <span class='ident'>A</span> <span class='ident'>A</span> <span class='ident'>A</span> <span class='ident'>A</span> <span class='ident'>B</span>
+  
+    
+    <link rel="stylesheet" href="https://javadude.com/js/vendors/katex/katex.min.css">
+  
+  
 
- <span class='operator'>|</span> <span class='operator'>(</span><span class='ident'>A</span><span class='operator'>)+</span> <span class='ident'>B</span>
+  
+    
+    <link rel="stylesheet" href="https://javadude.com/css/vendors/highlight/github-gist.css">
+  
 
- <span class='operator'>;</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
-                <p>Basically, we want to do a certain action if we see 6 A's
-                then a B. Any other number of A's followed by a B does something
-                else. (Yes -- you could just count the A's in the (A)+ part of
-                the rule, but suppose I was stubborn and insisted you follow
-                me...)</p>
-                <p>This rule would need 7 token lookahead, or some really nasty
-                splitting up that would make the meaning unclear (or, don't say
-                it, a counter in the (A)+...) By changing the rule to</p>
-<a name='figure.5'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 5: Try the first rule</p><pre class='content'><span class='ident'>a</span><span class='operator'>:</span> <span class='operator'>(</span><span class='ident'>A</span> <span class='ident'>A</span> <span class='ident'>A</span> <span class='ident'>A</span> <span class='ident'>A</span> <span class='ident'>A</span> <span class='ident'>B</span><span class='operator'>)?</span>
+</head>
 
- <span class='operator'>|</span> <span class='operator'>(</span><span class='ident'>A</span><span class='operator'>)+</span> <span class='ident'>B</span>
+  <body class="bg-light" data-spy="scroll" data-target="#page-scrollspy" data-offset="90">
+  
+    
+    
 
- <span class='operator'>;</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
-                <p>You tell ANTLR to construct a parser that will
-                &quot;try&quot; the first alt, and if it works, use it.
-                Otherwise, _don't_ display a message and try the next alt and so
-                on. Note that the &quot;guess&quot; it is taking doesn't execute
-                action code, and if the &quot;guess&quot; says use that rule, it
-                needs to re-run the match to run the actions.</p>
-                <p>Syntactic predicates are your friend, but they are costly if
-                overused. Also, be warned that they are implemented using setjmp/longjmp,
-                which could cause problems if you create objects and need them
-                destructed -- be careful!</p></li>
+    
+      
+
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+    <div class="container">
+
+      
+      <a class="navbar-brand" href="https://javadude.com">
+          
+        <img class="avatar" src="https://javadude.com/img/favicon.ico" style="width: 40px!important;height: auto;"  class="d-inline-block align-top" alt="" >
+        
+        <strong> Scott Stanchfield</strong>
+      </a>
+
+      
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        
+        <ul class="navbar-nav mr-auto ">
+          <li class="nav-item ">
+            <a class="nav-link" href="https://javadude.com">Home</a>
+          </li>
+             
+            <li class="nav-item ">
+              <a class="nav-link" href="https://javadude.com/categories/videos/" >Videos  </a>
+            </li>
+          
+             
+            <li class="nav-item ">
+              <a class="nav-link" href="https://javadude.com/categories/articles/" >Articles  </a>
+            </li>
+          
+             
+            <li class="nav-item ">
+              <a class="nav-link" href="https://javadude.com/categories/tools/" >Tools  </a>
+            </li>
+          
+             
+            <li class="nav-item ">
+              <a class="nav-link" href="https://javadude.com/publications/" >Publications  </a>
+            </li>
+          
+             
+            <li class="nav-item ">
+              <a class="nav-link" href="https://javadude.com/about/" >About  </a>
+            </li>
+          
+          
         </ul>
-    </li>
-    <li>Left Recursion
-        <p>This one requires a bit of thought, but usually not too much.</p>
-        <p>Suppose we have a rule</p>
-<a name='figure.6'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 6: Left-recursive rule</p><pre class='content'><span class='ident'>a</span><span class='operator'>:</span> <span class='ident'>a</span> <span class='ident'>B</span> <span class='ident'>C</span>
 
- <span class='operator'>|</span> <span class='comment'>//nothing</span>
+      </div>
 
- <span class='operator'>;</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
-        <p>Think about what that means -- any number of &quot;B C&quot; pairs.
-        Just rewrite it as</p>
-<a name='figure.7'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 7: Re-written, ex-left-recursive fule</p><pre class='content'><span class='ident'>a</span><span class='operator'>:</span> <span class='operator'>(</span><span class='ident'>B</span> <span class='ident'>C</span><span class='operator'>)*</span> <span class='operator'>;</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
-        <p>be careful as to the use of * vs + -- in the above, a can be empty,
-        so * was used. this could also be written as a tail-recursive rule, but
-        the first method is more efficient as it just generates a match loop,
-        not extra function calls. (Use the (...)* and (...)+ constructs when
-        possible to avoid recursive calls -- they save on performance!)</p>
-        <p>Left recursion is also prevalent in expression rules. Things like</p>
-<a name='figure.8'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 8: Left-recursive expression rule</p><pre class='content'><span class='ident'>expr</span> <span class='operator'>:</span> <span class='ident'>expr</span> <span class='operator'>&quot;+&quot;</span> <span class='ident'>expr</span>
+    </div>
+  </nav>
+  
+ 
+      
+ 
 
-     <span class='operator'>|</span> <span class='ident'>expr</span> <span class='operator'>&quot;-&quot;</span> <span class='ident'>expr</span>
 
-     <span class='operator'>|</span> <span class='ident'>expr</span> <span class='operator'>&quot;*&quot;</span> <span class='ident'>expr</span>
 
-     <span class='operator'>;</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
-        <p>and so on.</p>
-        <p>To rewrite the expression rules in LL(k) form, you'll need to break
-        them up by the precedence of the operators. Start with a rule like
-        &quot;primary&quot; that just lists the &quot;atomic&quot; elements of
-        an expression, like variable, constant and (expr):</p>
-<a name='figure.9'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 9: Primary part of an expression</p><pre class='content'><span class='ident'>primary</span> <span class='operator'>:</span> <span class='ident'>variable</span>
 
-        <span class='operator'>|</span> <span class='ident'>constant</span>
 
-        <span class='operator'>|</span> <span class='ident'>LPAREN</span> <span class='ident'>expr</span> <span class='ident'>RPAREN</span>
 
-        <span class='operator'>;</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
-        <p>then work your way _down_ the precedence table, starting with the
-        highest-level precedence operators, like NOT:</p>
-<a name='figure.10'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 10: Unary operators</p><pre class='content'><span class='ident'>unary_expr</span> <span class='operator'>:</span> <span class='operator'>(</span><span class='ident'>unary_operator</span><span class='operator'>)*</span> <span class='ident'>primary</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
-        <p>then go to the next level (suppose it's multiplicative operators)</p>
-<a name='figure.11'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 11: Multiplicative operators</p><pre class='content'><span class='ident'>mult_expr</span> <span class='operator'>:</span> <span class='ident'>unary_expr</span> <span class='operator'>(</span><span class='ident'>mult_op</span> <span class='ident'>unary_expr</span><span class='operator'>)*</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
-        <p>then the next level</p>
-<a name='figure.12'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 12: Additive operators</p><pre class='content'><span class='ident'>add_expr</span> <span class='operator'>:</span> <span class='ident'>mult_expr</span> <span class='operator'>(</span><span class='ident'>add_op</span> <span class='ident'>mult_expr</span><span class='operator'>)*</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
-        <p>and so on. The idea is that things at each level of the precedence
-        table reference the things at the next higher precedence level,
-        _possibly_ adding their own operators. In general</p>
-<a name='figure.13'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 13: General expression rule parts</p><pre class='content'><span class='ident'>level_n_expr</span> <span class='operator'>:</span> <span class='ident'>level_n</span><span class='operator'>-</span>1<span class='ident'>_expr</span> <span class='operator'>(</span><span class='ident'>level_n_op</span> <span class='ident'>level_n</span><span class='operator'>-</span>1<span class='ident'>_expr</span><span class='operator'>)*</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
-        <p>making sure to use <code>(...)*</code> and NOT <code>(...)+</code></p></li>
-</ul>
-<p>Most (if not all) yacc grammars can be converted into ANTLR grammars, but I
-suggest you use thought to do it rather than mechanical force (unless there's a
-mechanical force that smart enough, which I doubt.) It doesn't take too long to
-do it, either. A few other things to remember about ANTLR:</p>
-<p>action code can be placed _anywhere_ in rules without adding conflicts
-(although placing them at the start of a rule makes it and &quot;init
-action&quot; rather than a normal action -- see the docs</p>
-<p>You can pass/return values to/from other rules as parameters to the rules.
-This is a GREAT feature that you just can't do in yacc due to the nature of LALR
-parsing try to use label _names_ instead of label _numbers_ (as in yacc) this'll
-save tons of headache when you need to make a mod like adding a rule reference
-to a rule.</p>
-<a name='figure.14'/><div class='zsnazzy'><b class='xtop'><b class='xb1'></b><b class='xb2 color_b'></b><b class='xb3 color_b'></b><b class='xb4 color_b'></b></b><div class='xboxcontent'><p class='header'>Figure 14: Action code</p><pre class='content'><span class='ident'>yacc</span> <span class='operator'>:</span>    <span class='ident'>a</span><span class='operator'>:</span> <span class='ident'>B</span> <span class='ident'>C</span> <span class='operator'>{</span>$$ <span class='operator'>=</span> <span class='keyword'>do</span><span class='operator'>(</span>$1, $2<span class='operator'>);}</span>
+<div id="site-header" class="carousel slide carousel-fade" data-ride="carousel" style="height: 18rem;" >  
 
-<span class='ident'>ANTLR</span><span class='operator'>:</span>    <span class='ident'>a</span><span class='operator'>:</span> <span class='ident'>b</span><span class='operator'>:</span><span class='ident'>B</span> <span class='ident'>c</span><span class='operator'>:</span><span class='ident'>C</span> <span class='operator'>&lt;&lt;</span>$0 <span class='operator'>=</span> <span class='keyword'>do</span><span class='operator'>(</span><span class='specialIdent'>$b</span>, <span class='specialIdent'>$c</span><span class='operator'>);&gt;&gt;</span></pre></div><b class='xbottom'><b class='xb4'></b><b class='xb3'></b><b class='xb2'></b><b class='xbb'></b></b></div>
-<p>(keep in mind that you can only label terminals -- if you need a result from
-a subrule, pass it back as a return value)</p>
-<p>Good luck!&nbsp;</p>
-				</a>
-				<!-- #EndEditable "content" -->
-				<div id="footer">
-					<p>&nbsp;</p>
-					<hr/>
-					<p>Copyright &copy; 1996-2014, Scott Stanchfield. All Rights Reserved.<br />
-					<br/>
-					Contact me at <a href="mailto:scott@javadude.com">scott@javadude.com</a><br />
-					<a href="http://javadude.com/index.html">JavaDude.com Home</a> </p>
-					<p>Rounded-corner figures based on &quot;More Snazzy Borders&quot; by 
-					Stu Nicholls<a href="http://cssplay.co.uk"><img alt="" class="style1" height="31" src="../images/cssplay_button.png" width="88" /></a></p>
-					<p>
-					<a href="http://feeds.feedburner.com/Javadudecom-ScottStanchfield">
-					<img alt="RSS Feed for JavaDude.com" class="style1" height="14" longdesc="../Want to hear about new stuff at JavaDude.com? Use this RSS Feed!" src="../images/feed-icon-14x14.png" width="14" />Want 
-					to hear about new stuff at JavaDude.com? Use this RSS Feed!</a><br/>
-					</p>
-				</div>
-			</div>
-		</div>
-		<div id="bottom"/>
-		<div id="navigation">
-			<h3>NAVIGATION</h3>
-			<ul>
-				<li><a href="../index.html">Home</a></li>
-				<li><a href="index.html">Articles</a></li>
-				<li><a href="../tools/index.html">Tools</a></li>
-				<li><a href="../evaj/index.html">Effective VisualAge<br/>&nbsp;&nbsp;&nbsp;&nbsp;for Java</a></li>
-				<li><a href="../eclipse/index.html">Eclipse Tips</a></li>
-				<li><a href="../vaj/index.html">VisualAge Tips</a></li>
-				<!--
-				<li><a href="resume.html">Resume</a></li>
-				-->
-				<li><a href="../publications.html">Publications</a></li>
-			</ul>
-			<p>&nbsp;</p>
-		</div>
-		<div id="bottomcorner"/>
-		<div id="topcorner"/>
-		</div>
-		<p>&nbsp;</p>
-	</body>
-<!-- #EndTemplate -->
+  
+  
+  
+
+  
+  <div class="carousel-inner" role="listbox">
+    
+      
+
+        
+        <div class="carousel-item active">
+          <div class="view" style="background-image: url('https://javadude.com/img/header-slides/gamera.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+            
+            <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+              
+              
+              
+
+            </div>
+            
+
+          </div>
+        </div>
+        
+      
+    
+
+  
+  </div>
+  
+
+  
+  <div class="carousel-content text-center white-text wow fadeIn">
+    <div class="row mx-0 headfont mt-3 pt-4">
+      
+      <div class="col-12 col-sm-5 align-middle">
+        <a href="https://javadude.com">
+          
+            <img class="pull-right avatar avatar-md" src="https://javadude.com/img/scott.jpg" alt="" >
+          
+        </a>
+      </div>
+      
+      <div class="col-12 col-sm-7 text-left pl-2">
+        <a href="https://javadude.com">
+          <h1 class="mb-2 h1" style="font-weight: 300;" >
+            <strong>JavaDude.com</strong>
+          </h1>
+        </a>
+        
+
+             
+        <div class="mt-2" style="font-size: 1rem; color: white;">
+            
+              <a href="//github.com/javadude" target="_blank" rel="noopener"><i class="fab fa-github pr-1" aria-hidden="true"></i></a>    
+            
+            
+
+            
+              <a href="//facebook.com/scott.stanchfield" target="_blank" rel="noopener"><i class="fab fa-facebook pr-1" aria-hidden="true"></i></a>
+            
+
+            
+
+            
+
+            
+    
+            
+    
+        
+            
+                <a href="mailto:scott@javadude.com"><i class="far fa-envelope-open pr-1" aria-hidden="true"></i></a>
+            
+    
+            
+
+            
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  
+  
+  
+
+</div>
+  
+    
+
+    
+  
+  <main class="post-main-wrapper">
+    
+    
+    <div class="row">
+
+      
+
+      
+      <div class="container pr-5">
+      
+
+        
+        <div class="z-depth-1  post-wrapper white-bg single-post">
+
+          <div class="post-header text-center" >
+  <ul class="post-meta li-x">
+    
+      
+        <li><a href="https://javadude.com/categories/articles"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> Articles </a></li>
+      
+    
+    
+  </ul>
+
+  <div class="px-4 post-heading">Converting a Grammar from LALR to LL</div>
+
+  <ul class="post-meta li-x mt-1">
+    
+      <li>Mar 4, 2000</li>
+    
+
+    
+  </ul>
+  
+
+</div>
+
+
+          <div class="post-content markdown">
+            <p>Converting from LALR to LL can be challenging&hellip; Hopefully this article will make it a weeeeee bit simpler&hellip;</p>
+
+<p></p>
+
+<p>This is from a post of mine in a thread about automated tools to convert from LALR grammars to LL grammars&hellip; NOTE: These are fairly general (but pointed to PCCTS 1.33 &ndash; note that PCCTS 2.0 does not implement syntactic predicates with setjmp/longjmp)</p>
+
+<p>Toolwise, I think you&rsquo;re pretty much SOL. But there are several common algorithms available that you could probably use to write a simple tool.</p>
+
+<p>HOWEVER, I don&rsquo;t think you&rsquo;d really want the code they&rsquo;d generate, and hand-written ANTLR rules using its EBNF notation are much more maintainable.</p>
+
+<p>There are two &ldquo;big&rdquo; issues to deal with in the conversion (and some minor headaches as well):</p>
+
+<h2 id="problem-common-prefixes">Problem: Common Prefixes</h2>
+
+<p>An LL(k) parser cannot choose between two rules that have the same k-token lookahead. For example, if k=1 (LL(1)), the following is ambiguous:</p>
+
+<pre><code>a
+    :   A B C
+    |   A D E
+    ;   
+</code></pre>
+
+<p>The above ambiguity will disappear if you specify k=2 &ndash; the parser will look at the &ldquo;B&rdquo; or &ldquo;D&rdquo; after the &ldquo;A&rdquo; to determine which way to go. But, this can be inefficient, as the parser must look 2 tokens ahead in every prediction expression!</p>
+
+<p>An LALR(1) parser doesn&rsquo;t have trouble with this because it is essentially &ldquo;trying all the alts at once&rdquo; and deciding which to use when it has enough info.</p>
+
+<p>An LL(k) parser predicts which alt to take based on the next k tokens it sees in the input stream.</p>
+
+<p>So what to do in a general case? There are a few possibilities:</p>
+
+<h3 id="up-the-value-of-k-lookahead">Up the value of k (lookahead)</h3>
+
+<p>This may work, but will cause a performance hit and only covers an certain set of cases</p>
+
+<h3 id="left-factor">Left factor</h3>
+
+<p>In the above example (in ANTLR), left-factoring this would result in:</p>
+
+<pre><code>a
+    :   A (B C | D E)
+    ;
+</code></pre>
+
+<p>Now the parser just matches &ldquo;A&rdquo;, then makes another decision on which alternative based on &ldquo;is the next token B or D?&rdquo; Note that this could also be written</p>
+
+<pre><code>a
+    :   A a_rest
+    ;
+a_rest
+    :   B C
+    |   D E
+    ;
+</code></pre>
+
+<p>if you prefer. However, this creates another function call (ANTLR generates recursive-descent parsers.) Use your judgement as to when to create separate rules as opposed to subrules. Ask &ldquo;is it readable? Does it make more sense to keep stuff in one rule?&rdquo; and so on&hellip;</p>
+
+<h3 id="add-syntactic-predicates">Add syntactic predicates</h3>
+
+<p>There may be cases when it is very difficult/impossible to left factor, or you really need &ldquo;infinite lookahead&rdquo; (C++ is a great example of this with decl vs. expr)</p>
+
+<p>Syntactic predicates are a feature of ANTLR that says &ldquo;if my first k tokens match, try me &ndash; if I work, use me. Otherwise, try the next possibility&rdquo;</p>
+
+<p>Say you may have a silly rule like</p>
+
+<pre><code>a
+    :   A A A A A A B
+    |   (A)+ B
+    ;
+</code></pre>
+
+<p>Basically, we want to do a certain action if we see 6 A&rsquo;s then a B. Any other number of A&rsquo;s followed by a B does something else. (Yes &ndash; you could just count the A&rsquo;s in the (A)+ part of the rule, but suppose I was stubborn and insisted you follow me&hellip;)</p>
+
+<p>This rule would need 7 token lookahead, or some really nasty splitting up that would make the meaning unclear (or, don&rsquo;t say it, a counter in the (A)+&hellip;) By changing the rule to</p>
+
+<pre><code>a
+    :   (A A A A A A B)?
+    |   (A)+ B
+    ;
+</code></pre>
+
+<p>You tell ANTLR to construct a parser that will &ldquo;try&rdquo; the first alt, and if it works, use it. Otherwise, _don&rsquo;t_ display a message and try the next alt and so on. Note that the &ldquo;guess&rdquo; it is taking doesn&rsquo;t execute action code, and if the &ldquo;guess&rdquo; says use that rule, it needs to re-run the match to run the actions.</p>
+
+<p>Syntactic predicates are your friend, but they are costly if overused. Also, be warned that they are implemented using setjmp/longjmp, which could cause problems if you create objects and need them destructed &ndash; be careful!</p>
+
+<h2 id="problem-left-recursion">Problem: Left Recursion</h2>
+
+<p>This one requires a bit of thought, but usually not too much.</p>
+
+<p>Suppose we have a rule</p>
+
+<pre><code>a
+    :   a B C
+    |   //nothing
+    ;
+</code></pre>
+
+<p>Think about what that means &ndash; any number of &ldquo;B C&rdquo; pairs. Just rewrite it as</p>
+
+<pre><code>a
+    :   (B C)*
+    ;
+</code></pre>
+
+<p>be careful as to the use of * vs + &ndash; in the above, a can be empty, so * was used. this could also be written as a tail-recursive rule, but the first method is more efficient as it just generates a match loop, not extra function calls. (Use the (&hellip;)* and (&hellip;)+ constructs when possible to avoid recursive calls &ndash; they save on performance!)</p>
+
+<p>Left recursion is also prevalent in expression rules. Things like</p>
+
+<pre><code>expr
+    :   expr &quot;+&quot; expr
+    |   expr &quot;-&quot; expr
+    |   expr &quot;\*&quot; expr
+    ;
+</code></pre>
+
+<p>and so on.</p>
+
+<p>To rewrite the expression rules in LL(k) form, you&rsquo;ll need to break them up by the precedence of the operators. Start with a rule like &ldquo;primary&rdquo; that just lists the &ldquo;atomic&rdquo; elements of an expression, like variable, constant and (expr):</p>
+
+<pre><code>primary
+    :   variable
+    |   constant
+    |   LPAREN expr RPAREN
+    ;
+</code></pre>
+
+<p>then work your way <em>down</em> the precedence table, starting with the highest-level precedence operators, like NOT:</p>
+
+<pre><code>unary_expr
+    :   (unary_operator)* primary
+    ;
+</code></pre>
+
+<p>then go to the next level (suppose it&rsquo;s multiplicative operators)</p>
+
+<pre><code>mult_expr
+    :   unary_expr (mult_op unary_expr)*
+    ;
+</code></pre>
+
+<p>then the next level</p>
+
+<pre><code>add_expr
+    :   mult_expr (add_op mult_expr)*
+</code></pre>
+
+<p>and so on. The idea is that things at each level of the precedence table reference the things at the next higher precedence level, <em>possibly</em> adding their own operators. In general</p>
+
+<pre><code>level_n_expr
+    :   level_n-1_expr (level_n_op level_n-1_expr)*
+    ;
+</code></pre>
+
+<p>making sure to use <code>(...)*</code> and NOT <code>(...)+</code></p>
+
+<p>Most (if not all) yacc grammars can be converted into ANTLR grammars, but I suggest you use thought to do it rather than mechanical force (unless there&rsquo;s a mechanical force that smart enough, which I doubt.) It doesn&rsquo;t take too long to do it, either. A few other things to remember about ANTLR:</p>
+
+<p>Action code can be placed <em>anywhere</em> in rules without adding conflicts (although placing them at the start of a rule makes it and &ldquo;init action&rdquo; rather than a normal action &ndash; see the docs</p>
+
+<p>You can pass/return values to/from other rules as parameters to the rules. This is a GREAT feature that you just can&rsquo;t do in yacc due to the nature of LALR parsing try to use label <em>names</em> instead of label <em>numbers</em> (as in yacc) this&rsquo;ll save tons of headache when you need to make a mod like adding a rule reference to a rule.</p>
+
+<pre><code>yacc :    a: B C {$$ \= do($1, $2);}
+
+ANTLR:    a: b:B c:C &lt;&lt;$0 \= do($b, $c);&gt;&gt;
+</code></pre>
+
+<p>(keep in mind that you can only label terminals &ndash; if you need a result from a subrule, pass it back as a return value)</p>
+
+<p>Good luck! </p>
+          </div>
+
+          
+          <div class="row">
+            <div class="col-md-8">
+            
+              <div class="mb-5">
+                
+<div class="li-x div-x post-meta">
+  <li class="pr-0"><a href="https://javadude.com/tags/"><i class="fas fa-tags"></i></a></li>
+  <div class="tags-sm">
+    
+      <li><a href="https://javadude.com/tags/parsing" role="button">parsing </a></li>
+      
+    
+  </div>
+</div>
+              </div>
+            
+            </div>
+            
+          </div>
+          
+
+          
+          <div class="row pt-3">
+            <div class="col-md-6">
+              
+                <a href=https://javadude.com/posts/20000304-property-editors/ class="post-meta">Previous
+                  <div class="pt-2 pb-5 d-flex">
+                    <i class="fas fa-angle-left text-grey font-weight-bold mr-2 active-color"></i>
+                    <span>Creating JavaBean Property Editors</span>
+                  </div>
+                </a>
+              
+            </div>
+            
+            <div class="col-md-6 text-right" >
+              
+                <a href=https://javadude.com/posts/20000304-antlrtut/ class="post-meta">Next
+                  <div class="pt-2 pb-5 flex-reverse">
+                    <i class="fas fa-angle-right text-grey font-weight-bold ml-2 active-color"></i>
+                    <span>An ANTLR 2.0 Tutorial</span>
+                  </div>
+                </a>
+              
+            </div>
+          </div>
+
+          
+
+        </div>
+        
+
+      </div>
+      
+
+      
+
+    </div>
+    
+
+
+  </main>
+  
+
+
+    
+    
+
+<footer class="page-footer text-center font-small mt-4 wow fadeIn">
+
+
+  
+  <div class="pb-2 mt-5 pt-5">
+    
+      <a href="//github.com/javadude " target="_blank" rel="noopener"><i class="fab fa-github mr-3" aria-hidden="true"></i></a>    
+    
+    
+
+    
+      <a href="//facebook.com/scott.stanchfield" target="_blank" rel="noopener"><i class="fab fa-facebook-f mr-3" aria-hidden="true"></i></a>
+    
+
+    
+
+    
+
+    
+
+    
+
+
+    
+        <a href="mailto:scott@javadude.com"><i class="far fa-envelope-open mr-3" aria-hidden="true"></i></a>
+    
+
+    
+
+    
+
+  </div>
+  
+
+  
+  <div class="copyright py-4">
+    
+    <span>  1998 - 2019 &copy; Scott Stanchfield | Theme <a href='https://github.com/orianna-zzo/AllinOne' target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a>  </span>
+  </div>
+  
+
+</footer>
+
+
+    
+
+
+
+
+
+
+<script type="text/javascript" src="https://javadude.com/js/vendors/jquery/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="https://javadude.com/js/vendors/jquery/jquery.smooth-scroll.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://javadude.com/js/vendors/popper.min.js"></script>
+<script type="text/javascript" src="https://javadude.com/js/vendors/holder.min.js"></script>
+<script type="text/javascript" src="https://javadude.com/js/vendors-extensions/bootstrap4/bootstrap.js" ></script>
+
+<script type="text/javascript" src="https://javadude.com/js/vendors/mdb/mdb.min.js"></script>
+
+<script type="text/javascript" src="https://javadude.com/js/main.js"></script>
+
+
+
+  
+  <script src="https://javadude.com/js/vendors/highlight.pack.js"> </script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+ 
+  <script src="https://javadude.com/js/vendors/katex/katex.min.js"> </script>
+  <script src="https://javadude.com/js/vendors/katex/contrib/auto-render.min.js"></script>
+
+  <script>
+      document.addEventListener("DOMContentLoaded", function () {
+          renderMathInElement(document.body);
+      });
+  </script>
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+  
+  new WOW().init();
+</script>
+
+
+
+
+  </body>
 </html>

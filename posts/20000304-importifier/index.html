@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1" />
+  <meta name="author" content="Scott Stanchfield">
+  <meta name="description" content="Automatic Expansion of Java Import Statements">
+  
+  <meta property="og:title" content="Importifier" />
+<meta property="og:description" content="Automatic Expansion of Java Import Statements" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://javadude.com/posts/20000304-importifier/" /><meta property="article:published_time" content="2000-03-04T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2000-03-04T00:00:00&#43;00:00"/>
+
+
+  <title>
+  
+       Importifier | JavaDude.com 
+  
+  </title>
+
+  <link rel="canonical" href="https://javadude.com/posts/20000304-importifier/">
+
+  
+  
+
+  
+  <link href="https://javadude.com/css/vendors-extensions/fontawesome/all.min.css" rel="stylesheet">
+
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:300,400,500,600">
+  <link href="https://javadude.com/css/font.css" rel="stylesheet"> 
+    
+  
+  <link href="https://javadude.com/css/vendors/bootstrap4/bootstrap.min.css" rel="stylesheet">
+  <link href="https://javadude.com/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet"> 
+  <link href="https://javadude.com/css/vendors/mdb/style.min.css" rel="stylesheet"> 
+  <link href="https://javadude.com/css/main.css" rel="stylesheet">
+
+
+  
+  <link rel="shortcut icon"
+  
+      href="https://javadude.com/img/favicon.ico"
+  
+  >
+
+
+  
+  
+
+  <style type="text/css">
+      @media (min-width: 800px) and (max-width: 850px) {
+              .navbar:not(.top-nav-collapse) {
+                  background: #1C2331!important;
+              }
+          }
+  </style>
+
+
+  
+    
+    <link rel="stylesheet" href="https://javadude.com/js/vendors/katex/katex.min.css">
+  
+  
+
+  
+    
+    <link rel="stylesheet" href="https://javadude.com/css/vendors/highlight/github-gist.css">
+  
+
+</head>
+
+  <body class="bg-light" data-spy="scroll" data-target="#page-scrollspy" data-offset="90">
+  
+    
+    
+
+    
+      
+
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+    <div class="container">
+
+      
+      <a class="navbar-brand" href="https://javadude.com">
+          
+        <img class="avatar" src="https://javadude.com/img/favicon.ico" style="width: 40px!important;height: auto;"  class="d-inline-block align-top" alt="" >
+        
+        <strong> Scott Stanchfield</strong>
+      </a>
+
+      
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        
+        <ul class="navbar-nav mr-auto ">
+          <li class="nav-item ">
+            <a class="nav-link" href="https://javadude.com">Home</a>
+          </li>
+             
+            <li class="nav-item ">
+              <a class="nav-link" href="https://javadude.com/categories/videos/" >Videos  </a>
+            </li>
+          
+             
+            <li class="nav-item ">
+              <a class="nav-link" href="https://javadude.com/categories/articles/" >Articles  </a>
+            </li>
+          
+             
+            <li class="nav-item ">
+              <a class="nav-link" href="https://javadude.com/categories/tools/" >Tools  </a>
+            </li>
+          
+             
+            <li class="nav-item ">
+              <a class="nav-link" href="https://javadude.com/publications/" >Publications  </a>
+            </li>
+          
+             
+            <li class="nav-item ">
+              <a class="nav-link" href="https://javadude.com/about/" >About  </a>
+            </li>
+          
+          
+        </ul>
+
+      </div>
+
+    </div>
+  </nav>
+  
+ 
+      
+ 
+
+
+
+
+
+
+<div id="site-header" class="carousel slide carousel-fade" data-ride="carousel" style="height: 18rem;" >  
+
+  
+  
+  
+
+  
+  <div class="carousel-inner" role="listbox">
+    
+      
+
+        
+        <div class="carousel-item active">
+          <div class="view" style="background-image: url('https://javadude.com/img/header-slides/gamera.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+            
+            <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+              
+              
+              
+
+            </div>
+            
+
+          </div>
+        </div>
+        
+      
+    
+
+  
+  </div>
+  
+
+  
+  <div class="carousel-content text-center white-text wow fadeIn">
+    <div class="row mx-0 headfont mt-3 pt-4">
+      
+      <div class="col-12 col-sm-5 align-middle">
+        <a href="https://javadude.com">
+          
+            <img class="pull-right avatar avatar-md" src="https://javadude.com/img/scott.jpg" alt="" >
+          
+        </a>
+      </div>
+      
+      <div class="col-12 col-sm-7 text-left pl-2">
+        <a href="https://javadude.com">
+          <h1 class="mb-2 h1" style="font-weight: 300;" >
+            <strong>JavaDude.com</strong>
+          </h1>
+        </a>
+        
+
+             
+        <div class="mt-2" style="font-size: 1rem; color: white;">
+            
+              <a href="//github.com/javadude" target="_blank" rel="noopener"><i class="fab fa-github pr-1" aria-hidden="true"></i></a>    
+            
+            
+
+            
+              <a href="//facebook.com/scott.stanchfield" target="_blank" rel="noopener"><i class="fab fa-facebook pr-1" aria-hidden="true"></i></a>
+            
+
+            
+
+            
+
+            
+    
+            
+    
+        
+            
+                <a href="mailto:scott@javadude.com"><i class="far fa-envelope-open pr-1" aria-hidden="true"></i></a>
+            
+    
+            
+
+            
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  
+  
+  
+
+</div>
+  
+    
+
+    
+  
+  <main class="post-main-wrapper">
+    
+    
+    <div class="row">
+
+      
+
+      
+      <div class="container pr-5">
+      
+
+        
+        <div class="z-depth-1  post-wrapper white-bg single-post">
+
+          <div class="post-header text-center" >
+  <ul class="post-meta li-x">
+    
+      
+        <li><a href="https://javadude.com/categories/tools"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> Tools </a></li>
+      
+    
+    
+  </ul>
+
+  <div class="px-4 post-heading">Importifier</div>
+
+  <ul class="post-meta li-x mt-1">
+    
+      <li>Mar 4, 2000</li>
+    
+
+    
+  </ul>
+  
+
+</div>
+
+
+          <div class="post-content markdown">
+            <p>Automatic Expansion of Java Import Statements</p>
+
+<p></p>
+
+<h1 id="news">News</h1>
+
+<ul>
+<li><p>10/17/2018</p>
+
+<ul>
+<li>Updating my website. This tool is obsolete, and only runs in VisualAge for Java. I&rsquo;m keeping it here for historical purposes. The same functionality (cleaning up imports) is available in most modern IDEs.</li>
+</ul></li>
+
+<li><p>6/26/2001</p>
+
+<ul>
+<li>Fixed line separation characters. Now the proper line separator (&rsquo;\n&rsquo;, &lsquo;\r&rsquo;, or &ldquo;\r\n&rdquo;) will be appended after each import statement. (Ummm&hellip; oops, silly me ;)</li>
+<li>Added checks that the source code compiles cleanly and is versioned. Note that you must now version classes before importifying them.</li>
+<li>Moved messages into the status dialog rather than in the VisualAge console.<br />
+ </li>
+</ul></li>
+
+<li><p>7/13/2000</p>
+
+<ul>
+<li>Important limitation reported! If you only reference finals in another class/interface, importifier will not add an import for that class. See the limitations section below. Don&rsquo;t know if I&rsquo;ll be able to do anything about this near-term, so you may have to add a few imports by hand when the compiler complains&hellip;<br />
+ </li>
+</ul></li>
+
+<li><p>3/12/2000</p>
+
+<ul>
+<li>Initial release of Importifier</li>
+<li>Status: Works pretty well, but I&rsquo;d recommend you version your source <em>before</em> using it, <em>just</em> in case&hellip;<br />
+<strong><em>Note: This version of the tool only works inside VisualAge for Java.</em></strong> I&rsquo;ve written the code such that I should be able to easily create a command-line version for non VAJ users in a later release.</li>
+</ul></li>
+</ul>
+
+<h1 id="introduction">Introduction</h1>
+
+<p>Java provides two forms of import statements:</p>
+
+<ul>
+<li><p><strong>Explicit import</strong> - You write an import statement like</p>
+
+<p>import java.awt.Button;</p>
+
+<p>which tells the compiler &ldquo;when you see &lsquo;Button&rsquo;, I mean &lsquo;java.awt.Button&rsquo;.<br />
+ </p></li>
+
+<li><p><strong>Import on demand</strong> - You write an import statement like</p>
+
+<p>import java.awt.*;</p>
+
+<p>which tells the compiler &ldquo;when you see a name you don&rsquo;t recognize, check to see if it exists in package &lsquo;java.awt&rsquo;&rdquo;<br />
+ </p></li>
+</ul>
+
+<p><strong><em>Import on demand is pure, unadulterated EVIL</em></strong>.</p>
+
+<p>There are several problems with import-on-demand:</p>
+
+<ul>
+<li>If you use a name that exists in more than one package, the Java compiler cannot determine which fully-qualified name to use. You need to specify the full qualification yourself.</li>
+<li>If a name is currently unambiguous (exists in only one package that you specify via import-on-demand), someone could add the same name to another package and your program will no longer compile.
+
+<ul>
+<li><em>Note that this happened with the Java2 platform. Originally, the List class existed in package java.awt. In Java2, Sun added a new List class to the java.util package. If your program imports java.awt.* and java.util.*, and uses List, it will compile in JDK 1.1 but not in the Java 2 platform!</em></li>
+</ul></li>
+<li>If someone is reading your code, they need to check in each specified package to see which contains a referenced class Foo.</li>
+</ul>
+
+<p>The importifier replaces all import statements with <em>exactly</em> the import statements your program requires.</p>
+
+<h1 id="how-the-tool-works">How the tool works</h1>
+
+<p><em>First, it is important that the code you want to importify be error-free.</em> The tool needs to examine the bytecode to determine the correct imports, as well as resolve ambiguities.</p>
+
+<p><em>Second, you must version your classes and interfaces before running importifier against them</em>. This is a safeguard, <em>just</em> in case importifier decides to have a bad fur day.</p>
+
+<p>Importifier starts by exporting the code you wish to importify. The tool exports .class files to a temporary directory, so it can parse the bytecode.</p>
+
+<p>Next, importifier parses the bytecode to see which classes are used. This is significantly easier than parsing the source code to find out the same information.</p>
+
+<p>After the tool knows which classes are used, it walks through the source code of the class definition to remove the old import statements and add the new, fully-qualified ones. In many cases this is straightforward, but in cases where the short name of the classes are ambiguous (as in List being in both java.awt and java.util in the Java2 platform), importifier examines your old imports to see which full name it should keep.</p>
+
+<p>If the tool sees any inner classes listed in the .class file, it recursively parses the inner classes to determine all imports needed in the containing class.</p>
+
+<h1 id="distribution">Distribution</h1>
+
+<p>Importifier is packaged as a tool for VisualAge for Java 3.02 and above. <em><strong>Importifier will not work on earlier versions of VisualAge for Java. Note that the latest release has not been tested on versions earlier than 3.5.3 but should work on 3.02.</strong></em></p>
+
+<h2 id="installation-for-visualage-for-java-tool-packaging">Installation for VisualAge for Java - Tool Packaging</h2>
+
+<p>To use Importifier in VisualAge for Java:</p>
+
+<ol>
+<li>Download <a href="importifier.zip">importifier.zip</a> from this site.</li>
+<li>Unzip importifier.zip to the directory where VisualAge for Java is installed.  For example, if you installed VisualAge for Java in the c:\IBMVJava directory were on your C:\ drive, unzip the importifier.zip to C:\IBMVJava directory. Note that VisualAge for Java version 3.5 and above are typically installed under <em>C:\Program Files\IBM\VisualAge for Java</em>.</li>
+<li>Shutdown VisualAge for Java if it is running</li>
+<li>Start VisualAge for Java.</li>
+</ol>
+
+<p>This will add the importifier tool to the Tools menu for classes, packages, and projects.</p>
+
+<p><em><strong>Note: If you are using VisualAge for Java 3.02 on Linux, you will need to download the tool api for linux. You can get this from VisualAge Developer Domain (<a href="http://www.software.ibm.com/vadd">http://www.software.ibm.com/vadd</a>). The latest version of importifier has not been tested under Linux. Please let me know if you encounter any problems!</strong></em></p>
+
+<h2 id="use">Use</h2>
+
+<h2 id="visualage-for-java">VisualAge for Java</h2>
+
+<p>To use Importifier (once it is installed)</p>
+
+<ul>
+<li>Version the classes, packages, or projects that you want to importify. Note that the tool will check if the code is already versioned and abort if it isn&rsquo;t.</li>
+<li>Select <strong>Tools-&gt;Expand import statements</strong> from the popup menu of selected classes, packages, or projects</li>
+<li>The status dialog for the Importifier reports its progress.</li>
+</ul>
+
+<h2 id="command-line">Command-Line</h2>
+
+<p>The importifier tool does not yet support command-line use. I will eventually release a version that includes command-line capability.</p>
+
+<h1 id="limitations">Limitations</h1>
+
+<p><strong><em>This tool will not add imports for classes/interfaces from which you only use final variables.</em></strong></p>
+
+<p>Importifier reads the generated bytcode for the class being importified to figure out what imports are needed. If all you reference are constants (finals) in another class/interface, it won&rsquo;t see that class/interface because the java compiler resolves them, leaving no reference to that class/interface in the bytecode. Bummer&hellip;</p>
+
+<p>IMHO, this is a design flaw in Java, but that&rsquo;s another issue&hellip; I&rsquo;ll have to see if there&rsquo;s some way I can fix it later, but don&rsquo;t know that I&rsquo;ll have time anytime soon. For now, you may have to add a few imports by hand after running importifier. It will still give you a great start toward freedom from import-on-demand, though.</p>
+
+<p><strong><em>This tool does not work on classes that exist in a default package!</em></strong> You should only use the tool on classes in a named package!</p>
+
+<p>The tool does not change full-qualifications in the code to short names. I will add this capability in a later version of the tool.</p>
+
+<p>You may need to clean up the code a bit after the tool is done, as it adds a bit of extra space. In many cases the space will be correct, but in some cases you may find there is an extra blank line between the imports and the class definition. <em>Note also that the resulting file might look a bit strange if you had comments on the same lines or near the old import statements.</em></p>
+
+<p><strong><em>The tool will only work if the code to importify is error free!</em></strong></p>
+
+<p>The tool currently creates import statements for classes in the same package as well as classes in package java.lang. A later version of the tool may provide options to omit these imports if desired.</p>
+
+<h1 id="license">License</h1>
+
+<p>Importifier is free for <em>any</em> use <em>other</em> than selling it as a stand-alone product.</p>
+
+<p>Note that Importifier is provided &ldquo;as-is&rdquo; without any warrantee or guarantee of suitability for any purpose. Scott Stanchfield cannot be held responsible for any damage caused by its use.</p>
+
+<p>(In other words, use &lsquo;em for free at your own risk.)</p>
+          </div>
+
+          
+          <div class="row">
+            <div class="col-md-8">
+            
+              <div class="mb-5">
+                
+<div class="li-x div-x post-meta">
+  <li class="pr-0"><a href="https://javadude.com/tags/"><i class="fas fa-tags"></i></a></li>
+  <div class="tags-sm">
+    
+      <li><a href="https://javadude.com/tags/java" role="button">java </a></li>
+      
+    
+  </div>
+</div>
+              </div>
+            
+            </div>
+            
+          </div>
+          
+
+          
+          <div class="row pt-3">
+            <div class="col-md-6">
+              
+                <a href=https://javadude.com/posts/20000304-javaone/ class="post-meta">Previous
+                  <div class="pt-2 pb-5 d-flex">
+                    <i class="fas fa-angle-left text-grey font-weight-bold mr-2 active-color"></i>
+                    <span>JavaOne 2000/2001/2002</span>
+                  </div>
+                </a>
+              
+            </div>
+            
+            <div class="col-md-6 text-right" >
+              
+                <a href=https://javadude.com/posts/20000304-property-editors/ class="post-meta">Next
+                  <div class="pt-2 pb-5 flex-reverse">
+                    <i class="fas fa-angle-right text-grey font-weight-bold ml-2 active-color"></i>
+                    <span>Creating JavaBean Property Editors</span>
+                  </div>
+                </a>
+              
+            </div>
+          </div>
+
+          
+
+        </div>
+        
+
+      </div>
+      
+
+      
+
+    </div>
+    
+
+
+  </main>
+  
+
+
+    
+    
+
+<footer class="page-footer text-center font-small mt-4 wow fadeIn">
+
+
+  
+  <div class="pb-2 mt-5 pt-5">
+    
+      <a href="//github.com/javadude " target="_blank" rel="noopener"><i class="fab fa-github mr-3" aria-hidden="true"></i></a>    
+    
+    
+
+    
+      <a href="//facebook.com/scott.stanchfield" target="_blank" rel="noopener"><i class="fab fa-facebook-f mr-3" aria-hidden="true"></i></a>
+    
+
+    
+
+    
+
+    
+
+    
+
+
+    
+        <a href="mailto:scott@javadude.com"><i class="far fa-envelope-open mr-3" aria-hidden="true"></i></a>
+    
+
+    
+
+    
+
+  </div>
+  
+
+  
+  <div class="copyright py-4">
+    
+    <span>  1998 - 2019 &copy; Scott Stanchfield | Theme <a href='https://github.com/orianna-zzo/AllinOne' target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a>  </span>
+  </div>
+  
+
+</footer>
+
+
+    
+
+
+
+
+
+
+<script type="text/javascript" src="https://javadude.com/js/vendors/jquery/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="https://javadude.com/js/vendors/jquery/jquery.smooth-scroll.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://javadude.com/js/vendors/popper.min.js"></script>
+<script type="text/javascript" src="https://javadude.com/js/vendors/holder.min.js"></script>
+<script type="text/javascript" src="https://javadude.com/js/vendors-extensions/bootstrap4/bootstrap.js" ></script>
+
+<script type="text/javascript" src="https://javadude.com/js/vendors/mdb/mdb.min.js"></script>
+
+<script type="text/javascript" src="https://javadude.com/js/main.js"></script>
+
+
+
+  
+  <script src="https://javadude.com/js/vendors/highlight.pack.js"> </script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+ 
+  <script src="https://javadude.com/js/vendors/katex/katex.min.js"> </script>
+  <script src="https://javadude.com/js/vendors/katex/contrib/auto-render.min.js"></script>
+
+  <script>
+      document.addEventListener("DOMContentLoaded", function () {
+          renderMathInElement(document.body);
+      });
+  </script>
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+  
+  new WOW().init();
+</script>
+
+
+
+
+  </body>
+</html>

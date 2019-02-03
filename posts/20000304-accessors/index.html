@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1" />
+  <meta name="author" content="Scott Stanchfield">
+  <meta name="description" content="How and why you should use JavaBean accessor (get/set) methods.">
+  
+  <meta property="og:title" content="Using JavaBean Accessors" />
+<meta property="og:description" content="How and why you should use JavaBean accessor (get/set) methods." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://javadude.com/posts/20000304-accessors/" /><meta property="article:published_time" content="2000-03-04T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2000-03-04T00:00:00&#43;00:00"/>
+
+
+  <title>
+  
+       Using JavaBean Accessors | JavaDude.com 
+  
+  </title>
+
+  <link rel="canonical" href="https://javadude.com/posts/20000304-accessors/">
+
+  
+  
+
+  
+  <link href="https://javadude.com/css/vendors-extensions/fontawesome/all.min.css" rel="stylesheet">
+
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:300,400,500,600">
+  <link href="https://javadude.com/css/font.css" rel="stylesheet"> 
+    
+  
+  <link href="https://javadude.com/css/vendors/bootstrap4/bootstrap.min.css" rel="stylesheet">
+  <link href="https://javadude.com/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet"> 
+  <link href="https://javadude.com/css/vendors/mdb/style.min.css" rel="stylesheet"> 
+  <link href="https://javadude.com/css/main.css" rel="stylesheet">
+
+
+  
+  <link rel="shortcut icon"
+  
+      href="https://javadude.com/img/favicon.ico"
+  
+  >
+
+
+  
+  
+
+  <style type="text/css">
+      @media (min-width: 800px) and (max-width: 850px) {
+              .navbar:not(.top-nav-collapse) {
+                  background: #1C2331!important;
+              }
+          }
+  </style>
+
+
+  
+    
+    <link rel="stylesheet" href="https://javadude.com/js/vendors/katex/katex.min.css">
+  
+  
+
+  
+    
+    <link rel="stylesheet" href="https://javadude.com/css/vendors/highlight/github-gist.css">
+  
+
+</head>
+
+  <body class="bg-light" data-spy="scroll" data-target="#page-scrollspy" data-offset="90">
+  
+    
+    
+
+    
+      
+
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+    <div class="container">
+
+      
+      <a class="navbar-brand" href="https://javadude.com">
+          
+        <img class="avatar" src="https://javadude.com/img/favicon.ico" style="width: 40px!important;height: auto;"  class="d-inline-block align-top" alt="" >
+        
+        <strong> Scott Stanchfield</strong>
+      </a>
+
+      
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        
+        <ul class="navbar-nav mr-auto ">
+          <li class="nav-item ">
+            <a class="nav-link" href="https://javadude.com">Home</a>
+          </li>
+             
+            <li class="nav-item ">
+              <a class="nav-link" href="https://javadude.com/categories/videos/" >Videos  </a>
+            </li>
+          
+             
+            <li class="nav-item ">
+              <a class="nav-link" href="https://javadude.com/categories/articles/" >Articles  </a>
+            </li>
+          
+             
+            <li class="nav-item ">
+              <a class="nav-link" href="https://javadude.com/categories/tools/" >Tools  </a>
+            </li>
+          
+             
+            <li class="nav-item ">
+              <a class="nav-link" href="https://javadude.com/publications/" >Publications  </a>
+            </li>
+          
+             
+            <li class="nav-item ">
+              <a class="nav-link" href="https://javadude.com/about/" >About  </a>
+            </li>
+          
+          
+        </ul>
+
+      </div>
+
+    </div>
+  </nav>
+  
+ 
+      
+ 
+
+
+
+
+
+
+<div id="site-header" class="carousel slide carousel-fade" data-ride="carousel" style="height: 18rem;" >  
+
+  
+  
+  
+
+  
+  <div class="carousel-inner" role="listbox">
+    
+      
+
+        
+        <div class="carousel-item active">
+          <div class="view" style="background-image: url('https://javadude.com/img/header-slides/gamera.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+            
+            <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+              
+              
+              
+
+            </div>
+            
+
+          </div>
+        </div>
+        
+      
+    
+
+  
+  </div>
+  
+
+  
+  <div class="carousel-content text-center white-text wow fadeIn">
+    <div class="row mx-0 headfont mt-3 pt-4">
+      
+      <div class="col-12 col-sm-5 align-middle">
+        <a href="https://javadude.com">
+          
+            <img class="pull-right avatar avatar-md" src="https://javadude.com/img/scott.jpg" alt="" >
+          
+        </a>
+      </div>
+      
+      <div class="col-12 col-sm-7 text-left pl-2">
+        <a href="https://javadude.com">
+          <h1 class="mb-2 h1" style="font-weight: 300;" >
+            <strong>JavaDude.com</strong>
+          </h1>
+        </a>
+        
+
+             
+        <div class="mt-2" style="font-size: 1rem; color: white;">
+            
+              <a href="//github.com/javadude" target="_blank" rel="noopener"><i class="fab fa-github pr-1" aria-hidden="true"></i></a>    
+            
+            
+
+            
+              <a href="//facebook.com/scott.stanchfield" target="_blank" rel="noopener"><i class="fab fa-facebook pr-1" aria-hidden="true"></i></a>
+            
+
+            
+
+            
+
+            
+    
+            
+    
+        
+            
+                <a href="mailto:scott@javadude.com"><i class="far fa-envelope-open pr-1" aria-hidden="true"></i></a>
+            
+    
+            
+
+            
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  
+  
+  
+
+</div>
+  
+    
+
+    
+  
+  <main class="post-main-wrapper">
+    
+    
+    <div class="row">
+
+      
+
+      
+      <div class="container pr-5">
+      
+
+        
+        <div class="z-depth-1  post-wrapper white-bg single-post">
+
+          <div class="post-header text-center" >
+  <ul class="post-meta li-x">
+    
+      
+        <li><a href="https://javadude.com/categories/articles"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> Articles </a></li>
+      
+    
+    
+  </ul>
+
+  <div class="px-4 post-heading">Using JavaBean Accessors</div>
+
+  <ul class="post-meta li-x mt-1">
+    
+      <li>Mar 4, 2000</li>
+    
+
+    
+  </ul>
+  
+
+</div>
+
+
+          <div class="post-content markdown">
+            <p>Accessors are a key ingredient to proper encapsulation.  The can restrict access to only read/write data, inform other objects of changes to data, and perform validation on new values being set.  Consistent accessor usage makes class modification easy and transparent.</p>
+
+<p></p>
+
+<h2 id="what-are-accessors">What are Accessors?</h2>
+
+<p>An accessor is a method that allows read or write access to a piece of class or instance data.  These are commonly defined using the naming convention</p>
+
+<ul>
+<li>get<em>VarName</em>() &ndash; reads the data for class/instance variable <em>varName</em></li>
+<li>set<em>VarName</em>(<em>value</em>) &ndash; sets the value for class/instance variable <em>varName</em></li>
+</ul>
+
+<p>By providing and using accessor methods to read/write data contained within a class, you provide stronger encapsulation for the data of that class.  This has several advantages, especially if you decide to change the implementation of the underlying data (or remove the data itself and replace it with a computation).</p>
+
+<p>In addition, creating accessors for a private class/instance variable allow you to restrict access to read-only or write-only by providing <em>only</em> a get or set method.</p>
+
+<h2 id="but-that-s-inefficient">But That&rsquo;s Inefficient!</h2>
+
+<p>The most-common objection to use of accessors is &ldquo;but that&rsquo;s another method call, and it will drastically slow down my program!&rdquo;</p>
+
+<p>Not any more!</p>
+
+<p>The new HotSpot VM provides excellent run-time optimization.  Part of this optimization is automatic inlining of simple methods.  If you write accessors that just set and return a value, these will be inlined to simple assignment statements.   Accessors that do more may still be inlined, depending on their complexity.</p>
+
+<p>Bottom line: set aside any worries about accessors causing a performance hit.</p>
+
+<h2 id="all-data-must-be-private">All Data <strong>Must</strong> Be Private!</h2>
+
+<p>I could go on and on about this forever, but I&rsquo;ll try to keep it brief: All data defined in a class <em><strong>must</strong></em> be <em>private</em>!</p>
+
+<p>I may sound a bit like an &ldquo;OO-purist&rdquo; when I say this, but I view this from a practical standpoint, having been burned by not doing it&hellip;</p>
+
+<p>Making data (by data I mean class and instance variables) non-private allows another class to change their values without the owner of that data knowing about the change.   If the owner doesn&rsquo;t know about the change:</p>
+
+<ul>
+<li>the owner has no control over the value; it could be outside the intended range of the data</li>
+<li>the owner cannot know the value has change, and cannot respond if needed</li>
+<li>the owner cannot tell others that the value has changed</li>
+<li>the owner cannot allow others to <em>veto</em> the change</li>
+</ul>
+
+<p>On top of these problems, if you ever decide to change your code to allow other classes to listen for changes, or restrict bounds on a variable, you would need to find every reference to the data and change it.  This can be very painful if the class were a public library that many people had used in their own code.</p>
+
+<p>Even worse, you cannot change the implementation of the data without changing the users of that data.  For example, suppose you had an integer instance variable to keep track of some ID for a list node.  Perhaps you had done some research and decided that the memory cost of keeping that ID was more expensive than recomputing it the few times it was needed.  If ID were only available via an accessor, all you would need to do to affect the change is to remove the instance variable and change the getID accessor to compute the ID and return it.  Far simpler than creating the getID accessor and going back and changing every reference to x.id&hellip;</p>
+
+<p>Privacy is the key to true encapsulation.  All manipulation of an object&rsquo;s state <strong><em>must</em></strong> be done <em>by the object itself!</em></p>
+
+<p>Once you use accessors to read/write class/instance data, that data is instantly available as a JavaBean property!</p>
+
+<h2 id="javabean-properties">JavaBean Properties</h2>
+
+<p>The Java Bean spec defines the entities described by get and set accessors as &ldquo;properties&rdquo;.  I use the term <em>entities</em> here because a property does not need to have any actual data associated with it.  (A get method could just perform a computation instead of returning a variable&rsquo;s value.)  By using the simple get/set naming convention, any tool that supports JavaBeans can determine which properties are available for a bean <em>just</em> by looking at the names of the provided methods!</p>
+
+<p>JavaBean properties come in four flavors:</p>
+
+<ul>
+<li>simple properties</li>
+<li>bound properties</li>
+<li>constrained properties</li>
+<li>indexed properties</li>
+</ul>
+
+<p>Properties can be any combination of bound, constrained and indexed, or just &ldquo;simple&rdquo; properties.</p>
+
+<h3 id="simple-properties">Simple Properties</h3>
+
+<p>These are basic properties defined by a JavaBean, and can be readable, writable or both.</p>
+
+<h3 id="bound-properties">Bound Properties</h3>
+
+<p>This is where the real power of accessors shines.  A bound property is one that will dispatch an event any time it has changed.  By restricting write access of a property to its set method, you can have the set method fire PropertyChangeEvents to any object registered to listen for a change to that property!</p>
+
+<h3 id="constrained-properties">Constrained Properties</h3>
+
+<p>Taking the bound concept a bit further, we can tell listeners that a property has changed _and allow those listeners to veto the change!_  This works pretty much the same as a bound property, but if the listener doesn&rsquo;t agree with the change, he can throw a PropertyVetoException which the property&rsquo;s set method will respect and halt the actual data change.</p>
+
+<h3 id="indexed-properties">Indexed Properties</h3>
+
+<p>The JavaBeans specification provides for one more type of property.  Indexed properties are properties that appear like arrays.  You can read or write the entire group of property values with one get/set method, or you can read/write individual elements of that indexed property.  Again, the data does not have to be represented as an array; it could be stored in <em>any</em> format, or there might not even <em>be</em> data behind the property.</p>
+
+<h2 id="use-accessors-in-the-class-that-defines-the-data">Use Accessors in the Class that Defines the Data!</h2>
+
+<p>A final note: <em>All</em> references to class/instance data should be through accessors, <em>even</em> if the reference is in the class that defines that data!   This centralizes access to the data, allows all changes to be known (including notification for bound and constrained properties.)</p>
+
+<p>This may seem like a bit of overkill, but if you ever need to change how a property is implemented, you&rsquo;ll be glad you used accessors consistently.</p>
+          </div>
+
+          
+          <div class="row">
+            <div class="col-md-8">
+            
+              <div class="mb-5">
+                
+<div class="li-x div-x post-meta">
+  <li class="pr-0"><a href="https://javadude.com/tags/"><i class="fas fa-tags"></i></a></li>
+  <div class="tags-sm">
+    
+      <li><a href="https://javadude.com/tags/java" role="button">java </a></li>
+      
+    
+      <li><a href="https://javadude.com/tags/language" role="button">language </a></li>
+      
+    
+      <li><a href="https://javadude.com/tags/design" role="button">design </a></li>
+      
+    
+  </div>
+</div>
+              </div>
+            
+            </div>
+            
+          </div>
+          
+
+          
+          <div class="row pt-3">
+            <div class="col-md-6">
+              
+                <a href=https://javadude.com/posts/20000304-comments/ class="post-meta">Previous
+                  <div class="pt-2 pb-5 d-flex">
+                    <i class="fas fa-angle-left text-grey font-weight-bold mr-2 active-color"></i>
+                    <span>Using the Right Comment in Java</span>
+                  </div>
+                </a>
+              
+            </div>
+            
+            <div class="col-md-6 text-right" >
+              
+                <a href=https://javadude.com/posts/20000304-javabeans/ class="post-meta">Next
+                  <div class="pt-2 pb-5 flex-reverse">
+                    <i class="fas fa-angle-right text-grey font-weight-bold ml-2 active-color"></i>
+                    <span>The JavaBean Component Model</span>
+                  </div>
+                </a>
+              
+            </div>
+          </div>
+
+          
+
+        </div>
+        
+
+      </div>
+      
+
+      
+
+    </div>
+    
+
+
+  </main>
+  
+
+
+    
+    
+
+<footer class="page-footer text-center font-small mt-4 wow fadeIn">
+
+
+  
+  <div class="pb-2 mt-5 pt-5">
+    
+      <a href="//github.com/javadude " target="_blank" rel="noopener"><i class="fab fa-github mr-3" aria-hidden="true"></i></a>    
+    
+    
+
+    
+      <a href="//facebook.com/scott.stanchfield" target="_blank" rel="noopener"><i class="fab fa-facebook-f mr-3" aria-hidden="true"></i></a>
+    
+
+    
+
+    
+
+    
+
+    
+
+
+    
+        <a href="mailto:scott@javadude.com"><i class="far fa-envelope-open mr-3" aria-hidden="true"></i></a>
+    
+
+    
+
+    
+
+  </div>
+  
+
+  
+  <div class="copyright py-4">
+    
+    <span>  1998 - 2019 &copy; Scott Stanchfield | Theme <a href='https://github.com/orianna-zzo/AllinOne' target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a>  </span>
+  </div>
+  
+
+</footer>
+
+
+    
+
+
+
+
+
+
+<script type="text/javascript" src="https://javadude.com/js/vendors/jquery/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="https://javadude.com/js/vendors/jquery/jquery.smooth-scroll.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://javadude.com/js/vendors/popper.min.js"></script>
+<script type="text/javascript" src="https://javadude.com/js/vendors/holder.min.js"></script>
+<script type="text/javascript" src="https://javadude.com/js/vendors-extensions/bootstrap4/bootstrap.js" ></script>
+
+<script type="text/javascript" src="https://javadude.com/js/vendors/mdb/mdb.min.js"></script>
+
+<script type="text/javascript" src="https://javadude.com/js/main.js"></script>
+
+
+
+  
+  <script src="https://javadude.com/js/vendors/highlight.pack.js"> </script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+ 
+  <script src="https://javadude.com/js/vendors/katex/katex.min.js"> </script>
+  <script src="https://javadude.com/js/vendors/katex/contrib/auto-render.min.js"></script>
+
+  <script>
+      document.addEventListener("DOMContentLoaded", function () {
+          renderMathInElement(document.body);
+      });
+  </script>
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+  
+  new WOW().init();
+</script>
+
+
+
+
+  </body>
+</html>
