@@ -255,9 +255,7 @@
 
       
 
-      
-      <div class="container pr-5">
-      
+      <div class="col-md-10">
 
         
         <div class="z-depth-1  post-wrapper white-bg single-post">
@@ -297,7 +295,7 @@
 <li><p>10/17/2018</p>
 
 <ul>
-<li>Cleaning up my website. This tool is obsolete; it was a debugger for ANTLR 2.x. I&rsquo;m keeping it here for historical purposes. (Wow&hellip; It&rsquo;s over 20 years old!)</li>
+<li>Cleaning up my website. This tool is obsolete; it was a debugger for ANTLR 2.x. I'm keeping it here for historical purposes. (Wow... It's over 20 years old!)</li>
 </ul></li>
 
 <li><p>6/17/1999</p>
@@ -328,10 +326,10 @@
 <li><p>7/17/1998</p>
 
 <ul>
-<li>I&rsquo;ve given a first pass of the tool to Terence.  He&rsquo;s checking things out and making sure I didn&rsquo;t break ANTLR.</li>
-<li>Developed a good debugging model for ANTLR that will make it easy to add any sort of debugger you want (especially ParseView).  The API for this will eventually be documented so people can add their own debuggers, simple (like just &ldquo;println&rdquo;s) or complex, like ParseView.</li>
-<li>ParseView will be a <em>free</em> part of the real ANTLR distribution.  Terence and I realized it would just be too much work to try to really have this be supported the way a &ldquo;pay&rdquo; tool should be.  We just don&rsquo;t have that much time.  Instead, we&rsquo;re releasing it <em>with source</em> so others can add to it.</li>
-<li>The source will be included with the distribution.  Please <em><strong>refrain</strong></em> from making changes just yet &ndash; I&rsquo;d like to add a few more things, like breakpoints and some AST stuff before people start sending in changes to integrate.</li>
+<li>I've given a first pass of the tool to Terence.  He's checking things out and making sure I didn't break ANTLR.</li>
+<li>Developed a good debugging model for ANTLR that will make it easy to add any sort of debugger you want (especially ParseView).  The API for this will eventually be documented so people can add their own debuggers, simple (like just &quot;println&quot;s) or complex, like ParseView.</li>
+<li>ParseView will be a <em>free</em> part of the real ANTLR distribution.  Terence and I realized it would just be too much work to try to really have this be supported the way a &quot;pay&quot; tool should be.  We just don't have that much time.  Instead, we're releasing it <em>with source</em> so others can add to it.</li>
+<li>The source will be included with the distribution.  Please <em><strong>refrain</strong></em> from making changes just yet -- I'd like to add a few more things, like breakpoints and some AST stuff before people start sending in changes to integrate.</li>
 </ul></li>
 </ul>
 
@@ -371,7 +369,7 @@
 <li><p>Controller</p>
 
 <ul>
-<li><strong>Note:</strong> The controller currently <em>only</em> controls the Parse Tree &ndash; you cannot step using through the scan tree yet.  Sorry &ndash; I just ran out of time&hellip;</li>
+<li><strong>Note:</strong> The controller currently <em>only</em> controls the Parse Tree -- you cannot step using through the scan tree yet.  Sorry -- I just ran out of time...</li>
 <li>Step to next rule entry</li>
 <li>Step to exit of current rule</li>
 <li>Step to next matched token</li>
@@ -380,10 +378,10 @@
 <li>Step to any of the above</li>
 <li>Continue parse until any of the buttons are pressed</li>
 <li>Stop the program (System.exit(0) called)</li>
-<li>Find text in the Parse Tree (again &ndash; not implemented for Scan Tree yet)</li>
+<li>Find text in the Parse Tree (again -- not implemented for Scan Tree yet)</li>
 </ul></li>
 
-<li><p>Character &ldquo;ticker&rdquo;</p>
+<li><p>Character &quot;ticker&quot;</p>
 
 <ul>
 <li>Shows consumed characters during scan at top of screen.</li>
@@ -408,11 +406,11 @@
 <li>Apparently has a limit on how many rows it will display
 
 <ul>
-<li>I&rsquo;m hoping this is a bug that Sun will fix, otherwise I&rsquo;ll need to go back to my own treeview again</li>
+<li>I'm hoping this is a bug that Sun will fix, otherwise I'll need to go back to my own treeview again</li>
 </ul></li>
-<li>Sometimes doesn&rsquo;t properly scrollPathToVisible() &ndash; when you pause the parse you may need to adjust the scrollbars to see the newest edition to the Parse or Scan trees</li>
+<li>Sometimes doesn't properly scrollPathToVisible() -- when you pause the parse you may need to adjust the scrollbars to see the newest edition to the Parse or Scan trees</li>
 </ul></li>
-<li>&ldquo;Finish&rdquo; and &ldquo;Continue&rdquo; do pretty much the same thing - I&rsquo;ll probably remove the &ldquo;Finish&rdquo; button</li>
+<li>&quot;Finish&quot; and &quot;Continue&quot; do pretty much the same thing - I'll probably remove the &quot;Finish&quot; button</li>
 </ul>
 
 <hr />
@@ -424,7 +422,7 @@
 
 <ul>
 <li>Provide a proxy listener that can gather parser events and send them across a socket</li>
-<li>Provide a debugger &ldquo;server&rdquo; that listens to a socket, creates the new debugging events and sends them to real listeners (like ParseView.)</li>
+<li>Provide a debugger &quot;server&quot; that listens to a socket, creates the new debugging events and sends them to real listeners (like ParseView.)</li>
 <li>This will allow
 
 <ul>
@@ -442,7 +440,7 @@
 
 <ul>
 <li>Rule, token match, syntax error</li>
-<li>In context &ndash; for example, &ldquo;break in expression in ifStatement&rdquo;</li>
+<li>In context -- for example, &quot;break in expression in ifStatement&quot;</li>
 <li>Source line number</li>
 <li>Source text</li>
 <li>Before/After manipulating an AST</li>
@@ -458,30 +456,30 @@
 <li><p>Filter tree contents</p>
 
 <ul>
-<li>&ldquo;show only x, y and z&rdquo; &ndash; everything else is grouped into larger &ldquo;ignore&rdquo; boxes in the tree that can be expanded if needed.</li>
+<li>&quot;show only x, y and z&quot; -- everything else is grouped into larger &quot;ignore&quot; boxes in the tree that can be expanded if needed.</li>
 </ul></li>
 
-<li><p>Scanned-text &ldquo;relief-map&rdquo; view</p>
+<li><p>Scanned-text &quot;relief-map&quot; view</p>
 
 <ul>
 <li>Really cool way to see how the source text is recognized by the parser/scanner</li>
-<li>Each rule entered adds a tier to the current &ldquo;hill&rdquo;; rule exit closes current tier</li>
+<li>Each rule entered adds a tier to the current &quot;hill&quot;; rule exit closes current tier</li>
 <li>Source file will be laid out as closely as possible to original input as read</li>
 <li>Shows all text that has been scanned to current breakpoint</li>
-<li>Each top-level box represents a terminal in the grammar &ndash; the text is the text read from the source file
+<li>Each top-level box represents a terminal in the grammar -- the text is the text read from the source file
 
 <ul>
-<li>white space is skipped in the view &ndash; might add an option to display it</li>
+<li>white space is skipped in the view -- might add an option to display it</li>
 </ul></li>
 <li>ToolTips or some other mechanism will display the parse rule relating to a box at any given level</li>
 <li>Interaction between parse tree and scanned text view
 
 <ul>
 <li>clicking on a box in the scanned text view will select the corresponding node in the parse tree</li>
-<li>vice-versa (&lsquo;cause I&rsquo;m too lazy to type the rest)</li>
+<li>vice-versa ('cause I'm too lazy to type the rest)</li>
 </ul></li>
 
-<li><p>Initial mock up &ndash; I&rsquo;ll do a better mock up another time&hellip;</p>
+<li><p>Initial mock up -- I'll do a better mock up another time...</p>
 
 <p><img src="images/st.gif" alt="Scanned Text Panel" /></p></li>
 </ul></li>
@@ -499,10 +497,10 @@
 
 <ul>
 <li>Current AST states shown at all breakpoints for all ASTs available in rule</li>
-<li>AST manipulations in action code &ndash; investigating ways of tracking these with minimal impact</li>
+<li>AST manipulations in action code -- investigating ways of tracking these with minimal impact</li>
 </ul></li>
-<li>May add a thumbnail view with fisheye lens &ndash; depends how daring I feel the night I code it</li>
-<li>Note: These pictures are just rough mockups to give you an idea of what I&rsquo;m thinking of&hellip;<img src="images/ast1.gif" alt="AST View 1" />   <img src="images/ast2.gif" alt="AST View 2" /></li>
+<li>May add a thumbnail view with fisheye lens -- depends how daring I feel the night I code it</li>
+<li>Note: These pictures are just rough mockups to give you an idea of what I'm thinking of...<img src="images/ast1.gif" alt="AST View 1" />   <img src="images/ast2.gif" alt="AST View 2" /></li>
 </ul></li>
 
 <li><p>Static Grammar Analysis</p>
@@ -512,7 +510,7 @@
 <li>conflict displays</li>
 <li>derivation trees</li>
 <li>prediction expressions</li>
-<li>syntax (&ldquo;railroad&rdquo;) diagrams for grammar (if I feel like it ;)</li>
+<li>syntax (&quot;railroad&quot;) diagrams for grammar (if I feel like it ;)</li>
 <li>Available as an ANTLR option, run immediately after ANTLR parsing completes</li>
 <li>Will assist conflict resolution
 
@@ -543,21 +541,21 @@
 
 <h1 id="operating-instructions">Operating Instructions</h1>
 
-<p>These are brief for now; I&rsquo;ll add more later</p>
+<p>These are brief for now; I'll add more later</p>
 
 <h2 id="building-a-parser-for-debugging">Building a Parser for Debugging</h2>
 
-<p>Run ANTLR as you normally would, but add &ldquo;-debug&rdquo; to your command line.   For example:</p>
+<p>Run ANTLR as you normally would, but add &quot;-debug&quot; to your command line.   For example:</p>
 
 <p>java antlr.Tool -debug java.g</p>
 
-<h2 id="what-you-ll-need-to-run-parseview">What you&rsquo;ll need to run ParseView</h2>
+<h2 id="what-you-ll-need-to-run-parseview">What you'll need to run ParseView</h2>
 
 <ul>
 <li>You need the ANTLR distribution that contains ParseView</li>
 <li>You need Swing 1.0.2</li>
-<li>Your code needs to have a System.exit(0) call at its end.  Simply returning from main will not stop the program,  as ParseView starts an AWT thread which must be killed&hellip;</li>
-<li>ParseView only works with programs that use <strong><em>both</em></strong> ANTLR-generated scanners <em>and</em> parsers.  If you use a custom parser or scanner, ParseView probably won&rsquo;t work.  I&rsquo;ll be writing some adapters to make this easy to do, using the debugger interface.</li>
+<li>Your code needs to have a System.exit(0) call at its end.  Simply returning from main will not stop the program,  as ParseView starts an AWT thread which must be killed...</li>
+<li>ParseView only works with programs that use <strong><em>both</em></strong> ANTLR-generated scanners <em>and</em> parsers.  If you use a custom parser or scanner, ParseView probably won't work.  I'll be writing some adapters to make this easy to do, using the debugger interface.</li>
 </ul>
 
 <p>Other than that, run your parser normally.  A ParseView window will appear.</p>
@@ -574,10 +572,10 @@
 
 <ul>
 <li>The Parse and Scan tree views show the entered rules and all tokens/characters matched in those rules</li>
-<li>Any rules entered while in &ldquo;guess mode&rdquo; via a syntactic predicate will have a yellow background</li>
+<li>Any rules entered while in &quot;guess mode&quot; via a syntactic predicate will have a yellow background</li>
 <li>Characters that are skipped in the scan are colored gray</li>
 <li>At each stop point, the status line will say which event has happened (like a token being matched or a rule being entered or exited.)</li>
-<li>While the parse is running, the status line under the scan tree will display the current line number in the source file.  <strong>Note:</strong> This will only work properly if your scanner calls newline() anytime a newline sequence is detected.  Newline sequences should be &ldquo;\n&rdquo;, &ldquo;\r&rdquo; or &ldquo;\r\n&rdquo;</li>
+<li>While the parse is running, the status line under the scan tree will display the current line number in the source file.  <strong>Note:</strong> This will only work properly if your scanner calls newline() anytime a newline sequence is detected.  Newline sequences should be &quot;\n&quot;, &quot;\r&quot; or &quot;\r\n&quot;</li>
 </ul></li>
 <li>The column of buttons (which will eventually be a toolbar) is the controller.  The buttons do the following:
 
@@ -587,13 +585,13 @@
 <li>Token - continue parse until a token has been matched</li>
 <li>Parser Sem Pred - continue parse until a semantic predicate is evaluated</li>
 <li>Parser Guess - continue parse unti a syntactic predicate starts or finishes</li>
-<li>Finish - continue parse <em>without watching for breakpoints</em>.  Currently, this does the same as the &ldquo;Continue&rdquo; button.</li>
+<li>Finish - continue parse <em>without watching for breakpoints</em>.  Currently, this does the same as the &quot;Continue&quot; button.</li>
 <li>Any - continue parse until any of the above things are matched</li>
 <li>Continue - continue parse until the next breakpoint or step button event occurs button</li>
-<li>Find - locate text in the parse tree &ndash; this will pop up a dialog asking for text and whether you want to start at the top or find the next occurrence</li>
+<li>Find - locate text in the parse tree -- this will pop up a dialog asking for text and whether you want to start at the top or find the next occurrence</li>
 <li>VAJ Debug - halt the parser and enter the VisualAge for Java debugger.  This will only appear if you are running in VisualAge for Java.</li>
 <li>Inspect - bring up the VisualAge for Java variable inspector for the Parser.  This will only appear if you are running in VisualAge for Java</li>
-<li>System.exit() &ndash; calls System.exit(0) to stop the parser</li>
+<li>System.exit() -- calls System.exit(0) to stop the parser</li>
 </ul></li>
 </ul>
           </div>
@@ -656,7 +654,225 @@
       </div>
       
 
-      
+      	
+	
+	
+	
+		
+		
+		
+	
+
+		
+		<div class="col-md-2 pl-0">
+
+			
+			<div id="page-scrollspy" class="toc-nav">
+				
+				<ul class="nav nav-pills ml-0">
+					
+					<li class="nav-item pb-3 text-center">
+						<span class="font-weight-bold mb-2">- CONTENTS - </span>
+					</li>
+
+					
+						
+						
+							
+								
+								
+									<ul class="nav">
+								
+								
+
+										<li class="nav-item">
+						 					<a class="nav-link" href="#status">
+												 Status
+											</a>
+										</li>
+						 
+								
+								
+									</ul>
+								
+							
+						
+				 
+						
+						
+							
+								
+								
+									<ul class="nav">
+								
+								
+
+										<li class="nav-item">
+						 					<a class="nav-link" href="#current-state-of-the-tool">
+												 Current State of the Tool
+											</a>
+										</li>
+						 
+								
+								
+									</ul>
+								
+							
+						
+				 
+						
+						
+							
+								
+								
+									<ul class="nav">
+								
+								
+
+										<li class="nav-item">
+						 					<a class="nav-link" href="#known-problems">
+												 Known Problems
+											</a>
+										</li>
+						 
+								
+								
+									</ul>
+								
+							
+						
+				 
+						
+						
+							
+								
+								
+									<ul class="nav">
+								
+								
+
+										<li class="nav-item">
+						 					<a class="nav-link" href="#planned-features">
+												 Planned Features
+											</a>
+										</li>
+						 
+								
+								
+									</ul>
+								
+							
+						
+				 
+						
+						
+							
+								
+								
+									<ul class="nav">
+								
+								
+
+										<li class="nav-item">
+						 					<a class="nav-link" href="#operating-instructions">
+												 Operating Instructions
+											</a>
+										</li>
+						 
+								
+								
+									</ul>
+								
+							
+						
+				 
+						
+						
+							
+								
+								
+									<ul class="nav">
+								
+									<ul class="nav">
+								
+								
+
+										<li class="nav-item">
+						 					<a class="nav-link" href="#building-a-parser-for-debugging">
+												 Building a Parser for Debugging
+											</a>
+										</li>
+						 
+								
+								
+									</ul>
+								
+									</ul>
+								
+							
+						
+				 
+						
+						
+							
+								
+								
+									<ul class="nav">
+								
+									<ul class="nav">
+								
+								
+
+										<li class="nav-item">
+						 					<a class="nav-link" href="#what-you-ll-need-to-run-parseview">
+												 What you&#39;ll need to run ParseView
+											</a>
+										</li>
+						 
+								
+								
+									</ul>
+								
+									</ul>
+								
+							
+						
+				 
+						
+						
+							
+								
+								
+									<ul class="nav">
+								
+									<ul class="nav">
+								
+								
+
+										<li class="nav-item">
+						 					<a class="nav-link" href="#the-parseview-window">
+												 The ParseView Window
+											</a>
+										</li>
+						 
+								
+								
+									</ul>
+								
+									</ul>
+								
+							
+						
+				 
+
+				</ul>
+			</div>
+			
+
+		</div>
+		
+	
+
 
     </div>
     

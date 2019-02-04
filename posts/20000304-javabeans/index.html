@@ -255,9 +255,7 @@
 
       
 
-      
-      <div class="container pr-5">
-      
+      <div class="col-md-10">
 
         
         <div class="z-depth-1  post-wrapper white-bg single-post">
@@ -291,7 +289,7 @@
 
 <p></p>
 
-<p>(Note - this article is quite old&hellip; I only had time to reformat it, so please forgive use of &ldquo;Vector&rdquo;, though I&rsquo;m not sure why I used it&hellip; I have anonymous inner classes in here, so <code>java.util.List</code> existed&hellip; I assume it was just code evolution at some point&hellip;)</p>
+<p>(Note - this article is quite old... I only had time to reformat it, so please forgive use of &quot;Vector&quot;, though I'm not sure why I used it... I have anonymous inner classes in here, so <code>java.util.List</code> existed... I assume it was just code evolution at some point...)</p>
 
 <p>JavaBean components, or simply beans, are classes that are proud of what they are, and they let the world know it. Using certain naming conventions and possibly a helper class, a bean identifies its attributes and behavior to any interested party. Bean-builder tools or other applications use that knowledge to customize beans and glue them together through event registration.</p>
 
@@ -308,7 +306,7 @@
 <li>They must support persistence of their state.</li>
 </ul>
 
-<p>The bean specification enables this persistence through the java.io.Serializable or java.io.Externalizable interfaces. This requirement enables an application such as a bean-builder tool to restore a &ldquo;pickled&rdquo; instance of a bean, an instance created before running the application.</p>
+<p>The bean specification enables this persistence through the java.io.Serializable or java.io.Externalizable interfaces. This requirement enables an application such as a bean-builder tool to restore a &quot;pickled&quot; instance of a bean, an instance created before running the application.</p>
 
 <p>If you plan to always restore the bean from its serialized state, no other requirements must be met. However, it is generally desirable to create new instances of a bean by using a new expression. To enable this, the bean must provide a public no-argument (otherwise known as default) constructor.</p>
 
@@ -354,7 +352,7 @@ public void setPropertyName(TypeName value)
 
 <p>This defines a readable property named eyeColor of type <code>java.awt.Color</code>.</p>
 
-<p>Note that there can be both a get and is method for a boolean property; the is method is allowed for readability. Normally, you define the get and set methods, but sometimes the get method doesn&rsquo;t read naturally. For example</p>
+<p>Note that there can be both a get and is method for a boolean property; the is method is allowed for readability. Normally, you define the get and set methods, but sometimes the get method doesn't read naturally. For example</p>
 
 <pre><code>if (list.isEmpty()) {...}
 
@@ -385,7 +383,7 @@ public void setPropertyName(int index, TypeName value)
 
 <h3 id="bound-and-constrained-properties">Bound and Constrained Properties</h3>
 
-<p>While these names may conjure images of Harry Houdini, bound and constrained properties have nothing to do with ropes, shackles, or chains. (If you&rsquo;re thinking something other than Harry Houdini, remember that this is a family show&hellip;)</p>
+<p>While these names may conjure images of Harry Houdini, bound and constrained properties have nothing to do with ropes, shackles, or chains. (If you're thinking something other than Harry Houdini, remember that this is a family show...)</p>
 
 <p>Bound and constrained properties fire events that report any modification to their state. Bound properties notify registered listeners after their state has changed, while constrained properties notify listeners before they change, allowing those listeners to veto the change. You can bind and constrain simple or indexed properties.</p>
 
@@ -393,7 +391,7 @@ public void setPropertyName(int index, TypeName value)
 
 <h3 id="bound-properties-reporting-property-state-changes">Bound Properties: Reporting Property-State Changes</h3>
 
-<p>(NOTE: This is an implementation of the Observer Pattern&hellip;)</p>
+<p>(NOTE: This is an implementation of the Observer Pattern...)</p>
 
 <p>A bound property fires a <code>PropertyChangeEvent</code> (defined in package <code>java.beans</code>) when its state changes. <code>PropertyChangeListener</code>s register themselves with the bean to receive notification of those changes. The <code>java.beans</code> package provides support for this processing through its <code>PropertyChangeSupport</code> class. For example, consider a simple property phoneNumber, defined as follows:</p>
 
@@ -413,7 +411,7 @@ public String getPhoneNumber() {
 <pre><code>this.phoneNumber = phoneNumber;
 </code></pre>
 
-<p><em>can be quite confusing to read, especially when first learning the Java language. We use it here because it is and accepted common practice. The <code>this</code> qualification on the first <code>phoneNumber</code> means, &ldquo;I&rsquo;m talking about the <strong>instance</strong> variable <code>phoneNumber</code>.&rdquo; This is necessary to distinguish it from the current active use of <code>phoneNumber</code>, the <strong>parameter</strong> <code>phoneNumber</code>.</em></p>
+<p><em>can be quite confusing to read, especially when first learning the Java language. We use it here because it is and accepted common practice. The <code>this</code> qualification on the first <code>phoneNumber</code> means, &quot;I'm talking about the <strong>instance</strong> variable <code>phoneNumber</code>.&quot; This is necessary to distinguish it from the current active use of <code>phoneNumber</code>, the <strong>parameter</strong> <code>phoneNumber</code>.</em></p>
 
 <p>This simple property definition directly sets and gets its data. To bind this property, we need to provide the following:</p>
 
@@ -565,7 +563,7 @@ Nancy: 555-7777
 
 <h3 id="constrained-properties-property-validation-by-delegation">Constrained Properties: Property Validation by Delegation</h3>
 
-<p>Note that this is <em>not</em> an ideal way to do validation (you lose the invalid value&hellip;), and in practice, is rarely, if ever, used.)</p>
+<p>Note that this is <em>not</em> an ideal way to do validation (you lose the invalid value...), and in practice, is rarely, if ever, used.)</p>
 
 <p>Constrained properties allow registered listeners to veto a proposed change. The bean fires a <code>PropertyChangeEvent</code> before the property state is changed, and the listeners can object to the change by throwing a <code>PropertyVetoException</code>. The exception prevents the state from changing and informs the code that called the set method of the veto.</p>
 
@@ -786,9 +784,9 @@ Set number to 5551111111111
 <pre><code>public void addPropertyChangeListener(PropertyChangeListener l)
 </code></pre>
 
-<p>it assumes that contained properties may be bound. While that is a bit over-assuming, it really does not hurt use of the bean. If the bean has any properties that are not bound, it is the bean-developer&rsquo;s responsibility to provide a <code>BeanInfo</code> class that explicitly states which properties are not bound.</p>
+<p>it assumes that contained properties may be bound. While that is a bit over-assuming, it really does not hurt use of the bean. If the bean has any properties that are not bound, it is the bean-developer's responsibility to provide a <code>BeanInfo</code> class that explicitly states which properties are not bound.</p>
 
-<p>Constrained properties are similar, but assumptions are safer. Whenever the tool sees that a property&rsquo;s set method throws a <code>PropertyVetoException</code>, the tool can assume the property is constrained.</p>
+<p>Constrained properties are similar, but assumptions are safer. Whenever the tool sees that a property's set method throws a <code>PropertyVetoException</code>, the tool can assume the property is constrained.</p>
 
 <p>Remember that properties can be both bound and constrained. In practice, most properties are only bound, and very few are only constrained.</p>
 
@@ -1079,7 +1077,7 @@ public void removeSomeName(SomeName l)
 
 <p>How can we hide features from the user of a bean-builder tool? How can we allow only expert users to see some features, while non-expert users see only very basic features? How can we change the way the user interacts with the properties in a property sheet, or enable several properties to be set as a group? Explicit metadata is required to address these and other issues, describing exactly what we want. The bean specification calls this metadata BeanInfo. BeanInfo are classes that are delivered along with beans. Any bean may have a BeanInfo class, which describes in detail the features provided by that bean.</p>
 
-<p>BeanInfo classes are associated with a bean by a simple naming convention. The name of the BeanInfo class is the name of the bean with &ldquo;BeanInfo&rdquo; as its suffix. For example, a bean named Person could have a PersonBeanInfo class that describes it. BeanInfo classes all implement the java.beans.BeanInfo interface, which requires methods that return arrays of PropertyDescriptors, MethodDescriptors, and EventSetDescriptors as well as general information about the bean itself.</p>
+<p>BeanInfo classes are associated with a bean by a simple naming convention. The name of the BeanInfo class is the name of the bean with &quot;BeanInfo&quot; as its suffix. For example, a bean named Person could have a PersonBeanInfo class that describes it. BeanInfo classes all implement the java.beans.BeanInfo interface, which requires methods that return arrays of PropertyDescriptors, MethodDescriptors, and EventSetDescriptors as well as general information about the bean itself.</p>
 
 <p>If the introspection process discovers a BeanInfo class, it queries that BeanInfo class to determine features instead of examining public method names. The FeatureDescriptors (PropertyDescriptors, MethodDescriptors, and EventSetDescriptors) provide the names and descriptions of the features. Each FeatureDescriptor can contain additional information, stating if a feature should be hidden or considered expert. The bean-builder tool uses the FeatureDescriptor information to filter the features that are available. PropertyDescriptors can also specify a property editor, one means of customizing the way a user edits a property’s value in the bean-builder tool.</p>
 
@@ -1149,7 +1147,481 @@ public void removeSomeName(SomeName l)
       </div>
       
 
-      
+      	
+	
+	
+	
+		
+		
+		
+	
+
+		
+		<div class="col-md-2 pl-0">
+
+			
+			<div id="page-scrollspy" class="toc-nav">
+				
+				<ul class="nav nav-pills ml-0">
+					
+					<li class="nav-item pb-3 text-center">
+						<span class="font-weight-bold mb-2">- CONTENTS - </span>
+					</li>
+
+					
+						
+						
+							
+								
+								
+									<ul class="nav">
+								
+								
+
+										<li class="nav-item">
+						 					<a class="nav-link" href="#what-makes-a-class-a-bean">
+												 What Makes a Class a Bean?
+											</a>
+										</li>
+						 
+								
+								
+									</ul>
+								
+							
+						
+				 
+						
+						
+							
+								
+								
+									<ul class="nav">
+								
+								
+
+										<li class="nav-item">
+						 					<a class="nav-link" href="#bean-features">
+												 Bean Features
+											</a>
+										</li>
+						 
+								
+								
+									</ul>
+								
+							
+						
+				 
+						
+						
+							
+								
+								
+									<ul class="nav">
+								
+								
+
+										<li class="nav-item">
+						 					<a class="nav-link" href="#properties">
+												 Properties
+											</a>
+										</li>
+						 
+								
+								
+									</ul>
+								
+							
+						
+				 
+						
+						
+							
+								
+								
+									<ul class="nav">
+								
+									<ul class="nav">
+								
+								
+
+										<li class="nav-item">
+						 					<a class="nav-link" href="#simple-properties">
+												 Simple Properties
+											</a>
+										</li>
+						 
+								
+								
+									</ul>
+								
+									</ul>
+								
+							
+						
+				 
+						
+						
+							
+								
+								
+									<ul class="nav">
+								
+									<ul class="nav">
+								
+								
+
+										<li class="nav-item">
+						 					<a class="nav-link" href="#indexed-properties">
+												 Indexed Properties
+											</a>
+										</li>
+						 
+								
+								
+									</ul>
+								
+									</ul>
+								
+							
+						
+				 
+						
+						
+							
+								
+								
+									<ul class="nav">
+								
+									<ul class="nav">
+								
+								
+
+										<li class="nav-item">
+						 					<a class="nav-link" href="#bound-and-constrained-properties">
+												 Bound and Constrained Properties
+											</a>
+										</li>
+						 
+								
+								
+									</ul>
+								
+									</ul>
+								
+							
+						
+				 
+						
+						
+							
+								
+								
+									<ul class="nav">
+								
+									<ul class="nav">
+								
+								
+
+										<li class="nav-item">
+						 					<a class="nav-link" href="#bound-properties-reporting-property-state-changes">
+												 Bound Properties: Reporting Property-State Changes
+											</a>
+										</li>
+						 
+								
+								
+									</ul>
+								
+									</ul>
+								
+							
+						
+				 
+						
+						
+							
+								
+								
+									<ul class="nav">
+								
+									<ul class="nav">
+								
+								
+
+										<li class="nav-item">
+						 					<a class="nav-link" href="#constrained-properties-property-validation-by-delegation">
+												 Constrained Properties: Property Validation by Delegation
+											</a>
+										</li>
+						 
+								
+								
+									</ul>
+								
+									</ul>
+								
+							
+						
+				 
+						
+						
+							
+								
+								
+									<ul class="nav">
+								
+									<ul class="nav">
+								
+								
+
+										<li class="nav-item">
+						 					<a class="nav-link" href="#how-can-a-tool-tell-if-a-property-is-bound-or-constrained">
+												 How Can a Tool Tell if a Property is Bound or Constrained?
+											</a>
+										</li>
+						 
+								
+								
+									</ul>
+								
+									</ul>
+								
+							
+						
+				 
+						
+						
+							
+								
+								
+									<ul class="nav">
+								
+								
+
+										<li class="nav-item">
+						 					<a class="nav-link" href="#event-sets">
+												 Event Sets
+											</a>
+										</li>
+						 
+								
+								
+									</ul>
+								
+							
+						
+				 
+						
+						
+							
+								
+								
+									<ul class="nav">
+								
+									<ul class="nav">
+								
+								
+
+										<li class="nav-item">
+						 					<a class="nav-link" href="#an-event-class">
+												 An Event Class
+											</a>
+										</li>
+						 
+								
+								
+									</ul>
+								
+									</ul>
+								
+							
+						
+				 
+						
+						
+							
+								
+								
+									<ul class="nav">
+								
+									<ul class="nav">
+								
+								
+
+										<li class="nav-item">
+						 					<a class="nav-link" href="#an-event-listener-interface">
+												 An Event-Listener Interface
+											</a>
+										</li>
+						 
+								
+								
+									</ul>
+								
+									</ul>
+								
+							
+						
+				 
+						
+						
+							
+								
+								
+									<ul class="nav">
+								
+									<ul class="nav">
+								
+								
+
+										<li class="nav-item">
+						 					<a class="nav-link" href="#an-event-source-bean">
+												 An Event-Source Bean
+											</a>
+										</li>
+						 
+								
+								
+									</ul>
+								
+									</ul>
+								
+							
+						
+				 
+						
+						
+							
+								
+								
+									<ul class="nav">
+								
+									<ul class="nav">
+								
+								
+
+										<li class="nav-item">
+						 					<a class="nav-link" href="#a-sample-event-listener">
+												 A Sample Event Listener
+											</a>
+										</li>
+						 
+								
+								
+									</ul>
+								
+									</ul>
+								
+							
+						
+				 
+						
+						
+							
+								
+								
+									<ul class="nav">
+								
+									<ul class="nav">
+								
+								
+
+										<li class="nav-item">
+						 					<a class="nav-link" href="#determining-which-events-are-fired">
+												 Determining Which Events Are Fired
+											</a>
+										</li>
+						 
+								
+								
+									</ul>
+								
+									</ul>
+								
+							
+						
+				 
+						
+						
+							
+								
+								
+									<ul class="nav">
+								
+								
+
+										<li class="nav-item">
+						 					<a class="nav-link" href="#methods">
+												 Methods
+											</a>
+										</li>
+						 
+								
+								
+									</ul>
+								
+							
+						
+				 
+						
+						
+							
+								
+								
+									<ul class="nav">
+								
+								
+
+										<li class="nav-item">
+						 					<a class="nav-link" href="#bean-builder-tools-and-beans">
+												 Bean-Builder Tools and Beans
+											</a>
+										</li>
+						 
+								
+								
+									</ul>
+								
+							
+						
+				 
+						
+						
+							
+								
+								
+									<ul class="nav">
+								
+									<ul class="nav">
+								
+								
+
+										<li class="nav-item">
+						 					<a class="nav-link" href="#introspection-and-the-role-of-beaninfo-classes">
+												 Introspection and the Role of BeanInfo Classes
+											</a>
+										</li>
+						 
+								
+								
+									</ul>
+								
+									</ul>
+								
+							
+						
+				 
+
+				</ul>
+			</div>
+			
+
+		</div>
+		
+	
+
 
     </div>
     

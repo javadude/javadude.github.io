@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://javadude.com/posts/20190203-kotlin01/</loc>
+    <lastmod>2019-02-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://javadude.com/publications/</loc>
     <lastmod>2018-10-18T00:00:00+00:00</lastmod>
   </url>
@@ -175,7 +180,7 @@
   
   <url>
     <loc>http://javadude.com/categories/articles/</loc>
-    <lastmod>2004-05-22T00:00:00+00:00</lastmod>
+    <lastmod>2019-02-03T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -187,7 +192,7 @@
   
   <url>
     <loc>http://javadude.com/categories/</loc>
-    <lastmod>2004-05-22T00:00:00+00:00</lastmod>
+    <lastmod>2019-02-03T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -223,13 +228,19 @@
   
   <url>
     <loc>http://javadude.com/</loc>
-    <lastmod>2018-10-18T00:00:00+00:00</lastmod>
+    <lastmod>2019-02-03T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://javadude.com/tags/kotlin/</loc>
+    <lastmod>2019-02-03T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://javadude.com/tags/language/</loc>
-    <lastmod>2014-09-23T00:00:00+00:00</lastmod>
+    <lastmod>2019-02-03T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -247,7 +258,7 @@
   
   <url>
     <loc>http://javadude.com/posts/</loc>
-    <lastmod>2017-06-28T00:00:00+00:00</lastmod>
+    <lastmod>2019-02-03T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

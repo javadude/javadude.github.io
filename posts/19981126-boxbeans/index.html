@@ -255,9 +255,7 @@
 
       
 
-      
-      <div class="container pr-5">
-      
+      <div class="col-md-10">
 
         
         <div class="z-depth-1  post-wrapper white-bg single-post">
@@ -297,14 +295,14 @@
 <li><p>10/17/2018</p>
 
 <ul>
-<li>Updating this website. The VisualAge for Java version of these beans are obsolete, and I&rsquo;m just keeping this around for historical purposes. The beans themselves <em>might</em> still work in GUI builders, but I haven&rsquo;t tested them in years, and the source is in a VisualAge repository so I can&rsquo;t get to it&hellip;</li>
+<li>Updating this website. The VisualAge for Java version of these beans are obsolete, and I'm just keeping this around for historical purposes. The beans themselves <em>might</em> still work in GUI builders, but I haven't tested them in years, and the source is in a VisualAge repository so I can't get to it...</li>
 </ul></li>
 
 <li><p>11/26/1998</p>
 
 <ul>
-<li>With the current VisualAge fixpacks you no longer need the extra swing package.   I&rsquo;ve removed them from the VAJ distribution</li>
-<li>I&rsquo;ve added a JAR file distribution and tested it with JBuilder &ndash; it seems to work just fine!
+<li>With the current VisualAge fixpacks you no longer need the extra swing package.   I've removed them from the VAJ distribution</li>
+<li>I've added a JAR file distribution and tested it with JBuilder -- it seems to work just fine!
 
 <br /></li>
 </ul></li>
@@ -312,13 +310,13 @@
 
 <h1 id="introduction">Introduction</h1>
 
-<p>Swing&rsquo;s BoxLayout is a fairly useful layout manager, but using it in a visual environment such as VisualAge for Java&rsquo;s Visual Composition Editor isn&rsquo;t easy.</p>
+<p>Swing's BoxLayout is a fairly useful layout manager, but using it in a visual environment such as VisualAge for Java's Visual Composition Editor isn't easy.</p>
 
 <p>There are several problems to face:</p>
 
 <ul>
-<li>The Box class isn&rsquo;t a bean</li>
-<li>Support for &ldquo;struts&rdquo; and &ldquo;glue&rdquo; is only provided programmatically</li>
+<li>The Box class isn't a bean</li>
+<li>Support for &quot;struts&quot; and &quot;glue&quot; is only provided programmatically</li>
 <li>BoxLayout uses getPreferredSize(), getMaximumSize() and getMinimumSize() to perform its calculations.  These sizes are settable for Swing components, but for non-swing components you must subclass components to change them.</li>
 </ul>
 
@@ -330,10 +328,10 @@
 <li><p>BoxAdapter - a simple container that can be used to change the resize behavior of any component in a BoxLayout.  It has four boolean properties:</p>
 
 <ul>
-<li>shrinkHorizontal - controls the &ldquo;width&rdquo; when asked for getMinimumSize().</li>
-<li>shrinkVertical - controls the &ldquo;height&rdquo; when asked for getMinimumSize().</li>
-<li>stretchHorizontal - controls the &ldquo;width&rdquo; when asked for getMaximumSize().</li>
-<li>stretchVertical - controls the &ldquo;height&rdquo; when asked for getMaximumSize().
+<li>shrinkHorizontal - controls the &quot;width&quot; when asked for getMinimumSize().</li>
+<li>shrinkVertical - controls the &quot;height&quot; when asked for getMinimumSize().</li>
+<li>stretchHorizontal - controls the &quot;width&quot; when asked for getMaximumSize().</li>
+<li>stretchVertical - controls the &quot;height&quot; when asked for getMaximumSize().
 <br /></li>
 </ul>
 
@@ -352,7 +350,7 @@
 <li><p>HorizontalGlue - Represents a varying size horizontal component, used to force space between other components in a x-axis-oriented BoxLayout.</p></li>
 </ul>
 
-<p>The struts have a &ldquo;pixels&rdquo; property that controls how much space they take up.  Glue doesn&rsquo;t need it, as it expands and collapses as needed.</p>
+<p>The struts have a &quot;pixels&quot; property that controls how much space they take up.  Glue doesn't need it, as it expands and collapses as needed.</p>
 
 <p>All of the above beans have a <em>design representation</em>.  That is, when used in a bean builder, they will paint an image to easily identify themselves.  When used at runtime, no image will be painted.  For example:</p>
 
@@ -364,7 +362,7 @@
 
 <h1 id="distribution">Distribution</h1>
 
-<p>I have just packaged these as a &ldquo;feature&rdquo; for VisualAge for Java 2.0.  I will set up a standard jar file later for use in other (inferior ;) ) environments.</p>
+<p>I have just packaged these as a &quot;feature&quot; for VisualAge for Java 2.0.  I will set up a standard jar file later for use in other (inferior ;) ) environments.</p>
 
 <h2 id="installation-for-visualage-for-java-feature-packaging">Installation for VisualAge for Java - Feature Packaging</h2>
 
@@ -374,9 +372,9 @@
 <li>Download <a href="box-vaj.zip">box-vaj.zip</a> from this site.</li>
 <li>Unzip box.zip to the directory where VisualAge for Java is installed.  For example, C:\IBMVJava.</li>
 <li>Start VisualAge for Java.</li>
-<li>Select &ldquo;Quick Start&rdquo; from the &ldquo;File&rdquo; menu.</li>
-<li>Select &ldquo;Add feature&rdquo; from the &ldquo;Features&rdquo; category.</li>
-<li>Select &ldquo;Javadude Box Beans&rdquo; to install the box beans.</li>
+<li>Select &quot;Quick Start&quot; from the &quot;File&quot; menu.</li>
+<li>Select &quot;Add feature&quot; from the &quot;Features&quot; category.</li>
+<li>Select &quot;Javadude Box Beans&quot; to install the box beans.</li>
 </ol>
 
 <p>This will add the box beans to <em>both</em> the AWT and Swing palettes, with the following icons:</p>
@@ -389,11 +387,11 @@
 <li><img src="images/hglue32.gif" alt="hglue32.gif (246 bytes)" />HorizontalGlue</li>
 </ul>
 
-<p>If anyone has some better icon images, please let me know and I&rsquo;ll include them!</p>
+<p>If anyone has some better icon images, please let me know and I'll include them!</p>
 
 <h2 id="installation-for-other-ides-standard-jar-file">Installation for Other IDES - Standard JAR File</h2>
 
-<p>A standard JavaBean JAR file exists at <a href="boxbeans.jar">boxbeans.jar</a>.   I&rsquo;ve tested this under JBuilder and it seems to work ok.</p>
+<p>A standard JavaBean JAR file exists at <a href="boxbeans.jar">boxbeans.jar</a>.   I've tested this under JBuilder and it seems to work ok.</p>
 
 <h1 id="use">Use</h1>
 
@@ -404,10 +402,10 @@
 <ul>
 <li>Open a class to the VCE</li>
 <li>Add a Container (Panel, JPanel, whatever) to your composition</li>
-<li>Set that Container&rsquo;s layout to BoxLayout</li>
+<li>Set that Container's layout to BoxLayout</li>
 <li>Drop combinations of of the beans in the BoxLayout-controlled Container.</li>
 <li>If you want to add other beans (like a java.awt.Button), drop a BoxAdapter in the BoxLayout first, then drop the other bean inside it.  Adjust the properties of the BoxAdapter to get the resize behavior you want.</li>
-<li>Adjust the &ldquo;pixels&rdquo; property of the struts to control how much space they reserve.</li>
+<li>Adjust the &quot;pixels&quot; property of the struts to control how much space they reserve.</li>
 </ul>
 
 <h2 id="other-ides-or-beanbox">Other IDEs or BeanBox</h2>
@@ -420,9 +418,9 @@
 
 <p>Box Beans are free for <em>any</em> use <em>other</em> than selling them as a stand-alone product.</p>
 
-<p>Note that these beans are provided &ldquo;as-is&rdquo; without any warrantee or guarantee of suitability for any purpose. Scott Stanchfield cannot be held responsible for any damage caused by use of these beans.</p>
+<p>Note that these beans are provided &quot;as-is&quot; without any warrantee or guarantee of suitability for any purpose. Scott Stanchfield cannot be held responsible for any damage caused by use of these beans.</p>
 
-<p>(In other words, use &lsquo;em for free at your own risk.)</p>
+<p>(In other words, use 'em for free at your own risk.)</p>
           </div>
 
           
@@ -480,7 +478,251 @@
       </div>
       
 
-      
+      	
+	
+	
+	
+		
+		
+		
+	
+
+		
+		<div class="col-md-2 pl-0">
+
+			
+			<div id="page-scrollspy" class="toc-nav">
+				
+				<ul class="nav nav-pills ml-0">
+					
+					<li class="nav-item pb-3 text-center">
+						<span class="font-weight-bold mb-2">- CONTENTS - </span>
+					</li>
+
+					
+						
+						
+							
+								
+								
+									<ul class="nav">
+								
+								
+
+										<li class="nav-item">
+						 					<a class="nav-link" href="#news">
+												 News
+											</a>
+										</li>
+						 
+								
+								
+									</ul>
+								
+							
+						
+				 
+						
+						
+							
+								
+								
+									<ul class="nav">
+								
+								
+
+										<li class="nav-item">
+						 					<a class="nav-link" href="#introduction">
+												 Introduction
+											</a>
+										</li>
+						 
+								
+								
+									</ul>
+								
+							
+						
+				 
+						
+						
+							
+								
+								
+									<ul class="nav">
+								
+								
+
+										<li class="nav-item">
+						 					<a class="nav-link" href="#distribution">
+												 Distribution
+											</a>
+										</li>
+						 
+								
+								
+									</ul>
+								
+							
+						
+				 
+						
+						
+							
+								
+								
+									<ul class="nav">
+								
+									<ul class="nav">
+								
+								
+
+										<li class="nav-item">
+						 					<a class="nav-link" href="#installation-for-visualage-for-java-feature-packaging">
+												 Installation for VisualAge for Java - Feature Packaging
+											</a>
+										</li>
+						 
+								
+								
+									</ul>
+								
+									</ul>
+								
+							
+						
+				 
+						
+						
+							
+								
+								
+									<ul class="nav">
+								
+									<ul class="nav">
+								
+								
+
+										<li class="nav-item">
+						 					<a class="nav-link" href="#installation-for-other-ides-standard-jar-file">
+												 Installation for Other IDES - Standard JAR File
+											</a>
+										</li>
+						 
+								
+								
+									</ul>
+								
+									</ul>
+								
+							
+						
+				 
+						
+						
+							
+								
+								
+									<ul class="nav">
+								
+								
+
+										<li class="nav-item">
+						 					<a class="nav-link" href="#use">
+												 Use
+											</a>
+										</li>
+						 
+								
+								
+									</ul>
+								
+							
+						
+				 
+						
+						
+							
+								
+								
+									<ul class="nav">
+								
+									<ul class="nav">
+								
+								
+
+										<li class="nav-item">
+						 					<a class="nav-link" href="#visualage-for-java">
+												 VisualAge for Java
+											</a>
+										</li>
+						 
+								
+								
+									</ul>
+								
+									</ul>
+								
+							
+						
+				 
+						
+						
+							
+								
+								
+									<ul class="nav">
+								
+									<ul class="nav">
+								
+								
+
+										<li class="nav-item">
+						 					<a class="nav-link" href="#other-ides-or-beanbox">
+												 Other IDEs or BeanBox
+											</a>
+										</li>
+						 
+								
+								
+									</ul>
+								
+									</ul>
+								
+							
+						
+				 
+						
+						
+							
+								
+								
+									<ul class="nav">
+								
+								
+
+										<li class="nav-item">
+						 					<a class="nav-link" href="#license">
+												 License
+											</a>
+										</li>
+						 
+								
+								
+									</ul>
+								
+							
+						
+				 
+
+				</ul>
+			</div>
+			
+
+		</div>
+		
+	
+
 
     </div>
     
