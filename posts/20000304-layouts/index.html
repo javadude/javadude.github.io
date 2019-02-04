@@ -255,9 +255,7 @@
 
       
 
-      
-      <div class="container pr-5">
-      
+      <div class="col-md-10">
 
         
         <div class="z-depth-1  post-wrapper white-bg single-post">
@@ -287,7 +285,7 @@
 
 
           <div class="post-content markdown">
-            <p>Let&rsquo;s get familiar with Java Layout Managers!</p>
+            <p>Let's get familiar with Java Layout Managers!</p>
 
 <p></p>
 
@@ -301,7 +299,7 @@
 
 <p><strong>Window Expanded, Components Stay Put</strong></p>
 
-<p>The first layout sin is to ignore a user-resize. The most common display size is probably still 640x480, so it&rsquo;s a good idea to make sure your application fits on that size screen. However, some users have much more screen real estate and want to take advantage of it. Non-resizable GUIs can be extremely frustrating. For example, in the initial display of a screen, the name entered is rather long, so it doesn&rsquo;t quite fit in the text field such that all is visible at once:</p>
+<p>The first layout sin is to ignore a user-resize. The most common display size is probably still 640x480, so it's a good idea to make sure your application fits on that size screen. However, some users have much more screen real estate and want to take advantage of it. Non-resizable GUIs can be extremely frustrating. For example, in the initial display of a screen, the name entered is rather long, so it doesn't quite fit in the text field such that all is visible at once:</p>
 
 <p><img src="images/badresize1.gif" alt="badresize1.gif (2921 bytes)" /></p>
 
@@ -329,23 +327,23 @@
 
 <p><strong>Components Designed for a Specific Language</strong></p>
 
-<p>Some words take up the same amount of space in different languages. &ldquo;No&rdquo; is a good example, as it&rsquo;s spelled that way in several languages.</p>
+<p>Some words take up the same amount of space in different languages. &quot;No&quot; is a good example, as it's spelled that way in several languages.</p>
 
 <p>However, most words have varying lengths depending on which language you are using. For example:</p>
 
 <p><img src="images/bye-english.gif" alt="bye-english.gif (1061 bytes)" /></p>
 
-<p>A simple button to end an application. The programmer didn&rsquo;t give much thought to translations into other languages&hellip;</p>
+<p>A simple button to end an application. The programmer didn't give much thought to translations into other languages...</p>
 
 <p><img src="images/bye-german.gif" alt="bye-german.gif (1060 bytes)" /></p>
 
-<p>&hellip;such as German. <em>Auf Wiedersehen</em> gets chopped to the much smaller <em>Wieder</em>.</p>
+<p>...such as German. <em>Auf Wiedersehen</em> gets chopped to the much smaller <em>Wieder</em>.</p>
 
 <p>This is unfortunate for two reasons:</p>
 
 <ul>
-<li>The user doesn&rsquo;t see the entire phrase, but even worse&hellip;</li>
-<li>&hellip;&ldquo;wieder&rdquo; means <em>again</em>. (I had a student from Germany who started laughing when I showed that button and told me what it meant&hellip;)
+<li>The user doesn't see the entire phrase, but even worse...</li>
+<li>...&quot;wieder&quot; means <em>again</em>. (I had a student from Germany who started laughing when I showed that button and told me what it meant...)
 
 <br /></li>
 </ul>
@@ -389,7 +387,7 @@ This returns the largest desired size for a component.</p></li>
 okButton.setPreferredSize(new Dimension(100,10));
 </code></pre>
 
-<p>You should only adjust the sizes if you&rsquo;re really sure what you&rsquo;re doing. (The above example is probably_not_a good idea&hellip;)</p>
+<p>You should only adjust the sizes if you're really sure what you're doing. (The above example is probably_not_a good idea...)</p>
 
 <p>If your component is not a JFC Project Swing component, you will need to subclass it to adjust the sizes. For example:</p>
 
@@ -437,7 +435,7 @@ public void add(Component comp, Object constraints, int index)
 <pre><code>protected void addImpl(Component comp, Object constraints, int index)
 </code></pre>
 
-<p>Note: <em>addImpl</em> stands for &ldquo;implementation of the add method.&rdquo;</p>
+<p>Note: <em>addImpl</em> stands for &quot;implementation of the add method.&quot;</p>
 
 <p>This method is the one that does all the work. It adds the <code>Component</code> to the <code>Container</code>, and, if a layout manager is managing the container layout, calls the <code>addLayoutComponent()</code> method of the layout manager. It is through <code>addLayoutComponent()</code> that the layout manager receives the constraints (from the <code>add()</code> call).</p>
 
@@ -449,7 +447,7 @@ public void add(Component comp, Object constraints, int index)
 
 <p>These insets define the area a container is reserving for its own use (such as drawing a decorative border). Layout managers_must_respect this area when positioning and sizing the contained components.</p>
 
-<p>To demonstrate, create a simple <code>Panel</code> subclass that provides a raised, 3D border around whatever is contained within it. You&rsquo;ll define this border as being 5 pixels away from each edge of the container border, and reserving some extra room between it and the laid out components. The class will look something like this:</p>
+<p>To demonstrate, create a simple <code>Panel</code> subclass that provides a raised, 3D border around whatever is contained within it. You'll define this border as being 5 pixels away from each edge of the container border, and reserving some extra room between it and the laid out components. The class will look something like this:</p>
 
 <pre><code>public class BorderPanel extends Panel {
     private static final Insets insets = new Insets(10,10,10,10);
@@ -462,7 +460,7 @@ public void add(Component comp, Object constraints, int index)
 }
 </code></pre>
 
-<p>To create the panel, you defined a static <code>Insets</code> object that represents the space to reserve. Because that space won&rsquo;t change, you used a single static final instance of it. You&rsquo;ll return this instance anytime a layout manager (or anyone else) calls <code>getInsets()</code>.</p>
+<p>To create the panel, you defined a static <code>Insets</code> object that represents the space to reserve. Because that space won't change, you used a single static final instance of it. You'll return this instance anytime a layout manager (or anyone else) calls <code>getInsets()</code>.</p>
 
 <p>You then define a <code>paint()</code> method that gets the size of the container into which it is painting, then draws a raised border within that space. If you use the above class as follows:</p>
 
@@ -477,7 +475,7 @@ f.setVisible(true);
 f.pack();
 </code></pre>
 
-<p>you&rsquo;ll get the following GUI:</p>
+<p>you'll get the following GUI:</p>
 
 <p><img src="images/insets1.gif" alt="insets1.gif (1695 bytes)" /></p>
 
@@ -518,7 +516,7 @@ f.pack();
 <li>respect the preferred size of all contained components</li>
 <li>lay out as many components as will fit horizontally within a container</li>
 <li>start a new row of components if more components exist</li>
-<li>if all components can&rsquo;t fit, too bad!</li>
+<li>if all components can't fit, too bad!</li>
 </ul>
 
 <p>To add components to a container managed by <code>FlowLayout</code>, you could use one of the following <code>add()</code> methods:</p>
@@ -556,7 +554,7 @@ public Component add(Component comp, int index)
 <p><img src="images/flow3.gif" alt="flow3.gif (2106 bytes)" /><br />
 <strong>More horizontal expansion</strong></p>
 
-<p>Notice how the layout is fitting as many components per line as possible. If there isn&rsquo;t room for all the components, they are simply not shown:</p>
+<p>Notice how the layout is fitting as many components per line as possible. If there isn't room for all the components, they are simply not shown:</p>
 
 <p><img src="images/flow44.gif" alt="flow44.gif (1667 bytes)" /></p>
 
@@ -578,9 +576,9 @@ public Component add(Component comp, int index)
 
 <p>Recall that when a <code>Container</code> is asked for its preferred size, it bases that preferred size on its layout manager. This raises the subject of what <code>FlowLayout</code>would prefer to do with its components.</p>
 
-<p>Unfortunately, there is no way for a container to know anything about the size of its parent or how its parent&rsquo;s layout manager plans to lay <em>it</em> out. So, the only information available to determine the preferred size of a container is the set of components contained within it.</p>
+<p>Unfortunately, there is no way for a container to know anything about the size of its parent or how its parent's layout manager plans to lay <em>it</em> out. So, the only information available to determine the preferred size of a container is the set of components contained within it.</p>
 
-<p><code>FlowLayout</code>&rsquo;s preference would be to lay all its components out into a <em>single row</em>. This means that its preferred height would be the maximum height of any of its components plus some &ldquo;slop&rdquo; known as its<code>vgap</code>. (<code>vgap</code> and <code>hgap</code>are common properties of most of the standard layout managers, and specify how far apart components are placed.) The preferred width would be the sum of all widths of its contained components, plus an <code>hgap</code> between each and on either end of the row.</p>
+<p><code>FlowLayout</code>'s preference would be to lay all its components out into a <em>single row</em>. This means that its preferred height would be the maximum height of any of its components plus some &quot;slop&quot; known as its<code>vgap</code>. (<code>vgap</code> and <code>hgap</code>are common properties of most of the standard layout managers, and specify how far apart components are placed.) The preferred width would be the sum of all widths of its contained components, plus an <code>hgap</code> between each and on either end of the row.</p>
 
 <p>Think about the consequences of this. What would happen if a <code>FlowLayout</code>-managed container was nested within another <code>FlowLayout</code>-managed container? For example:</p>
 
@@ -597,27 +595,27 @@ p1.add(p2);
 <p>Think this through a bit and the answer is very disconcerting. The following walks you through the layout process:</p>
 
 <ol>
-<li>p1&rsquo;s parent container tells it to lay itself out.</li>
+<li>p1's parent container tells it to lay itself out.</li>
 <li>p1 sees that it has a layout manager and delegates thelayout task to it.</li>
-<li>p1&rsquo;s <code>FlowLayout</code> checks the preferred sizes of all its components:
+<li>p1's <code>FlowLayout</code> checks the preferred sizes of all its components:
 
 <ol>
 <li>The only component in p1 is p2</li>
 <li>p2 sees it has a layout manager and delegates the preferred size request to the layout manager:
 
 <ol>
-<li>p2&rsquo;s <code>FlowLayout</code> states that it would prefer to lay out all of its components in a single row.</li>
-<li>p2&rsquo;s <code>FlowLayout</code> asks its components (the buttons) for their preferred sizes and calculates the size of that single, preferred row.</li>
-<li>p2&rsquo;s <code>FlowLayout</code> returns that preferred size.</li>
+<li>p2's <code>FlowLayout</code> states that it would prefer to lay out all of its components in a single row.</li>
+<li>p2's <code>FlowLayout</code> asks its components (the buttons) for their preferred sizes and calculates the size of that single, preferred row.</li>
+<li>p2's <code>FlowLayout</code> returns that preferred size.</li>
 </ol></li>
 <li>p2 returns the preferred size.</li>
 </ol></li>
-<li>p1&rsquo;s <code>FlowLayout</code> tries to respect the preferred size of p2 as much as possible.
+<li>p1's <code>FlowLayout</code> tries to respect the preferred size of p2 as much as possible.
 
 <ul>
-<li>If there&rsquo;s enough room for the single row, it sets the bounds of p2 to its preferred size.</li>
-<li>If there&rsquo;s not enough horizontal room, it sets p2&rsquo;s bounds to the single-line height and as much width as is available.</li>
-<li>If there&rsquo;s not enough horizontal or vertical room, it sets the bounds of p2 to whatever it has.</li>
+<li>If there's enough room for the single row, it sets the bounds of p2 to its preferred size.</li>
+<li>If there's not enough horizontal room, it sets p2's bounds to the single-line height and as much width as is available.</li>
+<li>If there's not enough horizontal or vertical room, it sets the bounds of p2 to whatever it has.</li>
 </ul></li>
 </ol>
 
@@ -639,7 +637,7 @@ p1.add(p2);
 <ul>
 <li>Caveat: If you only have a few components, this is not as important to avoid.</li>
 </ul></li>
-<li>The <code>FlowLayout</code> manager effectively hides components if they won&rsquo;t fit.
+<li>The <code>FlowLayout</code> manager effectively hides components if they won't fit.
 
 <ul>
 <li>There is no visual indication of this to the user—as far as the user is concerned, the unshown components never even existed.</li>
@@ -656,7 +654,7 @@ p1.add(p2);
 
 <p><img src="images/border1.gif" alt="border1.gif (2976 bytes)" /></p>
 
-<p>The first thing going through your mind should be &ldquo;but I will_never_have a GUI that looks like that!&rdquo; Moreover, you are probably correct. However, the secret is in mastering its nesting capabilities, and using two or three of the logical sections. (It&rsquo;s very rare that you&rsquo;ll actually use more than three of the positions in a container at once.)</p>
+<p>The first thing going through your mind should be &quot;but I will_never_have a GUI that looks like that!&quot; Moreover, you are probably correct. However, the secret is in mastering its nesting capabilities, and using two or three of the logical sections. (It's very rare that you'll actually use more than three of the positions in a container at once.)</p>
 
 <p>First, look at the sample code for the above GUI:</p>
 
@@ -683,13 +681,13 @@ f.add(new Button(&quot;Center&quot;), BorderLayout.CENTER);
 
 <ul>
 <li><p><code>public void add(String constraint, Component component)</code><br />
-This is the &ldquo;old&rdquo; form of adding a constraint. JDK 1.0.2 only provided for constraints that were represented by a<code>String</code>to be added when adding a<code>Component</code>to a<code>Container</code></p></li>
+This is the &quot;old&quot; form of adding a constraint. JDK 1.0.2 only provided for constraints that were represented by a<code>String</code>to be added when adding a<code>Component</code>to a<code>Container</code></p></li>
 
 <li><p><code>public void add(Component component, Object constraint)</code><br />
-This is the &ldquo;new&rdquo; form of adding a constraint, added in JDK 1.1.</p></li>
+This is the &quot;new&quot; form of adding a constraint, added in JDK 1.1.</p></li>
 </ul>
 
-<p>You&rsquo;ll see a few more variations of the<code>add()</code>method when you examine<code>CardLayout</code><a href="#cardLayout">later</a>. Concentrate on just these forms for now.</p>
+<p>You'll see a few more variations of the<code>add()</code>method when you examine<code>CardLayout</code><a href="#cardLayout">later</a>. Concentrate on just these forms for now.</p>
 
 <p>For<code>BorderLayout</code>, the constraint argument describes which position the component will occupy. Note that the earlier<code>BorderLayout</code>example source code could have been written as follows:</p>
 
@@ -702,7 +700,7 @@ f.add(&quot;West&quot;,   new Button(&quot;West&quot;));
 f.add(&quot;Center&quot;, new Button(&quot;Center&quot;));
 </code></pre>
 
-<p>The big difference is that the newer form (using the<code>BorderLayout.NORTH</code>type constraints) can be compile-time checked; if you type<code>BorderLayout.NORFH</code>the compiler will catch it. If you just type &ldquo;Norfh&rdquo;, it will not be caught until runtime, causing an<code>IllegalArgumentException</code>to be thrown.</p>
+<p>The big difference is that the newer form (using the<code>BorderLayout.NORTH</code>type constraints) can be compile-time checked; if you type<code>BorderLayout.NORFH</code>the compiler will catch it. If you just type &quot;Norfh&quot;, it will not be caught until runtime, causing an<code>IllegalArgumentException</code>to be thrown.</p>
 
 <p>The Java 2 platform (previously known as the JDK 1.2) adds additional constants of<code>BEFORE_FIRST_LINE</code>,<code>AFTER_LAST_LINE</code>,<code>BEFORE_LINE_BEGINS</code>, and<code>AFTER_LINE_ENDS</code>. These are effectively equivalent to<code>NORTH</code>,<code>SOUTH</code>,<code>WEST</code>, and<code>EAST</code>, respectively. However, they could have other orientations where text is not oriented left-to-right, top-to-bottom. Examine the<code>java.awt.ComponentOrientation</code>class for additional information on language-sensitive orientation issues.</p>
 
@@ -767,8 +765,8 @@ border.add(flow, BorderLayout.NORTH);
 <p>Now consider some nice generalizations about<code>BorderLayout</code>:</p>
 
 <ul>
-<li>NORTH and<code>SOUTH</code>positions in a<code>BorderLayout</code>can be useful if you want to_bind_the height of part of a GUI to that part&rsquo;s preferred height.</li>
-<li>EAST and<code>WEST</code>positions in a<code>BorderLayout</code>can be useful if you want to_bind_the width of part of a GUI to that part&rsquo;s preferred width.</li>
+<li>NORTH and<code>SOUTH</code>positions in a<code>BorderLayout</code>can be useful if you want to_bind_the height of part of a GUI to that part's preferred height.</li>
+<li>EAST and<code>WEST</code>positions in a<code>BorderLayout</code>can be useful if you want to_bind_the width of part of a GUI to that part's preferred width.</li>
 <li>Once part of the GUI is bound, the<code>CENTER</code>is the expanding part.</li>
 </ul>
 
@@ -836,7 +834,7 @@ p2.add(p, BorderLayout.NORTH);
 <li>SOUTH</li>
 </ul>
 
-<p>The preferred width of the layout needs to take into account the widest of these rows. Using pw as the abbreviation for &ldquo;preferred width&rdquo;, you can write a simple equation for the preferred width of a<code>BorderLayout</code>:</p>
+<p>The preferred width of the layout needs to take into account the widest of these rows. Using pw as the abbreviation for &quot;preferred width&quot;, you can write a simple equation for the preferred width of a<code>BorderLayout</code>:</p>
 
 <pre><code>pw = max(north.pw, south.pw,
         (west.pw + center.pw + east.pw + hgaps))
@@ -872,7 +870,7 @@ p.add(new TextField(), BorderLayout.SOUTH);
 f.add(p, BorderLayout.NORTH);
 </code></pre>
 
-<p>An effective combination of a<code>FlowLayout</code>and a<code>BorderLayout</code>is for the common &ldquo;Ok&rdquo; and &ldquo;Cancel&rdquo; buttons on a dialog. For example:</p>
+<p>An effective combination of a<code>FlowLayout</code>and a<code>BorderLayout</code>is for the common &quot;Ok&quot; and &quot;Cancel&quot; buttons on a dialog. For example:</p>
 
 <p><img src="images/border13.gif" alt="border13.gif (2037 bytes)" /></p>
 
@@ -886,7 +884,7 @@ p.add(new Button(&quot;Cancel&quot;));
 f.add(p, BorderLayout.SOUTH);
 </code></pre>
 
-<p>There is one problem with this approach: the widths of the two buttons are different. You&rsquo;ll see a better way to create this type of GUI in a moment.</p>
+<p>There is one problem with this approach: the widths of the two buttons are different. You'll see a better way to create this type of GUI in a moment.</p>
 
 <p><strong><code>GridLayout</code></strong></p>
 
@@ -917,9 +915,9 @@ else
 <pre><code>f.setLayout(new GridLayout(3,4));
 </code></pre>
 
-<p>looks like it will_always_divide the screen into twelve sections, but that&rsquo;s not the case. In the above statement, you could substitute_any_value for the number of columns, and the effect would be exactly the same.</p>
+<p>looks like it will_always_divide the screen into twelve sections, but that's not the case. In the above statement, you could substitute_any_value for the number of columns, and the effect would be exactly the same.</p>
 
-<p>A better way to specify the_rows_and_columns_of a<code>GridLayout</code>is to_always_set one of them to zero. A zero value for_rows_of_columns_means &ldquo;any number of&rdquo;.</p>
+<p>A better way to specify the_rows_and_columns_of a<code>GridLayout</code>is to_always_set one of them to zero. A zero value for_rows_of_columns_means &quot;any number of&quot;.</p>
 
 <p>Note: A word of caution: you cannot specify zero for<em>both</em>; an<code>IllegalArgumentException</code>will be thrown.</p>
 
@@ -943,9 +941,9 @@ else
 ph = (maxPrefHeight \* rows) + (vgap \* (rows+1))
 </code></pre>
 
-<p><strong><em>&ldquo;Ok&rdquo; and &ldquo;Cancel&rdquo; Revisited</em></strong></p>
+<p><strong><em>&quot;Ok&quot; and &quot;Cancel&quot; Revisited</em></strong></p>
 
-<p>One of the goals of the earlier &ldquo;Ok&rdquo; and &ldquo;Cancel&rdquo; dialog was to make the buttons the same size. This can be accomplished by putting the buttons in a single-row<code>GridLayout</code>. You can then add that<code>GridLayout</code>container to the<code>FlowLayout</code>, or use a nested<code>BorderLayout</code>in place of the<code>FlowLayout</code>. Here are both approaches:</p>
+<p>One of the goals of the earlier &quot;Ok&quot; and &quot;Cancel&quot; dialog was to make the buttons the same size. This can be accomplished by putting the buttons in a single-row<code>GridLayout</code>. You can then add that<code>GridLayout</code>container to the<code>FlowLayout</code>, or use a nested<code>BorderLayout</code>in place of the<code>FlowLayout</code>. Here are both approaches:</p>
 
 <p><img src="images/gridb1.gif" alt="gridb1.gif (2035 bytes)" /></p>
 
@@ -1036,7 +1034,7 @@ l.show(p, &quot;two&quot;);
 
 <p><strong>Setting the Initial Frame Size</strong></p>
 
-<p>The<code>Frame</code>class provides a<code>pack()</code>method that helps set an &ldquo;ideal&rdquo; initial size. The<code>pack()</code>method calls the<code>getPreferredSize()</code>method of<code>Frame</code>to determine what size it would like to be laid out, and, if the screen is large enough to allow it, sets the Frame to that size. If there isn&rsquo;t enough screen space, the Frame will be limited to the available screen space.</p>
+<p>The<code>Frame</code>class provides a<code>pack()</code>method that helps set an &quot;ideal&quot; initial size. The<code>pack()</code>method calls the<code>getPreferredSize()</code>method of<code>Frame</code>to determine what size it would like to be laid out, and, if the screen is large enough to allow it, sets the Frame to that size. If there isn't enough screen space, the Frame will be limited to the available screen space.</p>
 
 <p><strong>Nesting Layout Managers to Achieve Nirvana</strong></p>
 
@@ -1048,7 +1046,7 @@ l.show(p, &quot;two&quot;);
 
 <p><img src="images/ws1.gif" alt="" /></p>
 
-<p>This GUI, while it may seem nice for &ldquo;power users&rdquo; is overly complex. The buttons at the bottom should really be menu items and the buttons to the right of each file list should be popup menus on the file lists. Nevertheless, the GUI as it stands makes a great example for nesting the basic layout managers.</p>
+<p>This GUI, while it may seem nice for &quot;power users&quot; is overly complex. The buttons at the bottom should really be menu items and the buttons to the right of each file list should be popup menus on the file lists. Nevertheless, the GUI as it stands makes a great example for nesting the basic layout managers.</p>
 
 <p><strong>How to Design this GUI</strong></p>
 
@@ -1061,7 +1059,7 @@ l.show(p, &quot;two&quot;);
 
 <p>In the above example, ignore the border lines around components. These can be added after the GUI is constructed, either by applying the Decorator Pattern or, if using JFC Project Swing containers, by calling<code>setBorder()</code>.</p>
 
-<p>Start with a picture describing what you want the GUI to look like. Simplify things a bit by removing the decorative borders and assume the existence of a &ldquo;File List&rdquo; component (probably a table with a header).</p>
+<p>Start with a picture describing what you want the GUI to look like. Simplify things a bit by removing the decorative borders and assume the existence of a &quot;File List&quot; component (probably a table with a header).</p>
 
 <p><img src="images/ws2.gif" alt="" /></p>
 
@@ -1071,17 +1069,17 @@ l.show(p, &quot;two&quot;);
 
 <p>The above diagram is marked with the resize behavior of the GUI. The key explains which lines refer to fixed and varying sizing behaviors. When part of a component has a fixed size (horizontal, vertical, or both) it will not expand or contract as the window is resized. The equal signs (=) refer to adjoining components that have the same size.</p>
 
-<p>A few notes on the GUI&rsquo;s behavior:</p>
+<p>A few notes on the GUI's behavior:</p>
 
 <ul>
 <li>The two large sections that contain the File Lists should occupy the same amount of space.</li>
 <li>The two arrow buttons in the middle should be vertically centered between the file list sections.</li>
-<li>The ChgDir, MkDir, and other buttons all are the same size and are fixed at the group&rsquo;s preferred width and do not expand vertically. (The space below them expands when the window is stretched vertically.)</li>
-<li>The buttons at the bottom of the GUI are all the same size and will expand/collapse horizontally with the GUI&rsquo;s width.</li>
+<li>The ChgDir, MkDir, and other buttons all are the same size and are fixed at the group's preferred width and do not expand vertically. (The space below them expands when the window is stretched vertically.)</li>
+<li>The buttons at the bottom of the GUI are all the same size and will expand/collapse horizontally with the GUI's width.</li>
 <li>The ASCII, Binary and Auto checkboxes stay a fixed amount apart, floating as a group horizontally centered.</li>
 </ul>
 
-<p>Now, the fun begins. You need to examine the GUI and try to visualize layout managers being used to represent sections of it. When trying to design the GUI, work from the outside edges inward. Always start by looking for &ldquo;borders&rdquo;; a component, or group of components that border an edge with a fixed width or height.</p>
+<p>Now, the fun begins. You need to examine the GUI and try to visualize layout managers being used to represent sections of it. When trying to design the GUI, work from the outside edges inward. Always start by looking for &quot;borders&quot;; a component, or group of components that border an edge with a fixed width or height.</p>
 
 <p>Looking at the above GUI, you can visualize it as a<code>BorderLayout</code>with two components: a<code>SOUTH</code>, and a<code>CENTER</code>:</p>
 
@@ -1091,7 +1089,7 @@ l.show(p, &quot;two&quot;);
 
 <p><img src="images/ws4.gif" alt="" /></p>
 
-<p>Note that there are three components here, stacked vertically, each with their preferred height. You might be tempted to stick this in a<code>GridLayout</code>, but that would force them all to take up the same amount of space vertically. That&rsquo;s not what you want.</p>
+<p>Note that there are three components here, stacked vertically, each with their preferred height. You might be tempted to stick this in a<code>GridLayout</code>, but that would force them all to take up the same amount of space vertically. That's not what you want.</p>
 
 <p>Suppose you put these three components as<code>NORTH</code>,<code>CENTER</code>, and<code>SOUTH</code>of a<code>BorderLayout</code>. This new<code>BorderLayout</code>panel is nested as the<code>SOUTH</code>component of the overall<code>BorderLayout</code>. Think through what happens when this part of the GUI is laid out:</p>
 
@@ -1107,7 +1105,7 @@ l.show(p, &quot;two&quot;);
 <li>Height = sum of the preferred heights of those three components.</li>
 </ul></li>
 </ol></li>
-<li>The overall<code>BorderLayout</code>_assigns_the size of its<code>SOUTH</code>component to the frame&rsquo;s width, and the preferred height of that<code>SOUTH</code>component. The<code>CENTER</code>component gets all remaining room.</li>
+<li>The overall<code>BorderLayout</code>_assigns_the size of its<code>SOUTH</code>component to the frame's width, and the preferred height of that<code>SOUTH</code>component. The<code>CENTER</code>component gets all remaining room.</li>
 <li>The<code>SOUTH</code>component now gets its chance to lay out its contained components.
 
 <ol>
@@ -1123,9 +1121,9 @@ l.show(p, &quot;two&quot;);
 
 <p>First, define the<code>NORTH</code>part of this sub-GUI. It has three components, equally spaced, with all of them centered across the width of the<code>Panel</code>. Sounds like a<code>FlowLayout</code>, eh? So, it is a<code>Panel</code>with a<code>FlowLayout</code>containing three<code>CheckBox</code>components. Notice that the first two<code>CheckBox</code>components must be associated with a<code>CheckboxGroup</code>so they will become radio buttons.</p>
 
-<p>Now you must create the<code>SOUTH</code>part of this sub-GUI. It has seven<code>Button</code>components, all equally sized. The phrase &ldquo;equally-sized&rdquo; should immediately trigger<code>GridLayout</code>in your mind. So, the<code>SOUTH</code>part of the sub-GUI is a<code>Panel</code>with a<code>GridLayout</code>containing seven<code>Button</code>component. This<code>GridLayout</code>consists of a single row, so use parameters of (1,0) to its constructor.</p>
+<p>Now you must create the<code>SOUTH</code>part of this sub-GUI. It has seven<code>Button</code>components, all equally sized. The phrase &quot;equally-sized&quot; should immediately trigger<code>GridLayout</code>in your mind. So, the<code>SOUTH</code>part of the sub-GUI is a<code>Panel</code>with a<code>GridLayout</code>containing seven<code>Button</code>component. This<code>GridLayout</code>consists of a single row, so use parameters of (1,0) to its constructor.</p>
 
-<p>The<code>CENTER</code>part is just a single component, a<code>TextArea</code>. You do not need to nest this inside another<code>Panel</code>; components can be directly added to containers&hellip; You&rsquo;ll set this<code>TextArea</code>&rsquo;s number of rows to 3 and columns to 30. These numbers drive the_preferred size_of the<code>TextArea</code>; they have no effect on the<code>TextArea</code>once it has been sized by the layout manager. You must specify these because its placement in the layout asks for its preferred size, and it would return a larger number of rows than three if asked. The 30 will only come in handy if you<code>pack()</code>the<code>Frame</code>, where it will help contribute to the calculated width of the frame. One final note on this<code>TextArea</code>: if you place it in a<code>BorderPanel</code>as previously discussed in the<code>Insets</code>section above, you can give it a raised, lowered, or etched border.</p>
+<p>The<code>CENTER</code>part is just a single component, a<code>TextArea</code>. You do not need to nest this inside another<code>Panel</code>; components can be directly added to containers... You'll set this<code>TextArea</code>'s number of rows to 3 and columns to 30. These numbers drive the_preferred size_of the<code>TextArea</code>; they have no effect on the<code>TextArea</code>once it has been sized by the layout manager. You must specify these because its placement in the layout asks for its preferred size, and it would return a larger number of rows than three if asked. The 30 will only come in handy if you<code>pack()</code>the<code>Frame</code>, where it will help contribute to the calculated width of the frame. One final note on this<code>TextArea</code>: if you place it in a<code>BorderPanel</code>as previously discussed in the<code>Insets</code>section above, you can give it a raised, lowered, or etched border.</p>
 
 <p>To sum up what the layout looks like so far:</p>
 
@@ -1139,24 +1137,24 @@ l.show(p, &quot;two&quot;);
 <li>NORTH=Panel, layout=<code>FlowLayout</code>
 
 <ul>
-<li><code>Checkbox</code>(&ldquo;ASCII&rdquo;) w/<code>CheckboxGroup</code></li>
-<li><code>Checkbox</code>(&ldquo;Binary&rdquo;), w/<code>CheckboxGroup</code></li>
-<li><code>Checkbox</code>(&ldquo;Auto&rdquo;)</li>
+<li><code>Checkbox</code>(&quot;ASCII&quot;) w/<code>CheckboxGroup</code></li>
+<li><code>Checkbox</code>(&quot;Binary&quot;), w/<code>CheckboxGroup</code></li>
+<li><code>Checkbox</code>(&quot;Auto&quot;)</li>
 </ul></li>
 <li>CENTER=<code>TextArea</code>(3,30)</li>
 <li>SOUTH=<code>Panel</code>, layout=<code>GridLayout</code>(1,0)
 
 <ul>
-<li><code>Button</code>(&ldquo;Close&rdquo;)</li>
-<li><code>Button</code>(&ldquo;Cancel&rdquo;)</li>
-<li><code>Button</code>(&ldquo;LogWnd&rdquo;)</li>
-<li><code>Button</code>(&ldquo;Help&rdquo;)</li>
-<li><code>Button</code>(&ldquo;Options&rdquo;)</li>
-<li><code>Button</code>(&ldquo;About&rdquo;)</li>
-<li><code>Button</code>(&ldquo;Exit&rdquo;)</li>
+<li><code>Button</code>(&quot;Close&quot;)</li>
+<li><code>Button</code>(&quot;Cancel&quot;)</li>
+<li><code>Button</code>(&quot;LogWnd&quot;)</li>
+<li><code>Button</code>(&quot;Help&quot;)</li>
+<li><code>Button</code>(&quot;Options&quot;)</li>
+<li><code>Button</code>(&quot;About&quot;)</li>
+<li><code>Button</code>(&quot;Exit&quot;)</li>
 </ul></li>
 </ul></li>
-<li>CENTER=? (that&rsquo;s next&hellip;)</li>
+<li>CENTER=? (that's next...)</li>
 </ul></li>
 </ul>
 
@@ -1164,7 +1162,7 @@ l.show(p, &quot;two&quot;);
 
 <p><img src="images/ws5.gif" alt="" /></p>
 
-<p>Notice anything interesting? It has to do with those two boxes drawn around the left and right side components. They are structurally the same._Exactly_the same. When two things are the same, and it&rsquo;s a chore to build it each time, you should think<em>reuse</em>.</p>
+<p>Notice anything interesting? It has to do with those two boxes drawn around the left and right side components. They are structurally the same._Exactly_the same. When two things are the same, and it's a chore to build it each time, you should think<em>reuse</em>.</p>
 
 <p><strong>A Helper Class:<code>FileDisplay</code></strong></p>
 
@@ -1172,15 +1170,15 @@ l.show(p, &quot;two&quot;);
 
 <p><img src="images/ws6.gif" alt="" /></p>
 
-<p>The<code>NORTH</code>part consists of a<code>Label</code>and combo box (you&rsquo;ll use an AWT<code>Choice</code>component for now), vertically stacked. The<code>CENTER</code>is a<code>List</code>component. The<code>EAST</code>is a bunch of<code>Button</code>s vertically stacked.</p>
+<p>The<code>NORTH</code>part consists of a<code>Label</code>and combo box (you'll use an AWT<code>Choice</code>component for now), vertically stacked. The<code>CENTER</code>is a<code>List</code>component. The<code>EAST</code>is a bunch of<code>Button</code>s vertically stacked.</p>
 
-<p>Looking first at the<code>NORTH</code>part, you need to have the<code>Label</code>and<code>Choice</code>take up their preferred height and the full width. Since this is the<code>NORTH</code>component, whatever they are contained in will receive its preferred height. By placing the<code>Label</code>and<code>Choice</code>as<code>NORTH</code>and<code>SOUTH</code>(or<code>NORTH</code>and<code>CENTER</code>, or<code>CENTER</code>and<code>SOUTH</code>) of a<code>BorderLayout</code>, they will receive their preferred height. Again, a<code>GridLayout</code>would be a bad choice because that assumes that both components want the same height. You could change the font size on the<code>Label</code>to make it larger, and you wouldn&rsquo;t want that to affect the size of the<code>Choice</code>.</p>
+<p>Looking first at the<code>NORTH</code>part, you need to have the<code>Label</code>and<code>Choice</code>take up their preferred height and the full width. Since this is the<code>NORTH</code>component, whatever they are contained in will receive its preferred height. By placing the<code>Label</code>and<code>Choice</code>as<code>NORTH</code>and<code>SOUTH</code>(or<code>NORTH</code>and<code>CENTER</code>, or<code>CENTER</code>and<code>SOUTH</code>) of a<code>BorderLayout</code>, they will receive their preferred height. Again, a<code>GridLayout</code>would be a bad choice because that assumes that both components want the same height. You could change the font size on the<code>Label</code>to make it larger, and you wouldn't want that to affect the size of the<code>Choice</code>.</p>
 
 <p>The<code>CENTER</code>part is simple: just a<code>List</code>component. Not contained inside any<code>Panel</code>(unless you had a<code>Panel</code>subclass that provided a decorative border, such as the previously-discussed<code>BorderPanel</code>).</p>
 
 <p>Now for the<code>EAST</code>part, which is a bit trickier. You want all the<code>Button</code>components the same size (your mind should immediately think<code>GridLayout</code>) but that size should be their preferred height and preferred width. Any space below the buttons expands and collapses.</p>
 
-<p>Because you&rsquo;ve placed the entire strip of<code>Button</code>s as an<code>EAST</code>component of a<code>BorderLayout</code>, their width is fixed on the preferred width of the container that encloses those buttons. To fix their height on their preferred height, you can place the strip<em>inside another<code>BorderLayout</code>, as the<code>NORTH</code>component</em>! So<code>EAST</code>is a<code>Panel</code>with a<code>BorderLayout</code>containing another<code>Panel</code>as its<code>NORTH</code>component, and that<code>NORTH</code><code>Panel</code>has a<code>GridLayout</code>controlling its buttons. The<code>GridLayout</code>is a single column of buttons, so its constructor parameters are (0,1).</p>
+<p>Because you've placed the entire strip of<code>Button</code>s as an<code>EAST</code>component of a<code>BorderLayout</code>, their width is fixed on the preferred width of the container that encloses those buttons. To fix their height on their preferred height, you can place the strip<em>inside another<code>BorderLayout</code>, as the<code>NORTH</code>component</em>! So<code>EAST</code>is a<code>Panel</code>with a<code>BorderLayout</code>containing another<code>Panel</code>as its<code>NORTH</code>component, and that<code>NORTH</code><code>Panel</code>has a<code>GridLayout</code>controlling its buttons. The<code>GridLayout</code>is a single column of buttons, so its constructor parameters are (0,1).</p>
 
 <p>Now for a look at the structure of the<code>FileDisplay</code>:</p>
 
@@ -1191,7 +1189,7 @@ l.show(p, &quot;two&quot;);
 <li>NORTH=<code>Panel</code>, layout=<code>BorderLayout</code>
 
 <ul>
-<li>NORTH=<code>Label</code>(&ldquo;&rdquo;)</li>
+<li>NORTH=<code>Label</code>(&quot;&quot;)</li>
 <li>SOUTH=<code>Choice</code></li>
 </ul></li>
 <li>CENTER=<code>List</code></li>
@@ -1201,25 +1199,25 @@ l.show(p, &quot;two&quot;);
 <li>NORTH=<code>Panel</code>,layout=<code>GridLayout</code>(0,1)
 
 <ul>
-<li><code>Button</code>(&ldquo;ChgDir&rdquo;)</li>
-<li><code>Button</code>(&ldquo;MkDir&rdquo;)</li>
-<li><code>TextField</code>(&rdquo;*.*&rdquo;)</li>
-<li><code>Button</code>(&ldquo;View&rdquo;)</li>
-<li><code>Button</code>(&ldquo;Exec&rdquo;)</li>
-<li><code>Button</code>(&ldquo;Rename&rdquo;)</li>
-<li><code>Button</code>(&ldquo;Delete&rdquo;)</li>
-<li><code>Button</code>(&ldquo;Refresh&rdquo;)</li>
-<li><code>Button</code>(&ldquo;DirInfo&rdquo;)</li>
+<li><code>Button</code>(&quot;ChgDir&quot;)</li>
+<li><code>Button</code>(&quot;MkDir&quot;)</li>
+<li><code>TextField</code>(&quot;*.*&quot;)</li>
+<li><code>Button</code>(&quot;View&quot;)</li>
+<li><code>Button</code>(&quot;Exec&quot;)</li>
+<li><code>Button</code>(&quot;Rename&quot;)</li>
+<li><code>Button</code>(&quot;Delete&quot;)</li>
+<li><code>Button</code>(&quot;Refresh&quot;)</li>
+<li><code>Button</code>(&quot;DirInfo&quot;)</li>
 </ul></li>
 </ul></li>
 </ul></li>
 </ul>
 
-<p>To make this work properly, you must have<code>FileDisplay</code>&ldquo;promote&rdquo; the text property of its<code>Label</code>as a property of its own. Provide a<code>get()</code>and<code>set()</code>method for that property that simply gets and sets the text property of the<code>Label</code>. You&rsquo;ll see this when the code is reviewed later.</p>
+<p>To make this work properly, you must have<code>FileDisplay</code>&quot;promote&quot; the text property of its<code>Label</code>as a property of its own. Provide a<code>get()</code>and<code>set()</code>method for that property that simply gets and sets the text property of the<code>Label</code>. You'll see this when the code is reviewed later.</p>
 
 <p>All that remains now is the<code>CENTER</code>section of the main GUI.</p>
 
-<p><strong>Back to the Main FTP GUI&hellip;</strong></p>
+<p><strong>Back to the Main FTP GUI...</strong></p>
 
 <p>Examine what the<code>CENTER</code>section looks like without the details that you captured in<code>FileDisplay</code>:</p>
 
@@ -1237,7 +1235,7 @@ l.show(p, &quot;two&quot;);
 
 <p>You can see that this<code>GridBagLayout</code>will have six cells and four (numbered) components. Each cell requires the configuration of a<code>GridBagConstraints</code>object, to be passed along as the constraints in the<code>add(Component component, Object constraints)</code>version of the<code>add()</code>method. You now need to walk through the<code>GridBagConstraints</code>options and determine what they should be.</p>
 
-<p>First, the easy ones, gridx, gridy, gridwidth, gridheight, ipadx, and ipady. You&rsquo;ll use insets rather than padding, so it makes the ipadx and ipady settings zero for all components:</p>
+<p>First, the easy ones, gridx, gridy, gridwidth, gridheight, ipadx, and ipady. You'll use insets rather than padding, so it makes the ipadx and ipady settings zero for all components:</p>
 
 <table>
 <thead>
@@ -1303,9 +1301,9 @@ l.show(p, &quot;two&quot;);
 
 <p>Next you need to understand fill. Recall that this tells how the components will expand within their allotted cells. For components 1 and 2, this will be BOTH; you want components 3 and 4 to be their preferred size, so fill will be NONE.</p>
 
-<p>Next, anchor. Because components 1 and 2 completely fill their allotted space, their anchor could be any value. Usually you use the default of<code>CENTER</code>. Component 3 sits at the bottom/center of its cell—that&rsquo;s the<code>SOUTH</code>anchor position. Component 4 sits at the top/center of its cell—that&rsquo;s the<code>NORTH</code>, anchor position.</p>
+<p>Next, anchor. Because components 1 and 2 completely fill their allotted space, their anchor could be any value. Usually you use the default of<code>CENTER</code>. Component 3 sits at the bottom/center of its cell—that's the<code>SOUTH</code>anchor position. Component 4 sits at the top/center of its cell—that's the<code>NORTH</code>, anchor position.</p>
 
-<p>The insets define the space to leave around components. There&rsquo;s no space around components 1 and 2, so their insets are all 0. You want some space around components 3 and 4. How about four pixels between them and any adjoining components. You can do this in several ways to put 4 pixels between components 3 and 4—give them 2 as their bottom and top insets.</p>
+<p>The insets define the space to leave around components. There's no space around components 1 and 2, so their insets are all 0. You want some space around components 3 and 4. How about four pixels between them and any adjoining components. You can do this in several ways to put 4 pixels between components 3 and 4—give them 2 as their bottom and top insets.</p>
 
 <p>Now the tricky part of this<code>GridBagLayout</code>: the weights. Think about the constraints rules you want:</p>
 
@@ -1456,7 +1454,7 @@ l.show(p, &quot;two&quot;);
 
 <p><img src="images/ws11.gif" alt="ws11.gif (8037 bytes)" /></p>
 
-<p>Notice where the &ldquo;&lt;&ndash;&rdquo; and &ldquo;&ndash;&gt;&rdquo; buttons are. The weightx and weighty values control the sizing of the_grid cells_that a component will occupy. If the sum of the weights for a given row or column in a<code>GridBagLayout</code>does not equal that of the other rows or columns,<code>GridBagLayout</code>makes up the difference by setting the weight of the_last_component in that row or column. In this case, you have three columns: two are the<code>FileDisplay</code>components, and the third is the column with the two buttons in it. Because the weighty values of the two buttons don&rsquo;t add to the same weighty values of the other two columns,<code>GridBagLayout</code>gives the lower button&rsquo;s grid cell the entire remaining height.</p>
+<p>Notice where the &quot;&lt;--&quot; and &quot;--&gt;&quot; buttons are. The weightx and weighty values control the sizing of the_grid cells_that a component will occupy. If the sum of the weights for a given row or column in a<code>GridBagLayout</code>does not equal that of the other rows or columns,<code>GridBagLayout</code>makes up the difference by setting the weight of the_last_component in that row or column. In this case, you have three columns: two are the<code>FileDisplay</code>components, and the third is the column with the two buttons in it. Because the weighty values of the two buttons don't add to the same weighty values of the other two columns,<code>GridBagLayout</code>gives the lower button's grid cell the entire remaining height.</p>
 
 <p><strong>Looking at Some Code for this GUI</strong></p>
 
@@ -1469,11 +1467,11 @@ l.show(p, &quot;two&quot;);
 <li><a href="FileDisplay1.java">FileDisplay1.java</a></li>
 </ul>
 
-<p>This code was generated using IBM&rsquo;s VisualAge for Java, and simplified by removing the exception handling and &ldquo;ivj&rdquo; prefixes on all the variable names. The code follows a &ldquo;lazy instantiation&rdquo; strategy: no GUI components or sub-GUIs are created until needed. This has several advantages:</p>
+<p>This code was generated using IBM's VisualAge for Java, and simplified by removing the exception handling and &quot;ivj&quot; prefixes on all the variable names. The code follows a &quot;lazy instantiation&quot; strategy: no GUI components or sub-GUIs are created until needed. This has several advantages:</p>
 
 <ul>
-<li>If a GUI in your application isn&rsquo;t used, it&rsquo;s never created, making the program more efficient.</li>
-<li>You never need to worry if you&rsquo;ve already created part of a GUI or not; you simply call the method in question to access that part of the GUI.</li>
+<li>If a GUI in your application isn't used, it's never created, making the program more efficient.</li>
+<li>You never need to worry if you've already created part of a GUI or not; you simply call the method in question to access that part of the GUI.</li>
 <li>The GUI structure is directly reflected in the code. Nested GUI elements are calls made to other methods.</li>
 </ul>
 
@@ -1517,7 +1515,7 @@ l.show(p, &quot;two&quot;);
 
 <p>First, you need to think about how to bind the labels and text fields to their preferred height. This can be accomplished by placing all of the components as the<code>NORTH</code>component of a<code>BorderLayout</code>.</p>
 
-<p>Next, you need to divide the GUI into two evenly spaced parts: the left half the right half. You should think &ldquo;<code>GridLayout</code>&rdquo; whenever you hear the phrase &ldquo;equally spaced&rdquo;. This<code>GridLayout</code>consists of a single row; its parameters to its constructor would be (1,0). (In the above example, you are also setting hgap to five.)</p>
+<p>Next, you need to divide the GUI into two evenly spaced parts: the left half the right half. You should think &quot;<code>GridLayout</code>&quot; whenever you hear the phrase &quot;equally spaced&quot;. This<code>GridLayout</code>consists of a single row; its parameters to its constructor would be (1,0). (In the above example, you are also setting hgap to five.)</p>
 
 <p>Now what do you do about the pairs of text fields and labels? Your initial answer might involve placing each pair of text fields and labels into their own<code>BorderLayout</code>. For example:</p>
 
@@ -1530,7 +1528,7 @@ panel1.add(new TextField(), BorderLayout.CENTER);
 
 <p><img src="images/nameform4.gif" alt="nameform4.gif (2866 bytes)" /></p>
 
-<p>So what happened? Think about what<code>BorderLayout</code>does. It says &ldquo;look at my<code>WEST</code>component. Give it its preferred width. Then, give the<code>CENTER</code>component the remaining available space.&rdquo; Note that it doesn&rsquo;t say &ldquo;look at the component below me. Make sure my<code>WEST</code>component matches the same size as<em>his</em><code>WEST</code>component.&rdquo; You need to somehow associate the labels with one other, and the text fields with one another.</p>
+<p>So what happened? Think about what<code>BorderLayout</code>does. It says &quot;look at my<code>WEST</code>component. Give it its preferred width. Then, give the<code>CENTER</code>component the remaining available space.&quot; Note that it doesn't say &quot;look at the component below me. Make sure my<code>WEST</code>component matches the same size as<em>his</em><code>WEST</code>component.&quot; You need to somehow associate the labels with one other, and the text fields with one another.</p>
 
 <p>The only way you can do this is to put all the labels that go together in the same container. Similar for the text fields. However, you also need to make sure the text fields and labels line up.</p>
 
@@ -1555,9 +1553,9 @@ panel1.add(new TextField(), BorderLayout.CENTER);
 <li>WEST=Panel, layout=<code>GridLayout</code>(3,0)
 
 <ul>
-<li>Label(&ldquo;First name:&ldquo;)</li>
-<li>Label(&ldquo;Street:&ldquo;)</li>
-<li>Label(&ldquo;Phone:&ldquo;)</li>
+<li>Label(&quot;First name:&quot;)</li>
+<li>Label(&quot;Street:&quot;)</li>
+<li>Label(&quot;Phone:&quot;)</li>
 </ul></li>
 <li>CENTER=Panel, layout=<code>GridLayout</code>(3,0)
 
@@ -1573,8 +1571,8 @@ panel1.add(new TextField(), BorderLayout.CENTER);
 <li>WEST=Panel, layout=<code>GridLayout</code>(3,0)
 
 <ul>
-<li>Label(&ldquo;Last name:&ldquo;)</li>
-<li>Label(&ldquo;City:&ldquo;)</li>
+<li>Label(&quot;Last name:&quot;)</li>
+<li>Label(&quot;City:&quot;)</li>
 </ul></li>
 <li>CENTER=Panel, layout=<code>GridLayout</code>(3,0)
 
@@ -1587,7 +1585,7 @@ panel1.add(new TextField(), BorderLayout.CENTER);
 </ul></li>
 </ul>
 
-<p>One thing to notice here is the parameters passed to the most deeply nested<code>GridLayout</code>containers. Your first thought when setting up these<code>GridLayout</code>containers should be &ldquo;there is one column of components&rdquo;. The problem is, the first set of<code>GridLayout</code>containers have three components each; the second set has two components each. If you set a<code>GridLayout</code>constructor parameters to (0, 1), the GUI would look as follows:</p>
+<p>One thing to notice here is the parameters passed to the most deeply nested<code>GridLayout</code>containers. Your first thought when setting up these<code>GridLayout</code>containers should be &quot;there is one column of components&quot;. The problem is, the first set of<code>GridLayout</code>containers have three components each; the second set has two components each. If you set a<code>GridLayout</code>constructor parameters to (0, 1), the GUI would look as follows:</p>
 
 <p><img src="images/nameform5.gif" alt="nameform5.gif (2814 bytes)" /></p>
 
@@ -1645,7 +1643,11 @@ panel1.add(new TextField(), BorderLayout.CENTER);
       </div>
       
 
-      
+      	
+	
+	
+	
+
 
     </div>
     

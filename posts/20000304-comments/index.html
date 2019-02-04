@@ -255,9 +255,7 @@
 
       
 
-      
-      <div class="container pr-5">
-      
+      <div class="col-md-10">
 
         
         <div class="z-depth-1  post-wrapper white-bg single-post">
@@ -347,14 +345,14 @@ x = 1; // a single-line comment after code
 <p>There are a few important things to note about documentation comments:</p>
 
 <ul>
-<li><p>The documentation generator, javadoc, will add all text inside a documentation comment to an HTML paragraph. This means that any text inside a documentation comment will be formatted into a paragraph; spacing and line breaks are ignored. If you want special formatting, you must include HTML tags inside your documentation comment.*   If a documentation comment begins with more than two asterisks, javadoc assumes this is just used to create a &ldquo;box&rdquo; around the comment in the source code and ignores the extra asterisks. For example:</p>
+<li><p>The documentation generator, javadoc, will add all text inside a documentation comment to an HTML paragraph. This means that any text inside a documentation comment will be formatted into a paragraph; spacing and line breaks are ignored. If you want special formatting, you must include HTML tags inside your documentation comment.*   If a documentation comment begins with more than two asterisks, javadoc assumes this is just used to create a &quot;box&quot; around the comment in the source code and ignores the extra asterisks. For example:</p>
 
 <pre><code>/**********************************       
     This is the start of a method        
 **********************************/
 </code></pre>
 
-<p>will only keep the text &ldquo;This is the start of a method&rdquo;.</p></li>
+<p>will only keep the text &quot;This is the start of a method&quot;.</p></li>
 
 <li><p>javadoc will ignore leading asterisks inside a documentation-comment block. For example:</p>
 
@@ -365,21 +363,21 @@ x = 1; // a single-line comment after code
  ***************************************/
 </code></pre>
 
-<p>will only keep the text &ldquo;This is a doc comment on multiple lines that I want to stand out in source code, looking &ldquo;neat&rdquo;&rdquo;</p></li>
+<p>will only keep the text &quot;This is a doc comment on multiple lines that I want to stand out in source code, looking &quot;neat&quot;&quot;</p></li>
 
-<li><p>It&rsquo;s common practice to use something like</p>
+<li><p>It's common practice to use something like</p>
 
 <pre><code>/******************************************
 ...
 ******************************************/
 </code></pre>
 
-<p>to make a comment stand out. Be aware that this is treated as a documentation comment (even if that&rsquo;s not what you had intended), and could show up in the generated documentation.</p></li>
+<p>to make a comment stand out. Be aware that this is treated as a documentation comment (even if that's not what you had intended), and could show up in the generated documentation.</p></li>
 </ul>
 
 <h1 id="when-to-use-documentation-comments">When to Use Documentation Comments</h1>
 
-<p>Documentation comments should (at very least) be used in front of every public class, interface, method and class/instance variable in your source code. This allows someone to run javadoc against the code and generate a simple document that lists the public entities and a brief description of each. You may also use documentation comments in front on non-public methods, and use a javadoc option to generate documentation for them. Using documentation comments on non-public entities is not as important as publics (the interface isn&rsquo;t exposed&hellip;) but if you&rsquo;re commenting the code <em>anyway</em> you might as well write those comments as documentation comments.</p>
+<p>Documentation comments should (at very least) be used in front of every public class, interface, method and class/instance variable in your source code. This allows someone to run javadoc against the code and generate a simple document that lists the public entities and a brief description of each. You may also use documentation comments in front on non-public methods, and use a javadoc option to generate documentation for them. Using documentation comments on non-public entities is not as important as publics (the interface isn't exposed...) but if you're commenting the code <em>anyway</em> you might as well write those comments as documentation comments.</p>
 
 <h1 id="when-to-use-single-line-comments">When to Use Single-Line Comments</h1>
 
@@ -387,7 +385,7 @@ x = 1; // a single-line comment after code
 
 <p>My simple advice on commenting is that whenever you want to write a normal comment (not a documentation comment that describes and class, interface, method or variable) use a single line comment.</p>
 
-<p>Why? Because you can easily use multi-line comments to &ldquo;comment out&rdquo; a section of your code! (&ldquo;Commenting out code&rdquo; refers to changing the lexical state of a section of source code to being inside a comment, making the compiler ignore that code.) Take as an example:</p>
+<p>Why? Because you can easily use multi-line comments to &quot;comment out&quot; a section of your code! (&quot;Commenting out code&quot; refers to changing the lexical state of a section of source code to being inside a comment, making the compiler ignore that code.) Take as an example:</p>
 
 <pre><code>x \= 1;   /* set x to 1 */
 y \= 2;   /* set y to 2 */
@@ -401,14 +399,14 @@ f(x, y); /* call f with x and y */
 // f(x, y); /* call f with x and y */
 </code></pre>
 
-<p>or add in multi-line comments wherever there isn&rsquo;t already one present:</p>
+<p>or add in multi-line comments wherever there isn't already one present:</p>
 
 <pre><code>/* x = 1;  */ /* set x to 1 */
 /* y = 2;  */ /* set y to 2 */
 /* f(x, y);*/ /* call f with x and y */
 </code></pre>
 
-<p>or mutilate/remove the &ldquo;end comment&rdquo; delimiters of the existing comments:</p>
+<p>or mutilate/remove the &quot;end comment&quot; delimiters of the existing comments:</p>
 
 <pre><code>/*
     x = 1;   /* set x to 1 * /
@@ -417,7 +415,7 @@ f(x, y); /* call f with x and y */
 */
 </code></pre>
 
-<p>None of these are terribly pleasant. It&rsquo;s much easier if the original code were:</p>
+<p>None of these are terribly pleasant. It's much easier if the original code were:</p>
 
 <pre><code>x = 1;   // set x to 1
 y = 2;   // set y to 2
@@ -435,7 +433,7 @@ f(x, y); // call f with x and y
 
 <p><em>Always</em> use single-line comments for your everyday commenting needs!</p>
 
-<p>NOTE: Most IDEs have a simple &ldquo;comment-out&rdquo; function - highlight a block and it comments it out. Most often, it simply prepends <code>//</code> at the front of each selected line.</p>
+<p>NOTE: Most IDEs have a simple &quot;comment-out&quot; function - highlight a block and it comments it out. Most often, it simply prepends <code>//</code> at the front of each selected line.</p>
 
 <h1 id="when-to-use-multi-line-comments">When to Use Multi-Line Comments</h1>
 
@@ -500,7 +498,181 @@ f(x, y); // call f with x and y
       </div>
       
 
-      
+      	
+	
+	
+	
+		
+		
+		
+	
+
+		
+		<div class="col-md-2 pl-0">
+
+			
+			<div id="page-scrollspy" class="toc-nav">
+				
+				<ul class="nav nav-pills ml-0">
+					
+					<li class="nav-item pb-3 text-center">
+						<span class="font-weight-bold mb-2">- CONTENTS - </span>
+					</li>
+
+					
+						
+						
+							
+								
+								
+									<ul class="nav">
+								
+									<ul class="nav">
+								
+								
+
+										<li class="nav-item">
+						 					<a class="nav-link" href="#single-line-c-style-comments">
+												 Single-Line (C&#43;&#43;-Style) Comments
+											</a>
+										</li>
+						 
+								
+								
+									</ul>
+								
+									</ul>
+								
+							
+						
+				 
+						
+						
+							
+								
+								
+									<ul class="nav">
+								
+									<ul class="nav">
+								
+								
+
+										<li class="nav-item">
+						 					<a class="nav-link" href="#multi-line-c-style-comments">
+												 Multi-Line (C-Style) Comments
+											</a>
+										</li>
+						 
+								
+								
+									</ul>
+								
+									</ul>
+								
+							
+						
+				 
+						
+						
+							
+								
+								
+									<ul class="nav">
+								
+									<ul class="nav">
+								
+								
+
+										<li class="nav-item">
+						 					<a class="nav-link" href="#documentation-comments">
+												 Documentation Comments
+											</a>
+										</li>
+						 
+								
+								
+									</ul>
+								
+									</ul>
+								
+							
+						
+				 
+						
+						
+							
+								
+								
+									<ul class="nav">
+								
+								
+
+										<li class="nav-item">
+						 					<a class="nav-link" href="#when-to-use-documentation-comments">
+												 When to Use Documentation Comments
+											</a>
+										</li>
+						 
+								
+								
+									</ul>
+								
+							
+						
+				 
+						
+						
+							
+								
+								
+									<ul class="nav">
+								
+								
+
+										<li class="nav-item">
+						 					<a class="nav-link" href="#when-to-use-single-line-comments">
+												 When to Use Single-Line Comments
+											</a>
+										</li>
+						 
+								
+								
+									</ul>
+								
+							
+						
+				 
+						
+						
+							
+								
+								
+									<ul class="nav">
+								
+								
+
+										<li class="nav-item">
+						 					<a class="nav-link" href="#when-to-use-multi-line-comments">
+												 When to Use Multi-Line Comments
+											</a>
+										</li>
+						 
+								
+								
+									</ul>
+								
+							
+						
+				 
+
+				</ul>
+			</div>
+			
+
+		</div>
+		
+	
+
 
     </div>
     

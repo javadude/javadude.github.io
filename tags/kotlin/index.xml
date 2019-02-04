@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kotlin on JavaDude.com</title>
+    <link>http://javadude.com/tags/kotlin/</link>
+    <description>Recent content in Kotlin on JavaDude.com</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <lastBuildDate>Sun, 03 Feb 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://javadude.com/tags/kotlin/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>From Java to Kotlin - Episode 1 - You&#39;ve Gotta Start Somewhere...</title>
+      <link>http://javadude.com/posts/20190203-kotlin01/</link>
+      <pubDate>Sun, 03 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://javadude.com/posts/20190203-kotlin01/</guid>
+      <description>&lt;script src=&#34;https://unpkg.com/kotlin-playground@1&#34; data-selector=&#34;pre&#34;&gt;&lt;/script&gt;
+
+&lt;p&gt;Let&#39;s learn Kotlin from a Java point of view. We&#39;ll start by looking at some basics of Variables, Values, Classes, Properties and Constructors.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
