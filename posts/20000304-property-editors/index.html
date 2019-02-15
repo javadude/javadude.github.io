@@ -12,7 +12,8 @@
   <meta property="og:title" content="Creating JavaBean Property Editors" />
 <meta property="og:description" content="How and why you should use JavaBean accessor (get/set) methods." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://javadude.com/posts/20000304-property-editors/" /><meta property="article:published_time" content="2000-03-04T00:00:00&#43;00:00"/>
+<meta property="og:url" content="http://javadude.com/posts/20000304-property-editors/" />
+<meta property="article:published_time" content="2000-03-04T00:00:00&#43;00:00"/>
 <meta property="article:modified_time" content="2000-03-04T00:00:00&#43;00:00"/>
 
 
@@ -38,6 +39,7 @@
   <link href="http://javadude.com/css/vendors/bootstrap4/bootstrap.min.css" rel="stylesheet">
   <link href="http://javadude.com/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet"> 
   <link href="http://javadude.com/css/vendors/mdb/style.min.css" rel="stylesheet"> 
+  <link href="http://javadude.com/css/syntax.css" rel="stylesheet">
   <link href="http://javadude.com/css/main.css" rel="stylesheet">
 
 
@@ -68,8 +70,6 @@
   
 
   
-    
-    <link rel="stylesheet" href="http://javadude.com/css/vendors/highlight/github-gist.css">
   
 
 </head>
@@ -286,8 +286,6 @@
 
           <div class="post-content markdown">
             <p>Property editors are a way to make your bean more user-friendly.  Bean builder tools can determine quite a lot about your bean just by looking at it and its corresponding BeanInfo class, but they usually have only very simple methods of editing the properties in the bean.</p>
-
-<p></p>
 
 <p>Many properties can be represented as a String, number or Color, and most Bean design tools have built-in editors for these types.  But if a property is another type of object, you must tell the design tool how to edit it.</p>
 
@@ -1220,9 +1218,6 @@ import java.awt.Rectangle;
 
 
 
-  
-  <script src="http://javadude.com/js/vendors/highlight.pack.js"> </script>
-  <script>hljs.initHighlightingOnLoad();</script>
 
 
 

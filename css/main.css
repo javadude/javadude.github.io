@@ -368,8 +368,9 @@ Markdown
 }
 
 .markdown pre, .markdown code {
+  margin-bottom: 0;
   /* background-color: #f7f7f7; */
-  background-color: var(--grey-l4);
+  /* background-color: var(--grey-l4);  */
   /* font-size: 1rem; */
 }
 
@@ -384,8 +385,8 @@ Markdown
 /* enclosed by 3 backticks (```) */
 .markdown pre {
   display: block;
-  margin-top: 1rem;
-  margin-bottom: 2rem;
+  margin-top: 0;
+  margin-bottom: 0;
   padding: 1rem;
   line-height: 1.5em;
   /* white-space: pre; */
@@ -443,6 +444,26 @@ Markdown
   text-align: center;
 }
 
+.chroma {
+  background-color:white;
+}
+.chroma .lnt {
+  padding: 0;
+  margin: 0;
+}
+
+.chroma .lntable {
+  margin: 1rem;
+}
+/*
+.chroma .lntd {
+  border-color: var(--grey-l3);
+  border-width: 1px;
+  border-radius: 2px;
+  border-style: solid;
+}
+*/
+
 .markdown td, .markdown th {
   padding: .25rem .5rem;
   /* border: 1px solid #e5e5e5; */
@@ -452,7 +473,7 @@ Markdown
 .markdown tbody tr:nth-child(odd) td,
 .markdown tbody tr:nth-child(odd) th {
   /* background-color: #f7f7f7; */
-  background-color: var(--grey-l4);
+  /* background-color: var(--grey-l4);*/
  }
 
 .markdown img {

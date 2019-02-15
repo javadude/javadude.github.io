@@ -17,16 +17,12 @@
       <pubDate>Sun, 03 Feb 2019 00:00:00 +0000</pubDate>
       
       <guid>http://javadude.com/posts/20190203-kotlin01/</guid>
-      <description>&lt;script src=&#34;https://unpkg.com/kotlin-playground@1&#34; data-selector=&#34;pre&#34;&gt;&lt;/script&gt;
-
-&lt;table&gt;
+      <description>&lt;table&gt;
     &lt;tr&gt;
         &lt;td style=&#34;border:none;background: unset;&#34;&gt;&lt;a href=&#34;https://www.jetbrains.com&#34;&gt;&lt;img src=&#34;../../img/kotlin-logo.png&#34; alt=&#34;Kotlin Logo&#34; style=&#34;width:300px;&#34;/&gt;&lt;/a&gt;&lt;/td&gt;
         &lt;td style=&#34;border:none;background: unset;&#34;&gt;&lt;font size=&#34;+2&#34;&gt;&lt;p&gt;Let&#39;s learn Kotlin from a Java point of view.&lt;p&gt;We&#39;ll start by looking at some basics of Variables, Values, Classes, Properties and Constructors.&lt;/p&gt;&lt;/font&gt;&lt;/td&gt;
     &lt;/tr&gt;
-&lt;/table&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;/table&gt;</description>
     </item>
     
     <item>
@@ -37,9 +33,7 @@
       <guid>http://javadude.com/posts/20040522-import-on-demand-is-evil/</guid>
       <description>&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
 
-&lt;p&gt;There should &lt;em&gt;&lt;strong&gt;never&lt;/strong&gt;&lt;/em&gt; exist any language feature such that &lt;em&gt;&lt;strong&gt;adding&lt;/strong&gt;&lt;/em&gt; a new type to a referenced package can break your existing code. Import-on-demand is one such feature... And it&#39;s evil...&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;There should &lt;em&gt;&lt;strong&gt;never&lt;/strong&gt;&lt;/em&gt; exist any language feature such that &lt;em&gt;&lt;strong&gt;adding&lt;/strong&gt;&lt;/em&gt; a new type to a referenced package can break your existing code. Import-on-demand is one such feature... And it&#39;s evil...&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -50,9 +44,7 @@
       <guid>http://javadude.com/articles/passbyvalue.htm</guid>
       <description>&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
 
-&lt;p&gt;I finally decided to write up a little something about Java&#39;s parameter passing. I&#39;m really tired of hearing folks (incorrectly) state &amp;quot;primitives are passed by value, objects are passed by reference&amp;quot;.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;I finally decided to write up a little something about Java&#39;s parameter passing. I&#39;m really tired of hearing folks (incorrectly) state &amp;quot;primitives are passed by value, objects are passed by reference&amp;quot;.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -65,9 +57,7 @@
 
 &lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 
-&lt;p&gt;Maintainable applications can be quite tricky to develop. One of the keys to creating such a beast, is to properly layer your application.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;Maintainable applications can be quite tricky to develop. One of the keys to creating such a beast, is to properly layer your application.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -76,9 +66,7 @@
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
       <guid>http://javadude.com/posts/20000304-antlrtut/</guid>
-      <description>&lt;p&gt;A tutorial on ANTLR 2.x&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;A tutorial on ANTLR 2.x&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -87,9 +75,7 @@
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
       <guid>http://javadude.com/articles/lalrtoll.html</guid>
-      <description>&lt;p&gt;Converting from LALR to LL can be challenging... Hopefully this article will make it a weeeeee bit simpler...&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Converting from LALR to LL can be challenging... Hopefully this article will make it a weeeeee bit simpler...&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -98,9 +84,7 @@
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
       <guid>http://javadude.com/posts/20000304-property-editors/</guid>
-      <description>&lt;p&gt;Property editors are a way to make your bean more user-friendly.  Bean builder tools can determine quite a lot about your bean just by looking at it and its corresponding BeanInfo class, but they usually have only very simple methods of editing the properties in the bean.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Property editors are a way to make your bean more user-friendly.  Bean builder tools can determine quite a lot about your bean just by looking at it and its corresponding BeanInfo class, but they usually have only very simple methods of editing the properties in the bean.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -109,9 +93,7 @@
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
       <guid>http://javadude.com/posts/20000304-javaone/</guid>
-      <description>&lt;p&gt;Some talks I gave at JavaOne in 2000, 2001, and 2002.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Some talks I gave at JavaOne in 2000, 2001, and 2002.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -120,9 +102,7 @@
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
       <guid>http://javadude.com/posts/20000304-javabeans/</guid>
-      <description>&lt;p&gt;The basics of the JavaBean Component Model&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;The basics of the JavaBean Component Model&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -131,9 +111,7 @@
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
       <guid>http://javadude.com/posts/20000304-accessors/</guid>
-      <description>&lt;p&gt;Accessors are a key ingredient to proper encapsulation.  The can restrict access to only read/write data, inform other objects of changes to data, and perform validation on new values being set.  Consistent accessor usage makes class modification easy and transparent.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Accessors are a key ingredient to proper encapsulation.  The can restrict access to only read/write data, inform other objects of changes to data, and perform validation on new values being set.  Consistent accessor usage makes class modification easy and transparent.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -142,9 +120,7 @@
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
       <guid>http://javadude.com/posts/20000304-comments/</guid>
-      <description>&lt;p&gt;Java provides three types of comments; when should we use which?&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Java provides three types of comments; when should we use which?&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -153,9 +129,7 @@
       <pubDate>Thu, 01 Jan 1998 00:00:00 +0000</pubDate>
       
       <guid>http://javadude.com/posts/20000304-layouts/</guid>
-      <description>&lt;p&gt;Let&#39;s get familiar with Java Layout Managers!&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Let&#39;s get familiar with Java Layout Managers!&lt;/p&gt;</description>
     </item>
     
   </channel>
