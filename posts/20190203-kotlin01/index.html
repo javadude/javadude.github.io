@@ -8,29 +8,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1" />
   <meta name="author" content="Scott Stanchfield">
   <meta name="description" content="
-
-
     
         
         Let&#39;s learn Kotlin from a Java point of view.We&#39;ll start by looking at some basics of Variables, Values, Classes, Properties and Constructors.
     
-
-
 ">
   
   <meta property="og:title" content="From Java to Kotlin - Episode 1 - You&#39;ve Gotta Start Somewhere..." />
 <meta property="og:description" content="
-
-
     
         
         Let&#39;s learn Kotlin from a Java point of view.We&#39;ll start by looking at some basics of Variables, Values, Classes, Properties and Constructors.
     
-
-
 " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://javadude.com/posts/20190203-kotlin01/" /><meta property="article:published_time" content="2019-02-03T00:00:00&#43;00:00"/>
+<meta property="og:url" content="http://javadude.com/posts/20190203-kotlin01/" />
+<meta property="article:published_time" content="2019-02-03T00:00:00&#43;00:00"/>
 <meta property="article:modified_time" content="2019-02-03T00:00:00&#43;00:00"/>
 
 
@@ -56,6 +49,7 @@
   <link href="http://javadude.com/css/vendors/bootstrap4/bootstrap.min.css" rel="stylesheet">
   <link href="http://javadude.com/css/vendors-extensions/mdb/mdb.min.css" rel="stylesheet"> 
   <link href="http://javadude.com/css/vendors/mdb/style.min.css" rel="stylesheet"> 
+  <link href="http://javadude.com/css/syntax.css" rel="stylesheet">
   <link href="http://javadude.com/css/main.css" rel="stylesheet">
 
 
@@ -86,8 +80,6 @@
   
 
   
-    
-    <link rel="stylesheet" href="http://javadude.com/css/vendors/highlight/github-gist.css">
   
 
 </head>
@@ -303,16 +295,12 @@
 
 
           <div class="post-content markdown">
-            <script src="https://unpkg.com/kotlin-playground@1" data-selector="pre"></script>
-
-<table>
+            <table>
     <tr>
         <td style="border:none;background: unset;"><a href="https://www.jetbrains.com"><img src="../../img/kotlin-logo.png" alt="Kotlin Logo" style="width:300px;"/></a></td>
         <td style="border:none;background: unset;"><font size="+2"><p>Let's learn Kotlin from a Java point of view.<p>We'll start by looking at some basics of Variables, Values, Classes, Properties and Constructors.</p></font></td>
     </tr>
 </table>
-
-<p></p>
 
 <h2 id="introduction">Introduction</h2>
 
@@ -330,44 +318,55 @@
 
 <p>Nullability is a pretty big concept and I knew this article would be pretty long to start with, so I'm punting it down the road a wee bit. But don't worry... I'll get to it... It's quite important!</p>
 
-<h2 id="examples">Examples</h2>
-
-<p>I'm using the terribly-cool Kotlin Playground that JetBrains has set up. Every example in these posts can be run by clicking the little green arrow, <em>and</em> you can even modify the code if you'd like. (If you modify the code and want to reset it, you can refresh the page and the original code will be restored.)</p>
-
-<p>Some of the longer examples might initially hide code that you've already seen. In these cases, you'll see a little &quot;+&quot; icon at the top of the example. Clicking the &quot;+&quot; will expose the rest of the example. Note that the hidden code will be read-only and have a darker background.</p>
-
-<p>(Note that the Java code that appears in these articles cannot be executed in the Kotlin Playground.)</p>
-
-<p>For more details on Kotlin Playground, see <a href="https://github.com/JetBrains/kotlin-playground">https://github.com/JetBrains/kotlin-playground</a></p>
-
-<p>Note that if you do not have JavaScript enabled, the code examples will appear as normal text blocks.</p>
-
 <h2 id="main-functions">Main Functions</h2>
 
-<p>Kotlin has &quot;main&quot; functions just like Java. We'll use this to run examples in most of these articles. You'll most likely use Kotlin in environments like servers or Android applications that don't need a main, but they're useful for examples.</p>
+<p>Kotlin has &quot;main&quot; functions just like Java. You'll most likely use Kotlin in environments like servers or Android applications that don't need a main, but they're useful for examples.</p>
 
 <p>If you don't need any command-line arguments:
-<pre theme="darcula" lines="true" match-brackets="true">
-fun main() {
-    println(&quot;Hello, World!&quot;)
-}
-</pre></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">println</span><span class="p">(</span><span class="s">&#34;Hello, World!&#34;</span><span class="p">)</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></p>
 
-<p>If you want command-line arguments, you can use an explicit Array (more on that and <code>joinToString()</code> later). I'm passing <code>A B C</code> to Kotlin Playground for this example.
-<pre args="A B C" theme="darcula" lines="true" match-brackets="true">
-fun main(args : Array&lt;String&gt;) {
-    println(&quot;Hello, World!&quot;)
-    println(args.joinToString())
-}
-</pre></p>
+<p>If you want command-line arguments, you can use an explicit Array (more on that and <code>joinToString()</code> later). I'm passing <code>A B C</code> to Kotlin Playground for this example.</p>
 
-<p>or you can use a varying-length argument list (more on that and <code>joinToString()</code> later). I'm passing <code>A B C</code> to Kotlin Playground for this example.
-<pre args="A B C" theme="darcula" lines="true" match-brackets="true">
-fun main(vararg args : String) {
-    println(&quot;Hello, World!&quot;)
-    println(args.joinToString())
-}
-</pre></p>
+<p><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span> <span class="p">:</span> <span class="n">Array</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">String</span><span class="p">&gt;)</span> <span class="p">{</span>
+	<span class="n">println</span><span class="p">(</span><span class="s">&#34;Hello, World!&#34;</span><span class="p">)</span>
+	<span class="n">println</span><span class="p">(</span><span class="n">args</span><span class="p">.</span><span class="n">joinToString</span><span class="p">())</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+or you can use a varying-length argument list (more on that and <code>joinToString()</code> later). I'm passing <code>A B C</code> to Kotlin Playground for this example.
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="k">vararg</span> <span class="n">args</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+	<span class="n">println</span><span class="p">(</span><span class="s">&#34;Hello, World!&#34;</span><span class="p">)</span>
+	<span class="n">println</span><span class="p">(</span><span class="n">args</span><span class="p">.</span><span class="n">joinToString</span><span class="p">())</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div></p>
 
 <h2 id="yay-no-semicolons">Yay! No Semicolons!</h2>
 
@@ -379,45 +378,78 @@ fun main(vararg args : String) {
 
 <p>In Kotlin, we explicitly state whether a local or member of a class can be modified. We do this by specifying <code>var</code> or <code>val</code> to define a variable or value.</p>
 
-<p>Try running the following example (press the green arrow) and you'll see the error.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="k">var</span> <span class="py">x</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;Hello&#34;</span>
+	<span class="k">val</span> <span class="py">y</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;Message&#34;</span>
 
-<pre theme="darcula" lines="true" match-brackets="true">
-fun main() {
-    var x : String = "Hello"
-    val y : String = "Message"
+	<span class="n">x</span> <span class="p">=</span> <span class="s">&#34;aaa&#34;</span> <span class="c1">// just fine; can change the variable
+</span><span class="c1"></span>	<span class="n">y</span> <span class="p">=</span> <span class="s">&#34;bbb&#34;</span> <span class="c1">// will not compile!!! can&#39;t change a &#34;val&#34;
+</span><span class="c1"></span>
+	<span class="n">println</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+	<span class="n">println</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 
-    x = "aaa" // just fine; can change the variable
-    y = "bbb" // will not compile!!! can't change a "val"
+<p>If you run the above example, you'll get an &quot;initializer is redundant&quot; warning for line 2. Kotlin does a lot of data flow analysis, and here it's telling us that it sees the only path using <code>x</code> assigns it twice before using it, so the initializer isn't needed. We could write</p>
 
-    println(x)
-    println(y)
-}
-</pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="k">var</span> <span class="py">x</span> <span class="p">:</span> <span class="n">String</span>
+	<span class="k">val</span> <span class="py">y</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;Message&#34;</span>
 
-<p>When you run the above example, note the &quot;initializer is redundant&quot; warning for line 2. Kotlin does a lot of data flow analysis, and here it's telling us that it sees the only path using <code>x</code> assigns it twice before using it, so the initializer isn't needed. We could write</p>
-
-<pre theme="darcula" lines="true" match-brackets="true">
-fun main() {
-    var x : String
-    val y : String = "Message"
-
-    x = "aaa" // just fine; can change the variable
-
-    println(x)
-    println(y)
-}
-</pre>
+	<span class="n">x</span> <span class="p">=</span> <span class="s">&#34;aaa&#34;</span> <span class="c1">// just fine; can change the variable
+</span><span class="c1"></span>
+	<span class="n">println</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+	<span class="n">println</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 
 <h2 id="type-inferencing">Type Inferencing</h2>
 
 <p>But things get even better. Kotlin loves to <em>infer</em> types so you don't have to write as much code. For example:</p>
 
-<pre theme="darcula" lines="true" match-brackets="true">
-fun main() {
-    val x = "aaa"
-    println(x)
-}
-</pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="k">val</span> <span class="py">x</span> <span class="p">=</span> <span class="s">&#34;aaa&#34;</span>
+	<span class="n">println</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 
 <p>The expression <code>&quot;aaa&quot;</code> is of type <code>String</code>, so kotlin knows that the value <code>x</code> can be a <code>String</code> and infers the type.</p>
 
@@ -441,16 +473,28 @@ fun main() {
 
 <p>Classes/Interfaces (and their members) in Kotlin are nowhere near as verbose as in Java.</p>
 
-<pre theme="darcula" lines="true" match-brackets="true">
-interface Foo
-open class A
-open class B : A(), Foo
-class C : B()
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">interface</span> <span class="nc">Foo</span>
+<span class="k">open</span> <span class="k">class</span> <span class="nc">A</span>
+<span class="k">open</span> <span class="k">class</span> <span class="nc">B</span> <span class="p">:</span> <span class="n">A</span><span class="p">(),</span> <span class="n">Foo</span>
+<span class="k">class</span> <span class="nc">C</span> <span class="p">:</span> <span class="n">B</span><span class="p">()</span>
 
-fun main() {
-    val c = C()
-}
-</pre>
+<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="k">val</span> <span class="py">c</span> <span class="p">=</span> <span class="n">C</span><span class="p">()</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 
 <p>Let's break this down, line by line</p>
 
@@ -511,11 +555,18 @@ fun main() {
 
 <p>A JavaBean property is defined by one or two methods in a Java class:</p>
 
-<pre mode="java" theme="darcula" lines="true" match-brackets="true">
-// JAVA CODE
-public String getFirstName() { ... }
-public void setFirstName(String firstName) { ... }
-</pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// JAVA CODE
+</span><span class="c1"></span><span class="kd">public</span> <span class="n">String</span> <span class="nf">getFirstName</span><span class="o">()</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setFirstName</span><span class="o">(</span><span class="n">String</span> <span class="n">firstName</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span></code></pre></td></tr></table>
+</div>
+</div>
 
 <ul>
 <li>If <em>only</em> a <code>get</code> method exists, we're defining a read-only property. For example, if we only had <code>getFirstName()</code> we're defining a read-only property called <code>firstName</code> (note the case.)</li>
@@ -531,19 +582,34 @@ public void setFirstName(String firstName) { ... }
 
 <p>Kotlin fixes this by introducing properties as first-class language constructs.</p>
 
-<pre theme="darcula" lines="true" match-brackets="true">
-class A {
-    var firstName : String = "no first name"
-    var lastName = "no last name"
-}
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">A</span> <span class="p">{</span>
+	<span class="k">var</span> <span class="py">firstName</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;no first name&#34;</span>
+	<span class="k">var</span> <span class="py">lastName</span> <span class="p">=</span> <span class="s">&#34;no last name&#34;</span>
+<span class="p">}</span>
 
-fun main() {
-    val a = A()
-    println(a.firstName)    
-    a.firstName = "Scott"
-    println(a.firstName)    
-}
-</pre>
+<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="k">val</span> <span class="py">a</span> <span class="p">=</span> <span class="n">A</span><span class="p">()</span>
+	<span class="n">println</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">firstName</span><span class="p">)</span>	
+	<span class="n">a</span><span class="p">.</span><span class="n">firstName</span> <span class="p">=</span> <span class="s">&#34;Scott&#34;</span>
+	<span class="n">println</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">firstName</span><span class="p">)</span>	
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 
 <p>Adding <code>var</code> and <code>val</code> definitions inside a class or interface defines a property. <code>var</code> properties are read/write (you can modify them), and <code>val</code> properties are read-only (you cannot modify them).</p>
 
@@ -597,23 +663,39 @@ fun main() {
 
 <h3 id="using-kotlin-properties-from-java-code">Using Kotlin Properties From Java Code</h3>
 
-<p>Kotlin has excellent interoperaility with Java. If we defined a Kotlin class</p>
+<p>Kotlin has excellent interoperability with Java. If we defined a Kotlin class</p>
 
-<pre theme="darcula" lines="true" match-brackets="true" data-highlight-only>
-class A {
-    var firstName : String = "no first name"
-    var lastName = "no last name"
-}
-</pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">A</span> <span class="p">{</span>
+	<span class="k">var</span> <span class="py">firstName</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;no first name&#34;</span>
+	<span class="k">var</span> <span class="py">lastName</span> <span class="p">=</span> <span class="s">&#34;no last name&#34;</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 
 <p>we could access it from Java as</p>
 
-<pre mode="java" theme="darcula" lines="true" match-brackets="true">
-// JAVA CODE
-A a = new A();
-a.setFirstName("Scott"));
-System.out.println(a.getFirstName());
-</pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// JAVA CODE
+</span><span class="c1"></span><span class="n">A</span> <span class="n">a</span> <span class="o">=</span> <span class="k">new</span> <span class="n">A</span><span class="o">();</span>
+<span class="n">a</span><span class="o">.</span><span class="na">setFirstName</span><span class="o">(</span><span class="s">&#34;Scott&#34;</span><span class="o">));</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a</span><span class="o">.</span><span class="na">getFirstName</span><span class="o">());</span></code></pre></td></tr></table>
+</div>
+</div>
 
 <p>Behind the scenes, Kotlin creates a class file to run in the Java Virtual Machine, and this class file contains <code>get</code> and <code>set</code> methods for each read/write property, or just <code>get</code> methods for read-only properties.</p>
 
@@ -623,28 +705,49 @@ System.out.println(a.getFirstName());
 
 <p>Remember that JavaBean properties are defined <em>solely on the presence of <code>get</code> and <code>set</code> methods</em>. The implementation of those methods does not matter. However, we typically need to store a value when <code>set</code> is called and return it when <code>get</code> is called. For example:</p>
 
-<pre mode="java" theme="darcula" lines="true" match-brackets="true">
-// JAVA CODE
-class Foo {
-    private String name;
-    public String getName() {
-        return this.name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-}
-</pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// JAVA CODE
+</span><span class="c1"></span><span class="kd">class</span> <span class="nc">Foo</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">name</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+	<span class="o">}</span>
+<span class="o">}</span></code></pre></td></tr></table>
+</div>
+</div>
 
 <p>Note the field <code>name</code> in this example. It's a field in the class that's hidden from anything outside of class Foo. The property defined by <code>getName</code> and <code>setName</code> uses the <code>name</code> field to store the property value.</p>
 
 <p>Kotlin properties can automatically create a behind-the-scenes field just like this. For example, when you write</p>
 
-<pre theme="darcula" lines="true" match-brackets="true" data-highlight-only>
-class Foo {
-    var name : String = "no name"
-}
-</pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
+	<span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;no name&#34;</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 
 <p>the Kotlin compiler generates a <code>get</code> and <code>set</code> function for us (note that Kotlin uses the name &quot;function&quot; for what we would call a &quot;method&quot; in Java), and a &quot;backing field&quot; to hold the value of the <code>name</code> property.</p>
 
@@ -652,88 +755,159 @@ class Foo {
 
 <p>In Java, we might define a <code>get</code> method that computes a value (often called a &quot;derived property&quot;) or returns a literal value. For example</p>
 
-<pre mode="java" theme="darcula" lines="true" match-brackets="true">
-// JAVA CODE
-class Foo {
-    public String getName() {
-        return "Scott";
-    }
-}
-</pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// JAVA CODE
+</span><span class="c1"></span><span class="kd">class</span> <span class="nc">Foo</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="s">&#34;Scott&#34;</span><span class="o">;</span>
+	<span class="o">}</span>
+<span class="o">}</span></code></pre></td></tr></table>
+</div>
+</div>
 
 <p>In this case, we don't need a field to store the value.</p>
 
 <p>If we do something like the following in Kotlin</p>
 
-<pre theme="darcula" lines="true" match-brackets="true" data-highlight-only>
-class Foo {
-    val name : String = "no name"
-       // NOTE: a "val" property, so only defines a getter!
-}
-</pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
+	<span class="k">val</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;no name&#34;</span>
+	   <span class="c1">// NOTE: a &#34;val&#34; property, so only defines a getter!
+</span><span class="c1"></span><span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 
 <p>It <em>initializes</em> the backing field to &quot;no name&quot; and returns it whenever the property is accessed.</p>
 
 <p>If we want the equivalent of that literal-value <code>get</code> method in Java, we need to explicitly define what the <code>get</code> function in Kotlin would look like. We do this as follows:</p>
 
-<pre theme="darcula" lines="true" match-brackets="true" data-highlight-only>
-class Foo {
-    val name : String
-        get() {
-            return "no name"
-        }
-}
-</pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
+	<span class="k">val</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span>
+		<span class="k">get</span><span class="p">()</span> <span class="p">{</span>
+			<span class="k">return</span> <span class="s">&#34;no name&#34;</span>
+		<span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 
 <p>In this case, because we explicitly define the get() function, and do not mention the backing field, no backing field is defined.</p>
 
 <p>So how do we explicitly mention the backing field? We use the <code>field</code> keyword. For example:</p>
 
-<pre theme="darcula" lines="true" match-brackets="true" data-highlight-only>
-class Foo {
-    val name : String = "no name"
-        get() {
-            return field
-        }
-}
-</pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
+	<span class="k">val</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;no name&#34;</span>
+		<span class="k">get</span><span class="p">()</span> <span class="p">{</span>
+			<span class="k">return</span> <span class="n">field</span>
+		<span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 
 <p>This example is pretty silly; we're explicitly defining the default behavior of a read-only property. It's more interesting if we want to modify the behavior. For example, we could print or log a message whenever the field is requested</p>
 
-<pre theme="darcula" lines="true" match-brackets="true" data-highlight-only>
-class Foo {
-    val name : String = "no name"
-        get() {
-            println("name requested!")
-            return field
-        }
-}
-</pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
+	<span class="k">val</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;no name&#34;</span>
+		<span class="k">get</span><span class="p">()</span> <span class="p">{</span>
+			<span class="n">println</span><span class="p">(</span><span class="s">&#34;name requested!&#34;</span><span class="p">)</span>
+			<span class="k">return</span> <span class="n">field</span>
+		<span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 
 <p>Or more usefully, do something when a value is set. For example, suppose we wanted to ensure a Doctor was always called &quot;Dr.&quot;:</p>
 
-<pre theme="darcula" lines="true" match-brackets="true">
-class Doctor {
-    var name : String = "Dr. Nobody"
-        set(value) {
-            if (!value.startsWith("Dr. ")) {
-                field = "Dr. " + value
-            } else {
-                field = value
-            }
-        }
-}
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">Doctor</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;Dr. Nobody&#34;</span>
+        <span class="k">set</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(!</span><span class="n">value</span><span class="p">.</span><span class="n">startsWith</span><span class="p">(</span><span class="s">&#34;Dr. &#34;</span><span class="p">))</span> <span class="p">{</span>
+                <span class="n">field</span> <span class="p">=</span> <span class="s">&#34;Dr. &#34;</span> <span class="p">+</span> <span class="n">value</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="n">field</span> <span class="p">=</span> <span class="n">value</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+<span class="p">}</span>
 
-fun main() {
-    val doc = Doctor()
-    doc.name = "Scott"
-    println(doc.name)
-}
-</pre>
+<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">doc</span> <span class="p">=</span> <span class="n">Doctor</span><span class="p">()</span>
+    <span class="n">doc</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="s">&#34;Scott&#34;</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">doc</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 
 <p>(NOTE: There are some much more &quot;Kotlin-y&quot; ways to write the body of that <code>set</code> function, but I wanted to keep it closer to Java until we get to those concepts and idioms)</p>
 
-<p>Here we're explictly defining a <code>set</code> function for the <code>name</code> property. We look at the value passed in (the type of <code>value</code> is inferred to be <code>String</code>, the same as the type of the property), and if it doesn't call me a &quot;Dr.&quot; (which I am not; you can just call me &quot;Scott&quot;) it prepends &quot;Dr.&quot;&quot; when setting the value in the backing field.</p>
+<p>(ALSO NOTE: Before you comment on it, we would have been better off modifying the <code>get</code> instead of the <code>set</code>. I just wanted to demonstrate what the <code>set</code> would look like…)</p>
+
+<p>Here we're explicitly defining a <code>set</code> function for the <code>name</code> property. We look at the value passed in (the type of <code>value</code> is inferred to be <code>String</code>, the same as the type of the property), and if it doesn't call me a &quot;Dr.&quot; (which I am not; you can just call me &quot;Scott&quot;) it prepends &quot;Dr.&quot;&quot; when setting the value in the backing field.</p>
 
 <p>We're not defining the <code>get</code> function so we get its default behavior.</p>
 
@@ -751,19 +925,34 @@ fun main() {
 
 <p>Let's take a look at how we can pass in a name to a <code>Person</code> instance when creating it.</p>
 
-<pre theme="darcula" lines="true" match-brackets="true">
-class Person(name : String) {
-    var name : String = "No Name"
-    init {
-        this.name = name
-    }
-}
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span>
+    <span class="n">init</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-fun main() {
-    val person = Person("Scott")
-    println(person.name)
-}
-</pre>
+<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">person</span> <span class="p">=</span> <span class="n">Person</span><span class="p">(</span><span class="s">&#34;Scott&#34;</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">person</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 
 <p>Let's look at this example line-by-line</p>
 
@@ -804,46 +993,85 @@ fun main() {
 
 <p>You can define alternative constructors. For example, if we wanted to be able to skip passing in a value for the name we could define the following</p>
 
-<pre theme="darcula" lines="true" match-brackets="true">
-class Person(name : String) {
-    var name : String = "No Name"
-    constructor() : this("No Name")
-    init {
-        this.name = name
-    }
-}
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span>
+    <span class="k">constructor</span><span class="p">()</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="s">&#34;No Name&#34;</span><span class="p">)</span>
+    <span class="n">init</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-fun main() {
-    val person = Person("Scott")
-    println(person.name)
-    val person2 = Person()
-    println(person2.name)
-}
-</pre>
+<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">person</span> <span class="p">=</span> <span class="n">Person</span><span class="p">(</span><span class="s">&#34;Scott&#34;</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">person</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">val</span> <span class="py">person2</span> <span class="p">=</span> <span class="n">Person</span><span class="p">()</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">person2</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 
 <p>On line 3 we're defining a <em>secondary constructor</em> that calls the primary constructor passing in &quot;No Name&quot;. You can have any number of secondary constructors.</p>
 
 <p>If you have defined a <em>primary constructor</em>, <strong>all</strong> <em>secondary constructors</em> must directly or indirectly call it by using the <code>constructor(...) : this(...)</code> syntax. For example:</p>
 
-<pre theme="darcula" lines="true" match-brackets="true">
-class Person(name : String) {
-    var name : String = "No Name"
-    constructor(n : Int) : this("No Name " + n)
-    constructor() : this(42)
-    init {
-        this.name = name
-    }
-}
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span>
+    <span class="k">constructor</span><span class="p">(</span><span class="n">n</span> <span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="s">&#34;No Name &#34;</span> <span class="p">+</span> <span class="n">n</span><span class="p">)</span>
+    <span class="k">constructor</span><span class="p">()</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="m">42</span><span class="p">)</span>
+    <span class="n">init</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-fun main() {
-    val person = Person("Scott")
-    println(person.name)
-    val person2 = Person()
-    println(person2.name)
-    val person3 = Person(10)
-    println(person3.name)
-}
-</pre>
+<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">person</span> <span class="p">=</span> <span class="n">Person</span><span class="p">(</span><span class="s">&#34;Scott&#34;</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">person</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">val</span> <span class="py">person2</span> <span class="p">=</span> <span class="n">Person</span><span class="p">()</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">person2</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">val</span> <span class="py">person3</span> <span class="p">=</span> <span class="n">Person</span><span class="p">(</span><span class="m">10</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">person3</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 
 <p>This time, line 3 defines a secondary that takes an <code>Int</code> (similar to Java's primitive <code>int</code> behind the scenes, but treated like an object in code) and appends it after &quot;No Name&quot; before passing it to the primary constructor.</p>
 
@@ -855,80 +1083,148 @@ fun main() {
 
 <p>If you only need to call the primary constructor from a subclass, things are pretty simple:</p>
 
-<pre theme="darcula" lines="true" match-brackets="true">
-open class Person(name : String) {
-    var name : String = "No Name"
-    init {
-        this.name = name
-    }
-}
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span>
+    <span class="n">init</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-class Student(name : String) : Person(name)
+<span class="k">class</span> <span class="nc">Student</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">:</span> <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
 
-fun main() {
-    val student = Student("Scott")
-    println(student.name)
-}
-</pre>
+<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">student</span> <span class="p">=</span> <span class="n">Student</span><span class="p">(</span><span class="s">&#34;Scott&#34;</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 
 <p>Note that <code>Person</code> is defined as <code>open</code> so we can create subclasses, and has a primary constructor. We call that primary constructor on line 8, right after the superclass name, passing in the value passed to the primary constructor of Student. Student can do more than that, of course. For example:</p>
 
-<pre theme="darcula" lines="true" match-brackets="true">
-open class Person(name : String) {
-    var name : String = "No Name"
-    init {
-        this.name = name
-    }
-}
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span>
+    <span class="n">init</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-class Student(name : String, gpa : Float) : Person(name) {
-    var gpa : Float = 0F
-    init {
-        this.gpa = gpa
-    }
-}
+<span class="k">class</span> <span class="nc">Student</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">gpa</span> <span class="p">:</span> <span class="n">Float</span><span class="p">)</span> <span class="p">:</span> <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">var</span> <span class="py">gpa</span> <span class="p">:</span> <span class="n">Float</span> <span class="p">=</span> <span class="m">0F</span>
+	<span class="n">init</span> <span class="p">{</span>
+		<span class="k">this</span><span class="p">.</span><span class="n">gpa</span> <span class="p">=</span> <span class="n">gpa</span>
+	<span class="p">}</span>
+<span class="p">}</span>
 
-fun main() {
-    val student = Student("Scott", 3.99F) // Sooooo close...
-    println(student.name)
-    println(student.gpa)
-}
-</pre>
+<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">student</span> <span class="p">=</span> <span class="n">Student</span><span class="p">(</span><span class="s">&#34;Scott&#34;</span><span class="p">,</span> <span class="m">3.99F</span><span class="p">)</span> <span class="c1">// Sooooo close...
+</span><span class="c1"></span>    <span class="n">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">gpa</span><span class="p">)</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 
 <p>Things get a little trickier if you want to call secondary constructors in a superclass. In that case, <em>you cannot define a primary constructor in the subclass</em>. If you define a primary constructor, <em>all</em> secondary constructors must call it, which doesn't give us the choice of which super constructor to call... Here's an example:</p>
 
-<pre theme="darcula" lines="true" match-brackets="true">
-open class Person(name : String) {
-    constructor() : this("No Name")
-    var name : String = "No Name"
-    init {
-        this.name = name
-    }
-}
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">constructor</span><span class="p">()</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="s">&#34;No Name&#34;</span><span class="p">)</span>
+    <span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span>
+    <span class="n">init</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-class Student : Person {
-    constructor() : super()
-    constructor(name : String) : super(name)
-    var gpa : Float = 0F
-}
+<span class="k">class</span> <span class="nc">Student</span> <span class="p">:</span> <span class="n">Person</span> <span class="p">{</span>
+    <span class="k">constructor</span><span class="p">()</span> <span class="p">:</span> <span class="k">super</span><span class="p">()</span>
+    <span class="k">constructor</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">:</span> <span class="k">super</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">var</span> <span class="py">gpa</span> <span class="p">:</span> <span class="n">Float</span> <span class="p">=</span> <span class="m">0F</span>
+<span class="p">}</span>
 
-fun main() {
-    val student = Student("Scott")
-    student.gpa = 3.99F
-    val student2 = Student()
-    student2.gpa = 3.50F
-    println(student.name)
-    println(student.gpa)
-    println(student2.name)
-    println(student2.gpa)
-}
-</pre>
+<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">student</span> <span class="p">=</span> <span class="n">Student</span><span class="p">(</span><span class="s">&#34;Scott&#34;</span><span class="p">)</span>
+    <span class="n">student</span><span class="p">.</span><span class="n">gpa</span> <span class="p">=</span> <span class="m">3.99F</span>
+    <span class="k">val</span> <span class="py">student2</span> <span class="p">=</span> <span class="n">Student</span><span class="p">()</span>
+    <span class="n">student2</span><span class="p">.</span><span class="n">gpa</span> <span class="p">=</span> <span class="m">3.50F</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">gpa</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">student2</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">student2</span><span class="p">.</span><span class="n">gpa</span><span class="p">)</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 
 <p>So we can pick and choose which superclass constructors are called, but this makes it impossible to pass the gpa to a student constructor and assign it! Time to start looking at better ways to write the code we've been seeing...</p>
 
 <h2 id="simplifying-constructors">Simplifying Constructors</h2>
 
-<p>Let's introduce some new concepts that can make constuctors much simpler...</p>
+<p>Let's introduce some new concepts that can make constructors much simpler...</p>
 
 <h3 id="default-parameter-values">Default Parameter Values</h3>
 
@@ -936,53 +1232,101 @@ fun main() {
 
 <p>Most of the time, we define alternate constructors just to provide default values or different subsets of parameters. Let's start by defining a primary constructor for Person that takes the <code>name</code> and gives it a default value.</p>
 
-<pre theme="darcula" lines="true" match-brackets="true">
-open class Person(name : String = "No Name") {
-    var name : String = "No Name"
-    init {
-        this.name = name
-    }
-}
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span>
+    <span class="n">init</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-fun main() {
-    val person1 = Person()
-    val person2 = Person("Scott")
-    println(person1.name)
-    println(person2.name)
-}
-</pre>
+<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">person1</span> <span class="p">=</span> <span class="n">Person</span><span class="p">()</span>
+    <span class="k">val</span> <span class="py">person2</span> <span class="p">=</span> <span class="n">Person</span><span class="p">(</span><span class="s">&#34;Scott&#34;</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">person1</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">person2</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 
 <p>Now we can create a <code>Person</code> with or without a name using the same constructor. Let's add the <code>Student</code> subclass:</p>
 
-<pre theme="darcula" lines="true" match-brackets="true">
-open class Person(name : String = "No Name") {
-    var name : String = "No Name"
-    init {
-        this.name = name
-    }
-}
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span>
+    <span class="n">init</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-class Student(gpa : Float, name : String = "No Name") : Person(name) {
-    var gpa : Float = 0F
-    init {
-        this.gpa = gpa
-    }
-}
+<span class="k">class</span> <span class="nc">Student</span><span class="p">(</span><span class="n">gpa</span> <span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span><span class="p">)</span> <span class="p">:</span> <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="py">gpa</span> <span class="p">:</span> <span class="n">Float</span> <span class="p">=</span> <span class="m">0F</span>
+    <span class="n">init</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="n">gpa</span> <span class="p">=</span> <span class="n">gpa</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-fun main() {
-    val person1 = Person()
-    val person2 = Person("Scott")
-    println(person1.name)
-    println(person2.name)
+<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">person1</span> <span class="p">=</span> <span class="n">Person</span><span class="p">()</span>
+    <span class="k">val</span> <span class="py">person2</span> <span class="p">=</span> <span class="n">Person</span><span class="p">(</span><span class="s">&#34;Scott&#34;</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">person1</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">person2</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
 
-    val student = Student(3.99F, "Scott")
-    val student2 = Student(3.5F)
-    println(student.name)
-    println(student.gpa)
-    println(student2.name)
-    println(student2.gpa)
-}
-</pre>
+    <span class="k">val</span> <span class="py">student</span> <span class="p">=</span> <span class="n">Student</span><span class="p">(</span><span class="m">3.99F</span><span class="p">,</span> <span class="s">&#34;Scott&#34;</span><span class="p">)</span>
+    <span class="k">val</span> <span class="py">student2</span> <span class="p">=</span> <span class="n">Student</span><span class="p">(</span><span class="m">3.5F</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">gpa</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">student2</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">student2</span><span class="p">.</span><span class="n">gpa</span><span class="p">)</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 
 <p>Now we're able to require the GPA in the <code>Student</code> constructor! Note that parameters with default values must appear <em>after</em> any parameters that <em>do not</em> have default values... Unless...</p>
 
@@ -990,73 +1334,137 @@ fun main() {
 
 <p>Kotlin allows you to explicitly name your parameters when calling a function or constructor. For example:</p>
 
-<pre theme="darcula" lines="true" match-brackets="true">
-open class Person(name : String = "No Name") {
-    var name : String = "No Name"
-    init {
-        this.name = name
-    }
-}
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span>
+    <span class="n">init</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-class Student(gpa : Float, name : String = "No Name") : Person(name) {
-    var gpa : Float = 0F
-    init {
-        this.gpa = gpa
-    }
-}
+<span class="k">class</span> <span class="nc">Student</span><span class="p">(</span><span class="n">gpa</span> <span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span><span class="p">)</span> <span class="p">:</span> <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="py">gpa</span> <span class="p">:</span> <span class="n">Float</span> <span class="p">=</span> <span class="m">0F</span>
+    <span class="n">init</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="n">gpa</span> <span class="p">=</span> <span class="n">gpa</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-//sampleStart
-fun main() {
-    val person1 = Person()
-    val person2 = Person(name="Scott")
-    println(person1.name)
-    println(person2.name)
+<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">person1</span> <span class="p">=</span> <span class="n">Person</span><span class="p">()</span>
+    <span class="k">val</span> <span class="py">person2</span> <span class="p">=</span> <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="p">=</span><span class="s">&#34;Scott&#34;</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">person1</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">person2</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
 
-    val student = Student(3.99F, name="Scott")
-    val student2 = Student(3.5F)
-    println(student.name)
-    println(student.gpa)
-    println(student2.name)
-    println(student2.gpa)
-}
-//sampleEnd
-</pre>
+    <span class="k">val</span> <span class="py">student</span> <span class="p">=</span> <span class="n">Student</span><span class="p">(</span><span class="m">3.99F</span><span class="p">,</span> <span class="n">name</span><span class="p">=</span><span class="s">&#34;Scott&#34;</span><span class="p">)</span>
+    <span class="k">val</span> <span class="py">student2</span> <span class="p">=</span> <span class="n">Student</span><span class="p">(</span><span class="m">3.5F</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">gpa</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">student2</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">student2</span><span class="p">.</span><span class="n">gpa</span><span class="p">)</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 
 <p>This also allows us to specify parameters out of order, or even define default-valued parameters before non-default-valued parameters:</p>
 
-<pre theme="darcula" lines="true" match-brackets="true">
-open class Person(name : String = "No Name") {
-    var name : String = "No Name"
-    init {
-        this.name = name
-    }
-}
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span>
+    <span class="n">init</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-// NOTE PARAMETER ORDER CHANGE!!!
-class Student(name : String = "No Name", gpa : Float) : Person(name) { 
-    var gpa : Float = 0F
-    init {
-        this.gpa = gpa
-    }
-}
+<span class="c1">// NOTE PARAMETER ORDER CHANGE!!!
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Student</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span><span class="p">,</span> <span class="n">gpa</span> <span class="p">:</span> <span class="n">Float</span><span class="p">)</span> <span class="p">:</span> <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="p">{</span> 
+    <span class="k">var</span> <span class="py">gpa</span> <span class="p">:</span> <span class="n">Float</span> <span class="p">=</span> <span class="m">0F</span>
+    <span class="n">init</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="n">gpa</span> <span class="p">=</span> <span class="n">gpa</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-fun main() {
-    val person1 = Person()
-    val person2 = Person("Scott")
-    println(person1.name)
-    println(person2.name)
+<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">person1</span> <span class="p">=</span> <span class="n">Person</span><span class="p">()</span>
+    <span class="k">val</span> <span class="py">person2</span> <span class="p">=</span> <span class="n">Person</span><span class="p">(</span><span class="s">&#34;Scott&#34;</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">person1</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">person2</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
 
-    val student = Student("Scott", 3.99F) // ordered
-    val student2 = Student(gpa=3.5F) // named
-    val student3 = Student(gpa=3.99F, name="Scott") // different order!
-    println(student.name)
-    println(student.gpa)
-    println(student2.name)
-    println(student2.gpa)
-    println(student3.name)
-    println(student3.gpa)
-}
-</pre>
+    <span class="k">val</span> <span class="py">student</span> <span class="p">=</span> <span class="n">Student</span><span class="p">(</span><span class="s">&#34;Scott&#34;</span><span class="p">,</span> <span class="m">3.99F</span><span class="p">)</span> <span class="c1">// ordered
+</span><span class="c1"></span>    <span class="k">val</span> <span class="py">student2</span> <span class="p">=</span> <span class="n">Student</span><span class="p">(</span><span class="n">gpa</span><span class="p">=</span><span class="m">3.5F</span><span class="p">)</span> <span class="c1">// named
+</span><span class="c1"></span>    <span class="k">val</span> <span class="py">student3</span> <span class="p">=</span> <span class="n">Student</span><span class="p">(</span><span class="n">gpa</span><span class="p">=</span><span class="m">3.99F</span><span class="p">,</span> <span class="n">name</span><span class="p">=</span><span class="s">&#34;Scott&#34;</span><span class="p">)</span> <span class="c1">// different order!
+</span><span class="c1"></span>    <span class="n">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">gpa</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">student2</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">student2</span><span class="p">.</span><span class="n">gpa</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">student3</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">student3</span><span class="p">.</span><span class="n">gpa</span><span class="p">)</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 
 <p>Let's look at a few lines in particular</p>
 
@@ -1097,16 +1505,28 @@ fun main() {
 
 <p>A really nice optimization is that property initializers have access to primary constructor parameters. This eliminates the need for many <code>init</code> blocks, as they often just initialize properties.</p>
 
-<pre theme="darcula" lines="true" match-brackets="true" data-highlight-only>
-open class Person(name : String = "No Name") {
-    var name : String = name // direct access to primary constructor parameter
-}
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="n">name</span> <span class="c1">// direct access to primary constructor parameter
+</span><span class="c1"></span><span class="p">}</span>
 
-// NOTE PARAMETER ORDER CHANGE!!!
-class Student(name : String = "No Name", gpa : Float) : Person(name) { 
-    var gpa : Float = gpa // direct access to primary constructor parameter
-}
-</pre>
+<span class="c1">// NOTE PARAMETER ORDER CHANGE!!!
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Student</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span><span class="p">,</span> <span class="n">gpa</span> <span class="p">:</span> <span class="n">Float</span><span class="p">)</span> <span class="p">:</span> <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="p">{</span> 
+    <span class="k">var</span> <span class="py">gpa</span> <span class="p">:</span> <span class="n">Float</span> <span class="p">=</span> <span class="n">gpa</span> <span class="c1">// direct access to primary constructor parameter
+</span><span class="c1"></span><span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 
 <p>Wow! Code reduction! Love it!</p>
 
@@ -1116,11 +1536,18 @@ class Student(name : String = "No Name", gpa : Float) : Person(name) {
 
 <p>Here's one of my favorite things about Kotlin. If your constructor is passing in values that are directly used to initialize properties, you can define the properties <em>directly</em> in the constructor. It's easiest to understand this in an example...</p>
 
-<pre theme="darcula" lines="true" match-brackets="true" data-highlight-only>
-open class Person(var name : String = "No Name")
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span><span class="p">)</span>
 
-class Student(name : String = "No Name", var gpa : Float) : Person(name)
-</pre>
+<span class="k">class</span> <span class="nc">Student</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span><span class="p">,</span> <span class="k">var</span> <span class="py">gpa</span> <span class="p">:</span> <span class="n">Float</span><span class="p">)</span> <span class="p">:</span> <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
 
 <p>Check out the terseness, but still <em>very</em> readable. (I'd say even more readable now, as you no longer have the duplication and required explicit association of the constructor parameters and properties.)</p>
 
@@ -1147,54 +1574,98 @@ class Student(name : String = "No Name", var gpa : Float) : Person(name)
 
 <p>For example, let's define a <code>Section</code> class that defines text in a document that may have a header and footer:</p>
 
-<pre theme="darcula" lines="true" match-brackets="true" data-highlight-only>
-open class Section(
-    val text : String, 
-    val header : String = "", 
-    val footer : String = "")
-</pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Section</span><span class="p">(</span>
+	<span class="k">val</span> <span class="py">text</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span> 
+	<span class="k">val</span> <span class="py">header</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;&#34;</span><span class="p">,</span> 
+	<span class="k">val</span> <span class="py">footer</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
 
 <p>I'd like to impose a restriction such that if we specify a header or footer, the other must also be specified.</p>
 
 <p>We could add a check in the intializer...</p>
 
-<pre theme="darcula" lines="true" match-brackets="true">
-open class Section(
-    val text : String, 
-    val header : String = "", 
-    val footer : String = "") {
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Section</span><span class="p">(</span>
+	<span class="k">val</span> <span class="py">text</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span> 
+	<span class="k">val</span> <span class="py">header</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;&#34;</span><span class="p">,</span> 
+	<span class="k">val</span> <span class="py">footer</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;&#34;</span><span class="p">)</span> <span class="p">{</span>
 
-    init {
-        if (header.isEmpty() != footer.isEmpty()) {
-            throw IllegalArgumentException("Header and Footer must both be specified, or neither specified")
-        }
-    }
-}
+	<span class="n">init</span> <span class="p">{</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">header</span><span class="p">.</span><span class="n">isEmpty</span><span class="p">()</span> <span class="p">!=</span> <span class="n">footer</span><span class="p">.</span><span class="n">isEmpty</span><span class="p">())</span> <span class="p">{</span>
+			<span class="k">throw</span> <span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&#34;Header and Footer must both be specified, or neither specified&#34;</span><span class="p">)</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+<span class="p">}</span>
 
-fun main() {
-    val section = Section("Some text", "Section 1")
-}
-</pre>
+<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="k">val</span> <span class="py">section</span> <span class="p">=</span> <span class="n">Section</span><span class="p">(</span><span class="s">&#34;Some text&#34;</span><span class="p">,</span> <span class="s">&#34;Section 1&#34;</span><span class="p">)</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 
-<p>Try running this and we'll get the exception.</p>
+<p>If you run this, you'll get the IllegalArgumentException.</p>
 
 <p>But... I really prefer to catch things at compile-time when possible. So I'd really like to have constructors that either require <em>neither</em> header nor footer, <em>or both</em> header and footer. So we add a secondary constructor and tweak the primary:</p>
 
-<pre theme="darcula" lines="true" match-brackets="true">
-open class Section(
-    val text : String, 
-    val header : String, 
-    val footer : String) {
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Section</span><span class="p">(</span>
+	<span class="k">val</span> <span class="py">text</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span> 
+	<span class="k">val</span> <span class="py">header</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span> 
+	<span class="k">val</span> <span class="py">footer</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
 
-    constructor(text : String) : this(text, "", "")
-}
+	<span class="k">constructor</span><span class="p">(</span><span class="n">text</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">)</span>
+<span class="p">}</span>
 
-fun main() {
-    val section1 = Section("Some text")
-    val section2 = Section("Some text", "Section 1", "End of Section 1")
-    val section3 = Section("Some text", "Section 1") // will not compile
-}
-</pre>
+<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="k">val</span> <span class="py">section1</span> <span class="p">=</span> <span class="n">Section</span><span class="p">(</span><span class="s">&#34;Some text&#34;</span><span class="p">)</span>
+	<span class="k">val</span> <span class="py">section2</span> <span class="p">=</span> <span class="n">Section</span><span class="p">(</span><span class="s">&#34;Some text&#34;</span><span class="p">,</span> <span class="s">&#34;Section 1&#34;</span><span class="p">,</span> <span class="s">&#34;End of Section 1&#34;</span><span class="p">)</span>
+	<span class="k">val</span> <span class="py">section3</span> <span class="p">=</span> <span class="n">Section</span><span class="p">(</span><span class="s">&#34;Some text&#34;</span><span class="p">,</span> <span class="s">&#34;Section 1&#34;</span><span class="p">)</span> <span class="c1">// will not compile
+</span><span class="c1"></span><span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 
 <p>Our primary constructor now requires both header and footer, and the secondary only requires the text, passing the default values to the primary. Perfect!</p>
 
@@ -1202,81 +1673,156 @@ fun main() {
 
 <p>Let's create a very-poorly-designed class to represent a location (very-poorly-designed because we should use inheritance [and later, Kotlin's sealed classes!]). Start with</p>
 
-<pre theme="darcula" lines="true" match-brackets="true" data-highlight-only>
-open class Location(
-    val lat : Double,
-    val lon : Double,
-    val street : String,
-    val city : String,
-    val state : String,
-    val zip : String)
-</pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Location</span><span class="p">(</span>
+	<span class="k">val</span> <span class="py">lat</span> <span class="p">:</span> <span class="n">Double</span><span class="p">,</span>
+	<span class="k">val</span> <span class="py">lon</span> <span class="p">:</span> <span class="n">Double</span><span class="p">,</span>
+	<span class="k">val</span> <span class="py">street</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+	<span class="k">val</span> <span class="py">city</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+	<span class="k">val</span> <span class="py">state</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+	<span class="k">val</span> <span class="py">zip</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
 
 <p>Here we want to have <em>either</em> lat/lon, <em>or</em> street/city/state/zip. (Yes... this is crazy gross, but I'm tired and this demonstrates the concept and my brain won't think of another example right now so there).</p>
 
 <p>So we try</p>
 
-<pre theme="darcula" lines="true" match-brackets="true">
-open class Location(
-    val lat : Double,
-    val lon : Double,
-    val street : String,
-    val city : String,
-    val state : String,
-    val zip : String) {
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Location</span><span class="p">(</span>
+	<span class="k">val</span> <span class="py">lat</span> <span class="p">:</span> <span class="n">Double</span><span class="p">,</span>
+	<span class="k">val</span> <span class="py">lon</span> <span class="p">:</span> <span class="n">Double</span><span class="p">,</span>
+	<span class="k">val</span> <span class="py">street</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+	<span class="k">val</span> <span class="py">city</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+	<span class="k">val</span> <span class="py">state</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+	<span class="k">val</span> <span class="py">zip</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
 
-    constructor(lat : Double, lon : Double) : this(lat, lon, "", "", "", "")
-    constructor(
-        street : String,
-        city : String,
-        state : String,
-        zip : String) : this(0.0, 0.0, street, city, state, zip)
-}
+	<span class="k">constructor</span><span class="p">(</span><span class="n">lat</span> <span class="p">:</span> <span class="n">Double</span><span class="p">,</span> <span class="n">lon</span> <span class="p">:</span> <span class="n">Double</span><span class="p">)</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">)</span>
+	<span class="k">constructor</span><span class="p">(</span>
+		<span class="n">street</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+		<span class="n">city</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+		<span class="n">state</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+		<span class="n">zip</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="m">0.0</span><span class="p">,</span> <span class="m">0.0</span><span class="p">,</span> <span class="n">street</span><span class="p">,</span> <span class="n">city</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">zip</span><span class="p">)</span>
+<span class="p">}</span>
 
-fun main() {
-    // good
-    val location1 = Location(39.149810, -76.911257)
-        // (sing it with me... "My Harris Teeter")
+<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="c1">// good
+</span><span class="c1"></span>	<span class="k">val</span> <span class="py">location1</span> <span class="p">=</span> <span class="n">Location</span><span class="p">(</span><span class="m">39.149810</span><span class="p">,</span> <span class="p">-</span><span class="m">76.911257</span><span class="p">)</span>
+		<span class="c1">// (sing it with me... &#34;My Harris Teeter&#34;)
+</span><span class="c1"></span>
+	<span class="c1">// good
+</span><span class="c1"></span>	<span class="k">val</span> <span class="py">location2</span> <span class="p">=</span> <span class="n">Location</span><span class="p">(</span><span class="s">&#34;123 Sesame St&#34;</span><span class="p">,</span> <span class="s">&#34;New York&#34;</span><span class="p">,</span> <span class="s">&#34;NY&#34;</span><span class="p">,</span> <span class="s">&#34;10001&#34;</span><span class="p">)</span>
 
-    // good
-    val location2 = Location("123 Sesame St", "New York", "NY", "10001")
-
-    // uh oh...
-    val location3 = Location(39.149810, -76.911257, "123 Sesame St", "New York", "NY", "10001")
-}
-</pre>
+	<span class="c1">// uh oh...
+</span><span class="c1"></span>	<span class="k">val</span> <span class="py">location3</span> <span class="p">=</span> <span class="n">Location</span><span class="p">(</span><span class="m">39.149810</span><span class="p">,</span> <span class="p">-</span><span class="m">76.911257</span><span class="p">,</span> <span class="s">&#34;123 Sesame St&#34;</span><span class="p">,</span> <span class="s">&#34;New York&#34;</span><span class="p">,</span> <span class="s">&#34;NY&#34;</span><span class="p">,</span> <span class="s">&#34;10001&#34;</span><span class="p">)</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 
 <p>The primary constructor is <code>public</code> by default. In this case, we really don't want that. So let's make it private.</p>
 
-<pre theme="darcula" lines="true" match-brackets="true">
-open class Location private constructor(
-    val lat : Double,
-    val lon : Double,
-    val street : String,
-    val city : String,
-    val state : String,
-    val zip : String) {
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Location</span> <span class="k">private</span> <span class="k">constructor</span><span class="p">(</span>
+	<span class="k">val</span> <span class="py">lat</span> <span class="p">:</span> <span class="n">Double</span><span class="p">,</span>
+	<span class="k">val</span> <span class="py">lon</span> <span class="p">:</span> <span class="n">Double</span><span class="p">,</span>
+	<span class="k">val</span> <span class="py">street</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+	<span class="k">val</span> <span class="py">city</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+	<span class="k">val</span> <span class="py">state</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+	<span class="k">val</span> <span class="py">zip</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
 
-    constructor(lat : Double, lon : Double) : this(lat, lon, "", "", "", "")
-    constructor(
-        street : String,
-        city : String,
-        state : String,
-        zip : String) : this(0.0, 0.0, street, city, state, zip)
-}
+	<span class="k">constructor</span><span class="p">(</span><span class="n">lat</span> <span class="p">:</span> <span class="n">Double</span><span class="p">,</span> <span class="n">lon</span> <span class="p">:</span> <span class="n">Double</span><span class="p">)</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">)</span>
+	<span class="k">constructor</span><span class="p">(</span>
+		<span class="n">street</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+		<span class="n">city</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+		<span class="n">state</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+		<span class="n">zip</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="m">0.0</span><span class="p">,</span> <span class="m">0.0</span><span class="p">,</span> <span class="n">street</span><span class="p">,</span> <span class="n">city</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">zip</span><span class="p">)</span>
+<span class="p">}</span>
 
-fun main() {
-    // good
-    val location1 = Location(39.149810, -76.911257)
-        // (sing it with me... "My Harris Teeter")
+<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="c1">// good
+</span><span class="c1"></span>	<span class="k">val</span> <span class="py">location1</span> <span class="p">=</span> <span class="n">Location</span><span class="p">(</span><span class="m">39.149810</span><span class="p">,</span> <span class="p">-</span><span class="m">76.911257</span><span class="p">)</span>
+		<span class="c1">// (sing it with me... &#34;My Harris Teeter&#34;)
+</span><span class="c1"></span>
+	<span class="c1">// good
+</span><span class="c1"></span>	<span class="k">val</span> <span class="py">location2</span> <span class="p">=</span> <span class="n">Location</span><span class="p">(</span><span class="s">&#34;123 Sesame St&#34;</span><span class="p">,</span> <span class="s">&#34;New York&#34;</span><span class="p">,</span> <span class="s">&#34;NY&#34;</span><span class="p">,</span> <span class="s">&#34;10001&#34;</span><span class="p">)</span>
 
-    // good
-    val location2 = Location("123 Sesame St", "New York", "NY", "10001")
+	<span class="c1">// uh oh...
+</span><span class="c1"></span>	<span class="k">val</span> <span class="py">location3</span> <span class="p">=</span> <span class="n">Location</span><span class="p">(</span><span class="m">39.149810</span><span class="p">,</span> <span class="p">-</span><span class="m">76.911257</span><span class="p">,</span> <span class="s">&#34;123 Sesame St&#34;</span><span class="p">,</span> <span class="s">&#34;New York&#34;</span><span class="p">,</span> <span class="s">&#34;NY&#34;</span><span class="p">,</span> <span class="s">&#34;10001&#34;</span><span class="p">)</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
 
-    // uh oh...
-    val location3 = Location(39.149810, -76.911257, "123 Sesame St", "New York", "NY", "10001")
-}
-</pre>
+<p>If you run this you'll get an error compiling <code>location3</code>, as the constructor that takes all of those arguments is <code>private</code>.</p>
 
 <p>A little ugly, but poof! Private primary constructor. I haven't had to do this <em>too</em> often, but I have had to do it...</p>
 
@@ -1390,28 +1936,6 @@ fun main() {
 										<li class="nav-item">
 						 					<a class="nav-link" href="#a-note-on-nulls">
 												 A Note on Nulls
-											</a>
-										</li>
-						 
-								
-								
-									</ul>
-								
-							
-						
-				 
-						
-						
-							
-								
-								
-									<ul class="nav">
-								
-								
-
-										<li class="nav-item">
-						 					<a class="nav-link" href="#examples">
-												 Examples
 											</a>
 										</li>
 						 
@@ -1989,9 +2513,6 @@ fun main() {
 
 
 
-  
-  <script src="http://javadude.com/js/vendors/highlight.pack.js"> </script>
-  <script>hljs.initHighlightingOnLoad();</script>
 
 
 

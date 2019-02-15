@@ -19,9 +19,7 @@
       <guid>http://javadude.com/posts/20170628-dsls-and-codegen/</guid>
       <description>&lt;p&gt;A JHU Tech Talk from June 28, 2017.&lt;/p&gt;
 
-&lt;p&gt;What is a Domain-Specific Language? How can we use one for code-generation?&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;What is a Domain-Specific Language? How can we use one for code-generation?&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -30,9 +28,7 @@
       <pubDate>Thu, 19 Nov 2015 00:00:00 +0000</pubDate>
       
       <guid>http://javadude.com/posts/20151119-patterns/</guid>
-      <description>&lt;p&gt;Talks on Gang-of-Four Design Patterns: Mediator, Observer, Javabeans, Model-View-Controller, Command, Template Method, Strategy and Null Object, Composite and Visitor, Factory Method, Abstract Factory and Builder&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;Talks on Gang-of-Four Design Patterns: Mediator, Observer, Javabeans, Model-View-Controller, Command, Template Method, Strategy and Null Object, Composite and Visitor, Factory Method, Abstract Factory and Builder&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -41,9 +37,7 @@
       <pubDate>Mon, 06 Oct 2014 00:00:00 +0000</pubDate>
       
       <guid>http://javadude.com/posts/20141006-intents-and-fragments/</guid>
-      <description>&lt;p&gt;A tech talk I gave for Johns Hopkins University on Oct 6, 2014 on Android Intents and Fragments.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;A tech talk I gave for Johns Hopkins University on Oct 6, 2014 on Android Intents and Fragments.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -52,9 +46,7 @@
       <pubDate>Tue, 23 Sep 2014 00:00:00 +0000</pubDate>
       
       <guid>http://javadude.com/posts/20140923-lambdas-and-streams/</guid>
-      <description>&lt;p&gt;A JUG talk from September 2014 I presented on new features in Java 8: Lambdas and Streams.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;A JUG talk from September 2014 I presented on new features in Java 8: Lambdas and Streams.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -63,9 +55,7 @@
       <pubDate>Tue, 30 Jul 2013 00:00:00 +0000</pubDate>
       
       <guid>http://javadude.com/posts/20130730-xtext/</guid>
-      <description>&lt;p&gt;A JUG talk from July 2013 I presented on new features in JCode Generation with xText and xTend.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;A JUG talk from July 2013 I presented on new features in JCode Generation with xText and xTend.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -74,9 +64,7 @@
       <pubDate>Wed, 19 Dec 2012 00:00:00 +0000</pubDate>
       
       <guid>http://javadude.com/posts/20121219-enumerations/</guid>
-      <description>&lt;p&gt;A JUG talk I presented on enumerations in Java.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;A JUG talk I presented on enumerations in Java.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -85,9 +73,7 @@
       <pubDate>Thu, 13 Oct 2011 00:00:00 +0000</pubDate>
       
       <guid>http://javadude.com/posts/20111013-template-method-and-strategy/</guid>
-      <description>&lt;p&gt;I presented a talk on the Template Method and Strategy Patterns to the Columbia, Maryland Java Users Group on 10/13/2011.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;I presented a talk on the Template Method and Strategy Patterns to the Columbia, Maryland Java Users Group on 10/13/2011.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -96,9 +82,7 @@
       <pubDate>Thu, 02 Dec 2010 00:00:00 +0000</pubDate>
       
       <guid>http://javadude.com/posts/20101202-dynamic-proxies/</guid>
-      <description>&lt;p&gt;I presented a talk on Dynamic Proxies to the Columbia, Maryland Java Users Group on 12/02/2010.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;I presented a talk on Dynamic Proxies to the Columbia, Maryland Java Users Group on 12/02/2010.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -107,9 +91,7 @@
       <pubDate>Wed, 19 May 2010 00:00:00 +0000</pubDate>
       
       <guid>http://javadude.com/posts/20100519-effective-eclipse/</guid>
-      <description>&lt;p&gt;A JUG talk from May 2010 I presented on Eclipse tips and tricks.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;A JUG talk from May 2010 I presented on Eclipse tips and tricks.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -118,9 +100,7 @@
       <pubDate>Wed, 20 Jan 2010 00:00:00 +0000</pubDate>
       
       <guid>http://javadude.com/posts/20100120-annotations/</guid>
-      <description>&lt;p&gt;I presented a talk on Java Annotations to the Columbia, Maryland Java Users Group on 1/19/2010.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;I presented a talk on Java Annotations to the Columbia, Maryland Java Users Group on 1/19/2010.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -129,9 +109,7 @@
       <pubDate>Mon, 21 Dec 2009 00:00:00 +0000</pubDate>
       
       <guid>http://javadude.com/posts/20091221-antlr3tut/</guid>
-      <description>&lt;p&gt;A video tutorial on ANTLR 3.x&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+      <description>&lt;p&gt;A video tutorial on ANTLR 3.x&lt;/p&gt;</description>
     </item>
     
   </channel>
