@@ -335,30 +335,21 @@
 <h3 id="simple-properties">Simple Properties</h3>
 
 <p>Simple properties act like individual bits of data, describing the state of a bean. You define simple properties using sets of methods that match the following patterns:</p>
-
-<pre><code>public TypeName getPropertyName()
-public boolean isPropertyName()
-public void setPropertyName(TypeName value)
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="n">TypeName</span> <span class="nf">getPropertyName</span><span class="o">()</span>
+<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isPropertyName</span><span class="o">()</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPropertyName</span><span class="o">(</span><span class="n">TypeName</span> <span class="n">value</span><span class="o">)</span></code></pre></div>
 <p>Note: You can only define the <code>isPropertyName()</code> method for boolean properties.</p>
 
 <p><code>TypeName</code> is the name of a class or primitive type, and <code>PropertyName</code> is the name of the property. The presence of a get or is method defines a readable property. A set method defines a writeable property. The property name is actually a lower-cased version of whatever follows the get or set in the method declaration. For example, suppose a bean defines the following method:</p>
-
-<pre><code>public Color getEyeColor()
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="n">Color</span> <span class="nf">getEyeColor</span><span class="o">()</span></code></pre></div>
 <p>This defines a readable property named eyeColor of type <code>java.awt.Color</code>.</p>
 
 <p>Note that there can be both a get and is method for a boolean property; the is method is allowed for readability. Normally, you define the get and set methods, but sometimes the get method doesn't read naturally. For example</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">if</span> <span class="o">(</span><span class="n">list</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{...}</span>
 
-<pre><code>if (list.isEmpty()) {...}
-
-// is more readable than
-
-if (list.getEmpty()) {...}
-</code></pre>
-
+<span class="c1">// is more readable than
+</span><span class="c1"></span>
+<span class="k">if</span> <span class="o">(</span><span class="n">list</span><span class="o">.</span><span class="na">getEmpty</span><span class="o">())</span> <span class="o">{...}</span></code></pre></div>
 <p>The beauty of this model is its simplicity. Many programmers already use get and set methods to access their data, so defining properties is no different from their current style.</p>
 
 <p>A tool that recognizes these get and set methods can present a list of properties to a user, enabling the user to specify property values. The tool generates code to pass the specified values to the set methods.</p>
@@ -370,13 +361,10 @@ if (list.getEmpty()) {...}
 <p>Indexed properties are an extension of simple properties that allow multiple values for that property. The property acts like an array, even if there is no actual data for that property or if the data is stored in a non-array structure.</p>
 
 <p>You define indexed properties using four methods:</p>
-
-<pre><code>public TypeName[] getPropertyName()
-public TypeName getPropertyName(int index)
-public void setPropertyName(TypeName[] value)
-public void setPropertyName(int index, TypeName value)
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="n">TypeName</span><span class="o">[]</span> <span class="nf">getPropertyName</span><span class="o">()</span>
+<span class="kd">public</span> <span class="n">TypeName</span> <span class="nf">getPropertyName</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPropertyName</span><span class="o">(</span><span class="n">TypeName</span><span class="o">[]</span> <span class="n">value</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPropertyName</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">,</span> <span class="n">TypeName</span> <span class="n">value</span><span class="o">)</span></code></pre></div>
 <p>Recognizing these methods, a bean-builder tool can present a (possibly editable) list of values for setting the property.</p>
 
 <h3 id="bound-and-constrained-properties">Bound and Constrained Properties</h3>
@@ -392,23 +380,17 @@ public void setPropertyName(int index, TypeName value)
 <p>(NOTE: This is an implementation of the Observer Pattern...)</p>
 
 <p>A bound property fires a <code>PropertyChangeEvent</code> (defined in package <code>java.beans</code>) when its state changes. <code>PropertyChangeListener</code>s register themselves with the bean to receive notification of those changes. The <code>java.beans</code> package provides support for this processing through its <code>PropertyChangeSupport</code> class. For example, consider a simple property phoneNumber, defined as follows:</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="n">String</span> <span class="n">phoneNumber</span><span class="o">;</span>
 
-<pre><code>private String phoneNumber;
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPhoneNumber</span><span class="o">(</span><span class="n">String</span> <span class="n">phoneNumber</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">phoneNumber</span> <span class="o">=</span> <span class="n">phoneNumber</span><span class="o">;</span>
+<span class="o">}</span>
 
-public void setPhoneNumber(String phoneNumber) {
-    this.phoneNumber = phoneNumber;
-}
-
-public String getPhoneNumber() {
-    return phoneNumber;
-}
-</code></pre>
-
+<span class="kd">public</span> <span class="n">String</span> <span class="nf">getPhoneNumber</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">phoneNumber</span><span class="o">;</span>
+<span class="o">}</span></code></pre></div>
 <p><em>Note: Sometimes the statement</em></p>
-
-<pre><code>this.phoneNumber = phoneNumber;
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">this</span><span class="o">.</span><span class="na">phoneNumber</span> <span class="o">=</span> <span class="n">phoneNumber</span><span class="o">;</span></code></pre></div>
 <p><em>can be quite confusing to read, especially when first learning the Java language. We use it here because it is and accepted common practice. The <code>this</code> qualification on the first <code>phoneNumber</code> means, &quot;I'm talking about the <strong>instance</strong> variable <code>phoneNumber</code>.&quot; This is necessary to distinguish it from the current active use of <code>phoneNumber</code>, the <strong>parameter</strong> <code>phoneNumber</code>.</em></p>
 
 <p>This simple property definition directly sets and gets its data. To bind this property, we need to provide the following:</p>
@@ -419,131 +401,125 @@ public String getPhoneNumber() {
 </ul>
 
 <p>Because the code to perform these functions is identical for every bound property, we can delegate these functions to an instance of <code>PropertyChangeSupport</code>. A resulting Person bean containing the phoneNumber property could look as follows:</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">effectivevaj.bean.intro.boundproperty</span><span class="o">;</span>
 
-<p>package effectivevaj.bean.intro.boundproperty;</p>
+<span class="kn">import</span> <span class="nn">java.beans.PropertyChangeEvent</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.beans.PropertyChangeListener</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.beans.PropertyChangeSupport</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.Serializable</span><span class="o">;</span>
 
-<p>import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
-import java.io.Serializable;</p>
+<span class="cm">/**
+</span><span class="cm">    * A sample Person bean that defines a bound property
+</span><span class="cm">    */</span>
 
-<pre><code>/**
- * A sample Person bean that defines a bound property
- */
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="kd">implements</span> <span class="n">Serializable</span> <span class="o">{</span>
+    <span class="c1">// Create a PropertyChangeSupport instance
+</span><span class="c1"></span>    <span class="c1">//   to which we&#39;ll delegate our bound-property
+</span><span class="c1"></span>    <span class="c1">//   functionality
+</span><span class="c1"></span>
+    <span class="kd">private</span> <span class="kd">transient</span> <span class="n">PropertyChangeSupport</span> <span class="n">pcs</span> <span class="o">=</span>
+        <span class="k">new</span> <span class="n">PropertyChangeSupport</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
 
-public class Person implements Serializable {
-    // Create a PropertyChangeSupport instance
-    //   to which we'll delegate our bound-property
-    //   functionality
+    <span class="cm">/** Let classes listen for property changes */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addPropertyChangeListener</span><span class="o">(</span><span class="n">PropertyChangeListener</span> <span class="n">l</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">pcs</span><span class="o">.</span><span class="na">addPropertyChangeListener</span><span class="o">(</span><span class="n">l</span><span class="o">);</span>
+    <span class="o">}</span>
 
-    private transient PropertyChangeSupport pcs =
-        new PropertyChangeSupport(this);
+    <span class="cm">/** Let classes stop listening to property changes */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">removePropertyChangeListener</span><span class="o">(</span><span class="n">PropertyChangeListener</span> <span class="n">l</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">pcs</span><span class="o">.</span><span class="na">removePropertyChangeListener</span><span class="o">(</span><span class="n">l</span><span class="o">);</span>
+    <span class="o">}</span>
 
-    /** Let classes listen for property changes */
-    public void addPropertyChangeListener(PropertyChangeListener l) {
-        pcs.addPropertyChangeListener(l);
-    }
+    <span class="c1">// Define a read/write/bound property named phoneNumber
+</span><span class="c1"></span>    <span class="kd">private</span> <span class="n">String</span> <span class="n">phoneNumber</span><span class="o">;</span>
 
-    /** Let classes stop listening to property changes */
-    public void removePropertyChangeListener(PropertyChangeListener l) {
-        pcs.removePropertyChangeListener(l);
-    }
+    <span class="cm">/** Define property phoneNumber as readable String */</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getPhoneNumber</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">phoneNumber</span><span class="o">;</span>
+    <span class="o">}</span>
 
-    // Define a read/write/bound property named phoneNumber
-    private String phoneNumber;
+    <span class="cm">/** Define property phoneNumber as writeable String
+</span><span class="cm">        *  phoneNumber is bound, firing PropertyChangeEvents
+</span><span class="cm">        *  whenever its value changes
+</span><span class="cm">        */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPhoneNumber</span><span class="o">(</span><span class="n">String</span> <span class="n">phoneNumber</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// save the old value
+</span><span class="c1"></span>        <span class="n">String</span> <span class="n">oldNumber</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">phoneNumber</span><span class="o">;</span>
 
-    /** Define property phoneNumber as readable String */
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
+        <span class="c1">// set the new value
+</span><span class="c1"></span>        <span class="k">this</span><span class="o">.</span><span class="na">phoneNumber</span> <span class="o">=</span> <span class="n">phoneNumber</span><span class="o">;</span>
 
-    /** Define property phoneNumber as writeable String
-     *  phoneNumber is bound, firing PropertyChangeEvents
-     *  whenever its value changes
-     */
-    public void setPhoneNumber(String phoneNumber) {
-        // save the old value
-        String oldNumber = this.phoneNumber;
-
-        // set the new value
-        this.phoneNumber = phoneNumber;
-
-        // report the change
-        pcs.firePropertyChange(&quot;phoneNumber&quot;, oldNumber, phoneNumber);
-    }
-}
-</code></pre>
-
+        <span class="c1">// report the change
+</span><span class="c1"></span>        <span class="n">pcs</span><span class="o">.</span><span class="na">firePropertyChange</span><span class="o">(</span><span class="s">&#34;phoneNumber&#34;</span><span class="o">,</span> <span class="n">oldNumber</span><span class="o">,</span> <span class="n">phoneNumber</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></div>
 <p>The highlighted text in the previous example is the extra code needed to bind the <code>phoneNumber</code> property. Note that many tools, such as VisualAge for Java, can generate all of this code for you.</p>
 
 <p>After binding <code>phoneNumber</code>, we can keep the telephone numbers of two people synchronized by creating listeners. For example, suppose we have a married couple, Scott and Nancy, who share a telephone number. When one spouse changes the telephone number, the telephone number should change for the other person as well.</p>
 
 <p>The following code acts as glue between two <code>Person</code> beans, <code>scott</code> and <code>nancy</code>. We create event listeners (using anonymous inner classes) to listen for changes to the <code>phoneNumber</code> property of each bean. Whenever we hear that the <code>phoneNumber</code> of <code>scott</code> changes, we set the <code>phoneNumber</code> of <code>nancy</code>. We provide the same type of handling for changes to the <code>phoneNumber</code> in <code>nancy</code> as well.</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">effectivevaj.bean.intro.boundproperty</span><span class="o">;</span>
 
-<pre><code>package effectivevaj.bean.intro.boundproperty;
+<span class="kn">import</span> <span class="nn">java.beans.PropertyChangeEvent</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.beans.PropertyChangeListener</span><span class="o">;</span>
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+<span class="cm">/**
+</span><span class="cm">    * Test the Person bean&#39;s bound phone number property
+</span><span class="cm">    */</span>
 
-/**
- * Test the Person bean's bound phone number property
- */
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PhoneSync</span> <span class="o">{</span>
 
-public class PhoneSync {
+    <span class="cm">/**
+</span><span class="cm">        *  Test the bound phoneNumber of the Person bean
+</span><span class="cm">        *  Create two people that share a phone number and
+</span><span class="cm">        *    create property-change listeners that will keep
+</span><span class="cm">        *    their phone numbers synchronized
+</span><span class="cm">        */</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// create two people who share a phone number
+</span><span class="c1"></span>
+        <span class="kd">final</span> <span class="n">Person</span> <span class="n">scott</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">();</span>
+        <span class="kd">final</span> <span class="n">Person</span> <span class="n">nancy</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">();</span>
 
-    /**
-     *  Test the bound phoneNumber of the Person bean
-     *  Create two people that share a phone number and
-     *    create property-change listeners that will keep
-     *    their phone numbers synchronized
-     */
-    public static void main(String[] args) {
-        // create two people who share a phone number
+        <span class="c1">// when scott&#39;s phone changes, change nancy&#39;s
+</span><span class="c1"></span>        <span class="n">scott</span><span class="o">.</span><span class="na">addPropertyChangeListener</span><span class="o">(</span>
+            <span class="k">new</span> <span class="n">PropertyChangeListener</span><span class="o">()</span> <span class="o">{</span>
+                <span class="kd">public</span> <span class="kt">void</span> <span class="nf">propertyChange</span><span class="o">(</span><span class="n">PropertyChangeEvent</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="k">if</span> <span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getPropertyName</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="s">&#34;phoneNumber&#34;</span><span class="o">))</span> <span class="o">{</span>
+                        <span class="n">nancy</span><span class="o">.</span><span class="na">setPhoneNumber</span><span class="o">(</span><span class="n">scott</span><span class="o">.</span><span class="na">getPhoneNumber</span><span class="o">());</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">);</span>
 
-        final Person scott = new Person();
-        final Person nancy = new Person();
+        <span class="c1">// when nancy&#39;s phone changes, change scott&#39;s
+</span><span class="c1"></span>        <span class="n">nancy</span><span class="o">.</span><span class="na">addPropertyChangeListener</span><span class="o">(</span>
+            <span class="k">new</span> <span class="n">PropertyChangeListener</span><span class="o">()</span> <span class="o">{</span>
+                <span class="kd">public</span> <span class="kt">void</span> <span class="nf">propertyChange</span><span class="o">(</span><span class="n">PropertyChangeEvent</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="k">if</span> <span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getPropertyName</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="s">&#34;phoneNumber&#34;</span><span class="o">))</span> <span class="o">{</span>
+                        <span class="n">scott</span><span class="o">.</span><span class="na">setPhoneNumber</span><span class="o">(</span><span class="n">nancy</span><span class="o">.</span><span class="na">getPhoneNumber</span><span class="o">());</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">);</span>
 
-        // when scott's phone changes, change nancy's
-        scott.addPropertyChangeListener(
-            new PropertyChangeListener() {
-                public void propertyChange(PropertyChangeEvent e) {
-                    if (e.getPropertyName().equals(&quot;phoneNumber&quot;)) {
-                        nancy.setPhoneNumber(scott.getPhoneNumber());
-                    }
-                }
-            }
-        );
-
-        // when nancy's phone changes, change scott's
-        nancy.addPropertyChangeListener(
-            new PropertyChangeListener() {
-                public void propertyChange(PropertyChangeEvent e) {
-                    if (e.getPropertyName().equals(&quot;phoneNumber&quot;)) {
-                        scott.setPhoneNumber(nancy.getPhoneNumber());
-                    }
-                }
-            }
-        );
-
-        // Run a little test...
-
-        System.out.println(&quot;Initial phone numbers&quot;);
-        System.out.println(&quot;Scott: &quot;  + scott.getPhoneNumber());
-        System.out.println(&quot;Nancy: &quot;  + scott.getPhoneNumber());
-        System.out.println();
-        System.out.println(&quot;Set Scott's number to 555-1212&quot;);
-        scott.setPhoneNumber(&quot;555-1212&quot;);
-        System.out.println(&quot;Scott: &quot;  + scott.getPhoneNumber());
-        System.out.println(&quot;Nancy: &quot;  + scott.getPhoneNumber());
-        System.out.println();
-        System.out.println(&quot;Set Nancy's number to 555-7777&quot;);
-        nancy.setPhoneNumber(&quot;555-7777&quot;);
-        System.out.println(&quot;Scott: &quot;  + scott.getPhoneNumber());
-        System.out.println(&quot;Nancy: &quot;  + scott.getPhoneNumber());
-    }
-}
-</code></pre>
-
+        <span class="c1">// Run a little test...
+</span><span class="c1"></span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Initial phone numbers&#34;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Scott: &#34;</span>  <span class="o">+</span> <span class="n">scott</span><span class="o">.</span><span class="na">getPhoneNumber</span><span class="o">());</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Nancy: &#34;</span>  <span class="o">+</span> <span class="n">scott</span><span class="o">.</span><span class="na">getPhoneNumber</span><span class="o">());</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Set Scott&#39;s number to 555-1212&#34;</span><span class="o">);</span>
+        <span class="n">scott</span><span class="o">.</span><span class="na">setPhoneNumber</span><span class="o">(</span><span class="s">&#34;555-1212&#34;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Scott: &#34;</span>  <span class="o">+</span> <span class="n">scott</span><span class="o">.</span><span class="na">getPhoneNumber</span><span class="o">());</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Nancy: &#34;</span>  <span class="o">+</span> <span class="n">scott</span><span class="o">.</span><span class="na">getPhoneNumber</span><span class="o">());</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Set Nancy&#39;s number to 555-7777&#34;</span><span class="o">);</span>
+        <span class="n">nancy</span><span class="o">.</span><span class="na">setPhoneNumber</span><span class="o">(</span><span class="s">&#34;555-7777&#34;</span><span class="o">);</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Scott: &#34;</span>  <span class="o">+</span> <span class="n">scott</span><span class="o">.</span><span class="na">getPhoneNumber</span><span class="o">());</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Nancy: &#34;</span>  <span class="o">+</span> <span class="n">scott</span><span class="o">.</span><span class="na">getPhoneNumber</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></div>
 <p>Creating <code>PropertyChangeListener</code>s for each <code>Person</code> bean automatically updates both <code>Person</code> beans when either telephone number changes. We will use this technique during visual composition to achieve several interesting effects, including keeping a model synchronized with a GUI. The results of running <code>PhoneSync</code> follow:</p>
 
 <pre><code>Initial phone numbers
@@ -588,63 +564,60 @@ Nancy: 555-7777
 <p>The <code>java.beans</code> package provides another concrete-implementation class, <code>VetoableChangeSupport</code>, to assist with constrained-property event processing. Constraining a property is very similar to making it bound.</p>
 
 <p>The following code defines a constrained property called <code>phoneNumber</code>. Similar to our earlier bound property example, we delegate the listener tracking and event firing to another object, one of class <code>VetoableChangeSupport</code>.</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">effectivevaj.bean.intro.constrainedproperty</span><span class="o">;</span>
 
-<pre><code>package effectivevaj.bean.intro.constrainedproperty;
+<span class="kn">import</span> <span class="nn">java.io.Serializable</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.beans.PropertyChangeEvent</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.beans.VetoableChangeListener</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.beans.VetoableChangeSupport</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.beans.PropertyVetoException</span><span class="o">;</span>
 
-import java.io.Serializable;
-import java.beans.PropertyChangeEvent;
-import java.beans.VetoableChangeListener;
-import java.beans.VetoableChangeSupport;
-import java.beans.PropertyVetoException;
+    <span class="c1">// A sample Person bean that defines a constrained property
+</span><span class="c1"></span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Person</span> <span class="kd">implements</span> <span class="n">Serializable</span> <span class="o">{</span>
 
- // A sample Person bean that defines a constrained property
+    <span class="c1">// Create a VetoableChangeSupport instance
+</span><span class="c1"></span>    <span class="c1">//   to which we&#39;ll delegate our constrained-property
+</span><span class="c1"></span>    <span class="c1">//   functionality. (Note - using lazy-instantiation this time, just &#39;cause I can...)
+</span><span class="c1"></span>    <span class="kd">private</span> <span class="kd">transient</span> <span class="n">VetoableChangeSupport</span> <span class="n">vcs</span><span class="o">;</span>
 
-public class Person implements Serializable {
+    <span class="c1">// Let classes listen for property changes
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addVetoableChangeListener</span><span class="o">(</span><span class="n">VetoableChangeListener</span> <span class="n">l</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">vcs</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+            <span class="n">vcs</span> <span class="o">=</span> <span class="k">new</span> <span class="n">VetoableChangeSupport</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+        <span class="n">vcs</span><span class="o">.</span><span class="na">addVetoableChangeListener</span><span class="o">(</span><span class="n">l</span><span class="o">);</span>
+    <span class="o">}</span>
 
-    // Create a VetoableChangeSupport instance
-    //   to which we'll delegate our constrained-property
-    //   functionality. (Note - using lazy-instantiation this time, just 'cause I can...)
-    private transient VetoableChangeSupport vcs;
+    <span class="c1">// Let classes stop listening to property changes
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">removeVetoableChangeListener</span><span class="o">(</span><span class="n">VetoableChangeListener</span> <span class="n">l</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">vcs</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+            <span class="n">vcs</span> <span class="o">=</span> <span class="k">new</span> <span class="n">VetoableChangeSupport</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+        <span class="n">vcs</span><span class="o">.</span><span class="na">removeVetoableChangeListener</span><span class="o">(</span><span class="n">l</span><span class="o">);</span>
+    <span class="o">}</span>
 
-    // Let classes listen for property changes
-    public void addVetoableChangeListener(VetoableChangeListener l) {
-        if (vcs == null)
-            vcs = new VetoableChangeSupport(this);
-        vcs.addVetoableChangeListener(l);
-    }
+    <span class="c1">// Define a read/write/constrained property named
+</span><span class="c1"></span>    <span class="c1">//  phoneNumber
+</span><span class="c1"></span>    <span class="kd">private</span> <span class="n">String</span> <span class="n">phoneNumber</span><span class="o">;</span> 
 
-    // Let classes stop listening to property changes
-    public void removeVetoableChangeListener(VetoableChangeListener l) {
-        if (vcs == null)
-            vcs = new VetoableChangeSupport(this);
-        vcs.removeVetoableChangeListener(l);
-    }
+    <span class="c1">// Define property phoneNumber as readable String
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getPhoneNumber</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">phoneNumber</span><span class="o">;</span>
+    <span class="o">}</span>
 
-    // Define a read/write/constrained property named
-    //  phoneNumber
-    private String phoneNumber; 
-
-    // Define property phoneNumber as readable String
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    // Define property phoneNumber as writeable String
-    // phoneNumber is constrained, firing 
-    // PropertyChangeEvents whenever its value is
-    // about to change
-    public void setPhoneNumber(String phoneNumber) throws PropertyVetoException {
-        if (vcs != null) {
-            // report the impending change
-            vcs.fireVetoableChange(&quot;phoneNumber&quot;, 
-                                   this.phoneNumber, phoneNumber);
-        }
-        // change to the new value
-        this.phoneNumber = phoneNumber;
-    }
-}
-</code></pre>
-
+    <span class="c1">// Define property phoneNumber as writeable String
+</span><span class="c1"></span>    <span class="c1">// phoneNumber is constrained, firing 
+</span><span class="c1"></span>    <span class="c1">// PropertyChangeEvents whenever its value is
+</span><span class="c1"></span>    <span class="c1">// about to change
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setPhoneNumber</span><span class="o">(</span><span class="n">String</span> <span class="n">phoneNumber</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">PropertyVetoException</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">vcs</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// report the impending change
+</span><span class="c1"></span>            <span class="n">vcs</span><span class="o">.</span><span class="na">fireVetoableChange</span><span class="o">(</span><span class="s">&#34;phoneNumber&#34;</span><span class="o">,</span> 
+                                    <span class="k">this</span><span class="o">.</span><span class="na">phoneNumber</span><span class="o">,</span> <span class="n">phoneNumber</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="c1">// change to the new value
+</span><span class="c1"></span>        <span class="k">this</span><span class="o">.</span><span class="na">phoneNumber</span> <span class="o">=</span> <span class="n">phoneNumber</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></div>
 <p>The highlighted text is the set of changes necessary to support a constrained property. Again, many tools, such as VisualAge for Java, can generate all of this code for you.</p>
 
 <p>Registered <code>VetoableChangeListener</code>s can throw a <code>PropertyVetoException</code>, which halts the <code>setPhoneNumber</code> processing, throwing the exception to the caller of <code>setPhoneNumber()</code>.</p>
@@ -652,114 +625,110 @@ public class Person implements Serializable {
 <p>As a simple example, we restrict a <code>Person</code>’s telephone number to exactly seven numeric characters. Our strategy to implement this is as follows:</p>
 
 <ul>
-<li><p>Constrain the <code>phoneNumber</code> property. (We have defined that previously.)*   Create the class <code>StringLengthCheck</code> to ensure that a String is within a minimum-maximum range, as follows:</p>
-
-<pre><code>package effectivevaj.bean.intro.constrainedproperty;
-
-import java.beans.PropertyVetoException;
-import java.beans.PropertyChangeEvent;
-import java.beans.VetoableChangeListener;
-
-// A VetoableChangeListener that validates that a String's
-// length falls within a given range
-public class StringLengthCheck implements VetoableChangeListener {    
-    private int minimum, maximum;
-
-    // constructor -- gather the min-max range for
-    //                  the legal string length
-    public StringLengthCheck(int min, int max) {
-        minimum = min;
-        maximum = max;
-    }
-
-    // VetoableChangeListener notification - check to see 
-    // if the length of the new string value is within 
-    // the minimum/maximum range
-    public void vetoableChange(PropertyChangeEvent e) throws PropertyVetoException {
-        if (e.getPropertyName().equals(&quot;phoneNumber&quot;)) {
-            String number = (String) e.getNewValue();
-            if (number == null)
-                throw new PropertyVetoException(&quot;No new value!&quot;, e);
-            int len = number.length();
-            if (len &lt; minimum || len &gt; maximum)
-                throw new PropertyVetoException(&quot;Improper length: must be in range &quot; + 
-                    minimum + &quot;-&quot; + maximum, e);
-        }
-    }
-}
-</code></pre></li>
-
-<li><p>Create class <code>NumberStringCheck</code> to ensure that all characters are numeric, as follows:</p>
-
-<pre><code>package effectivevaj.bean.intro.constrainedproperty;
-
-import java.beans.VetoableChangeListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyVetoException;
-
-// A VetoableChangeListener that validates that a 
-// String's value is completely numeric
-public class NumberStringCheck implements VetoableChangeListener {
-    public void vetoableChange(PropertyChangeEvent e) throws PropertyVetoException {
-        if (e.getPropertyName().equals(&quot;phoneNumber&quot;)) {
-            String number = (String) e.getNewValue();
-            if (number != null) {
-                int len = number.length();
-                for (int i = 0; i &lt; len; i++) {
-                    if (!Character.isDigit(number.charAt(i))) {
-                        throw new PropertyVetoException(number + 
-                            &quot; contains non-numeric characters&quot;, e);
-                    }
-                }
-            }
-        }
-    }
-}
-</code></pre></li>
-
-<li><p>Add instances of <code>StringLengthCheck</code> and <code>NumberStringCheck</code> to the <code>Person</code> bean as <code>VetoableChangeListeners</code>, as follows:</p>
-
-<pre><code>package effectivevaj.bean.intro.constrainedproperty;
-
-import java.beans.PropertyVetoException;
-
-// Test our constrained phoneNumber property
-public class PhoneValidate {
-    // A convenience method to handle the exceptions for us
-    protected static void setPersonsPhoneNumber(Person person, String number){ 
-        try {
-            person.setPhoneNumber(number);
-            System.out.println(&quot;Set number to &quot; + number);
-        } catch (PropertyVetoException e) {
-            System.out.println(e);
-        }
-    }
-
-    // Runs a simple test of our constrained phone property
-    public static void main(String[] args) {
-        Person scott = new Person();
-        scott.addVetoableChangeListener(
-        new StringLengthCheck(7, 7));
-        scott.addVetoableChangeListener(new NumberStringCheck());
-        // test a non-numeric phone number
-        setPersonsPhoneNumber(scott,&quot;111aaaa&quot;);
-        // test a long phone number
-        setPersonsPhoneNumber(scott,&quot;5551111111111&quot;);
-        // test a normal phone number
-        setPersonsPhoneNumber(scott,&quot;5551212&quot;);
-        // create a new person that only checks that the
-        //   phoneNumber is numeric
-        Person nancy = new Person();
-        nancy.addVetoableChangeListener(new NumberStringCheck());
-        // test a non-numeric phone number
-        setPersonsPhoneNumber(nancy,&quot;111aaaa&quot;);
-        // test a long phone number
-        setPersonsPhoneNumber(nancy,&quot;5551111111111&quot;);
-    }
-}
-</code></pre></li>
+<li>Constrain the <code>phoneNumber</code> property. (We have defined that previously.)*   Create the class <code>StringLengthCheck</code> to ensure that a String is within a minimum-maximum range, as follows:
+<br /></li>
 </ul>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">        <span class="kn">package</span> <span class="nn">effectivevaj.bean.intro.constrainedproperty</span><span class="o">;</span>
+    
+        <span class="kn">import</span> <span class="nn">java.beans.PropertyVetoException</span><span class="o">;</span>
+        <span class="kn">import</span> <span class="nn">java.beans.PropertyChangeEvent</span><span class="o">;</span>
+        <span class="kn">import</span> <span class="nn">java.beans.VetoableChangeListener</span><span class="o">;</span>
+    
+        <span class="c1">// A VetoableChangeListener that validates that a String&#39;s
+</span><span class="c1"></span>        <span class="c1">// length falls within a given range
+</span><span class="c1"></span>        <span class="kd">public</span> <span class="kd">class</span> <span class="nc">StringLengthCheck</span> <span class="kd">implements</span> <span class="n">VetoableChangeListener</span> <span class="o">{</span>    
+            <span class="kd">private</span> <span class="kt">int</span> <span class="n">minimum</span><span class="o">,</span> <span class="n">maximum</span><span class="o">;</span>
+    
+            <span class="c1">// constructor -- gather the min-max range for
+</span><span class="c1"></span>            <span class="c1">//                  the legal string length
+</span><span class="c1"></span>            <span class="kd">public</span> <span class="nf">StringLengthCheck</span><span class="o">(</span><span class="kt">int</span> <span class="n">min</span><span class="o">,</span> <span class="kt">int</span> <span class="n">max</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">minimum</span> <span class="o">=</span> <span class="n">min</span><span class="o">;</span>
+                <span class="n">maximum</span> <span class="o">=</span> <span class="n">max</span><span class="o">;</span>
+            <span class="o">}</span>
 
+            <span class="c1">// VetoableChangeListener notification - check to see 
+</span><span class="c1"></span>            <span class="c1">// if the length of the new string value is within 
+</span><span class="c1"></span>            <span class="c1">// the minimum/maximum range
+</span><span class="c1"></span>            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">vetoableChange</span><span class="o">(</span><span class="n">PropertyChangeEvent</span> <span class="n">e</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">PropertyVetoException</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getPropertyName</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="s">&#34;phoneNumber&#34;</span><span class="o">))</span> <span class="o">{</span>
+                    <span class="n">String</span> <span class="n">number</span> <span class="o">=</span> <span class="o">(</span><span class="n">String</span><span class="o">)</span> <span class="n">e</span><span class="o">.</span><span class="na">getNewValue</span><span class="o">();</span>
+                    <span class="k">if</span> <span class="o">(</span><span class="n">number</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+                        <span class="k">throw</span> <span class="k">new</span> <span class="n">PropertyVetoException</span><span class="o">(</span><span class="s">&#34;No new value!&#34;</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
+                    <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">number</span><span class="o">.</span><span class="na">length</span><span class="o">();</span>
+                    <span class="k">if</span> <span class="o">(</span><span class="n">len</span> <span class="o">&lt;</span> <span class="n">minimum</span> <span class="o">||</span> <span class="n">len</span> <span class="o">&gt;</span> <span class="n">maximum</span><span class="o">)</span>
+                        <span class="k">throw</span> <span class="k">new</span> <span class="n">PropertyVetoException</span><span class="o">(</span><span class="s">&#34;Improper length: must be in range &#34;</span> <span class="o">+</span> 
+                            <span class="n">minimum</span> <span class="o">+</span> <span class="s">&#34;-&#34;</span> <span class="o">+</span> <span class="n">maximum</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span></code></pre></div>
+<ul>
+<li>Create class <code>NumberStringCheck</code> to ensure that all characters are numeric, as follows:</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">        <span class="kn">package</span> <span class="nn">effectivevaj.bean.intro.constrainedproperty</span><span class="o">;</span>
+    
+        <span class="kn">import</span> <span class="nn">java.beans.VetoableChangeListener</span><span class="o">;</span>
+        <span class="kn">import</span> <span class="nn">java.beans.PropertyChangeEvent</span><span class="o">;</span>
+        <span class="kn">import</span> <span class="nn">java.beans.PropertyVetoException</span><span class="o">;</span>
+    
+        <span class="c1">// A VetoableChangeListener that validates that a 
+</span><span class="c1"></span>        <span class="c1">// String&#39;s value is completely numeric
+</span><span class="c1"></span>        <span class="kd">public</span> <span class="kd">class</span> <span class="nc">NumberStringCheck</span> <span class="kd">implements</span> <span class="n">VetoableChangeListener</span> <span class="o">{</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">vetoableChange</span><span class="o">(</span><span class="n">PropertyChangeEvent</span> <span class="n">e</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">PropertyVetoException</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getPropertyName</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="s">&#34;phoneNumber&#34;</span><span class="o">))</span> <span class="o">{</span>
+                    <span class="n">String</span> <span class="n">number</span> <span class="o">=</span> <span class="o">(</span><span class="n">String</span><span class="o">)</span> <span class="n">e</span><span class="o">.</span><span class="na">getNewValue</span><span class="o">();</span>
+                    <span class="k">if</span> <span class="o">(</span><span class="n">number</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">number</span><span class="o">.</span><span class="na">length</span><span class="o">();</span>
+                        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+                            <span class="k">if</span> <span class="o">(!</span><span class="n">Character</span><span class="o">.</span><span class="na">isDigit</span><span class="o">(</span><span class="n">number</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)))</span> <span class="o">{</span>
+                                <span class="k">throw</span> <span class="k">new</span> <span class="n">PropertyVetoException</span><span class="o">(</span><span class="n">number</span> <span class="o">+</span> 
+                                    <span class="s">&#34; contains non-numeric characters&#34;</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
+                            <span class="o">}</span>
+                        <span class="o">}</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span></code></pre></div>
+<ul>
+<li>Add instances of <code>StringLengthCheck</code> and <code>NumberStringCheck</code> to the <code>Person</code> bean as <code>VetoableChangeListeners</code>, as follows:</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">        <span class="kn">package</span> <span class="nn">effectivevaj.bean.intro.constrainedproperty</span><span class="o">;</span>
+    
+        <span class="kn">import</span> <span class="nn">java.beans.PropertyVetoException</span><span class="o">;</span>
+    
+        <span class="c1">// Test our constrained phoneNumber property
+</span><span class="c1"></span>        <span class="kd">public</span> <span class="kd">class</span> <span class="nc">PhoneValidate</span> <span class="o">{</span>
+            <span class="c1">// A convenience method to handle the exceptions for us
+</span><span class="c1"></span>            <span class="kd">protected</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">setPersonsPhoneNumber</span><span class="o">(</span><span class="n">Person</span> <span class="n">person</span><span class="o">,</span> <span class="n">String</span> <span class="n">number</span><span class="o">){</span> 
+                <span class="k">try</span> <span class="o">{</span>
+                    <span class="n">person</span><span class="o">.</span><span class="na">setPhoneNumber</span><span class="o">(</span><span class="n">number</span><span class="o">);</span>
+                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;Set number to &#34;</span> <span class="o">+</span> <span class="n">number</span><span class="o">);</span>
+                <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">PropertyVetoException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+
+            <span class="c1">// Runs a simple test of our constrained phone property
+</span><span class="c1"></span>            <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">Person</span> <span class="n">scott</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">();</span>
+                <span class="n">scott</span><span class="o">.</span><span class="na">addVetoableChangeListener</span><span class="o">(</span>
+                <span class="k">new</span> <span class="n">StringLengthCheck</span><span class="o">(</span><span class="n">7</span><span class="o">,</span> <span class="n">7</span><span class="o">));</span>
+                <span class="n">scott</span><span class="o">.</span><span class="na">addVetoableChangeListener</span><span class="o">(</span><span class="k">new</span> <span class="n">NumberStringCheck</span><span class="o">());</span>
+                <span class="c1">// test a non-numeric phone number
+</span><span class="c1"></span>                <span class="n">setPersonsPhoneNumber</span><span class="o">(</span><span class="n">scott</span><span class="o">,</span><span class="s">&#34;111aaaa&#34;</span><span class="o">);</span>
+                <span class="c1">// test a long phone number
+</span><span class="c1"></span>                <span class="n">setPersonsPhoneNumber</span><span class="o">(</span><span class="n">scott</span><span class="o">,</span><span class="s">&#34;5551111111111&#34;</span><span class="o">);</span>
+                <span class="c1">// test a normal phone number
+</span><span class="c1"></span>                <span class="n">setPersonsPhoneNumber</span><span class="o">(</span><span class="n">scott</span><span class="o">,</span><span class="s">&#34;5551212&#34;</span><span class="o">);</span>
+                <span class="c1">// create a new person that only checks that the
+</span><span class="c1"></span>                <span class="c1">//   phoneNumber is numeric
+</span><span class="c1"></span>                <span class="n">Person</span> <span class="n">nancy</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Person</span><span class="o">();</span>
+                <span class="n">nancy</span><span class="o">.</span><span class="na">addVetoableChangeListener</span><span class="o">(</span><span class="k">new</span> <span class="n">NumberStringCheck</span><span class="o">());</span>
+                <span class="c1">// test a non-numeric phone number
+</span><span class="c1"></span>                <span class="n">setPersonsPhoneNumber</span><span class="o">(</span><span class="n">nancy</span><span class="o">,</span><span class="s">&#34;111aaaa&#34;</span><span class="o">);</span>
+                <span class="c1">// test a long phone number
+</span><span class="c1"></span>                <span class="n">setPersonsPhoneNumber</span><span class="o">(</span><span class="n">nancy</span><span class="o">,</span><span class="s">&#34;5551111111111&#34;</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span></code></pre></div>
 <p>As you can see from the previous test, not only can we plug in several validations, but we can also use different sets of validations for each instance of a class. The previous example will print the following to <code>System.out</code>:</p>
 
 <p>Constrained test output</p>
@@ -778,10 +747,7 @@ Set number to 5551111111111
 <p>Tools like VisualAge for Java have two ways to determine if properties are bound and/or constrained. They can make educated assumptions, or they can find out for certain through a BeanInfo class.</p>
 
 <p>If a tool sees that a bean defines method</p>
-
-<pre><code>public void addPropertyChangeListener(PropertyChangeListener l)
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">addPropertyChangeListener</span><span class="o">(</span><span class="n">PropertyChangeListener</span> <span class="n">l</span><span class="o">)</span></code></pre></div>
 <p>it assumes that contained properties may be bound. While that is a bit over-assuming, it really does not hurt use of the bean. If the bean has any properties that are not bound, it is the bean-developer's responsibility to provide a <code>BeanInfo</code> class that explicitly states which properties are not bound.</p>
 
 <p>Constrained properties are similar, but assumptions are safer. Whenever the tool sees that a property's set method throws a <code>PropertyVetoException</code>, the tool can assume the property is constrained.</p>
@@ -810,37 +776,34 @@ Event firing requires the following elements:</p>
 <p>Event classes should be immutable! Immutable objects are ones that cannot be changed. Event firing passes a reference to a single event to each listener in an unspecified order. It is important that these listeners cannot modify the event, or it could change the way processing continues for other listeners. Note that the following class is not a bean, because its superclass does not implement <code>java.io.Serializable</code>. If you like, you can define the event object as a bean but in practice this is rarely done.</p>
 
 <p>Note that the event object must extend class <code>java.util.EventObject</code>. <code>EventObject</code> provides the <code>getSource()</code> method so we can determine the event origin. By extending <code>EventObject</code>, we can handle these objects generically in other methods, and some tools, like VisualAge for Java, take advantage of this when creating generic methods to forward events.</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">effectivevaj.bean.intro.eventsets</span><span class="o">;</span>
 
-<pre><code>package effectivevaj.bean.intro.eventsets;
+<span class="kn">import</span> <span class="nn">java.util.Date</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.EventObject</span><span class="o">;</span>
 
-import java.util.Date;
-import java.util.EventObject;
+<span class="c1">// An event that represents the Sun rising or setting
+</span><span class="c1"></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SunEvent</span> <span class="kd">extends</span> <span class="n">EventObject</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">boolean</span> <span class="n">risen</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">Date</span> <span class="n">date</span><span class="o">;</span>
 
-// An event that represents the Sun rising or setting
-public class SunEvent extends EventObject {
-    private boolean risen;
-    private Date date;
+    <span class="kd">public</span> <span class="nf">SunEvent</span><span class="o">(</span><span class="n">Object</span> <span class="n">source</span><span class="o">,</span> <span class="kt">boolean</span> <span class="n">risen</span><span class="o">,</span> <span class="n">Date</span> <span class="n">date</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">source</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">risen</span> <span class="o">=</span> <span class="n">risen</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">date</span> <span class="o">=</span> <span class="n">date</span><span class="o">;</span>
+    <span class="o">}</span>
 
-    public SunEvent(Object source, boolean risen, Date date) {
-        super(source);
-        this.risen = risen;
-        this.date = date;
-    }
+    <span class="c1">// return a String representation of the date
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getDate</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">// return only a String representation
+</span><span class="c1"></span>        <span class="c1">//   so the user cannot modify the real date
+</span><span class="c1"></span>        <span class="k">return</span> <span class="n">date</span><span class="o">.</span><span class="na">toString</span><span class="o">();</span>
+    <span class="o">}</span>
 
-    // return a String representation of the date
-    public String getDate() {
-        // return only a String representation
-        //   so the user cannot modify the real date
-        return date.toString();
-    }
-
-    // return whether the sun rose or set
-    public boolean isRisen() {
-        return risen;
-    }
-}
-</code></pre>
-
+    <span class="c1">// return whether the sun rose or set
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isRisen</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">risen</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></div>
 <p><code>EventObject</code> requires a <code>source</code> (a reference to the object that fired the event), which we set to our <code>WeatherStation</code> bean when firing the event. Whenever we fire events, we create an instance of the <code>EventObject</code> class and pass it to each registered listener.</p>
 
 <h3 id="an-event-listener-interface">An Event-Listener Interface</h3>
@@ -852,122 +815,116 @@ public class SunEvent extends EventObject {
 <p>Therefore, we define an interface that specifies our contract. Because each listener must implement that interface, the event-source bean can determine which methods it can call. Continuing our example, we define a simple interface for our sun events.</p>
 
 <p>Note that the following interface extends the <code>java.util.EventListener</code> interface. <code>EventListener</code> requires no methods. It is just a tag that indicates an interface is acting as an event listener. This assists determination of the events a bean can fire.</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">effectivevaj.bean.intro.eventsets</span><span class="o">;</span>
 
-<pre><code>package effectivevaj.bean.intro.eventsets;
+<span class="kn">import</span> <span class="nn">java.util.EventListener</span><span class="o">;</span>
 
-import java.util.EventListener;
-
-// A contract between a SunEvent source and
-// listener classes
-public interface SunListener extends EventListener {
-    // Called whenever the sun changes position
-    // in a SunEvent source object 
-    public void sunMoved(SunEvent e);
-}
-</code></pre>
-
+<span class="c1">// A contract between a SunEvent source and
+</span><span class="c1">// listener classes
+</span><span class="c1"></span><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">SunListener</span> <span class="kd">extends</span> <span class="n">EventListener</span> <span class="o">{</span>
+    <span class="c1">// Called whenever the sun changes position
+</span><span class="c1"></span>    <span class="c1">// in a SunEvent source object 
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">sunMoved</span><span class="o">(</span><span class="n">SunEvent</span> <span class="n">e</span><span class="o">);</span>
+<span class="o">}</span></code></pre></div>
 <p>We require that any <code>SunEvent</code> listeners implement a single method, <code>sunMoved()</code>. Normally, event-listener methods should take a single parameter: the event object. However, if you have a strong need, the Beans specification allows (but strongly discourages) different parameters.</p>
 
 <h3 id="an-event-source-bean">An Event-Source Bean</h3>
 
 <p>Now we define the source of our sun events, the <code>WeatherStation</code>. This class needs to track its listeners and fire the events. We implement this as follows, and provide a simple GUI to trigger the <code>SunEvent</code>s:</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">effectivevaj.bean.intro.eventsets</span><span class="o">;</span>
 
-<pre><code>package effectivevaj.bean.intro.eventsets;
+<span class="kn">import</span> <span class="nn">java.util.Vector</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Date</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Enumeration</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.Button</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.Frame</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.GridLayout</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.event.ActionListener</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.event.ActionEvent</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.event.WindowAdapter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.event.WindowEvent</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.Serializable</span><span class="o">;</span>
 
-import java.util.Vector;
-import java.util.Date;
-import java.util.Enumeration;
-import java.awt.Button;
-import java.awt.Frame;
-import java.awt.GridLayout;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.Serializable;
+<span class="c1">// A sample event source - this class fires SunEvents
+</span><span class="c1">// to anyone watching. A simple GUI is provided
+</span><span class="c1">// with &#34;rise&#34; and &#34;set&#34; buttons that cause the
+</span><span class="c1">// SunEvents to be fired.
+</span><span class="c1"></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">WeatherStation</span> <span class="kd">extends</span> <span class="n">Frame</span> <span class="kd">implements</span> <span class="n">Serializable</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">transient</span> <span class="n">Vector</span> <span class="n">listeners</span><span class="o">;</span>
 
-// A sample event source - this class fires SunEvents
-// to anyone watching. A simple GUI is provided
-// with &quot;rise&quot; and &quot;set&quot; buttons that cause the
-// SunEvents to be fired.
-public class WeatherStation extends Frame implements Serializable {
-    private transient Vector listeners;
+    <span class="c1">// Provide a simple GUI that triggers our SunEvents
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="nf">WeatherStation</span><span class="o">()</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="s">&#34;Sun Watcher&#34;</span><span class="o">);</span>
+        <span class="n">setLayout</span><span class="o">(</span><span class="k">new</span> <span class="n">GridLayout</span><span class="o">(</span><span class="n">1</span><span class="o">,</span><span class="n">0</span><span class="o">));</span>
+        <span class="n">Button</span> <span class="n">riseButton</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Button</span><span class="o">(</span><span class="s">&#34;Rise&#34;</span><span class="o">);</span>
+        <span class="n">Button</span> <span class="n">setButton</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Button</span><span class="o">(</span><span class="s">&#34;Set&#34;</span><span class="o">);</span>
+        <span class="n">add</span><span class="o">(</span><span class="n">riseButton</span><span class="o">);</span>
+        <span class="n">add</span><span class="o">(</span><span class="n">setButton</span><span class="o">);</span>
 
-    // Provide a simple GUI that triggers our SunEvents
-    public WeatherStation() {
-        super(&quot;Sun Watcher&quot;);
-        setLayout(new GridLayout(1,0));
-        Button riseButton = new Button(&quot;Rise&quot;);
-        Button setButton = new Button(&quot;Set&quot;);
-        add(riseButton);
-        add(setButton);
+        <span class="c1">// make the &#34;Rise&#34; button fire &#34;rise&#34; SunEvents
+</span><span class="c1"></span>        <span class="n">riseButton</span><span class="o">.</span><span class="na">addActionListener</span><span class="o">(</span><span class="k">new</span> <span class="n">ActionListener</span><span class="o">()</span> <span class="o">{</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">actionPerformed</span><span class="o">(</span><span class="n">ActionEvent</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">fireSunMoved</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">});</span>
 
-        // make the &quot;Rise&quot; button fire &quot;rise&quot; SunEvents
-        riseButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                fireSunMoved(true);
-            }
-        });
+        <span class="c1">// make the &#34;Rise&#34; button fire &#34;set&#34; SunEvents
+</span><span class="c1"></span>        <span class="n">setButton</span><span class="o">.</span><span class="na">addActionListener</span><span class="o">(</span><span class="k">new</span> <span class="n">ActionListener</span><span class="o">()</span> <span class="o">{</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">actionPerformed</span><span class="o">(</span><span class="n">ActionEvent</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">fireSunMoved</span><span class="o">(</span><span class="kc">false</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">});</span>
 
-        // make the &quot;Rise&quot; button fire &quot;set&quot; SunEvents
-        setButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                fireSunMoved(false);
-            }
-        });
+        <span class="c1">// Provide a means to close the application
+</span><span class="c1"></span>        <span class="n">addWindowListener</span><span class="o">(</span><span class="k">new</span> <span class="n">WindowAdapter</span><span class="o">()</span> <span class="o">{</span>
+            <span class="kd">public</span> <span class="kt">void</span> <span class="nf">windowClosing</span><span class="o">(</span><span class="n">WindowEvent</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="n">0</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">});</span>
 
-        // Provide a means to close the application
-        addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                System.exit(0);
-            }
-        });
+        <span class="n">pack</span><span class="o">();</span>
+    <span class="o">}</span>
 
-        pack();
-    }
+    <span class="c1">// Register a listener for SunEvents
+</span><span class="c1"></span>    <span class="kd">synchronized</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addSunListener</span><span class="o">(</span><span class="n">SunListener</span> <span class="n">l</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">listeners</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">listeners</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Vector</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="n">listeners</span><span class="o">.</span><span class="na">addElement</span><span class="o">(</span><span class="n">l</span><span class="o">);</span>
+    <span class="o">}</span>  
 
-    // Register a listener for SunEvents
-    synchronized public void addSunListener(SunListener l) {
-        if (listeners == null) {
-            listeners = new Vector();
-        }
-        listeners.addElement(l);
-    }  
+    <span class="c1">// Remove a listener for SunEvents
+</span><span class="c1"></span>    <span class="kd">synchronized</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">removeSunListener</span><span class="o">(</span><span class="n">SunListener</span> <span class="n">l</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">listeners</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">listeners</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Vector</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="n">listeners</span><span class="o">.</span><span class="na">removeElement</span><span class="o">(</span><span class="n">l</span><span class="o">);</span>
+    <span class="o">}</span>
 
-    // Remove a listener for SunEvents
-    synchronized public void removeSunListener(SunListener l) {
-        if (listeners == null) {
-            listeners = new Vector();
-        }
-        listeners.removeElement(l);
-    }
+    <span class="c1">// Fire a SunEvent to all registered listeners
+</span><span class="c1"></span>    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">fireSunMoved</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">rose</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// if we have no listeners, do nothing...
+</span><span class="c1"></span>        <span class="k">if</span> <span class="o">(</span><span class="n">listeners</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">listeners</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+            <span class="c1">// create the event object to send
+</span><span class="c1"></span>            <span class="n">SunEvent</span> <span class="n">event</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SunEvent</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">rose</span><span class="o">,</span> <span class="k">new</span> <span class="n">Date</span><span class="o">());</span>
 
-    // Fire a SunEvent to all registered listeners
-    protected void fireSunMoved(boolean rose) {
-        // if we have no listeners, do nothing...
-        if (listeners != null &amp;&amp; !listeners.isEmpty()) {
-            // create the event object to send
-            SunEvent event = new SunEvent(this, rose, new Date());
+            <span class="c1">// make a copy of the listener list in case
+</span><span class="c1"></span>            <span class="c1">//   anyone adds/removes listeners
+</span><span class="c1"></span>            <span class="n">Vector</span> <span class="n">targets</span><span class="o">;</span>
+            <span class="kd">synchronized</span> <span class="o">(</span><span class="k">this</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">targets</span> <span class="o">=</span> <span class="o">(</span><span class="n">Vector</span><span class="o">)</span> <span class="n">listeners</span><span class="o">.</span><span class="na">clone</span><span class="o">();</span>
+            <span class="o">}</span>
 
-            // make a copy of the listener list in case
-            //   anyone adds/removes listeners
-            Vector targets;
-            synchronized (this) {
-                targets = (Vector) listeners.clone();
-            }
-
-            // walk through the listener list and
-            //   call the sunMoved method in each
-            Enumeration e = targets.elements();
-            while (e.hasMoreElements()) {
-                SunListener l = (SunListener) e.nextElement();
-                l.sunMoved(event);
-            }
-        }
-    }
-}
-</code></pre>
-
+            <span class="c1">// walk through the listener list and
+</span><span class="c1"></span>            <span class="c1">//   call the sunMoved method in each
+</span><span class="c1"></span>            <span class="n">Enumeration</span> <span class="n">e</span> <span class="o">=</span> <span class="n">targets</span><span class="o">.</span><span class="na">elements</span><span class="o">();</span>
+            <span class="k">while</span> <span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">hasMoreElements</span><span class="o">())</span> <span class="o">{</span>
+                <span class="n">SunListener</span> <span class="n">l</span> <span class="o">=</span> <span class="o">(</span><span class="n">SunListener</span><span class="o">)</span> <span class="n">e</span><span class="o">.</span><span class="na">nextElement</span><span class="o">();</span>
+                <span class="n">l</span><span class="o">.</span><span class="na">sunMoved</span><span class="o">(</span><span class="n">event</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></div>
 <p>Our event source can now notify interested listeners. The <code>synchronized</code> keywords and cloning are necessary to avoid possible problems if the list of listeners changes while we are notifying listeners. Pressing the Rise and Set buttons fires an appropriate <code>SunEvent</code> to any registered listeners.</p>
 
 <p>Typically, developers will create a <code>fire</code> method similar to the previous <code>fireSunMoved()</code> method, but the method is not required. The event-firing code can appear in any method you prefer. VisualAge for Java will create a method similar to this fire method, taking a SunEvent as its argument.</p>
@@ -975,50 +932,44 @@ public class WeatherStation extends Frame implements Serializable {
 <h3 id="a-sample-event-listener">A Sample Event Listener</h3>
 
 <p>In our example, the weather channel informs any interested parties about the sun rising or setting. Continuing this example, Mrs. Jones assigns her class the task of graphing the behavior of the sun. They must watch a weather channel to find out at exactly what time the sun rose and set each day, logging this information in their notebook. We can model this example using a Student class as follows:</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// A sample SunListener, logging when the sun rises and sets
+</span><span class="c1"></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Student</span> <span class="kd">implements</span> <span class="n">SunListener</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
 
-<pre><code>// A sample SunListener, logging when the sun rises and sets
-public class Student implements SunListener {
-    private String name;
+    <span class="kd">public</span> <span class="nf">Student</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
 
-    public Student(String name) {
-        this.name = name;
-    }
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">sunMoved</span><span class="o">(</span><span class="n">SunEvent</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">log</span><span class="o">(</span><span class="n">name</span> <span class="o">+</span> <span class="s">&#34;\tlogs : &#34;</span> <span class="o">+</span> <span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">isRisen</span><span class="o">()</span> <span class="o">?</span> <span class="s">&#34;rose&#34;</span> <span class="o">:</span> <span class="s">&#34;set&#34;</span><span class="o">)</span> <span class="o">+</span>
+                <span class="s">&#34; at &#34;</span> <span class="o">+</span> <span class="n">e</span><span class="o">.</span><span class="na">getDate</span><span class="o">());</span> 
+    <span class="o">}</span>
 
-    public void sunMoved(SunEvent e) {
-        log(name + &quot;\tlogs : &quot; + (e.isRisen() ? &quot;rose&quot; : &quot;set&quot;) +
-                &quot; at &quot; + e.getDate()); 
-    }
-
-    protected void log(String text) {
-        System.out.println(text);
-    }
-}
-</code></pre>
-
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">log</span><span class="o">(</span><span class="n">String</span> <span class="n">text</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">text</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></div>
 <p>Note that <code>Student</code> implements <code>SunListener</code>, defining the details of a <code>sunMoved()</code> method. Any number of <code>Student</code>s may watch the weather channel to hear the time of sunrise and sunset.</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">effectivevaj.bean.intro.eventsets</span><span class="o">;</span>
 
-<pre><code>package effectivevaj.bean.intro.eventsets;
+<span class="c1">// A simple test of the SunEvent source and listeners
+</span><span class="c1"></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">WeatherTest</span> <span class="o">{</span>
+    <span class="c1">// Run a test on the weather station, using Scott&#39;s
+</span><span class="c1"></span>    <span class="c1">//  kids as sample students
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// create a new sun event source
+</span><span class="c1"></span>        <span class="n">WeatherStation</span> <span class="n">w</span> <span class="o">=</span> <span class="k">new</span> <span class="n">WeatherStation</span><span class="o">();</span>
 
-// A simple test of the SunEvent source and listeners
-public class WeatherTest {
-    // Run a test on the weather station, using Scott's
-    //  kids as sample students
-    public static void main(String[] args) {
-        // create a new sun event source
-        WeatherStation w = new WeatherStation();
+        <span class="c1">// add some students to listen for sun rise/set
+</span><span class="c1"></span>        <span class="n">w</span><span class="o">.</span><span class="na">addSunListener</span><span class="o">(</span><span class="k">new</span> <span class="n">Student</span><span class="o">(</span><span class="s">&#34;Nicole&#34;</span><span class="o">));</span>
+        <span class="n">w</span><span class="o">.</span><span class="na">addSunListener</span><span class="o">(</span><span class="k">new</span> <span class="n">Student</span><span class="o">(</span><span class="s">&#34;Alex&#34;</span><span class="o">));</span>
+        <span class="n">w</span><span class="o">.</span><span class="na">addSunListener</span><span class="o">(</span><span class="k">new</span> <span class="n">Student</span><span class="o">(</span><span class="s">&#34;Trevor&#34;</span><span class="o">));</span>
+        <span class="n">w</span><span class="o">.</span><span class="na">addSunListener</span><span class="o">(</span><span class="k">new</span> <span class="n">Student</span><span class="o">(</span><span class="s">&#34;Claire&#34;</span><span class="o">));</span>
 
-        // add some students to listen for sun rise/set
-        w.addSunListener(new Student(&quot;Nicole&quot;));
-        w.addSunListener(new Student(&quot;Alex&quot;));
-        w.addSunListener(new Student(&quot;Trevor&quot;));
-        w.addSunListener(new Student(&quot;Claire&quot;));
-
-        // display the GUI for the weather channel
-        w.setVisible(true);
-    }
-}
-</code></pre>
-
+        <span class="c1">// display the GUI for the weather channel
+</span><span class="c1"></span>        <span class="n">w</span><span class="o">.</span><span class="na">setVisible</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></div>
 <p>Running WeatherTest and pressing the Rise and Set buttons results in something like the following:</p>
 
 <pre><code>Nicole logs : rose at Thu Apr 29 14:55:21 PDT 1999
@@ -1042,11 +993,8 @@ Claire logs : set at Thu Apr 29 14:55:22 PDT 1999
 <p>Events are useful when writing code by hand, but they require a lot of code. Fortunately, bean-builder tools can provide assistance in generating this code. But how can a bean-builder tool determine which events can be fired so it can assist?</p>
 
 <p>Recall that methods define properties using certain naming conventions; we define events in a similar manner. Bean-builder tools look for methods with the following naming pattern:</p>
-
-<pre><code>public void addSomeName(SomeName l)
-public void removeSomeName(SomeName l)
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">addSomeName</span><span class="o">(</span><span class="n">SomeName</span> <span class="n">l</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">removeSomeName</span><span class="o">(</span><span class="n">SomeName</span> <span class="n">l</span><span class="o">)</span></code></pre></div>
 <p>When a tool sees a method that matches this naming pattern, it checks to see if <code>SomeName</code> is an interface that implements <code>EventListener</code>. (Remember that tag we added to the <code>SunListener</code> interface?) A method matching this pattern defines an event set.</p>
 
 <p>Once identified, the bean-builder tool examines the event listener interface to see which methods it requires. These methods are possible events that the bean can fire. Using this information, the bean-builder tool can tell the user which events a bean can fire, enabling the user to associate an event from one bean with an action on another. We will see later how the bean-builder tool can use this information to help a user generate an application.</p>

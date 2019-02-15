@@ -290,16 +290,13 @@
 <p>There should <em><strong>never</strong></em> exist any language feature such that <em><strong>adding</strong></em> a new type to a referenced package can break your existing code. Import-on-demand is one such feature... And it's evil...</p>
 
 <p>For example:</p>
-
-<pre><code>import a.b.*; // your package
-import x.y.*; // 3rd-party code
-
-class Foo {
-    Bar bar;
-    ...
-}
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">a.b.*</span><span class="o">;</span> <span class="c1">// your package
+</span><span class="c1"></span><span class="kn">import</span> <span class="nn">x.y.*</span><span class="o">;</span> <span class="c1">// 3rd-party code
+</span><span class="c1"></span>
+<span class="kd">class</span> <span class="nc">Foo</span> <span class="o">{</span>
+    <span class="n">Bar</span> <span class="n">bar</span><span class="o">;</span>
+    <span class="o">...</span>
+<span class="o">}</span></code></pre></div>
 <p>Suppose that to start with, only <code>a.b.Bar</code> exists. You compile and check-in your code and all's fine.</p>
 
 <p>This code has a <a href="http://c2.com/cgi/wiki?BusNumber">Bus Number</a> of one...</p>
@@ -311,16 +308,10 @@ class Foo {
 <h1 id="the-big-bang">The Big Bang</h1>
 
 <p>This is language design at its worst, and Sun made this blow up in everyone's face between JDK 1.1 and 1.2. In 1.1, there existed <code>java.awt.List</code>. Tons of folks wrote code that included</p>
-
-<pre><code>import java.util.*;
-import java.awt.*;
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.*</span><span class="o">;</span></code></pre></div>
 <p>I can't begin to count the number of code examples that contained those two lines). If you used List in your class, like</p>
-
-<pre><code>List choices = new List();
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">List</span> <span class="n">choices</span> <span class="o">=</span> <span class="k">new</span> <span class="n">List</span><span class="o">();</span></code></pre></div>
 <p>Your code compiled fine in 1.1, but a runtime lib upgrade to Java 1.2  breaks your code!</p>
 
 <p>BTW: Sun <em>knew</em> and announced this would happen. They should have created <code>java.util.collections.List</code> instead of <code>java.util.List</code> to prevent it. It forced lots of people to change existing code for no gain.</p>

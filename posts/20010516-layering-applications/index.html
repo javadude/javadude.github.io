@@ -345,22 +345,19 @@ Suppose tomorrow &quot;Schmoo&quot; becomes available. &quot;Schmoo&quot; is the
 <p>In the same manner, interfaces are the key to separation in your application. If you have two components that need to talk with one another, define one or more interfaces to lock down that communication. Once you have the interfaces in place, <em>it doesn't matter <strong>what</strong> the components actually <strong>are</strong> or <strong>do</strong>, as long as they respect that communication!</em></p>
 
 <p>Think about this for a moment. Suppose we define:</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Customer</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">();</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">);</span>
+    <span class="o">...</span>
+<span class="o">}</span>
 
-<pre><code>public interface Customer {
-    public String getName();
-    public void setName(String name);
-    ...
-}
-
-public interface CustomerManager {
-    public Customer   load(int id);
-    public Customer   store(Customer customer);
-    public Customer[] findByName(String namePattern);
-    public Customer   createCustomer(String name, float creditLimit);
-    public void       deleteCustomer(Customer customer);
-}
-</code></pre>
-
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CustomerManager</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">Customer</span>   <span class="nf">load</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="n">Customer</span>   <span class="nf">store</span><span class="o">(</span><span class="n">Customer</span> <span class="n">customer</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="n">Customer</span><span class="o">[]</span> <span class="nf">findByName</span><span class="o">(</span><span class="n">String</span> <span class="n">namePattern</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="n">Customer</span>   <span class="nf">createCustomer</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">float</span> <span class="n">creditLimit</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="kt">void</span>       <span class="nf">deleteCustomer</span><span class="o">(</span><span class="n">Customer</span> <span class="n">customer</span><span class="o">);</span>
+<span class="o">}</span></code></pre></div>
 <p>Notice how this <em>does not</em> say anything about <em>how</em> or <em>where</em> the customer is stored. All we're doing here is specifying the basic CRUD (Create, Read, Update, Delete) operations that you need for a piece of data.</p>
 
 <h2 id="wow-i-can-reuse-things">Wow, I can reuse things!</h2>
@@ -431,16 +428,13 @@ The code that fetches and saves data for you</li>
 <p>The hardest part of making your application nice and generic is dealing with exceptions.</p>
 
 <p>Let's just think about our CustomerManager:</p>
-
-<pre><code>public interface CustomerManager {
-    public Customer   load(int id);
-    public Customer   store(Customer customer);
-    public Customer[] findByName(String namePattern);
-    public Customer   createCustomer(String name, float creditLimit);
-    public void       deleteCustomer(Customer customer);
-}
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CustomerManager</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">Customer</span>   <span class="nf">load</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="n">Customer</span>   <span class="nf">store</span><span class="o">(</span><span class="n">Customer</span> <span class="n">customer</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="n">Customer</span><span class="o">[]</span> <span class="nf">findByName</span><span class="o">(</span><span class="n">String</span> <span class="n">namePattern</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="n">Customer</span>   <span class="nf">createCustomer</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">float</span> <span class="n">creditLimit</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="kt">void</span>       <span class="nf">deleteCustomer</span><span class="o">(</span><span class="n">Customer</span> <span class="n">customer</span><span class="o">);</span>
+<span class="o">}</span></code></pre></div>
 <p>This definition has some serious problems. If anything goes wrong, the caller needs to know about it. So we'll need to declare some thrown exceptions for error cases.</p>
 
 <p><em>But what exceptions should we throw?</em></p>
@@ -448,38 +442,32 @@ The code that fetches and saves data for you</li>
 <p>Let's start by thinking about and implementation using JDBC. JDBC throws SQLExceptions (btw: SQL is properly pronounced &quot;squeal&quot;, no Ned Beatty references, please.)</p>
 
 <p>So we could write a class that looks like:</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomerManagerUsingJDBC</span> <span class="kd">implements</span> <span class="n">CustomerManager</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">Customer</span>   <span class="nf">load</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">SQLException</span> <span class="o">{</span>
+        <span class="o">...</span>
+    <span class="o">}</span>
 
-<pre><code>public class CustomerManagerUsingJDBC implements CustomerManager {
-    public Customer   load(int id) throws SQLException {
-        ...
-    }
-
-    public Customer   store(Customer customer) throws SQLException {
-        ...
-    }
-    ...
-}
-</code></pre>
-
+    <span class="kd">public</span> <span class="n">Customer</span>   <span class="nf">store</span><span class="o">(</span><span class="n">Customer</span> <span class="n">customer</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">SQLException</span> <span class="o">{</span>
+        <span class="o">...</span>
+    <span class="o">}</span>
+    <span class="o">...</span>
+<span class="o">}</span></code></pre></div>
 <p>and then modify the interface to also throw those exceptions. Ok so far, and we set up the business logic to catch SQLExceptions as necessary.</p>
 
 <h3 id="uhhhh-but-what-about-ejb">Uhhhh, but what about EJB?</h3>
 
 <p>But things get nasty if we try to change the implementation to use Enterprise JavaBeans:</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomerManagerUsingEJB</span> <span class="kd">implements</span> <span class="n">CustomerManager</span> <span class="o">{</span>
 
-<pre><code>public class CustomerManagerUsingEJB implements CustomerManager {
+    <span class="kd">public</span> <span class="n">Customer</span> <span class="nf">load</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">EJBException</span><span class="o">,</span> <span class="n">RemoteException</span> <span class="o">{</span>
+        <span class="o">...</span>
+    <span class="o">}</span>
 
-    public Customer load(int id) throws EJBException, RemoteException {
-        ...
-    }
-
-    public Customer store(Customer customer) throws EJBException, RemoteException {
-        ...
-    }
-    ...
-}
-</code></pre>
-
+    <span class="kd">public</span> <span class="n">Customer</span> <span class="nf">store</span><span class="o">(</span><span class="n">Customer</span> <span class="n">customer</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">EJBException</span><span class="o">,</span> <span class="n">RemoteException</span> <span class="o">{</span>
+        <span class="o">...</span>
+    <span class="o">}</span>
+    <span class="o">...</span>
+<span class="o">}</span></code></pre></div>
 <p>Accessing EJBs could throw EJBException or RemoteException. Ok, so we'll modify the interface to use EJB, then change the code in the business logic.</p>
 
 <p><strong>Wrongo!!!</strong></p>
@@ -501,65 +489,56 @@ The code that fetches and saves data for you</li>
 </ul>
 
 <p>Those are a few simple cases. Ok, let's define custom exceptions to deal with this.</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyApplicationException</span> <span class="kd">extends</span> <span class="n">Exception</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">Throwable</span> <span class="n">nestedException</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="nf">MyApplicationException</span> <span class="o">(</span><span class="n">String</span> <span class="n">message</span><span class="o">,</span> <span class="n">Throwable</span> <span class="n">nestedException</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">nestedException</span> <span class="o">=</span> <span class="n">nestedException</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">Throwable</span> <span class="nf">getNestedException</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">nestedException</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 
-<pre><code>public class MyApplicationException extends Exception {
-    private Throwable nestedException;
-    public MyApplicationException (String message, Throwable nestedException) {
-        super(message);
-        this.nestedException = nestedException;
-    }
-    public Throwable getNestedException() {
-        return nestedException;
-    }
-}
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomerException</span> <span class="kd">extends</span> <span class="n">MyApplicationException</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nf">CustomerException</span><span class="o">(</span><span class="n">String</span> <span class="n">message</span><span class="o">,</span> <span class="n">Throwable</span> <span class="n">nestedException</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">message</span><span class="o">,</span> <span class="n">nestedException</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 
-public class CustomerException extends MyApplicationException {
-    public CustomerException(String message, Throwable nestedException) {
-        super(message, nestedException);
-    }
-}
-
-public class NotFoundException extends MyApplicationException {
-    public NotFoundException(String message, Throwable nestedException) {
-        super(message, nestedException);
-    }
-}
-</code></pre>
-
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">NotFoundException</span> <span class="kd">extends</span> <span class="n">MyApplicationException</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nf">NotFoundException</span><span class="o">(</span><span class="n">String</span> <span class="n">message</span><span class="o">,</span> <span class="n">Throwable</span> <span class="n">nestedException</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">message</span><span class="o">,</span> <span class="n">nestedException</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></div>
 <p>Now we define the interface as follows. Note that this is how we <em>should</em> have defined it in the first place, so it won't require changes.</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CustomerManager</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">Customer</span> <span class="nf">load</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">CustomerException</span><span class="o">,</span> <span class="n">NotFoundException</span> <span class="o">{</span>
+        <span class="o">...</span>
+    <span class="o">}</span>
 
-<pre><code>public interface CustomerManager {
-    public Customer load(int id) throws CustomerException, NotFoundException {
-        ...
-    }
-
-    public Customer store(Customer customer) throws CustomerException {
-        ...
-    }
-    ...
-}
-</code></pre>
-
+    <span class="kd">public</span> <span class="n">Customer</span> <span class="nf">store</span><span class="o">(</span><span class="n">Customer</span> <span class="n">customer</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">CustomerException</span> <span class="o">{</span>
+        <span class="o">...</span>
+    <span class="o">}</span>
+    <span class="o">...</span>
+<span class="o">}</span></code></pre></div>
 <p>Now the interface is <em>totally generic</em>, with respect to how we store the data! A sample JDBC implementation might look like:</p>
-
-<pre><code>public class CustomerManagerUsingJDBC implements CustomerManager {
-    public Customer load(int id) throws CustomerException, NotFoundException {
-        try {
-            // JDBC to try to fetch data
-            if (resultSetIsEmpty)
-                throw new NotFoundException(&quot;Customer &quot; + id + &quot; not found&quot;, null);
-
-        } catch(NotFoundException e) {
-            throw e;
-        } catch(SQLException e) {
-            throw new CustomerException(&quot;oops!&quot;, e);
-        }
-        ...
-    }
-    ...
-}
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomerManagerUsingJDBC</span> <span class="kd">implements</span> <span class="n">CustomerManager</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">Customer</span> <span class="nf">load</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">CustomerException</span><span class="o">,</span> <span class="n">NotFoundException</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="c1">// JDBC to try to fetch data
+</span><span class="c1"></span>            <span class="k">if</span> <span class="o">(</span><span class="n">resultSetIsEmpty</span><span class="o">)</span>
+                <span class="k">throw</span> <span class="k">new</span> <span class="n">NotFoundException</span><span class="o">(</span><span class="s">&#34;Customer &#34;</span> <span class="o">+</span> <span class="n">id</span> <span class="o">+</span> <span class="s">&#34; not found&#34;</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+            
+        <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="n">NotFoundException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">throw</span> <span class="n">e</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="n">SQLException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="n">CustomerException</span><span class="o">(</span><span class="s">&#34;oops!&#34;</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="o">...</span>
+    <span class="o">}</span>
+    <span class="o">...</span>
+<span class="o">}</span></code></pre></div>
 <p>The idea is to catch the specific exception and wrap it in an application exception. This allows the business logic to worry about the <em>concept</em> of the problem, without knowing anything about the details of <em>how</em> the data manager was implemented.</p>
 
 <p>2018 Note: Of course this gets much simpler with Kotlin, as <em>it does not use checked exceptions</em>, so you don't have to pollute callers with framework-specific exceptions of things they call...</p>
@@ -582,45 +561,39 @@ public class NotFoundException extends MyApplicationException {
 <p>Entity beans are really just another way to store data.</p>
 
 <p>Start with our interfaces again:</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Customer</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span>          <span class="kd">throws</span> <span class="n">CustomerException</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">CustomerException</span><span class="o">;</span>
+    <span class="o">...</span>
+<span class="o">}</span>
 
-<pre><code>public interface Customer {
-    public String getName()          throws CustomerException;
-    public void setName(String name) throws CustomerException;
-    ...
-}
-
-public interface CustomerManager {
-    public Customer   load(int id)
-        throws CustomerException, NotFoundException;
-    public Customer   store(Customer customer) 
-        throws CustomerException;
-    public Customer[] findByName(String namePattern) 
-        throws CustomerException, NotFoundException;
-    public Customer   createCustomer(String name, float creditLimit) 
-        throws CustomerException;
-    public void       deleteCustomer(Customer customer) 
-        throws CustomerException;
-}
-</code></pre>
-
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CustomerManager</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">Customer</span>   <span class="nf">load</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">)</span>
+        <span class="kd">throws</span> <span class="n">CustomerException</span><span class="o">,</span> <span class="n">NotFoundException</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="n">Customer</span>   <span class="nf">store</span><span class="o">(</span><span class="n">Customer</span> <span class="n">customer</span><span class="o">)</span> 
+        <span class="kd">throws</span> <span class="n">CustomerException</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="n">Customer</span><span class="o">[]</span> <span class="nf">findByName</span><span class="o">(</span><span class="n">String</span> <span class="n">namePattern</span><span class="o">)</span> 
+        <span class="kd">throws</span> <span class="n">CustomerException</span><span class="o">,</span> <span class="n">NotFoundException</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="n">Customer</span>   <span class="nf">createCustomer</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">float</span> <span class="n">creditLimit</span><span class="o">)</span> 
+        <span class="kd">throws</span> <span class="n">CustomerException</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kt">void</span>       <span class="nf">deleteCustomer</span><span class="o">(</span><span class="n">Customer</span> <span class="n">customer</span><span class="o">)</span> 
+        <span class="kd">throws</span> <span class="n">CustomerException</span><span class="o">;</span>
+<span class="o">}</span></code></pre></div>
 <p>The key here is the cooperation between the implementations of Customer and CustomerManager. First, our Customer implementation might look like:</p>
-
-<pre><code>public class CustomerAsEntityBean implements Customer {
-    private EntityCustomer entityCustomer;
-    public CustomerAsEntityBean(EntityCustomer entityCustomer) {
-        this.entityCustomer = entityCustomer;
-    }
-    public String getName() throws CustomerException {
-        try {
-            return entityCustomer.getName();
-        } catch(Exception e) { // EJBException, RemoteException
-            throw new CustomerException(e);
-        }
-    }
-    ...
-}
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomerAsEntityBean</span> <span class="kd">implements</span> <span class="n">Customer</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">EntityCustomer</span> <span class="n">entityCustomer</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="nf">CustomerAsEntityBean</span><span class="o">(</span><span class="n">EntityCustomer</span> <span class="n">entityCustomer</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">entityCustomer</span> <span class="o">=</span> <span class="n">entityCustomer</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">CustomerException</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">entityCustomer</span><span class="o">.</span><span class="na">getName</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// EJBException, RemoteException
+</span><span class="c1"></span>            <span class="k">throw</span> <span class="k">new</span> <span class="n">CustomerException</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="o">...</span>
+<span class="o">}</span></code></pre></div>
 <p>This customer is a <em>proxy</em> for our Entity Bean. Note that all requests are merely passed through to the entity bean.</p>
 
 <p>There are several approaches to using entity beans like this:</p>
@@ -636,25 +609,22 @@ public interface CustomerManager {
 <p>Whatever implementation you choose <em>makes no difference to the rest of your application (other than the data manager)</em>. All the rest of your application cares about is that it can ask a Customer for pieces of information and deal with problems accessing that data.</p>
 
 <p>The final piece necessary to make this work is a data manager:</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomerManagerUsingEJB</span> <span class="kd">interface</span> <span class="nc">CustomerManager</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">Customer</span>   <span class="nf">load</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">)</span>
+            <span class="kd">throws</span> <span class="n">CustomerException</span><span class="o">,</span> <span class="n">NotFoundException</span> <span class="o">{</span>
 
-<pre><code>public class CustomerManagerUsingEJB interface CustomerManager {
-    public Customer   load(int id)
-            throws CustomerException, NotFoundException {
-
-        try {
-            // set up naming context
-            // grab home interface for entity
-            // find entity (store as entityCustomer)
-            return new CustomerAsEntityBean(entityCustomer);
-        } catch(FinderException e) { 
-            throw new NotFoundException(&quot;Customer &quot; + id + &quot; not found&quot;, e);
-        } catch(Exception e) { //EJBException, RemoteException
-        }
-    }
-    ...
-}
-</code></pre>
-
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="c1">// set up naming context
+</span><span class="c1"></span>            <span class="c1">// grab home interface for entity
+</span><span class="c1"></span>            <span class="c1">// find entity (store as entityCustomer)
+</span><span class="c1"></span>            <span class="k">return</span> <span class="k">new</span> <span class="n">CustomerAsEntityBean</span><span class="o">(</span><span class="n">entityCustomer</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="n">FinderException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span> 
+            <span class="k">throw</span> <span class="k">new</span> <span class="n">NotFoundException</span><span class="o">(</span><span class="s">&#34;Customer &#34;</span> <span class="o">+</span> <span class="n">id</span> <span class="o">+</span> <span class="s">&#34; not found&#34;</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span> <span class="c1">//EJBException, RemoteException
+</span><span class="c1"></span>        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="o">...</span>
+<span class="o">}</span></code></pre></div>
 <p>Now all your business logic cares about is that it can ask <em>some</em> CustomerManager for <em>some</em> Customer. It doesn't need to even know that EJB was involved!</p>
 
 <h3 id="session-beans">Session Beans</h3>
@@ -666,57 +636,52 @@ public interface CustomerManager {
 <p>We need <em>something</em> to tie all of the pieces together. That something is a Factory class. We'll use the Factory Method pattern (see <em>Design Patterns</em> by Gamma et al) to implement this.</p>
 
 <p>A simple factory might look as follows:</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyApplicationFactory</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="n">CustomerManager</span> <span class="n">customerManager</span> <span class="o">=</span>
+        <span class="k">new</span> <span class="n">CustomerManagerUsingEJB</span><span class="o">();</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="n">ApplicationLogic</span> <span class="n">applicationLogic</span> <span class="o">=</span>
+        <span class="k">new</span> <span class="n">ApplicationLogicAsSessionBean</span><span class="o">();</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">CustomerManager</span> <span class="nf">getCustomerManager</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">customerManager</span><span class="o">;</span>
+    <span class="o">}</span>
 
-<pre><code>public class MyApplicationFactory {
-    private static CustomerManager customerManager =
-        new CustomerManagerUsingEJB();
-    private static ApplicationLogic applicationLogic =
-        new ApplicationLogicAsSessionBean();
-    public static CustomerManager getCustomerManager() {
-        return customerManager;
-    }
-
-    public static ApplicationLogic getLogic() {
-        return applicationLogic;
-    }
-}
-</code></pre>
-
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">ApplicationLogic</span> <span class="nf">getLogic</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">applicationLogic</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></div>
 <p>(Note that this type of object is also called a <em>Service Locator</em>, giving centralized access to common resources. The same function can be accomplished using <em>Dependency Injection</em>, but I generally find it much simpler to debug a Service Locator)</p>
 
 <p>You could even make things more flexible, keeping the names of the actual classes to use in a property file:</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyApplicationFactory</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="n">CustomerManager</span> <span class="n">customerManager</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="n">ApplicationLogic</span> <span class="n">applicationLogic</span><span class="o">;</span>
+    <span class="c1">// note: needs **much** better error handling...
+</span><span class="c1"></span>    <span class="c1">//       this is just to give the idea... 
+</span><span class="c1"></span>    <span class="kd">static</span> <span class="o">{</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">InputStream</span> <span class="n">in</span> <span class="o">=</span> 
+                <span class="n">MyApplicationFactory</span><span class="o">.</span><span class="na">getResourceAsStream</span><span class="o">(</span>
+                    <span class="s">&#34;application.properties&#34;</span><span class="o">);</span>
+            <span class="n">Properties</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Properties</span><span class="o">();</span>
+            <span class="n">p</span><span class="o">.</span><span class="na">load</span><span class="o">(</span><span class="n">in</span><span class="o">);</span>
+            <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+            <span class="n">customerManager</span> <span class="o">=</span> 
+                <span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">&#34;manager.customer&#34;</span><span class="o">)).</span><span class="na">newInstance</span><span class="o">();</span>
+            <span class="n">applicationLogic</span> <span class="o">=</span> 
+                <span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">&#34;logic.application&#34;</span><span class="o">)).</span><span class="na">newInstance</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// report error
+</span><span class="c1"></span>        <span class="o">}</span>
+    <span class="o">}</span>
 
-<pre><code>public class MyApplicationFactory {
-    private static CustomerManager customerManager;
-    private static ApplicationLogic applicationLogic;
-    // note: needs **much** better error handling...
-    //       this is just to give the idea... 
-    static {
-        try {
-            InputStream in = 
-                MyApplicationFactory.getResourceAsStream(
-                    &quot;application.properties&quot;);
-            Properties p = new Properties();
-            p.load(in);
-            in.close();
-            customerManager = 
-                Class.forName(p.getProperty(&quot;manager.customer&quot;)).newInstance();
-            applicationLogic = 
-                Class.forName(p.getProperty(&quot;logic.application&quot;)).newInstance();
-        } catch(Exception e) {
-            // report error
-        }
-    }
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">CustomerManager</span> <span class="nf">getCustomerManager</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">customerManager</span><span class="o">;</span>
+    <span class="o">}</span>
 
-    public static CustomerManager getCustomerManager() {
-        return customerManager;
-    }
-
-    public static ApplicationLogic getLogic() {
-        return applicationLogic;
-    }
-}
-</code></pre>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">ApplicationLogic</span> <span class="nf">getLogic</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">applicationLogic</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></div>
           </div>
 
           
