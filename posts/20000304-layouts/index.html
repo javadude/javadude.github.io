@@ -380,22 +380,16 @@ This returns the largest desired size for a component.</p></li>
 <p>Controlling the sizes returned for your own components can be accomplished in two ways, depending on whether you are using the JFC Project Swing components.</p>
 
 <p>If your component is a JFC Project Swing component, you inherit three methods,<code>setPreferredSize(Dimension)</code>, <code>setMinimumSize(Dimension)</code> and <code>setMaximumSize(Dimension)</code>. You can call these methods directly to explicitly set the size information for a component. For example:</p>
-
-<pre><code>JButton okButton = new JButton(&quot;Ok&quot;);
-okButton.setPreferredSize(new Dimension(100,10));
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">JButton</span> <span class="n">okButton</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JButton</span><span class="o">(</span><span class="s">&#34;Ok&#34;</span><span class="o">);</span>
+<span class="n">okButton</span><span class="o">.</span><span class="na">setPreferredSize</span><span class="o">(</span><span class="k">new</span> <span class="n">Dimension</span><span class="o">(</span><span class="n">100</span><span class="o">,</span><span class="n">10</span><span class="o">));</span></code></pre></div>
 <p>You should only adjust the sizes if you're really sure what you're doing. (The above example is probably_not_a good idea...)</p>
 
 <p>If your component is not a JFC Project Swing component, you will need to subclass it to adjust the sizes. For example:</p>
-
-<pre><code>public class MyButton extends Button {
-    public Dimension getPreferredSize() {
-        return new Dimension(100,10);
-    }   
-}
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyButton</span> <span class="kd">extends</span> <span class="n">Button</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">Dimension</span> <span class="nf">getPreferredSize</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="n">Dimension</span><span class="o">(</span><span class="n">100</span><span class="o">,</span><span class="n">10</span><span class="o">);</span>
+    <span class="o">}</span>   
+<span class="o">}</span></code></pre></div>
 <p><strong>Layout Managers and Containers</strong></p>
 
 <p>A layout manager must be associated with a <code>Container</code> object to perform its work. If a container does not have an associated layout manager, the container simply places components wherever specified by using the <code>setBounds()</code>, <code>setLocation()</code> and/or<code>setSize()</code> methods.</p>
@@ -403,36 +397,24 @@ okButton.setPreferredSize(new Dimension(100,10));
 <p>If a container has an associated layout manager, the container asks that layout manager to position and size its components before they are painted. The layout manager itself_does not_perform the painting; it simply decides what size and position each component should occupy and calls <code>setBounds()</code>, <code>setLocation()</code>and/or<code>setSize()</code> on each of those components.</p>
 
 <p>A <code>LayoutManager</code> is associated with a <code>Container</code> by calling the <code>setLayout(LayoutManager)</code> method of <code>Container</code>. For example:</p>
-
-<pre><code>Panel p = new Panel();
-p.setLayout(new BorderLayout());
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Panel</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Panel</span><span class="o">();</span>
+<span class="n">p</span><span class="o">.</span><span class="na">setLayout</span><span class="o">(</span><span class="k">new</span> <span class="n">BorderLayout</span><span class="o">());</span></code></pre></div>
 <p>Some containers, such as <code>Panel</code>, provide a constructor that takes a layout manager as an argument as well:</p>
-
-<pre><code>Panel p = new Panel(new BorderLayout());
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Panel</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Panel</span><span class="o">(</span><span class="k">new</span> <span class="n">BorderLayout</span><span class="o">());</span></code></pre></div>
 <p><strong>The <code>add(...)</code> Methods</strong></p>
 
 <p>Containers have several methods that can be used to add components to them. They are:</p>
-
-<pre><code>public Component add(Component comp)
-public Component add(String name, Component comp)
-public Component add(Component comp, int index)
-public void add(Component comp, Object constraints)
-public void add(Component comp, Object constraints, int index)
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="n">Component</span> <span class="nf">add</span><span class="o">(</span><span class="n">Component</span> <span class="n">comp</span><span class="o">)</span>
+<span class="kd">public</span> <span class="n">Component</span> <span class="nf">add</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="n">Component</span> <span class="n">comp</span><span class="o">)</span>
+<span class="kd">public</span> <span class="n">Component</span> <span class="nf">add</span><span class="o">(</span><span class="n">Component</span> <span class="n">comp</span><span class="o">,</span> <span class="kt">int</span> <span class="n">index</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">add</span><span class="o">(</span><span class="n">Component</span> <span class="n">comp</span><span class="o">,</span> <span class="n">Object</span> <span class="n">constraints</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">add</span><span class="o">(</span><span class="n">Component</span> <span class="n">comp</span><span class="o">,</span> <span class="n">Object</span> <span class="n">constraints</span><span class="o">,</span> <span class="kt">int</span> <span class="n">index</span><span class="o">)</span></code></pre></div>
 <p>Each of these methods adds a component to the container and passes information to the layout manager of the container. All of the methods take a<code>Component</code>parameter, specifying which component to add. Some take an index. This is used to specify an order in the container; some layout managers (such as<code>CardLayout</code>) respect the ordering of added components.</p>
 
 <p>The other parameters, <code>name</code> and <code>constraints</code> are information that can be used by a layout manager to help direct the layout. For example, when adding a component to a container that is managed by a <code>BorderLayout</code>, you specify a compass position as a constraint.</p>
 
 <p>Each of the above<code>add()</code>methods delegates its work to a single<code>addImpl()</code>method:</p>
-
-<pre><code>protected void addImpl(Component comp, Object constraints, int index)
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">protected</span> <span class="kt">void</span> <span class="nf">addImpl</span><span class="o">(</span><span class="n">Component</span> <span class="n">comp</span><span class="o">,</span> <span class="n">Object</span> <span class="n">constraints</span><span class="o">,</span> <span class="kt">int</span> <span class="n">index</span><span class="o">)</span></code></pre></div>
 <p>Note: <em>addImpl</em> stands for &quot;implementation of the add method.&quot;</p>
 
 <p>This method is the one that does all the work. It adds the <code>Component</code> to the <code>Container</code>, and, if a layout manager is managing the container layout, calls the <code>addLayoutComponent()</code> method of the layout manager. It is through <code>addLayoutComponent()</code> that the layout manager receives the constraints (from the <code>add()</code> call).</p>
@@ -446,33 +428,27 @@ public void add(Component comp, Object constraints, int index)
 <p>These insets define the area a container is reserving for its own use (such as drawing a decorative border). Layout managers_must_respect this area when positioning and sizing the contained components.</p>
 
 <p>To demonstrate, create a simple <code>Panel</code> subclass that provides a raised, 3D border around whatever is contained within it. You'll define this border as being 5 pixels away from each edge of the container border, and reserving some extra room between it and the laid out components. The class will look something like this:</p>
-
-<pre><code>public class BorderPanel extends Panel {
-    private static final Insets insets = new Insets(10,10,10,10);
-    public Insets getInsets() {return insets;}
-    public void paint(Graphics g) {
-        Dimension size = getSize();
-        g.setColor(getBackground());
-        g.draw3DRect(5,5,size.width-11, size.height-11, true);
-    }
-}
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BorderPanel</span> <span class="kd">extends</span> <span class="n">Panel</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Insets</span> <span class="n">insets</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Insets</span><span class="o">(</span><span class="n">10</span><span class="o">,</span><span class="n">10</span><span class="o">,</span><span class="n">10</span><span class="o">,</span><span class="n">10</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="n">Insets</span> <span class="nf">getInsets</span><span class="o">()</span> <span class="o">{</span><span class="k">return</span> <span class="n">insets</span><span class="o">;}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">paint</span><span class="o">(</span><span class="n">Graphics</span> <span class="n">g</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Dimension</span> <span class="n">size</span> <span class="o">=</span> <span class="n">getSize</span><span class="o">();</span>
+        <span class="n">g</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="n">getBackground</span><span class="o">());</span>
+        <span class="n">g</span><span class="o">.</span><span class="na">draw3DRect</span><span class="o">(</span><span class="n">5</span><span class="o">,</span><span class="n">5</span><span class="o">,</span><span class="n">size</span><span class="o">.</span><span class="na">width</span><span class="o">-</span><span class="n">11</span><span class="o">,</span> <span class="n">size</span><span class="o">.</span><span class="na">height</span><span class="o">-</span><span class="n">11</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></div>
 <p>To create the panel, you defined a static <code>Insets</code> object that represents the space to reserve. Because that space won't change, you used a single static final instance of it. You'll return this instance anytime a layout manager (or anyone else) calls <code>getInsets()</code>.</p>
 
 <p>You then define a <code>paint()</code> method that gets the size of the container into which it is painting, then draws a raised border within that space. If you use the above class as follows:</p>
-
-<pre><code>Frame f = new Frame(&quot;Test&quot;);
-f.setLayout(new GridLayout(1,0));
-f.setBackground(Color.lightGray);
-BorderPanel p = new BorderPanel();
-p.setLayout(new GridLayout(1,0));
-p.add(new Button(&quot;Hello&quot;));
-f.add(p);
-f.setVisible(true);
-f.pack();
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Frame</span> <span class="n">f</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Frame</span><span class="o">(</span><span class="s">&#34;Test&#34;</span><span class="o">);</span>
+<span class="n">f</span><span class="o">.</span><span class="na">setLayout</span><span class="o">(</span><span class="k">new</span> <span class="n">GridLayout</span><span class="o">(</span><span class="n">1</span><span class="o">,</span><span class="n">0</span><span class="o">));</span>
+<span class="n">f</span><span class="o">.</span><span class="na">setBackground</span><span class="o">(</span><span class="n">Color</span><span class="o">.</span><span class="na">lightGray</span><span class="o">);</span>
+<span class="n">BorderPanel</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BorderPanel</span><span class="o">();</span>
+<span class="n">p</span><span class="o">.</span><span class="na">setLayout</span><span class="o">(</span><span class="k">new</span> <span class="n">GridLayout</span><span class="o">(</span><span class="n">1</span><span class="o">,</span><span class="n">0</span><span class="o">));</span>
+<span class="n">p</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Button</span><span class="o">(</span><span class="s">&#34;Hello&#34;</span><span class="o">));</span>
+<span class="n">f</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">p</span><span class="o">);</span>
+<span class="n">f</span><span class="o">.</span><span class="na">setVisible</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+<span class="n">f</span><span class="o">.</span><span class="na">pack</span><span class="o">();</span></code></pre></div>
 <p>you'll get the following GUI:</p>
 
 <p><img src="images/insets1.gif" alt="insets1.gif (1695 bytes)" /></p>
@@ -480,10 +456,7 @@ f.pack();
 <p>If you are not familiar with <code>GridLayout</code>, it will be discussed<a href="#gridLayout">later</a>.</p>
 
 <p>You can get another interesting effect by adding the following to the <code>paint()</code> method:</p>
-
-<pre><code>g.draw3DRect(6,6,size.width-13,size.height-13,false);
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">g</span><span class="o">.</span><span class="na">draw3DRect</span><span class="o">(</span><span class="n">6</span><span class="o">,</span><span class="n">6</span><span class="o">,</span><span class="n">size</span><span class="o">.</span><span class="na">width</span><span class="o">-</span><span class="n">13</span><span class="o">,</span><span class="n">size</span><span class="o">.</span><span class="na">height</span><span class="o">-</span><span class="n">13</span><span class="o">,</span><span class="kc">false</span><span class="o">);</span></code></pre></div>
 <p>after the first <code>draw3DRect()</code>:</p>
 
 <p><img src="images/insets2.gif" alt="insets2.gif (1714 bytes)" /></p>
@@ -526,21 +499,18 @@ public Component add(Component comp, int index)
 <p>You do not specify any constraints for the components, as <code>FlowLayout</code> <em>only</em> depends on the order of the <code>add()</code> calls (or the index specified in the call to <code>add(Component, int)</code>.)</p>
 
 <p>Examine a simple <code>FlowLayout</code> in action. Suppose you had the following class definition:</p>
-
-<pre><code>public class FlowTest {
-    public static void main(String[] args) {
-        Frame f = new Frame(&quot;FlowTest&quot;);
-        f.setLayout(new FlowLayout());
-        f.add(new Button(&quot;A&quot;));
-        f.add(new Button(&quot;B&quot;));
-        f.add(new Button(&quot;C&quot;));
-        f.add(new Button(&quot;D&quot;));
-        f.add(new Button(&quot;E&quot;));
-        f.setVisible(true);
-    }
-}
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">FlowTest</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">Frame</span> <span class="n">f</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Frame</span><span class="o">(</span><span class="s">&#34;FlowTest&#34;</span><span class="o">);</span>
+        <span class="n">f</span><span class="o">.</span><span class="na">setLayout</span><span class="o">(</span><span class="k">new</span> <span class="n">FlowLayout</span><span class="o">());</span>
+        <span class="n">f</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Button</span><span class="o">(</span><span class="s">&#34;A&#34;</span><span class="o">));</span>
+        <span class="n">f</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Button</span><span class="o">(</span><span class="s">&#34;B&#34;</span><span class="o">));</span>
+        <span class="n">f</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Button</span><span class="o">(</span><span class="s">&#34;C&#34;</span><span class="o">));</span>
+        <span class="n">f</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Button</span><span class="o">(</span><span class="s">&#34;D&#34;</span><span class="o">));</span>
+        <span class="n">f</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Button</span><span class="o">(</span><span class="s">&#34;E&#34;</span><span class="o">));</span>
+        <span class="n">f</span><span class="o">.</span><span class="na">setVisible</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></div>
 <p>This class creates a <code>Frame</code> and adds five buttons to it. It lays the buttons out as many can fit per row, then moves to the next row to display more of them. The following pictures show the frame being expanded horizontally:</p>
 
 <p><img src="images/flow1.gif" alt="flow1.gif (2004 bytes)" /><br />
@@ -579,17 +549,14 @@ public Component add(Component comp, int index)
 <p><code>FlowLayout</code>'s preference would be to lay all its components out into a <em>single row</em>. This means that its preferred height would be the maximum height of any of its components plus some &quot;slop&quot; known as its<code>vgap</code>. (<code>vgap</code> and <code>hgap</code>are common properties of most of the standard layout managers, and specify how far apart components are placed.) The preferred width would be the sum of all widths of its contained components, plus an <code>hgap</code> between each and on either end of the row.</p>
 
 <p>Think about the consequences of this. What would happen if a <code>FlowLayout</code>-managed container was nested within another <code>FlowLayout</code>-managed container? For example:</p>
-
-<pre><code>Panel p1 = new Panel(new FlowLayout());
-Panel p2 = new Panel(new FlowLayout());
-p2.add(new Button(&quot;A&quot;));
-p2.add(new Button(&quot;B&quot;));
-p2.add(new Button(&quot;C&quot;));
-p2.add(new Button(&quot;D&quot;));
-p2.add(new Button(&quot;E&quot;));
-p1.add(p2);
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Panel</span> <span class="n">p1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Panel</span><span class="o">(</span><span class="k">new</span> <span class="n">FlowLayout</span><span class="o">());</span>
+<span class="n">Panel</span> <span class="n">p2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Panel</span><span class="o">(</span><span class="k">new</span> <span class="n">FlowLayout</span><span class="o">());</span>
+<span class="n">p2</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Button</span><span class="o">(</span><span class="s">&#34;A&#34;</span><span class="o">));</span>
+<span class="n">p2</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Button</span><span class="o">(</span><span class="s">&#34;B&#34;</span><span class="o">));</span>
+<span class="n">p2</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Button</span><span class="o">(</span><span class="s">&#34;C&#34;</span><span class="o">));</span>
+<span class="n">p2</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Button</span><span class="o">(</span><span class="s">&#34;D&#34;</span><span class="o">));</span>
+<span class="n">p2</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Button</span><span class="o">(</span><span class="s">&#34;E&#34;</span><span class="o">));</span>
+<span class="n">p1</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">p2</span><span class="o">);</span></code></pre></div>
 <p>Think this through a bit and the answer is very disconcerting. The following walks you through the layout process:</p>
 
 <ol>
@@ -655,16 +622,13 @@ p1.add(p2);
 <p>The first thing going through your mind should be &quot;but I will_never_have a GUI that looks like that!&quot; Moreover, you are probably correct. However, the secret is in mastering its nesting capabilities, and using two or three of the logical sections. (It's very rare that you'll actually use more than three of the positions in a container at once.)</p>
 
 <p>First, look at the sample code for the above GUI:</p>
-
-<pre><code>Frame f = new Frame(&quot;orderTest&quot;);
-f.setLayout(new BorderLayout());
-f.add(new Button(&quot;North&quot;),  BorderLayout.NORTH);
-f.add(new Button(&quot;South&quot;),  BorderLayout.SOUTH);
-f.add(new Button(&quot;East&quot;),   BorderLayout.EAST);
-f.add(new Button(&quot;West&quot;),   BorderLayout.WEST);
-f.add(new Button(&quot;Center&quot;), BorderLayout.CENTER);
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Frame</span> <span class="n">f</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Frame</span><span class="o">(</span><span class="s">&#34;orderTest&#34;</span><span class="o">);</span>
+<span class="n">f</span><span class="o">.</span><span class="na">setLayout</span><span class="o">(</span><span class="k">new</span> <span class="n">BorderLayout</span><span class="o">());</span>
+<span class="n">f</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Button</span><span class="o">(</span><span class="s">&#34;North&#34;</span><span class="o">),</span>  <span class="n">BorderLayout</span><span class="o">.</span><span class="na">NORTH</span><span class="o">);</span>
+<span class="n">f</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Button</span><span class="o">(</span><span class="s">&#34;South&#34;</span><span class="o">),</span>  <span class="n">BorderLayout</span><span class="o">.</span><span class="na">SOUTH</span><span class="o">);</span>
+<span class="n">f</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Button</span><span class="o">(</span><span class="s">&#34;East&#34;</span><span class="o">),</span>   <span class="n">BorderLayout</span><span class="o">.</span><span class="na">EAST</span><span class="o">);</span>
+<span class="n">f</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Button</span><span class="o">(</span><span class="s">&#34;West&#34;</span><span class="o">),</span>   <span class="n">BorderLayout</span><span class="o">.</span><span class="na">WEST</span><span class="o">);</span>
+<span class="n">f</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Button</span><span class="o">(</span><span class="s">&#34;Center&#34;</span><span class="o">),</span> <span class="n">BorderLayout</span><span class="o">.</span><span class="na">CENTER</span><span class="o">);</span></code></pre></div>
 <p>The <code>BorderLayout</code> manager requires a constraint when adding a component. The constraint can be one of the following:</p>
 
 <ul>
@@ -688,16 +652,13 @@ This is the &quot;new&quot; form of adding a constraint, added in JDK 1.1.</p></
 <p>You'll see a few more variations of the<code>add()</code>method when you examine<code>CardLayout</code><a href="#cardLayout">later</a>. Concentrate on just these forms for now.</p>
 
 <p>For<code>BorderLayout</code>, the constraint argument describes which position the component will occupy. Note that the earlier<code>BorderLayout</code>example source code could have been written as follows:</p>
-
-<pre><code>Frame f = new Frame(&quot;BorderTest&quot;);
-f.setLayout(new BorderLayout());
-f.add(&quot;North&quot;,  new Button(&quot;North&quot;));
-f.add(&quot;South&quot;,  new Button(&quot;South&quot;));
-f.add(&quot;East&quot;,   new Button(&quot;East&quot;));
-f.add(&quot;West&quot;,   new Button(&quot;West&quot;));
-f.add(&quot;Center&quot;, new Button(&quot;Center&quot;));
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Frame</span> <span class="n">f</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Frame</span><span class="o">(</span><span class="s">&#34;BorderTest&#34;</span><span class="o">);</span>
+<span class="n">f</span><span class="o">.</span><span class="na">setLayout</span><span class="o">(</span><span class="k">new</span> <span class="n">BorderLayout</span><span class="o">());</span>
+<span class="n">f</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&#34;North&#34;</span><span class="o">,</span>  <span class="k">new</span> <span class="n">Button</span><span class="o">(</span><span class="s">&#34;North&#34;</span><span class="o">));</span>
+<span class="n">f</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&#34;South&#34;</span><span class="o">,</span>  <span class="k">new</span> <span class="n">Button</span><span class="o">(</span><span class="s">&#34;South&#34;</span><span class="o">));</span>
+<span class="n">f</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&#34;East&#34;</span><span class="o">,</span>   <span class="k">new</span> <span class="n">Button</span><span class="o">(</span><span class="s">&#34;East&#34;</span><span class="o">));</span>
+<span class="n">f</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&#34;West&#34;</span><span class="o">,</span>   <span class="k">new</span> <span class="n">Button</span><span class="o">(</span><span class="s">&#34;West&#34;</span><span class="o">));</span>
+<span class="n">f</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&#34;Center&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">Button</span><span class="o">(</span><span class="s">&#34;Center&#34;</span><span class="o">));</span></code></pre></div>
 <p>The big difference is that the newer form (using the<code>BorderLayout.NORTH</code>type constraints) can be compile-time checked; if you type<code>BorderLayout.NORFH</code>the compiler will catch it. If you just type &quot;Norfh&quot;, it will not be caught until runtime, causing an<code>IllegalArgumentException</code>to be thrown.</p>
 
 <p>The Java 2 platform (previously known as the JDK 1.2) adds additional constants of<code>BEFORE_FIRST_LINE</code>,<code>AFTER_LAST_LINE</code>,<code>BEFORE_LINE_BEGINS</code>, and<code>AFTER_LINE_ENDS</code>. These are effectively equivalent to<code>NORTH</code>,<code>SOUTH</code>,<code>WEST</code>, and<code>EAST</code>, respectively. However, they could have other orientations where text is not oriented left-to-right, top-to-bottom. Examine the<code>java.awt.ComponentOrientation</code>class for additional information on language-sensitive orientation issues.</p>
@@ -723,17 +684,14 @@ Respect its preferred_width_if possible, and set its height to the_remaining_hei
 </ol>
 
 <p>Now consider nesting a<code>FlowLayout</code>-managed container inside a<code>BorderLayout</code>-managed container. First, what would happen if you added the<code>FlowLayout</code>-managed container as the<code>NORTH</code>or<code>SOUTH</code>component of the<code>BorderLayout</code>?</p>
-
-<pre><code>Panel flow   = new Panel(new FlowLayout());
-Panel border = new Panel(new BorderLayout());
-flow.add(new Button(&quot;A&quot;));
-flow.add(new Button(&quot;B&quot;));
-flow.add(new Button(&quot;C&quot;));
-flow.add(new Button(&quot;D&quot;));
-flow.add(new Button(&quot;E&quot;));
-border.add(flow, BorderLayout.NORTH);
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Panel</span> <span class="n">flow</span>   <span class="o">=</span> <span class="k">new</span> <span class="n">Panel</span><span class="o">(</span><span class="k">new</span> <span class="n">FlowLayout</span><span class="o">());</span>
+<span class="n">Panel</span> <span class="n">border</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Panel</span><span class="o">(</span><span class="k">new</span> <span class="n">BorderLayout</span><span class="o">());</span>
+<span class="n">flow</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Button</span><span class="o">(</span><span class="s">&#34;A&#34;</span><span class="o">));</span>
+<span class="n">flow</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Button</span><span class="o">(</span><span class="s">&#34;B&#34;</span><span class="o">));</span>
+<span class="n">flow</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Button</span><span class="o">(</span><span class="s">&#34;C&#34;</span><span class="o">));</span>
+<span class="n">flow</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Button</span><span class="o">(</span><span class="s">&#34;D&#34;</span><span class="o">));</span>
+<span class="n">flow</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Button</span><span class="o">(</span><span class="s">&#34;E&#34;</span><span class="o">));</span>
+<span class="n">border</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">flow</span><span class="o">,</span> <span class="n">BorderLayout</span><span class="o">.</span><span class="na">NORTH</span><span class="o">);</span></code></pre></div>
 <p>Remember what happens when a<code>FlowLayout</code>-managed container is added to a layout that respects preferred height?<em>The</em><code>FlowLayout</code><em>container will only ever have a single row</em>! It will never flow its components to more than that one row.</p>
 
 <p><img src="images/border4.gif" alt="border4.gif (2450 bytes)" /></p>
@@ -779,14 +737,11 @@ border.add(flow, BorderLayout.NORTH);
 </ul>
 
 <p>You could start with the following code:</p>
-
-<pre><code>Panel p = new Panel(new BorderLayout());
-Label nameLabel = new Label(&quot;Name:&quot;);
-TextField entry = new TextField();
-p.add(nameLabel, BorderLayout.WEST);
-p.add(entry, BorderLayout.CENTER);
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Panel</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Panel</span><span class="o">(</span><span class="k">new</span> <span class="n">BorderLayout</span><span class="o">());</span>
+<span class="n">Label</span> <span class="n">nameLabel</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Label</span><span class="o">(</span><span class="s">&#34;Name:&#34;</span><span class="o">);</span>
+<span class="n">TextField</span> <span class="n">entry</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TextField</span><span class="o">();</span>
+<span class="n">p</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">nameLabel</span><span class="o">,</span> <span class="n">BorderLayout</span><span class="o">.</span><span class="na">WEST</span><span class="o">);</span>
+<span class="n">p</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">entry</span><span class="o">,</span> <span class="n">BorderLayout</span><span class="o">.</span><span class="na">CENTER</span><span class="o">);</span></code></pre></div>
 <p>Here you are binding the width of the label to its preferred width. It will take up that much space and not expand. The entry field is not bound and can expand. So, you achieve the desired result:</p>
 
 <p><img src="images/border7.gif" alt="border7.gif (1641 bytes)" /><br />
@@ -800,16 +755,13 @@ p.add(entry, BorderLayout.CENTER);
 <p><img src="images/border9.gif" alt="border9.gif (2140 bytes)" /></p>
 
 <p>The<code>TextField</code>is stretched. So, you need to bind the height of the two components to their preferred height. This can be accomplished by placing the<code>Label</code>/<code>TextField</code>combination inside<em>another</em><code>BorderLayout</code>-managed container, as the<code>NORTH</code>or<code>SOUTH</code>component. Assuming that you want the fields to stay at the top of the GUI, you can place it to the<code>NORTH</code>:</p>
-
-<pre><code>Panel p = new Panel(new BorderLayout());
-Label nameLabel = new Label(&quot;Name:&quot;);
-TextField entry = new TextField();
-p.add(nameLabel, BorderLayout.WEST);
-p.add(entry, BorderLayout.CENTER);
-Panel p2 = new Panel(new BorderLayout());
-p2.add(p, BorderLayout.NORTH);
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Panel</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Panel</span><span class="o">(</span><span class="k">new</span> <span class="n">BorderLayout</span><span class="o">());</span>
+<span class="n">Label</span> <span class="n">nameLabel</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Label</span><span class="o">(</span><span class="s">&#34;Name:&#34;</span><span class="o">);</span>
+<span class="n">TextField</span> <span class="n">entry</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TextField</span><span class="o">();</span>
+<span class="n">p</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">nameLabel</span><span class="o">,</span> <span class="n">BorderLayout</span><span class="o">.</span><span class="na">WEST</span><span class="o">);</span>
+<span class="n">p</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">entry</span><span class="o">,</span> <span class="n">BorderLayout</span><span class="o">.</span><span class="na">CENTER</span><span class="o">);</span>
+<span class="n">Panel</span> <span class="n">p2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Panel</span><span class="o">(</span><span class="k">new</span> <span class="n">BorderLayout</span><span class="o">());</span>
+<span class="n">p2</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">p</span><span class="o">,</span> <span class="n">BorderLayout</span><span class="o">.</span><span class="na">NORTH</span><span class="o">);</span></code></pre></div>
 <p>Now, when you expand vertically, you get the following effect:</p>
 
 <p><img src="images/border10.gif" alt="border10.gif (2075 bytes)" /></p>
@@ -833,19 +785,13 @@ p2.add(p, BorderLayout.NORTH);
 </ul>
 
 <p>The preferred width of the layout needs to take into account the widest of these rows. Using pw as the abbreviation for &quot;preferred width&quot;, you can write a simple equation for the preferred width of a<code>BorderLayout</code>:</p>
-
-<pre><code>pw = max(north.pw, south.pw,
-        (west.pw + center.pw + east.pw + hgaps))
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">pw</span> <span class="o">=</span> <span class="n">max</span><span class="o">(</span><span class="n">north</span><span class="o">.</span><span class="na">pw</span><span class="o">,</span> <span class="n">south</span><span class="o">.</span><span class="na">pw</span><span class="o">,</span>
+        <span class="o">(</span><span class="n">west</span><span class="o">.</span><span class="na">pw</span> <span class="o">+</span> <span class="n">center</span><span class="o">.</span><span class="na">pw</span> <span class="o">+</span> <span class="n">east</span><span class="o">.</span><span class="na">pw</span> <span class="o">+</span> <span class="n">hgaps</span><span class="o">))</span></code></pre></div>
 <p>The_hgaps_amount to include depends on which components are present in the center row.</p>
 
 <p>The preferred height (<em>ph</em> in the following equation) depends on the sizes of the<code>NORTH</code>and<code>SOUTH</code>components plus the_tallest_of the middle-row components:</p>
-
-<pre><code>ph = vgaps + north.ph + south.ph +
-        max(west.ph, center.ph, east.ph)
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">ph</span> <span class="o">=</span> <span class="n">vgaps</span> <span class="o">+</span> <span class="n">north</span><span class="o">.</span><span class="na">ph</span> <span class="o">+</span> <span class="n">south</span><span class="o">.</span><span class="na">ph</span> <span class="o">+</span>
+        <span class="n">max</span><span class="o">(</span><span class="n">west</span><span class="o">.</span><span class="na">ph</span><span class="o">,</span> <span class="n">center</span><span class="o">.</span><span class="na">ph</span><span class="o">,</span> <span class="n">east</span><span class="o">.</span><span class="na">ph</span><span class="o">)</span></code></pre></div>
 <p>The <em>vgaps</em> amount depends on which rows are present in the <code>BorderLayout</code>.</p>
 
 <p>A useful application of this preferred-size knowledge is creating two or three rows of components that each keep their preferred size. Suppose you had a<code>Label</code>, a<code>TextArea</code>, and a<code>TextField</code>that you wanted to lay out like this:</p>
@@ -857,31 +803,25 @@ p2.add(p, BorderLayout.NORTH);
 <p><img src="images/border12.gif" alt="border12.gif (3703 bytes)" /></p>
 
 <p>First, recall that you can_bind_the height of a component to its preferred height by placing it in the<code>NORTH</code>or<code>SOUTH</code>part of a<code>BorderLayout</code>. If that bound component happens to be another<code>BorderLayout</code>, (with<code>NORTH</code>,<code>CENTER</code>, and<code>SOUTH</code>components) each component within that layout would get its preferred height. This results in the above figure, with code to produce it:</p>
-
-<pre><code>Frame f = new Frame(&quot;BorderTest&quot;);
-Panel p = new Panel(new BorderLayout());
-f.setLayout(new BorderLayout());
-p.add(new Label(&quot;Hello&quot;, Label.CENTER), 
-            BorderLayout.NORTH);
-p.add(new TextArea(), BorderLayout.CENTER);
-p.add(new TextField(), BorderLayout.SOUTH);
-f.add(p, BorderLayout.NORTH);
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Frame</span> <span class="n">f</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Frame</span><span class="o">(</span><span class="s">&#34;BorderTest&#34;</span><span class="o">);</span>
+<span class="n">Panel</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Panel</span><span class="o">(</span><span class="k">new</span> <span class="n">BorderLayout</span><span class="o">());</span>
+<span class="n">f</span><span class="o">.</span><span class="na">setLayout</span><span class="o">(</span><span class="k">new</span> <span class="n">BorderLayout</span><span class="o">());</span>
+<span class="n">p</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Label</span><span class="o">(</span><span class="s">&#34;Hello&#34;</span><span class="o">,</span> <span class="n">Label</span><span class="o">.</span><span class="na">CENTER</span><span class="o">),</span> 
+            <span class="n">BorderLayout</span><span class="o">.</span><span class="na">NORTH</span><span class="o">);</span>
+<span class="n">p</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">TextArea</span><span class="o">(),</span> <span class="n">BorderLayout</span><span class="o">.</span><span class="na">CENTER</span><span class="o">);</span>
+<span class="n">p</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">TextField</span><span class="o">(),</span> <span class="n">BorderLayout</span><span class="o">.</span><span class="na">SOUTH</span><span class="o">);</span>
+<span class="n">f</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">p</span><span class="o">,</span> <span class="n">BorderLayout</span><span class="o">.</span><span class="na">NORTH</span><span class="o">);</span></code></pre></div>
 <p>An effective combination of a<code>FlowLayout</code>and a<code>BorderLayout</code>is for the common &quot;Ok&quot; and &quot;Cancel&quot; buttons on a dialog. For example:</p>
 
 <p><img src="images/border13.gif" alt="border13.gif (2037 bytes)" /></p>
 
 <p>The above is accomplished with the following code:</p>
-
-<pre><code>Frame f = new Frame(&quot;BorderTest&quot;);
-Panel p = new Panel(new FlowLayout(FlowLayout.RIGHT));
-f.setLayout(new BorderLayout());
-p.add(new Button(&quot;Ok&quot;));
-p.add(new Button(&quot;Cancel&quot;));
-f.add(p, BorderLayout.SOUTH);
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Frame</span> <span class="n">f</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Frame</span><span class="o">(</span><span class="s">&#34;BorderTest&#34;</span><span class="o">);</span>
+<span class="n">Panel</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Panel</span><span class="o">(</span><span class="k">new</span> <span class="n">FlowLayout</span><span class="o">(</span><span class="n">FlowLayout</span><span class="o">.</span><span class="na">RIGHT</span><span class="o">));</span>
+<span class="n">f</span><span class="o">.</span><span class="na">setLayout</span><span class="o">(</span><span class="k">new</span> <span class="n">BorderLayout</span><span class="o">());</span>
+<span class="n">p</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Button</span><span class="o">(</span><span class="s">&#34;Ok&#34;</span><span class="o">));</span>
+<span class="n">p</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Button</span><span class="o">(</span><span class="s">&#34;Cancel&#34;</span><span class="o">));</span>
+<span class="n">f</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">p</span><span class="o">,</span> <span class="n">BorderLayout</span><span class="o">.</span><span class="na">SOUTH</span><span class="o">);</span></code></pre></div>
 <p>There is one problem with this approach: the widths of the two buttons are different. You'll see a better way to create this type of GUI in a moment.</p>
 
 <p><strong><code>GridLayout</code></strong></p>
@@ -891,28 +831,19 @@ f.add(p, BorderLayout.SOUTH);
 <p><img src="images/grid1.gif" alt="grid1.gif (2317 bytes)" /></p>
 
 <p>The code that produced the above GUI looks like:</p>
-
-<pre><code>Frame f = new Frame(&quot;Grid Test&quot;);
-f.setLayout(new GridLayout(3,4));
-for (int x = 1; x &lt; 13; x++)
-    f.add(new Button(&quot;&quot;&quot;+x));
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Frame</span> <span class="n">f</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Frame</span><span class="o">(</span><span class="s">&#34;Grid Test&#34;</span><span class="o">);</span>
+<span class="n">f</span><span class="o">.</span><span class="na">setLayout</span><span class="o">(</span><span class="k">new</span> <span class="n">GridLayout</span><span class="o">(</span><span class="n">3</span><span class="o">,</span><span class="n">4</span><span class="o">));</span>
+<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">13</span><span class="o">;</span> <span class="n">x</span><span class="o">++)</span>
+    <span class="n">f</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Button</span><span class="o">(</span><span class="s">&#34;&#34;</span><span class="err">&#34;</span><span class="o">+</span><span class="n">x</span><span class="o">));</span></code></pre></div>
 <p>When specifying a<code>GridLayout</code>, there are two main parameters:_rows_and<em>columns</em>. You can specify both of these parameters, <em>but only one will ever be used.</em> Take a look at the following code snippet from<code>GridLayout.java</code>:</p>
-
-<pre><code>if (nrows &gt; 0) {
-    ncols = (ncomponents + nrows - 1) / nrows;
-else
-    nrows = (ncomponents + ncols - 1) / ncols;
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">if</span> <span class="o">(</span><span class="n">nrows</span> <span class="o">&gt;</span> <span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">ncols</span> <span class="o">=</span> <span class="o">(</span><span class="n">ncomponents</span> <span class="o">+</span> <span class="n">nrows</span> <span class="o">-</span> <span class="n">1</span><span class="o">)</span> <span class="o">/</span> <span class="n">nrows</span><span class="o">;</span>
+<span class="k">else</span>
+    <span class="n">nrows</span> <span class="o">=</span> <span class="o">(</span><span class="n">ncomponents</span> <span class="o">+</span> <span class="n">ncols</span> <span class="o">-</span> <span class="n">1</span><span class="o">)</span> <span class="o">/</span> <span class="n">ncols</span><span class="o">;</span></code></pre></div>
 <p>Notice that if_rows_is non-zero, it_calculates_the number of columns; if_rows_is zero, it calculates the number of rows based on the specified number of columns.</p>
 
 <p>To the casual observer, a statement like</p>
-
-<pre><code>f.setLayout(new GridLayout(3,4));
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">f</span><span class="o">.</span><span class="na">setLayout</span><span class="o">(</span><span class="k">new</span> <span class="n">GridLayout</span><span class="o">(</span><span class="n">3</span><span class="o">,</span><span class="n">4</span><span class="o">));</span></code></pre></div>
 <p>looks like it will_always_divide the screen into twelve sections, but that's not the case. In the above statement, you could substitute_any_value for the number of columns, and the effect would be exactly the same.</p>
 
 <p>A better way to specify the_rows_and_columns_of a<code>GridLayout</code>is to_always_set one of them to zero. A zero value for_rows_of_columns_means &quot;any number of&quot;.</p>
@@ -920,57 +851,42 @@ else
 <p>Note: A word of caution: you cannot specify zero for<em>both</em>; an<code>IllegalArgumentException</code>will be thrown.</p>
 
 <p>Specifying zero for one value makes the_design intent_obvious. If you always_want_four rows, say so; if you always_want_three columns, say so. The above example_should_be written as either</p>
-
-<pre><code>f.setLayout(new GridLayout(3,0));
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">f</span><span class="o">.</span><span class="na">setLayout</span><span class="o">(</span><span class="k">new</span> <span class="n">GridLayout</span><span class="o">(</span><span class="n">3</span><span class="o">,</span><span class="n">0</span><span class="o">));</span></code></pre></div>
 <p>or</p>
-
-<pre><code>f.setLayout(new GridLayout(0,4));
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">f</span><span class="o">.</span><span class="na">setLayout</span><span class="o">(</span><span class="k">new</span> <span class="n">GridLayout</span><span class="o">(</span><span class="n">0</span><span class="o">,</span><span class="n">4</span><span class="o">));</span></code></pre></div>
 <p><strong><em>Preferred Size of a<code>GridLayout</code>Container</em></strong></p>
 
 <p>How do you determine the preferred size of a<code>GridLayout</code>?<code>GridLayout</code>wants to accommodate the preferred size of_all_its contained components if possible. To do this, it looks at all the preferred sizes and determines the maximum preferred width and the maximum preferred height._One thing to keep in mind, the maximum preferred height and maximum preferred width_do not<em>necessarily come from the same component</em>!</p>
 
 <p>The<code>GridLayout</code>would like to set the size of_each_component to that maximum preferred width and maximum preferred height. (Remember—all components in a<code>GridLayout</code>will be the same size!) This makes the preferred size of a<code>GridLayout</code></p>
-
-<pre><code>pw = (maxPrefWidth \* cols) + (hgap \* (cols+1))
-ph = (maxPrefHeight \* rows) + (vgap \* (rows+1))
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">pw</span> <span class="o">=</span> <span class="o">(</span><span class="n">maxPrefWidth</span> <span class="err">\</span><span class="o">*</span> <span class="n">cols</span><span class="o">)</span> <span class="o">+</span> <span class="o">(</span><span class="n">hgap</span> <span class="err">\</span><span class="o">*</span> <span class="o">(</span><span class="n">cols</span><span class="o">+</span><span class="n">1</span><span class="o">))</span>
+<span class="n">ph</span> <span class="o">=</span> <span class="o">(</span><span class="n">maxPrefHeight</span> <span class="err">\</span><span class="o">*</span> <span class="n">rows</span><span class="o">)</span> <span class="o">+</span> <span class="o">(</span><span class="n">vgap</span> <span class="err">\</span><span class="o">*</span> <span class="o">(</span><span class="n">rows</span><span class="o">+</span><span class="n">1</span><span class="o">))</span></code></pre></div>
 <p><strong><em>&quot;Ok&quot; and &quot;Cancel&quot; Revisited</em></strong></p>
 
 <p>One of the goals of the earlier &quot;Ok&quot; and &quot;Cancel&quot; dialog was to make the buttons the same size. This can be accomplished by putting the buttons in a single-row<code>GridLayout</code>. You can then add that<code>GridLayout</code>container to the<code>FlowLayout</code>, or use a nested<code>BorderLayout</code>in place of the<code>FlowLayout</code>. Here are both approaches:</p>
 
 <p><img src="images/gridb1.gif" alt="gridb1.gif (2035 bytes)" /></p>
-
-<pre><code>Frame f = new Frame(&quot;Ok/Cancel&quot;);
-f.setLayout(new BorderLayout());
-Panel p = new Panel();
-p.setLayout(new FlowLayout(FlowLayout.RIGHT));
-Panel p2 = new Panel()
-p2.setLayout(new GridLayout(1,0,5,5));
-p2.add(new Button(&quot;Ok&quot;));
-p2.add(new Button(&quot;Cancel&quot;));
-p.add(p2, BorderLayout.EAST);
-f.add(p, BorderLayout.SOUTH);
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Frame</span> <span class="n">f</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Frame</span><span class="o">(</span><span class="s">&#34;Ok/Cancel&#34;</span><span class="o">);</span>
+<span class="n">f</span><span class="o">.</span><span class="na">setLayout</span><span class="o">(</span><span class="k">new</span> <span class="n">BorderLayout</span><span class="o">());</span>
+<span class="n">Panel</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Panel</span><span class="o">();</span>
+<span class="n">p</span><span class="o">.</span><span class="na">setLayout</span><span class="o">(</span><span class="k">new</span> <span class="n">FlowLayout</span><span class="o">(</span><span class="n">FlowLayout</span><span class="o">.</span><span class="na">RIGHT</span><span class="o">));</span>
+<span class="n">Panel</span> <span class="n">p2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Panel</span><span class="o">()</span>
+<span class="n">p2</span><span class="o">.</span><span class="na">setLayout</span><span class="o">(</span><span class="k">new</span> <span class="n">GridLayout</span><span class="o">(</span><span class="n">1</span><span class="o">,</span><span class="n">0</span><span class="o">,</span><span class="n">5</span><span class="o">,</span><span class="n">5</span><span class="o">));</span>
+<span class="n">p2</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Button</span><span class="o">(</span><span class="s">&#34;Ok&#34;</span><span class="o">));</span>
+<span class="n">p2</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Button</span><span class="o">(</span><span class="s">&#34;Cancel&#34;</span><span class="o">));</span>
+<span class="n">p</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">p2</span><span class="o">,</span> <span class="n">BorderLayout</span><span class="o">.</span><span class="na">EAST</span><span class="o">);</span>
+<span class="n">f</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">p</span><span class="o">,</span> <span class="n">BorderLayout</span><span class="o">.</span><span class="na">SOUTH</span><span class="o">);</span></code></pre></div>
 <p><img src="images/gridb2.gif" alt="gridb2.gif (2014 bytes)" /></p>
-
-<pre><code>Frame f = new Frame(&quot;Ok/Cancel&quot;);
-f.setLayout(new BorderLayout());
-Panel p = new Panel();
-p.setLayout(new BorderLayout());
-Panel p2 = new Panel()
-p2.setLayout(new GridLayout(1,0,5,5));
-p2.add(new Button(&quot;Ok&quot;));
-p2.add(new Button(&quot;Cancel&quot;));
-p.add(p2, BorderLayout.EAST);
-f.add(p, BorderLayout.SOUTH);
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Frame</span> <span class="n">f</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Frame</span><span class="o">(</span><span class="s">&#34;Ok/Cancel&#34;</span><span class="o">);</span>
+<span class="n">f</span><span class="o">.</span><span class="na">setLayout</span><span class="o">(</span><span class="k">new</span> <span class="n">BorderLayout</span><span class="o">());</span>
+<span class="n">Panel</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Panel</span><span class="o">();</span>
+<span class="n">p</span><span class="o">.</span><span class="na">setLayout</span><span class="o">(</span><span class="k">new</span> <span class="n">BorderLayout</span><span class="o">());</span>
+<span class="n">Panel</span> <span class="n">p2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Panel</span><span class="o">()</span>
+<span class="n">p2</span><span class="o">.</span><span class="na">setLayout</span><span class="o">(</span><span class="k">new</span> <span class="n">GridLayout</span><span class="o">(</span><span class="n">1</span><span class="o">,</span><span class="n">0</span><span class="o">,</span><span class="n">5</span><span class="o">,</span><span class="n">5</span><span class="o">));</span>
+<span class="n">p2</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Button</span><span class="o">(</span><span class="s">&#34;Ok&#34;</span><span class="o">));</span>
+<span class="n">p2</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Button</span><span class="o">(</span><span class="s">&#34;Cancel&#34;</span><span class="o">));</span>
+<span class="n">p</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">p2</span><span class="o">,</span> <span class="n">BorderLayout</span><span class="o">.</span><span class="na">EAST</span><span class="o">);</span>
+<span class="n">f</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">p</span><span class="o">,</span> <span class="n">BorderLayout</span><span class="o">.</span><span class="na">SOUTH</span><span class="o">);</span></code></pre></div>
 <p>Notice the difference in appearance. The<code>FlowLayout</code>pads_around_the components with the hgap and vgap, while<code>BorderLayout</code>only pads_between_components (so the components butt right against the edges of the container.)</p>
 
 <p>In both cases, the buttons now appear the same size. The nesting for this layout can be more easily seen in the following picture:</p>
@@ -982,31 +898,22 @@ f.add(p, BorderLayout.SOUTH);
 <p><strong><code>CardLayout</code></strong></p>
 
 <p><code>CardLayout</code>uses a different strategy than the other layout managers. Instead of assigning locations in the container for all nested components, it only displays one component at a time. Components can be added to a<code>CardLayout</code>using the following<code>add</code>methods:</p>
-
-<pre><code>public void add(Component component, String key);
-public void add(String key, Component component);
-public void add(String key, Component component, int index);
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">add</span><span class="o">(</span><span class="n">Component</span> <span class="n">component</span><span class="o">,</span> <span class="n">String</span> <span class="n">key</span><span class="o">);</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">add</span><span class="o">(</span><span class="n">String</span> <span class="n">key</span><span class="o">,</span> <span class="n">Component</span> <span class="n">component</span><span class="o">);</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">add</span><span class="o">(</span><span class="n">String</span> <span class="n">key</span><span class="o">,</span> <span class="n">Component</span> <span class="n">component</span><span class="o">,</span> <span class="kt">int</span> <span class="n">index</span><span class="o">);</span></code></pre></div>
 <p>The first two forms of the<code>add()</code>method will add the component at the end of the list of components for the container. The last form of the<code>add()</code>method will add the component at the specified position in the container. The position of the component within the container determines the order in which the components will be displayed via the manipulation methods of<code>CardLayout</code>.</p>
 
 <p>A unique<code>String</code>key must be assigned for each component that is added to the container. For example:</p>
-
-<pre><code>Panel p = new Panel(new CardLayout());
-p.add(&quot;one&quot;,   new Button (&quot;the first component&quot;));
-p.add(new Button (&quot;the second component&quot;), &quot;two&quot;);
-p.add(&quot;three&quot;, new Button (&quot;the third component&quot;));
-p.add(&quot;between two and three&quot;, new Button (&quot;the fourth component&quot;), 2);
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Panel</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Panel</span><span class="o">(</span><span class="k">new</span> <span class="n">CardLayout</span><span class="o">());</span>
+<span class="n">p</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&#34;one&#34;</span><span class="o">,</span>   <span class="k">new</span> <span class="n">Button</span> <span class="o">(</span><span class="s">&#34;the first component&#34;</span><span class="o">));</span>
+<span class="n">p</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Button</span> <span class="o">(</span><span class="s">&#34;the second component&#34;</span><span class="o">),</span> <span class="s">&#34;two&#34;</span><span class="o">);</span>
+<span class="n">p</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&#34;three&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">Button</span> <span class="o">(</span><span class="s">&#34;the third component&#34;</span><span class="o">));</span>
+<span class="n">p</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&#34;between two and three&#34;</span><span class="o">,</span> <span class="k">new</span> <span class="n">Button</span> <span class="o">(</span><span class="s">&#34;the fourth component&#34;</span><span class="o">),</span> <span class="n">2</span><span class="o">);</span></code></pre></div>
 <p>When components are added to container that is controlled by a<code>CardLayout</code>, a<code>String</code>key is associated with each component. Different components can be displayed by using the<code>next()</code>,<code>previous</code>, and<code>show</code>methods of<code>CardLayout</code>. The order in which components are added to the container determines their display order when using the<code>next()</code>and<code>previous</code>methods. For example:</p>
-
-<pre><code>CardLayout l = (CardLayout)p.getLayout();
-l.previous(p);
-l.next(p);
-l.show(p, &quot;two&quot;);
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">CardLayout</span> <span class="n">l</span> <span class="o">=</span> <span class="o">(</span><span class="n">CardLayout</span><span class="o">)</span><span class="n">p</span><span class="o">.</span><span class="na">getLayout</span><span class="o">();</span>
+<span class="n">l</span><span class="o">.</span><span class="na">previous</span><span class="o">(</span><span class="n">p</span><span class="o">);</span>
+<span class="n">l</span><span class="o">.</span><span class="na">next</span><span class="o">(</span><span class="n">p</span><span class="o">);</span>
+<span class="n">l</span><span class="o">.</span><span class="na">show</span><span class="o">(</span><span class="n">p</span><span class="o">,</span> <span class="s">&#34;two&#34;</span><span class="o">);</span></code></pre></div>
 <p>Notice that the<code>previous()</code>,<code>next()</code>, and<code>show()</code>methods require a reference to the container be passed into them has an argument. Layout managers do not keep a reference to the container that uses them. When performing actions such as calling<code>previous()</code>,<code>next()</code>, and<code>show()</code>, and, as you will see later, the laying out of the actual components, the layout manager needs to be informed of the container on which it is operating so it can have access to the components it is laying out.</p>
 
 <p><code>CardLayout</code>is commonly used in GUIs that want to organize their data into several smaller screens, rather than having all components on one larger screen. This is typically used in combination with several buttons for switching components within the<code>CardLayout</code>, or a tabbed panel component.</p>
@@ -1516,12 +1423,9 @@ l.show(p, &quot;two&quot;);
 <p>Next, you need to divide the GUI into two evenly spaced parts: the left half the right half. You should think &quot;<code>GridLayout</code>&quot; whenever you hear the phrase &quot;equally spaced&quot;. This<code>GridLayout</code>consists of a single row; its parameters to its constructor would be (1,0). (In the above example, you are also setting hgap to five.)</p>
 
 <p>Now what do you do about the pairs of text fields and labels? Your initial answer might involve placing each pair of text fields and labels into their own<code>BorderLayout</code>. For example:</p>
-
-<pre><code>Panel panel1 = new Panel(new BorderLayout());
-panel1.add(new Label(&quot;First name:&quot;), BorderLayout.WEST);
-panel1.add(new TextField(), BorderLayout.CENTER);
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Panel</span> <span class="n">panel1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Panel</span><span class="o">(</span><span class="k">new</span> <span class="n">BorderLayout</span><span class="o">());</span>
+<span class="n">panel1</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">Label</span><span class="o">(</span><span class="s">&#34;First name:&#34;</span><span class="o">),</span> <span class="n">BorderLayout</span><span class="o">.</span><span class="na">WEST</span><span class="o">);</span>
+<span class="n">panel1</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="n">TextField</span><span class="o">(),</span> <span class="n">BorderLayout</span><span class="o">.</span><span class="na">CENTER</span><span class="o">);</span></code></pre></div>
 <p>Using this strategy for each pair of labels and text fields, and adding each of those into their proper place in the GUI, you get a slightly undesirable affect:</p>
 
 <p><img src="images/nameform4.gif" alt="nameform4.gif (2866 bytes)" /></p>

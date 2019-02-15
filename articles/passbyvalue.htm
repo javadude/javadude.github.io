@@ -344,47 +344,42 @@ swap(var1,var2);
 <p>actually switches the values of the variables <code>var1</code> and <code>var2</code>, the language supports pass-by-reference semantics.</p>
 
 <p>For example, in Pascal, you can write</p>
-
-<pre><code>procedure swap(var arg1, arg2: SomeType);
-    var
-        temp : SomeType;
-    begin
-        temp := arg1;
-        arg1 := arg2;
-        arg2 := temp;
-    end;
-
-    ...
-
-    { in some other procedure/function/program }
-
-    var
-        var1, var2 : SomeType;
-
-    begin
-        var1 := ...; { value &quot;A&quot; }
-        var2 := ...; { value &quot;B&quot; } 
-        swap(var1, var2);
-        { now var1 has value &quot;B&quot; and var2 has value &quot;A&quot; }
-    end;
-</code></pre>
-
-<p>or in C++ you could write</p>
-
-<pre><code>void swap(SomeType&amp; arg1, Sometype&amp; arg2) {
-    SomeType temp = arg1;
-    arg1 = arg2;
-    arg2 = temp;
-}
+<div class="highlight"><pre class="chroma"><code class="language-pascal" data-lang="pascal">procedure swap(var arg1, arg2: SomeType);
+var
+    temp : SomeType;
+begin
+    temp := arg1;
+    arg1 := arg2;
+    arg2 := temp;
+end;
 
 ...
 
-SomeType var1 = ...; // value &quot;A&quot;
-SomeType var2 = ...; // value &quot;B&quot;
-swap(var1, var2); // swaps their values!
-// now var1 has value &quot;B&quot; and var2 has value &quot;A&quot;
-</code></pre>
+{ in some other procedure/function/program }
 
+var
+    var1, var2 : SomeType;
+
+begin
+    var1 := ...; { value &#34;A&#34; }
+    var2 := ...; { value &#34;B&#34; } 
+    swap(var1, var2);
+    { now var1 has value &#34;B&#34; and var2 has value &#34;A&#34; }
+end;</code></pre></div>
+<p>or in C++ you could write</p>
+<div class="highlight"><pre class="chroma"><code class="language-c++" data-lang="c++"><span class="kt">void</span> <span class="nf">swap</span><span class="p">(</span><span class="n">SomeType</span><span class="o">&amp;</span> <span class="n">arg1</span><span class="p">,</span> <span class="n">Sometype</span><span class="o">&amp;</span> <span class="n">arg2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">SomeType</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">arg1</span><span class="p">;</span>
+    <span class="n">arg1</span> <span class="o">=</span> <span class="n">arg2</span><span class="p">;</span>
+    <span class="n">arg2</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">...</span>
+
+<span class="n">SomeType</span> <span class="n">var1</span> <span class="o">=</span> <span class="p">...;</span> <span class="c1">// value &#34;A&#34;
+</span><span class="c1"></span><span class="n">SomeType</span> <span class="n">var2</span> <span class="o">=</span> <span class="p">...;</span> <span class="c1">// value &#34;B&#34;
+</span><span class="c1"></span><span class="n">swap</span><span class="p">(</span><span class="n">var1</span><span class="p">,</span> <span class="n">var2</span><span class="p">);</span> <span class="c1">// swaps their values!
+</span><span class="c1">// now var1 has value &#34;B&#34; and var2 has value &#34;A&#34;
+</span></code></pre></div>
 <p>(Please let me know if my Pascal or C++ has lapsed and I've messed up the syntax...)</p>
 
 <p>But you <em>cannot</em> do this in Java!</p>
@@ -404,33 +399,27 @@ swap(var1, var2); // swaps their values!
 <p>This may seem like splitting hairs, but it is <em>far</em> from it. There is a world of difference in meaning. The following examples should help make the distinction.</p>
 
 <p>In Java, take the case of</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">foo</span><span class="o">(</span><span class="n">Dog</span> <span class="n">d</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Dog</span><span class="o">(</span><span class="s">&#34;Fifi&#34;</span><span class="o">);</span> <span class="c1">// creating the &#34;Fifi&#34; dog
+</span><span class="c1"></span><span class="o">}</span>
 
-<pre><code>public void foo(Dog d) {
-    d = new Dog(&quot;Fifi&quot;); // creating the &quot;Fifi&quot; dog
-}
+<span class="n">Dog</span> <span class="n">aDog</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Dog</span><span class="o">(</span><span class="s">&#34;Max&#34;</span><span class="o">);</span> <span class="c1">// creating the &#34;Max&#34; dog
+</span><span class="c1"></span>
+<span class="c1">// at this point, aDog points to the &#34;Max&#34; dog
+</span><span class="c1"></span>
+<span class="n">foo</span><span class="o">(</span><span class="n">aDog</span><span class="o">);</span> 
 
-Dog aDog = new Dog(&quot;Max&quot;); // creating the &quot;Max&quot; dog
-// at this point, aDog points to the &quot;Max&quot; dog
-foo(aDog);
-// aDog still points to the &quot;Max&quot; dog
-</code></pre>
-
+<span class="o">//</span> <span class="n">aDog</span> <span class="n">still</span> <span class="n">points</span> <span class="n">to</span> <span class="n">the</span> <span class="s">&#34;Max&#34;</span> <span class="n">dog</span></code></pre></div>
 <p>the variable passed in, <code>aDog</code>, <strong><em>is not</em></strong> modified! After calling <code>foo()</code>, <code>aDog</code> <strong><em>still</em></strong> points to the <code>Dog</code> with name &quot;Max&quot;!</p>
 
 <p>Many people mistakenly think/state that something like</p>
-
-<pre><code>public void foo(Dog d) { 
-    d.setName(&quot;Fifi&quot;);
-}
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">foo</span><span class="o">(</span><span class="n">Dog</span> <span class="n">d</span><span class="o">)</span> <span class="o">{</span> 
+    <span class="n">d</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">&#34;Fifi&#34;</span><span class="o">);</span>
+<span class="o">}</span></code></pre></div>
 <p>shows that Java does in fact pass objects by reference.</p>
 
 <p>The mistake they make is in the definition of</p>
-
-<pre><code>Dog d;
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Dog</span> <span class="n">d</span><span class="o">;</span></code></pre></div>
 <p>itself. When you write that definition, you are defining a <em>pointer</em> to a <code>Dog</code> object, <em>not</em> a <code>Dog</code> object itself.</p>
 
 <h2 id="on-pointers-versus-references">On Pointers versus References...</h2>
@@ -464,10 +453,7 @@ foo(aDog);
 <h2 id="calling-methods">Calling Methods</h2>
 
 <p>Calling</p>
-
-<pre><code>foo(d);
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">foo</span><span class="o">(</span><span class="n">d</span><span class="o">);</span></code></pre></div>
 <p>passes the <strong><em>value of <code>d</code></em></strong> to <code>foo()</code>; it does <em>not</em> pass the object that <code>d</code> points to!</p>
 
 <p>The value of the pointer being passed is similar to a memory address. Under the covers it may be a tad different, but from a programmer's perspective, you can think of it in exactly the same way. <em>The value uniquely identifies some object on the heap</em>.</p>
@@ -475,32 +461,18 @@ foo(aDog);
 <p><strong><em>However,</em></strong> it makes <em>no</em> difference how pointers are <strong><em>implemented</em></strong> under the covers. You program with them <strong><em>exactly</em></strong> the same way in Java as you would in C or C++. The syntax is just slightly different (another poor choice in Java's design; they should have used the same <code>-&gt;</code> syntax for de-referencing as C++).</p>
 
 <p>In Java,</p>
-
-<pre><code>Dog d;
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Dog</span> <span class="n">d</span><span class="o">;</span></code></pre></div>
 <p>is <strong><em>exactly</em></strong> like C++'s</p>
-
-<pre><code>Dog *d;
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Dog</span> <span class="o">*</span><span class="n">d</span><span class="o">;</span></code></pre></div>
 <p>And using</p>
-
-<pre><code>d.setName(&quot;Fifi&quot;);
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">d</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">&#34;Fifi&#34;</span><span class="o">);</span></code></pre></div>
 <p>is exactly like C++'s</p>
-
-<pre><code>d-&gt;setName(&quot;Fifi&quot;);
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-c++" data-lang="c++"><span class="n">d</span><span class="o">-&gt;</span><span class="n">setName</span><span class="p">(</span><span class="s">&#34;Fifi&#34;</span><span class="p">);</span>
+</code></pre></div>
 <p>To sum up: Java <strong><em>has</em></strong> pointers, and the <strong><em>value</em></strong> of the <strong><em>pointer</em></strong> is passed in. There's no way to actually pass an object itself as a parameter. You can only pass a pointer to an object.</p>
 
 <p>Keep in mind, when you call</p>
-
-<pre><code>foo(d);
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">foo</span><span class="o">(</span><span class="n">d</span><span class="o">);</span></code></pre></div>
 <p>you're not passing an object; you're passing a <em>pointer</em> to the object.</p>
 
 <p>For a slightly different (but still correct) take on this issue, please see Praxis 1 in Peter Haggar's excellent book, <em>Practical Java</em>: <a href="https://books.google.com/books?id=iWPeqljHNcoC&amp;lpg=PP1&amp;pg=PA1">https://books.google.com/books?id=iWPeqljHNcoC&amp;lpg=PP1&amp;pg=PA1</a>.</p>
@@ -537,31 +509,22 @@ foo(aDog);
 <p>The Java Spec says that everything in java is pass-by-value. There is no such thing as &quot;pass-by-reference&quot; in java.</p>
 
 <p>The key to understanding this is that something like</p>
-
-<pre><code>Dog myDog;
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Dog</span> <span class="n">myDog</span><span class="o">;</span></code></pre></div>
 <p>is not a Dog; it's actually a pointer to a Dog.</p>
 
 <p>What that means, is when you have</p>
-
-<pre><code>Dog myDog = new Dog(&quot;Rover&quot;);
-foo(myDog);
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">Dog</span> <span class="n">myDog</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Dog</span><span class="o">(</span><span class="s">&#34;Rover&#34;</span><span class="o">);</span>
+<span class="n">foo</span><span class="o">(</span><span class="n">myDog</span><span class="o">);</span></code></pre></div>
 <p>you're essentially passing the address of the created Dog object to the foo method. (I say essentially b/c java pointers aren't direct addresses, but it's easiest to think of them that way)</p>
 
 <p>Suppose the Dog object resides at memory address 42. This means we pass 42 to the method.</p>
 
 <p>If the Method were defined as</p>
-
-<pre><code>public void foo(Dog someDog) {  // AAA
-    someDog.setName(&quot;Max&quot;);     // BBB
-    someDog = new Dog(&quot;Fifi&quot;);  // CCC
-    someDog.setName(&quot;Rowlf&quot;);   // DDD
-}
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kt">void</span> <span class="nf">foo</span><span class="o">(</span><span class="n">Dog</span> <span class="n">someDog</span><span class="o">)</span> <span class="o">{</span>  <span class="c1">// AAA
+</span><span class="c1"></span>    <span class="n">someDog</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">&#34;Max&#34;</span><span class="o">);</span>     <span class="c1">// BBB
+</span><span class="c1"></span>    <span class="n">someDog</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Dog</span><span class="o">(</span><span class="s">&#34;Fifi&#34;</span><span class="o">);</span>  <span class="c1">// CCC
+</span><span class="c1"></span>    <span class="n">someDog</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">&#34;Rowlf&#34;</span><span class="o">);</span>   <span class="c1">// DDD
+</span><span class="c1"></span><span class="o">}</span></code></pre></div>
 <p>Let's look at what's happening.</p>
 
 <ul>

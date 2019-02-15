@@ -309,32 +309,29 @@
 <p>Before getting into the actual property editors, let's define a convenience &quot;adapter&quot; class for the PropertyEditor interface.  This adapter will provide default behaviors for all the PropertyEditor methods, and we can use it as a convenient superclass for the rest of our property editors.   We'll discuss the methods in this interface as we proceed through the article.</p>
 
 <p>Adapters make life a bit easier for us because we don't have to define all the methods ourselves; we just need to override the ones that we really care about.</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// A simple adapter class for interface java.beans.PropertyEditor
+</span><span class="c1"></span><span class="kn">package</span> <span class="nn">com.magelang.adapter</span><span class="o">;</span>
 
-<pre><code>// A simple adapter class for interface java.beans.PropertyEditor
-package com.magelang.adapter;
+<span class="kn">import</span> <span class="nn">java.beans.PropertyEditor</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.beans.PropertyChangeListener</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.Rectangle</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.Graphics</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.Component</span><span class="o">;</span>
 
-import java.beans.PropertyEditor;
-import java.beans.PropertyChangeListener;
-import java.awt.Rectangle;
-import java.awt.Graphics;
-import java.awt.Component;
-
-public class PropertyEditorAdapter implements PropertyEditor {
-    public void addPropertyChangeListener(PropertyChangeListener listener) {}
-    public void removePropertyChangeListener(PropertyChangeListener listener) {}
-    public void setAsText(String text) throws IllegalArgumentException {}
-    public void setValue(Object value)     {}
-    public void paintValue(Graphics gfx, Rectangle box)  {}
-    public String    getAsText()                   {return null;}
-    public Component getCustomEditor()             {return null;}
-    public String    getJavaInitializationString() {return null;}
-    public String[]  getTags()                     {return null;}
-    public Object    getValue()                    {return null;}
-    public boolean   supportsCustomEditor()        {return false;}
-    public boolean   isPaintable()                 {return false;}
-}
-</code></pre>
-
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">PropertyEditorAdapter</span> <span class="kd">implements</span> <span class="n">PropertyEditor</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addPropertyChangeListener</span><span class="o">(</span><span class="n">PropertyChangeListener</span> <span class="n">listener</span><span class="o">)</span> <span class="o">{}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">removePropertyChangeListener</span><span class="o">(</span><span class="n">PropertyChangeListener</span> <span class="n">listener</span><span class="o">)</span> <span class="o">{}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setAsText</span><span class="o">(</span><span class="n">String</span> <span class="n">text</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IllegalArgumentException</span> <span class="o">{}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setValue</span><span class="o">(</span><span class="n">Object</span> <span class="n">value</span><span class="o">)</span>     <span class="o">{}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">paintValue</span><span class="o">(</span><span class="n">Graphics</span> <span class="n">gfx</span><span class="o">,</span> <span class="n">Rectangle</span> <span class="n">box</span><span class="o">)</span>  <span class="o">{}</span>
+    <span class="kd">public</span> <span class="n">String</span>    <span class="nf">getAsText</span><span class="o">()</span>                   <span class="o">{</span><span class="k">return</span> <span class="kc">null</span><span class="o">;}</span>
+    <span class="kd">public</span> <span class="n">Component</span> <span class="nf">getCustomEditor</span><span class="o">()</span>             <span class="o">{</span><span class="k">return</span> <span class="kc">null</span><span class="o">;}</span>
+    <span class="kd">public</span> <span class="n">String</span>    <span class="nf">getJavaInitializationString</span><span class="o">()</span> <span class="o">{</span><span class="k">return</span> <span class="kc">null</span><span class="o">;}</span>
+    <span class="kd">public</span> <span class="n">String</span><span class="o">[]</span>  <span class="nf">getTags</span><span class="o">()</span>                     <span class="o">{</span><span class="k">return</span> <span class="kc">null</span><span class="o">;}</span>
+    <span class="kd">public</span> <span class="n">Object</span>    <span class="nf">getValue</span><span class="o">()</span>                    <span class="o">{</span><span class="k">return</span> <span class="kc">null</span><span class="o">;}</span>
+    <span class="kd">public</span> <span class="kt">boolean</span>   <span class="nf">supportsCustomEditor</span><span class="o">()</span>        <span class="o">{</span><span class="k">return</span> <span class="kc">false</span><span class="o">;}</span>
+    <span class="kd">public</span> <span class="kt">boolean</span>   <span class="nf">isPaintable</span><span class="o">()</span>                 <span class="o">{</span><span class="k">return</span> <span class="kc">false</span><span class="o">;}</span>
+<span class="o">}</span></code></pre></div>
 <p>Note that the JDK provides a class <code>java.beans.PropertyEditorSupport</code> that is very similar to this adapter (it adds better default support for property change notification and <code>getAsText</code>/<code>setAsText</code>.  I present this simpler adapter so we can avoid talking about property change events until later.  When you're really creating a property editor, you may want to use <code>java.beans.PropertyEditorSupport</code>.</p>
 
 <p>The negative angle to using this approach is that your property editor cannot be directly included in another GUI, such as a Customizer.  If you want to use a property editor as a general bean as well as only a property editor, you can either:</p>
@@ -373,78 +370,75 @@ public class PropertyEditorAdapter implements PropertyEditor {
 <p>One thing to note here: the bean builder is handling the interaction with the user, and informs the property editor when changes are made.  The property editor does not need to worry about informing anyone of the property being changed.  (This will become an issue when our property editor handles the user interaction and needs to inform the bean builder that the property value has changed.)</p>
 
 <p>Our implementation of this simple property editor looks as follows.  Note that we subclass PropertyEditorAdapter so we only need to define the five methods mentioned above.</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">coloredit</span><span class="o">;</span>
 
-<pre><code>package coloredit;
+<span class="kn">import</span> <span class="nn">java.awt.Color</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.magelang.adapter.PropertyEditorAdapter</span><span class="o">;</span>
 
-import java.awt.Color;
-import com.magelang.adapter.PropertyEditorAdapter;
+<span class="c1">// An overly simple Color editor.  The user types in the textual
+</span><span class="c1">// name of a color and this class verifies that it is a basic color
+</span><span class="c1">// name.  If it isn&#39;t, the color is set back to white.
+</span><span class="c1"></span>
+<span class="c1">//Demonstrates use of the setAsText() and getAsText() methods.
+</span><span class="c1"></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ColorEditor1</span> <span class="kd">extends</span> <span class="n">PropertyEditorAdapter</span> <span class="o">{</span>
+    <span class="c1">// Used to validate the color name
+</span><span class="c1"></span>    <span class="c1">//  (this property is protected to make the second 
+</span><span class="c1"></span>    <span class="c1">//   editor a bit easier...)
+</span><span class="c1"></span>    <span class="kd">protected</span> <span class="kd">static</span> <span class="n">String</span> <span class="n">colorNames</span><span class="o">[]</span> <span class="o">=</span> <span class="o">{</span>
+        <span class="s">&#34;white&#34;</span><span class="o">,</span> <span class="s">&#34;lightGray&#34;</span><span class="o">,</span> <span class="s">&#34;gray&#34;</span><span class="o">,</span> <span class="s">&#34;darkGray&#34;</span><span class="o">,</span> <span class="s">&#34;black&#34;</span><span class="o">,</span> 
+        <span class="s">&#34;red&#34;</span><span class="o">,</span> <span class="s">&#34;pink&#34;</span><span class="o">,</span> <span class="s">&#34;orange&#34;</span><span class="o">,</span> <span class="s">&#34;yellow&#34;</span><span class="o">,</span> <span class="s">&#34;green&#34;</span><span class="o">,</span> 
+        <span class="s">&#34;magenta&#34;</span><span class="o">,</span> <span class="s">&#34;cyan&#34;</span><span class="o">,</span> <span class="s">&#34;blue&#34;</span>
+    <span class="o">};</span>
 
-// An overly simple Color editor.  The user types in the textual
-// name of a color and this class verifies that it is a basic color
-// name.  If it isn't, the color is set back to white.
+    <span class="c1">// Used to map a color name to a Color object
+</span><span class="c1"></span>    <span class="kd">private</span> <span class="kd">static</span> <span class="n">Color</span>  <span class="n">colors</span><span class="o">[]</span> <span class="o">=</span> <span class="o">{</span>
+        <span class="n">Color</span><span class="o">.</span><span class="na">white</span><span class="o">,</span> <span class="n">Color</span><span class="o">.</span><span class="na">lightGray</span><span class="o">,</span> <span class="n">Color</span><span class="o">.</span><span class="na">gray</span><span class="o">,</span> <span class="n">Color</span><span class="o">.</span><span class="na">darkGray</span><span class="o">,</span> 
+        <span class="n">Color</span><span class="o">.</span><span class="na">black</span><span class="o">,</span> <span class="n">Color</span><span class="o">.</span><span class="na">red</span><span class="o">,</span> <span class="n">Color</span><span class="o">.</span><span class="na">pink</span><span class="o">,</span> <span class="n">Color</span><span class="o">.</span><span class="na">orange</span><span class="o">,</span> 
+        <span class="n">Color</span><span class="o">.</span><span class="na">yellow</span><span class="o">,</span> <span class="n">Color</span><span class="o">.</span><span class="na">green</span><span class="o">,</span> <span class="n">Color</span><span class="o">.</span><span class="na">magenta</span><span class="o">,</span> 
+        <span class="n">Color</span><span class="o">.</span><span class="na">cyan</span><span class="o">,</span> <span class="n">Color</span><span class="o">.</span><span class="na">blue</span>
+    <span class="o">};</span>
 
-//Demonstrates use of the setAsText() and getAsText() methods.
-public class ColorEditor1 extends PropertyEditorAdapter {
-    // Used to validate the color name
-    //  (this property is protected to make the second 
-    //   editor a bit easier...)
-    protected static String colorNames[] = {
-        &quot;white&quot;, &quot;lightGray&quot;, &quot;gray&quot;, &quot;darkGray&quot;, &quot;black&quot;, 
-        &quot;red&quot;, &quot;pink&quot;, &quot;orange&quot;, &quot;yellow&quot;, &quot;green&quot;, 
-        &quot;magenta&quot;, &quot;cyan&quot;, &quot;blue&quot;
-    };
+    <span class="c1">// The currently-selected color (start with white)
+</span><span class="c1"></span>    <span class="kd">private</span> <span class="kt">int</span> <span class="n">selected</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+    
+    <span class="c1">//Tells the bean builder the name of the current color 
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getAsText</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">colorNames</span><span class="o">[</span><span class="n">selected</span><span class="o">];</span>
+    <span class="o">}</span>
 
-    // Used to map a color name to a Color object
-    private static Color  colors[] = {
-        Color.white, Color.lightGray, Color.gray, Color.darkGray, 
-        Color.black, Color.red, Color.pink, Color.orange, 
-        Color.yellow, Color.green, Color.magenta, 
-        Color.cyan, Color.blue
-    };
+    <span class="c1">// Allows the bean builder to tell the property editor the value
+</span><span class="c1"></span>    <span class="c1">// that the user has entered
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setAsText</span><span class="o">(</span><span class="n">String</span> <span class="n">text</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IllegalArgumentException</span> <span class="o">{</span>
+        <span class="k">for</span><span class="o">(</span><span class="n">selected</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+            <span class="n">selected</span> <span class="o">&lt;</span> <span class="n">colorNames</span><span class="o">.</span><span class="na">length</span> <span class="o">&amp;&amp;</span>
+            <span class="o">!</span><span class="n">colorNames</span><span class="o">[</span><span class="n">selected</span><span class="o">].</span><span class="na">equals</span><span class="o">(</span><span class="n">text</span><span class="o">);</span>
+            <span class="n">selected</span><span class="o">++);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">selected</span> <span class="o">==</span> <span class="n">colorNames</span><span class="o">.</span><span class="na">length</span><span class="o">)</span>
+            <span class="n">selected</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+    <span class="o">}</span>
 
-    // The currently-selected color (start with white)
-    private int selected = 0;
+    <span class="c1">// Tells the bean builder the value for the property
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="n">Object</span> <span class="nf">getValue</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">colors</span><span class="o">[</span><span class="n">selected</span><span class="o">];</span>
+    <span class="o">}</span>
 
-    //Tells the bean builder the name of the current color 
-    public String getAsText() {
-        return colorNames[selected];
-    }
+    <span class="c1">// Allows the bean builder to pass the current property
+</span><span class="c1"></span>    <span class="c1">// value to the property editor
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setValue</span><span class="o">(</span><span class="n">Object</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">selected</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">value</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">colors</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">value</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">colors</span><span class="o">[</span><span class="n">i</span><span class="o">]))</span> <span class="o">{</span>
+                    <span class="n">selected</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
+                    <span class="k">break</span><span class="o">;</span>
+                <span class="o">}</span>   
+    <span class="o">}</span>
 
-    // Allows the bean builder to tell the property editor the value
-    // that the user has entered
-    public void setAsText(String text) throws IllegalArgumentException {
-        for(selected = 0;
-            selected &lt; colorNames.length &amp;&amp;
-            !colorNames[selected].equals(text);
-            selected++);
-        if (selected == colorNames.length)
-            selected = 0;
-    }
-
-    // Tells the bean builder the value for the property
-    public Object getValue() {
-        return colors[selected];
-    }
-
-    // Allows the bean builder to pass the current property
-    // value to the property editor
-    public void setValue(Object value) {
-        selected = 0;
-        if (value != null)
-            for(int i=0; i&lt;colors.length; i++)
-                if (value.equals(colors[i])) {
-                    selected = i;
-                    break;
-                }   
-    }
-
-    // Get the initialization code for the property
-    public String getJavaInitializationString() {
-        return &quot;java.awt.Color.&quot; + colorNames[selected];
-    }
-}  
-</code></pre>
-
+    <span class="c1">// Get the initialization code for the property
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getJavaInitializationString</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">&#34;java.awt.Color.&#34;</span> <span class="o">+</span> <span class="n">colorNames</span><span class="o">[</span><span class="n">selected</span><span class="o">];</span>
+    <span class="o">}</span>
+<span class="o">}</span>  </code></pre></div>
 <p>This property editor converts the passed-in Color value to a String representing the color name, validates that name whenever it is set, and converts it back to a Color object.</p>
 
 <h2 id="using-the-property-editor">Using the Property Editor</h2>
@@ -459,84 +453,75 @@ public class ColorEditor1 extends PropertyEditorAdapter {
 <p>This article will concentrate on the first use.  A later article will discuss setting up a property editor as the default editor for a given type.</p>
 
 <p>To associate a property editor with a bean property, you need to define a BeanInfo class for the bean.  Of course this means that we need a bean, so let's define a simple Panel subclass that has a &quot;color&quot; property whose implementation is to set/get the Panel's background color. (We will leave the background property intact so operation of this property editor can be compared to normal Color editor operation in the bean builder you are using.)</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">coloredit</span><span class="o">;</span>
 
-<pre><code>package coloredit;
+<span class="kn">import</span> <span class="nn">java.awt.Color</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.Panel</span><span class="o">;</span>
 
-import java.awt.Color;
-import java.awt.Panel;
-
-// A Simple Panel extension that we'll use to test our
-// property editor 
-public class ColorBean extends Panel {
-    // note that there is no real &quot;color&quot; field;
-    // a property can be strictly algorithmic...
-    public Color getColor() {return getBackground();} 
-    public void setColor(Color color) {setBackground(color);}
-}  
-</code></pre>
-
+<span class="c1">// A Simple Panel extension that we&#39;ll use to test our
+</span><span class="c1">// property editor 
+</span><span class="c1"></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ColorBean</span> <span class="kd">extends</span> <span class="n">Panel</span> <span class="o">{</span>
+    <span class="c1">// note that there is no real &#34;color&#34; field;
+</span><span class="c1"></span>    <span class="c1">// a property can be strictly algorithmic...
+</span><span class="c1"></span>    <span class="kd">public</span> <span class="n">Color</span> <span class="nf">getColor</span><span class="o">()</span> <span class="o">{</span><span class="k">return</span> <span class="n">getBackground</span><span class="o">();}</span> 
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setColor</span><span class="o">(</span><span class="n">Color</span> <span class="n">color</span><span class="o">)</span> <span class="o">{</span><span class="n">setBackground</span><span class="o">(</span><span class="n">color</span><span class="o">);}</span>
+<span class="o">}</span>  </code></pre></div>
 <p>The BeanInfo class for this is big and hairy, and discussion of BeanInfo is out of the scope of this article.  (I'd advise you to get a tool, such as VisualAge for Java, that generates the BeanInfo class for you...) The following is the relevant part of the ColorBeanBeanInfo class that sets up the property editor.  The full BeanInfo class (as generated by VisualAge for Java) is available in the source distribution.</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">coloredit</span><span class="o">;</span>
 
-<pre><code>package coloredit;
+<span class="c1">// Relevant parts of the ColorBeanBeanInfo class 
+</span><span class="c1">// Note that exception handling has been removed 
+</span><span class="c1">// and the relevant parts
+</span><span class="c1">// have been simplified...
+</span><span class="c1"></span>
+<span class="kn">import</span> <span class="nn">java.beans.PropertyDescriptor</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.beans.SimpleBeanInfo</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.lang.reflect.Method</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.Color</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">coloredit.ColorEditor1</span><span class="o">;</span>
 
-// Relevant parts of the ColorBeanBeanInfo class 
-// Note that exception handling has been removed 
-// and the relevant parts
-// have been simplified...
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ColorBeanBeanInfo</span> <span class="kd">extends</span> <span class="n">SimpleBeanInfo</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">PropertyDescriptor</span> <span class="nf">colorPropertyDescriptor</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">// get the &#34;get&#34; method
+</span><span class="c1"></span>        <span class="n">Class</span> <span class="n">aGetMethodParameterTypes</span><span class="o">[]</span> <span class="o">=</span> <span class="o">{};</span>
+        <span class="n">Method</span> <span class="n">aGetMethod</span> <span class="o">=</span>
+            <span class="n">getBeanClass</span><span class="o">().</span><span class="na">getMethod</span><span class="o">(</span><span class="s">&#34;getColor&#34;</span><span class="o">,</span> 
+                <span class="n">aGetMethodParameterTypes</span><span class="o">);</span>
 
-import java.beans.PropertyDescriptor;
-import java.beans.SimpleBeanInfo;
-import java.lang.reflect.Method;
-import java.awt.Color;
-import coloredit.ColorEditor1;
+        <span class="c1">// get the &#34;set&#34; method
+</span><span class="c1"></span>        <span class="n">Class</span> <span class="n">aSetMethodParameterTypes</span> <span class="o">=</span> <span class="o">{</span><span class="n">Color</span><span class="o">.</span><span class="na">class</span><span class="o">};</span>
+        <span class="n">Method</span> <span class="n">aSetMethod</span> <span class="o">=</span>
+            <span class="n">getBeanClass</span><span class="o">().</span><span class="na">getMethod</span><span class="o">(</span><span class="s">&#34;setColor&#34;</span><span class="o">,</span> 
+                <span class="n">aSetMethodParameterTypes</span><span class="o">);</span>
 
-public class ColorBeanBeanInfo extends SimpleBeanInfo {
-    public PropertyDescriptor colorPropertyDescriptor() {
-        // get the &quot;get&quot; method
-        Class aGetMethodParameterTypes[] = {};
-        Method aGetMethod =
-            getBeanClass().getMethod(&quot;getColor&quot;, 
-                aGetMethodParameterTypes);
+        <span class="c1">// define the property descriptor
+</span><span class="c1"></span>        <span class="n">PropertyDescriptor</span> <span class="n">aDescriptor</span> <span class="o">=</span>
+            <span class="k">new</span> <span class="n">PropertyDescriptor</span><span class="o">(</span><span class="s">&#34;color&#34;</span><span class="o">,</span> <span class="n">aGetMethod</span><span class="o">,</span> <span class="n">aSetMethod</span><span class="o">);</span>
+        <span class="c1">// Set a property editor
+</span><span class="c1"></span>        <span class="n">aDescriptor</span><span class="o">.</span><span class="na">setPropertyEditorClass</span><span class="o">(</span><span class="n">ColorEditor1</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">aDescriptor</span><span class="o">;</span>
+    <span class="o">}</span>
 
-        // get the &quot;set&quot; method
-        Class aSetMethodParameterTypes = {Color.class};
-        Method aSetMethod =
-            getBeanClass().getMethod(&quot;setColor&quot;, 
-                aSetMethodParameterTypes);
+    <span class="kd">public</span> <span class="n">PropertyDescriptor</span><span class="o">[]</span> <span class="nf">getPropertyDescriptors</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">PropertyDescriptor</span> <span class="n">aDescriptorList</span><span class="o">[]</span> <span class="o">=</span> 
+            <span class="o">{</span><span class="n">colorPropertyDescriptor</span><span class="o">()};</span>
+        <span class="k">return</span> <span class="n">aDescriptorList</span><span class="o">;</span>
+    <span class="o">}</span>
 
-        // define the property descriptor
-        PropertyDescriptor aDescriptor =
-            new PropertyDescriptor(&quot;color&quot;, aGetMethod, aSetMethod);
-        // Set a property editor
-        aDescriptor.setPropertyEditorClass(ColorEditor1.class);
-        return aDescriptor;
-    }
-
-    public PropertyDescriptor[] getPropertyDescriptors() {
-        PropertyDescriptor aDescriptorList[] = 
-            {colorPropertyDescriptor()};
-        return aDescriptorList;
-    }
-
-    // and more BeanInfo stuff...
-}  
-</code></pre>
-
+    <span class="c1">// and more BeanInfo stuff...
+</span><span class="c1"></span><span class="o">}</span>  </code></pre></div>
 <p>When you use the ColorBean when visually designing a new bean, you can bring up the property sheet for the new instance of the ColorBean.  Initially, the value for &quot;color&quot; will be &quot;white&quot;.  If you change it to one of the valid color names, the change will stick.  If you mistype, the color value becomes &quot;white&quot; again.</p>
 
 <h2 id="making-the-property-editor-a-bit-nicer">Making the Property Editor a Bit Nicer...</h2>
 
 <p>Because we have a (small) finite set of values, a nicer user interface would be to give the user a list of choices.  This is easily accomplished by adding a getTags() method to our color editor.  If getTags() returns a null (which is the default that we defined in PropertyEditorAdapter) the bean builder will just present a TextField to get the value.  If getTags() returns an array of Strings, the bean builder will present a Choice component with those String values.  So we can extend our ColorEditor as follows:</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">coloredit</span><span class="o">;</span>
 
-<pre><code>package coloredit;
-
-public class ColorEditor2 extends ColorEditor1 {
-    public String[] getTags() {
-        return colorNames;
-    }
-}  
-</code></pre>
-
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ColorEditor2</span> <span class="kd">extends</span> <span class="n">ColorEditor1</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="n">String</span><span class="o">[]</span> <span class="nf">getTags</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">colorNames</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>  </code></pre></div>
 <p>This is possible because we defined colorNames as a protected field (even before we thought of this extension ;)</p>
 
 <p>If we change the ColorBeanBeanInfo definition to use ColorEditor2, the property can now be edited by the user selecting the color choice in the property sheet.</p>
@@ -557,119 +542,113 @@ public class ColorEditor2 extends ColorEditor1 {
 <p>Let's look at the last item first: we need to tell the bean builder when the property has changed.  The PropertyEditor interface requires methods addPropertyListener() and removePropertyListener(), which let other classes ask us to inform them when a property changes.  The other class, in this instance, is the bean builder itself.</p>
 
 <p>Let's take our PropertyEditorAdapter and extend it to add the property change notification support we need.  The JDK provides a support class, java.beans.PropertyChangeSupport, that will help us.  All we need is:</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">com.magelang.adapter</span><span class="o">;</span>
 
-<pre><code>package com.magelang.adapter;
+<span class="kn">import</span> <span class="nn">java.beans.PropertyChangeSupport</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.beans.PropertyChangeListener</span><span class="o">;</span>
 
-import java.beans.PropertyChangeSupport;
-import java.beans.PropertyChangeListener;
-
-// A default implementation of PropertyEditor Adapter 
-// that provides support for property listeners. 
-// This will be used for any property editors that 
-// perform their own interaction with the user to 
-// change the property value.
-public class PropertyEditorChangeAdapter extends PropertyEditorAdapter {
-    private PropertyChangeSupport propertyChangeSupport =
-        new PropertyChangeSupport(this);
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        propertyChangeSupport.addPropertyChangeListener(listener);
-    }
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
-        propertyChangeSupport.removePropertyChangeListener(listener);
-    }
-    protected void firePropertyChange(Object oldValue, Object newValue) {
-        propertyChangeSupport.firePropertyChange(null, oldValue, newValue);
-    }
-}  
-</code></pre>
-
+<span class="c1">// A default implementation of PropertyEditor Adapter 
+</span><span class="c1">// that provides support for property listeners. 
+</span><span class="c1">// This will be used for any property editors that 
+</span><span class="c1">// perform their own interaction with the user to 
+</span><span class="c1">// change the property value.
+</span><span class="c1"></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">PropertyEditorChangeAdapter</span> <span class="kd">extends</span> <span class="n">PropertyEditorAdapter</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="n">PropertyChangeSupport</span> <span class="n">propertyChangeSupport</span> <span class="o">=</span>
+        <span class="k">new</span> <span class="n">PropertyChangeSupport</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addPropertyChangeListener</span><span class="o">(</span><span class="n">PropertyChangeListener</span> <span class="n">listener</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">propertyChangeSupport</span><span class="o">.</span><span class="na">addPropertyChangeListener</span><span class="o">(</span><span class="n">listener</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">removePropertyChangeListener</span><span class="o">(</span><span class="n">PropertyChangeListener</span> <span class="n">listener</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">propertyChangeSupport</span><span class="o">.</span><span class="na">removePropertyChangeListener</span><span class="o">(</span><span class="n">listener</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">firePropertyChange</span><span class="o">(</span><span class="n">Object</span> <span class="n">oldValue</span><span class="o">,</span> <span class="n">Object</span> <span class="n">newValue</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">propertyChangeSupport</span><span class="o">.</span><span class="na">firePropertyChange</span><span class="o">(</span><span class="kc">null</span><span class="o">,</span> <span class="n">oldValue</span><span class="o">,</span> <span class="n">newValue</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>  </code></pre></div>
 <p>We define addPropertyChangeListener() and removePropertyChangeListener() to delegate their tasks to an instance of PropertyChangeSupport. We define an extra &quot;helper&quot; method, firePropertyChange(), to make life a bit easier for our derived property editors.</p>
 
 <p>Now we'll take our original ColorEdit1 and change its superclass to PropertyEditorChangeAdapter.  We'll also change its name to ColorEdit3 to keep things clear.  After a few more changes, our new property editor looks like (changes to ColorEditor1 are in bold):</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">coloredit</span><span class="o">;</span>
 
-<pre><code>package coloredit;
+<span class="kn">import</span> <span class="nn">java.beans.PropertyChangeListener</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.Choice</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.Component</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.Color</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.event.ItemListener</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.event.ItemEvent</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.magelang.adapter.PropertyEditorChangeAdapter</span><span class="o">;</span>
 
-import java.beans.PropertyChangeListener;
-import java.awt.Choice;
-import java.awt.Component;
-import java.awt.Color;
-import java.awt.event.ItemListener;
-import java.awt.event.ItemEvent;
-import com.magelang.adapter.PropertyEditorChangeAdapter;
+<span class="c1">// This color editor will display a custom property editor and
+</span><span class="c1">// allow the user to select a color name from a list.
+</span><span class="c1"></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ColorEditor3</span> <span class="kd">extends</span> <span class="n">PropertyEditorChangeAdapter</span> <span class="kd">implements</span> <span class="n">ItemListener</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="n">String</span> <span class="n">colorNames</span><span class="o">[]</span> <span class="o">=</span> <span class="o">{</span>
+        <span class="s">&#34;white&#34;</span><span class="o">,</span> <span class="s">&#34;lightGray&#34;</span><span class="o">,</span> <span class="s">&#34;gray&#34;</span><span class="o">,</span> <span class="s">&#34;darkGray&#34;</span><span class="o">,</span> 
+        <span class="s">&#34;black&#34;</span><span class="o">,</span> <span class="s">&#34;red&#34;</span><span class="o">,</span> <span class="s">&#34;pink&#34;</span><span class="o">,</span> <span class="s">&#34;orange&#34;</span><span class="o">,</span> <span class="s">&#34;yellow&#34;</span><span class="o">,</span>
+        <span class="s">&#34;green&#34;</span><span class="o">,</span> <span class="s">&#34;magenta&#34;</span><span class="o">,</span> <span class="s">&#34;cyan&#34;</span><span class="o">,</span> <span class="s">&#34;blue&#34;</span>
+    <span class="o">};</span>
 
-// This color editor will display a custom property editor and
-// allow the user to select a color name from a list.
-public class ColorEditor3 extends PropertyEditorChangeAdapter implements ItemListener {
-    private static String colorNames[] = {
-        &quot;white&quot;, &quot;lightGray&quot;, &quot;gray&quot;, &quot;darkGray&quot;, 
-        &quot;black&quot;, &quot;red&quot;, &quot;pink&quot;, &quot;orange&quot;, &quot;yellow&quot;,
-        &quot;green&quot;, &quot;magenta&quot;, &quot;cyan&quot;, &quot;blue&quot;
-    };
+    <span class="kd">private</span> <span class="kd">static</span> <span class="n">Color</span>  <span class="n">colors</span><span class="o">[]</span> <span class="o">=</span> <span class="o">{</span>
+        <span class="n">Color</span><span class="o">.</span><span class="na">white</span><span class="o">,</span> <span class="n">Color</span><span class="o">.</span><span class="na">lightGray</span><span class="o">,</span> <span class="n">Color</span><span class="o">.</span><span class="na">gray</span><span class="o">,</span>
+        <span class="n">Color</span><span class="o">.</span><span class="na">darkGray</span><span class="o">,</span> <span class="n">Color</span><span class="o">.</span><span class="na">black</span><span class="o">,</span> <span class="n">Color</span><span class="o">.</span><span class="na">red</span><span class="o">,</span> 
+        <span class="n">Color</span><span class="o">.</span><span class="na">pink</span><span class="o">,</span> <span class="n">Color</span><span class="o">.</span><span class="na">orange</span><span class="o">,</span> <span class="n">Color</span><span class="o">.</span><span class="na">yellow</span><span class="o">,</span> 
+        <span class="n">Color</span><span class="o">.</span><span class="na">green</span><span class="o">,</span> <span class="n">Color</span><span class="o">.</span><span class="na">magenta</span><span class="o">,</span> <span class="n">Color</span><span class="o">.</span><span class="na">cyan</span><span class="o">,</span> <span class="n">Color</span><span class="o">.</span><span class="na">blue</span>
+    <span class="o">};</span>
 
-    private static Color  colors[] = {
-        Color.white, Color.lightGray, Color.gray,
-        Color.darkGray, Color.black, Color.red, 
-        Color.pink, Color.orange, Color.yellow, 
-        Color.green, Color.magenta, Color.cyan, Color.blue
-    };
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">selected</span><span class="o">=</span><span class="n">0</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">Choice</span> <span class="n">myGUI</span><span class="o">;</span>
+    
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getAsText</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">colorNames</span><span class="o">[</span><span class="n">selected</span><span class="o">];</span>
+    <span class="o">}</span>
 
-    private int selected=0;
-    private Choice myGUI;
+    <span class="kd">public</span> <span class="n">Component</span> <span class="nf">getCustomEditor</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">myGUI</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">myGUI</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Choice</span><span class="o">();</span>
+            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">colorNames</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
+                <span class="n">myGUI</span><span class="o">.</span><span class="na">addItem</span><span class="o">(</span><span class="n">colorNames</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+            <span class="n">myGUI</span><span class="o">.</span><span class="na">addItemListener</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+        <span class="o">}</span>   
+        <span class="k">return</span> <span class="n">myGUI</span><span class="o">;</span>
+    <span class="o">}</span>
 
-    public String getAsText() {
-        return colorNames[selected];
-    }
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getJavaInitializationString</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">&#34;java.awt.Color.&#34;</span><span class="o">+</span><span class="n">colorNames</span><span class="o">[</span><span class="n">selected</span><span class="o">];</span>
+    <span class="o">}</span>
 
-    public Component getCustomEditor() {
-        if (myGUI == null) {
-            myGUI = new Choice();
-            for(int i = 0; i &lt; colorNames.length; i++)
-                myGUI.addItem(colorNames[i]);
-            myGUI.addItemListener(this);
-        }   
-        return myGUI;
-    }
+    <span class="kd">public</span> <span class="n">Object</span> <span class="nf">getValue</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">colors</span><span class="o">[</span><span class="n">selected</span><span class="o">];</span>
+    <span class="o">}</span>
 
-    public String getJavaInitializationString() {
-        return &quot;java.awt.Color.&quot;+colorNames[selected];
-    }
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">itemStateChanged</span><span class="o">(</span><span class="n">ItemEvent</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">setAsText</span><span class="o">((</span><span class="n">String</span><span class="o">)</span><span class="n">e</span><span class="o">.</span><span class="na">getItem</span><span class="o">());</span>
+    <span class="o">}</span> 
 
-    public Object getValue() {
-        return colors[selected];
-    }
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setAsText</span><span class="o">(</span><span class="n">String</span> <span class="n">text</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IllegalArgumentException</span> <span class="o">{</span>
+        <span class="n">Object</span> <span class="n">oldValue</span> <span class="o">=</span> <span class="n">getValue</span><span class="o">();</span>
+        <span class="k">for</span><span class="o">(</span><span class="n">selected</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+            <span class="n">selected</span> <span class="o">&lt;</span> <span class="n">colorNames</span><span class="o">.</span><span class="na">length</span> <span class="o">&amp;&amp;</span>
+            <span class="o">!</span><span class="n">colorNames</span><span class="o">[</span><span class="n">selected</span><span class="o">].</span><span class="na">equals</span><span class="o">(</span><span class="n">text</span><span class="o">);</span>
+            <span class="n">selected</span><span class="o">++);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">selected</span> <span class="o">==</span> <span class="n">colorNames</span><span class="o">.</span><span class="na">length</span><span class="o">)</span>
+            <span class="n">selected</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+        <span class="n">Object</span> <span class="n">newValue</span> <span class="o">=</span> <span class="n">getValue</span><span class="o">();</span>
+        <span class="n">firePropertyChange</span><span class="o">(</span><span class="n">oldValue</span><span class="o">,</span> <span class="n">newValue</span><span class="o">);</span>
+    <span class="o">}</span>
 
-    public void itemStateChanged(ItemEvent e) {
-        setAsText((String)e.getItem());
-    } 
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setValue</span><span class="o">(</span><span class="n">Object</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">selected</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">value</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">colors</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">value</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">colors</span><span class="o">[</span><span class="n">i</span><span class="o">]))</span> <span class="o">{</span>
+                    <span class="n">selected</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
+                    <span class="k">break</span><span class="o">;</span>
+                <span class="o">}</span>   
+    <span class="o">}</span>
 
-    public void setAsText(String text) throws IllegalArgumentException {
-        Object oldValue = getValue();
-        for(selected = 0;
-            selected &lt; colorNames.length &amp;&amp;
-            !colorNames[selected].equals(text);
-            selected++);
-        if (selected == colorNames.length)
-            selected = 0;
-        Object newValue = getValue();
-        firePropertyChange(oldValue, newValue);
-    }
-
-    public void setValue(Object value) {
-        selected = 0;
-        if (value != null)
-            for(int i=0; i &lt; colors.length; i++)
-                if (value.equals(colors[i])) {
-                    selected = i;
-                    break;
-                }   
-    }
-
-    public boolean supportsCustomEditor() {
-        return true;
-    }
-}  
-</code></pre>
-
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">supportsCustomEditor</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>  </code></pre></div>
 <p>So what is it doing now?</p>
 
 <p>First, we define supportsCustomEditor() to return true (recall that the default implementation in PropertyEditorAdapter returns false).   This method tells the bean builder that our property editor will have its own GUI.   The bean builder will then call getCustomEditor() to retrieve our GUI component that does the editing.  The bean builder will display this component in a dialog.</p>
@@ -685,92 +664,89 @@ public class ColorEditor3 extends PropertyEditorChangeAdapter implements ItemLis
 <p>The interface still leaves something to be desired.  What does &quot;cyan&quot; look like?  Why don't we provide some buttons with the colors as their background?   (Note: there are some versions of the JDK that have a bug in AWT's Button class that does not paint the background color of the Button.  The current version of VisualAge for Java contains this AWT bug.)</p>
 
 <p>The interface between the property editor and the bean builder remains <em>exactly the same</em>.  All we are doing is changing our GUI a bit.  Differences between this editor and ColorEditor3 are in bold.</p>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">coloredit</span><span class="o">;</span>
 
-<pre><code>package coloredit;
+<span class="kn">import</span> <span class="nn">java.beans.PropertyChangeListener</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.GridLayout</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.Panel</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.Button</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.Component</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.Color</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.event.ActionListener</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.event.ActionEvent</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.magelang.adapter.PropertyEditorChangeAdapter</span><span class="o">;</span>
 
-import java.beans.PropertyChangeListener;
-import java.awt.GridLayout;
-import java.awt.Panel;
-import java.awt.Button;
-import java.awt.Component;
-import java.awt.Color;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import com.magelang.adapter.PropertyEditorChangeAdapter;
+<span class="c1">// This color editor will display a custom property editor
+</span><span class="c1">// and allow the user to select a color button.
+</span><span class="c1"></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ColorEditor4</span> <span class="kd">extends</span> <span class="n">PropertyEditorChangeAdapter</span> <span class="kd">implements</span> <span class="n">ActionListener</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="n">String</span> <span class="n">colorNames</span><span class="o">[]</span> <span class="o">=</span> <span class="o">{</span>
+        <span class="s">&#34;white&#34;</span><span class="o">,</span> <span class="s">&#34;lightGray&#34;</span><span class="o">,</span> <span class="s">&#34;gray&#34;</span><span class="o">,</span> <span class="s">&#34;darkGray&#34;</span><span class="o">,</span> 
+        <span class="s">&#34;black&#34;</span><span class="o">,</span> <span class="s">&#34;red&#34;</span><span class="o">,</span> <span class="s">&#34;pink&#34;</span><span class="o">,</span> <span class="s">&#34;orange&#34;</span><span class="o">,</span> <span class="s">&#34;yellow&#34;</span><span class="o">,</span>
+        <span class="s">&#34;green&#34;</span><span class="o">,</span> <span class="s">&#34;magenta&#34;</span><span class="o">,</span> <span class="s">&#34;cyan&#34;</span><span class="o">,</span> <span class="s">&#34;blue&#34;</span>
+    <span class="o">};</span>
+    <span class="kd">private</span>   <span class="kd">static</span> <span class="n">Color</span>  <span class="n">colors</span><span class="o">[]</span> <span class="o">=</span> <span class="o">{</span>
+        <span class="n">Color</span><span class="o">.</span><span class="na">white</span><span class="o">,</span> <span class="n">Color</span><span class="o">.</span><span class="na">lightGray</span><span class="o">,</span> <span class="n">Color</span><span class="o">.</span><span class="na">gray</span><span class="o">,</span>
+        <span class="n">Color</span><span class="o">.</span><span class="na">darkGray</span><span class="o">,</span> <span class="n">Color</span><span class="o">.</span><span class="na">black</span><span class="o">,</span> <span class="n">Color</span><span class="o">.</span><span class="na">red</span><span class="o">,</span> 
+        <span class="n">Color</span><span class="o">.</span><span class="na">pink</span><span class="o">,</span> <span class="n">Color</span><span class="o">.</span><span class="na">orange</span><span class="o">,</span> <span class="n">Color</span><span class="o">.</span><span class="na">yellow</span><span class="o">,</span> 
+        <span class="n">Color</span><span class="o">.</span><span class="na">green</span><span class="o">,</span> <span class="n">Color</span><span class="o">.</span><span class="na">magenta</span><span class="o">,</span> <span class="n">Color</span><span class="o">.</span><span class="na">cyan</span><span class="o">,</span> <span class="n">Color</span><span class="o">.</span><span class="na">blue</span>
+    <span class="o">};</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">selected</span><span class="o">=</span><span class="n">0</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="n">Panel</span> <span class="n">myGUI</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">actionPerformed</span><span class="o">(</span><span class="n">ActionEvent</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">setAsText</span><span class="o">(((</span><span class="n">Button</span><span class="o">)</span><span class="n">e</span><span class="o">.</span><span class="na">getSource</span><span class="o">()).</span><span class="na">getLabel</span><span class="o">());</span>
+    <span class="o">}</span> 
 
-// This color editor will display a custom property editor
-// and allow the user to select a color button.
-public class ColorEditor4 extends PropertyEditorChangeAdapter implements ActionListener {
-    private static String colorNames[] = {
-        &quot;white&quot;, &quot;lightGray&quot;, &quot;gray&quot;, &quot;darkGray&quot;, 
-        &quot;black&quot;, &quot;red&quot;, &quot;pink&quot;, &quot;orange&quot;, &quot;yellow&quot;,
-        &quot;green&quot;, &quot;magenta&quot;, &quot;cyan&quot;, &quot;blue&quot;
-    };
-    private   static Color  colors[] = {
-        Color.white, Color.lightGray, Color.gray,
-        Color.darkGray, Color.black, Color.red, 
-        Color.pink, Color.orange, Color.yellow, 
-        Color.green, Color.magenta, Color.cyan, Color.blue
-    };
-    private int selected=0;
-    private Panel myGUI;
-    public void actionPerformed(ActionEvent e) {
-        setAsText(((Button)e.getSource()).getLabel());
-    } 
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getAsText</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">colorNames</span><span class="o">[</span><span class="n">selected</span><span class="o">];</span>
+    <span class="o">}</span>
 
-    public String getAsText() {
-        return colorNames[selected];
-    }
+    <span class="kd">public</span> <span class="n">Component</span> <span class="nf">getCustomEditor</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">myGUI</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">myGUI</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Panel</span><span class="o">(</span><span class="k">new</span> <span class="n">GridLayout</span><span class="o">(</span><span class="n">0</span><span class="o">,</span><span class="n">2</span><span class="o">));</span>
+            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">colorNames</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+                <span class="n">Button</span> <span class="n">b</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Button</span><span class="o">(</span><span class="n">colorNames</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+                <span class="n">b</span><span class="o">.</span><span class="na">setBackground</span><span class="o">(</span><span class="n">colors</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+                <span class="n">b</span><span class="o">.</span><span class="na">addActionListener</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+                <span class="n">myGUI</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">b</span><span class="o">);</span>
+            <span class="o">}</span> 
+        <span class="o">}</span>   
+        <span class="k">return</span> <span class="n">myGUI</span><span class="o">;</span>
+    <span class="o">}</span>
 
-    public Component getCustomEditor() {
-        if (myGUI == null) {
-            myGUI = new Panel(new GridLayout(0,2));
-            for(int i = 0; i &lt; colorNames.length; i++) {
-                Button b = new Button(colorNames[i]);
-                b.setBackground(colors[i]);
-                b.addActionListener(this);
-                myGUI.add(b);
-            } 
-        }   
-        return myGUI;
-    }
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getJavaInitializationString</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">&#34;java.awt.Color.&#34;</span><span class="o">+</span><span class="n">colorNames</span><span class="o">[</span><span class="n">selected</span><span class="o">];</span> 
+    <span class="o">}</span>
 
-    public String getJavaInitializationString() {
-        return &quot;java.awt.Color.&quot;+colorNames[selected]; 
-    }
+    <span class="kd">public</span> <span class="n">Object</span> <span class="nf">getValue</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">colors</span><span class="o">[</span><span class="n">selected</span><span class="o">];</span>
+    <span class="o">}</span>
 
-    public Object getValue() {
-        return colors[selected];
-    }
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setAsText</span><span class="o">(</span><span class="n">String</span> <span class="n">text</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IllegalArgumentException</span> <span class="o">{</span>
+        <span class="n">Object</span> <span class="n">oldValue</span> <span class="o">=</span> <span class="n">getValue</span><span class="o">();</span>
+        <span class="k">for</span><span class="o">(</span><span class="n">selected</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+            <span class="n">selected</span> <span class="o">&lt;</span> <span class="n">colorNames</span><span class="o">.</span><span class="na">length</span> <span class="o">&amp;&amp;</span>
+            <span class="o">!</span><span class="n">colorNames</span><span class="o">[</span><span class="n">selected</span><span class="o">].</span><span class="na">equals</span><span class="o">(</span><span class="n">text</span><span class="o">);</span>
+            <span class="n">selected</span><span class="o">++);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">selected</span> <span class="o">==</span> <span class="n">colorNames</span><span class="o">.</span><span class="na">length</span><span class="o">)</span>
+            <span class="n">selected</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+        <span class="n">Object</span> <span class="n">newValue</span> <span class="o">=</span> <span class="n">getValue</span><span class="o">();</span>
+        <span class="n">firePropertyChange</span><span class="o">(</span><span class="n">oldValue</span><span class="o">,</span> <span class="n">newValue</span><span class="o">);</span>
+    <span class="o">}</span>
 
-    public void setAsText(String text) throws IllegalArgumentException {
-        Object oldValue = getValue();
-        for(selected = 0;
-            selected &lt; colorNames.length &amp;&amp;
-            !colorNames[selected].equals(text);
-            selected++);
-        if (selected == colorNames.length)
-            selected = 0;
-        Object newValue = getValue();
-        firePropertyChange(oldValue, newValue);
-    }
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setValue</span><span class="o">(</span><span class="n">Object</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">selected</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">value</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+            <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">colors</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">value</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">colors</span><span class="o">[</span><span class="n">i</span><span class="o">]))</span> <span class="o">{</span>
+                    <span class="n">selected</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
+                    <span class="k">break</span><span class="o">;</span>
+                <span class="o">}</span>   
+    <span class="o">}</span>
 
-    public void setValue(Object value) {
-        selected = 0;
-        if (value != null)
-            for(int i=0; i &lt; colors.length; i++)
-                if (value.equals(colors[i])) {
-                    selected = i;
-                    break;
-                }   
-    }
-
-    public boolean supportsCustomEditor() {
-        return true;
-    }
-}  
-</code></pre>
-
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">supportsCustomEditor</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>  </code></pre></div>
 <p>All we have changed is the appearance of the GUI (and how we respond to events.)   If you are careful with how you interact with the bean builder, you can change the appearance of the GUI with very little effort.  In this case, our GUI is now a Panel with a 2-column grid of Buttons. Each Button has the color name and (unless the AWT background color bug is present) the color that will be selected.   When pressed, the color value is set.</p>
 
 <h2 id="the-final-touch">The Final Touch</h2>
@@ -780,30 +756,25 @@ public class ColorEditor4 extends PropertyEditorChangeAdapter implements ActionL
 <p>To make this possible, we need to drop the getAsText() method and implement the isPaintable() and paintValue() methods.  Instead of passing a text value for the property back to the bean builder, we're telling it that we can paint a value for the property, and providing a method to do that painting.  Our changes to the class are very simple:</p>
 
 <ul>
-<li><p>remove the getAsText() method*   add two imports:Figure 9: Imports to add</p>
-
-<pre><code>import java.awt.Graphics;
-import java.awt.Rectangle; 
-</code></pre></li>
-
-<li><p>add an isPaintable() method (recall that the default defined in PropertyEditorAdapter returned false):</p>
-
-<pre><code>public boolean isPaintable() {return true;}
-</code></pre></li>
-
-<li><p>add a paintValue() method:Figure 11: paintValue() method</p>
-
-<pre><code>public void paintValue(Graphics gfx, Rectangle box) {
-    gfx.setColor(colors[selected]);
-    // we use three 3-d rects to over-emphasize the 3-d effect
-    // (this way you can be sure this editor is working...)
-    gfx.fill3DRect(box.x+2,box.y+2, box.width-5, box.height-5, true);
-    gfx.fill3DRect(box.x+3,box.y+3, box.width-7, boxheight-7, true);
-    gfx.fill3DRect(box.x+4,box.y+4, box.width-9, box.height-9, true);
-} 
-</code></pre></li>
+<li>remove the getAsText() method*   add two imports:Figure 9: Imports to add</li>
 </ul>
-
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">        <span class="kn">import</span> <span class="nn">java.awt.Graphics</span><span class="o">;</span>
+        <span class="kn">import</span> <span class="nn">java.awt.Rectangle</span><span class="o">;</span> </code></pre></div>
+<ul>
+<li>add an isPaintable() method (recall that the default defined in PropertyEditorAdapter returned false):</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">        <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isPaintable</span><span class="o">()</span> <span class="o">{</span><span class="k">return</span> <span class="kc">true</span><span class="o">;}</span></code></pre></div>
+<ul>
+<li>add a paintValue() method:Figure 11: paintValue() method</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">paintValue</span><span class="o">(</span><span class="n">Graphics</span> <span class="n">gfx</span><span class="o">,</span> <span class="n">Rectangle</span> <span class="n">box</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">gfx</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="n">colors</span><span class="o">[</span><span class="n">selected</span><span class="o">]);</span>
+            <span class="c1">// we use three 3-d rects to over-emphasize the 3-d effect
+</span><span class="c1"></span>            <span class="c1">// (this way you can be sure this editor is working...)
+</span><span class="c1"></span>            <span class="n">gfx</span><span class="o">.</span><span class="na">fill3DRect</span><span class="o">(</span><span class="n">box</span><span class="o">.</span><span class="na">x</span><span class="o">+</span><span class="n">2</span><span class="o">,</span><span class="n">box</span><span class="o">.</span><span class="na">y</span><span class="o">+</span><span class="n">2</span><span class="o">,</span> <span class="n">box</span><span class="o">.</span><span class="na">width</span><span class="o">-</span><span class="n">5</span><span class="o">,</span> <span class="n">box</span><span class="o">.</span><span class="na">height</span><span class="o">-</span><span class="n">5</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+            <span class="n">gfx</span><span class="o">.</span><span class="na">fill3DRect</span><span class="o">(</span><span class="n">box</span><span class="o">.</span><span class="na">x</span><span class="o">+</span><span class="n">3</span><span class="o">,</span><span class="n">box</span><span class="o">.</span><span class="na">y</span><span class="o">+</span><span class="n">3</span><span class="o">,</span> <span class="n">box</span><span class="o">.</span><span class="na">width</span><span class="o">-</span><span class="n">7</span><span class="o">,</span> <span class="n">boxheight</span><span class="o">-</span><span class="n">7</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+            <span class="n">gfx</span><span class="o">.</span><span class="na">fill3DRect</span><span class="o">(</span><span class="n">box</span><span class="o">.</span><span class="na">x</span><span class="o">+</span><span class="n">4</span><span class="o">,</span><span class="n">box</span><span class="o">.</span><span class="na">y</span><span class="o">+</span><span class="n">4</span><span class="o">,</span> <span class="n">box</span><span class="o">.</span><span class="na">width</span><span class="o">-</span><span class="n">9</span><span class="o">,</span> <span class="n">box</span><span class="o">.</span><span class="na">height</span><span class="o">-</span><span class="n">9</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+        <span class="o">}</span> </code></pre></div>
 <p>paintValue() is passed a graphics context into which its painting will be done, and a bounding Rectangle that tells us where we are allowed to draw within that graphics context.  _Make sure you respect that bounding box, or the property sheet graphics could end up looking pretty nasty!_  Our implementation for ColorEditor5 draws a raised box in the selected color.</p>
 
 <h2 id="propertyeditorsupport">PropertyEditorSupport</h2>
