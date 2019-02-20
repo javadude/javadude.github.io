@@ -322,52 +322,20 @@
 
 <p>Kotlin has &quot;main&quot; functions just like Java. You'll most likely use Kotlin in environments like servers or Android applications that don't need a main, but they're useful for examples.</p>
 
-<p>If you don't need any command-line arguments:
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-	<span class="n">println</span><span class="p">(</span><span class="s">&#34;Hello, World!&#34;</span><span class="p">)</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div></p>
-
+<p>If you don't need any command-line arguments:</p>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">println</span><span class="p">(</span><span class="s">&#34;Hello, World!&#34;</span><span class="p">)</span>
+<span class="p">}</span></code></pre></div>
 <p>If you want command-line arguments, you can use an explicit Array (more on that and <code>joinToString()</code> later). I'm passing <code>A B C</code> to Kotlin Playground for this example.</p>
-
-<p><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span> <span class="p">:</span> <span class="n">Array</span><span class="p">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">String</span><span class="p">&gt;)</span> <span class="p">{</span>
-	<span class="n">println</span><span class="p">(</span><span class="s">&#34;Hello, World!&#34;</span><span class="p">)</span>
-	<span class="n">println</span><span class="p">(</span><span class="n">args</span><span class="p">.</span><span class="n">joinToString</span><span class="p">())</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
-or you can use a varying-length argument list (more on that and <code>joinToString()</code> later). I'm passing <code>A B C</code> to Kotlin Playground for this example.
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="k">vararg</span> <span class="n">args</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
-	<span class="n">println</span><span class="p">(</span><span class="s">&#34;Hello, World!&#34;</span><span class="p">)</span>
-	<span class="n">println</span><span class="p">(</span><span class="n">args</span><span class="p">.</span><span class="n">joinToString</span><span class="p">())</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div></p>
-
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span> <span class="p">:</span> <span class="n">Array</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;)</span> <span class="p">{</span>
+    <span class="n">println</span><span class="p">(</span><span class="s">&#34;Hello, World!&#34;</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">args</span><span class="p">.</span><span class="n">joinToString</span><span class="p">())</span>
+<span class="p">}</span></code></pre></div>
+<p>or you can use a varying-length argument list (more on that and <code>joinToString()</code> later). I'm passing <code>A B C</code> to Kotlin Playground for this example.</p>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="k">vararg</span> <span class="n">args</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">println</span><span class="p">(</span><span class="s">&#34;Hello, World!&#34;</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">args</span><span class="p">.</span><span class="n">joinToString</span><span class="p">())</span>
+<span class="p">}</span></code></pre></div>
 <h2 id="yay-no-semicolons">Yay! No Semicolons!</h2>
 
 <p>Ding, dong, semicolons are dead! Well, not dead, just not as required as in Java. You can still use them to separate statements, but I don't recommend it. Give yourself a little time to get used to it and you'll add 5 more years before you get carpal-tunnel syndrome. At least according to the science I made up in my head.</p>
@@ -377,80 +345,33 @@ or you can use a varying-length argument list (more on that and <code>joinToStri
 <h2 id="variables-and-values">Variables and Values</h2>
 
 <p>In Kotlin, we explicitly state whether a local or member of a class can be modified. We do this by specifying <code>var</code> or <code>val</code> to define a variable or value.</p>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="py">x</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;Hello&#34;</span> <span class="c1">// 2 - &#34;initializer is redundant&#34; warning!
+</span><span class="c1"></span>    <span class="k">val</span> <span class="py">y</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;Message&#34;</span>
 
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-	<span class="k">var</span> <span class="py">x</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;Hello&#34;</span>
-	<span class="k">val</span> <span class="py">y</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;Message&#34;</span>
-
-	<span class="n">x</span> <span class="p">=</span> <span class="s">&#34;aaa&#34;</span> <span class="c1">// just fine; can change the variable
-</span><span class="c1"></span>	<span class="n">y</span> <span class="p">=</span> <span class="s">&#34;bbb&#34;</span> <span class="c1">// will not compile!!! can&#39;t change a &#34;val&#34;
+    <span class="n">x</span> <span class="p">=</span> <span class="s">&#34;aaa&#34;</span> <span class="c1">// just fine; can change the variable
+</span><span class="c1"></span>    <span class="n">y</span> <span class="p">=</span> <span class="s">&#34;bbb&#34;</span> <span class="c1">// will not compile!!! can&#39;t change a &#34;val&#34;
 </span><span class="c1"></span>
-	<span class="n">println</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-	<span class="n">println</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
-
+    <span class="n">println</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="p">}</span></code></pre></div>
 <p>If you run the above example, you'll get an &quot;initializer is redundant&quot; warning for line 2. Kotlin does a lot of data flow analysis, and here it's telling us that it sees the only path using <code>x</code> assigns it twice before using it, so the initializer isn't needed. We could write</p>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="py">x</span> <span class="p">:</span> <span class="n">String</span>
+    <span class="k">val</span> <span class="py">y</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;Message&#34;</span>
 
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-	<span class="k">var</span> <span class="py">x</span> <span class="p">:</span> <span class="n">String</span>
-	<span class="k">val</span> <span class="py">y</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;Message&#34;</span>
-
-	<span class="n">x</span> <span class="p">=</span> <span class="s">&#34;aaa&#34;</span> <span class="c1">// just fine; can change the variable
+    <span class="n">x</span> <span class="p">=</span> <span class="s">&#34;aaa&#34;</span> <span class="c1">// just fine; can change the variable
 </span><span class="c1"></span>
-	<span class="n">println</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-	<span class="n">println</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
-
+    <span class="n">println</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="p">}</span></code></pre></div>
 <h2 id="type-inferencing">Type Inferencing</h2>
 
 <p>But things get even better. Kotlin loves to <em>infer</em> types so you don't have to write as much code. For example:</p>
-
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-	<span class="k">val</span> <span class="py">x</span> <span class="p">=</span> <span class="s">&#34;aaa&#34;</span>
-	<span class="n">println</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
-
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">x</span> <span class="p">=</span> <span class="s">&#34;aaa&#34;</span>
+    <span class="n">println</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="p">}</span></code></pre></div>
 <p>The expression <code>&quot;aaa&quot;</code> is of type <code>String</code>, so kotlin knows that the value <code>x</code> can be a <code>String</code> and infers the type.</p>
 
 <h2 id="everything-is-public-and-final">Everything is Public and Final</h2>
@@ -472,30 +393,14 @@ or you can use a varying-length argument list (more on that and <code>joinToStri
 <h2 id="class-and-interface-inheritance">Class and Interface Inheritance</h2>
 
 <p>Classes/Interfaces (and their members) in Kotlin are nowhere near as verbose as in Java.</p>
-
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">interface</span> <span class="nc">Foo</span>
-<span class="k">open</span> <span class="k">class</span> <span class="nc">A</span>
-<span class="k">open</span> <span class="k">class</span> <span class="nc">B</span> <span class="p">:</span> <span class="n">A</span><span class="p">(),</span> <span class="n">Foo</span>
-<span class="k">class</span> <span class="nc">C</span> <span class="p">:</span> <span class="n">B</span><span class="p">()</span>
-
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">interface</span> <span class="nc">Foo</span>           <span class="c1">// 1
+</span><span class="c1"></span><span class="k">open</span> <span class="k">class</span> <span class="nc">A</span>            <span class="c1">// 2
+</span><span class="c1"></span><span class="k">open</span> <span class="k">class</span> <span class="nc">B</span> <span class="p">:</span> <span class="n">A</span><span class="p">(),</span> <span class="n">Foo</span> <span class="c1">// 3
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">C</span> <span class="p">:</span> <span class="n">B</span><span class="p">()</span>           <span class="c1">// 4
+</span><span class="c1"></span>
 <span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-	<span class="k">val</span> <span class="py">c</span> <span class="p">=</span> <span class="n">C</span><span class="p">()</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
-
+    <span class="k">val</span> <span class="py">c</span> <span class="p">=</span> <span class="n">C</span><span class="p">()</span>         <span class="c1">// 7
+</span><span class="c1"></span><span class="p">}</span></code></pre></div>
 <p>Let's break this down, line by line</p>
 
 <table>
@@ -554,19 +459,10 @@ or you can use a varying-length argument list (more on that and <code>joinToStri
 <h3 id="properties-in-java">Properties in Java</h3>
 
 <p>A JavaBean property is defined by one or two methods in a Java class:</p>
-
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// JAVA CODE
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// JAVA CODE
 </span><span class="c1"></span><span class="kd">public</span> <span class="n">String</span> <span class="nf">getFirstName</span><span class="o">()</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
-<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setFirstName</span><span class="o">(</span><span class="n">String</span> <span class="n">firstName</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span></code></pre></td></tr></table>
-</div>
-</div>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setFirstName</span><span class="o">(</span><span class="n">String</span> <span class="n">firstName</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span></code></pre></div>
+<p>Property types</p>
 
 <ul>
 <li>If <em>only</em> a <code>get</code> method exists, we're defining a read-only property. For example, if we only had <code>getFirstName()</code> we're defining a read-only property called <code>firstName</code> (note the case.)</li>
@@ -581,36 +477,17 @@ or you can use a varying-length argument list (more on that and <code>joinToStri
 <h3 id="properties-in-kotlin">Properties in Kotlin</h3>
 
 <p>Kotlin fixes this by introducing properties as first-class language constructs.</p>
-
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">A</span> <span class="p">{</span>
-	<span class="k">var</span> <span class="py">firstName</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;no first name&#34;</span>
-	<span class="k">var</span> <span class="py">lastName</span> <span class="p">=</span> <span class="s">&#34;no last name&#34;</span>
-<span class="p">}</span>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">A</span> <span class="p">{</span>                                       <span class="c1">// 1
+</span><span class="c1"></span>    <span class="k">var</span> <span class="py">firstName</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;no first name&#34;</span>    <span class="c1">// 2
+</span><span class="c1"></span>    <span class="k">var</span> <span class="py">lastName</span> <span class="p">=</span> <span class="s">&#34;no last name&#34;</span>               <span class="c1">// 3
+</span><span class="c1"></span><span class="p">}</span>
 
 <span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-	<span class="k">val</span> <span class="py">a</span> <span class="p">=</span> <span class="n">A</span><span class="p">()</span>
-	<span class="n">println</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">firstName</span><span class="p">)</span>	
-	<span class="n">a</span><span class="p">.</span><span class="n">firstName</span> <span class="p">=</span> <span class="s">&#34;Scott&#34;</span>
-	<span class="n">println</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">firstName</span><span class="p">)</span>	
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
-
+    <span class="k">val</span> <span class="py">a</span> <span class="p">=</span> <span class="n">A</span><span class="p">()</span>                                 <span class="c1">// 7
+</span><span class="c1"></span>    <span class="n">println</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">firstName</span><span class="p">)</span>                        <span class="c1">// 8 
+</span><span class="c1"></span>    <span class="n">a</span><span class="p">.</span><span class="n">firstName</span> <span class="p">=</span> <span class="s">&#34;Scott&#34;</span>                       <span class="c1">// 9
+</span><span class="c1"></span>    <span class="n">println</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">firstName</span><span class="p">)</span>                        <span class="c1">// 10
+</span><span class="c1"></span><span class="p">}</span></code></pre></div>
 <p>Adding <code>var</code> and <code>val</code> definitions inside a class or interface defines a property. <code>var</code> properties are read/write (you can modify them), and <code>val</code> properties are read-only (you cannot modify them).</p>
 
 <p>Let's look at this example line-by-line</p>
@@ -664,39 +541,15 @@ or you can use a varying-length argument list (more on that and <code>joinToStri
 <h3 id="using-kotlin-properties-from-java-code">Using Kotlin Properties From Java Code</h3>
 
 <p>Kotlin has excellent interoperability with Java. If we defined a Kotlin class</p>
-
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">A</span> <span class="p">{</span>
-	<span class="k">var</span> <span class="py">firstName</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;no first name&#34;</span>
-	<span class="k">var</span> <span class="py">lastName</span> <span class="p">=</span> <span class="s">&#34;no last name&#34;</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
-
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">A</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="py">firstName</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;no first name&#34;</span>
+    <span class="k">var</span> <span class="py">lastName</span> <span class="p">=</span> <span class="s">&#34;no last name&#34;</span>
+<span class="p">}</span></code></pre></div>
 <p>we could access it from Java as</p>
-
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// JAVA CODE
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// JAVA CODE
 </span><span class="c1"></span><span class="n">A</span> <span class="n">a</span> <span class="o">=</span> <span class="k">new</span> <span class="n">A</span><span class="o">();</span>
 <span class="n">a</span><span class="o">.</span><span class="na">setFirstName</span><span class="o">(</span><span class="s">&#34;Scott&#34;</span><span class="o">));</span>
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a</span><span class="o">.</span><span class="na">getFirstName</span><span class="o">());</span></code></pre></td></tr></table>
-</div>
-</div>
-
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a</span><span class="o">.</span><span class="na">getFirstName</span><span class="o">());</span></code></pre></div>
 <p>Behind the scenes, Kotlin creates a class file to run in the Java Virtual Machine, and this class file contains <code>get</code> and <code>set</code> methods for each read/write property, or just <code>get</code> methods for read-only properties.</p>
 
 <h3 id="backing-fields">Backing Fields</h3>
@@ -704,187 +557,68 @@ or you can use a varying-length argument list (more on that and <code>joinToStri
 <p>To explain &quot;Backing fields&quot; in Kotlin, let's look at a typical property implementation in Java</p>
 
 <p>Remember that JavaBean properties are defined <em>solely on the presence of <code>get</code> and <code>set</code> methods</em>. The implementation of those methods does not matter. However, we typically need to store a value when <code>set</code> is called and return it when <code>get</code> is called. For example:</p>
-
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// JAVA CODE
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// JAVA CODE
 </span><span class="c1"></span><span class="kd">class</span> <span class="nc">Foo</span> <span class="o">{</span>
-	<span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
-	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
-		<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">name</span><span class="o">;</span>
-	<span class="o">}</span>
-	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
-		<span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
-	<span class="o">}</span>
-<span class="o">}</span></code></pre></td></tr></table>
-</div>
-</div>
-
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">name</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></div>
 <p>Note the field <code>name</code> in this example. It's a field in the class that's hidden from anything outside of class Foo. The property defined by <code>getName</code> and <code>setName</code> uses the <code>name</code> field to store the property value.</p>
 
 <p>Kotlin properties can automatically create a behind-the-scenes field just like this. For example, when you write</p>
-
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
-	<span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;no name&#34;</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
-
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;no name&#34;</span>
+<span class="p">}</span></code></pre></div>
 <p>the Kotlin compiler generates a <code>get</code> and <code>set</code> function for us (note that Kotlin uses the name &quot;function&quot; for what we would call a &quot;method&quot; in Java), and a &quot;backing field&quot; to hold the value of the <code>name</code> property.</p>
 
 <p>But that doesn't <em>always</em> happen...</p>
 
 <p>In Java, we might define a <code>get</code> method that computes a value (often called a &quot;derived property&quot;) or returns a literal value. For example</p>
-
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// JAVA CODE
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// JAVA CODE
 </span><span class="c1"></span><span class="kd">class</span> <span class="nc">Foo</span> <span class="o">{</span>
-	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
-		<span class="k">return</span> <span class="s">&#34;Scott&#34;</span><span class="o">;</span>
-	<span class="o">}</span>
-<span class="o">}</span></code></pre></td></tr></table>
-</div>
-</div>
-
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">&#34;Scott&#34;</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></div>
 <p>In this case, we don't need a field to store the value.</p>
 
 <p>If we do something like the following in Kotlin</p>
-
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
-	<span class="k">val</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;no name&#34;</span>
-	   <span class="c1">// NOTE: a &#34;val&#34; property, so only defines a getter!
-</span><span class="c1"></span><span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
-
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;no name&#34;</span>
+       <span class="c1">// NOTE: a &#34;val&#34; property, so only defines a getter!
+</span><span class="c1"></span><span class="p">}</span></code></pre></div>
 <p>It <em>initializes</em> the backing field to &quot;no name&quot; and returns it whenever the property is accessed.</p>
 
 <p>If we want the equivalent of that literal-value <code>get</code> method in Java, we need to explicitly define what the <code>get</code> function in Kotlin would look like. We do this as follows:</p>
-
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
-	<span class="k">val</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span>
-		<span class="k">get</span><span class="p">()</span> <span class="p">{</span>
-			<span class="k">return</span> <span class="s">&#34;no name&#34;</span>
-		<span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
-
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span>
+        <span class="k">get</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="s">&#34;no name&#34;</span>
+        <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
 <p>In this case, because we explicitly define the get() function, and do not mention the backing field, no backing field is defined.</p>
 
 <p>So how do we explicitly mention the backing field? We use the <code>field</code> keyword. For example:</p>
-
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
-	<span class="k">val</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;no name&#34;</span>
-		<span class="k">get</span><span class="p">()</span> <span class="p">{</span>
-			<span class="k">return</span> <span class="n">field</span>
-		<span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
-
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;no name&#34;</span>
+        <span class="k">get</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">field</span>
+        <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
 <p>This example is pretty silly; we're explicitly defining the default behavior of a read-only property. It's more interesting if we want to modify the behavior. For example, we could print or log a message whenever the field is requested</p>
-
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
-	<span class="k">val</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;no name&#34;</span>
-		<span class="k">get</span><span class="p">()</span> <span class="p">{</span>
-			<span class="n">println</span><span class="p">(</span><span class="s">&#34;name requested!&#34;</span><span class="p">)</span>
-			<span class="k">return</span> <span class="n">field</span>
-		<span class="p">}</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
-
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;no name&#34;</span>
+        <span class="k">get</span><span class="p">()</span> <span class="p">{</span>
+            <span class="n">println</span><span class="p">(</span><span class="s">&#34;name requested!&#34;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">field</span>
+        <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
 <p>Or more usefully, do something when a value is set. For example, suppose we wanted to ensure a Doctor was always called &quot;Dr.&quot;:</p>
-
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">Doctor</span> <span class="p">{</span>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">Doctor</span> <span class="p">{</span>
     <span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;Dr. Nobody&#34;</span>
         <span class="k">set</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">if</span> <span class="p">(!</span><span class="n">value</span><span class="p">.</span><span class="n">startsWith</span><span class="p">(</span><span class="s">&#34;Dr. &#34;</span><span class="p">))</span> <span class="p">{</span>
@@ -899,10 +633,7 @@ or you can use a varying-length argument list (more on that and <code>joinToStri
     <span class="k">val</span> <span class="py">doc</span> <span class="p">=</span> <span class="n">Doctor</span><span class="p">()</span>
     <span class="n">doc</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="s">&#34;Scott&#34;</span>
     <span class="n">println</span><span class="p">(</span><span class="n">doc</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
-
+<span class="p">}</span></code></pre></div>
 <p>(NOTE: There are some much more &quot;Kotlin-y&quot; ways to write the body of that <code>set</code> function, but I wanted to keep it closer to Java until we get to those concepts and idioms)</p>
 
 <p>(ALSO NOTE: Before you comment on it, we would have been better off modifying the <code>get</code> instead of the <code>set</code>. I just wanted to demonstrate what the <code>set</code> would look like…)</p>
@@ -924,36 +655,12 @@ or you can use a varying-length argument list (more on that and <code>joinToStri
 <p>Kotlin wants to be terse, which is good, because I don't like to type. (He says after typing in everything you've just read...) One of it's best tricks is to combine the definition of a constructor directly in the definition of the class.</p>
 
 <p>Let's take a look at how we can pass in a name to a <code>Person</code> instance when creating it.</p>
-
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span>
-    <span class="n">init</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">val</span> <span class="py">person</span> <span class="p">=</span> <span class="n">Person</span><span class="p">(</span><span class="s">&#34;Scott&#34;</span><span class="p">)</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">person</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
-
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>       <span class="c1">// 1
+</span><span class="c1"></span>    <span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span>   <span class="c1">// 2
+</span><span class="c1"></span>    <span class="n">init</span> <span class="p">{</span>                          <span class="c1">// 3
+</span><span class="c1"></span>        <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>            <span class="c1">// 4
+</span><span class="c1"></span>    <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
 <p>Let's look at this example line-by-line</p>
 
 <table>
@@ -992,29 +699,10 @@ or you can use a varying-length argument list (more on that and <code>joinToStri
 <h3 id="secondary-constructors">Secondary Constructors</h3>
 
 <p>You can define alternative constructors. For example, if we wanted to be able to skip passing in a value for the name we could define the following</p>
-
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span>
-    <span class="k">constructor</span><span class="p">()</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="s">&#34;No Name&#34;</span><span class="p">)</span>
-    <span class="n">init</span> <span class="p">{</span>
+    <span class="k">constructor</span><span class="p">()</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="s">&#34;No Name&#34;</span><span class="p">)</span> <span class="c1">// 3 - SECONDARY CONSTRUCTOR
+</span><span class="c1"></span>    <span class="n">init</span> <span class="p">{</span>
         <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>
     <span class="p">}</span>
 <span class="p">}</span>
@@ -1024,40 +712,15 @@ or you can use a varying-length argument list (more on that and <code>joinToStri
     <span class="n">println</span><span class="p">(</span><span class="n">person</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
     <span class="k">val</span> <span class="py">person2</span> <span class="p">=</span> <span class="n">Person</span><span class="p">()</span>
     <span class="n">println</span><span class="p">(</span><span class="n">person2</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
-
+<span class="p">}</span></code></pre></div>
 <p>On line 3 we're defining a <em>secondary constructor</em> that calls the primary constructor passing in &quot;No Name&quot;. You can have any number of secondary constructors.</p>
 
 <p>If you have defined a <em>primary constructor</em>, <strong>all</strong> <em>secondary constructors</em> must directly or indirectly call it by using the <code>constructor(...) : this(...)</code> syntax. For example:</p>
-
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span>
-    <span class="k">constructor</span><span class="p">(</span><span class="n">n</span> <span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="s">&#34;No Name &#34;</span> <span class="p">+</span> <span class="n">n</span><span class="p">)</span>
-    <span class="k">constructor</span><span class="p">()</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="m">42</span><span class="p">)</span>
-    <span class="n">init</span> <span class="p">{</span>
+    <span class="k">constructor</span><span class="p">(</span><span class="n">n</span> <span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="s">&#34;No Name &#34;</span> <span class="p">+</span> <span class="n">n</span><span class="p">)</span> <span class="c1">// 3
+</span><span class="c1"></span>    <span class="k">constructor</span><span class="p">()</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="m">42</span><span class="p">)</span>                    <span class="c1">// 4
+</span><span class="c1"></span>    <span class="n">init</span> <span class="p">{</span>
         <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>
     <span class="p">}</span>
 <span class="p">}</span>
@@ -1069,10 +732,7 @@ or you can use a varying-length argument list (more on that and <code>joinToStri
     <span class="n">println</span><span class="p">(</span><span class="n">person2</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
     <span class="k">val</span> <span class="py">person3</span> <span class="p">=</span> <span class="n">Person</span><span class="p">(</span><span class="m">10</span><span class="p">)</span>
     <span class="n">println</span><span class="p">(</span><span class="n">person3</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
-
+<span class="p">}</span></code></pre></div>
 <p>This time, line 3 defines a secondary that takes an <code>Int</code> (similar to Java's primitive <code>int</code> behind the scenes, but treated like an object in code) and appends it after &quot;No Name&quot; before passing it to the primary constructor.</p>
 
 <p>Line 4 defines another secondary constructor that takes no parameters, and passes <code>42</code> to the other secondary constructor, which will then append it to &quot;No Name&quot; and pass it to the primary constructor.</p>
@@ -1082,66 +742,21 @@ or you can use a varying-length argument list (more on that and <code>joinToStri
 <h3 id="calling-superclass-constructors">Calling Superclass Constructors</h3>
 
 <p>If you only need to call the primary constructor from a subclass, things are pretty simple:</p>
-
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span>
     <span class="n">init</span> <span class="p">{</span>
         <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="k">class</span> <span class="nc">Student</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">:</span> <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-
+<span class="k">class</span> <span class="nc">Student</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">:</span> <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="c1">// 8
+</span><span class="c1"></span>
 <span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">val</span> <span class="py">student</span> <span class="p">=</span> <span class="n">Student</span><span class="p">(</span><span class="s">&#34;Scott&#34;</span><span class="p">)</span>
     <span class="n">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
-
+<span class="p">}</span></code></pre></div>
 <p>Note that <code>Person</code> is defined as <code>open</code> so we can create subclasses, and has a primary constructor. We call that primary constructor on line 8, right after the superclass name, passing in the value passed to the primary constructor of Student. Student can do more than that, of course. For example:</p>
-
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span>
     <span class="n">init</span> <span class="p">{</span>
         <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>
@@ -1149,51 +764,19 @@ or you can use a varying-length argument list (more on that and <code>joinToStri
 <span class="p">}</span>
 
 <span class="k">class</span> <span class="nc">Student</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">gpa</span> <span class="p">:</span> <span class="n">Float</span><span class="p">)</span> <span class="p">:</span> <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="p">{</span>
-	<span class="k">var</span> <span class="py">gpa</span> <span class="p">:</span> <span class="n">Float</span> <span class="p">=</span> <span class="m">0F</span>
-	<span class="n">init</span> <span class="p">{</span>
-		<span class="k">this</span><span class="p">.</span><span class="n">gpa</span> <span class="p">=</span> <span class="n">gpa</span>
-	<span class="p">}</span>
+    <span class="k">var</span> <span class="py">gpa</span> <span class="p">:</span> <span class="n">Float</span> <span class="p">=</span> <span class="m">0F</span>
+    <span class="n">init</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="n">gpa</span> <span class="p">=</span> <span class="n">gpa</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 
 <span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">val</span> <span class="py">student</span> <span class="p">=</span> <span class="n">Student</span><span class="p">(</span><span class="s">&#34;Scott&#34;</span><span class="p">,</span> <span class="m">3.99F</span><span class="p">)</span> <span class="c1">// Sooooo close...
 </span><span class="c1"></span>    <span class="n">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
     <span class="n">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">gpa</span><span class="p">)</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
-
+<span class="p">}</span></code></pre></div>
 <p>Things get a little trickier if you want to call secondary constructors in a superclass. In that case, <em>you cannot define a primary constructor in the subclass</em>. If you define a primary constructor, <em>all</em> secondary constructors must call it, which doesn't give us the choice of which super constructor to call... Here's an example:</p>
-
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">constructor</span><span class="p">()</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="s">&#34;No Name&#34;</span><span class="p">)</span>
     <span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span>
     <span class="n">init</span> <span class="p">{</span>
@@ -1216,10 +799,7 @@ or you can use a varying-length argument list (more on that and <code>joinToStri
     <span class="n">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">gpa</span><span class="p">)</span>
     <span class="n">println</span><span class="p">(</span><span class="n">student2</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
     <span class="n">println</span><span class="p">(</span><span class="n">student2</span><span class="p">.</span><span class="n">gpa</span><span class="p">)</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
-
+<span class="p">}</span></code></pre></div>
 <p>So we can pick and choose which superclass constructors are called, but this makes it impossible to pass the gpa to a student constructor and assign it! Time to start looking at better ways to write the code we've been seeing...</p>
 
 <h2 id="simplifying-constructors">Simplifying Constructors</h2>
@@ -1231,25 +811,7 @@ or you can use a varying-length argument list (more on that and <code>joinToStri
 <p>First, default values for parameters...</p>
 
 <p>Most of the time, we define alternate constructors just to provide default values or different subsets of parameters. Let's start by defining a primary constructor for Person that takes the <code>name</code> and gives it a default value.</p>
-
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span>
     <span class="n">init</span> <span class="p">{</span>
         <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>
@@ -1261,44 +823,9 @@ or you can use a varying-length argument list (more on that and <code>joinToStri
     <span class="k">val</span> <span class="py">person2</span> <span class="p">=</span> <span class="n">Person</span><span class="p">(</span><span class="s">&#34;Scott&#34;</span><span class="p">)</span>
     <span class="n">println</span><span class="p">(</span><span class="n">person1</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
     <span class="n">println</span><span class="p">(</span><span class="n">person2</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
-
+<span class="p">}</span></code></pre></div>
 <p>Now we can create a <code>Person</code> with or without a name using the same constructor. Let's add the <code>Student</code> subclass:</p>
-
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span>
     <span class="n">init</span> <span class="p">{</span>
         <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>
@@ -1324,48 +851,13 @@ or you can use a varying-length argument list (more on that and <code>joinToStri
     <span class="n">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">gpa</span><span class="p">)</span>
     <span class="n">println</span><span class="p">(</span><span class="n">student2</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
     <span class="n">println</span><span class="p">(</span><span class="n">student2</span><span class="p">.</span><span class="n">gpa</span><span class="p">)</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
-
+<span class="p">}</span></code></pre></div>
 <p>Now we're able to require the GPA in the <code>Student</code> constructor! Note that parameters with default values must appear <em>after</em> any parameters that <em>do not</em> have default values... Unless...</p>
 
 <h3 id="naming-parameters-in-a-call">Naming Parameters in a Call</h3>
 
 <p>Kotlin allows you to explicitly name your parameters when calling a function or constructor. For example:</p>
-
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span>
     <span class="n">init</span> <span class="p">{</span>
         <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>
@@ -1391,48 +883,9 @@ or you can use a varying-length argument list (more on that and <code>joinToStri
     <span class="n">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">gpa</span><span class="p">)</span>
     <span class="n">println</span><span class="p">(</span><span class="n">student2</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
     <span class="n">println</span><span class="p">(</span><span class="n">student2</span><span class="p">.</span><span class="n">gpa</span><span class="p">)</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
-
+<span class="p">}</span></code></pre></div>
 <p>This also allows us to specify parameters out of order, or even define default-valued parameters before non-default-valued parameters:</p>
-
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span>
     <span class="n">init</span> <span class="p">{</span>
         <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>
@@ -1440,8 +893,8 @@ or you can use a varying-length argument list (more on that and <code>joinToStri
 <span class="p">}</span>
 
 <span class="c1">// NOTE PARAMETER ORDER CHANGE!!!
-</span><span class="c1"></span><span class="k">class</span> <span class="nc">Student</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span><span class="p">,</span> <span class="n">gpa</span> <span class="p">:</span> <span class="n">Float</span><span class="p">)</span> <span class="p">:</span> <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="p">{</span> 
-    <span class="k">var</span> <span class="py">gpa</span> <span class="p">:</span> <span class="n">Float</span> <span class="p">=</span> <span class="m">0F</span>
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Student</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span><span class="p">,</span> <span class="n">gpa</span> <span class="p">:</span> <span class="n">Float</span><span class="p">)</span> <span class="p">:</span> <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 9
+</span><span class="c1"></span>    <span class="k">var</span> <span class="py">gpa</span> <span class="p">:</span> <span class="n">Float</span> <span class="p">=</span> <span class="m">0F</span>
     <span class="n">init</span> <span class="p">{</span>
         <span class="k">this</span><span class="p">.</span><span class="n">gpa</span> <span class="p">=</span> <span class="n">gpa</span>
     <span class="p">}</span>
@@ -1453,19 +906,16 @@ or you can use a varying-length argument list (more on that and <code>joinToStri
     <span class="n">println</span><span class="p">(</span><span class="n">person1</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
     <span class="n">println</span><span class="p">(</span><span class="n">person2</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
 
-    <span class="k">val</span> <span class="py">student</span> <span class="p">=</span> <span class="n">Student</span><span class="p">(</span><span class="s">&#34;Scott&#34;</span><span class="p">,</span> <span class="m">3.99F</span><span class="p">)</span> <span class="c1">// ordered
-</span><span class="c1"></span>    <span class="k">val</span> <span class="py">student2</span> <span class="p">=</span> <span class="n">Student</span><span class="p">(</span><span class="n">gpa</span><span class="p">=</span><span class="m">3.5F</span><span class="p">)</span> <span class="c1">// named
-</span><span class="c1"></span>    <span class="k">val</span> <span class="py">student3</span> <span class="p">=</span> <span class="n">Student</span><span class="p">(</span><span class="n">gpa</span><span class="p">=</span><span class="m">3.99F</span><span class="p">,</span> <span class="n">name</span><span class="p">=</span><span class="s">&#34;Scott&#34;</span><span class="p">)</span> <span class="c1">// different order!
+    <span class="k">val</span> <span class="py">student</span> <span class="p">=</span> <span class="n">Student</span><span class="p">(</span><span class="s">&#34;Scott&#34;</span><span class="p">,</span> <span class="m">3.99F</span><span class="p">)</span>           <span class="c1">// 22 - ordered
+</span><span class="c1"></span>    <span class="k">val</span> <span class="py">student2</span> <span class="p">=</span> <span class="n">Student</span><span class="p">(</span><span class="n">gpa</span><span class="p">=</span><span class="m">3.5F</span><span class="p">)</span>                <span class="c1">// 23 - named
+</span><span class="c1"></span>    <span class="k">val</span> <span class="py">student3</span> <span class="p">=</span> <span class="n">Student</span><span class="p">(</span><span class="n">gpa</span><span class="p">=</span><span class="m">3.99F</span><span class="p">,</span> <span class="n">name</span><span class="p">=</span><span class="s">&#34;Scott&#34;</span><span class="p">)</span> <span class="c1">// 24 - different order!
 </span><span class="c1"></span>    <span class="n">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
     <span class="n">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">gpa</span><span class="p">)</span>
     <span class="n">println</span><span class="p">(</span><span class="n">student2</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
     <span class="n">println</span><span class="p">(</span><span class="n">student2</span><span class="p">.</span><span class="n">gpa</span><span class="p">)</span>
     <span class="n">println</span><span class="p">(</span><span class="n">student3</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
     <span class="n">println</span><span class="p">(</span><span class="n">student3</span><span class="p">.</span><span class="n">gpa</span><span class="p">)</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
-
+<span class="p">}</span></code></pre></div>
 <p>Let's look at a few lines in particular</p>
 
 <table>
@@ -1504,30 +954,14 @@ or you can use a varying-length argument list (more on that and <code>joinToStri
 <h3 id="initializers-can-access-primary-constructor-parameters">Initializers Can Access Primary Constructor Parameters</h3>
 
 <p>A really nice optimization is that property initializers have access to primary constructor parameters. This eliminates the need for many <code>init</code> blocks, as they often just initialize properties.</p>
-
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="n">name</span> <span class="c1">// direct access to primary constructor parameter
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="n">name</span> <span class="c1">// 2 - direct access to primary constructor parameter
 </span><span class="c1"></span><span class="p">}</span>
 
 <span class="c1">// NOTE PARAMETER ORDER CHANGE!!!
 </span><span class="c1"></span><span class="k">class</span> <span class="nc">Student</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span><span class="p">,</span> <span class="n">gpa</span> <span class="p">:</span> <span class="n">Float</span><span class="p">)</span> <span class="p">:</span> <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="p">{</span> 
-    <span class="k">var</span> <span class="py">gpa</span> <span class="p">:</span> <span class="n">Float</span> <span class="p">=</span> <span class="n">gpa</span> <span class="c1">// direct access to primary constructor parameter
-</span><span class="c1"></span><span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
-
+<span class="k">var</span> <span class="py">gpa</span> <span class="p">:</span> <span class="n">Float</span> <span class="p">=</span> <span class="n">gpa</span> <span class="c1">// 7 - direct access to primary constructor parameter
+</span><span class="c1"></span><span class="p">}</span></code></pre></div>
 <p>Wow! Code reduction! Love it!</p>
 
 <p>Looking at lines 2 and 7, we reference the primary constructor parameters in the property initializers. That removes the need for a dummy initializer value, and gets rid of the <code>init</code> blocks. Nifty! But the next step is the biggie... (Side note - my grandmother on my mom's side always hated the word &quot;biggie&quot; for some reason. Trips to Wendy's were always accompanied by her cringing...)</p>
@@ -1535,20 +969,9 @@ or you can use a varying-length argument list (more on that and <code>joinToStri
 <h3 id="define-properties-in-the-primary-constructor">Define Properties in the Primary Constructor</h3>
 
 <p>Here's one of my favorite things about Kotlin. If your constructor is passing in values that are directly used to initialize properties, you can define the properties <em>directly</em> in the constructor. It's easiest to understand this in an example...</p>
-
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span><span class="p">)</span>
-
-<span class="k">class</span> <span class="nc">Student</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span><span class="p">,</span> <span class="k">var</span> <span class="py">gpa</span> <span class="p">:</span> <span class="n">Float</span><span class="p">)</span> <span class="p">:</span> <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="p">)</span></code></pre></td></tr></table>
-</div>
-</div>
-
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span><span class="p">)</span>    <span class="c1">// 1
+</span><span class="c1"></span>
+<span class="k">class</span> <span class="nc">Student</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span><span class="p">,</span> <span class="k">var</span> <span class="py">gpa</span> <span class="p">:</span> <span class="n">Float</span><span class="p">)</span> <span class="p">:</span> <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="c1">// 3</span></code></pre></div>
 <p>Check out the terseness, but still <em>very</em> readable. (I'd say even more readable now, as you no longer have the duplication and required explicit association of the constructor parameters and properties.)</p>
 
 <p>By adding <code>var</code> or <code>val</code> in front of a primary constructor parameter, you</p>
@@ -1573,255 +996,114 @@ or you can use a varying-length argument list (more on that and <code>joinToStri
 <p>Suppose we have several properties, some of which must be specified together or not at all.</p>
 
 <p>For example, let's define a <code>Section</code> class that defines text in a document that may have a header and footer:</p>
-
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Section</span><span class="p">(</span>
-	<span class="k">val</span> <span class="py">text</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span> 
-	<span class="k">val</span> <span class="py">header</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;&#34;</span><span class="p">,</span> 
-	<span class="k">val</span> <span class="py">footer</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;&#34;</span><span class="p">)</span></code></pre></td></tr></table>
-</div>
-</div>
-
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Section</span><span class="p">(</span>
+    <span class="k">val</span> <span class="py">text</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span> 
+    <span class="k">val</span> <span class="py">header</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;&#34;</span><span class="p">,</span> 
+    <span class="k">val</span> <span class="py">footer</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;&#34;</span><span class="p">)</span></code></pre></div>
 <p>I'd like to impose a restriction such that if we specify a header or footer, the other must also be specified.</p>
 
 <p>We could add a check in the intializer...</p>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Section</span><span class="p">(</span>
+    <span class="k">val</span> <span class="py">text</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span> 
+    <span class="k">val</span> <span class="py">header</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;&#34;</span><span class="p">,</span> 
+    <span class="k">val</span> <span class="py">footer</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;&#34;</span><span class="p">)</span> <span class="p">{</span>
 
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Section</span><span class="p">(</span>
-	<span class="k">val</span> <span class="py">text</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span> 
-	<span class="k">val</span> <span class="py">header</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;&#34;</span><span class="p">,</span> 
-	<span class="k">val</span> <span class="py">footer</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;&#34;</span><span class="p">)</span> <span class="p">{</span>
-
-	<span class="n">init</span> <span class="p">{</span>
-		<span class="k">if</span> <span class="p">(</span><span class="n">header</span><span class="p">.</span><span class="n">isEmpty</span><span class="p">()</span> <span class="p">!=</span> <span class="n">footer</span><span class="p">.</span><span class="n">isEmpty</span><span class="p">())</span> <span class="p">{</span>
-			<span class="k">throw</span> <span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&#34;Header and Footer must both be specified, or neither specified&#34;</span><span class="p">)</span>
-		<span class="p">}</span>
-	<span class="p">}</span>
+    <span class="n">init</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">header</span><span class="p">.</span><span class="n">isEmpty</span><span class="p">()</span> <span class="p">!=</span> <span class="n">footer</span><span class="p">.</span><span class="n">isEmpty</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&#34;Header and Footer must both be specified, or neither specified&#34;</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 
 <span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-	<span class="k">val</span> <span class="py">section</span> <span class="p">=</span> <span class="n">Section</span><span class="p">(</span><span class="s">&#34;Some text&#34;</span><span class="p">,</span> <span class="s">&#34;Section 1&#34;</span><span class="p">)</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
-
+    <span class="k">val</span> <span class="py">section</span> <span class="p">=</span> <span class="n">Section</span><span class="p">(</span><span class="s">&#34;Some text&#34;</span><span class="p">,</span> <span class="s">&#34;Section 1&#34;</span><span class="p">)</span>
+<span class="p">}</span></code></pre></div>
 <p>If you run this, you'll get the IllegalArgumentException.</p>
 
 <p>But... I really prefer to catch things at compile-time when possible. So I'd really like to have constructors that either require <em>neither</em> header nor footer, <em>or both</em> header and footer. So we add a secondary constructor and tweak the primary:</p>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Section</span><span class="p">(</span>
+    <span class="k">val</span> <span class="py">text</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span> 
+    <span class="k">val</span> <span class="py">header</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span> 
+    <span class="k">val</span> <span class="py">footer</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
 
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Section</span><span class="p">(</span>
-	<span class="k">val</span> <span class="py">text</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span> 
-	<span class="k">val</span> <span class="py">header</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span> 
-	<span class="k">val</span> <span class="py">footer</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
-
-	<span class="k">constructor</span><span class="p">(</span><span class="n">text</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">)</span>
+    <span class="k">constructor</span><span class="p">(</span><span class="n">text</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">)</span>
 <span class="p">}</span>
 
 <span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-	<span class="k">val</span> <span class="py">section1</span> <span class="p">=</span> <span class="n">Section</span><span class="p">(</span><span class="s">&#34;Some text&#34;</span><span class="p">)</span>
-	<span class="k">val</span> <span class="py">section2</span> <span class="p">=</span> <span class="n">Section</span><span class="p">(</span><span class="s">&#34;Some text&#34;</span><span class="p">,</span> <span class="s">&#34;Section 1&#34;</span><span class="p">,</span> <span class="s">&#34;End of Section 1&#34;</span><span class="p">)</span>
-	<span class="k">val</span> <span class="py">section3</span> <span class="p">=</span> <span class="n">Section</span><span class="p">(</span><span class="s">&#34;Some text&#34;</span><span class="p">,</span> <span class="s">&#34;Section 1&#34;</span><span class="p">)</span> <span class="c1">// will not compile
-</span><span class="c1"></span><span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
-
+    <span class="k">val</span> <span class="py">section1</span> <span class="p">=</span> <span class="n">Section</span><span class="p">(</span><span class="s">&#34;Some text&#34;</span><span class="p">)</span>
+    <span class="k">val</span> <span class="py">section2</span> <span class="p">=</span> <span class="n">Section</span><span class="p">(</span><span class="s">&#34;Some text&#34;</span><span class="p">,</span> <span class="s">&#34;Section 1&#34;</span><span class="p">,</span> <span class="s">&#34;End of Section 1&#34;</span><span class="p">)</span>
+    <span class="k">val</span> <span class="py">section3</span> <span class="p">=</span> <span class="n">Section</span><span class="p">(</span><span class="s">&#34;Some text&#34;</span><span class="p">,</span> <span class="s">&#34;Section 1&#34;</span><span class="p">)</span> <span class="c1">// will not compile
+</span><span class="c1"></span><span class="p">}</span></code></pre></div>
 <p>Our primary constructor now requires both header and footer, and the secondary only requires the text, passing the default values to the primary. Perfect!</p>
 
 <p>But what if we have parameters that create more complex groupings?</p>
 
 <p>Let's create a very-poorly-designed class to represent a location (very-poorly-designed because we should use inheritance [and later, Kotlin's sealed classes!]). Start with</p>
-
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Location</span><span class="p">(</span>
-	<span class="k">val</span> <span class="py">lat</span> <span class="p">:</span> <span class="n">Double</span><span class="p">,</span>
-	<span class="k">val</span> <span class="py">lon</span> <span class="p">:</span> <span class="n">Double</span><span class="p">,</span>
-	<span class="k">val</span> <span class="py">street</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
-	<span class="k">val</span> <span class="py">city</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
-	<span class="k">val</span> <span class="py">state</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
-	<span class="k">val</span> <span class="py">zip</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span></code></pre></td></tr></table>
-</div>
-</div>
-
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Location</span><span class="p">(</span>
+    <span class="k">val</span> <span class="py">lat</span> <span class="p">:</span> <span class="n">Double</span><span class="p">,</span>
+    <span class="k">val</span> <span class="py">lon</span> <span class="p">:</span> <span class="n">Double</span><span class="p">,</span>
+    <span class="k">val</span> <span class="py">street</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+    <span class="k">val</span> <span class="py">city</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+    <span class="k">val</span> <span class="py">state</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+    <span class="k">val</span> <span class="py">zip</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span></code></pre></div>
 <p>Here we want to have <em>either</em> lat/lon, <em>or</em> street/city/state/zip. (Yes... this is crazy gross, but I'm tired and this demonstrates the concept and my brain won't think of another example right now so there).</p>
 
 <p>So we try</p>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Location</span><span class="p">(</span>
+    <span class="k">val</span> <span class="py">lat</span> <span class="p">:</span> <span class="n">Double</span><span class="p">,</span>
+    <span class="k">val</span> <span class="py">lon</span> <span class="p">:</span> <span class="n">Double</span><span class="p">,</span>
+    <span class="k">val</span> <span class="py">street</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+    <span class="k">val</span> <span class="py">city</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+    <span class="k">val</span> <span class="py">state</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+    <span class="k">val</span> <span class="py">zip</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
 
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Location</span><span class="p">(</span>
-	<span class="k">val</span> <span class="py">lat</span> <span class="p">:</span> <span class="n">Double</span><span class="p">,</span>
-	<span class="k">val</span> <span class="py">lon</span> <span class="p">:</span> <span class="n">Double</span><span class="p">,</span>
-	<span class="k">val</span> <span class="py">street</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
-	<span class="k">val</span> <span class="py">city</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
-	<span class="k">val</span> <span class="py">state</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
-	<span class="k">val</span> <span class="py">zip</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
-
-	<span class="k">constructor</span><span class="p">(</span><span class="n">lat</span> <span class="p">:</span> <span class="n">Double</span><span class="p">,</span> <span class="n">lon</span> <span class="p">:</span> <span class="n">Double</span><span class="p">)</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">)</span>
-	<span class="k">constructor</span><span class="p">(</span>
-		<span class="n">street</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
-		<span class="n">city</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
-		<span class="n">state</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
-		<span class="n">zip</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="m">0.0</span><span class="p">,</span> <span class="m">0.0</span><span class="p">,</span> <span class="n">street</span><span class="p">,</span> <span class="n">city</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">zip</span><span class="p">)</span>
+    <span class="k">constructor</span><span class="p">(</span><span class="n">lat</span> <span class="p">:</span> <span class="n">Double</span><span class="p">,</span> <span class="n">lon</span> <span class="p">:</span> <span class="n">Double</span><span class="p">)</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">)</span>
+    <span class="k">constructor</span><span class="p">(</span>
+        <span class="n">street</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+        <span class="n">city</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+        <span class="n">state</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+        <span class="n">zip</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="m">0.0</span><span class="p">,</span> <span class="m">0.0</span><span class="p">,</span> <span class="n">street</span><span class="p">,</span> <span class="n">city</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">zip</span><span class="p">)</span>
 <span class="p">}</span>
 
 <span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-	<span class="c1">// good
-</span><span class="c1"></span>	<span class="k">val</span> <span class="py">location1</span> <span class="p">=</span> <span class="n">Location</span><span class="p">(</span><span class="m">39.149810</span><span class="p">,</span> <span class="p">-</span><span class="m">76.911257</span><span class="p">)</span>
-		<span class="c1">// (sing it with me... &#34;My Harris Teeter&#34;)
+    <span class="c1">// good
+</span><span class="c1"></span>    <span class="k">val</span> <span class="py">location1</span> <span class="p">=</span> <span class="n">Location</span><span class="p">(</span><span class="m">39.149810</span><span class="p">,</span> <span class="p">-</span><span class="m">76.911257</span><span class="p">)</span>
+        <span class="c1">// (sing it with me... &#34;My Harris Teeter&#34;)
 </span><span class="c1"></span>
-	<span class="c1">// good
-</span><span class="c1"></span>	<span class="k">val</span> <span class="py">location2</span> <span class="p">=</span> <span class="n">Location</span><span class="p">(</span><span class="s">&#34;123 Sesame St&#34;</span><span class="p">,</span> <span class="s">&#34;New York&#34;</span><span class="p">,</span> <span class="s">&#34;NY&#34;</span><span class="p">,</span> <span class="s">&#34;10001&#34;</span><span class="p">)</span>
+    <span class="c1">// good
+</span><span class="c1"></span>    <span class="k">val</span> <span class="py">location2</span> <span class="p">=</span> <span class="n">Location</span><span class="p">(</span><span class="s">&#34;123 Sesame St&#34;</span><span class="p">,</span> <span class="s">&#34;New York&#34;</span><span class="p">,</span> <span class="s">&#34;NY&#34;</span><span class="p">,</span> <span class="s">&#34;10001&#34;</span><span class="p">)</span>
 
-	<span class="c1">// uh oh...
-</span><span class="c1"></span>	<span class="k">val</span> <span class="py">location3</span> <span class="p">=</span> <span class="n">Location</span><span class="p">(</span><span class="m">39.149810</span><span class="p">,</span> <span class="p">-</span><span class="m">76.911257</span><span class="p">,</span> <span class="s">&#34;123 Sesame St&#34;</span><span class="p">,</span> <span class="s">&#34;New York&#34;</span><span class="p">,</span> <span class="s">&#34;NY&#34;</span><span class="p">,</span> <span class="s">&#34;10001&#34;</span><span class="p">)</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
-
+    <span class="c1">// uh oh...
+</span><span class="c1"></span>    <span class="k">val</span> <span class="py">location3</span> <span class="p">=</span> <span class="n">Location</span><span class="p">(</span><span class="m">39.149810</span><span class="p">,</span> <span class="p">-</span><span class="m">76.911257</span><span class="p">,</span> <span class="s">&#34;123 Sesame St&#34;</span><span class="p">,</span> <span class="s">&#34;New York&#34;</span><span class="p">,</span> <span class="s">&#34;NY&#34;</span><span class="p">,</span> <span class="s">&#34;10001&#34;</span><span class="p">)</span>
+<span class="p">}</span></code></pre></div>
 <p>The primary constructor is <code>public</code> by default. In this case, we really don't want that. So let's make it private.</p>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Location</span> <span class="k">private</span> <span class="k">constructor</span><span class="p">(</span>
+    <span class="k">val</span> <span class="py">lat</span> <span class="p">:</span> <span class="n">Double</span><span class="p">,</span>
+    <span class="k">val</span> <span class="py">lon</span> <span class="p">:</span> <span class="n">Double</span><span class="p">,</span>
+    <span class="k">val</span> <span class="py">street</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+    <span class="k">val</span> <span class="py">city</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+    <span class="k">val</span> <span class="py">state</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+    <span class="k">val</span> <span class="py">zip</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
 
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Location</span> <span class="k">private</span> <span class="k">constructor</span><span class="p">(</span>
-	<span class="k">val</span> <span class="py">lat</span> <span class="p">:</span> <span class="n">Double</span><span class="p">,</span>
-	<span class="k">val</span> <span class="py">lon</span> <span class="p">:</span> <span class="n">Double</span><span class="p">,</span>
-	<span class="k">val</span> <span class="py">street</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
-	<span class="k">val</span> <span class="py">city</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
-	<span class="k">val</span> <span class="py">state</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
-	<span class="k">val</span> <span class="py">zip</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
-
-	<span class="k">constructor</span><span class="p">(</span><span class="n">lat</span> <span class="p">:</span> <span class="n">Double</span><span class="p">,</span> <span class="n">lon</span> <span class="p">:</span> <span class="n">Double</span><span class="p">)</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">)</span>
-	<span class="k">constructor</span><span class="p">(</span>
-		<span class="n">street</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
-		<span class="n">city</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
-		<span class="n">state</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
-		<span class="n">zip</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="m">0.0</span><span class="p">,</span> <span class="m">0.0</span><span class="p">,</span> <span class="n">street</span><span class="p">,</span> <span class="n">city</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">zip</span><span class="p">)</span>
+    <span class="k">constructor</span><span class="p">(</span><span class="n">lat</span> <span class="p">:</span> <span class="n">Double</span><span class="p">,</span> <span class="n">lon</span> <span class="p">:</span> <span class="n">Double</span><span class="p">)</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">)</span>
+    <span class="k">constructor</span><span class="p">(</span>
+        <span class="n">street</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+        <span class="n">city</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+        <span class="n">state</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+        <span class="n">zip</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="m">0.0</span><span class="p">,</span> <span class="m">0.0</span><span class="p">,</span> <span class="n">street</span><span class="p">,</span> <span class="n">city</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">zip</span><span class="p">)</span>
 <span class="p">}</span>
 
 <span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-	<span class="c1">// good
-</span><span class="c1"></span>	<span class="k">val</span> <span class="py">location1</span> <span class="p">=</span> <span class="n">Location</span><span class="p">(</span><span class="m">39.149810</span><span class="p">,</span> <span class="p">-</span><span class="m">76.911257</span><span class="p">)</span>
-		<span class="c1">// (sing it with me... &#34;My Harris Teeter&#34;)
+    <span class="c1">// good
+</span><span class="c1"></span>    <span class="k">val</span> <span class="py">location1</span> <span class="p">=</span> <span class="n">Location</span><span class="p">(</span><span class="m">39.149810</span><span class="p">,</span> <span class="p">-</span><span class="m">76.911257</span><span class="p">)</span>
+        <span class="c1">// (sing it with me... &#34;My Harris Teeter&#34;)
 </span><span class="c1"></span>
-	<span class="c1">// good
-</span><span class="c1"></span>	<span class="k">val</span> <span class="py">location2</span> <span class="p">=</span> <span class="n">Location</span><span class="p">(</span><span class="s">&#34;123 Sesame St&#34;</span><span class="p">,</span> <span class="s">&#34;New York&#34;</span><span class="p">,</span> <span class="s">&#34;NY&#34;</span><span class="p">,</span> <span class="s">&#34;10001&#34;</span><span class="p">)</span>
+    <span class="c1">// good
+</span><span class="c1"></span>    <span class="k">val</span> <span class="py">location2</span> <span class="p">=</span> <span class="n">Location</span><span class="p">(</span><span class="s">&#34;123 Sesame St&#34;</span><span class="p">,</span> <span class="s">&#34;New York&#34;</span><span class="p">,</span> <span class="s">&#34;NY&#34;</span><span class="p">,</span> <span class="s">&#34;10001&#34;</span><span class="p">)</span>
 
-	<span class="c1">// uh oh...
-</span><span class="c1"></span>	<span class="k">val</span> <span class="py">location3</span> <span class="p">=</span> <span class="n">Location</span><span class="p">(</span><span class="m">39.149810</span><span class="p">,</span> <span class="p">-</span><span class="m">76.911257</span><span class="p">,</span> <span class="s">&#34;123 Sesame St&#34;</span><span class="p">,</span> <span class="s">&#34;New York&#34;</span><span class="p">,</span> <span class="s">&#34;NY&#34;</span><span class="p">,</span> <span class="s">&#34;10001&#34;</span><span class="p">)</span>
-<span class="p">}</span></code></pre></td></tr></table>
-</div>
-</div>
-
+    <span class="c1">// uh oh...
+</span><span class="c1"></span>    <span class="k">val</span> <span class="py">location3</span> <span class="p">=</span> <span class="n">Location</span><span class="p">(</span><span class="m">39.149810</span><span class="p">,</span> <span class="p">-</span><span class="m">76.911257</span><span class="p">,</span> <span class="s">&#34;123 Sesame St&#34;</span><span class="p">,</span> <span class="s">&#34;New York&#34;</span><span class="p">,</span> <span class="s">&#34;NY&#34;</span><span class="p">,</span> <span class="s">&#34;10001&#34;</span><span class="p">)</span>
+<span class="p">}</span></code></pre></div>
 <p>If you run this you'll get an error compiling <code>location3</code>, as the constructor that takes all of those arguments is <code>private</code>.</p>
 
 <p>A little ugly, but poof! Private primary constructor. I haven't had to do this <em>too</em> often, but I have had to do it...</p>

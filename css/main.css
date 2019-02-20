@@ -370,7 +370,7 @@ Markdown
 .markdown pre, .markdown code {
   margin-bottom: 0;
   /* background-color: #f7f7f7; */
-  /* background-color: var(--grey-l4);  */
+  background-color: var(--grey-l4);
   /* font-size: 1rem; */
 }
 
