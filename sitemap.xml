@@ -3,12 +3,12 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://javadude.com/posts/20190203-kotlin01/</loc>
-    <lastmod>2019-02-03T00:00:00+00:00</lastmod>
+    <loc>http://javadude.com/posts/20190326-android-studio-deadlocks/</loc>
+    <lastmod>2019-03-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://javadude.com/posts/20190326-android-studio-deadlocks/</loc>
+    <loc>http://javadude.com/posts/20190203-kotlin01/</loc>
     <lastmod>2019-02-03T00:00:00+00:00</lastmod>
   </url>
   
@@ -173,7 +173,13 @@
   
   <url>
     <loc>http://javadude.com/tags/android/</loc>
-    <lastmod>2014-10-06T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-26T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://javadude.com/tags/android-studio/</loc>
+    <lastmod>2019-03-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -233,7 +239,7 @@
   
   <url>
     <loc>http://javadude.com/</loc>
-    <lastmod>2019-02-03T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -263,7 +269,7 @@
   
   <url>
     <loc>http://javadude.com/posts/</loc>
-    <lastmod>2019-02-03T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -274,7 +280,7 @@
   
   <url>
     <loc>http://javadude.com/tags/</loc>
-    <lastmod>2014-10-06T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -286,7 +292,7 @@
   
   <url>
     <loc>http://javadude.com/categories/videos/</loc>
-    <lastmod>2017-06-28T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
