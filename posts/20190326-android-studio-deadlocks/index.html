@@ -7,29 +7,19 @@
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1" />
   <meta name="author" content="Scott Stanchfield">
-  <meta name="description" content="
-    
-        
-        Let&#39;s learn Kotlin from a Java point of view.We&#39;ll start by looking at some basics of Variables, Values, Classes, Properties and Constructors.
-    
-">
+  <meta name="description" content="Using Android Studio&#39;s Debugger to Find Deadlocks">
   
-  <meta property="og:title" content="From Java to Kotlin - Episode 1 - You&#39;ve Gotta Start Somewhere..." />
-<meta property="og:description" content="
-    
-        
-        Let&#39;s learn Kotlin from a Java point of view.We&#39;ll start by looking at some basics of Variables, Values, Classes, Properties and Constructors.
-    
-" />
+  <meta property="og:title" content="Finding a deadlock in Android Studio" />
+<meta property="og:description" content="Using Android Studio&#39;s Debugger to Find Deadlocks" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://javadude.com/posts/20190326-android-studio-deadlocks/" />
-<meta property="article:published_time" content="2019-02-03T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2019-02-03T00:00:00&#43;00:00"/>
+<meta property="article:published_time" content="2019-03-26T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2019-03-26T00:00:00&#43;00:00"/>
 
 
   <title>
   
-       From Java to Kotlin - Episode 1 - You&#39;ve Gotta Start Somewhere... | JavaDude.com 
+       Finding a deadlock in Android Studio | JavaDude.com 
   
   </title>
 
@@ -274,17 +264,17 @@
   <ul class="post-meta li-x">
     
       
-        <li><a href="http://javadude.com/categories/articles"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> Articles </a></li>
+        <li><a href="http://javadude.com/categories/videos"><i class="fas fa-folder-open pr-1" aria-hidden="true"></i> Videos </a></li>
       
     
     
   </ul>
 
-  <div class="px-4 post-heading">From Java to Kotlin - Episode 1 - You&#39;ve Gotta Start Somewhere...</div>
+  <div class="px-4 post-heading">Finding a deadlock in Android Studio</div>
 
   <ul class="post-meta li-x mt-1">
     
-      <li>Feb 3, 2019</li>
+      <li>Mar 26, 2019</li>
     
 
     
@@ -295,820 +285,41 @@
 
 
           <div class="post-content markdown">
-            <table>
-    <tr>
-        <td style="border:none;background: unset;"><a href="https://www.jetbrains.com"><img src="../../img/kotlin-logo.png" alt="Kotlin Logo" style="width:300px;"/></a></td>
-        <td style="border:none;background: unset;"><font size="+2"><p>Let's learn Kotlin from a Java point of view.<p>We'll start by looking at some basics of Variables, Values, Classes, Properties and Constructors.</p></font></td>
-    </tr>
-</table>
+            <p>Android Studio makes it crazy easy to locate deadlocks!</p>
 
-<h1 id="introduction">Introduction</h1>
+<h1 id="videos">Videos</h1>
 
-<p>I remember the way I felt when Java came out. There was this feeling of freedom using Java after using C++ for so long. I feel the same way switching from Java to Kotlin...</p>
+<h2 id="video-license">Video License</h2>
 
-<p>This series of posts assumes you're fairly familiar with Java. I'll explain some Java concepts more than others (like Anonymous Inner Classes and Lambdas), and in some cases point you to other articles or videos for more detail on how Java does things.</p>
+<p><a href="http://creativecommons.org/licenses/by-nc-nd/3.0/us/"><img src="http://i.creativecommons.org/l/by-nc-nd/3.0/us/88x31.png" alt="Creative Commons License" /></a><br />
+Finding a deadlock in Android Studio by Scott Stanchfield is licensed under a <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/us/">Creative Commons Attribution-Noncommercial-No Derivative Works 3.0 United States License</a>.</p>
 
-<p>Hopefully, many of the Kotlin concepts will make sense on their own... But don't say I didn't warn you ;)</p>
+<p>Feel free to watch the videos and point friends to them, but you cannot use them as part of any commercial product nor can you create derivative works. Follow the link above to see the complete license text.</p>
 
-<p>This post starts by taking a look at the very basics of Variables, Values, Classes, Properties and Constructors. In future articles, I'll be going into more detail on these topics. Learning a new programming language often requires a lot of back and forth as the concepts are often highly interconnected...</p>
-
-<h1 id="a-note-on-nulls">A Note on Nulls</h1>
-
-<p>While you're reading this, you'll likely think &quot;why didn't he use null instead of dummy values?&quot;...</p>
-
-<p>Nullability is a pretty big concept and I knew this article would be pretty long to start with, so I'm punting it down the road a wee bit. But don't worry... I'll get to it... It's quite important!</p>
-
-<h1 id="main-functions">Main Functions</h1>
-
-<p>Kotlin has &quot;main&quot; functions just like Java. You'll most likely use Kotlin in environments like servers or Android applications that don't need a main, but they're useful for examples.</p>
-
-<p>If you don't need any command-line arguments:</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">println</span><span class="p">(</span><span class="s">&#34;Hello, World!&#34;</span><span class="p">)</span>
-<span class="p">}</span></code></pre></div>
-<p>If you want command-line arguments, you can use an explicit Array (more on that and <code>joinToString()</code> later). I'm passing <code>A B C</code> to Kotlin Playground for this example.</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span> <span class="p">:</span> <span class="n">Array</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;)</span> <span class="p">{</span>
-    <span class="n">println</span><span class="p">(</span><span class="s">&#34;Hello, World!&#34;</span><span class="p">)</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">args</span><span class="p">.</span><span class="n">joinToString</span><span class="p">())</span>
-<span class="p">}</span></code></pre></div>
-<p>or you can use a varying-length argument list (more on that and <code>joinToString()</code> later). I'm passing <code>A B C</code> to Kotlin Playground for this example.</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="k">vararg</span> <span class="n">args</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">println</span><span class="p">(</span><span class="s">&#34;Hello, World!&#34;</span><span class="p">)</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">args</span><span class="p">.</span><span class="n">joinToString</span><span class="p">())</span>
-<span class="p">}</span></code></pre></div>
-<h1 id="yay-no-semicolons">Yay! No Semicolons!</h1>
-
-<p>Ding, dong, semicolons are dead! Well, not dead, just not as required as in Java. You can still use them to separate statements, but I don't recommend it. Give yourself a little time to get used to it and you'll add 5 more years before you get carpal-tunnel syndrome. At least according to the science I made up in my head.</p>
-
-<p>(I do find myself forgetting semicolons when I have to write Java code... But I don't do that often any more...)</p>
-
-<h1 id="variables-and-values">Variables and Values</h1>
-
-<p>In Kotlin, we explicitly state whether a local or member of a class can be modified. We do this by specifying <code>var</code> or <code>val</code> to define a variable or value.</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">var</span> <span class="py">x</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;Hello&#34;</span> <span class="c1">// 2 - &#34;initializer is redundant&#34; warning!
-</span><span class="c1"></span>    <span class="k">val</span> <span class="py">y</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;Message&#34;</span>
-
-    <span class="n">x</span> <span class="p">=</span> <span class="s">&#34;aaa&#34;</span> <span class="c1">// just fine; can change the variable
-</span><span class="c1"></span>    <span class="n">y</span> <span class="p">=</span> <span class="s">&#34;bbb&#34;</span> <span class="c1">// will not compile!!! can&#39;t change a &#34;val&#34;
-</span><span class="c1"></span>
-    <span class="n">println</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-<span class="p">}</span></code></pre></div>
-<p>If you run the above example, you'll get an &quot;initializer is redundant&quot; warning for line 2. Kotlin does a lot of data flow analysis, and here it's telling us that it sees the only path using <code>x</code> assigns it twice before using it, so the initializer isn't needed. We could write</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">var</span> <span class="py">x</span> <span class="p">:</span> <span class="n">String</span>
-    <span class="k">val</span> <span class="py">y</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;Message&#34;</span>
-
-    <span class="n">x</span> <span class="p">=</span> <span class="s">&#34;aaa&#34;</span> <span class="c1">// just fine; can change the variable
-</span><span class="c1"></span>
-    <span class="n">println</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-<span class="p">}</span></code></pre></div>
-<h1 id="type-inferencing">Type Inferencing</h1>
-
-<p>But things get even better. Kotlin loves to <em>infer</em> types so you don't have to write as much code. For example:</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">val</span> <span class="py">x</span> <span class="p">=</span> <span class="s">&#34;aaa&#34;</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="p">}</span></code></pre></div>
-<p>The expression <code>&quot;aaa&quot;</code> is of type <code>String</code>, so kotlin knows that the value <code>x</code> can be a <code>String</code> and infers the type.</p>
-
-<h1 id="everything-is-public-and-final">Everything is Public and Final</h1>
-
-<p>First, the good news...</p>
-
-<p>All types, functions and properties are <code>public</code> by default. I think this was a great choice, as I'm a big proponent of keeping things accessible unless there's a really strong reason not to (that reason is usually a sensitive algorithm, such as a security feature). <code>public</code> here means the same thing as in Java; any class can access <code>public</code> types, functions and properties.</p>
-
-<p>However...</p>
-
-<p>All classes, functions and properties are <code>final</code> by default (unless explicitly marked as <code>open</code>, <code>abstract</code> or <code>sealed</code>), or being functions/properties defined inside an <code>interface</code>). Interfaces are always non-final (as a <code>final</code> interface wouldn't make sense...)</p>
-
-<p><strong>[Here comes the rant!!!]</strong></p>
-
-<p>This was a <em>horrible</em> design choice, IMNSHO. This means you cannot create subclasses, or override functions or properties unless the parent explicitly says so. Unfortunately the designers of the language took advice from &quot;Effective Java&quot; (which says to only make non-final if you intend people to extend) a little too far. I've come across far too many cases where a library doesn't let you extend something that has gotten in the way. I believe in the Open/Closed principal - open for extension, closed for modification of its guts.</p>
-
-<p><strong>[rant over... you may continue with your lives...]</strong></p>
-
-<h1 id="class-and-interface-inheritance">Class and Interface Inheritance</h1>
-
-<p>Classes/Interfaces (and their members) in Kotlin are nowhere near as verbose as in Java.</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">interface</span> <span class="nc">Foo</span>           <span class="c1">// 1
-</span><span class="c1"></span><span class="k">open</span> <span class="k">class</span> <span class="nc">A</span>            <span class="c1">// 2
-</span><span class="c1"></span><span class="k">open</span> <span class="k">class</span> <span class="nc">B</span> <span class="p">:</span> <span class="n">A</span><span class="p">(),</span> <span class="n">Foo</span> <span class="c1">// 3
-</span><span class="c1"></span><span class="k">class</span> <span class="nc">C</span> <span class="p">:</span> <span class="n">B</span><span class="p">()</span>           <span class="c1">// 4
-</span><span class="c1"></span>
-<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">val</span> <span class="py">c</span> <span class="p">=</span> <span class="n">C</span><span class="p">()</span>         <span class="c1">// 7
-</span><span class="c1"></span><span class="p">}</span></code></pre></div>
-<p>Let's break this down, line by line</p>
-
-<table>
-<thead>
-<tr>
-<th>Line</th>
-<th>What's Happening</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>1</td>
-<td>Defines an interface named <code>Foo</code>. Nothing in it, but we might just be using it as a Marker to help us classify objects.</td>
-</tr>
-
-<tr>
-<td>2</td>
-<td>Defines a class named <code>A</code><br/>- We can extend it because it's marked <code>open</code></td>
-</tr>
-
-<tr>
-<td>3</td>
-<td>Defines a class named <code>B</code><br/>- It is a subclass of class <code>A</code><br/>- It implements interface <code>Foo</code><br/>- It can be extended because it's <code>open</code></td>
-</tr>
-
-<tr>
-<td>4</td>
-<td>Defines a class named <code>C</code><br/>- It is a subclass of <code>B</code><br/>- Note that this means it's indirectly a subclass of <code>A</code> and implements <code>Foo</code><br/>- It <em>cannot</em> be extended because it is <em>not</em> explicitly marked <code>open</code></td>
-</tr>
-
-<tr>
-<td>7</td>
-<td>Create an instance of <code>C</code> and point value <code>c</code> to it. (Yes... Kotlin has pointers, just like Java... See <a href="../../articles/passbyvalue.htm">Java is Pass-By-Value, Dammit!</a>)</td>
-</tr>
-</tbody>
-</table>
-
-<p>Some interesting things to note</p>
+<h1 id="sample-code">Sample Code</h1>
 
 <ul>
-<li>Both interfaces and a class can appear after the colon.
-
-<ul>
-<li>there can be at most one class, and any number of interfaces, in any order</li>
-</ul></li>
-<li>Superclasses must be followed by a call to a constructor (the parentheses in <code>A()</code> and <code>B()</code> on lines 3 and 4)</li>
+<li>Code: <a href="Deadlock.zip">Deadlock.zip</a></li>
 </ul>
 
-<p>Before we talk about constructors, let's talk about properties, and I'll circle back. I promise...</p>
+<h2 id="software-license">Software License</h2>
 
-<h1 id="properties">Properties</h1>
+<p>All code is licensed under Apache 2 <a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a></p>
 
-<p>I've been waiting for these for a long time... There's a concept used in Java called JavaBeans, part of which is a convention for defining properties. I've got an <a href="../20000304-javabeans">article on JavaBeans</a> that goes into a ton of detail, but here are the basics.</p>
+<p>Copyright 2019 Scott Stanchfield</p>
 
-<h2 id="properties-in-java">Properties in Java</h2>
+<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at</p>
 
-<p>A JavaBean property is defined by one or two methods in a Java class:</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// JAVA CODE
-</span><span class="c1"></span><span class="kd">public</span> <span class="n">String</span> <span class="nf">getFirstName</span><span class="o">()</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
-<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setFirstName</span><span class="o">(</span><span class="n">String</span> <span class="n">firstName</span><span class="o">)</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span></code></pre></div>
-<p>Property types</p>
+<pre><code>http://www.apache.org/licenses/LICENSE-2.0
+</code></pre>
 
-<ul>
-<li>If <em>only</em> a <code>get</code> method exists, we're defining a read-only property. For example, if we only had <code>getFirstName()</code> we're defining a read-only property called <code>firstName</code> (note the case.)</li>
-<li>If <em>only</em> a <code>set</code> method exists, we're defining a write-only property. For example, if we only had <code>setFirstName()</code> we're defining a write-only property called <code>firstName</code></li>
-<li>If <em>both</em> methods exist, we're defining a read/write property</li>
-</ul>
-
-<p>These conventions could be used by various tools, such as GUI builders, to automatically determine properties that a user could configure when designing an application. These properties would often appear in a little table where the user could set values and see how the GUI changes, then generate code to set that value at runtime.</p>
-
-<p>But this is horribly verbose, and nearly all <code>get</code>/<code>set</code> methods look identical in an application.</p>
-
-<h2 id="properties-in-kotlin">Properties in Kotlin</h2>
-
-<p>Kotlin fixes this by introducing properties as first-class language constructs.</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">A</span> <span class="p">{</span>                                       <span class="c1">// 1
-</span><span class="c1"></span>    <span class="k">var</span> <span class="py">firstName</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;no first name&#34;</span>    <span class="c1">// 2
-</span><span class="c1"></span>    <span class="k">var</span> <span class="py">lastName</span> <span class="p">=</span> <span class="s">&#34;no last name&#34;</span>               <span class="c1">// 3
-</span><span class="c1"></span><span class="p">}</span>
-
-<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">val</span> <span class="py">a</span> <span class="p">=</span> <span class="n">A</span><span class="p">()</span>                                 <span class="c1">// 7
-</span><span class="c1"></span>    <span class="n">println</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">firstName</span><span class="p">)</span>                        <span class="c1">// 8 
-</span><span class="c1"></span>    <span class="n">a</span><span class="p">.</span><span class="n">firstName</span> <span class="p">=</span> <span class="s">&#34;Scott&#34;</span>                       <span class="c1">// 9
-</span><span class="c1"></span>    <span class="n">println</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">firstName</span><span class="p">)</span>                        <span class="c1">// 10
-</span><span class="c1"></span><span class="p">}</span></code></pre></div>
-<p>Adding <code>var</code> and <code>val</code> definitions inside a class or interface defines a property. <code>var</code> properties are read/write (you can modify them), and <code>val</code> properties are read-only (you cannot modify them).</p>
-
-<p>Let's look at this example line-by-line</p>
-
-<table>
-<thead>
-<tr>
-<th>Line</th>
-<th>What's Happening</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>1</td>
-<td>Define a new class (not extensible!)</td>
-</tr>
-
-<tr>
-<td>2</td>
-<td>Define a read/write property called <code>firstName</code> of type <code>String</code> initialized to <code>&quot;no first name&quot;</code></td>
-</tr>
-
-<tr>
-<td>3</td>
-<td>Define a read/write property called <code>lastName</code> of <em>inferred</em> type <code>String</code> initialized to <code>&quot;no last name&quot;</code></td>
-</tr>
-
-<tr>
-<td>7</td>
-<td>Create an instance of class <code>A</code> and point value <code>a</code> to it. Note that there is no <code>new</code> keyword; we just specify the class name followed by parens and constructor parameters (if any)</td>
-</tr>
-
-<tr>
-<td>8</td>
-<td>Follow pointer <code>a</code> to its <code>A</code> instance and print the value of its <code>firstName</code> property</td>
-</tr>
-
-<tr>
-<td>9</td>
-<td>Follow pointer <code>a</code> to its <code>A</code> instance and change the value of its <code>firstName</code> property to <code>&quot;Scott&quot;</code> <br/>(Note that technically we're setting the value of the property to <em>point</em> to a <code>String</code> with the value <code>&quot;Scott&quot;</code>)</td>
-</tr>
-
-<tr>
-<td>10</td>
-<td>Follow pointer <code>a</code> to its <code>A</code> instance and print the value of its <code>firstName</code> property</td>
-</tr>
-</tbody>
-</table>
-
-<h2 id="using-kotlin-properties-from-java-code">Using Kotlin Properties From Java Code</h2>
-
-<p>Kotlin has excellent interoperability with Java. If we defined a Kotlin class</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">A</span> <span class="p">{</span>
-    <span class="k">var</span> <span class="py">firstName</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;no first name&#34;</span>
-    <span class="k">var</span> <span class="py">lastName</span> <span class="p">=</span> <span class="s">&#34;no last name&#34;</span>
-<span class="p">}</span></code></pre></div>
-<p>we could access it from Java as</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// JAVA CODE
-</span><span class="c1"></span><span class="n">A</span> <span class="n">a</span> <span class="o">=</span> <span class="k">new</span> <span class="n">A</span><span class="o">();</span>
-<span class="n">a</span><span class="o">.</span><span class="na">setFirstName</span><span class="o">(</span><span class="s">&#34;Scott&#34;</span><span class="o">));</span>
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a</span><span class="o">.</span><span class="na">getFirstName</span><span class="o">());</span></code></pre></div>
-<p>Behind the scenes, Kotlin creates a class file to run in the Java Virtual Machine, and this class file contains <code>get</code> and <code>set</code> methods for each read/write property, or just <code>get</code> methods for read-only properties.</p>
-
-<h2 id="backing-fields">Backing Fields</h2>
-
-<p>To explain &quot;Backing fields&quot; in Kotlin, let's look at a typical property implementation in Java</p>
-
-<p>Remember that JavaBean properties are defined <em>solely on the presence of <code>get</code> and <code>set</code> methods</em>. The implementation of those methods does not matter. However, we typically need to store a value when <code>set</code> is called and return it when <code>get</code> is called. For example:</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// JAVA CODE
-</span><span class="c1"></span><span class="kd">class</span> <span class="nc">Foo</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">name</span><span class="o">;</span>
-    <span class="o">}</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span></code></pre></div>
-<p>Note the field <code>name</code> in this example. It's a field in the class that's hidden from anything outside of class Foo. The property defined by <code>getName</code> and <code>setName</code> uses the <code>name</code> field to store the property value.</p>
-
-<p>Kotlin properties can automatically create a behind-the-scenes field just like this. For example, when you write</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
-    <span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;no name&#34;</span>
-<span class="p">}</span></code></pre></div>
-<p>the Kotlin compiler generates a <code>get</code> and <code>set</code> function for us (note that Kotlin uses the name &quot;function&quot; for what we would call a &quot;method&quot; in Java), and a &quot;backing field&quot; to hold the value of the <code>name</code> property.</p>
-
-<p>But that doesn't <em>always</em> happen...</p>
-
-<p>In Java, we might define a <code>get</code> method that computes a value (often called a &quot;derived property&quot;) or returns a literal value. For example</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// JAVA CODE
-</span><span class="c1"></span><span class="kd">class</span> <span class="nc">Foo</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="s">&#34;Scott&#34;</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span></code></pre></div>
-<p>In this case, we don't need a field to store the value.</p>
-
-<p>If we do something like the following in Kotlin</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
-    <span class="k">val</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;no name&#34;</span>
-       <span class="c1">// NOTE: a &#34;val&#34; property, so only defines a getter!
-</span><span class="c1"></span><span class="p">}</span></code></pre></div>
-<p>It <em>initializes</em> the backing field to &quot;no name&quot; and returns it whenever the property is accessed.</p>
-
-<p>If we want the equivalent of that literal-value <code>get</code> method in Java, we need to explicitly define what the <code>get</code> function in Kotlin would look like. We do this as follows:</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
-    <span class="k">val</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span>
-        <span class="k">get</span><span class="p">()</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="s">&#34;no name&#34;</span>
-        <span class="p">}</span>
-<span class="p">}</span></code></pre></div>
-<p>In this case, because we explicitly define the get() function, and do not mention the backing field, no backing field is defined.</p>
-
-<p>So how do we explicitly mention the backing field? We use the <code>field</code> keyword. For example:</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
-    <span class="k">val</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;no name&#34;</span>
-        <span class="k">get</span><span class="p">()</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="n">field</span>
-        <span class="p">}</span>
-<span class="p">}</span></code></pre></div>
-<p>This example is pretty silly; we're explicitly defining the default behavior of a read-only property. It's more interesting if we want to modify the behavior. For example, we could print or log a message whenever the field is requested</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
-    <span class="k">val</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;no name&#34;</span>
-        <span class="k">get</span><span class="p">()</span> <span class="p">{</span>
-            <span class="n">println</span><span class="p">(</span><span class="s">&#34;name requested!&#34;</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">field</span>
-        <span class="p">}</span>
-<span class="p">}</span></code></pre></div>
-<p>Or more usefully, do something when a value is set. For example, suppose we wanted to ensure a Doctor was always called &quot;Dr.&quot;:</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">Doctor</span> <span class="p">{</span>
-    <span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;Dr. Nobody&#34;</span>
-        <span class="k">set</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(!</span><span class="n">value</span><span class="p">.</span><span class="n">startsWith</span><span class="p">(</span><span class="s">&#34;Dr. &#34;</span><span class="p">))</span> <span class="p">{</span>
-                <span class="n">field</span> <span class="p">=</span> <span class="s">&#34;Dr. &#34;</span> <span class="p">+</span> <span class="n">value</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="n">field</span> <span class="p">=</span> <span class="n">value</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">val</span> <span class="py">doc</span> <span class="p">=</span> <span class="n">Doctor</span><span class="p">()</span>
-    <span class="n">doc</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="s">&#34;Scott&#34;</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">doc</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
-<span class="p">}</span></code></pre></div>
-<p>(NOTE: There are some much more &quot;Kotlin-y&quot; ways to write the body of that <code>set</code> function, but I wanted to keep it closer to Java until we get to those concepts and idioms)</p>
-
-<p>(ALSO NOTE: Before you comment on it, we would have been better off modifying the <code>get</code> instead of the <code>set</code>. I just wanted to demonstrate what the <code>set</code> would look like…)</p>
-
-<p>Here we're explicitly defining a <code>set</code> function for the <code>name</code> property. We look at the value passed in (the type of <code>value</code> is inferred to be <code>String</code>, the same as the type of the property), and if it doesn't call me a &quot;Dr.&quot; (which I am not; you can just call me &quot;Scott&quot;) it prepends &quot;Dr.&quot;&quot; when setting the value in the backing field.</p>
-
-<p>We're not defining the <code>get</code> function so we get its default behavior.</p>
-
-<p>Most of the time, you'll use properties without explicitly defining the <code>get</code> or <code>set</code> functions, but occasionally these are useful.</p>
-
-<p>The most-common instance of defining a <code>get</code> is for returning literals. This can be a little more efficient than initializing the property value and having to keep an extra backing field inside the class.</p>
-
-<h1 id="constructors">Constructors</h1>
-
-<p>NOTE: There is a <em>lot</em> of code in this section that can be significantly reduced; I'm starting the section conceptually similar to how you would write the equivalent Java code, followed by a section on simplifying it after we've finished the basic concepts.</p>
-
-<p>Now that we've defined the basics of properties (there will be much more cool stuff to come later...), we can talk about how Constructors work.</p>
-
-<p>Kotlin wants to be terse, which is good, because I don't like to type. (He says after typing in everything you've just read...) One of it's best tricks is to combine the definition of a constructor directly in the definition of the class.</p>
-
-<p>Let's take a look at how we can pass in a name to a <code>Person</code> instance when creating it.</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>       <span class="c1">// 1
-</span><span class="c1"></span>    <span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span>   <span class="c1">// 2
-</span><span class="c1"></span>    <span class="n">init</span> <span class="p">{</span>                          <span class="c1">// 3
-</span><span class="c1"></span>        <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>            <span class="c1">// 4
-</span><span class="c1"></span>    <span class="p">}</span>
-<span class="p">}</span></code></pre></div>
-<p>Let's look at this example line-by-line</p>
-
-<table>
-<thead>
-<tr>
-<th>Line</th>
-<th>What's Happening</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>1</td>
-<td>Define a new class named <code>Person</code> with a <em>primary constructor</em>.<br/>This primary constructor takes a <code>name</code> parameter, which is <code>final</code> (in Java terms) and is of type <code>String</code>.</td>
-</tr>
-
-<tr>
-<td>2</td>
-<td>Define a read/write property called <code>name</code> of type <code>String</code> initialized to <code>&quot;No name&quot;</code></td>
-</tr>
-
-<tr>
-<td>3</td>
-<td>Define an initializer. This is a block of code that will run as the body of the primary constructor.</td>
-</tr>
-
-<tr>
-<td>4</td>
-<td>Assign the property <code>name</code> to the constructor parameter <code>name</code>. The <code>this.</code> qualifies it to distinguish the property from the parameter. Alternatively, we could have just used a unique name for the parameter and not needed the <code>this.</code> qualification.</td>
-</tr>
-</tbody>
-</table>
-
-<p>Kotlin separates the concept of primary and secondary constructors. The <em>Primary Constructor</em> is specified directly after the name of the class. <em>Secondary Constructors</em> are specified in the body of the class.</p>
-
-<h2 id="secondary-constructors">Secondary Constructors</h2>
-
-<p>You can define alternative constructors. For example, if we wanted to be able to skip passing in a value for the name we could define the following</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span>
-    <span class="k">constructor</span><span class="p">()</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="s">&#34;No Name&#34;</span><span class="p">)</span> <span class="c1">// 3 - SECONDARY CONSTRUCTOR
-</span><span class="c1"></span>    <span class="n">init</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">val</span> <span class="py">person</span> <span class="p">=</span> <span class="n">Person</span><span class="p">(</span><span class="s">&#34;Scott&#34;</span><span class="p">)</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">person</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
-    <span class="k">val</span> <span class="py">person2</span> <span class="p">=</span> <span class="n">Person</span><span class="p">()</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">person2</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
-<span class="p">}</span></code></pre></div>
-<p>On line 3 we're defining a <em>secondary constructor</em> that calls the primary constructor passing in &quot;No Name&quot;. You can have any number of secondary constructors.</p>
-
-<p>If you have defined a <em>primary constructor</em>, <strong>all</strong> <em>secondary constructors</em> must directly or indirectly call it by using the <code>constructor(...) : this(...)</code> syntax. For example:</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span>
-    <span class="k">constructor</span><span class="p">(</span><span class="n">n</span> <span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="s">&#34;No Name &#34;</span> <span class="p">+</span> <span class="n">n</span><span class="p">)</span> <span class="c1">// 3
-</span><span class="c1"></span>    <span class="k">constructor</span><span class="p">()</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="m">42</span><span class="p">)</span>                    <span class="c1">// 4
-</span><span class="c1"></span>    <span class="n">init</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">val</span> <span class="py">person</span> <span class="p">=</span> <span class="n">Person</span><span class="p">(</span><span class="s">&#34;Scott&#34;</span><span class="p">)</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">person</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
-    <span class="k">val</span> <span class="py">person2</span> <span class="p">=</span> <span class="n">Person</span><span class="p">()</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">person2</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
-    <span class="k">val</span> <span class="py">person3</span> <span class="p">=</span> <span class="n">Person</span><span class="p">(</span><span class="m">10</span><span class="p">)</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">person3</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
-<span class="p">}</span></code></pre></div>
-<p>This time, line 3 defines a secondary that takes an <code>Int</code> (similar to Java's primitive <code>int</code> behind the scenes, but treated like an object in code) and appends it after &quot;No Name&quot; before passing it to the primary constructor.</p>
-
-<p>Line 4 defines another secondary constructor that takes no parameters, and passes <code>42</code> to the other secondary constructor, which will then append it to &quot;No Name&quot; and pass it to the primary constructor.</p>
-
-<p>The <code>init</code> block then runs as the body of the primary constructor to set the <code>name</code> property.</p>
-
-<h2 id="calling-superclass-constructors">Calling Superclass Constructors</h2>
-
-<p>If you only need to call the primary constructor from a subclass, things are pretty simple:</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span>
-    <span class="n">init</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">class</span> <span class="nc">Student</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">:</span> <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="c1">// 8
-</span><span class="c1"></span>
-<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">val</span> <span class="py">student</span> <span class="p">=</span> <span class="n">Student</span><span class="p">(</span><span class="s">&#34;Scott&#34;</span><span class="p">)</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
-<span class="p">}</span></code></pre></div>
-<p>Note that <code>Person</code> is defined as <code>open</code> so we can create subclasses, and has a primary constructor. We call that primary constructor on line 8, right after the superclass name, passing in the value passed to the primary constructor of Student. Student can do more than that, of course. For example:</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span>
-    <span class="n">init</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">class</span> <span class="nc">Student</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">gpa</span> <span class="p">:</span> <span class="n">Float</span><span class="p">)</span> <span class="p">:</span> <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">var</span> <span class="py">gpa</span> <span class="p">:</span> <span class="n">Float</span> <span class="p">=</span> <span class="m">0F</span>
-    <span class="n">init</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="n">gpa</span> <span class="p">=</span> <span class="n">gpa</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">val</span> <span class="py">student</span> <span class="p">=</span> <span class="n">Student</span><span class="p">(</span><span class="s">&#34;Scott&#34;</span><span class="p">,</span> <span class="m">3.99F</span><span class="p">)</span> <span class="c1">// Sooooo close...
-</span><span class="c1"></span>    <span class="n">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">gpa</span><span class="p">)</span>
-<span class="p">}</span></code></pre></div>
-<p>Things get a little trickier if you want to call secondary constructors in a superclass. In that case, <em>you cannot define a primary constructor in the subclass</em>. If you define a primary constructor, <em>all</em> secondary constructors must call it, which doesn't give us the choice of which super constructor to call... Here's an example:</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">constructor</span><span class="p">()</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="s">&#34;No Name&#34;</span><span class="p">)</span>
-    <span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span>
-    <span class="n">init</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">class</span> <span class="nc">Student</span> <span class="p">:</span> <span class="n">Person</span> <span class="p">{</span>
-    <span class="k">constructor</span><span class="p">()</span> <span class="p">:</span> <span class="k">super</span><span class="p">()</span>
-    <span class="k">constructor</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">:</span> <span class="k">super</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-    <span class="k">var</span> <span class="py">gpa</span> <span class="p">:</span> <span class="n">Float</span> <span class="p">=</span> <span class="m">0F</span>
-<span class="p">}</span>
-
-<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">val</span> <span class="py">student</span> <span class="p">=</span> <span class="n">Student</span><span class="p">(</span><span class="s">&#34;Scott&#34;</span><span class="p">)</span>
-    <span class="n">student</span><span class="p">.</span><span class="n">gpa</span> <span class="p">=</span> <span class="m">3.99F</span>
-    <span class="k">val</span> <span class="py">student2</span> <span class="p">=</span> <span class="n">Student</span><span class="p">()</span>
-    <span class="n">student2</span><span class="p">.</span><span class="n">gpa</span> <span class="p">=</span> <span class="m">3.50F</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">gpa</span><span class="p">)</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">student2</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">student2</span><span class="p">.</span><span class="n">gpa</span><span class="p">)</span>
-<span class="p">}</span></code></pre></div>
-<p>So we can pick and choose which superclass constructors are called, but this makes it impossible to pass the gpa to a student constructor and assign it! Time to start looking at better ways to write the code we've been seeing...</p>
-
-<h1 id="simplifying-constructors">Simplifying Constructors</h1>
-
-<p>Let's introduce some new concepts that can make constructors much simpler...</p>
-
-<h2 id="default-parameter-values">Default Parameter Values</h2>
-
-<p>First, default values for parameters...</p>
-
-<p>Most of the time, we define alternate constructors just to provide default values or different subsets of parameters. Let's start by defining a primary constructor for Person that takes the <code>name</code> and gives it a default value.</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span>
-    <span class="n">init</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">val</span> <span class="py">person1</span> <span class="p">=</span> <span class="n">Person</span><span class="p">()</span>
-    <span class="k">val</span> <span class="py">person2</span> <span class="p">=</span> <span class="n">Person</span><span class="p">(</span><span class="s">&#34;Scott&#34;</span><span class="p">)</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">person1</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">person2</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
-<span class="p">}</span></code></pre></div>
-<p>Now we can create a <code>Person</code> with or without a name using the same constructor. Let's add the <code>Student</code> subclass:</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span>
-    <span class="n">init</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">class</span> <span class="nc">Student</span><span class="p">(</span><span class="n">gpa</span> <span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span><span class="p">)</span> <span class="p">:</span> <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">var</span> <span class="py">gpa</span> <span class="p">:</span> <span class="n">Float</span> <span class="p">=</span> <span class="m">0F</span>
-    <span class="n">init</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="n">gpa</span> <span class="p">=</span> <span class="n">gpa</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">val</span> <span class="py">person1</span> <span class="p">=</span> <span class="n">Person</span><span class="p">()</span>
-    <span class="k">val</span> <span class="py">person2</span> <span class="p">=</span> <span class="n">Person</span><span class="p">(</span><span class="s">&#34;Scott&#34;</span><span class="p">)</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">person1</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">person2</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
-
-    <span class="k">val</span> <span class="py">student</span> <span class="p">=</span> <span class="n">Student</span><span class="p">(</span><span class="m">3.99F</span><span class="p">,</span> <span class="s">&#34;Scott&#34;</span><span class="p">)</span>
-    <span class="k">val</span> <span class="py">student2</span> <span class="p">=</span> <span class="n">Student</span><span class="p">(</span><span class="m">3.5F</span><span class="p">)</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">gpa</span><span class="p">)</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">student2</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">student2</span><span class="p">.</span><span class="n">gpa</span><span class="p">)</span>
-<span class="p">}</span></code></pre></div>
-<p>Now we're able to require the GPA in the <code>Student</code> constructor! Note that parameters with default values must appear <em>after</em> any parameters that <em>do not</em> have default values... Unless...</p>
-
-<h2 id="naming-parameters-in-a-call">Naming Parameters in a Call</h2>
-
-<p>Kotlin allows you to explicitly name your parameters when calling a function or constructor. For example:</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span>
-    <span class="n">init</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">class</span> <span class="nc">Student</span><span class="p">(</span><span class="n">gpa</span> <span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span><span class="p">)</span> <span class="p">:</span> <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">var</span> <span class="py">gpa</span> <span class="p">:</span> <span class="n">Float</span> <span class="p">=</span> <span class="m">0F</span>
-    <span class="n">init</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="n">gpa</span> <span class="p">=</span> <span class="n">gpa</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">val</span> <span class="py">person1</span> <span class="p">=</span> <span class="n">Person</span><span class="p">()</span>
-    <span class="k">val</span> <span class="py">person2</span> <span class="p">=</span> <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="p">=</span><span class="s">&#34;Scott&#34;</span><span class="p">)</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">person1</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">person2</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
-
-    <span class="k">val</span> <span class="py">student</span> <span class="p">=</span> <span class="n">Student</span><span class="p">(</span><span class="m">3.99F</span><span class="p">,</span> <span class="n">name</span><span class="p">=</span><span class="s">&#34;Scott&#34;</span><span class="p">)</span>
-    <span class="k">val</span> <span class="py">student2</span> <span class="p">=</span> <span class="n">Student</span><span class="p">(</span><span class="m">3.5F</span><span class="p">)</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">gpa</span><span class="p">)</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">student2</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">student2</span><span class="p">.</span><span class="n">gpa</span><span class="p">)</span>
-<span class="p">}</span></code></pre></div>
-<p>This also allows us to specify parameters out of order, or even define default-valued parameters before non-default-valued parameters:</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span>
-    <span class="n">init</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="c1">// NOTE PARAMETER ORDER CHANGE!!!
-</span><span class="c1"></span><span class="k">class</span> <span class="nc">Student</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span><span class="p">,</span> <span class="n">gpa</span> <span class="p">:</span> <span class="n">Float</span><span class="p">)</span> <span class="p">:</span> <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 9
-</span><span class="c1"></span>    <span class="k">var</span> <span class="py">gpa</span> <span class="p">:</span> <span class="n">Float</span> <span class="p">=</span> <span class="m">0F</span>
-    <span class="n">init</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="n">gpa</span> <span class="p">=</span> <span class="n">gpa</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">val</span> <span class="py">person1</span> <span class="p">=</span> <span class="n">Person</span><span class="p">()</span>
-    <span class="k">val</span> <span class="py">person2</span> <span class="p">=</span> <span class="n">Person</span><span class="p">(</span><span class="s">&#34;Scott&#34;</span><span class="p">)</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">person1</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">person2</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
-
-    <span class="k">val</span> <span class="py">student</span> <span class="p">=</span> <span class="n">Student</span><span class="p">(</span><span class="s">&#34;Scott&#34;</span><span class="p">,</span> <span class="m">3.99F</span><span class="p">)</span>           <span class="c1">// 22 - ordered
-</span><span class="c1"></span>    <span class="k">val</span> <span class="py">student2</span> <span class="p">=</span> <span class="n">Student</span><span class="p">(</span><span class="n">gpa</span><span class="p">=</span><span class="m">3.5F</span><span class="p">)</span>                <span class="c1">// 23 - named
-</span><span class="c1"></span>    <span class="k">val</span> <span class="py">student3</span> <span class="p">=</span> <span class="n">Student</span><span class="p">(</span><span class="n">gpa</span><span class="p">=</span><span class="m">3.99F</span><span class="p">,</span> <span class="n">name</span><span class="p">=</span><span class="s">&#34;Scott&#34;</span><span class="p">)</span> <span class="c1">// 24 - different order!
-</span><span class="c1"></span>    <span class="n">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">gpa</span><span class="p">)</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">student2</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">student2</span><span class="p">.</span><span class="n">gpa</span><span class="p">)</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">student3</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
-    <span class="n">println</span><span class="p">(</span><span class="n">student3</span><span class="p">.</span><span class="n">gpa</span><span class="p">)</span>
-<span class="p">}</span></code></pre></div>
-<p>Let's look at a few lines in particular</p>
-
-<table>
-<thead>
-<tr>
-<th>Line</th>
-<th>What's Happening</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>9</td>
-<td>we swapped the order of the parameters; the <code>name</code> with a default value, comes first. (NOTE: We can no longer call the constructor without a name specified <em>unless</em> we name the <code>gpa</code> parameter in the call!)</td>
-</tr>
-
-<tr>
-<td>22</td>
-<td>We create a <code>Student</code> instance with positional parameters as before, but the parameter order is reversed in the constructor definition (line 9).</td>
-</tr>
-
-<tr>
-<td>23</td>
-<td>We create a <code>Student</code> instance <em>without</em> a name passed in. Note that we <em>must</em> name the gpa parameter, as it follows a default-valued parameter in the constructor definition.</td>
-</tr>
-
-<tr>
-<td>24</td>
-<td>We create a <code>Student</code> instance with named parameters as before, gpa first. When you name parameters, you can pass them in any order!</td>
-</tr>
-</tbody>
-</table>
-
-<p>Note that I do not recommend putting parameters without default values after parameters with default values; this can cause confusion, but I wanted to point out the requirement for naming in this case.</p>
-
-<h2 id="initializers-can-access-primary-constructor-parameters">Initializers Can Access Primary Constructor Parameters</h2>
-
-<p>A really nice optimization is that property initializers have access to primary constructor parameters. This eliminates the need for many <code>init</code> blocks, as they often just initialize properties.</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="n">name</span> <span class="c1">// 2 - direct access to primary constructor parameter
-</span><span class="c1"></span><span class="p">}</span>
-
-<span class="c1">// NOTE PARAMETER ORDER CHANGE!!!
-</span><span class="c1"></span><span class="k">class</span> <span class="nc">Student</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span><span class="p">,</span> <span class="n">gpa</span> <span class="p">:</span> <span class="n">Float</span><span class="p">)</span> <span class="p">:</span> <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="p">{</span> 
-<span class="k">var</span> <span class="py">gpa</span> <span class="p">:</span> <span class="n">Float</span> <span class="p">=</span> <span class="n">gpa</span> <span class="c1">// 7 - direct access to primary constructor parameter
-</span><span class="c1"></span><span class="p">}</span></code></pre></div>
-<p>Wow! Code reduction! Love it!</p>
-
-<p>Looking at lines 2 and 7, we reference the primary constructor parameters in the property initializers. That removes the need for a dummy initializer value, and gets rid of the <code>init</code> blocks. Nifty! But the next step is the biggie... (Side note - my grandmother on my mom's side always hated the word &quot;biggie&quot; for some reason. Trips to Wendy's were always accompanied by her cringing...)</p>
-
-<h2 id="define-properties-in-the-primary-constructor">Define Properties in the Primary Constructor</h2>
-
-<p>Here's one of my favorite things about Kotlin. If your constructor is passing in values that are directly used to initialize properties, you can define the properties <em>directly</em> in the constructor. It's easiest to understand this in an example...</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="k">var</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span><span class="p">)</span>    <span class="c1">// 1
-</span><span class="c1"></span>
-<span class="k">class</span> <span class="nc">Student</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;No Name&#34;</span><span class="p">,</span> <span class="k">var</span> <span class="py">gpa</span> <span class="p">:</span> <span class="n">Float</span><span class="p">)</span> <span class="p">:</span> <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="c1">// 3</span></code></pre></div>
-<p>Check out the terseness, but still <em>very</em> readable. (I'd say even more readable now, as you no longer have the duplication and required explicit association of the constructor parameters and properties.)</p>
-
-<p>By adding <code>var</code> or <code>val</code> in front of a primary constructor parameter, you</p>
-
-<ul>
-<li>Define a property for the class</li>
-<li>Initialize the property to the value passed in (or default value)</li>
-</ul>
-
-<p>Line 1 defines the <code>name</code> property of <code>Person</code> and line 3 defines the <code>gpa</code> property of <code>Student</code>.</p>
-
-<p>Because <code>Student</code> inherits <code>name</code> from <code>Person</code>, we don't add <code>var</code> or <code>val</code> to <code>name</code> in the <code>Student</code> constructor; it's just a normal constructor parameter that we pass on to the superclass.</p>
-
-<p>Because these are <code>var</code> properties, we can modify them the same way we did before. We could also make them <code>val</code> properties, in which case, once the value has been set at creation time, we cannot change it.</p>
-
-<p>You may have noticed that we no longer have a body (<code>{ ... }</code>) for these classes. If everything you need to define is in the constructors, you don't need a body and can remove the curly braces!</p>
-
-<h1 id="property-subsets-in-constructors">Property Subsets in Constructors</h1>
-
-<p>One last thought before I pass out or my fingers refuse to keep typing...</p>
-
-<p>Suppose we have several properties, some of which must be specified together or not at all.</p>
-
-<p>For example, let's define a <code>Section</code> class that defines text in a document that may have a header and footer:</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Section</span><span class="p">(</span>
-    <span class="k">val</span> <span class="py">text</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span> 
-    <span class="k">val</span> <span class="py">header</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;&#34;</span><span class="p">,</span> 
-    <span class="k">val</span> <span class="py">footer</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;&#34;</span><span class="p">)</span></code></pre></div>
-<p>I'd like to impose a restriction such that if we specify a header or footer, the other must also be specified.</p>
-
-<p>We could add a check in the intializer...</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Section</span><span class="p">(</span>
-    <span class="k">val</span> <span class="py">text</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span> 
-    <span class="k">val</span> <span class="py">header</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;&#34;</span><span class="p">,</span> 
-    <span class="k">val</span> <span class="py">footer</span> <span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">&#34;&#34;</span><span class="p">)</span> <span class="p">{</span>
-
-    <span class="n">init</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">header</span><span class="p">.</span><span class="n">isEmpty</span><span class="p">()</span> <span class="p">!=</span> <span class="n">footer</span><span class="p">.</span><span class="n">isEmpty</span><span class="p">())</span> <span class="p">{</span>
-            <span class="k">throw</span> <span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s">&#34;Header and Footer must both be specified, or neither specified&#34;</span><span class="p">)</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">val</span> <span class="py">section</span> <span class="p">=</span> <span class="n">Section</span><span class="p">(</span><span class="s">&#34;Some text&#34;</span><span class="p">,</span> <span class="s">&#34;Section 1&#34;</span><span class="p">)</span>
-<span class="p">}</span></code></pre></div>
-<p>If you run this, you'll get the IllegalArgumentException.</p>
-
-<p>But... I really prefer to catch things at compile-time when possible. So I'd really like to have constructors that either require <em>neither</em> header nor footer, <em>or both</em> header and footer. So we add a secondary constructor and tweak the primary:</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Section</span><span class="p">(</span>
-    <span class="k">val</span> <span class="py">text</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span> 
-    <span class="k">val</span> <span class="py">header</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span> 
-    <span class="k">val</span> <span class="py">footer</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
-
-    <span class="k">constructor</span><span class="p">(</span><span class="n">text</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">)</span>
-<span class="p">}</span>
-
-<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">val</span> <span class="py">section1</span> <span class="p">=</span> <span class="n">Section</span><span class="p">(</span><span class="s">&#34;Some text&#34;</span><span class="p">)</span>
-    <span class="k">val</span> <span class="py">section2</span> <span class="p">=</span> <span class="n">Section</span><span class="p">(</span><span class="s">&#34;Some text&#34;</span><span class="p">,</span> <span class="s">&#34;Section 1&#34;</span><span class="p">,</span> <span class="s">&#34;End of Section 1&#34;</span><span class="p">)</span>
-    <span class="k">val</span> <span class="py">section3</span> <span class="p">=</span> <span class="n">Section</span><span class="p">(</span><span class="s">&#34;Some text&#34;</span><span class="p">,</span> <span class="s">&#34;Section 1&#34;</span><span class="p">)</span> <span class="c1">// will not compile
-</span><span class="c1"></span><span class="p">}</span></code></pre></div>
-<p>Our primary constructor now requires both header and footer, and the secondary only requires the text, passing the default values to the primary. Perfect!</p>
-
-<p>But what if we have parameters that create more complex groupings?</p>
-
-<p>Let's create a very-poorly-designed class to represent a location (very-poorly-designed because we should use inheritance [and later, Kotlin's sealed classes!]). Start with</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Location</span><span class="p">(</span>
-    <span class="k">val</span> <span class="py">lat</span> <span class="p">:</span> <span class="n">Double</span><span class="p">,</span>
-    <span class="k">val</span> <span class="py">lon</span> <span class="p">:</span> <span class="n">Double</span><span class="p">,</span>
-    <span class="k">val</span> <span class="py">street</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
-    <span class="k">val</span> <span class="py">city</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
-    <span class="k">val</span> <span class="py">state</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
-    <span class="k">val</span> <span class="py">zip</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span></code></pre></div>
-<p>Here we want to have <em>either</em> lat/lon, <em>or</em> street/city/state/zip. (Yes... this is crazy gross, but I'm tired and this demonstrates the concept and my brain won't think of another example right now so there).</p>
-
-<p>So we try</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Location</span><span class="p">(</span>
-    <span class="k">val</span> <span class="py">lat</span> <span class="p">:</span> <span class="n">Double</span><span class="p">,</span>
-    <span class="k">val</span> <span class="py">lon</span> <span class="p">:</span> <span class="n">Double</span><span class="p">,</span>
-    <span class="k">val</span> <span class="py">street</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
-    <span class="k">val</span> <span class="py">city</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
-    <span class="k">val</span> <span class="py">state</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
-    <span class="k">val</span> <span class="py">zip</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
-
-    <span class="k">constructor</span><span class="p">(</span><span class="n">lat</span> <span class="p">:</span> <span class="n">Double</span><span class="p">,</span> <span class="n">lon</span> <span class="p">:</span> <span class="n">Double</span><span class="p">)</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">)</span>
-    <span class="k">constructor</span><span class="p">(</span>
-        <span class="n">street</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
-        <span class="n">city</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
-        <span class="n">state</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
-        <span class="n">zip</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="m">0.0</span><span class="p">,</span> <span class="m">0.0</span><span class="p">,</span> <span class="n">street</span><span class="p">,</span> <span class="n">city</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">zip</span><span class="p">)</span>
-<span class="p">}</span>
-
-<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// good
-</span><span class="c1"></span>    <span class="k">val</span> <span class="py">location1</span> <span class="p">=</span> <span class="n">Location</span><span class="p">(</span><span class="m">39.149810</span><span class="p">,</span> <span class="p">-</span><span class="m">76.911257</span><span class="p">)</span>
-        <span class="c1">// (sing it with me... &#34;My Harris Teeter&#34;)
-</span><span class="c1"></span>
-    <span class="c1">// good
-</span><span class="c1"></span>    <span class="k">val</span> <span class="py">location2</span> <span class="p">=</span> <span class="n">Location</span><span class="p">(</span><span class="s">&#34;123 Sesame St&#34;</span><span class="p">,</span> <span class="s">&#34;New York&#34;</span><span class="p">,</span> <span class="s">&#34;NY&#34;</span><span class="p">,</span> <span class="s">&#34;10001&#34;</span><span class="p">)</span>
-
-    <span class="c1">// uh oh...
-</span><span class="c1"></span>    <span class="k">val</span> <span class="py">location3</span> <span class="p">=</span> <span class="n">Location</span><span class="p">(</span><span class="m">39.149810</span><span class="p">,</span> <span class="p">-</span><span class="m">76.911257</span><span class="p">,</span> <span class="s">&#34;123 Sesame St&#34;</span><span class="p">,</span> <span class="s">&#34;New York&#34;</span><span class="p">,</span> <span class="s">&#34;NY&#34;</span><span class="p">,</span> <span class="s">&#34;10001&#34;</span><span class="p">)</span>
-<span class="p">}</span></code></pre></div>
-<p>The primary constructor is <code>public</code> by default. In this case, we really don't want that. So let's make it private.</p>
-<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">open</span> <span class="k">class</span> <span class="nc">Location</span> <span class="k">private</span> <span class="k">constructor</span><span class="p">(</span>
-    <span class="k">val</span> <span class="py">lat</span> <span class="p">:</span> <span class="n">Double</span><span class="p">,</span>
-    <span class="k">val</span> <span class="py">lon</span> <span class="p">:</span> <span class="n">Double</span><span class="p">,</span>
-    <span class="k">val</span> <span class="py">street</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
-    <span class="k">val</span> <span class="py">city</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
-    <span class="k">val</span> <span class="py">state</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
-    <span class="k">val</span> <span class="py">zip</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
-
-    <span class="k">constructor</span><span class="p">(</span><span class="n">lat</span> <span class="p">:</span> <span class="n">Double</span><span class="p">,</span> <span class="n">lon</span> <span class="p">:</span> <span class="n">Double</span><span class="p">)</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">)</span>
-    <span class="k">constructor</span><span class="p">(</span>
-        <span class="n">street</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
-        <span class="n">city</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
-        <span class="n">state</span> <span class="p">:</span> <span class="n">String</span><span class="p">,</span>
-        <span class="n">zip</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">:</span> <span class="k">this</span><span class="p">(</span><span class="m">0.0</span><span class="p">,</span> <span class="m">0.0</span><span class="p">,</span> <span class="n">street</span><span class="p">,</span> <span class="n">city</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">zip</span><span class="p">)</span>
-<span class="p">}</span>
-
-<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// good
-</span><span class="c1"></span>    <span class="k">val</span> <span class="py">location1</span> <span class="p">=</span> <span class="n">Location</span><span class="p">(</span><span class="m">39.149810</span><span class="p">,</span> <span class="p">-</span><span class="m">76.911257</span><span class="p">)</span>
-        <span class="c1">// (sing it with me... &#34;My Harris Teeter&#34;)
-</span><span class="c1"></span>
-    <span class="c1">// good
-</span><span class="c1"></span>    <span class="k">val</span> <span class="py">location2</span> <span class="p">=</span> <span class="n">Location</span><span class="p">(</span><span class="s">&#34;123 Sesame St&#34;</span><span class="p">,</span> <span class="s">&#34;New York&#34;</span><span class="p">,</span> <span class="s">&#34;NY&#34;</span><span class="p">,</span> <span class="s">&#34;10001&#34;</span><span class="p">)</span>
-
-    <span class="c1">// uh oh...
-</span><span class="c1"></span>    <span class="k">val</span> <span class="py">location3</span> <span class="p">=</span> <span class="n">Location</span><span class="p">(</span><span class="m">39.149810</span><span class="p">,</span> <span class="p">-</span><span class="m">76.911257</span><span class="p">,</span> <span class="s">&#34;123 Sesame St&#34;</span><span class="p">,</span> <span class="s">&#34;New York&#34;</span><span class="p">,</span> <span class="s">&#34;NY&#34;</span><span class="p">,</span> <span class="s">&#34;10001&#34;</span><span class="p">)</span>
-<span class="p">}</span></code></pre></div>
-<p>If you run this you'll get an error compiling <code>location3</code>, as the constructor that takes all of those arguments is <code>private</code>.</p>
-
-<p>A little ugly, but poof! Private primary constructor. I haven't had to do this <em>too</em> often, but I have had to do it...</p>
-
-<p>Lots more to cover in later articles, but it's after midnight and I need some sleep... More soon!</p>
+<p>Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</p>
           </div>
 
           
@@ -1121,10 +332,10 @@
   <li class="pr-0"><a href="http://javadude.com/tags/"><i class="fas fa-tags"></i></a></li>
   <div class="tags-sm">
     
-      <li><a href="http://javadude.com/tags/kotlin" role="button">kotlin </a></li>
+      <li><a href="http://javadude.com/tags/android" role="button">android </a></li>
       
     
-      <li><a href="http://javadude.com/tags/language" role="button">language </a></li>
+      <li><a href="http://javadude.com/tags/android-studio" role="button">android studio </a></li>
       
     
   </div>
@@ -1140,23 +351,16 @@
           <div class="row pt-3">
             <div class="col-md-6">
               
-                <a href=http://javadude.com/posts/20170628-dsls-and-codegen/ class="post-meta">Previous
+                <a href=http://javadude.com/posts/20190203-kotlin01/ class="post-meta">Previous
                   <div class="pt-2 pb-5 d-flex">
                     <i class="fas fa-angle-left text-grey font-weight-bold mr-2 active-color"></i>
-                    <span>DSLs and Code Generation</span>
+                    <span>From Java to Kotlin - Episode 1 - You&#39;ve Gotta Start Somewhere...</span>
                   </div>
                 </a>
               
             </div>
             
             <div class="col-md-6 text-right" >
-              
-                <a href=http://javadude.com/posts/20190203-kotlin01/ class="post-meta">Next
-                  <div class="pt-2 pb-5 flex-reverse">
-                    <i class="fas fa-angle-right text-grey font-weight-bold ml-2 active-color"></i>
-                    <span>From Java to Kotlin - Episode 1 - You&#39;ve Gotta Start Somewhere...</span>
-                  </div>
-                </a>
               
             </div>
           </div>
@@ -1201,184 +405,8 @@
 								
 
 										<li class="nav-item">
-						 					<a class="nav-link" href="#introduction">
-												 Introduction
-											</a>
-										</li>
-						 
-								
-								
-									</ul>
-								
-							
-						
-				 
-						
-						
-							
-								
-								
-									<ul class="nav">
-								
-								
-
-										<li class="nav-item">
-						 					<a class="nav-link" href="#a-note-on-nulls">
-												 A Note on Nulls
-											</a>
-										</li>
-						 
-								
-								
-									</ul>
-								
-							
-						
-				 
-						
-						
-							
-								
-								
-									<ul class="nav">
-								
-								
-
-										<li class="nav-item">
-						 					<a class="nav-link" href="#main-functions">
-												 Main Functions
-											</a>
-										</li>
-						 
-								
-								
-									</ul>
-								
-							
-						
-				 
-						
-						
-							
-								
-								
-									<ul class="nav">
-								
-								
-
-										<li class="nav-item">
-						 					<a class="nav-link" href="#yay-no-semicolons">
-												 Yay! No Semicolons!
-											</a>
-										</li>
-						 
-								
-								
-									</ul>
-								
-							
-						
-				 
-						
-						
-							
-								
-								
-									<ul class="nav">
-								
-								
-
-										<li class="nav-item">
-						 					<a class="nav-link" href="#variables-and-values">
-												 Variables and Values
-											</a>
-										</li>
-						 
-								
-								
-									</ul>
-								
-							
-						
-				 
-						
-						
-							
-								
-								
-									<ul class="nav">
-								
-								
-
-										<li class="nav-item">
-						 					<a class="nav-link" href="#type-inferencing">
-												 Type Inferencing
-											</a>
-										</li>
-						 
-								
-								
-									</ul>
-								
-							
-						
-				 
-						
-						
-							
-								
-								
-									<ul class="nav">
-								
-								
-
-										<li class="nav-item">
-						 					<a class="nav-link" href="#everything-is-public-and-final">
-												 Everything is Public and Final
-											</a>
-										</li>
-						 
-								
-								
-									</ul>
-								
-							
-						
-				 
-						
-						
-							
-								
-								
-									<ul class="nav">
-								
-								
-
-										<li class="nav-item">
-						 					<a class="nav-link" href="#class-and-interface-inheritance">
-												 Class and Interface Inheritance
-											</a>
-										</li>
-						 
-								
-								
-									</ul>
-								
-							
-						
-				 
-						
-						
-							
-								
-								
-									<ul class="nav">
-								
-								
-
-										<li class="nav-item">
-						 					<a class="nav-link" href="#properties">
-												 Properties
+						 					<a class="nav-link" href="#videos">
+												 Videos
 											</a>
 										</li>
 						 
@@ -1401,86 +429,8 @@
 								
 
 										<li class="nav-item">
-						 					<a class="nav-link" href="#properties-in-java">
-												 Properties in Java
-											</a>
-										</li>
-						 
-								
-								
-									</ul>
-								
-									</ul>
-								
-							
-						
-				 
-						
-						
-							
-								
-								
-									<ul class="nav">
-								
-									<ul class="nav">
-								
-								
-
-										<li class="nav-item">
-						 					<a class="nav-link" href="#properties-in-kotlin">
-												 Properties in Kotlin
-											</a>
-										</li>
-						 
-								
-								
-									</ul>
-								
-									</ul>
-								
-							
-						
-				 
-						
-						
-							
-								
-								
-									<ul class="nav">
-								
-									<ul class="nav">
-								
-								
-
-										<li class="nav-item">
-						 					<a class="nav-link" href="#using-kotlin-properties-from-java-code">
-												 Using Kotlin Properties From Java Code
-											</a>
-										</li>
-						 
-								
-								
-									</ul>
-								
-									</ul>
-								
-							
-						
-				 
-						
-						
-							
-								
-								
-									<ul class="nav">
-								
-									<ul class="nav">
-								
-								
-
-										<li class="nav-item">
-						 					<a class="nav-link" href="#backing-fields">
-												 Backing Fields
+						 					<a class="nav-link" href="#video-license">
+												 Video License
 											</a>
 										</li>
 						 
@@ -1503,8 +453,8 @@
 								
 
 										<li class="nav-item">
-						 					<a class="nav-link" href="#constructors">
-												 Constructors
+						 					<a class="nav-link" href="#sample-code">
+												 Sample Code
 											</a>
 										</li>
 						 
@@ -1527,188 +477,14 @@
 								
 
 										<li class="nav-item">
-						 					<a class="nav-link" href="#secondary-constructors">
-												 Secondary Constructors
+						 					<a class="nav-link" href="#software-license">
+												 Software License
 											</a>
 										</li>
 						 
 								
 								
 									</ul>
-								
-									</ul>
-								
-							
-						
-				 
-						
-						
-							
-								
-								
-									<ul class="nav">
-								
-									<ul class="nav">
-								
-								
-
-										<li class="nav-item">
-						 					<a class="nav-link" href="#calling-superclass-constructors">
-												 Calling Superclass Constructors
-											</a>
-										</li>
-						 
-								
-								
-									</ul>
-								
-									</ul>
-								
-							
-						
-				 
-						
-						
-							
-								
-								
-									<ul class="nav">
-								
-								
-
-										<li class="nav-item">
-						 					<a class="nav-link" href="#simplifying-constructors">
-												 Simplifying Constructors
-											</a>
-										</li>
-						 
-								
-								
-									</ul>
-								
-							
-						
-				 
-						
-						
-							
-								
-								
-									<ul class="nav">
-								
-									<ul class="nav">
-								
-								
-
-										<li class="nav-item">
-						 					<a class="nav-link" href="#default-parameter-values">
-												 Default Parameter Values
-											</a>
-										</li>
-						 
-								
-								
-									</ul>
-								
-									</ul>
-								
-							
-						
-				 
-						
-						
-							
-								
-								
-									<ul class="nav">
-								
-									<ul class="nav">
-								
-								
-
-										<li class="nav-item">
-						 					<a class="nav-link" href="#naming-parameters-in-a-call">
-												 Naming Parameters in a Call
-											</a>
-										</li>
-						 
-								
-								
-									</ul>
-								
-									</ul>
-								
-							
-						
-				 
-						
-						
-							
-								
-								
-									<ul class="nav">
-								
-									<ul class="nav">
-								
-								
-
-										<li class="nav-item">
-						 					<a class="nav-link" href="#initializers-can-access-primary-constructor-parameters">
-												 Initializers Can Access Primary Constructor Parameters
-											</a>
-										</li>
-						 
-								
-								
-									</ul>
-								
-									</ul>
-								
-							
-						
-				 
-						
-						
-							
-								
-								
-									<ul class="nav">
-								
-									<ul class="nav">
-								
-								
-
-										<li class="nav-item">
-						 					<a class="nav-link" href="#define-properties-in-the-primary-constructor">
-												 Define Properties in the Primary Constructor
-											</a>
-										</li>
-						 
-								
-								
-									</ul>
-								
-									</ul>
-								
-							
-						
-				 
-						
-						
-							
-								
-								
-									<ul class="nav">
-								
-								
-
-										<li class="nav-item">
-						 					<a class="nav-link" href="#property-subsets-in-constructors">
-												 Property Subsets in Constructors
-											</a>
-										</li>
-						 
-								
 								
 									</ul>
 								

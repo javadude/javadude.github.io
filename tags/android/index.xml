@@ -6,10 +6,19 @@
     <description>Recent content in Android on JavaDude.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Mon, 06 Oct 2014 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 26 Mar 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://javadude.com/tags/android/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Finding a deadlock in Android Studio</title>
+      <link>http://javadude.com/posts/20190326-android-studio-deadlocks/</link>
+      <pubDate>Tue, 26 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://javadude.com/posts/20190326-android-studio-deadlocks/</guid>
+      <description>&lt;p&gt;Android Studio makes it crazy easy to locate deadlocks!&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Android Intents and Fragments</title>

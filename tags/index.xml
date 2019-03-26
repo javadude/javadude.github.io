@@ -6,7 +6,7 @@
     <description>Recent content in Tags on JavaDude.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Mon, 06 Oct 2014 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 26 Mar 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://javadude.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,9 +14,18 @@
     <item>
       <title>Android</title>
       <link>http://javadude.com/tags/android/</link>
-      <pubDate>Mon, 06 Oct 2014 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 26 Mar 2019 00:00:00 +0000</pubDate>
       
       <guid>http://javadude.com/tags/android/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Android Studio</title>
+      <link>http://javadude.com/tags/android-studio/</link>
+      <pubDate>Tue, 26 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://javadude.com/tags/android-studio/</guid>
       <description></description>
     </item>
     
