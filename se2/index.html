@@ -1,0 +1,204 @@
+<html>
+	<head>
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Expires" content="0" />
+	</head>
+	<body>
+		<h1>APK</h1>
+			<h2><a href="siteexploitation_release_3.6.0.20.apk">siteexploitation_release_3.6.0.20.apk (12/10/2018)</a></h1>
+				<ul>
+					<li>Add missing cancel action when creating a new task (user pressing cancel left the selection in a bad state)</li>
+					<li>Fix NullPointerException when loading maps while rotating device</li>
+					<li>Allow buildings to be represented by a single point, rather than requiring a full polygon</li>
+					<li>Disable overly-proactive warning about online maps being unavailable</li>
+				</ul>
+
+		<h1>EXPERIMENTAL APK</h1>
+			<h2><a href="siteexploitation_release_experimental_4.0.0.0.apk">siteexploitation_release_experimental_4.0.0.0.apk (1/30/2019)</a></h1>
+				<ul>
+					<li>EXPERIMENTAL APK - NOT FOR USE IN DEMONSTRATIONS/EXERCISES</li>
+					<li>NOTE: Cannot be run on same device as release TacDOGS</li>
+					<li>Simplified build to help bring others on project</li> 
+					<li>New model, form, and database approaches</li>
+					<li>Added new fast Bag & Tag option (select a non-evidence node in the tree and tap BAG & TAG on the toolbar)</li>
+					<li>Added server reports (spreadsheet and case zip) locally
+						<ul>
+							<li>NOTE: Spreadsheet is now a simple CSV; there are no more drop-down lists</li>
+							<li>Reports are written to SD card or internal storage (depends on device setup - needs work)</li>
+						</ul>
+					</li>
+				</ul>
+
+		<h1>Older APKs</h1>				
+			<h2><a href="siteexploitation_release_3.6.0.14.apk">siteexploitation_release_3.6.0.14.apk (11/1/2018)</a></h1>
+				<ul>
+					<li>re-fixed "add photo during create case was blanking form" (thanks for double-checking, Arvin!)</li>
+				</ul>
+			<h2><a href="siteexploitation_release_3.6.0.13.apk">siteexploitation_release_3.6.0.13.apk (11/1/2018)</a></h1>
+				<ul>
+					<li>add photo during create case was blanking form</li>
+					<li>guard against trying to refresh map items on page reload before map is ready</li>
+					<li>when vehicle or person added, map representation would change in parent</li>
+					<li>multiple person or vehicles could be added at once. this didn't make sense, as we specify a representation for their children; which are we creating representation for? changed to just allow a single person or vehicle to be created at a time</li>
+					<li>when selecting a child with an image map, then switching back to its world-map parent, icons would be doubled (and show as clusters)</li>					
+				</ul>
+			<h2><a href="siteexploitation_release_3.6.0.12.apk">siteexploitation_release_3.6.0.12.apk (11/1/2018)</a></h1>
+				<ul>
+					<li>add photo during create case was blanking form</li>
+					<li>guard against trying to refresh map items on page reload before map is ready</li>
+					<li>stop saving "edit setup" in preferences; made the app always think it was in "create case" mode if backgrounded/killed during case creation and restarted</li>
+				</ul>
+			<h2><a href="siteexploitation_release_3.6.0.10.apk">siteexploitation_release_3.6.0.10.apk (11/1/2018)</a></h1>
+				<ul>
+					<li>added polygon vertex markers to move mode</li>
+					<li>reduced vertical offset when moving markers on image map</li>
+					<li>increased size of markers when adding</li>
+					<li>change time-on-target to show snackbar instead of toast, with "dismiss" button</li>
+					<li>added alarm sound for time-on-target expiration</li>
+					<li>keep current selections after download if they exist in downloaded data</li>
+					<li>make sure move mode is turned off when switching tabs, selections, going back, starting to add new items, etc</li>
+				</ul>
+			<h2><a href="siteexploitation_release_3.6.0.6.apk">siteexploitation_release_3.6.0.6.apk (10/31/2018)</a></h1>
+				<ul>
+					<li>for "zoom to all displayed", ignore parent polygon so it will zoom to specific child</li>
+					<li>fixed "move points" appearing twice on toolbar</li>
+					<li>changed "region" to "area"</li>
+					<li>allow any container object (non-evidence) to contain any other</li>
+					<li>allow container objects to have no mapped-location in parent</li>
+				</ul>
+			<h2><a href="siteexploitation_release_3.6.0.5.apk">siteexploitation_release_3.6.0.5.apk (10/31/2018)</a></h1>
+				<ul>
+					<li>made polygons selectable</li>
+					<li>add polygon labels using polylabel algorithm for positioning (NOT centroid)</li>
+					<li>removed zoom controls - caused issues when pinch-zooming</li>
+					<li>added "move points" mode for mapbox map</li>
+					<li>added "move points" mode for image map</li>
+					<li>changed tap-to-select on image map to react on action_up, not action_down</li>
+				</ul>
+			<h2><a href="siteexploitation_release_3.6.0.4.apk">siteexploitation_release_3.6.0.4.apk (10/30/2018)</a></h1>
+				<ul>
+					<li>fixed - mapbox crash/hang</li>
+					<li>fixed - turn tablet off when map displayed, exception when turn back on</li>
+					<li>fix which tab is selected after returning from adding subtasks in collection</li>
+					<li>disable auto-zoom-on-selection if on an image map</li>
+					<li>changed evidence icon to "tent" marker</li>
+					<li>fixed when switching to custom image-map view - found issues with tying points to lat/lng, which would vary based on screen ratio</li>
+					<li>switched to Picasso to load and scale image map images to save memory and simplify image setup</li>
+					<li>stopped asking for representation when adding evidence</li>
+					<li>don't display map options menu when image map is used</li>
+					<li>fixed - was deleting case when canceling creation of items in collection - gah...</li>
+					<li>clear temp points when canceling creation of items in collection</li>
+					<li>delete geometry, image refs, and notes when deleting tasks</li>
+					<li>fixed crash on exiting image editor</li>
+					<li>fixed display of maps/image maps</li>
+					<li>delete objects from model cache when deleted from database</li>
+					<li>set up custom image viewer so we have title, back/ok</li>
+					<li>add back "use as representation" to images so can more easily restore if switched away</li>
+				</ul>
+			<h2><a href="siteexploitation_release_3.6.0.0.apk">siteexploitation_release_3.6.0.0.apk (10/26/2018)</a></h1>
+				<ul>
+					<li>Replaced Map with MapBox</li>
+					<li>Various bug fixes and enhancements that I'm too tired to write up</li>
+				</ul>
+			<h2><a href="siteexploitation_release_3.5.0.7.apk">siteexploitation_release_3.5.0.7.apk (9/19/2018)</a></h1>
+				<ul>
+					<li>Save images with proper rotation</li>
+					<li>Fix some NPEs</li>
+				</ul>
+			<h2><a href="siteexploitation_release_3.5.0.6.apk">siteexploitation_release_3.5.0.6.apk (9/5/2018)</a></h1>
+				<ul>
+					<li>After writing NFC tag, evidence would be updated with name of whatever other item is selected in tree</li>
+					<li>Don't show +n on evidence in collection list when the evidence has analyses</li>
+					<li>Show siblings for evidence with analyses in collection list rather than just that item (hiding children)</li>
+				</ul>
+			<h2><a href="siteexploitation_release_3.5.0.5.apk">siteexploitation_release_3.5.0.5.apk (9/5/2018)</a></h1>
+				<ul>
+					<li>Clean up deletion messages</li>
+					<li>When users deleted, remove from list in user manager</li>
+					<li>If current user is deleted, blank out current user</li>
+					<li>Add "encrypting"/"decrypting" pop up while password is being encrypted/decrypted</li>
+					<li>Don't show analysis tasks in collection</li>
+					<li>Don't require annotations on images
+						<ul>
+							<li>with no annotations, "ok" on toolbar just exits</li>
+							<li>with annotations, "ok" on toolbar asks to save</li>
+						</ul>
+					</li>
+				</ul>
+			<h2><a href="siteexploitation_release_3.5.0.4.apk">siteexploitation_release_3.5.0.4.apk (8/30/2018)</a></h1>
+				<ul>
+					<li>screen orientation set to "sensor landscape" - always in landscape but will respect device orientation</li>
+					<li>moved "edit case" to last position</li>
+					<li>fixed spelling of "veriticies"</li>
+					<li>"Write NFC Tag" action on toolbar only visible if evidence is selected</li>
+					<li>Removed "resize polygon" action when in "add" mode on map</li>
+					<li>Added case name and user name to section headers when selected</li>
+					<li>Prevent case from being deleted in collection and analysis screens</li>
+				</ul>
+			<h2><a href="siteexploitation_release_3.5.0.3.apk">siteexploitation_release_3.5.0.3.apk (8/21/2018)</a></h1>
+				<ul>
+					<li>Fixed NFC Writing Issues</li>
+					<li>When case changed, make sure it changes in collection/analysis</li>
+					<li>Re-enabled polygon editing</li>
+					<li>Darken polygons on KML maps</li>
+					<li>Don't include lat/lng on spreadsheet for evidence that is inside an image map</li>
+					<li>Changed "up" button on left end of toolbar to act the same as "back"</li>
+				</ul>
+			<h2><a href="siteexploitation_release_3.5.0.2.apk">siteexploitation_release_3.5.0.2.apk (8/13/2018)</a></h1>
+				<ul>
+					<li>Continued new Flow Simplification Concept</li>
+					<li>Full app (minus bag-and-tag - need to work with Alex on conops)
+						<ul>
+							<li>Added Time-On-Target countdown (keeps running across application stop and sends notification if app not running)</li>
+							<li>Reorganized home screen to eliminate need for overflow and hamburger menus</li>
+							<li>Simplified forms, reducing to only items that seem absolutely necessary - need to chat about content to see if we're missing anything important or can eliminate more</li>
+							<li>App now only works in landscape orientation; did not have time to create usable layouts in portrait or single-pane mode for new flows (will likely be a good bit of work)</li>
+							<li>Completely re-worked image-as-map scaling algorithm to ensure locations are consistent</li>
+						</ul>
+					</li>
+					<li>Server with new features
+						<ul>
+							<li>Maps are downloadable for use in Google Earth locally</li>
+							<li>Map description boxes include URL to show reports that include
+								<ul>
+									<li>Images</li>
+									<li>Notes</li>
+									<li>List of Evidence under Case</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			<h2><a href="siteexploitation_release_3.4.0.0.apk">siteexploitation_release_3.4.0.0.apk (7/23/2018)</a></h1>
+				<ul>
+					<li>New Flow Simplification Concept</li>
+					<li>Work in Progress - Maps, Custody, Server Not Available</li>
+				</ul>
+			<h2><a href="siteexploitation_release_3.3.1.5.apk">siteexploitation_release_3.3.1.5.apk (6/22/2018)</a></h1>
+				<ul>
+					<li>Clear cache when downloading from server</li>
+				</ul>
+			<h2><a href="siteexploitation_release_3.3.1.4.apk">siteexploitation_release_3.3.1.4.apk (6/21/2018)</a></h1>
+				<ul>
+					<li>Instrument manager removed</li>
+					<li>Instruments changed to enum for now</li>
+					<li>Asset manager no longer has instruments</li>
+					<li>Added chain of custody tracking</li>
+				</ul>
+			<h2><a href="siteexploitation_release_3.3.1.2.apk">siteexploitation_release_3.3.1.2.apk (5/10/2018)</a></h1>
+				<ul>
+					<li>Model tweaks to make compatible with new server</li>
+				</ul>
+			<h2><a href="siteexploitation_release_3.3.1.1.apk">siteexploitation_release_3.3.1.1.apk (5/10/2018)</a></h1>
+				<ul>
+					<li>Fix error when tapping to add evidence on map</li>
+				</ul>
+			<h2><a href="siteexploitation_release_3.3.1.0.apk">siteexploitation_release_3.3.1.0.apk (5/8/2018)</a></h1>
+				<ul>
+					<li>Add "Bag and Tag" flow for quickly adding evidence</li>
+					<li>Created new image annotator (similar to skitch)</li>
+					<li>Changed priority specification to use Enum of A,B,C,D with descriptions</li>
+				</ul>
+	</body>
+</html>
