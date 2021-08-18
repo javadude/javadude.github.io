@@ -1,0 +1,6 @@
+Privacy Notice
+
+Effective Date: 8/18/2021
+
+This sample application collects no data, nor does it communicate via the internet; it only displays a "hello" message on the screen.
+
