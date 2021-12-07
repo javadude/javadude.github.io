@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Beans on JavaDude.com</title>
-    <link>http://javadude.com/tags/beans/</link>
+    <link>https://javadude.com/tags/beans/</link>
     <description>Recent content in Beans on JavaDude.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <lastBuildDate>Sat, 04 Mar 2000 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://javadude.com/tags/beans/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://javadude.com/tags/beans/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Creating JavaBean Property Editors</title>
-      <link>http://javadude.com/posts/20000304-property-editors/</link>
+      <link>https://javadude.com/posts/20000304-property-editors/</link>
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
-      <guid>http://javadude.com/posts/20000304-property-editors/</guid>
+      <guid>https://javadude.com/posts/20000304-property-editors/</guid>
       <description>&lt;p&gt;Property editors are a way to make your bean more user-friendly.  Bean builder tools can determine quite a lot about your bean just by looking at it and its corresponding BeanInfo class, but they usually have only very simple methods of editing the properties in the bean.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>The JavaBean Component Model</title>
-      <link>http://javadude.com/posts/20000304-javabeans/</link>
+      <link>https://javadude.com/posts/20000304-javabeans/</link>
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
-      <guid>http://javadude.com/posts/20000304-javabeans/</guid>
+      <guid>https://javadude.com/posts/20000304-javabeans/</guid>
       <description>&lt;p&gt;The basics of the JavaBean Component Model&lt;/p&gt;</description>
     </item>
     
