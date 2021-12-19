@@ -1,16 +1,12 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Java on JavaDude.com</title>
+    <title>java on JavaDude.com</title>
     <link>https://javadude.com/tags/java/</link>
-    <description>Recent content in Java on JavaDude.com</description>
+    <description>Recent content in java on JavaDude.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Wed, 28 Jun 2017 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://javadude.com/tags/java/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 28 Jun 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://javadude.com/tags/java/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>DSLs and Code Generation</title>
       <link>https://javadude.com/posts/20170628-dsls-and-codegen/</link>
@@ -18,7 +14,6 @@
       
       <guid>https://javadude.com/posts/20170628-dsls-and-codegen/</guid>
       <description>&lt;p&gt;A JHU Tech Talk from June 28, 2017.&lt;/p&gt;
-
 &lt;p&gt;What is a Domain-Specific Language? How can we use one for code-generation?&lt;/p&gt;</description>
     </item>
     
@@ -119,8 +114,7 @@
       
       <guid>https://javadude.com/posts/20040522-import-on-demand-is-evil/</guid>
       <description>&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
-
-&lt;p&gt;There should &lt;em&gt;&lt;strong&gt;never&lt;/strong&gt;&lt;/em&gt; exist any language feature such that &lt;em&gt;&lt;strong&gt;adding&lt;/strong&gt;&lt;/em&gt; a new type to a referenced package can break your existing code. Import-on-demand is one such feature... And it&#39;s evil...&lt;/p&gt;</description>
+&lt;p&gt;There should &lt;em&gt;&lt;strong&gt;never&lt;/strong&gt;&lt;/em&gt; exist any language feature such that &lt;em&gt;&lt;strong&gt;adding&lt;/strong&gt;&lt;/em&gt; a new type to a referenced package can break your existing code. Import-on-demand is one such feature&amp;hellip; And it&amp;rsquo;s evil&amp;hellip;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -130,8 +124,7 @@
       
       <guid>https://javadude.com/articles/passbyvalue.htm</guid>
       <description>&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
-
-&lt;p&gt;I finally decided to write up a little something about Java&#39;s parameter passing. I&#39;m really tired of hearing folks (incorrectly) state &amp;quot;primitives are passed by value, objects are passed by reference&amp;quot;.&lt;/p&gt;</description>
+&lt;p&gt;I finally decided to write up a little something about Java&amp;rsquo;s parameter passing. I&amp;rsquo;m really tired of hearing folks (incorrectly) state &amp;ldquo;primitives are passed by value, objects are passed by reference&amp;rdquo;.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -141,9 +134,7 @@
       
       <guid>https://javadude.com/posts/20010516-layering-applications/</guid>
       <description>&lt;h1 id=&#34;layering-applications&#34;&gt;Layering Applications&lt;/h1&gt;
-
 &lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
-
 &lt;p&gt;Maintainable applications can be quite tricky to develop. One of the keys to creating such a beast, is to properly layer your application.&lt;/p&gt;</description>
     </item>
     
@@ -270,7 +261,7 @@
       <pubDate>Thu, 01 Jan 1998 00:00:00 +0000</pubDate>
       
       <guid>https://javadude.com/posts/20000304-layouts/</guid>
-      <description>&lt;p&gt;Let&#39;s get familiar with Java Layout Managers!&lt;/p&gt;</description>
+      <description>&lt;p&gt;Let&amp;rsquo;s get familiar with Java Layout Managers!&lt;/p&gt;</description>
     </item>
     
   </channel>

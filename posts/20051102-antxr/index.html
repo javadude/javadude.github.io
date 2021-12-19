@@ -12,9 +12,10 @@
   <meta property="og:title" content="ANTXR" />
 <meta property="og:description" content="Easy XML Parsing, based on the ANTLR parser generator" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://javadude.com/posts/20051102-antxr/" />
-<meta property="article:published_time" content="2005-11-02T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2005-11-02T00:00:00&#43;00:00"/>
+<meta property="og:url" content="https://javadude.com/posts/20051102-antxr/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2005-11-02T00:00:00+00:00" />
+<meta property="article:modified_time" content="2005-11-02T00:00:00+00:00" />
+
 
 
   <title>
@@ -286,77 +287,57 @@
 
           <div class="post-content markdown">
             <p>ANTXR: Easy XML Parsing, based on the ANTLR parser generator</p>
-
-<p>NOTE: I haven't updated this tool in many years... I'm keeping it here for historical purposes, and someday might play around with it again... It was very useful in some projects at a previous job...</p>
-
-<h1 id="antxr-another-tool-for-xml-recognition">ANTXR = ANother Tool for Xml Recognition</h1>
-
-<p>Pronounce it &quot;Ant-zer&quot;...</p>
-
+<p>NOTE: I haven&rsquo;t updated this tool in many years&hellip; I&rsquo;m keeping it here for historical purposes, and someday might play around with it again&hellip; It was very useful in some projects at a previous job&hellip;</p>
+<h1 id="antxr--another-tool-for-xml-recognition">ANTXR = ANother Tool for Xml Recognition</h1>
+<p>Pronounce it &ldquo;Ant-zer&rdquo;&hellip;</p>
 <p>The name is a slight modification to ANTLR (ANother Tool for Language Recognition), because ANTXR is based heavily on ANTLR.</p>
-
 <h1 id="source-code">Source Code</h1>
-
 <p>The source code is available at <a href="https://github.com/javadude/javadude">https://github.com/javadude/javadude</a></p>
-
 <p>Look for sub-directories
-    *   com.javadude.antxr.eclipse.core
-    *   com.javadude.antxr.eclipse.ui
-    *   com.javadude.antxr.eclipse.feature
-    *   com.javadude.antxr</p>
-
-<p>I haven't built this tool in <em>quite</em> a while, so I'm not sure how likely it is to build...</p>
-
+*	com.javadude.antxr.eclipse.core
+*	com.javadude.antxr.eclipse.ui
+*	com.javadude.antxr.eclipse.feature
+*	com.javadude.antxr</p>
+<p>I haven&rsquo;t built this tool in <em>quite</em> a while, so I&rsquo;m not sure how likely it is to build&hellip;</p>
 <h1 id="license">License</h1>
-
 <p>ANTXR is distributed under the <a href="http://eclipse.org/legal/epl-v10.html">Eclipse Public License (EPL)</a>. You can read about the concepts in plain English at <a href="http://www.eclipse.org/legal/eplfaq.php">Eclipse Public License (EPL) Frequently Asked Questions</a>. This is the same license that Eclipse is currently distributed under, and you can basically use the tool for whatever purpose you would like, commercial or non-commercial, without license fee.</p>
-
 <h1 id="download">Download</h1>
-
 <p>There are three main download types:</p>
-
 <ul>
 <li><strong>Eclipse</strong>: (UPDATE SITE NO LONGER EXISTS)
-     </li>
+ </li>
 <li><strong>Non-eclipse</strong>: The basic ANTXR distribution can be obtained via <a href="antxr.zip">antxr.zip</a>.
-
 <ul>
 <li>Use the build.xml under ant-build to build antxr.</li>
-<li>To use in your own ant scripts, look at the antxr macro defined in this build.xml.<br />
+<li>To use in your own ant scripts, look at the antxr macro defined in this build.xml.<br>
  </li>
-</ul></li>
+</ul>
+</li>
 <li><strong>Samples</strong>: <a href="antxr-samples.zip">antxr-samples.zip</a></li>
 </ul>
-
-<p>If you're interested in why ANTXR exists and how it got to where it is, read on. If you're only interested in some examples and how you write an ANTXR parser, feel free to jump to <a href="#Writing_Your_XML_Parser">Writing Your XML Parser</a>.</p>
-
+<p>If you&rsquo;re interested in why ANTXR exists and how it got to where it is, read on. If you&rsquo;re only interested in some examples and how you write an ANTXR parser, feel free to jump to <a href="#Writing_Your_XML_Parser">Writing Your XML Parser</a>.</p>
 <h1 id="acknowledgements">Acknowledgements</h1>
-
 <p>ANTXR is based on the public domain ANTLR Parser Generator by Terence Parr. See <a href="http://antlr.org">http://antlr.org</a> for details on ANTLR. Many thanks to Terence Parr and all of the other ANTLR contributors (including me ;) for their work on ANTLR that has allowed me to create ANTXR.</p>
-
 <p>The ANTXR Eclipse plugin is based on the ANTLR-Eclipse plugin at <a href="http://antlreclipse.sourceforge.net">http://antlreclipse.sourceforge.net</a> by Torsten Juergeleit. Many thanks to Torsten and the others who have contributed to the plugin.</p>
-
 <h1 id="contents">Contents</h1>
-
 <ul>
 <li><a href="#History">History</a>
-
 <ul>
 <li><a href="#Introduction_and_motivation">Introduction and motivation</a>
-
 <ul>
 <li><a href="#DOM">DOM</a></li>
 <li><a href="#SAX">SAX</a></li>
 <li><a href="#Digester">Digester</a></li>
 <li><a href="#Keeping_in_synch_with_the_XML_schema">Keeping in synch with the XML schema</a></li>
-</ul></li>
+</ul>
+</li>
 <li><a href="#Enter_ANTLR_XML_Parsing">Enter ANTLR-Based XML Parsing</a></li>
 <li><a href="#We_Have_ANTLR_Native_XML_Support">Poof! We Have ANTLR Native XML Support!</a></li>
 <li><a href="#Hacking_ANTLR_into_submission">Hacking ANTLR into submission</a></li>
 <li><a href="#Forking_from_ANTLR">Forking from ANTLR</a></li>
-</ul></li>
+</ul>
+</li>
 <li><a href="#Writing_Your_XML_Parser">Writing Your XML Parser</a>
-
 <ul>
 <li><a href="#Scanning_XML">Scanning_XML</a></li>
 <li><a href="#A_skeletal_XML_grammar">A skeletal XML grammar</a></li>
@@ -364,495 +345,380 @@
 <li><a href="#A_Simple_XML_Parser">A Simple XML Parser</a></li>
 <li><a href="#A_More_Complex_Parser">A More Complex Parser</a></li>
 <li><a href="#AnyTags">Any Tags</a></li>
-</ul></li>
+</ul>
+</li>
 <li><a href="#Performance">Performance</a></li>
 <li><a href="#Future">Future</a></li>
 </ul>
-
 <h1 id="History">History</h1>
-
 <p>XML Parsing can be quite a pain the butt.</p>
-
 <p>Current XML parsing mechanisms have several problems, from lack of context information, to using too much memory, to requiring unwieldy if-then-else constructs or difficult to maintain reflective modeling.</p>
-
 <p>Representing your XML parsing rules as an ANTXR grammar can solve many of these problems, producing an effective, maintainable XML parser.</p>
-
 <h1 id="Introduction_and_motivation">Introduction and motivation</h1>
-
-<p>_Note: What follows is a bunch of history, motivation, and implementation strategies. If you simply want to jump in and write an XML parser of your own, jump down to <a href="#Writing_Your_XML_Parser">Writing Your XML Parser</a>._</p>
-
-<p>There are several common mechanisms for XML parsing. Let's concentrate on the &quot;big two&quot;: SAX and DOM. And let's not treat them too nicely. They're nasty to use...</p>
-
+<p><em>Note: What follows is a bunch of history, motivation, and implementation strategies. If you simply want to jump in and write an XML parser of your own, jump down to <a href="#Writing_Your_XML_Parser">Writing Your XML Parser</a>.</em></p>
+<p>There are several common mechanisms for XML parsing. Let&rsquo;s concentrate on the &ldquo;big two&rdquo;: SAX and DOM. And let&rsquo;s not treat them too nicely. They&rsquo;re nasty to use&hellip;</p>
 <h2 id="DOM">DOM</h2>
-
-<p>A DOM parser rips through an XML instance document and creates a lovely little tree of evil DOM nodes. The larger your instance document, the more memory this takes, so it doesn't scale well at all. (Damn... I used a buzzword... sorry!)</p>
-
+<p>A DOM parser rips through an XML instance document and creates a lovely little tree of evil DOM nodes. The larger your instance document, the more memory this takes, so it doesn&rsquo;t scale well at all. (Damn&hellip; I used a buzzword&hellip; sorry!)</p>
 <p>Anyway, <em><strong>memory is a huge issue here</strong></em>, and is the main reason that people report for not using DOM. But there is another significant issue: <strong><em>You can accidentally ignore a subtree</em></strong>. Think about this. You make a change to your XML schema, and change part of your DOM tree walking parser, but forget to add in exploration for part of it. Everything proceeds without a clue that you forgot that part. This can cause errors that are pretty tricky to diagnose.</p>
-
-<p>And don't get me started on the DOM API. Blech! Unfortunately, the DOM API that we all use has been handed down from generation to generation from someone (Al Gore claims it was he), who was either intoxicated or stoned while working on browser HTML parsing.</p>
-
+<p>And don&rsquo;t get me started on the DOM API. Blech! Unfortunately, the DOM API that we all use has been handed down from generation to generation from someone (Al Gore claims it was he), who was either intoxicated or stoned while working on browser HTML parsing.</p>
 <h2 id="SAX">SAX</h2>
-
-<p>A nice little event-based mechanism that tells you when it sees tags and content. It does the dirty work of validation and scanning for you, but you're left to pick up the pieces as it throws you notifications. You write a handler with a single method that receives notification for any start tag. <strong><em>If you want to know the context in which a tag appears, it's up to you to track it</em></strong>. While it's pretty memory-efficient by itself, you still need to track extra information to know to which object <code>&lt;name&gt;</code> belongs.</p>
-
-<p>And then comes the handler...</p>
-
+<p>A nice little event-based mechanism that tells you when it sees tags and content. It does the dirty work of validation and scanning for you, but you&rsquo;re left to pick up the pieces as it throws you notifications. You write a handler with a single method that receives notification for any start tag. <strong><em>If you want to know the context in which a tag appears, it&rsquo;s up to you to track it</em></strong>. While it&rsquo;s pretty memory-efficient by itself, you still need to track extra information to know to which object <code>&lt;name&gt;</code> belongs.</p>
+<p>And then comes the handler&hellip;</p>
 <pre><code>public void startElement(String uri, String localName, 
-        String qName, Attributes attributes) throws SAXException {
-    if (&quot;tagA&quot;.equals(localName)) {...}
-    else if (&quot;tagB&quot;.equals(localName)) {...}
-    else if (&quot;tagC&quot;.equals(localName)) {...}
-    else if (&quot;tagD&quot;.equals(localName)) {...}
-    else if (&quot;tagE&quot;.equals(localName)) {...}
-    ...
-    else {/* error */}
+		String qName, Attributes attributes) throws SAXException {
+	if (&quot;tagA&quot;.equals(localName)) {...}
+	else if (&quot;tagB&quot;.equals(localName)) {...}
+	else if (&quot;tagC&quot;.equals(localName)) {...}
+	else if (&quot;tagD&quot;.equals(localName)) {...}
+	else if (&quot;tagE&quot;.equals(localName)) {...}
+	...
+	else {/* error */}
 }
 </code></pre>
-
-<p>Jinkies! This is an accident just waiting to happen. It's nearly impossible to &quot;see&quot; the XML structure in there. And if you don't add the &quot;anything else is an error&quot; block in there, you fall into one of the same problems as DOM: you can easily forget to handle a tag.</p>
-
-<p>A variation on this handler can use reflection to call other methods or plug-in tag handlers. I'll give this an &quot;A&quot; for effort, but after maintaining a few parsers like these, my head explodes at the thought.</p>
-
+<p>Jinkies! This is an accident just waiting to happen. It&rsquo;s nearly impossible to &ldquo;see&rdquo; the XML structure in there. And if you don&rsquo;t add the &ldquo;anything else is an error&rdquo; block in there, you fall into one of the same problems as DOM: you can easily forget to handle a tag.</p>
+<p>A variation on this handler can use reflection to call other methods or plug-in tag handlers. I&rsquo;ll give this an &ldquo;A&rdquo; for effort, but after maintaining a few parsers like these, my head explodes at the thought.</p>
 <h2 id="Digester">Digester</h2>
-
-<p>When I first saw Jakarta Digester, I was pretty impressed. Very cool little XML handler. It solves a lot of problems, including context. I was in love. But I like to think in terms of a stack when it's appropriate...</p>
-
-<p>I quickly saw confusion on the faces on others when faced with a digester rule-set. While I eat and breath stacks (I'm a compiler guy at heart), this is not the case with everyone, and digester can be incredibly confusing for many to grok. But it's a step in the right direction:</p>
-
+<p>When I first saw Jakarta Digester, I was pretty impressed. Very cool little XML handler. It solves a lot of problems, including context. I was in love. But I like to think in terms of a stack when it&rsquo;s appropriate&hellip;</p>
+<p>I quickly saw confusion on the faces on others when faced with a digester rule-set. While I eat and breath stacks (I&rsquo;m a compiler guy at heart), this is not the case with everyone, and digester can be incredibly confusing for many to grok. But it&rsquo;s a step in the right direction:</p>
 <ol>
-<li>Declaratively specify how to process the XML. Almost like showing what the XML &quot;looks like&quot;.</li>
+<li>Declaratively specify how to process the XML. Almost like showing what the XML &ldquo;looks like&rdquo;.</li>
 <li>Define what to do when you match certain patterns, including context.</li>
 <li>Keep track of the context appropriately.</li>
 </ol>
-
-<p>But I think its implementation causes more confusion to new users than it's worth, and it can require a bit of work to add in those &quot;special cases&quot; that we all find lurking in our wonderful XML documents.</p>
-
+<p>But I think its implementation causes more confusion to new users than it&rsquo;s worth, and it can require a bit of work to add in those &ldquo;special cases&rdquo; that we all find lurking in our wonderful XML documents.</p>
 <h2 id="Keeping_in_synch_with_the_XML_schema">Keeping in synch with the XML schema</h2>
-
-<p>And here's the biggest problem, and it applies to every XML parsing technique that's commonly used. It's often very difficult to update your parser when the XML schema changes. Think about what the code looks like in a SAX, DOM, or Digester based parser. It looks <strong><em>nothing</em></strong> like the XML schema. If we could represent our parser in a form that's parallel to our schema, life would be much simpler when it comes to updating a parser to match a schema change.</p>
-
+<p>And here&rsquo;s the biggest problem, and it applies to every XML parsing technique that&rsquo;s commonly used. It&rsquo;s often very difficult to update your parser when the XML schema changes. Think about what the code looks like in a SAX, DOM, or Digester based parser. It looks <strong><em>nothing</em></strong> like the XML schema. If we could represent our parser in a form that&rsquo;s parallel to our schema, life would be much simpler when it comes to updating a parser to match a schema change.</p>
 <h1 id="Enter_ANTLR_XML_Parsing">Enter ANTLR-Based XML Parsing</h1>
-
-<p>I've been thinking about parsing XML with ANTLR for quite some time, and when some folks at my then employer, FGM, Inc, were planning an XML import refactoring, I suggested that we take a look at ANTLR.</p>
-
+<p>I&rsquo;ve been thinking about parsing XML with ANTLR for quite some time, and when some folks at my then employer, FGM, Inc, were planning an XML import refactoring, I suggested that we take a look at ANTLR.</p>
 <p>For starters, I looked at <a href="http://xpa.sourceforge.net/">XPA</a>, which is some pretty nice XML parser support for ANTLR. This came pretty darn close to what I envisioned as an ideal XML parser, with a few exceptions:</p>
-
 <ul>
-<li><strong>It requires somewhat verbose specification</strong>. You need to specify the start and end tags explicitly, making it easy to &quot;typo&quot; the matching end tag. You also had to jump through a few hoops and casts to access the attributes for a tag.</li>
-<li><strong>It has no support for namespaces.</strong> This is not an issue if you're not using namespaces, but if you do use namespaces, it's a non-starter.</li>
+<li><strong>It requires somewhat verbose specification</strong>. You need to specify the start and end tags explicitly, making it easy to &ldquo;typo&rdquo; the matching end tag. You also had to jump through a few hoops and casts to access the attributes for a tag.</li>
+<li><strong>It has no support for namespaces.</strong> This is not an issue if you&rsquo;re not using namespaces, but if you do use namespaces, it&rsquo;s a non-starter.</li>
 </ul>
-
 <p>As a simple example of a grammar in XPA, I could write</p>
-
 <pre><code>// XPA example grammar rules
 note {String to, from, subject, body;}
-    :  noteStart:&quot;&lt;note&gt;&quot;
-        {
-            Attributes attributes =
-                ((XMLStartToken) noteStart).getAttributes();
-            to = attributes.getValue(&quot;to&quot;);
-            from = attributes.getValue(&quot;from&quot;);
-        }
-        subject=subjectTag
-        body=bodyTag
-        &quot;&lt;/note&gt;&quot;
-        {
-            // you can do whatever you want here with
-            //    to, from, subject and body
-        }
+	:  noteStart:&quot;&lt;note&gt;&quot;
+		{
+			Attributes attributes =
+				((XMLStartToken) noteStart).getAttributes();
+			to = attributes.getValue(&quot;to&quot;);
+			from = attributes.getValue(&quot;from&quot;);
+		}
+		subject=subjectTag
+		body=bodyTag
+		&quot;&lt;/note&gt;&quot;
+		{
+			// you can do whatever you want here with
+			//    to, from, subject and body
+		}
 ;  
 
 subjectTag returns [String subject=null]
-    :   &quot;&lt;subject&gt;&quot;
-        value:PCDATA  {subject=value.getText();}
-        &quot;&lt;/subject&gt;&quot;
-    ;
+	:	&quot;&lt;subject&gt;&quot;
+		value:PCDATA  {subject=value.getText();}
+		&quot;&lt;/subject&gt;&quot;
+	;
 
 bodyTag returns [String body=null]
-    :   &quot;&lt;body&gt;&quot;
-        value:PCDATA  {body=value.getText();}
-        &quot;&lt;/body&gt;&quot;
-    ;
+	:	&quot;&lt;body&gt;&quot;
+		value:PCDATA  {body=value.getText();}
+		&quot;&lt;/body&gt;&quot;
+	;
 </code></pre>
-
-<p>The first thing to notice here is that <em>we have context</em>. Rules are called from each other, and parameters can be passed and/or values returned. We could even have separate rules for &quot;<subject>&quot; that are referenced from other rules. For example, we could define a bookSubject and noteSubject, both of which reference the &quot;<subject>&quot; tag, but can have different actions. Or we could pass a parameter to the subjectTag rule that lets it know who is including it. We'll see some examples of this later.</p>
-
+<p>The first thing to notice here is that <em>we have context</em>. Rules are called from each other, and parameters can be passed and/or values returned. We could even have separate rules for &ldquo;<!-- raw HTML omitted -->&rdquo; that are referenced from other rules. For example, we could define a bookSubject and noteSubject, both of which reference the &ldquo;<!-- raw HTML omitted -->&rdquo; tag, but can have different actions. Or we could pass a parameter to the subjectTag rule that lets it know who is including it. We&rsquo;ll see some examples of this later.</p>
 <p>The above parser requires explicit specification of the start and end tags, and a slightly awkward attribute access mechanism.</p>
-
-<p>I wanted to make things easier for my coworkers, so I downloaded the latest ANTLR source and started hacking...</p>
-
+<p>I wanted to make things easier for my coworkers, so I downloaded the latest ANTLR source and started hacking&hellip;</p>
 <h1 id="We_Have_ANTLR_Native_XML_Support">Poof! We Have ANTLR Native XML Support!</h1>
-
-<p>The first thing I wanted was easy optional validation. It must be fast, and robust. It seemed to me that using an existing SAX parser was the best solution for this, as they're being pounded on by thousands of developers, so they'd be pretty robust, and they're pretty quick (some more so than others).</p>
-
+<p>The first thing I wanted was easy optional validation. It must be fast, and robust. It seemed to me that using an existing SAX parser was the best solution for this, as they&rsquo;re being pounded on by thousands of developers, so they&rsquo;d be pretty robust, and they&rsquo;re pretty quick (some more so than others).</p>
 <p>So we start with a SAX front-end. You choose the one you want to use and configure it turn on validation, namespace support, whatever.</p>
-
-<p>Next comes XMLTokenStream, a new class in the ANTLR distribution that acts as a hander for a SAX parser, and a source for an ANTLR parser. Because SAX is a &quot;push&quot; API, and ANTLR is a &quot;pull&quot; API, we need to form a &quot;meet-in-the-middle&quot; strategy. XMLTokenStream does this by supplying a blocking queue. SAX parses the XML, notifying a handler in the XMLTokenStream, and the handler creates ANTLR tokens, enqueueing them on the blocking queue. XMLTokenStream provides a nextToken() method that your ANTLR parser will call to retrieve tokens. This nextToken() method dequeues a token from the blocking queue (waiting if there isn't one available), and returns it to the ANTLR parser. <em><strong>Figure 1</strong></em> shows this processing.</p>
-
-<p><img src="xml-parsing.gif" alt="xml parsing" /></p>
-
+<p>Next comes XMLTokenStream, a new class in the ANTLR distribution that acts as a hander for a SAX parser, and a source for an ANTLR parser. Because SAX is a &ldquo;push&rdquo; API, and ANTLR is a &ldquo;pull&rdquo; API, we need to form a &ldquo;meet-in-the-middle&rdquo; strategy. XMLTokenStream does this by supplying a blocking queue. SAX parses the XML, notifying a handler in the XMLTokenStream, and the handler creates ANTLR tokens, enqueueing them on the blocking queue. XMLTokenStream provides a nextToken() method that your ANTLR parser will call to retrieve tokens. This nextToken() method dequeues a token from the blocking queue (waiting if there isn&rsquo;t one available), and returns it to the ANTLR parser. <em><strong>Figure 1</strong></em> shows this processing.</p>
+<p><img src="xml-parsing.gif" alt="xml parsing"></p>
 <p>You can also pass a DTDHandler or EntityResolver to the XMLTokenStream, if needed, and its default handler will delegate to them.</p>
-
 <p>At this point, we have support for validation (or not), tokenization based on the SAX parse, and feeding those tokens to a hungry ANTLR parser.</p>
-
 <p>But what do those tokens look like?</p>
-
 <p><strong>Start Tokens</strong></p>
-
 <p>Each time the SAX parser notifies XMLTokenStream that it has seen a start tag, a new XMLToken is created with a type matching the tag name. (This type is defined by your parser.)</p>
-
 <p><strong>End Tokens</strong></p>
-
 <p>Assuming that we <em>can</em> validate, at least to ensure well-formed-ness, we only need a single type of end token. We call this type of token XML_END_TAG. Anytime the SAX parser notifies XMLTokenStream that an end tag has been seen, a new CommonToken is created of type <strong>XML_END_TAG</strong>.</p>
-
 <p><strong>Character Data</strong></p>
-
 <p>Character data is collected and returned as a CommonToken of type <strong>PCDATA</strong>.</p>
-
-<p>XMLToken is an extension of ANTLR's CommonToken, providing access to a tag's attribute data. The SAX attributes object is placed into this token for easy access.</p>
-
-<p><em><strong>Call me a dunce...</strong><br />
-At this point I should note that silly me didn't look at the source for XPA... I wanted to do a &quot;clean room&quot; implementation. After looking at the XPA code while writing this document, It turns out that XPA handles its processing <strong>in almost exactly the same manner as I did</strong>. It's <strong>really</strong> spooky how similar the code I wrote for the XMLTokenStream and the blocking queue is to the XPA source code. However, looking back on this, though I effectively wasted a day working on it, it helps validate that this approach is good, as two separate (and brilliant, mind you ;) ) developers came up with the same approach for parsing. My XMLTokenStream is a bit more flexible, in that you can pass your own SAX handler instance to it, allowing you to configure it for whatever validation you would like.</em></p>
-
+<p>XMLToken is an extension of ANTLR&rsquo;s CommonToken, providing access to a tag&rsquo;s attribute data. The SAX attributes object is placed into this token for easy access.</p>
+<p><em><strong>Call me a dunce&hellip;</strong><br>
+At this point I should note that silly me didn&rsquo;t look at the source for XPA&hellip; I wanted to do a &ldquo;clean room&rdquo; implementation. After looking at the XPA code while writing this document, It turns out that XPA handles its processing <strong>in almost exactly the same manner as I did</strong>. It&rsquo;s <strong>really</strong> spooky how similar the code I wrote for the XMLTokenStream and the blocking queue is to the XPA source code. However, looking back on this, though I effectively wasted a day working on it, it helps validate that this approach is good, as two separate (and brilliant, mind you ;) ) developers came up with the same approach for parsing. My XMLTokenStream is a bit more flexible, in that you can pass your own SAX handler instance to it, allowing you to configure it for whatever validation you would like.</em></p>
 <h2 id="Hacking_ANTLR_into_submission">Hacking ANTLR into submission</h2>
-
 <p>Next I started modifying ANTLR. I wanted to make XML processing easier. To me, this meant two things:</p>
-
 <ol>
-<li>Don't require the grammar writer to have to type in the start and end tags.</li>
+<li>Don&rsquo;t require the grammar writer to have to type in the start and end tags.</li>
 <li>Make attribute access easy in action code.</li>
 </ol>
-
 <p>I wanted to be able to write something like the following:</p>
-
 <pre><code>&lt;note&gt;
-    { String subject, body; }
-    :   subject=&lt;subject&gt;
-        body=&lt;body&gt;
-        {doSomethingWith(@to, @from, subject, body);}
-    ;  
+	{ String subject, body; }
+	:	subject=&lt;subject&gt;
+		body=&lt;body&gt;
+		{doSomethingWith(@to, @from, subject, body);}
+	;  
 </code></pre>
-
-<p>I quickly found out this wouldn't be possible unless I made a separate ANTLR tool for parsing XML; &quot;&lt;&quot; and &quot;&gt;&quot; are used for specifying element options (like which AST node to generate), which made the above cause grammar conflicts. So, I tried something a bit different:</p>
-
+<p>I quickly found out this wouldn&rsquo;t be possible unless I made a separate ANTLR tool for parsing XML; &ldquo;&lt;&rdquo; and &ldquo;&gt;&rdquo; are used for specifying element options (like which AST node to generate), which made the above cause grammar conflicts. So, I tried something a bit different:</p>
 <pre><code>noteTag options {xmlTag=&quot;note&quot;;}
-    :   { String subject, body; }
-        subject=subjectTag
-        body=bodyTag
-        {doSomethingWith(@to, @from, subject, body);}
-    ;  
+	:	{ String subject, body; }
+		subject=subjectTag
+		body=bodyTag
+		{doSomethingWith(@to, @from, subject, body);}
+	;  
 </code></pre>
-
-<p><em>Almost</em> the same, but a slightly different approach. Now rule references are normal by ANTLR standards, but we've simply added two things:</p>
-
+<p><em>Almost</em> the same, but a slightly different approach. Now rule references are normal by ANTLR standards, but we&rsquo;ve simply added two things:</p>
 <ol>
 <li>The xmlTag option, which specifies that a rule represents an XML tag, and what the name of that tag is.</li>
 <li>The @name specification for Java action code, which is translated into the appropriate verbose nonsense to retrieve an attribute from the tag.</li>
 </ol>
-
-<p>But where are the tag token references in the above? This was the most interesting part of this ANTLR modification. If you specified xmlTag as an option, <em>ANTLR would generate &quot;ghost&quot; tokens for the start and end tags.</em> The above rule is really the same as:</p>
-
+<p>But where are the tag token references in the above? This was the most interesting part of this ANTLR modification. If you specified xmlTag as an option, <em>ANTLR would generate &ldquo;ghost&rdquo; tokens for the start and end tags.</em> The above rule is really the same as:</p>
 <pre><code>noteTag
-    :   start:&quot;&lt;note&gt;&quot;
-        (   // extra paren in case there were some alternatives...
-            { String subject, body, to=/*code to get &quot;to&quot;*/, from=/*code to get &quot;from&quot; */; }
-            subject=subjectTag
-            body=bodyTag
-            {doSomethingWith(to, from, subject, body);}
-        ) // extra paren in case there were some alternatives...
-        XML_END_TAG
-    ;  
+	:	start:&quot;&lt;note&gt;&quot;
+		(	// extra paren in case there were some alternatives...
+			{ String subject, body, to=/*code to get &quot;to&quot;*/, from=/*code to get &quot;from&quot; */; }
+			subject=subjectTag
+			body=bodyTag
+			{doSomethingWith(to, from, subject, body);}
+		) // extra paren in case there were some alternatives...
+		XML_END_TAG
+	;  
 </code></pre>
-
-<p>These &quot;ghost tokens&quot; make the grammar specification much simpler, and the @name attribute references can hold off carpal tunnel syndrome for at least a few more hours...</p>
-
+<p>These &ldquo;ghost tokens&rdquo; make the grammar specification much simpler, and the @name attribute references can hold off carpal tunnel syndrome for at least a few more hours&hellip;</p>
 <p>The next trick was to allow easy namespace usage. I wanted to be able to use</p>
-
 <pre><code>xmlTag=&quot;foo:someTag&quot;
 @foo:someAttribute
 </code></pre>
-
-<p>in the grammar, where &quot;foo&quot; could be a grammar-writer-defined prefix for some namespace, and map that reference to the real namespace used in the XML. This would allow different XML document instances to use different prefixes. To do this, I added an xmlNamespaceMapping option, which can be specified at the grammar level, mapping a prefix to a namespace URI:</p>
-
+<p>in the grammar, where &ldquo;foo&rdquo; could be a grammar-writer-defined prefix for some namespace, and map that reference to the real namespace used in the XML. This would allow different XML document instances to use different prefixes. To do this, I added an xmlNamespaceMapping option, which can be specified at the grammar level, mapping a prefix to a namespace URI:</p>
 <pre><code>class NoteParser extends Parser;
-    options {
-        xmlMode=true;
-        xmlNamespaceMapping=&quot;$DEFAULT=http://www.w3schools.com&quot;;
-        xmlNamespaceMapping=&quot;xsi=http://www.w3.org/2001/XMLSchema-instance&quot;;
-    }
+	options {
+		xmlMode=true;
+		xmlNamespaceMapping=&quot;$DEFAULT=http://www.w3schools.com&quot;;
+		xmlNamespaceMapping=&quot;xsi=http://www.w3.org/2001/XMLSchema-instance&quot;;
+	}
 </code></pre>
-
-<p>The &quot;xmlMode&quot; option simply sets up a few imports and a place to hold namespace mappings. The xmlNamespaceMapping option defines a prefix-&gt;URI mapping. Note that I used &quot;$DEFAULT&quot; to represent the default namespace. I did this because</p>
-
+<p>The &ldquo;xmlMode&rdquo; option simply sets up a few imports and a place to hold namespace mappings. The xmlNamespaceMapping option defines a prefix-&gt;URI mapping. Note that I used &ldquo;$DEFAULT&rdquo; to represent the default namespace. I did this because</p>
 <pre><code>xmlNamespaceMapping=&quot;=http://www.w3schools.com&quot;;
 </code></pre>
-
-<p>looked more like an error than an intentional default namespace specification. If you don't like this, ANTLR is open-source, so feel free to change it....</p>
-
-<p>With these few constructs added to ANTLR, my fellow FGMers started to write a parser. I gave them very little overview. Instead, I gave them a simple sample parser and my ANTLR tutorial (they were both new to ANTLR). They asked a few questions, but after a few days they were very comfortable with writing XML grammars in ANTLR. This gave me the warm fuzzies that I achieved my goals...</p>
-
+<p>looked more like an error than an intentional default namespace specification. If you don&rsquo;t like this, ANTLR is open-source, so feel free to change it&hellip;.</p>
+<p>With these few constructs added to ANTLR, my fellow FGMers started to write a parser. I gave them very little overview. Instead, I gave them a simple sample parser and my ANTLR tutorial (they were both new to ANTLR). They asked a few questions, but after a few days they were very comfortable with writing XML grammars in ANTLR. This gave me the warm fuzzies that I achieved my goals&hellip;</p>
 <h1 id="Forking_from_ANTLR">Forking from ANTLR</h1>
-
-<p>While the above parsers worked well, I still didn't like the syntax. I <em>really</em> wanted something that felt more like XML, so I decided to fork from ANTLR to create ANTXR (pronounced &quot;ant-zer&quot;). ANTXR has most of the syntax I really want. (I removed the above support from ANTLR itself.)</p>
-
+<p>While the above parsers worked well, I still didn&rsquo;t like the syntax. I <em>really</em> wanted something that felt more like XML, so I decided to fork from ANTLR to create ANTXR (pronounced &ldquo;ant-zer&rdquo;). ANTXR has most of the syntax I really want. (I removed the above support from ANTLR itself.)</p>
 <p>The following is a <em>real</em> (though not terribly useful) ANTXR grammar, demonstrating most of the features of ANTXR:</p>
-
 <pre><code>01  header {
 02  package com.javadude.antxr.sample;
-03      import java.util.Hashtable;
-04      import java.io.PrintWriter;
-05      import java.io.FileWriter;
+03  	import java.util.Hashtable;
+04  	import java.io.PrintWriter;
+05  	import java.io.FileWriter;
 06  }
 07  
 08  class NoteParser1 extends Parser;
 09  
 10  options {
-11      xmlns=&quot;http://www.w3schools.com&quot;;
-12      xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;;
+11  	xmlns=&quot;http://www.w3schools.com&quot;;
+12  	xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;;
 13  }
 14 
 15  document returns [String text=&quot;&quot;]
-16      :   text=&lt;note&gt; EOF
-17      ;
+16  	:	text=&lt;note&gt; EOF
+17  	;
 18
 19  &lt;note&gt; returns [String text=&quot;&quot;]
-20      :   {
-21              String t=null, f=null, h=null, b=null;
-22              text += &quot;xsi:schemaLocation = &quot; + 
-23              @xsi:schemaLocation + &quot;\n&quot;;
-24          }
-25          t=&lt;to&gt;
-26          f=&lt;from&gt;
-27          h=&lt;heading&gt;
-28          b=&lt;body&gt;
-29          {
-30              text += &quot;Note id: &quot; + @id + &quot;\n&quot;;
-31              text += &quot;To: &quot; + t + &quot;\n&quot;;
-32              text += &quot;From: &quot; + f + &quot;\n&quot;;
-33              text += &quot;Subject: &quot; + h + &quot;\n&quot;;
-34              text += &quot;----\n&quot;;
-35              text += b;
-36          }
+20  	:	{
+21  			String t=null, f=null, h=null, b=null;
+22  			text += &quot;xsi:schemaLocation = &quot; + 
+23  			@xsi:schemaLocation + &quot;\n&quot;;
+24  		}
+25  		t=&lt;to&gt;
+26  		f=&lt;from&gt;
+27  		h=&lt;heading&gt;
+28  		b=&lt;body&gt;
+29  		{
+30  			text += &quot;Note id: &quot; + @id + &quot;\n&quot;;
+31  			text += &quot;To: &quot; + t + &quot;\n&quot;;
+32  			text += &quot;From: &quot; + f + &quot;\n&quot;;
+33  			text += &quot;Subject: &quot; + h + &quot;\n&quot;;
+34  			text += &quot;----\n&quot;;
+35  			text += b;
+36  		}
 37  ;
 38  
 39  
 40  &lt;to&gt; returns [String value=&quot;&quot;]
-41      :   {value = @name;}
-42      ;
+41  	:	{value = @name;}
+42  	;
 43  
 44  &lt;from&gt; returns [String value=&quot;&quot;]
-45      :   {value = @name;}
-46      ;
+45  	:	{value = @name;}
+46  	;
 47  
 48  &lt;heading&gt; returns [String value=&quot;&quot;]
-49      :   :PCDATA {value = pcData.getText();}
-50      ;
+49  	:	:PCDATA {value = pcData.getText();}
+50  	;
 51  
 52  &lt;body&gt; returns [String value=&quot;&quot;]
-53      :   pcData:PCDATA {value = pcData.getText();}
-54      ;
+53  	:	pcData:PCDATA {value = pcData.getText();}
+54  	;
 </code></pre>
-
-<p>Let's walk through some of this example. Most of it is normal ANTLR syntax, with the following modifications:</p>
-
+<p>Let&rsquo;s walk through some of this example. Most of it is normal ANTLR syntax, with the following modifications:</p>
 <ul>
-<li><strong>lines 11-12</strong>: A much more natural namespace specification. (Well, XML namespace specifications are anything <em>but</em> natural, but this is as natural as XML itself...).</li>
-<li><strong>line 16</strong>: XML rules are referenced using <ruleName> syntax. Behind the scenes this becomes a call to __xml_ruleName().</li>
-<li><strong>line 19</strong>: Declaring the <note> rule does the following:
-
+<li><strong>lines 11-12</strong>: A much more natural namespace specification. (Well, XML namespace specifications are anything <em>but</em> natural, but this is as natural as XML itself&hellip;).</li>
+<li><strong>line 16</strong>: XML rules are referenced using <!-- raw HTML omitted --> syntax. Behind the scenes this becomes a call to __xml_ruleName().</li>
+<li><strong>line 19</strong>: Declaring the <!-- raw HTML omitted --> rule does the following:
 <ul>
 <li>Changes the method name to __xml_note()</li>
-<li>Automatically adds a reference to the <note> token at the beginning of the rule</li>
+<li>Automatically adds a reference to the <!-- raw HTML omitted --> token at the beginning of the rule</li>
 <li>Automatically adds a reference to the XML_END_TAG token at the end of the rule</li>
-<li>Assigns a variable to refer to the <note> tag so attribute references can see it.</li>
-</ul></li>
-<li><strong>lines 23, 30, 41, 45</strong>: Attributes are referenced using @attributeName syntax. Attributes are retrieved from the start tag corresponding to the rule in which they appear. For example, the @name referred to in the <from> rule will retrieve the name attribute of the <from> tag that was matched in the XML input.</li>
+<li>Assigns a variable to refer to the <!-- raw HTML omitted --> tag so attribute references can see it.</li>
+</ul>
+</li>
+<li><strong>lines 23, 30, 41, 45</strong>: Attributes are referenced using @attributeName syntax. Attributes are retrieved from the start tag corresponding to the rule in which they appear. For example, the @name referred to in the <!-- raw HTML omitted --> rule will retrieve the name attribute of the <!-- raw HTML omitted --> tag that was matched in the XML input.</li>
 <li><strong>lines 49, 53</strong>: PCDATA is a pre-defined token that represents parsed character data inside a tag. Its position corresponds to which PCDATA chunk you want to read from the tag. (Other tags can appear between PCDATA tags.)</li>
 </ul>
-
 <h1 id="Writing_Your_XML_Parser">Writing Your XML Parser</h1>
-
-<p>So now we come to the &quot;how to I write an XML parser using ANTLR&quot; stuff; the stuff that you actually care about and are now wondering why you just read all of the above stuff that doesn't get you any closer to having a working XML parser...</p>
-
+<p>So now we come to the &ldquo;how to I write an XML parser using ANTLR&rdquo; stuff; the stuff that you actually care about and are now wondering why you just read all of the above stuff that doesn&rsquo;t get you any closer to having a working XML parser&hellip;</p>
 <h1 id="Scanning_XML">Scanning XML</h1>
-
 <p>The first thing you need to know about writing an ANTXR parser is how the XML file is read and tokenized. There are two basic approaches here:</p>
-
 <ul>
-<li><strong>SAX-Based</strong>: A SAX parser (such as Xerces or Crimson) reads the XML file, and a simple SAX handler creates ANTXR tokens for each tag and PCDATA found. These tokens are <em>pushed</em> into a queue where they wait to be <em>pulled</em> by an ANTXR-generated parser. This is a push-pull parser, requiring two threads to perform the overall parsing and a synchronization point (the blocking queue).<br />
+<li><strong>SAX-Based</strong>: A SAX parser (such as Xerces or Crimson) reads the XML file, and a simple SAX handler creates ANTXR tokens for each tag and PCDATA found. These tokens are <em>pushed</em> into a queue where they wait to be <em>pulled</em> by an ANTXR-generated parser. This is a push-pull parser, requiring two threads to perform the overall parsing and a synchronization point (the blocking queue).<br>
  </li>
 <li><strong>XMLPULL-Based</strong>: An XMLPULL parser (such as kxml or StAX) waits to scan the XML file until the ANTXR-generated parser asks for a token. When a token is asked for, the XMLPULL parser scans for the next tag or PCDATA in the XML file, creates an ANTXR token and returns it. This is a pull parser, requiring only one thread to perform the overall parse.</li>
 </ul>
-
 <p>Each of these has benefits and drawbacks.</p>
-
 <p>The most obvious difference is <em><strong>performance</strong></em>. The XMLPULL-based parser generally performs slightly better (assuming a reasonable XMLPULL implementation is used for the scanner.) This is due to thread synchronization.</p>
-
-<p><strong><em>Executable size</em></strong> is another difference, and this can depend on the runtime environment. The Java Runtime Environment includes the Crimson XML parser (SAX-based), which means you don't need any jars other than the runtime jar and the ANTXR jar for your parser. However, some XMLPULL parsers like kxml are <em>very</em> small (only a few kilobytes) so this isn't much of an issue.</p>
-
+<p><strong><em>Executable size</em></strong> is another difference, and this can depend on the runtime environment. The Java Runtime Environment includes the Crimson XML parser (SAX-based), which means you don&rsquo;t need any jars other than the runtime jar and the ANTXR jar for your parser. However, some XMLPULL parsers like kxml are <em>very</em> small (only a few kilobytes) so this isn&rsquo;t much of an issue.</p>
 <p><strong><em>Validation</em></strong> is another difference. All of the SAX and XMLPULL based parsers will at least ensure the XML being parsed is well-formed. This allows ANTXR to be a little more efficient with regard to end tags, as all end tags can be represented by a common token type. However, if you want more than well-formedness checking, you need to examine which parser you want to use. For example:</p>
-
 <ul>
 <li>Xerces SAX supports DTD and schema-based validation</li>
 <li>Crimson SAX (present in the JRE) supports only DTD-based validation</li>
 <li>kxml XMLPULL supports only DTD-based validation</li>
 </ul>
-
 <p> I strongly recommend that you do any desired validation with the SAX or XMLPULL validator, and keep your ANTXR parser simple, just recognizing and performing actions on the XML file.</p>
-
 <h1 id="A_skeletal_XML_grammar">A skeletal XML grammar</h1>
-
-<p>Here's a simple skeleton for an XML parser written in ANTXR.</p>
-
+<p>Here&rsquo;s a simple skeleton for an XML parser written in ANTXR.</p>
 <pre><code>header {
-    package your.packagename;
-    // any necessary import statements
+	package your.packagename;
+	// any necessary import statements
 }
 
 class YourParserName extends Parser;
 
 options {
-    xmlns=&quot;http://your.default.namespace/uri&quot;;
-    xmlns:somePrefix=&quot;http://some.namespace/uri&quot;;
+	xmlns=&quot;http://your.default.namespace/uri&quot;;
+	xmlns:somePrefix=&quot;http://some.namespace/uri&quot;;
 }
 
 document
-    :   &lt;sampleRootTag&gt; EOF
-    ;
+	:	&lt;sampleRootTag&gt; EOF
+	;
 
 &lt;sampleRootTag&gt;
-    :   &lt;sampleTagWithAttributes&gt;
-    |   &lt;sampleTagWithPCDATA&gt;
-    ;
+	:	&lt;sampleTagWithAttributes&gt;
+	|	&lt;sampleTagWithPCDATA&gt;
+	;
 
 &lt;sampleTagWithAttributes&gt;
-    :   { System.out.println(@name); }
-    ;
+	:	{ System.out.println(@name); }
+	;
 
 &lt;sampleTagWithPCDATA&gt;
-    :   pcData:PCDATA { System.out.println(pcData.getText()); }
-    ;
+	:	pcData:PCDATA { System.out.println(pcData.getText()); }
+	;
 </code></pre>
-
 <p>This skeleton shows all you need to know to write a simple XML parser in ANTLR.</p>
-
 <h2 id="The_Ground_Rules">The Ground Rules</h2>
-
 <p>First, we should establish some ground rules:</p>
-
 <ul>
 <li>Each tag in your XML file is represented by one rule in the grammar. You can have additional rules to help organize things, but in order to take advantage of the shortcuts, you must define a top-level ANTXR rule for each tag in your grammar file.</li>
-<li>We assume that if you want to validate the XML, you're using the validation options of the SAX or XMLPULL parser you're using. You <em>could</em> do all the validation yourself in the grammar file, but that would be much more difficult than specifying an XML schema or DTD for the validation.</li>
-<li>We assume you're familiar with XML, so when we say things like &quot;namespace&quot;, you know what it means.</li>
+<li>We assume that if you want to validate the XML, you&rsquo;re using the validation options of the SAX or XMLPULL parser you&rsquo;re using. You <em>could</em> do all the validation yourself in the grammar file, but that would be much more difficult than specifying an XML schema or DTD for the validation.</li>
+<li>We assume you&rsquo;re familiar with XML, so when we say things like &ldquo;namespace&rdquo;, you know what it means.</li>
 </ul>
-
-<p>Ok, fair enough. Let's create a real XML parser in ANTXR.</p>
-
+<p>Ok, fair enough. Let&rsquo;s create a real XML parser in ANTXR.</p>
 <h2 id="A_Simple_XML_Parser">A Simple XML Parser</h2>
-
-<p>First, let's look at a chunk of XML that we can parse:</p>
-
+<p>First, let&rsquo;s look at a chunk of XML that we can parse:</p>
 <pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
-    &lt;people&gt;
-        &lt;person ssn=&quot;111-11-1111&quot;&gt;
-        &lt;firstName&gt;Terence&lt;/firstName&gt;
-        &lt;lastName&gt;Parr&lt;/lastName&gt;
-    &lt;/person&gt;
-    &lt;person ssn=&quot;222-22-2222&quot;&gt;
-        &lt;firstName&gt;Scott&lt;/firstName&gt;
-        &lt;lastName&gt;Stanchfield&lt;/lastName&gt;
-    &lt;/person&gt;
-    &lt;person ssn=&quot;333-33-3333&quot;&gt;
-        &lt;firstName&gt;James&lt;/firstName&gt;
-        &lt;lastName&gt;Stewart&lt;/lastName&gt;
-    &lt;/person&gt;
+	&lt;people&gt;
+		&lt;person ssn=&quot;111-11-1111&quot;&gt;
+		&lt;firstName&gt;Terence&lt;/firstName&gt;
+		&lt;lastName&gt;Parr&lt;/lastName&gt;
+	&lt;/person&gt;
+	&lt;person ssn=&quot;222-22-2222&quot;&gt;
+		&lt;firstName&gt;Scott&lt;/firstName&gt;
+		&lt;lastName&gt;Stanchfield&lt;/lastName&gt;
+	&lt;/person&gt;
+	&lt;person ssn=&quot;333-33-3333&quot;&gt;
+		&lt;firstName&gt;James&lt;/firstName&gt;
+		&lt;lastName&gt;Stewart&lt;/lastName&gt;
+	&lt;/person&gt;
 &lt;/people&gt;
 </code></pre>
-
-<p>This file defines a set of people we might want to deal with. They're all nice folks, albeit one of them is unfortunately dead, but we like them and want to interact with them. (It's <em>my</em> tutorial, so deal with it...)</p>
-
-<p>Anyway, we can define some rules for this example. Note that the xml file doesn't use namespaces, so we don't need to define any in the grammar.</p>
-
+<p>This file defines a set of people we might want to deal with. They&rsquo;re all nice folks, albeit one of them is unfortunately dead, but we like them and want to interact with them. (It&rsquo;s <em>my</em> tutorial, so deal with it&hellip;)</p>
+<p>Anyway, we can define some rules for this example. Note that the xml file doesn&rsquo;t use namespaces, so we don&rsquo;t need to define any in the grammar.</p>
 <pre><code>header {
-    package com.javadude.antlr.sample.xml;
+	package com.javadude.antlr.sample.xml;
 }
 
 class PeopleParser extends Parser;
 
 document
-    :   &lt;people&gt; EOF
-    ;
+	:	&lt;people&gt; EOF
+	;
 
 &lt;people&gt;
-    :   (&lt;person&gt;)*
-    ;
+	:	(&lt;person&gt;)*
+	;
 
 &lt;person&gt; 
-    :   (   &lt;firstName&gt;
-        |   &lt;lastName&gt;
-        )*
-    ;
+	:	(	&lt;firstName&gt;
+		|	&lt;lastName&gt;
+		)*
+	;
 
 &lt;firstName&gt;
-    :   PCDATA
-    ;
+	:	PCDATA
+	;
 
 &lt;lastName&gt;
-    :   PCDATA
-    ;
+	:	PCDATA
+	;
 </code></pre>
-
-<p>This is a complete ANTXR grammar to <em>recognize</em> the people example. Note that the (...)* constructs used <em>do not</em> enforce order or cardinality! That's the job of the XML schema or DTD. The easiest way to write these in ANTXR is to simply use ANTLR's (...)* to represent &quot;stuff that can appear inside this tag&quot;. If you're not familiar with ANTLR syntax, please see <a href="https://javadude.com/articles/antlrtut">An Antlr Tutorial</a> (<a href="https://javadude.com/articles/antlrtut">https://javadude.com/articles/antlrtut</a>).</p>
-
+<p>This is a complete ANTXR grammar to <em>recognize</em> the people example. Note that the (&hellip;)* constructs used <em>do not</em> enforce order or cardinality! That&rsquo;s the job of the XML schema or DTD. The easiest way to write these in ANTXR is to simply use ANTLR&rsquo;s (&hellip;)* to represent &ldquo;stuff that can appear inside this tag&rdquo;. If you&rsquo;re not familiar with ANTLR syntax, please see <a href="http://javadude.com/articles/antlrtut">An Antlr Tutorial</a> (<a href="http://javadude.com/articles/antlrtut">http://javadude.com/articles/antlrtut</a>).</p>
 <p>As a quick refresher:</p>
-
-<p>(...)*</p>
-
+<p>(&hellip;)*</p>
 <p>Zero or more of the enclosed symbols</p>
-
-<p>(...)+</p>
-
+<p>(&hellip;)+</p>
 <p>One or more of the enclosed symbols</p>
-
-<p>(...)?</p>
-
+<p>(&hellip;)?</p>
 <p>The enclosed symbol is optional</p>
-
 <p>x | y</p>
-
 <p>Either x or y can appear here</p>
-
-<p>{...}</p>
-
+<p>{&hellip;}</p>
 <p>Action code, code that gets executed at this spot in the rule</p>
-
 <p>To run this grammar, we need some startup code. You can choose between the following scanners (all in package com.javadude.antxr.scanner)</p>
-
 <ul>
-<li><strong>XMLTokenStream</strong>: The basic SAX-based XML scanner. You create and configure a SAX parser for your XML input and feed it to the XMLTokenStream. This is highly configurable, but only really necessary if you need extra flexibility.<br />
+<li><strong>XMLTokenStream</strong>: The basic SAX-based XML scanner. You create and configure a SAX parser for your XML input and feed it to the XMLTokenStream. This is highly configurable, but only really necessary if you need extra flexibility.<br>
  </li>
-<li><strong>XMLPullTokenStream</strong>: The basic XMLPULL-based XML scanner. You create and configure an XMLPULL parser for your XML input and feed it into the XMLPullTokenStream.<br />
+<li><strong>XMLPullTokenStream</strong>: The basic XMLPULL-based XML scanner. You create and configure an XMLPULL parser for your XML input and feed it into the XMLPullTokenStream.<br>
  </li>
-<li><strong>BasicCrimsonXMLTokenStream</strong>: An easy to create Crimson-based SAX scanner. You don't need any extra jars (other than antxr.jar). This is useful if you only need to specify:
-
+<li><strong>BasicCrimsonXMLTokenStream</strong>: An easy to create Crimson-based SAX scanner. You don&rsquo;t need any extra jars (other than antxr.jar). This is useful if you only need to specify:
 <ul>
 <li>The XML input (as a java.io.Reader)</li>
 <li>If you want a namespace-aware parse</li>
-<li>If you want DTD validation<br />
+<li>If you want DTD validation<br>
  </li>
-</ul></li>
+</ul>
+</li>
 <li><strong>BasicXercesXMLTokenStream</strong>: An easy to create Xerces-based SAX scanner. You will need the Xerces.jar in your classpath to use this option. This is useful if you only need to specify:
-
 <ul>
 <li>The XML input (as a java.io.Reader)</li>
 <li>If you want a namespace-aware parse</li>
 <li>If you want validation</li>
 <li>Whether than validation is DTD or XML Schema based</li>
-</ul></li>
 </ul>
-
-<p>Here's an example:</p>
-
+</li>
+</ul>
+<p>Here&rsquo;s an example:</p>
 <pre><code>package com.javadude.antxr.sample;
 
 import java.io.FileReader;
@@ -860,410 +726,376 @@ import com.javadude.antxr.scanner.BasicCrimsonXMLTokenStream;
 
 public class PeopleTest {
 
-    public static void main(String[] args) throws Exception {
-        // Create our scanner (using a simple SAX parser setup)
-        BasicCrimsonXMLTokenStream stream =
-            new BasicCrimsonXMLTokenStream(new FileReader(&quot;people.xml&quot;),
-        PeopleParser.class, false, false);
+	public static void main(String[] args) throws Exception {
+		// Create our scanner (using a simple SAX parser setup)
+		BasicCrimsonXMLTokenStream stream =
+			new BasicCrimsonXMLTokenStream(new FileReader(&quot;people.xml&quot;),
+		PeopleParser.class, false, false);
 
-        // Create our ANTLR parser
-        PeopleParser peopleParser = new PeopleParser(stream);
+		// Create our ANTLR parser
+		PeopleParser peopleParser = new PeopleParser(stream);
 
-        // parse the document
-        peopleParser.document();
-    }
+		// parse the document
+		peopleParser.document();
+	}
 }
 </code></pre>
-
-<p>This code can be nearly identical for any ANTXR-based XML parser. For this example, I used a BasicCrimsonXMLTokenStream. For it we specify the XML input (as a Reader), the parser class, false for &quot;not namespace-aware&quot; and false for &quot;no validation&quot;. (Note that well-formedness is still checked).</p>
-
-<p>The above grammar will <em>recognize</em> a person.xml file, but won't really do anything with it. Suppose we want to collect information about the people into Person objects.</p>
-
+<p>This code can be nearly identical for any ANTXR-based XML parser. For this example, I used a BasicCrimsonXMLTokenStream. For it we specify the XML input (as a Reader), the parser class, false for &ldquo;not namespace-aware&rdquo; and false for &ldquo;no validation&rdquo;. (Note that well-formedness is still checked).</p>
+<p>The above grammar will <em>recognize</em> a person.xml file, but won&rsquo;t really do anything with it. Suppose we want to collect information about the people into Person objects.</p>
 <p>Suppose I have the following Person class (a simple JavaBean):</p>
-
 <pre><code>package com.javadude.antlr.sample.xml;
 
 public class Person {
-    private String ssn;
-    private String firstName;
-    private String lastName;
+	private String ssn;
+	private String firstName;
+	private String lastName;
 
-    public String getFirstName() {
-        return firstName;
-    }
+	public String getFirstName() {
+		return firstName;
+	}
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 
-    public String getLastName() {
-        return lastName;
-    }
+	public String getLastName() {
+		return lastName;
+	}
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
-    public String getSsn() {
-        return ssn;
-    }
+	public String getSsn() {
+		return ssn;
+	}
 
-    public void setSsn(String ssn) {
-        this.ssn = ssn;
-    }
+	public void setSsn(String ssn) {
+		this.ssn = ssn;
+	}
 }
 </code></pre>
-
 <p>I can tweak my grammar to collect information. In this example, we collect data and pass it upwards to the caller.</p>
-
 <pre><code>header {
-    package com.javadude.antlr.sample.xml;
+	package com.javadude.antlr.sample.xml;
 
-    import java.util.List;
-    import java.util.ArrayList;
+	import java.util.List;
+	import java.util.ArrayList;
 }
 
 class PeopleParser extends Parser;
 
 document returns [List results = null]
-    :   results=&lt;people&gt; EOF
-    ;
+	:	results=&lt;people&gt; EOF
+	;
 
 &lt;people&gt; returns [List results = new ArrayList()]
-    { Person p; }
-    :   (   p=&lt;person&gt;  { results.add(p); }   )*
-    ;
+	{ Person p; }
+	:	(	p=&lt;person&gt;  { results.add(p); }   )*
+	;
 
 &lt;person&gt; returns [Person p = new Person()]
-    { String first, last; }
-    :   (   first=&lt;firstName&gt;  { p.setFirstName(first); }
-        |   last=&lt;lastName&gt;    { p.setLastName(last);   }
-        )*
+	{ String first, last; }
+	:	(	first=&lt;firstName&gt;  { p.setFirstName(first); }
+		|	last=&lt;lastName&gt;    { p.setLastName(last);   }
+		)*
 ;
 
 &lt;firstName&gt; returns [String value = null]
-    :   pcdata:PCDATA { value = pcdata.getText(); }
-    ;
+	:	pcdata:PCDATA { value = pcdata.getText(); }
+	;
 
 &lt;lastName&gt; returns [String value = null]
-    :   pcdata:PCDATA { value = pcdata.getText(); }
-    ;
+	:	pcdata:PCDATA { value = pcdata.getText(); }
+	;
 </code></pre>
-
 <p>We now use the grammar to gather information from the XML file, create objects and return them.</p>
-
 <p>Now we can change our calling code to include</p>
-
 <pre><code>List people = peopleParser.document();
 
 for (Iterator i = people.iterator(); i.hasNext();) {
-    Person p = (Person)i.next();
-    System.out.println(p.getFirstName() + &quot; &quot; + p.getLastName());
+	Person p = (Person)i.next();
+	System.out.println(p.getFirstName() + &quot; &quot; + p.getLastName());
 }
 </code></pre>
-
 <p>And poof! We have XML data converted to Person objects quite easily!</p>
-
 <h3 id="A_More_Complex_Parser">A More Complex Parser</h3>
-
-<p>Here's an example I presented at the Northern Virginia Java Users Group. It's a little more interesting, as it demonstrates a mix of returning values to callers and passing values into called rules. There's no &quot;right way&quot; to do this, but try to think about who needs to know what.</p>
-
+<p>Here&rsquo;s an example I presented at the Northern Virginia Java Users Group. It&rsquo;s a little more interesting, as it demonstrates a mix of returning values to callers and passing values into called rules. There&rsquo;s no &ldquo;right way&rdquo; to do this, but try to think about who needs to know what.</p>
 <p>This example creates a simple GUI using an XML specification. There are some points where you really <em>need</em> to pass data down vs. up. For example, a container needs to pass itself down to the layout manager so the layout constraint tags can add their components in the right location.</p>
-
-<p>Note that this is not intended to be a framework for real use; it's a simple example of how powerful ANTXR parsing can be.</p>
-
-<p>First, let's look at the XML we want to parse:</p>
-
+<p>Note that this is not intended to be a framework for real use; it&rsquo;s a simple example of how powerful ANTXR parsing can be.</p>
+<p>First, let&rsquo;s look at the XML we want to parse:</p>
 <pre><code>&lt;?xml version=&quot;1.0&quot;?&gt;
 &lt;frame&gt;
-    &lt;borderLayout&gt;
-        &lt;north&gt;
-            &lt;panel&gt;
-                &lt;borderLayout&gt;
-                    &lt;west&gt;
-                        &lt;panel&gt;
-                            &lt;gridLayout rows=&quot;0&quot; cols=&quot;1&quot;&gt;
-                                &lt;label text=&quot;Name&quot;/&gt;
-                                &lt;label text=&quot;Address&quot;/&gt;
-                            &lt;/gridLayout&gt;
-                        &lt;/panel&gt;
-                    &lt;/west&gt;
-                    &lt;center&gt;
-                        &lt;panel&gt;
-                            &lt;gridLayout rows=&quot;0&quot; cols=&quot;1&quot;&gt;
-                                &lt;textField /&gt;
-                                &lt;textField /&gt;
-                            &lt;/gridLayout&gt;
-                        &lt;/panel&gt;
-                    &lt;/center&gt;
-                &lt;/borderLayout&gt;
-            &lt;/panel&gt;
-        &lt;/north&gt; 
-        &lt;south&gt;
-            &lt;panel&gt;
-                &lt;flowLayout align=&quot;RIGHT&quot;&gt;
-                    &lt;button text=&quot;Ok&quot;&gt;
-                        &lt;printAction&gt;Done!&lt;/printAction&gt;
-                    &lt;/button&gt;
-                    &lt;button text=&quot;Cancel&quot;&gt;
-                        &lt;printAction&gt;Canceled!&lt;/printAction&gt;
-                    &lt;/button&gt;
-                &lt;/flowLayout&gt;
-            &lt;/panel&gt;
-        &lt;/south&gt;
-    &lt;/borderLayout&gt;
+	&lt;borderLayout&gt;
+		&lt;north&gt;
+			&lt;panel&gt;
+				&lt;borderLayout&gt;
+					&lt;west&gt;
+						&lt;panel&gt;
+							&lt;gridLayout rows=&quot;0&quot; cols=&quot;1&quot;&gt;
+								&lt;label text=&quot;Name&quot;/&gt;
+								&lt;label text=&quot;Address&quot;/&gt;
+							&lt;/gridLayout&gt;
+						&lt;/panel&gt;
+					&lt;/west&gt;
+					&lt;center&gt;
+						&lt;panel&gt;
+							&lt;gridLayout rows=&quot;0&quot; cols=&quot;1&quot;&gt;
+								&lt;textField /&gt;
+								&lt;textField /&gt;
+							&lt;/gridLayout&gt;
+						&lt;/panel&gt;
+					&lt;/center&gt;
+				&lt;/borderLayout&gt;
+			&lt;/panel&gt;
+		&lt;/north&gt; 
+		&lt;south&gt;
+			&lt;panel&gt;
+				&lt;flowLayout align=&quot;RIGHT&quot;&gt;
+					&lt;button text=&quot;Ok&quot;&gt;
+						&lt;printAction&gt;Done!&lt;/printAction&gt;
+					&lt;/button&gt;
+					&lt;button text=&quot;Cancel&quot;&gt;
+						&lt;printAction&gt;Canceled!&lt;/printAction&gt;
+					&lt;/button&gt;
+				&lt;/flowLayout&gt;
+			&lt;/panel&gt;
+		&lt;/south&gt;
+	&lt;/borderLayout&gt;
 &lt;/frame&gt;
 </code></pre>
-
 <p>This is a silly little name &amp; address form, with an Ok and Cancel button. We can parse the above XML file with the following ANTXR grammar:</p>
-
 <pre><code>header {
-    package com.javadude.antxr.sample;
-    import java.awt.*;
-    import java.awt.event.*;
-    import javax.swing.*;
+	package com.javadude.antxr.sample;
+	import java.awt.*;
+	import java.awt.event.*;
+	import javax.swing.*;
 }
 
 // A sample parser that generates a Java GUI based on an XML specification
 class GUIParser extends Parser;
 
 document returns [JFrame f=null] 
-    :   f=&lt;frame&gt; EOF
-    ;
+	:	f=&lt;frame&gt; EOF
+	;
 
 /**
  * Create a JFrame based on a frame tag
  * @return the generated JPanel
  */
 &lt;frame&gt; returns [JFrame f=null] 
-    { f = new JFrame(@title); }
-    :   layout[f.getContentPane()]
-        {
-            f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-            f.pack();
-        }
-    ;
+	{ f = new JFrame(@title); }
+	:	layout[f.getContentPane()]
+		{
+			f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+			f.pack();
+		}
+	;
 
 /**
  * Create a JPanel based on a panel tag
  * @return the generated JPanel
  */
 &lt;panel&gt; returns [JPanel p=new JPanel()] 
-    :   layout[p]
-    ;
+	:	layout[p]
+	;
 
 /**
  * Recognizes layout managers
  * @param container the container to which we add the layout manager
  */
 layout [Container container]
-    :   &lt;borderLayout&gt;[container]
-    |   &lt;flowLayout&gt;[container]
-    |   &lt;gridLayout&gt;[container]
-    ;
+	:	&lt;borderLayout&gt;[container]
+	|	&lt;flowLayout&gt;[container]
+	|	&lt;gridLayout&gt;[container]
+	;
 
 /**
  * Create BorderLayout for the borderLayout tag
  * @param container the container to which we add the layout manager
  */
 &lt;borderLayout&gt; [Container container]
-    { container.setLayout(new BorderLayout()); }
-    :   ( &lt;north&gt;[container]
-        |   &lt;south&gt;[container]
-        |   &lt;east&gt;[container]
-        |   &lt;west&gt;[container]
-        |   &lt;center&gt;[container]
-        )*
-    ;
+	{ container.setLayout(new BorderLayout()); }
+	:	( &lt;north&gt;[container]
+		|	&lt;south&gt;[container]
+		|	&lt;east&gt;[container]
+		|	&lt;west&gt;[container]
+		|	&lt;center&gt;[container]
+		)*
+	;
 
 /**
  * Add the nested component to the container at the &quot;north&quot; position
  * @param container the container to which we add the nested component
  */
 &lt;north&gt; [Container container]
-    { Component c; }
-    :   c=component {container.add(c, BorderLayout.NORTH); }
-    ;
+	{ Component c; }
+	:	c=component {container.add(c, BorderLayout.NORTH); }
+	;
 
 /**
  * Add the nested component to the container at the &quot;south&quot; position
  * @param container the container to which we add the nested component
  */
 &lt;south&gt; [Container container]
-    { Component c; }
-    :   c=component {container.add(c, BorderLayout.SOUTH); }
-    ;
+	{ Component c; }
+	:	c=component {container.add(c, BorderLayout.SOUTH); }
+	;
 
 /**
  * Add the nested component to the container at the &quot;east&quot; position
  * @param container the container to which we add the nested component
  */
 &lt;east&gt; [Container container]
-    { Component c; }
-    :   c=component {container.add(c, BorderLayout.EAST); }
-    ;
+	{ Component c; }
+	:	c=component {container.add(c, BorderLayout.EAST); }
+	;
 
 /**
  * Add the nested component to the container at the &quot;west&quot; position
  * @param container the container to which we add the nested component
  */
 &lt;west&gt; [Container container]
-    { Component c; }
-    :   c=component {container.add(c, BorderLayout.WEST); }
-    ;
+	{ Component c; }
+	:	c=component {container.add(c, BorderLayout.WEST); }
+	;
 
 /**
  * Add the nested component to the container at the &quot;center&quot; position
  * @param container the container to which we add the nested component
  */
 &lt;center&gt; [Container container]
-    { Component c; }
-    :   c=component {container.add(c, BorderLayout.CENTER); }
-    ;
+	{ Component c; }
+	:	c=component {container.add(c, BorderLayout.CENTER); }
+	;
 
 /**
  * Create FlowLayout for the flowLayout tag
  * @param container the container to which we add the layout manager
  */
 &lt;flowLayout&gt; [Container container]
-    {
-        int alignment = FlowLayout.CENTER;
-        String align = @align;
-        if (align != null)
-            if (&quot;RIGHT&quot;.equals(align))
-                alignment = FlowLayout.RIGHT;
-            else if (&quot;LEFT&quot;.equals(align))
-                alignment = FlowLayout.LEFT;
-            else if (&quot;CENTER&quot;.equals(align))
-                alignment = FlowLayout.CENTER;
+	{
+		int alignment = FlowLayout.CENTER;
+		String align = @align;
+		if (align != null)
+			if (&quot;RIGHT&quot;.equals(align))
+				alignment = FlowLayout.RIGHT;
+			else if (&quot;LEFT&quot;.equals(align))
+				alignment = FlowLayout.LEFT;
+			else if (&quot;CENTER&quot;.equals(align))
+				alignment = FlowLayout.CENTER;
 
-        container.setLayout(new FlowLayout(alignment));
+		container.setLayout(new FlowLayout(alignment));
 
-        Component c;
-    }
-    :   ( c=component {container.add(c);} )*
-    ;
+		Component c;
+	}
+	:	( c=component {container.add(c);} )*
+	;
 
 /**
  * Create GridLayout for the gridLayout tag
  * @param container the container to which we add the layout manager
  */
 &lt;gridLayout&gt; [Container container]
-    {
-        int rows = Integer.parseInt(@rows);
-        int cols = Integer.parseInt(@cols);
-        container.setLayout(new GridLayout(rows,cols));
-        Component c;
-    }
-    :   (   c=component {container.add(c);} )*
-    ;
+	{
+		int rows = Integer.parseInt(@rows);
+		int cols = Integer.parseInt(@cols);
+		container.setLayout(new GridLayout(rows,cols));
+		Component c;
+	}
+	:	(	c=component {container.add(c);} )*
+	;
 
 /**
  * Recognize a component
  * @return the component created based on an xml spec
  */
 component returns [Component component=null]
-    :   component=&lt;button&gt;
-    |   component=&lt;label&gt;
-    |   component=&lt;textField&gt;
-    |   component=&lt;panel&gt;
-    ;
+	:	component=&lt;button&gt;
+	|	component=&lt;label&gt;
+	|	component=&lt;textField&gt;
+	|	component=&lt;panel&gt;
+	;
 
 /**
  * Create a JButton based on a &quot;button&quot; xml tag
  * @return the created JButton
  */
 &lt;button&gt; returns [JButton b=new JButton()]
-    { b.setText(@text); }
-    :   (&lt;printAction&gt;[b])?
-    ;
+	{ b.setText(@text); }
+	:	(&lt;printAction&gt;[b])?
+	;
 
 /**
  * Create a JLabel based on a &quot;label&quot; xml tag
  * @return the created JLabel
  */
 &lt;label&gt; returns [JLabel l=new JLabel()]
-    { l.setText(@text); }
-    : 
-    ;
+	{ l.setText(@text); }
+	: 
+	;
 
 /**
  * Create a JTextField based on a &quot;textField&quot; xml tag
  * @return the created JTextField
  */
 &lt;textField&gt; returns [JTextField t=new JTextField()]
-    { t.setText(@text); }
-    : 
-    ;
+	{ t.setText(@text); }
+	: 
+	;
 
 /**
  * Create an ActionListener that prints the data in a &quot;printAction&quot; xml tag
  * @param b the button to which we add the listener
  */
 &lt;printAction&gt;[JButton b]
-    :   pcData:PCDATA 
-        {
-            final String value = pcData.getText();
-            b.addActionListener(
-                new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                    System.out.println(value);
-                }});
-        }
-    ;   
+	:	pcData:PCDATA 
+		{
+			final String value = pcData.getText();
+			b.addActionListener(
+				new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+					System.out.println(value);
+				}});
+		}
+	;   
 </code></pre>
-
 <p>Note that this grammar demonstrates several things:</p>
-
 <ul>
-<li><strong>Passing data down and up</strong><br />
-That things like components are passed back to their caller, which is usually a layout constraint. This allows the layout constraint to decide how to add that component. The container is passed <em>down</em> to the layout constraint. This is much simpler than passing back &quot;north&quot; (or some other representation of a constraint) back to the container rule for it to determine how to add the component.<br />
+<li><strong>Passing data down and up</strong><br>
+That things like components are passed back to their caller, which is usually a layout constraint. This allows the layout constraint to decide how to add that component. The container is passed <em>down</em> to the layout constraint. This is much simpler than passing back &ldquo;north&rdquo; (or some other representation of a constraint) back to the container rule for it to determine how to add the component.<br>
  </li>
-<li>**Use of rules that do not represent tags<br />
-**Check out the <strong>component</strong> and <strong>layout</strong> rules. These rules are simply there to make our lives easier, as we can logically represent the contents of a tag via a single rule, and let that new rule be used in more than one place. (For example, <strong>layout</strong> is used in both <strong>panel</strong> and <strong>frame</strong>, and this prevents us from having to specify all of the possible layouts under both <strong>panel</strong> and <strong>frame</strong>.<br />
+<li>**Use of rules that do not represent tags<br>
+**Check out the <strong>component</strong> and <strong>layout</strong> rules. These rules are simply there to make our lives easier, as we can logically represent the contents of a tag via a single rule, and let that new rule be used in more than one place. (For example, <strong>layout</strong> is used in both <strong>panel</strong> and <strong>frame</strong>, and this prevents us from having to specify all of the possible layouts under both <strong>panel</strong> and <strong>frame</strong>.<br>
  </li>
-<li><strong>Converting some attribute values to numbers</strong><br />
-This is something I'd like to make easier, but for now, you'll have to live with it. Attributes are strings, and if you want them in another form such as ints, you'll need to do the conversion.</li>
+<li><strong>Converting some attribute values to numbers</strong><br>
+This is something I&rsquo;d like to make easier, but for now, you&rsquo;ll have to live with it. Attributes are strings, and if you want them in another form such as ints, you&rsquo;ll need to do the conversion.</li>
 </ul>
-
-<h1 id="AnyTags">&quot;Any&quot; Tags</h1>
-
-<p>ANTXR allows use of the &quot;any&quot; tag in XML schema. This feature allows your XML to be extensible, but can make parsing a bit trickier. To use the &quot;any&quot; feature, simply use OTHER_TAG as a token in your grammar and match it with an XML_END_TAG token. For example:</p>
-
+<h1 id="AnyTags">&ldquo;Any&rdquo; Tags</h1>
+<p>ANTXR allows use of the &ldquo;any&rdquo; tag in XML schema. This feature allows your XML to be extensible, but can make parsing a bit trickier. To use the &ldquo;any&rdquo; feature, simply use OTHER_TAG as a token in your grammar and match it with an XML_END_TAG token. For example:</p>
 <pre><code>otherTag
-    :   OTHER_TAG
-        (   otherTag
-        |   foo
-        |   fee
-        |   PCDATA
-        )*
-        XML_END_TAG
-    ;
+	:	OTHER_TAG
+		(	otherTag
+		|	foo
+		|	fee
+		|	PCDATA
+		)*
+		XML_END_TAG
+	;
 </code></pre>
-
-<p>Anytime the scanner sees an XML tag that you haven't explicitly defined using xmlTag in your grammar, it checks to see if you used OTHER_TAG. If you used OTHER_TAG in your grammar, it will be returned for any tag you didn't explicitly specify. If you didn't use OTHER_TAG in your grammar, you will get a syntax error. I recommend defining the grammar as expicitly as possible, and avoiding OTHER_TAG unless absolutely necessary.</p>
-
-<p>I'm working on some lighter syntax for this.</p>
-
+<p>Anytime the scanner sees an XML tag that you haven&rsquo;t explicitly defined using xmlTag in your grammar, it checks to see if you used OTHER_TAG. If you used OTHER_TAG in your grammar, it will be returned for any tag you didn&rsquo;t explicitly specify. If you didn&rsquo;t use OTHER_TAG in your grammar, you will get a syntax error. I recommend defining the grammar as expicitly as possible, and avoiding OTHER_TAG unless absolutely necessary.</p>
+<p>I&rsquo;m working on some lighter syntax for this.</p>
 <h1 id="using-the-antxr-plugin-for-eclipse">Using the ANTXR Plugin for Eclipse</h1>
-
 <p>(I need to write more on this, but this is a quick start. The ANTXR plugin is nearly identical to the ANTLR plugin for eclipse at <a href="http://antlreclipse.sourceforge.net">http://antlreclipse.sourceforge.net</a>. Please read that page for the basic usage. You can download the ANTXR plugin as noted at the top of this page.)</p>
-
 <p>The main differences between the ANTXR plugin and the ANTLR plugin are names:</p>
-
 <ul>
-<li>You use the &quot;Toggle ANTXR nature&quot; option instead of &quot;Toggle ANTLR nature&quot;.</li>
+<li>You use the &ldquo;Toggle ANTXR nature&rdquo; option instead of &ldquo;Toggle ANTLR nature&rdquo;.</li>
 <li>You must name your grammars foo.antxr instead of foo.g.</li>
 </ul>
-
 <h1 id="Performance">Performance</h1>
-
-<p>I'm working with some testers to try and get a few good performance tests set up. Initial tests have shown the ANTXR approach to be comparable to an equivalent SAX-based implementation (sometimes slightly faster, sometimes slightly slower, but so close we cannot be decisive.) When a full comparison has been completed, I'll post the results.</p>
-
+<p>I&rsquo;m working with some testers to try and get a few good performance tests set up. Initial tests have shown the ANTXR approach to be comparable to an equivalent SAX-based implementation (sometimes slightly faster, sometimes slightly slower, but so close we cannot be decisive.) When a full comparison has been completed, I&rsquo;ll post the results.</p>
 <h1 id="Future">Future</h1>
-
 <p>The next big thing I want to add to this is the ability to generate an ANTXR grammar from an XML Schema or DTD.</p>
-
 <p>I also want to release a J2ME-friendly version of ANTXR.</p>
           </div>
 
@@ -1354,7 +1186,7 @@ This is something I'd like to make easier, but for now, you'll have to live with
 								
 
 										<li class="nav-item">
-						 					<a class="nav-link" href="#antxr-another-tool-for-xml-recognition">
+						 					<a class="nav-link" href="#antxr--another-tool-for-xml-recognition">
 												 ANTXR = ANother Tool for Xml Recognition
 											</a>
 										</li>
@@ -1875,7 +1707,7 @@ This is something I'd like to make easier, but for now, you'll have to live with
 
 										<li class="nav-item">
 						 					<a class="nav-link" href="#AnyTags">
-												 &#34;Any&#34; Tags
+												 “Any” Tags
 											</a>
 										</li>
 						 
@@ -2010,7 +1842,7 @@ This is something I'd like to make easier, but for now, you'll have to live with
   
   <div class="copyright py-4">
     
-    <span>  1998 - 2019 &copy; Scott Stanchfield | Theme <a href='https://github.com/orianna-zzo/AllinOne' target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a>  </span>
+    <span>  1998 - 2021 &copy; Scott Stanchfield | Theme <a href='https://github.com/orianna-zzo/AllinOne' target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a>  </span>
   </div>
   
 

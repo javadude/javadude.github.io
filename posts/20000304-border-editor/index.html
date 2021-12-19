@@ -12,9 +12,10 @@
   <meta property="og:title" content="Swing Border Editor" />
 <meta property="og:description" content="Simple Swing Border Editing in GUI Builders" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://javadude.com/posts/20000304-border-editor/" />
-<meta property="article:published_time" content="2000-03-04T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2000-03-04T00:00:00&#43;00:00"/>
+<meta property="og:url" content="https://javadude.com/posts/20000304-border-editor/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2000-03-04T00:00:00+00:00" />
+<meta property="article:modified_time" content="2000-03-04T00:00:00+00:00" />
+
 
 
   <title>
@@ -286,106 +287,78 @@
 
           <div class="post-content markdown">
             <p>Simple Swing Border Editing in GUI Builders</p>
-
-<p><strong>NOTE: This is a plugin for VisualAge for Java and is now obsolete. I'm keeping it here for historical purposes only</strong></p>
-
+<p><strong>NOTE: This is a plugin for VisualAge for Java and is now obsolete. I&rsquo;m keeping it here for historical purposes only</strong></p>
 <h1 id="description">Description</h1>
-
-<p>NOTE: Make sure you read the WARNING sections under usage -- this tool is a tad rough around the edges, but if you enter the right stuff it'll treat you well ;)</p>
-
-<p>Swing Border support is fairly generic in VisualAge for Java 3.5.  I've written a property editor that can be used in VAJ to make border edits easy.</p>
-
+<p>NOTE: Make sure you read the WARNING sections under usage &ndash; this tool is a tad rough around the edges, but if you enter the right stuff it&rsquo;ll treat you well ;)</p>
+<p>Swing Border support is fairly generic in VisualAge for Java 3.5.  I&rsquo;ve written a property editor that can be used in VAJ to make border edits easy.</p>
 <p>NOTE: The Swing Border Editor is only supported for version 3.5 of VisualAge for Java. It is no longer supported for version 2.0 or 3.0.</p>
-
 <h1 id="installation">Installation</h1>
-
 <p>To install the border editor in VisualAge for Java 3.5.</p>
-
 <p>When mentioned, <em><strong>installdir</strong></em> refers to the directory in which you installed VisualAge for Java, version 3.5. By default, this should be <strong>c:\Program Files\IBM\VisualAge for Java</strong></p>
-
 <ol>
 <li>Shutdown VisualAge for Java.</li>
 <li>Download <a href="bordereditor.zip">bordereditor.zip</a> from this site.   This zip includes the source and executables for the border editor.</li>
 <li>Extract bordereditor.zip into the <strong><em>installdir</em>\ide\features</strong> directory.</li>
 <li>Startup VisualAge for Java.  You should see a few messages about the features being installed.</li>
-<li>Select &quot;Quick Start&quot; from the &quot;File&quot; menu of the Workbench.</li>
-<li>Select &quot;Features&quot; from the left pane of the Quick Start window, then &quot;Add Feature&quot; from the right pane.</li>
-<li>Select &quot;Javadude Swing Border Editor&quot; and press OK.</li>
+<li>Select &ldquo;Quick Start&rdquo; from the &ldquo;File&rdquo; menu of the Workbench.</li>
+<li>Select &ldquo;Features&rdquo; from the left pane of the Quick Start window, then &ldquo;Add Feature&rdquo; from the right pane.</li>
+<li>Select &ldquo;Javadude Swing Border Editor&rdquo; and press OK.</li>
 <li>Create and save file <strong><em>installdir</em>\ide\program\lib\ivj-property-editor-registry.properties</strong> containing the following line:</li>
 </ol>
-
 <p>javax.swing.border.Border=com.javadude.bordereditor.BorderEditor</p>
-
 <h1 id="use">Use</h1>
-
 <p>WARNING 1: If you use this border editor, you will lose any previous border settings!</p>
-
-<p>WARNING 2: I haven't added any real exception handling in yet -- BE CAREFUL WHEN ENTERING NUMBERS IN TEXTFIELDS!  I'll fix this when I have time.  I just wanted to get this out to try.</p>
-
-<p>WARNING 3: If you use &quot;Custom&quot; borders, you're completely on your own for the code you write.  Be careful.  And make sure you either add import statements for any class refs, or fully-qualify them.</p>
-
-<p><img src="bordered1.gif" alt="bordered1.gif (8132 bytes)" /></p>
-
+<p>WARNING 2: I haven&rsquo;t added any real exception handling in yet &ndash; BE CAREFUL WHEN ENTERING NUMBERS IN TEXTFIELDS!  I&rsquo;ll fix this when I have time.  I just wanted to get this out to try.</p>
+<p>WARNING 3: If you use &ldquo;Custom&rdquo; borders, you&rsquo;re completely on your own for the code you write.  Be careful.  And make sure you either add import statements for any class refs, or fully-qualify them.</p>
+<p><img src="bordered1.gif" alt="bordered1.gif (8132 bytes)"></p>
 <p>Hopefully the interface is fairly obvious.</p>
-
 <p>You select from the type of border you want:</p>
-
 <ul>
-<li><p><strong>bevel</strong> - a raised/lowered, and possibly &quot;soft&quot; bevel border</p></li>
-
-<li><p><strong>etched</strong> - an etched/raised line</p></li>
-
-<li><p><strong>line</strong> - a varying width and color line around the edge.   <em><strong>NOTE: Make sure you enter valid numbers or you'll see exceptions thrown in the console...  I'll fix this in the next release.</strong></em></p></li>
-
-<li><p><strong>empty</strong> - empty space around the edges. <em><strong>NOTE: Make sure you enter valid numbers or you'll see exceptions thrown in the console...   I'll fix this in the next release.</strong></em></p></li>
-
-<li><p><strong>custom</strong> - you type the code -- <strong>NOTE: the tool does <em>not</em> verify this code!</strong></p></li>
-
-<li><p><strong>none</strong> - the layout will be set to &quot;null&quot;.   Note that this is <em>not</em> the same as the &quot;default&quot; layout for the border.  There is currently no way in VAJ to &quot;unset&quot; a property once it has been set.</p></li>
+<li>
+<p><strong>bevel</strong> - a raised/lowered, and possibly &ldquo;soft&rdquo; bevel border</p>
+</li>
+<li>
+<p><strong>etched</strong> - an etched/raised line</p>
+</li>
+<li>
+<p><strong>line</strong> - a varying width and color line around the edge.   <em><strong>NOTE: Make sure you enter valid numbers or you&rsquo;ll see exceptions thrown in the console&hellip;  I&rsquo;ll fix this in the next release.</strong></em></p>
+</li>
+<li>
+<p><strong>empty</strong> - empty space around the edges. <em><strong>NOTE: Make sure you enter valid numbers or you&rsquo;ll see exceptions thrown in the console&hellip;   I&rsquo;ll fix this in the next release.</strong></em></p>
+</li>
+<li>
+<p><strong>custom</strong> - you type the code &ndash; <strong>NOTE: the tool does <em>not</em> verify this code!</strong></p>
+</li>
+<li>
+<p><strong>none</strong> - the layout will be set to &ldquo;null&rdquo;.   Note that this is <em>not</em> the same as the &ldquo;default&rdquo; layout for the border.  There is currently no way in VAJ to &ldquo;unset&rdquo; a property once it has been set.</p>
+</li>
 </ul>
-
 <p>Fill in the details for the border type you want, then choose if you want that border titled or not.  If you want it titled, select the parameters for the titling.</p>
-
-<p>As you make changes, they will be reflected in the border editor's border so you can see what the result will look like.</p>
-
-<p>When you press &quot;Ok&quot; you should see the new border appear in the VCE around the component being edited.</p>
-
-<h1 id="uninstalling-from-visualage-for-java-version-3-5">Uninstalling from VisualAge for Java, version 3.5</h1>
-
+<p>As you make changes, they will be reflected in the border editor&rsquo;s border so you can see what the result will look like.</p>
+<p>When you press &ldquo;Ok&rdquo; you should see the new border appear in the VCE around the component being edited.</p>
+<h1 id="uninstalling-from-visualage-for-java-version-35">Uninstalling from VisualAge for Java, version 3.5</h1>
 <p>To uninstall from version 3.5:</p>
-
 <ol>
 <li>Delete the</li>
 </ol>
-
 <blockquote>
 <p>javax.swing.border.Border=com.javadude.bordereditor.BorderEditor</p>
-
 <p>line from <strong><em>installdir</em>\ide\program\lib\ivj-property-editor-registry.properties</strong></p>
 </blockquote>
-
 <ol>
 <li>Delete the added features (<strong>File-&gt;Quick Start-&gt;Features-&gt;Delete Feature</strong>)</li>
 </ol>
-
 <h1 id="license">License</h1>
-
 <p>The Swing Border Editor for VisualAge for Java is free for <em>any</em> use <em>other</em> than selling it as a stand-alone product.</p>
-
-<p>Note that this code is provided &quot;as-is&quot; without any warrantee or guarantee of suitability for any purpose. Scott Stanchfield cannot be held responsible for any damage caused by use this code.</p>
-
-<p>(In other words, use 'em for free at your own risk.)</p>
-
-<h1 id="bug-reports-feature-requests">Bug Reports/Feature Requests</h1>
-
-<p>Please let me know about any bugs you find or requests for what you'd like to see this tool do.  Feel free to send example code to implement it as well.</p>
-
+<p>Note that this code is provided &ldquo;as-is&rdquo; without any warrantee or guarantee of suitability for any purpose. Scott Stanchfield cannot be held responsible for any damage caused by use this code.</p>
+<p>(In other words, use &lsquo;em for free at your own risk.)</p>
+<h1 id="bug-reportsfeature-requests">Bug Reports/Feature Requests</h1>
+<p>Please let me know about any bugs you find or requests for what you&rsquo;d like to see this tool do.  Feel free to send example code to implement it as well.</p>
 <h1 id="future-directions">Future Directions</h1>
-
 <ul>
 <li>I need to document and comment the code like crazy</li>
 <li>I want to add nested borders (should be fairly easy, but I gotta think about exactly how they interact first)</li>
-<li>Good exception handling is necessary -- I'll add it in the next release.</li>
+<li>Good exception handling is necessary &ndash; I&rsquo;ll add it in the next release.</li>
 </ul>
           </div>
 
@@ -542,7 +515,7 @@
 								
 
 										<li class="nav-item">
-						 					<a class="nav-link" href="#uninstalling-from-visualage-for-java-version-3-5">
+						 					<a class="nav-link" href="#uninstalling-from-visualage-for-java-version-35">
 												 Uninstalling from VisualAge for Java, version 3.5
 											</a>
 										</li>
@@ -586,7 +559,7 @@
 								
 
 										<li class="nav-item">
-						 					<a class="nav-link" href="#bug-reports-feature-requests">
+						 					<a class="nav-link" href="#bug-reportsfeature-requests">
 												 Bug Reports/Feature Requests
 											</a>
 										</li>
@@ -678,7 +651,7 @@
   
   <div class="copyright py-4">
     
-    <span>  1998 - 2019 &copy; Scott Stanchfield | Theme <a href='https://github.com/orianna-zzo/AllinOne' target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a>  </span>
+    <span>  1998 - 2021 &copy; Scott Stanchfield | Theme <a href='https://github.com/orianna-zzo/AllinOne' target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a>  </span>
   </div>
   
 

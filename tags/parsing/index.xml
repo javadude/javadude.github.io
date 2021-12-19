@@ -1,16 +1,12 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Parsing on JavaDude.com</title>
+    <title>parsing on JavaDude.com</title>
     <link>https://javadude.com/tags/parsing/</link>
-    <description>Recent content in Parsing on JavaDude.com</description>
+    <description>Recent content in parsing on JavaDude.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Wed, 28 Jun 2017 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://javadude.com/tags/parsing/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 28 Jun 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://javadude.com/tags/parsing/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>DSLs and Code Generation</title>
       <link>https://javadude.com/posts/20170628-dsls-and-codegen/</link>
@@ -18,7 +14,6 @@
       
       <guid>https://javadude.com/posts/20170628-dsls-and-codegen/</guid>
       <description>&lt;p&gt;A JHU Tech Talk from June 28, 2017.&lt;/p&gt;
-
 &lt;p&gt;What is a Domain-Specific Language? How can we use one for code-generation?&lt;/p&gt;</description>
     </item>
     
@@ -55,7 +50,7 @@
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
       <guid>https://javadude.com/articles/lalrtoll.html</guid>
-      <description>&lt;p&gt;Converting from LALR to LL can be challenging... Hopefully this article will make it a weeeeee bit simpler...&lt;/p&gt;</description>
+      <description>&lt;p&gt;Converting from LALR to LL can be challenging&amp;hellip; Hopefully this article will make it a weeeeee bit simpler&amp;hellip;&lt;/p&gt;</description>
     </item>
     
   </channel>

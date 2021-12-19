@@ -12,9 +12,10 @@
   <meta property="og:title" content="Using JavaBean Accessors" />
 <meta property="og:description" content="How and why you should use JavaBean accessor (get/set) methods." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://javadude.com/posts/20000304-accessors/" />
-<meta property="article:published_time" content="2000-03-04T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2000-03-04T00:00:00&#43;00:00"/>
+<meta property="og:url" content="https://javadude.com/posts/20000304-accessors/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2000-03-04T00:00:00+00:00" />
+<meta property="article:modified_time" content="2000-03-04T00:00:00+00:00" />
+
 
 
   <title>
@@ -286,89 +287,54 @@
 
           <div class="post-content markdown">
             <p>Accessors are a key ingredient to proper encapsulation.  The can restrict access to only read/write data, inform other objects of changes to data, and perform validation on new values being set.  Consistent accessor usage makes class modification easy and transparent.</p>
-
 <h2 id="what-are-accessors">What are Accessors?</h2>
-
 <p>An accessor is a method that allows read or write access to a piece of class or instance data.  These are commonly defined using the naming convention</p>
-
 <ul>
-<li>get<em>VarName</em>() -- reads the data for class/instance variable <em>varName</em></li>
-<li>set<em>VarName</em>(<em>value</em>) -- sets the value for class/instance variable <em>varName</em></li>
+<li>get_VarName_() &ndash; reads the data for class/instance variable <em>varName</em></li>
+<li>set_VarName_(<em>value</em>) &ndash; sets the value for class/instance variable <em>varName</em></li>
 </ul>
-
 <p>By providing and using accessor methods to read/write data contained within a class, you provide stronger encapsulation for the data of that class.  This has several advantages, especially if you decide to change the implementation of the underlying data (or remove the data itself and replace it with a computation).</p>
-
 <p>In addition, creating accessors for a private class/instance variable allow you to restrict access to read-only or write-only by providing <em>only</em> a get or set method.</p>
-
-<h2 id="but-that-s-inefficient">But That's Inefficient!</h2>
-
-<p>The most-common objection to use of accessors is &quot;but that's another method call, and it will drastically slow down my program!&quot;</p>
-
+<h2 id="but-thats-inefficient">But That&rsquo;s Inefficient!</h2>
+<p>The most-common objection to use of accessors is &ldquo;but that&rsquo;s another method call, and it will drastically slow down my program!&rdquo;</p>
 <p>Not any more!</p>
-
 <p>The new HotSpot VM provides excellent run-time optimization.  Part of this optimization is automatic inlining of simple methods.  If you write accessors that just set and return a value, these will be inlined to simple assignment statements.   Accessors that do more may still be inlined, depending on their complexity.</p>
-
 <p>Bottom line: set aside any worries about accessors causing a performance hit.</p>
-
 <h2 id="all-data-must-be-private">All Data <strong>Must</strong> Be Private!</h2>
-
-<p>I could go on and on about this forever, but I'll try to keep it brief: All data defined in a class <em><strong>must</strong></em> be <em>private</em>!</p>
-
-<p>I may sound a bit like an &quot;OO-purist&quot; when I say this, but I view this from a practical standpoint, having been burned by not doing it...</p>
-
-<p>Making data (by data I mean class and instance variables) non-private allows another class to change their values without the owner of that data knowing about the change.   If the owner doesn't know about the change:</p>
-
+<p>I could go on and on about this forever, but I&rsquo;ll try to keep it brief: All data defined in a class <em><strong>must</strong></em> be <em>private</em>!</p>
+<p>I may sound a bit like an &ldquo;OO-purist&rdquo; when I say this, but I view this from a practical standpoint, having been burned by not doing it&hellip;</p>
+<p>Making data (by data I mean class and instance variables) non-private allows another class to change their values without the owner of that data knowing about the change.   If the owner doesn&rsquo;t know about the change:</p>
 <ul>
 <li>the owner has no control over the value; it could be outside the intended range of the data</li>
 <li>the owner cannot know the value has change, and cannot respond if needed</li>
 <li>the owner cannot tell others that the value has changed</li>
 <li>the owner cannot allow others to <em>veto</em> the change</li>
 </ul>
-
 <p>On top of these problems, if you ever decide to change your code to allow other classes to listen for changes, or restrict bounds on a variable, you would need to find every reference to the data and change it.  This can be very painful if the class were a public library that many people had used in their own code.</p>
-
-<p>Even worse, you cannot change the implementation of the data without changing the users of that data.  For example, suppose you had an integer instance variable to keep track of some ID for a list node.  Perhaps you had done some research and decided that the memory cost of keeping that ID was more expensive than recomputing it the few times it was needed.  If ID were only available via an accessor, all you would need to do to affect the change is to remove the instance variable and change the getID accessor to compute the ID and return it.  Far simpler than creating the getID accessor and going back and changing every reference to x.id...</p>
-
-<p>Privacy is the key to true encapsulation.  All manipulation of an object's state <strong><em>must</em></strong> be done <em>by the object itself!</em></p>
-
+<p>Even worse, you cannot change the implementation of the data without changing the users of that data.  For example, suppose you had an integer instance variable to keep track of some ID for a list node.  Perhaps you had done some research and decided that the memory cost of keeping that ID was more expensive than recomputing it the few times it was needed.  If ID were only available via an accessor, all you would need to do to affect the change is to remove the instance variable and change the getID accessor to compute the ID and return it.  Far simpler than creating the getID accessor and going back and changing every reference to x.id&hellip;</p>
+<p>Privacy is the key to true encapsulation.  All manipulation of an object&rsquo;s state <strong><em>must</em></strong> be done <em>by the object itself!</em></p>
 <p>Once you use accessors to read/write class/instance data, that data is instantly available as a JavaBean property!</p>
-
 <h2 id="javabean-properties">JavaBean Properties</h2>
-
-<p>The Java Bean spec defines the entities described by get and set accessors as &quot;properties&quot;.  I use the term <em>entities</em> here because a property does not need to have any actual data associated with it.  (A get method could just perform a computation instead of returning a variable's value.)  By using the simple get/set naming convention, any tool that supports JavaBeans can determine which properties are available for a bean <em>just</em> by looking at the names of the provided methods!</p>
-
+<p>The Java Bean spec defines the entities described by get and set accessors as &ldquo;properties&rdquo;.  I use the term <em>entities</em> here because a property does not need to have any actual data associated with it.  (A get method could just perform a computation instead of returning a variable&rsquo;s value.)  By using the simple get/set naming convention, any tool that supports JavaBeans can determine which properties are available for a bean <em>just</em> by looking at the names of the provided methods!</p>
 <p>JavaBean properties come in four flavors:</p>
-
 <ul>
 <li>simple properties</li>
 <li>bound properties</li>
 <li>constrained properties</li>
 <li>indexed properties</li>
 </ul>
-
-<p>Properties can be any combination of bound, constrained and indexed, or just &quot;simple&quot; properties.</p>
-
+<p>Properties can be any combination of bound, constrained and indexed, or just &ldquo;simple&rdquo; properties.</p>
 <h3 id="simple-properties">Simple Properties</h3>
-
 <p>These are basic properties defined by a JavaBean, and can be readable, writable or both.</p>
-
 <h3 id="bound-properties">Bound Properties</h3>
-
 <p>This is where the real power of accessors shines.  A bound property is one that will dispatch an event any time it has changed.  By restricting write access of a property to its set method, you can have the set method fire PropertyChangeEvents to any object registered to listen for a change to that property!</p>
-
 <h3 id="constrained-properties">Constrained Properties</h3>
-
-<p>Taking the bound concept a bit further, we can tell listeners that a property has changed _and allow those listeners to veto the change!_  This works pretty much the same as a bound property, but if the listener doesn't agree with the change, he can throw a PropertyVetoException which the property's set method will respect and halt the actual data change.</p>
-
+<p>Taking the bound concept a bit further, we can tell listeners that a property has changed <em>and allow those listeners to veto the change!</em>  This works pretty much the same as a bound property, but if the listener doesn&rsquo;t agree with the change, he can throw a PropertyVetoException which the property&rsquo;s set method will respect and halt the actual data change.</p>
 <h3 id="indexed-properties">Indexed Properties</h3>
-
 <p>The JavaBeans specification provides for one more type of property.  Indexed properties are properties that appear like arrays.  You can read or write the entire group of property values with one get/set method, or you can read/write individual elements of that indexed property.  Again, the data does not have to be represented as an array; it could be stored in <em>any</em> format, or there might not even <em>be</em> data behind the property.</p>
-
 <h2 id="use-accessors-in-the-class-that-defines-the-data">Use Accessors in the Class that Defines the Data!</h2>
-
 <p>A final note: <em>All</em> references to class/instance data should be through accessors, <em>even</em> if the reference is in the class that defines that data!   This centralizes access to the data, allows all changes to be known (including notification for bound and constrained properties.)</p>
-
-<p>This may seem like a bit of overkill, but if you ever need to change how a property is implemented, you'll be glad you used accessors consistently.</p>
+<p>This may seem like a bit of overkill, but if you ever need to change how a property is implemented, you&rsquo;ll be glad you used accessors consistently.</p>
           </div>
 
           
@@ -486,8 +452,8 @@
 								
 
 										<li class="nav-item">
-						 					<a class="nav-link" href="#but-that-s-inefficient">
-												 But That&#39;s Inefficient!
+						 					<a class="nav-link" href="#but-thats-inefficient">
+												 But That’s Inefficient!
 											</a>
 										</li>
 						 
@@ -726,7 +692,7 @@
   
   <div class="copyright py-4">
     
-    <span>  1998 - 2019 &copy; Scott Stanchfield | Theme <a href='https://github.com/orianna-zzo/AllinOne' target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a>  </span>
+    <span>  1998 - 2021 &copy; Scott Stanchfield | Theme <a href='https://github.com/orianna-zzo/AllinOne' target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a>  </span>
   </div>
   
 

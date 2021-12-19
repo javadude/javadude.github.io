@@ -1,16 +1,12 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Design on JavaDude.com</title>
+    <title>design on JavaDude.com</title>
     <link>https://javadude.com/tags/design/</link>
-    <description>Recent content in Design on JavaDude.com</description>
+    <description>Recent content in design on JavaDude.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Wed, 16 May 2001 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://javadude.com/tags/design/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 16 May 2001 00:00:00 +0000</lastBuildDate><atom:link href="https://javadude.com/tags/design/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Layering Applications</title>
       <link>https://javadude.com/posts/20010516-layering-applications/</link>
@@ -18,9 +14,7 @@
       
       <guid>https://javadude.com/posts/20010516-layering-applications/</guid>
       <description>&lt;h1 id=&#34;layering-applications&#34;&gt;Layering Applications&lt;/h1&gt;
-
 &lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
-
 &lt;p&gt;Maintainable applications can be quite tricky to develop. One of the keys to creating such a beast, is to properly layer your application.&lt;/p&gt;</description>
     </item>
     
@@ -66,7 +60,7 @@
       <pubDate>Thu, 01 Jan 1998 00:00:00 +0000</pubDate>
       
       <guid>https://javadude.com/posts/20000304-layouts/</guid>
-      <description>&lt;p&gt;Let&#39;s get familiar with Java Layout Managers!&lt;/p&gt;</description>
+      <description>&lt;p&gt;Let&amp;rsquo;s get familiar with Java Layout Managers!&lt;/p&gt;</description>
     </item>
     
   </channel>

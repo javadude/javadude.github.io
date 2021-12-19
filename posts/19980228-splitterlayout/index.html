@@ -12,9 +12,10 @@
   <meta property="og:title" content="SplitterLayout" />
 <meta property="og:description" content="A Layout Manager for Split Windows" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://javadude.com/posts/19980228-splitterlayout/" />
-<meta property="article:published_time" content="1999-10-24T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="1999-10-24T00:00:00&#43;00:00"/>
+<meta property="og:url" content="https://javadude.com/posts/19980228-splitterlayout/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="1999-10-24T00:00:00+00:00" />
+<meta property="article:modified_time" content="1999-10-24T00:00:00+00:00" />
+
 
 
   <title>
@@ -286,23 +287,14 @@
 
           <div class="post-content markdown">
             <p>A Layout Manager for Split Windows</p>
-
-<p>NOTE: I'm updating my website, and this is pretty ancient... I'm keeping this here for historical purposes. Ran the code in Android Studio to get pics... Still works, but maaaaaan, it's ugly. Some folks actually used it back-in-the-day, and I used it in ParseView...</p>
-
-<p>SplitterLayout is a simple layout manager that handles segmented displays with optional draggable bars between them.  In its simplest use, it's just a nice proportional layout manager.  More complex uses can create some interesting GUIs.</p>
-
-<p>Here are some examples.  I'll add more information to this page as I get time.   SplitterLayout is available as part of the TabSplitter distribution.  See <a href="index.html">TabSplitter</a> for details on how to download it.</p>
-
+<p>NOTE: I&rsquo;m updating my website, and this is pretty ancient&hellip; I&rsquo;m keeping this here for historical purposes. Ran the code in Android Studio to get pics&hellip; Still works, but maaaaaan, it&rsquo;s ugly. Some folks actually used it back-in-the-day, and I used it in ParseView&hellip;</p>
+<p>SplitterLayout is a simple layout manager that handles segmented displays with optional draggable bars between them.  In its simplest use, it&rsquo;s just a nice proportional layout manager.  More complex uses can create some interesting GUIs.</p>
+<p>Here are some examples.  I&rsquo;ll add more information to this page as I get time.   SplitterLayout is available as part of the TabSplitter distribution.  See <a href="index.html">TabSplitter</a> for details on how to download it.</p>
 <p>NOTE 1: All of these examples require a JDK 1.1 compatible browser.</p>
-
-<p>NOTE 2: Because I use AWT Windows to represent the SplitterBars as they are moving, they will probably appear with the words &quot;Warning Applet Window&quot; or something like that on them as they are being dragged.  I'm trying to come up with a solution for this... Grr... Arg...</p>
-
+<p>NOTE 2: Because I use AWT Windows to represent the SplitterBars as they are moving, they will probably appear with the words &ldquo;Warning Applet Window&rdquo; or something like that on them as they are being dragged.  I&rsquo;m trying to come up with a solution for this&hellip; Grr&hellip; Arg&hellip;</p>
 <h1 id="proportional-layouts-with-no-splitterbars">Proportional layouts with no SplitterBars</h1>
-
-<p><img src="s1.png" alt="s1.png" /></p>
-
+<p><img src="s1.png" alt="s1.png"></p>
 <p>The above layout was created with the following code:</p>
-
 <pre><code>package com.magelang.test;
 
 // GAH! Forgive the import-on-demand... I wrote this before my article on it!
@@ -312,88 +304,75 @@ import com.magelang.splitter.*;
 
 public class SplitterEx1 extends Applet {
 
-    public void init() {
-        super.init();
-        setLayout(new SplitterLayout(SplitterLayout.HORIZONTAL));
-        add(&quot;1&quot;,new Button(&quot;A (1)&quot;));
-        add(&quot;2&quot;,new Button(&quot;B (2)&quot;));
-        add(&quot;4&quot;,new Button(&quot;C (4)&quot;));
-        add(&quot;8&quot;,new Button(&quot;D (8)&quot;));
-        add(&quot;3&quot;,new Button(&quot;E (3)&quot;));
-    }
+	public void init() {
+		super.init();
+		setLayout(new SplitterLayout(SplitterLayout.HORIZONTAL));
+		add(&quot;1&quot;,new Button(&quot;A (1)&quot;));
+		add(&quot;2&quot;,new Button(&quot;B (2)&quot;));
+		add(&quot;4&quot;,new Button(&quot;C (4)&quot;));
+		add(&quot;8&quot;,new Button(&quot;D (8)&quot;));
+		add(&quot;3&quot;,new Button(&quot;E (3)&quot;));
+	}
 }  
 </code></pre>
-
 <p>The quoted numbers act as proportions to determine the amount of space each component gets.</p>
-
 <h1 id="adding-splitterbars">Adding SplitterBars</h1>
-
-<p><img src="s2.png" alt="s2.png" /></p>
-
+<p><img src="s2.png" alt="s2.png"></p>
 <p>The above layout was created with the following code:</p>
-
 <p>package com.magelang.test;</p>
-
 <pre><code>import java.applet.*;
 import java.awt.*;
 import com.magelang.splitter.*;
 
 public class SplitterEx2 extends Applet {
-    public void init() {
-        super.init();
-        setLayout(new SplitterLayout(SplitterLayout.HORIZONTAL));
-        add(&quot;1&quot;,new Button(&quot;A (1)&quot;));
-        add(new SplitterBar());
-        add(&quot;2&quot;,new Button(&quot;B (2)&quot;));
-        add(new SplitterBar());
-        add(&quot;4&quot;,new Button(&quot;C (4)&quot;));
-        add(new SplitterBar());
-        add(&quot;8&quot;,new Button(&quot;D (8)&quot;));
-        add(new SplitterBar());
-        add(&quot;3&quot;,new Button(&quot;E (3)&quot;));
-    }
+	public void init() {
+		super.init();
+		setLayout(new SplitterLayout(SplitterLayout.HORIZONTAL));
+		add(&quot;1&quot;,new Button(&quot;A (1)&quot;));
+		add(new SplitterBar());
+		add(&quot;2&quot;,new Button(&quot;B (2)&quot;));
+		add(new SplitterBar());
+		add(&quot;4&quot;,new Button(&quot;C (4)&quot;));
+		add(new SplitterBar());
+		add(&quot;8&quot;,new Button(&quot;D (8)&quot;));
+		add(new SplitterBar());
+		add(&quot;3&quot;,new Button(&quot;E (3)&quot;));
+	}
 }  
 </code></pre>
-
 <p>Adding Splitterbars between components allows the user to resize the components.  The quoted numbers are now only used as an initial size for the components.</p>
-
 <h1 id="splitterbars-can-contain-other-components">SplitterBars can contain other components!</h1>
-
-<p>SplitterBars are just Panels with dragging and painting stuff added.  They can contain any other components you want in any layout (even another SplitterLayout!)  The following shows a simple &quot;movable status bar&quot; layout:</p>
-
-<p><img src="s3.png" alt="s3.png" /></p>
-
+<p>SplitterBars are just Panels with dragging and painting stuff added.  They can contain any other components you want in any layout (even another SplitterLayout!)  The following shows a simple &ldquo;movable status bar&rdquo; layout:</p>
+<p><img src="s3.png" alt="s3.png"></p>
 <p>The above layout was created with the following code:</p>
-
 <p>package com.magelang.test;</p>
-
 <pre><code>import java.applet.*;
 import java.awt.*;
 import com.magelang.splitter.*;
 
 public class SplitterEx3 extends Applet {
-    public void init() {
-        super.init();
-        setLayout(new SplitterLayout(SplitterLayout.VERTICAL));
-        add(&quot;1&quot;,new Button(&quot;A (1)&quot;));
-        SplitterBar b1 = new SplitterBar();
-        b1.setLayout(new GridLayout(1,0));
-        b1.add(new SplitterSpace());
-        b1.add(new Label(&quot;Status&quot;));
-        b1.add(new TextField(&quot;Enter your name&quot;));
-        b1.add(new SplitterSpace());
-        add(b1);
-        add(&quot;2&quot;,new Button(&quot;B (2)&quot;));
-        SplitterBar b2 = new SplitterBar();
-        b2.setLayout(new SplitterLayout(SplitterLayout.HORIZONTAL));
-        b2.add(&quot;5&quot;,new SplitterSpace());
-        b2.add(new SplitterBar());
-        b2.add(&quot;10&quot;,new Label(&quot;Status&quot;));
-        b2.add(new SplitterBar());
-        b2.add(&quot;40&quot;,new TextField(&quot;Enter your name&quot;));
-        add(b2);
-        add(&quot;4&quot;,new Button(&quot;C (4)&quot;));
-        }
+	public void init() {
+		super.init();
+		setLayout(new SplitterLayout(SplitterLayout.VERTICAL));
+		add(&quot;1&quot;,new Button(&quot;A (1)&quot;));
+		SplitterBar b1 = new SplitterBar();
+		b1.setLayout(new GridLayout(1,0));
+		b1.add(new SplitterSpace());
+		b1.add(new Label(&quot;Status&quot;));
+		b1.add(new TextField(&quot;Enter your name&quot;));
+		b1.add(new SplitterSpace());
+		add(b1);
+		add(&quot;2&quot;,new Button(&quot;B (2)&quot;));
+		SplitterBar b2 = new SplitterBar();
+		b2.setLayout(new SplitterLayout(SplitterLayout.HORIZONTAL));
+		b2.add(&quot;5&quot;,new SplitterSpace());
+		b2.add(new SplitterBar());
+		b2.add(&quot;10&quot;,new Label(&quot;Status&quot;));
+		b2.add(new SplitterBar());
+		b2.add(&quot;40&quot;,new TextField(&quot;Enter your name&quot;));
+		add(b2);
+		add(&quot;4&quot;,new Button(&quot;C (4)&quot;));
+		}
 } 
 </code></pre>
           </div>
@@ -599,7 +578,7 @@ public class SplitterEx3 extends Applet {
   
   <div class="copyright py-4">
     
-    <span>  1998 - 2019 &copy; Scott Stanchfield | Theme <a href='https://github.com/orianna-zzo/AllinOne' target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a>  </span>
+    <span>  1998 - 2021 &copy; Scott Stanchfield | Theme <a href='https://github.com/orianna-zzo/AllinOne' target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a>  </span>
   </div>
   
 

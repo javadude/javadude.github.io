@@ -1,16 +1,12 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Beans on JavaDude.com</title>
+    <title>beans on JavaDude.com</title>
     <link>https://javadude.com/tags/beans/</link>
-    <description>Recent content in Beans on JavaDude.com</description>
+    <description>Recent content in beans on JavaDude.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Sat, 04 Mar 2000 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://javadude.com/tags/beans/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 04 Mar 2000 00:00:00 +0000</lastBuildDate><atom:link href="https://javadude.com/tags/beans/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Creating JavaBean Property Editors</title>
       <link>https://javadude.com/posts/20000304-property-editors/</link>

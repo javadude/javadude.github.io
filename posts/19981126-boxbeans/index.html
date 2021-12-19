@@ -12,9 +12,10 @@
   <meta property="og:title" content="BoxBeans" />
 <meta property="og:description" content="JavaBeans for BoxLayout Visualization" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://javadude.com/posts/19981126-boxbeans/" />
-<meta property="article:published_time" content="1998-11-26T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="1998-11-26T00:00:00&#43;00:00"/>
+<meta property="og:url" content="https://javadude.com/posts/19981126-boxbeans/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="1998-11-26T00:00:00+00:00" />
+<meta property="article:modified_time" content="1998-11-26T00:00:00+00:00" />
+
 
 
   <title>
@@ -286,139 +287,104 @@
 
           <div class="post-content markdown">
             <p>JavaBeans for BoxLayout Visualization</p>
-
 <h1 id="news">News</h1>
-
 <ul>
-<li><p>10/17/2018</p>
-
+<li>
+<p>10/17/2018</p>
 <ul>
-<li>Updating this website. The VisualAge for Java version of these beans are obsolete, and I'm just keeping this around for historical purposes. The beans themselves <em>might</em> still work in GUI builders, but I haven't tested them in years, and the source is in a VisualAge repository so I can't get to it...</li>
-</ul></li>
-
-<li><p>11/26/1998</p>
-
-<ul>
-<li>With the current VisualAge fixpacks you no longer need the extra swing package.   I've removed them from the VAJ distribution</li>
-<li>I've added a JAR file distribution and tested it with JBuilder -- it seems to work just fine!
-
-<br /></li>
-</ul></li>
+<li>Updating this website. The VisualAge for Java version of these beans are obsolete, and I&rsquo;m just keeping this around for historical purposes. The beans themselves <em>might</em> still work in GUI builders, but I haven&rsquo;t tested them in years, and the source is in a VisualAge repository so I can&rsquo;t get to it&hellip;</li>
 </ul>
-
-<h1 id="introduction">Introduction</h1>
-
-<p>Swing's BoxLayout is a fairly useful layout manager, but using it in a visual environment such as VisualAge for Java's Visual Composition Editor isn't easy.</p>
-
-<p>There are several problems to face:</p>
-
+</li>
+<li>
+<p>11/26/1998</p>
 <ul>
-<li>The Box class isn't a bean</li>
-<li>Support for &quot;struts&quot; and &quot;glue&quot; is only provided programmatically</li>
+<li>With the current VisualAge fixpacks you no longer need the extra swing package.   I&rsquo;ve removed them from the VAJ distribution</li>
+<li>I&rsquo;ve added a JAR file distribution and tested it with JBuilder &ndash; it seems to work just fine!</li>
+</ul>
+</li>
+</ul>
+<h1 id="introduction">Introduction</h1>
+<p>Swing&rsquo;s BoxLayout is a fairly useful layout manager, but using it in a visual environment such as VisualAge for Java&rsquo;s Visual Composition Editor isn&rsquo;t easy.</p>
+<p>There are several problems to face:</p>
+<ul>
+<li>The Box class isn&rsquo;t a bean</li>
+<li>Support for &ldquo;struts&rdquo; and &ldquo;glue&rdquo; is only provided programmatically</li>
 <li>BoxLayout uses getPreferredSize(), getMaximumSize() and getMinimumSize() to perform its calculations.  These sizes are settable for Swing components, but for non-swing components you must subclass components to change them.</li>
 </ul>
-
 <p>This became frustrating while teaching, so I developed the <strong>Box Beans</strong>.   The box beans provide visual support for easy use of BoxLayout.</p>
-
 <p>The following beans are provided:</p>
-
 <ul>
-<li><p>BoxAdapter - a simple container that can be used to change the resize behavior of any component in a BoxLayout.  It has four boolean properties:</p>
-
+<li>
+<p>BoxAdapter - a simple container that can be used to change the resize behavior of any component in a BoxLayout.  It has four boolean properties:</p>
 <ul>
-<li>shrinkHorizontal - controls the &quot;width&quot; when asked for getMinimumSize().</li>
-<li>shrinkVertical - controls the &quot;height&quot; when asked for getMinimumSize().</li>
-<li>stretchHorizontal - controls the &quot;width&quot; when asked for getMaximumSize().</li>
-<li>stretchVertical - controls the &quot;height&quot; when asked for getMaximumSize().
-<br /></li>
+<li>shrinkHorizontal - controls the &ldquo;width&rdquo; when asked for getMinimumSize().</li>
+<li>shrinkVertical - controls the &ldquo;height&rdquo; when asked for getMinimumSize().</li>
+<li>stretchHorizontal - controls the &ldquo;width&rdquo; when asked for getMaximumSize().</li>
+<li>stretchVertical - controls the &ldquo;height&rdquo; when asked for getMaximumSize().</li>
 </ul>
-
 <p>When any of these properties is false, the appropriate value from getPreferredSize() is returned.  For example, if <em>all</em> of these properties are false, the component will <em>always</em> be displayed at its preferred size.  If all are true, the component will stretch and shrink as needed.</p>
-
 <p>By placing a BoxAdapter in a BoxLayout-controlled Container, you can have it control the resize behavior of its contained Component(s).</p>
-
-<p>By default, BoxAdapter uses GridLayout(1,0) as its layout manager.   It is really intended to hold a single component, though it could be used anywhere a Container is needed.</p></li>
-
-<li><p>VerticalStrut - Represents a fixed-size vertical component, used for fixed spacing in a y-axis-oriented BoxLayout.</p></li>
-
-<li><p>HorizontalStrut - Represents a fixed-size horizontal component, used for fixed spacing in a x-axis-oriented BoxLayout.</p></li>
-
-<li><p>VerticalGlue - Represents a varying size vertical component, used to force space between other components in a y-axis-oriented BoxLayout.</p></li>
-
-<li><p>HorizontalGlue - Represents a varying size horizontal component, used to force space between other components in a x-axis-oriented BoxLayout.</p></li>
+<p>By default, BoxAdapter uses GridLayout(1,0) as its layout manager.   It is really intended to hold a single component, though it could be used anywhere a Container is needed.</p>
+</li>
+<li>
+<p>VerticalStrut - Represents a fixed-size vertical component, used for fixed spacing in a y-axis-oriented BoxLayout.</p>
+</li>
+<li>
+<p>HorizontalStrut - Represents a fixed-size horizontal component, used for fixed spacing in a x-axis-oriented BoxLayout.</p>
+</li>
+<li>
+<p>VerticalGlue - Represents a varying size vertical component, used to force space between other components in a y-axis-oriented BoxLayout.</p>
+</li>
+<li>
+<p>HorizontalGlue - Represents a varying size horizontal component, used to force space between other components in a x-axis-oriented BoxLayout.</p>
+</li>
 </ul>
-
-<p>The struts have a &quot;pixels&quot; property that controls how much space they take up.  Glue doesn't need it, as it expands and collapses as needed.</p>
-
+<p>The struts have a &ldquo;pixels&rdquo; property that controls how much space they take up.  Glue doesn&rsquo;t need it, as it expands and collapses as needed.</p>
 <p>All of the above beans have a <em>design representation</em>.  That is, when used in a bean builder, they will paint an image to easily identify themselves.  When used at runtime, no image will be painted.  For example:</p>
-
-<p><img src="images/sample1.gif" alt="sample1.gif (9931 bytes)" /></p>
-
+<p><img src="images/sample1.gif" alt="sample1.gif (9931 bytes)"></p>
 <p>Note that the struts and Glue have <em>minimum</em> sizes that are &gt; 0 when designing with them.  This ensures that they are visible at design time, and may cause the layout to look slightly different when the bean is actually run.</p>
-
 <p>BoxAdapter in particular would normally be (0,0) when empty.   However, to help visual design I set it up to (20,20) when empty at design time.   That way you can just drop another bean right on top of it without using the Beans List.</p>
-
 <h1 id="distribution">Distribution</h1>
-
-<p>I have just packaged these as a &quot;feature&quot; for VisualAge for Java 2.0.  I will set up a standard jar file later for use in other (inferior ;) ) environments.</p>
-
-<h2 id="installation-for-visualage-for-java-feature-packaging">Installation for VisualAge for Java - Feature Packaging</h2>
-
+<p>I have just packaged these as a &ldquo;feature&rdquo; for VisualAge for Java 2.0.  I will set up a standard jar file later for use in other (inferior ;) ) environments.</p>
+<h2 id="installation-for-visualage-for-java---feature-packaging">Installation for VisualAge for Java - Feature Packaging</h2>
 <p>To use the Box Beans in VisualAge for Java:</p>
-
 <ol>
 <li>Download <a href="box-vaj.zip">box-vaj.zip</a> from this site.</li>
 <li>Unzip box.zip to the directory where VisualAge for Java is installed.  For example, C:\IBMVJava.</li>
 <li>Start VisualAge for Java.</li>
-<li>Select &quot;Quick Start&quot; from the &quot;File&quot; menu.</li>
-<li>Select &quot;Add feature&quot; from the &quot;Features&quot; category.</li>
-<li>Select &quot;Javadude Box Beans&quot; to install the box beans.</li>
+<li>Select &ldquo;Quick Start&rdquo; from the &ldquo;File&rdquo; menu.</li>
+<li>Select &ldquo;Add feature&rdquo; from the &ldquo;Features&rdquo; category.</li>
+<li>Select &ldquo;Javadude Box Beans&rdquo; to install the box beans.</li>
 </ol>
-
 <p>This will add the box beans to <em>both</em> the AWT and Swing palettes, with the following icons:</p>
-
 <ul>
-<li><img src="images/boxadapt32.gif" alt="BoxAdapt32.gif (279 bytes)" />BoxAdapter</li>
-<li><img src="images/vstrut32.gif" alt="vstrut32.gif (252 bytes)" />VerticalStrut</li>
-<li><img src="images/hstrut32.gif" alt="hstrut32.gif (237 bytes)" />HorizontalStrut</li>
-<li><img src="images/vglue32.gif" alt="vglue32.gif (258 bytes)" />VerticalGlue</li>
-<li><img src="images/hglue32.gif" alt="hglue32.gif (246 bytes)" />HorizontalGlue</li>
+<li><img src="images/boxadapt32.gif" alt="BoxAdapt32.gif (279 bytes)">BoxAdapter</li>
+<li><img src="images/vstrut32.gif" alt="vstrut32.gif (252 bytes)">VerticalStrut</li>
+<li><img src="images/hstrut32.gif" alt="hstrut32.gif (237 bytes)">HorizontalStrut</li>
+<li><img src="images/vglue32.gif" alt="vglue32.gif (258 bytes)">VerticalGlue</li>
+<li><img src="images/hglue32.gif" alt="hglue32.gif (246 bytes)">HorizontalGlue</li>
 </ul>
-
-<p>If anyone has some better icon images, please let me know and I'll include them!</p>
-
-<h2 id="installation-for-other-ides-standard-jar-file">Installation for Other IDES - Standard JAR File</h2>
-
-<p>A standard JavaBean JAR file exists at <a href="boxbeans.jar">boxbeans.jar</a>.   I've tested this under JBuilder and it seems to work ok.</p>
-
+<p>If anyone has some better icon images, please let me know and I&rsquo;ll include them!</p>
+<h2 id="installation-for-other-ides---standard-jar-file">Installation for Other IDES - Standard JAR File</h2>
+<p>A standard JavaBean JAR file exists at <a href="boxbeans.jar">boxbeans.jar</a>.   I&rsquo;ve tested this under JBuilder and it seems to work ok.</p>
 <h1 id="use">Use</h1>
-
 <h2 id="visualage-for-java">VisualAge for Java</h2>
-
 <p>To use the Box Beans (once they are installed)</p>
-
 <ul>
 <li>Open a class to the VCE</li>
 <li>Add a Container (Panel, JPanel, whatever) to your composition</li>
-<li>Set that Container's layout to BoxLayout</li>
+<li>Set that Container&rsquo;s layout to BoxLayout</li>
 <li>Drop combinations of of the beans in the BoxLayout-controlled Container.</li>
 <li>If you want to add other beans (like a java.awt.Button), drop a BoxAdapter in the BoxLayout first, then drop the other bean inside it.  Adjust the properties of the BoxAdapter to get the resize behavior you want.</li>
-<li>Adjust the &quot;pixels&quot; property of the struts to control how much space they reserve.</li>
+<li>Adjust the &ldquo;pixels&rdquo; property of the struts to control how much space they reserve.</li>
 </ul>
-
 <h2 id="other-ides-or-beanbox">Other IDEs or BeanBox</h2>
-
 <p>Setup and use depends on the IDE in question.  As I test against other IDEs I will post usage instructions.</p>
-
 <p>In JBuilder, you can add the jar file to the palette and use it the same way as in VisualAge for Java.</p>
-
 <h1 id="license">License</h1>
-
 <p>Box Beans are free for <em>any</em> use <em>other</em> than selling them as a stand-alone product.</p>
-
-<p>Note that these beans are provided &quot;as-is&quot; without any warrantee or guarantee of suitability for any purpose. Scott Stanchfield cannot be held responsible for any damage caused by use of these beans.</p>
-
-<p>(In other words, use 'em for free at your own risk.)</p>
+<p>Note that these beans are provided &ldquo;as-is&rdquo; without any warrantee or guarantee of suitability for any purpose. Scott Stanchfield cannot be held responsible for any damage caused by use of these beans.</p>
+<p>(In other words, use &lsquo;em for free at your own risk.)</p>
           </div>
 
           
@@ -576,7 +542,7 @@
 								
 
 										<li class="nav-item">
-						 					<a class="nav-link" href="#installation-for-visualage-for-java-feature-packaging">
+						 					<a class="nav-link" href="#installation-for-visualage-for-java---feature-packaging">
 												 Installation for VisualAge for Java - Feature Packaging
 											</a>
 										</li>
@@ -602,7 +568,7 @@
 								
 
 										<li class="nav-item">
-						 					<a class="nav-link" href="#installation-for-other-ides-standard-jar-file">
+						 					<a class="nav-link" href="#installation-for-other-ides---standard-jar-file">
 												 Installation for Other IDES - Standard JAR File
 											</a>
 										</li>
@@ -770,7 +736,7 @@
   
   <div class="copyright py-4">
     
-    <span>  1998 - 2019 &copy; Scott Stanchfield | Theme <a href='https://github.com/orianna-zzo/AllinOne' target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a>  </span>
+    <span>  1998 - 2021 &copy; Scott Stanchfield | Theme <a href='https://github.com/orianna-zzo/AllinOne' target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a>  </span>
   </div>
   
 

@@ -12,9 +12,10 @@
   <meta property="og:title" content="Converting a Grammar from LALR to LL" />
 <meta property="og:description" content="How to convert a grammar from LALR to LL." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://javadude.com/articles/lalrtoll.html" />
-<meta property="article:published_time" content="2000-03-04T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2000-03-04T00:00:00&#43;00:00"/>
+<meta property="og:url" content="https://javadude.com/articles/lalrtoll.html" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2000-03-04T00:00:00+00:00" />
+<meta property="article:modified_time" content="2000-03-04T00:00:00+00:00" />
+
 
 
   <title>
@@ -285,171 +286,115 @@
 
 
           <div class="post-content markdown">
-            <p>Converting from LALR to LL can be challenging... Hopefully this article will make it a weeeeee bit simpler...</p>
-
-<p>This is from a post of mine in a thread about automated tools to convert from LALR grammars to LL grammars... NOTE: These are fairly general (but pointed to PCCTS 1.33 -- note that PCCTS 2.0 does not implement syntactic predicates with setjmp/longjmp)</p>
-
-<p>Toolwise, I think you're pretty much SOL. But there are several common algorithms available that you could probably use to write a simple tool.</p>
-
-<p>HOWEVER, I don't think you'd really want the code they'd generate, and hand-written ANTLR rules using its EBNF notation are much more maintainable.</p>
-
-<p>There are two &quot;big&quot; issues to deal with in the conversion (and some minor headaches as well):</p>
-
+            <p>Converting from LALR to LL can be challenging&hellip; Hopefully this article will make it a weeeeee bit simpler&hellip;</p>
+<p>This is from a post of mine in a thread about automated tools to convert from LALR grammars to LL grammars&hellip; NOTE: These are fairly general (but pointed to PCCTS 1.33 &ndash; note that PCCTS 2.0 does not implement syntactic predicates with setjmp/longjmp)</p>
+<p>Toolwise, I think you&rsquo;re pretty much SOL. But there are several common algorithms available that you could probably use to write a simple tool.</p>
+<p>HOWEVER, I don&rsquo;t think you&rsquo;d really want the code they&rsquo;d generate, and hand-written ANTLR rules using its EBNF notation are much more maintainable.</p>
+<p>There are two &ldquo;big&rdquo; issues to deal with in the conversion (and some minor headaches as well):</p>
 <h2 id="problem-common-prefixes">Problem: Common Prefixes</h2>
-
 <p>An LL(k) parser cannot choose between two rules that have the same k-token lookahead. For example, if k=1 (LL(1)), the following is ambiguous:</p>
-
 <pre><code>a
-    :   A B C
-    |   A D E
-    ;   
+	:	A B C
+	|	A D E
+	;   
 </code></pre>
-
-<p>The above ambiguity will disappear if you specify k=2 -- the parser will look at the &quot;B&quot; or &quot;D&quot; after the &quot;A&quot; to determine which way to go. But, this can be inefficient, as the parser must look 2 tokens ahead in every prediction expression!</p>
-
-<p>An LALR(1) parser doesn't have trouble with this because it is essentially &quot;trying all the alts at once&quot; and deciding which to use when it has enough info.</p>
-
+<p>The above ambiguity will disappear if you specify k=2 &ndash; the parser will look at the &ldquo;B&rdquo; or &ldquo;D&rdquo; after the &ldquo;A&rdquo; to determine which way to go. But, this can be inefficient, as the parser must look 2 tokens ahead in every prediction expression!</p>
+<p>An LALR(1) parser doesn&rsquo;t have trouble with this because it is essentially &ldquo;trying all the alts at once&rdquo; and deciding which to use when it has enough info.</p>
 <p>An LL(k) parser predicts which alt to take based on the next k tokens it sees in the input stream.</p>
-
 <p>So what to do in a general case? There are a few possibilities:</p>
-
 <h3 id="up-the-value-of-k-lookahead">Up the value of k (lookahead)</h3>
-
 <p>This may work, but will cause a performance hit and only covers an certain set of cases</p>
-
 <h3 id="left-factor">Left factor</h3>
-
 <p>In the above example (in ANTLR), left-factoring this would result in:</p>
-
 <pre><code>a
-    :   A (B C | D E)
-    ;
+	:	A (B C | D E)
+	;
 </code></pre>
-
-<p>Now the parser just matches &quot;A&quot;, then makes another decision on which alternative based on &quot;is the next token B or D?&quot; Note that this could also be written</p>
-
+<p>Now the parser just matches &ldquo;A&rdquo;, then makes another decision on which alternative based on &ldquo;is the next token B or D?&rdquo; Note that this could also be written</p>
 <pre><code>a
-    :   A a_rest
-    ;
+	:	A a_rest
+	;
 a_rest
-    :   B C
-    |   D E
-    ;
+	:	B C
+	|	D E
+	;
 </code></pre>
-
-<p>if you prefer. However, this creates another function call (ANTLR generates recursive-descent parsers.) Use your judgement as to when to create separate rules as opposed to subrules. Ask &quot;is it readable? Does it make more sense to keep stuff in one rule?&quot; and so on...</p>
-
+<p>if you prefer. However, this creates another function call (ANTLR generates recursive-descent parsers.) Use your judgement as to when to create separate rules as opposed to subrules. Ask &ldquo;is it readable? Does it make more sense to keep stuff in one rule?&rdquo; and so on&hellip;</p>
 <h3 id="add-syntactic-predicates">Add syntactic predicates</h3>
-
-<p>There may be cases when it is very difficult/impossible to left factor, or you really need &quot;infinite lookahead&quot; (C++ is a great example of this with decl vs. expr)</p>
-
-<p>Syntactic predicates are a feature of ANTLR that says &quot;if my first k tokens match, try me -- if I work, use me. Otherwise, try the next possibility&quot;</p>
-
+<p>There may be cases when it is very difficult/impossible to left factor, or you really need &ldquo;infinite lookahead&rdquo; (C++ is a great example of this with decl vs. expr)</p>
+<p>Syntactic predicates are a feature of ANTLR that says &ldquo;if my first k tokens match, try me &ndash; if I work, use me. Otherwise, try the next possibility&rdquo;</p>
 <p>Say you may have a silly rule like</p>
-
 <pre><code>a
-    :   A A A A A A B
-    |   (A)+ B
-    ;
+	:	A A A A A A B
+	|	(A)+ B
+	;
 </code></pre>
-
-<p>Basically, we want to do a certain action if we see 6 A's then a B. Any other number of A's followed by a B does something else. (Yes -- you could just count the A's in the (A)+ part of the rule, but suppose I was stubborn and insisted you follow me...)</p>
-
-<p>This rule would need 7 token lookahead, or some really nasty splitting up that would make the meaning unclear (or, don't say it, a counter in the (A)+...) By changing the rule to</p>
-
+<p>Basically, we want to do a certain action if we see 6 A&rsquo;s then a B. Any other number of A&rsquo;s followed by a B does something else. (Yes &ndash; you could just count the A&rsquo;s in the (A)+ part of the rule, but suppose I was stubborn and insisted you follow me&hellip;)</p>
+<p>This rule would need 7 token lookahead, or some really nasty splitting up that would make the meaning unclear (or, don&rsquo;t say it, a counter in the (A)+&hellip;) By changing the rule to</p>
 <pre><code>a
-    :   (A A A A A A B)?
-    |   (A)+ B
-    ;
+	:	(A A A A A A B)?
+	|	(A)+ B
+	;
 </code></pre>
-
-<p>You tell ANTLR to construct a parser that will &quot;try&quot; the first alt, and if it works, use it. Otherwise, _don't_ display a message and try the next alt and so on. Note that the &quot;guess&quot; it is taking doesn't execute action code, and if the &quot;guess&quot; says use that rule, it needs to re-run the match to run the actions.</p>
-
-<p>Syntactic predicates are your friend, but they are costly if overused. Also, be warned that they are implemented using setjmp/longjmp, which could cause problems if you create objects and need them destructed -- be careful!</p>
-
+<p>You tell ANTLR to construct a parser that will &ldquo;try&rdquo; the first alt, and if it works, use it. Otherwise, _don&rsquo;t_ display a message and try the next alt and so on. Note that the &ldquo;guess&rdquo; it is taking doesn&rsquo;t execute action code, and if the &ldquo;guess&rdquo; says use that rule, it needs to re-run the match to run the actions.</p>
+<p>Syntactic predicates are your friend, but they are costly if overused. Also, be warned that they are implemented using setjmp/longjmp, which could cause problems if you create objects and need them destructed &ndash; be careful!</p>
 <h2 id="problem-left-recursion">Problem: Left Recursion</h2>
-
 <p>This one requires a bit of thought, but usually not too much.</p>
-
 <p>Suppose we have a rule</p>
-
 <pre><code>a
-    :   a B C
-    |   //nothing
-    ;
+	:	a B C
+	|	//nothing
+	;
 </code></pre>
-
-<p>Think about what that means -- any number of &quot;B C&quot; pairs. Just rewrite it as</p>
-
+<p>Think about what that means &ndash; any number of &ldquo;B C&rdquo; pairs. Just rewrite it as</p>
 <pre><code>a
-    :   (B C)*
-    ;
+	:	(B C)*
+	;
 </code></pre>
-
-<p>be careful as to the use of * vs + -- in the above, a can be empty, so * was used. this could also be written as a tail-recursive rule, but the first method is more efficient as it just generates a match loop, not extra function calls. (Use the (...)* and (...)+ constructs when possible to avoid recursive calls -- they save on performance!)</p>
-
+<p>be careful as to the use of * vs + &ndash; in the above, a can be empty, so * was used. this could also be written as a tail-recursive rule, but the first method is more efficient as it just generates a match loop, not extra function calls. (Use the (&hellip;)* and (&hellip;)+ constructs when possible to avoid recursive calls &ndash; they save on performance!)</p>
 <p>Left recursion is also prevalent in expression rules. Things like</p>
-
 <pre><code>expr
-    :   expr &quot;+&quot; expr
-    |   expr &quot;-&quot; expr
-    |   expr &quot;\*&quot; expr
-    ;
+	:	expr &quot;+&quot; expr
+	|	expr &quot;-&quot; expr
+	|	expr &quot;\*&quot; expr
+	;
 </code></pre>
-
 <p>and so on.</p>
-
-<p>To rewrite the expression rules in LL(k) form, you'll need to break them up by the precedence of the operators. Start with a rule like &quot;primary&quot; that just lists the &quot;atomic&quot; elements of an expression, like variable, constant and (expr):</p>
-
+<p>To rewrite the expression rules in LL(k) form, you&rsquo;ll need to break them up by the precedence of the operators. Start with a rule like &ldquo;primary&rdquo; that just lists the &ldquo;atomic&rdquo; elements of an expression, like variable, constant and (expr):</p>
 <pre><code>primary
-    :   variable
-    |   constant
-    |   LPAREN expr RPAREN
-    ;
+	:	variable
+	|	constant
+	|	LPAREN expr RPAREN
+	;
 </code></pre>
-
 <p>then work your way <em>down</em> the precedence table, starting with the highest-level precedence operators, like NOT:</p>
-
 <pre><code>unary_expr
-    :   (unary_operator)* primary
-    ;
+	:	(unary_operator)* primary
+	;
 </code></pre>
-
-<p>then go to the next level (suppose it's multiplicative operators)</p>
-
+<p>then go to the next level (suppose it&rsquo;s multiplicative operators)</p>
 <pre><code>mult_expr
-    :   unary_expr (mult_op unary_expr)*
-    ;
+	:	unary_expr (mult_op unary_expr)*
+	;
 </code></pre>
-
 <p>then the next level</p>
-
 <pre><code>add_expr
-    :   mult_expr (add_op mult_expr)*
+	:	mult_expr (add_op mult_expr)*
 </code></pre>
-
 <p>and so on. The idea is that things at each level of the precedence table reference the things at the next higher precedence level, <em>possibly</em> adding their own operators. In general</p>
-
 <pre><code>level_n_expr
-    :   level_n-1_expr (level_n_op level_n-1_expr)*
-    ;
+	:	level_n-1_expr (level_n_op level_n-1_expr)*
+	;
 </code></pre>
-
 <p>making sure to use <code>(...)*</code> and NOT <code>(...)+</code></p>
-
-<p>Most (if not all) yacc grammars can be converted into ANTLR grammars, but I suggest you use thought to do it rather than mechanical force (unless there's a mechanical force that smart enough, which I doubt.) It doesn't take too long to do it, either. A few other things to remember about ANTLR:</p>
-
-<p>Action code can be placed <em>anywhere</em> in rules without adding conflicts (although placing them at the start of a rule makes it and &quot;init action&quot; rather than a normal action -- see the docs</p>
-
-<p>You can pass/return values to/from other rules as parameters to the rules. This is a GREAT feature that you just can't do in yacc due to the nature of LALR parsing try to use label <em>names</em> instead of label <em>numbers</em> (as in yacc) this'll save tons of headache when you need to make a mod like adding a rule reference to a rule.</p>
-
+<p>Most (if not all) yacc grammars can be converted into ANTLR grammars, but I suggest you use thought to do it rather than mechanical force (unless there&rsquo;s a mechanical force that smart enough, which I doubt.) It doesn&rsquo;t take too long to do it, either. A few other things to remember about ANTLR:</p>
+<p>Action code can be placed <em>anywhere</em> in rules without adding conflicts (although placing them at the start of a rule makes it and &ldquo;init action&rdquo; rather than a normal action &ndash; see the docs</p>
+<p>You can pass/return values to/from other rules as parameters to the rules. This is a GREAT feature that you just can&rsquo;t do in yacc due to the nature of LALR parsing try to use label <em>names</em> instead of label <em>numbers</em> (as in yacc) this&rsquo;ll save tons of headache when you need to make a mod like adding a rule reference to a rule.</p>
 <pre><code>yacc :    a: B C {$$ \= do($1, $2);}
 
 ANTLR:    a: b:B c:C &lt;&lt;$0 \= do($b, $c);&gt;&gt;
 </code></pre>
-
-<p>(keep in mind that you can only label terminals -- if you need a result from a subrule, pass it back as a return value)</p>
-
+<p>(keep in mind that you can only label terminals &ndash; if you need a result from a subrule, pass it back as a return value)</p>
 <p>Good luck! </p>
           </div>
 
@@ -710,7 +655,7 @@ ANTLR:    a: b:B c:C &lt;&lt;$0 \= do($b, $c);&gt;&gt;
   
   <div class="copyright py-4">
     
-    <span>  1998 - 2019 &copy; Scott Stanchfield | Theme <a href='https://github.com/orianna-zzo/AllinOne' target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a>  </span>
+    <span>  1998 - 2021 &copy; Scott Stanchfield | Theme <a href='https://github.com/orianna-zzo/AllinOne' target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a>  </span>
   </div>
   
 

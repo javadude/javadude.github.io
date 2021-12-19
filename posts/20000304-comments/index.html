@@ -12,9 +12,10 @@
   <meta property="og:title" content="Using the Right Comment in Java" />
 <meta property="og:description" content="How and why you should use JavaBean accessor (get/set) methods." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://javadude.com/posts/20000304-comments/" />
-<meta property="article:published_time" content="2000-03-04T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2000-03-04T00:00:00&#43;00:00"/>
+<meta property="og:url" content="https://javadude.com/posts/20000304-comments/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2000-03-04T00:00:00+00:00" />
+<meta property="article:modified_time" content="2000-03-04T00:00:00+00:00" />
+
 
 
   <title>
@@ -286,117 +287,100 @@
 
           <div class="post-content markdown">
             <p>Java provides three types of comments; when should we use which?</p>
-
 <h2 id="single-line-c-style-comments">Single-Line (C++-Style) Comments</h2>
-
 <p>The simplest comment in Java is the single line comment. It starts with two forward slashes and continues to the end of the line. For example:</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// this is a single-line comment
-</span><span class="c1"></span><span class="n">x</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span> <span class="o">//</span> <span class="n">a</span> <span class="n">single</span><span class="o">-</span><span class="n">line</span> <span class="n">comment</span> <span class="n">after</span> <span class="n">code</span></code></pre></div>
-<h2 id="multi-line-c-style-comments">Multi-Line (C-Style) Comments</h2>
-
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="c1">// this is a single-line comment
+</span><span class="c1"></span><span class="n">x</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span> <span class="c1">// a single-line comment after code
+</span></code></pre></div><h2 id="multi-line-c-style-comments">Multi-Line (C-Style) Comments</h2>
 <p>Java also provides a comment type that can span multiple lines. You start this type of comment with a forward slash followed by an asterisk, and end it with an asterisk followed by a forward slash. The start and end delimiters for this type of comment may be on the same line, or they can be on different lines. For example</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="cm">/* This is a c-style comment */</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="cm">/* This is a c-style comment */</span>
 
 <span class="cm">/*  This is also a
-</span><span class="cm">    c-style comment, spanning
-</span><span class="cm">    multiple lines */</span></code></pre></div>
-<p>Note that C-style comments <strong><em>cannot</em></strong> be nested. Something like</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="cm">/* A comment looks like
-</span><span class="cm">    /* This is a comment */</span>
-    <span class="n">blah</span> <span class="n">blah</span> <span class="n">blah</span>
-<span class="o">*/</span></code></pre></div>
-<p>will generate a syntax error because the java compiler will only treat through the first <code>*/</code> as a comment. (The comment ends at the first <code>*/</code> the compiler sees.)</p>
-
+</span><span class="cm">	c-style comment, spanning
+</span><span class="cm">	multiple lines */</span>
+</code></pre></div><p>Note that C-style comments <strong><em>cannot</em></strong> be nested. Something like</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="cm">/* A comment looks like
+</span><span class="cm">   /* This is a comment */</span>
+   <span class="n">blah</span> <span class="n">blah</span> <span class="n">blah</span>
+<span class="o">*/</span>
+</code></pre></div><p>will generate a syntax error because the java compiler will only treat through the first <code>*/</code> as a comment. (The comment ends at the first <code>*/</code> the compiler sees.)</p>
 <p>You <em>can</em> nest single-line comments within multi-line comments:</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="cm">/* This is a single-line comment:
-</span><span class="cm">    // a single-line comment
-</span><span class="cm">*/</span></code></pre></div>
-<p>and multi-line comments in single-line comments:</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// /* this is
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="cm">/* This is a single-line comment:
+</span><span class="cm">	// a single-line comment
+</span><span class="cm">*/</span>
+</code></pre></div><p>and multi-line comments in single-line comments:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="c1">// /* this is
 </span><span class="c1">//    a multi-line
-</span><span class="c1"></span><span class="o">//</span>    <span class="n">comment</span> <span class="o">*/</span></code></pre></div>
-<h2 id="documentation-comments">Documentation Comments</h2>
-
+</span><span class="c1">//    comment */
+</span></code></pre></div><h2 id="documentation-comments">Documentation Comments</h2>
 <p>Documentation comments are special comments that look like multi-line comments but can be used to generate external documentation about your source code. These begin with a forward slash followed by <strong><em>two</em></strong> asterisks, and end with an asterisk followed by a forward slash. For example:</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="cm">/** This is a documentation comment */</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="cm">/** This is a documentation comment */</span>
 
 <span class="cm">/** This is also a
-</span><span class="cm">    documentation comment */</span></code></pre></div>
-<p>There are a few important things to note about documentation comments:</p>
-
+</span><span class="cm">	documentation comment */</span>
+</code></pre></div><p>There are a few important things to note about documentation comments:</p>
 <ul>
-<li>The documentation generator, javadoc, will add all text inside a documentation comment to an HTML paragraph. This means that any text inside a documentation comment will be formatted into a paragraph; spacing and line breaks are ignored. If you want special formatting, you must include HTML tags inside your documentation comment.*   If a documentation comment begins with more than two asterisks, javadoc assumes this is just used to create a &quot;box&quot; around the comment in the source code and ignores the extra asterisks. For example:</li>
+<li>The documentation generator, javadoc, will add all text inside a documentation comment to an HTML paragraph. This means that any text inside a documentation comment will be formatted into a paragraph; spacing and line breaks are ignored. If you want special formatting, you must include HTML tags inside your documentation comment.*   If a documentation comment begins with more than two asterisks, javadoc assumes this is just used to create a &ldquo;box&rdquo; around the comment in the source code and ignores the extra asterisks. For example:</li>
 </ul>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="cm">/**********************************       
-</span><span class="cm">    This is the start of a method        
-</span><span class="cm">**********************************/</span></code></pre></div>
-<pre><code>will only keep the text &quot;This is the start of a method&quot;.
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="cm">/**********************************       
+</span><span class="cm">	This is the start of a method        
+</span><span class="cm">**********************************/</span>
+</code></pre></div><pre><code>will only keep the text &quot;This is the start of a method&quot;.
 </code></pre>
-
 <ul>
 <li>javadoc will ignore leading asterisks inside a documentation-comment block. For example:</li>
 </ul>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">        <span class="cm">/***************************************
-</span><span class="cm">         * This is a doc comment
-</span><span class="cm">         * on multiple lines that I want to stand
-</span><span class="cm">         * out in source code, looking &#34;neat&#34;
-</span><span class="cm">         ***************************************/</span></code></pre></div>
-<pre><code>will only keep the text &quot;This is a doc comment on multiple lines that I want to stand out in source code, looking &quot;neat&quot;&quot;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java">		<span class="cm">/***************************************
+</span><span class="cm">		 * This is a doc comment
+</span><span class="cm">		 * on multiple lines that I want to stand
+</span><span class="cm">		 * out in source code, looking &#34;neat&#34;
+</span><span class="cm">		 ***************************************/</span>
+</code></pre></div><pre><code>will only keep the text &quot;This is a doc comment on multiple lines that I want to stand out in source code, looking &quot;neat&quot;&quot;
 </code></pre>
-
 <ul>
-<li>It's common practice to use something like</li>
+<li>It&rsquo;s common practice to use something like</li>
 </ul>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java">        <span class="cm">/******************************************
-</span><span class="cm">        ...
-</span><span class="cm">        ******************************************/</span></code></pre></div>
-<pre><code>to make a comment stand out. Be aware that this is treated as a documentation comment (even if that's not what you had intended), and could show up in the generated documentation.   
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java">		<span class="cm">/******************************************
+</span><span class="cm">		...
+</span><span class="cm">		******************************************/</span>
+</code></pre></div><pre><code>to make a comment stand out. Be aware that this is treated as a documentation comment (even if that's not what you had intended), and could show up in the generated documentation.   
 </code></pre>
-
 <h1 id="when-to-use-documentation-comments">When to Use Documentation Comments</h1>
-
-<p>Documentation comments should (at very least) be used in front of every public class, interface, method and class/instance variable in your source code. This allows someone to run javadoc against the code and generate a simple document that lists the public entities and a brief description of each. You may also use documentation comments in front on non-public methods, and use a javadoc option to generate documentation for them. Using documentation comments on non-public entities is not as important as publics (the interface isn't exposed...) but if you're commenting the code <em>anyway</em> you might as well write those comments as documentation comments.</p>
-
+<p>Documentation comments should (at very least) be used in front of every public class, interface, method and class/instance variable in your source code. This allows someone to run javadoc against the code and generate a simple document that lists the public entities and a brief description of each. You may also use documentation comments in front on non-public methods, and use a javadoc option to generate documentation for them. Using documentation comments on non-public entities is not as important as publics (the interface isn&rsquo;t exposed&hellip;) but if you&rsquo;re commenting the code <em>anyway</em> you might as well write those comments as documentation comments.</p>
 <h1 id="when-to-use-single-line-comments">When to Use Single-Line Comments</h1>
-
 <p><strong>Always!</strong></p>
-
 <p>My simple advice on commenting is that whenever you want to write a normal comment (not a documentation comment that describes and class, interface, method or variable) use a single line comment.</p>
-
-<p>Why? Because you can easily use multi-line comments to &quot;comment out&quot; a section of your code! (&quot;Commenting out code&quot; refers to changing the lexical state of a section of source code to being inside a comment, making the compiler ignore that code.) Take as an example:</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">x</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span>   <span class="cm">/* set x to 1 */</span>
+<p>Why? Because you can easily use multi-line comments to &ldquo;comment out&rdquo; a section of your code! (&ldquo;Commenting out code&rdquo; refers to changing the lexical state of a section of source code to being inside a comment, making the compiler ignore that code.) Take as an example:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="n">x</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span>   <span class="cm">/* set x to 1 */</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">2</span><span class="o">;</span>   <span class="cm">/* set y to 2 */</span>
-<span class="n">f</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">);</span> <span class="cm">/* call f with x and y */</span></code></pre></div>
-<p>If you want to comment out these three lines, you would either need to put a single line comment in front of each line:</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="c1">// x = 1;   /* set x to 1 */
+<span class="n">f</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">);</span> <span class="cm">/* call f with x and y */</span>
+</code></pre></div><p>If you want to comment out these three lines, you would either need to put a single line comment in front of each line:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="c1">// x = 1;   /* set x to 1 */
 </span><span class="c1">// y = 2;   /* set y to 2 */
-</span><span class="c1"></span><span class="o">//</span> <span class="n">f</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">);</span> <span class="cm">/* call f with x and y */</span></code></pre></div>
-<p>or add in multi-line comments wherever there isn't already one present:</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="cm">/* x = 1;  */</span> <span class="cm">/* set x to 1 */</span>
+</span><span class="c1">// f(x, y); /* call f with x and y */
+</span></code></pre></div><p>or add in multi-line comments wherever there isn&rsquo;t already one present:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="cm">/* x = 1;  */</span> <span class="cm">/* set x to 1 */</span>
 <span class="cm">/* y = 2;  */</span> <span class="cm">/* set y to 2 */</span>
-<span class="cm">/* f(x, y);*/</span> <span class="cm">/* call f with x and y */</span></code></pre></div>
-<p>or mutilate/remove the &quot;end comment&quot; delimiters of the existing comments:</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="cm">/*
-</span><span class="cm">    x = 1;   /* set x to 1 * /
-</span><span class="cm">    y = 2;   /* set y to 2 * /
-</span><span class="cm">    f(x, y); /* call f with x and y * /
-</span><span class="cm">*/</span></code></pre></div>
-<p>None of these are terribly pleasant. It's much easier if the original code were:</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">x</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span>   <span class="c1">// set x to 1
+<span class="cm">/* f(x, y);*/</span> <span class="cm">/* call f with x and y */</span>
+</code></pre></div><p>or mutilate/remove the &ldquo;end comment&rdquo; delimiters of the existing comments:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="cm">/*
+</span><span class="cm">	x = 1;   /* set x to 1 * /
+</span><span class="cm">	y = 2;   /* set y to 2 * /
+</span><span class="cm">	f(x, y); /* call f with x and y * /
+</span><span class="cm">*/</span>
+</code></pre></div><p>None of these are terribly pleasant. It&rsquo;s much easier if the original code were:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="n">x</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span>   <span class="c1">// set x to 1
 </span><span class="c1"></span><span class="n">y</span> <span class="o">=</span> <span class="n">2</span><span class="o">;</span>   <span class="c1">// set y to 2
-</span><span class="c1"></span><span class="n">f</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">);</span> <span class="o">//</span> <span class="n">call</span> <span class="n">f</span> <span class="n">with</span> <span class="n">x</span> <span class="n">and</span> <span class="n">y</span></code></pre></div>
-<p>then you can easily comment it out by just placing a multi-line comment around it:</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="cm">/*
+</span><span class="c1"></span><span class="n">f</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">);</span> <span class="c1">// call f with x and y
+</span></code></pre></div><p>then you can easily comment it out by just placing a multi-line comment around it:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="cm">/*
 </span><span class="cm">x = 1;   // set x to 1
 </span><span class="cm">y = 2;   // set y to 2
 </span><span class="cm">f(x, y); // call f with x and y
-</span><span class="cm">*/</span></code></pre></div>
-<p><em>Always</em> use single-line comments for your everyday commenting needs!</p>
-
-<p>NOTE: Most IDEs have a simple &quot;comment-out&quot; function - highlight a block and it comments it out. Most often, it simply prepends <code>//</code> at the front of each selected line.</p>
-
+</span><span class="cm">*/</span>
+</code></pre></div><p><em>Always</em> use single-line comments for your everyday commenting needs!</p>
+<p>NOTE: Most IDEs have a simple &ldquo;comment-out&rdquo; function - highlight a block and it comments it out. Most often, it simply prepends <code>//</code> at the front of each selected line.</p>
 <h1 id="when-to-use-multi-line-comments">When to Use Multi-Line Comments</h1>
-
 <p>After reading the above section, this becomes obvious. <em>Only</em> use multi-line comments to comment out sections of code. <em>Never</em> use them for <em>any</em> other purpose!</p>
           </div>
 
@@ -682,7 +666,7 @@
   
   <div class="copyright py-4">
     
-    <span>  1998 - 2019 &copy; Scott Stanchfield | Theme <a href='https://github.com/orianna-zzo/AllinOne' target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a>  </span>
+    <span>  1998 - 2021 &copy; Scott Stanchfield | Theme <a href='https://github.com/orianna-zzo/AllinOne' target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a>  </span>
   </div>
   
 

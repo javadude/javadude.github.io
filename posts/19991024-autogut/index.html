@@ -12,9 +12,10 @@
   <meta property="og:title" content="Autogut" />
 <meta property="og:description" content="A VisualAge for Java plugin to create interfaces from classes" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://javadude.com/posts/19991024-autogut/" />
-<meta property="article:published_time" content="1999-10-24T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="1999-10-24T00:00:00&#43;00:00"/>
+<meta property="og:url" content="https://javadude.com/posts/19991024-autogut/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="1999-10-24T00:00:00+00:00" />
+<meta property="article:modified_time" content="1999-10-24T00:00:00+00:00" />
+
 
 
   <title>
@@ -286,93 +287,68 @@
 
           <div class="post-content markdown">
             <p>A VisualAge for Java plugin to create interfaces from classes</p>
-
 <h2 id="news">News</h2>
-
 <ul>
-<li><p>10/17/2018</p>
-
+<li>
+<p>10/17/2018</p>
 <ul>
-<li>I'm converting my website to a new form. This tool is obsolete (as it is a VisualAge for Java plugin), but I wanted to keep it here for historical purposes</li>
-</ul></li>
-
-<li><p>6/7/2003</p>
-
+<li>I&rsquo;m converting my website to a new form. This tool is obsolete (as it is a VisualAge for Java plugin), but I wanted to keep it here for historical purposes</li>
+</ul>
+</li>
+<li>
+<p>6/7/2003</p>
 <ul>
-<li>In case you didn't know, Eclipse has this function built in. To use it
-
+<li>In case you didn&rsquo;t know, Eclipse has this function built in. To use it
 <ul>
 <li>Select the name of a class in Eclipse</li>
 <li>Choose <strong>Refactor-&gt;Extract Interface</strong></li>
-</ul></li>
-</ul></li>
-
-<li><p>10/24/99</p>
-
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>10/24/99</p>
 <ul>
 <li>Initial release of autogut</li>
-<li>Status: An initial release - not entirely robust, but should work pretty well. I need to add a bit more checking for situations like &quot;project already exists in repository&quot; and ask if you want to create it. I suggest for now that you always use the Browse buttons for project and package.<br />
+<li>Status: An initial release - not entirely robust, but should work pretty well. I need to add a bit more checking for situations like &ldquo;project already exists in repository&rdquo; and ask if you want to create it. I suggest for now that you always use the Browse buttons for project and package.<br>
 This release has not undergone a great deal of testing, but should not pose any risks to your existing data. It does not modify the </li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <h1 id="introduction">Introduction</h1>
-
 <p>VisualAge for Java provides some excellent tools for JavaBean component creation and maintenance. However, it is often important to create interfaces to abstract a bean, especially for use in design patterns such as Model-View-Controller (MVC).</p>
-
 <p>In a normal MVC development cycle, you first create your interfaces, then implement them as concrete models. Conceptually, this is the right way to go. However, this can involve a lot of typing. Often, the model interface provides standard bound properties and custom event registration capabilities.</p>
-
-<p>VisualAge for Java's BeanInfo editor creates JavaBean properties and events quite easily. We can leverage this by creating a concrete model <em>first</em>, then gutting it to create an interface.</p>
-
+<p>VisualAge for Java&rsquo;s BeanInfo editor creates JavaBean properties and events quite easily. We can leverage this by creating a concrete model <em>first</em>, then gutting it to create an interface.</p>
 <p>AutoGut examines an existing class and creates an interface for all of its public methods. This provides a good initial interface that you can use for your model. You may need to do a bit of tweaking (AutoGut currently does not copy import statements, for example), but this is much simpler than writing the interface by hand.</p>
-
 <h1 id="distribution">Distribution</h1>
-
 <p>I have just packaged autogut as a tool for VisualAge for Java 3.0. It will probably work in version 2.0 but I have not tested it there.<a href="../index.html">Tools</a></p>
-
-<h3 id="installation-for-visualage-for-java-tool-packaging">Installation for VisualAge for Java - Tool Packaging</h3>
-
+<h3 id="installation-for-visualage-for-java---tool-packaging">Installation for VisualAge for Java - Tool Packaging</h3>
 <p>To use AutoGut in VisualAge for Java:</p>
-
 <ol>
 <li>Download <a href="autogut.zip">autogut.zip</a> from this site.</li>
 <li>Unzip autogut.zip to the directory where VisualAge for Java is installed.  For example, C:\IBMVJava.</li>
 <li>Shutdown VisualAge for Java if it is running</li>
 <li>Start VisualAge for Java.</li>
 </ol>
-
 <p>This will add the autogut tool to the <strong>Workspace-&gt;Tools</strong> menu, as well as the Tools menu for classes.</p>
-
 <h1 id="source-code">Source Code</h1>
-
-<p>If you're interested in the source code for this tool, you can download <a href="Autogut-dat.zip">Autogut-dat.zip</a>. Note that you <em>do not</em> need the source code to use the tool. This is a zipped VisualAge for Java repository file. You will need to unzip this file and import the JavaDude AutoGut project from this repository.</p>
-
+<p>If you&rsquo;re interested in the source code for this tool, you can download <a href="Autogut-dat.zip">Autogut-dat.zip</a>. Note that you <em>do not</em> need the source code to use the tool. This is a zipped VisualAge for Java repository file. You will need to unzip this file and import the JavaDude AutoGut project from this repository.</p>
 <h1 id="use">Use</h1>
-
 <h2 id="visualage-for-java">VisualAge for Java</h2>
-
 <p>To use AutoGut (once it is installed)</p>
-
 <ul>
 <li>Select <strong>Tools-&gt;Create Interface from Class</strong> from the <strong>Workbench</strong> menu or from a class' popup menu</li>
 <li>Specify the name of the class to gut (automatically selected if you had started AutoGut from a class' tool menu)</li>
 <li>Specify the name of the interface you want to create</li>
 <li>Specify the project and package where you want to create that interface. Note that if you pick a package that is in the workspace it will automatically select the project.</li>
 </ul>
-
 <h1 id="limitations">Limitations</h1>
-
 <p>Currently the tool does not copy the import statements from the class. You may need to add them yourself.</p>
-
-<p>The tool is not completely bulletproof yet, though it's in pretty good shape. Just be careful what you type.</p>
-
+<p>The tool is not completely bulletproof yet, though it&rsquo;s in pretty good shape. Just be careful what you type.</p>
 <h1 id="license">License</h1>
-
 <p>AutoGut free for <em>any</em> use <em>other</em> than selling it as a stand-alone product.</p>
-
-<p>Note that AutoGut is provided &quot;as-is&quot; without any warrantee or guarantee of suitability for any purpose. Scott Stanchfield cannot be held responsible for any damage caused by its use.</p>
-
-<p>(In other words, use 'em for free at your own risk.)</p>
+<p>Note that AutoGut is provided &ldquo;as-is&rdquo; without any warrantee or guarantee of suitability for any purpose. Scott Stanchfield cannot be held responsible for any damage caused by its use.</p>
+<p>(In other words, use &lsquo;em for free at your own risk.)</p>
           </div>
 
           
@@ -536,7 +512,7 @@ This release has not undergone a great deal of testing, but should not pose any 
 								
 
 										<li class="nav-item">
-						 					<a class="nav-link" href="#installation-for-visualage-for-java-tool-packaging">
+						 					<a class="nav-link" href="#installation-for-visualage-for-java---tool-packaging">
 												 Installation for VisualAge for Java - Tool Packaging
 											</a>
 										</li>
@@ -724,7 +700,7 @@ This release has not undergone a great deal of testing, but should not pose any 
   
   <div class="copyright py-4">
     
-    <span>  1998 - 2019 &copy; Scott Stanchfield | Theme <a href='https://github.com/orianna-zzo/AllinOne' target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a>  </span>
+    <span>  1998 - 2021 &copy; Scott Stanchfield | Theme <a href='https://github.com/orianna-zzo/AllinOne' target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a>  </span>
   </div>
   
 

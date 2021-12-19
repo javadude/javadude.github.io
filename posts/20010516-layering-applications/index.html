@@ -12,9 +12,10 @@
   <meta property="og:title" content="Layering Applications" />
 <meta property="og:description" content="How to separate your application into layers for easier maintenance." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://javadude.com/posts/20010516-layering-applications/" />
-<meta property="article:published_time" content="2001-05-16T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2001-05-16T00:00:00&#43;00:00"/>
+<meta property="og:url" content="https://javadude.com/posts/20010516-layering-applications/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2001-05-16T00:00:00+00:00" />
+<meta property="article:modified_time" content="2001-05-16T00:00:00+00:00" />
+
 
 
   <title>
@@ -286,402 +287,325 @@
 
           <div class="post-content markdown">
             <h1 id="layering-applications">Layering Applications</h1>
-
 <h2 id="introduction">Introduction</h2>
-
 <p>Maintainable applications can be quite tricky to develop. One of the keys to creating such a beast, is to properly layer your application.</p>
-
 <p>Separation is the key to maintainability. The more separate the parts of your application are, the lower the coupling between them, and changes to the guts of one part have less (or optimally no) effect on the rest of the application.</p>
-
 <p>Your biggest enemy in the quest for a maintainable application is direct communication.</p>
-
-<p>Let's get one thing out of the way right up front. <strong><em>Never</em></strong> talk directly to an EJB. I don't care what Sun or IBM says.</p>
-
+<p>Let&rsquo;s get one thing out of the way right up front. <strong><em>Never</em></strong> talk directly to an EJB. I don&rsquo;t care what Sun or IBM says.</p>
 <p>Reason? Simple. EJB is a <em>technology</em>, not a component in your application.</p>
-
 <h2 id="what-are-application-components">What are application components?</h2>
-
-<p>Think of your application as having components, similar to a stereo. We're not talking GUI Widgets here (AWT Components), we're talking about sizeable chunks of your application.</p>
-
+<p>Think of your application as having components, similar to a stereo. We&rsquo;re not talking GUI Widgets here (AWT Components), we&rsquo;re talking about sizeable chunks of your application.</p>
 <p>There are several benefits to a component stereo system:</p>
-
 <ul>
 <li>You can build it up starting with a few pieces and add more pieces over time.</li>
 <li>If a piece breaks, you can replace it or repair it without affecting the rest of the system.</li>
 <li>You can choose <em>any</em> receiver, <em>any</em> CD player, <em>any</em> equalizer, or even <em>any</em> record player, mixing and matching to create <em>your</em> system.</li>
 <li>If a better component comes along, you can replace <em>just that component</em> without affecting the rest of the system.</li>
 </ul>
-
 <p>Brilliant idea, eh?</p>
-
 <p>We can apply this concept to software with some amazing results:</p>
-
 <ul>
-<li><p><em>You can build it up starting with a few pieces and add more pieces over time.</em><br />
-Can you say &quot;lower startup cost, faster time to delivery?&quot; If you only need part of the application, you can just concentrate on that part if you think in terms of components.</p></li>
-
-<li><p><em>If a piece breaks, you can replace it or repair it without affecting the rest of the system.</em><br />
-Face it, when you fix a bug, there's a good chance that you'll break something else. The more isolated/standalong your components are, the better chance that impacts remain local to the place you changed, making them easier to notice beforehand and fix if found later.</p></li>
-
-<li><p><em>You can choose any receiver, any CD player, any equalizer, or even any record player, mixing and matching to create your system.</em><br />
-Think &quot;technologies&quot; here. We can use <em>any</em> presentation technology, like an AWT GUI or a JavaServer Page (JSP). We can use <em>any</em> data management technology (EJB Entity beans, direct database access with JDBC.)</p></li>
-
-<li><p><em>If a better component comes along, you can replace just that component without affecting the rest of the system.</em><br />
-Suppose tomorrow &quot;Schmoo&quot; becomes available. &quot;Schmoo&quot; is the newest, bestest, fastest, coolest, data management technology ever. (Kinda like folks are pushing EJB right now.) Wouldn't it be great to just replace the data management component with one that uses Schmoo instead of EJB?</p></li>
+<li>
+<p><em>You can build it up starting with a few pieces and add more pieces over time.</em><br>
+Can you say &ldquo;lower startup cost, faster time to delivery?&rdquo; If you only need part of the application, you can just concentrate on that part if you think in terms of components.</p>
+</li>
+<li>
+<p><em>If a piece breaks, you can replace it or repair it without affecting the rest of the system.</em><br>
+Face it, when you fix a bug, there&rsquo;s a good chance that you&rsquo;ll break something else. The more isolated/standalong your components are, the better chance that impacts remain local to the place you changed, making them easier to notice beforehand and fix if found later.</p>
+</li>
+<li>
+<p><em>You can choose any receiver, any CD player, any equalizer, or even any record player, mixing and matching to create your system.</em><br>
+Think &ldquo;technologies&rdquo; here. We can use <em>any</em> presentation technology, like an AWT GUI or a JavaServer Page (JSP). We can use <em>any</em> data management technology (EJB Entity beans, direct database access with JDBC.)</p>
+</li>
+<li>
+<p><em>If a better component comes along, you can replace just that component without affecting the rest of the system.</em><br>
+Suppose tomorrow &ldquo;Schmoo&rdquo; becomes available. &ldquo;Schmoo&rdquo; is the newest, bestest, fastest, coolest, data management technology ever. (Kinda like folks are pushing EJB right now.) Wouldn&rsquo;t it be great to just replace the data management component with one that uses Schmoo instead of EJB?</p>
+</li>
 </ul>
-
 <p>The key here is isolation. The more isolated your components, the more real the benefits become.</p>
-
 <p>And what makes this possible?</p>
-
 <h2 id="interfaces-are-the-key">Interfaces are the key</h2>
-
 <p>Think about what makes a component stereo work so well, or how we can use the same spark plugs in a Pacer (forgot about that, eh?) and a Rolls Royce.</p>
-
 <p>The <em>interface</em> between the components is what makes it possible!</p>
-
 <p>Components in a stereo use a common interface: RCA jacks and obfuscated setup manuals. Cars use common interfaces for their components as well, such as the threading and contacts for a spark plug.</p>
-
-<p>In the same manner, interfaces are the key to separation in your application. If you have two components that need to talk with one another, define one or more interfaces to lock down that communication. Once you have the interfaces in place, <em>it doesn't matter <strong>what</strong> the components actually <strong>are</strong> or <strong>do</strong>, as long as they respect that communication!</em></p>
-
+<p>In the same manner, interfaces are the key to separation in your application. If you have two components that need to talk with one another, define one or more interfaces to lock down that communication. Once you have the interfaces in place, <em>it doesn&rsquo;t matter <strong>what</strong> the components actually <strong>are</strong> or <strong>do</strong>, as long as they respect that communication!</em></p>
 <p>Think about this for a moment. Suppose we define:</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Customer</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">();</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">);</span>
-    <span class="o">...</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Customer</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">();</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">);</span>
+	<span class="o">...</span>
 <span class="o">}</span>
 
 <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CustomerManager</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="n">Customer</span>   <span class="nf">load</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">);</span>
-    <span class="kd">public</span> <span class="n">Customer</span>   <span class="nf">store</span><span class="o">(</span><span class="n">Customer</span> <span class="n">customer</span><span class="o">);</span>
-    <span class="kd">public</span> <span class="n">Customer</span><span class="o">[]</span> <span class="nf">findByName</span><span class="o">(</span><span class="n">String</span> <span class="n">namePattern</span><span class="o">);</span>
-    <span class="kd">public</span> <span class="n">Customer</span>   <span class="nf">createCustomer</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">float</span> <span class="n">creditLimit</span><span class="o">);</span>
-    <span class="kd">public</span> <span class="kt">void</span>       <span class="nf">deleteCustomer</span><span class="o">(</span><span class="n">Customer</span> <span class="n">customer</span><span class="o">);</span>
-<span class="o">}</span></code></pre></div>
-<p>Notice how this <em>does not</em> say anything about <em>how</em> or <em>where</em> the customer is stored. All we're doing here is specifying the basic CRUD (Create, Read, Update, Delete) operations that you need for a piece of data.</p>
-
+	<span class="kd">public</span> <span class="n">Customer</span>   <span class="nf">load</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">);</span>
+	<span class="kd">public</span> <span class="n">Customer</span>   <span class="nf">store</span><span class="o">(</span><span class="n">Customer</span> <span class="n">customer</span><span class="o">);</span>
+	<span class="kd">public</span> <span class="n">Customer</span><span class="o">[]</span> <span class="nf">findByName</span><span class="o">(</span><span class="n">String</span> <span class="n">namePattern</span><span class="o">);</span>
+	<span class="kd">public</span> <span class="n">Customer</span>   <span class="nf">createCustomer</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">float</span> <span class="n">creditLimit</span><span class="o">);</span>
+	<span class="kd">public</span> <span class="kt">void</span>       <span class="nf">deleteCustomer</span><span class="o">(</span><span class="n">Customer</span> <span class="n">customer</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div><p>Notice how this <em>does not</em> say anything about <em>how</em> or <em>where</em> the customer is stored. All we&rsquo;re doing here is specifying the basic CRUD (Create, Read, Update, Delete) operations that you need for a piece of data.</p>
 <h2 id="wow-i-can-reuse-things">Wow, I can reuse things!</h2>
-
-<p>Sorry, bud, you missed the point...</p>
-
-<p>I've often heard phrases like &quot;software is like cars; you can reuse spark plugs, pistons, even the whole engine.&quot;</p>
-
-<p>Can you say &quot;apples and oranges&quot;?</p>
-
+<p>Sorry, bud, you missed the point&hellip;</p>
+<p>I&rsquo;ve often heard phrases like &ldquo;software is like cars; you can reuse spark plugs, pistons, even the whole engine.&rdquo;</p>
+<p>Can you say &ldquo;apples and oranges&rdquo;?</p>
 <p>Sure, if all I wrote were personal information manager applications, I could reuse the notepad, address book and email components constantly. <em>But do I really write the same type of application more than once???</em> Of course not!</p>
-
-<p>(Note: Reusing things like MS Excel inside Word isn't a new type of app... they are both &quot;office apps&quot;)</p>
-
+<p>(Note: Reusing things like MS Excel inside Word isn&rsquo;t a new type of app&hellip; they are both &ldquo;office apps&rdquo;)</p>
 <h3 id="so-why-are-components-good-if-not-for-reuse">So why are components good, if not for reuse?</h3>
-
 <p>Think about stereos, refrigerators, and cars.</p>
-
-<p>If you examine them at a microscopic level, they all reuse molecules. Go up a bit farther, and they all share transistors, but as your components grow bigger, they become <em>more domain specific</em>. Domain-specific components can really only be used in one type of application. You can't take your car's engine and use it to build a fridge.</p>
-
-<p>Small enough components, like GUI Widgets, and data structures like Java's Vector and Hashtable, are incredibly reusable. But that's really low level.</p>
-
+<p>If you examine them at a microscopic level, they all reuse molecules. Go up a bit farther, and they all share transistors, but as your components grow bigger, they become <em>more domain specific</em>. Domain-specific components can really only be used in one type of application. You can&rsquo;t take your car&rsquo;s engine and use it to build a fridge.</p>
+<p>Small enough components, like GUI Widgets, and data structures like Java&rsquo;s Vector and Hashtable, are incredibly reusable. But that&rsquo;s really low level.</p>
 <p>Thinking of <em>application</em> components, the real benefit is in the upgrade and repair department, <em>not</em> the cross-application reuse department.</p>
-
-<p>If you had separated your application into components, and one of those components is a CustomerManager (defined as the interface above), you're in great shape. Suppose your initial CustomerManager implementation uses JDBC calls to store and retrieve data. If you want to upgrade to EJB, all you'd need to do is change the implementation of the CustomerManager. (There's a few gotchas we'll hit later, such as generic exception handling, though. The simple definition of CustomerManager above isn't quite enough, but it's presented here to get the basic idea across.)</p>
-
+<p>If you had separated your application into components, and one of those components is a CustomerManager (defined as the interface above), you&rsquo;re in great shape. Suppose your initial CustomerManager implementation uses JDBC calls to store and retrieve data. If you want to upgrade to EJB, all you&rsquo;d need to do is change the implementation of the CustomerManager. (There&rsquo;s a few gotchas we&rsquo;ll hit later, such as generic exception handling, though. The simple definition of CustomerManager above isn&rsquo;t quite enough, but it&rsquo;s presented here to get the basic idea across.)</p>
 <h2 id="application-layering">Application layering</h2>
-
 <p>Components fall into <em>layers</em> in your application. Each layer has a specific set of responsibilities, and defined communication with other layers.</p>
-
-<p><img src="layers.gif" alt="Application Layers" /></p>
-
+<p><img src="layers.gif" alt="Application Layers"></p>
 <p>The current ideal way to design your application is to provide nice, clean interfaces between layers:</p>
-
 <ul>
-<li><strong>Presentation Layer</strong> (aka User Interface Layer)<br />
-Displays data to user and accepts i/p -- no business logic at all!<br />
+<li><strong>Presentation Layer</strong> (aka User Interface Layer)<br>
+Displays data to user and accepts i/p &ndash; no business logic at all!<br>
  </li>
-<li><strong>Domain Layer</strong> (aka Business Logic Layer)<br />
-The &quot;smarts&quot; of your application<br />
+<li><strong>Domain Layer</strong> (aka Business Logic Layer)<br>
+The &ldquo;smarts&rdquo; of your application<br>
  </li>
-<li><strong>Storage Layer</strong> (aka Data Management Layer)<br />
+<li><strong>Storage Layer</strong> (aka Data Management Layer)<br>
 The code that fetches and saves data for you</li>
 </ul>
-
-<p>Note that I said &quot;current ideal&quot;. Architecture evolves over time, and this is a <em>current</em> best practice. Newer and better techniques will come along, but they should grow from this approach.</p>
-
+<p>Note that I said &ldquo;current ideal&rdquo;. Architecture evolves over time, and this is a <em>current</em> best practice. Newer and better techniques will come along, but they should grow from this approach.</p>
 <p>Each of the three layers has specific responsibilities, and can be composed of one or more components in your application. The dotted lines between the layers in Figure 1 represent the separation between the layers, and are written using one or more interfaces.</p>
-
 <p>Any number of presentation components (GUIs, JSPs, Servlets, Consoles) can present data to the user and accept user input. They communicate with the business logic of the application to request data to display and ask for modifications to the data. The business logic asks the data managers for data, and may modify that data before returning it to the presentations.</p>
-
 <h2 id="skipping-layers-is-a-no-no">Skipping layers is a no-no</h2>
-
 <p><em>Communication should <strong>never</strong> skip layers!</em> This is <em>incredibly</em> important, though it may not seem obvious at first.</p>
-
-<p>One of the key sins committed by application developers is having their user interface talk directly to the data managers. <em>The business logic is there for a reason, folks!</em> If you skip past the business logic, the &quot;smarts&quot; of the application doesn't have the <em>opportunity</em> to do anything with the request. At first, you may not see a need for passing through, but you <em>should</em>.</p>
-
-<p>For example, suppose you're implementing a simple online store application. You may at first think it's ok for the presentation to directly ask the data managers for the list of items to display. Hey, it's just a list, after all...</p>
-
+<p>One of the key sins committed by application developers is having their user interface talk directly to the data managers. <em>The business logic is there for a reason, folks!</em> If you skip past the business logic, the &ldquo;smarts&rdquo; of the application doesn&rsquo;t have the <em>opportunity</em> to do anything with the request. At first, you may not see a need for passing through, but you <em>should</em>.</p>
+<p>For example, suppose you&rsquo;re implementing a simple online store application. You may at first think it&rsquo;s ok for the presentation to directly ask the data managers for the list of items to display. Hey, it&rsquo;s just a list, after all&hellip;</p>
 <p>But what happens when you want to put those items on sale? Ok, so you go and modify the presentations to list a 20% off price. But there could be a bazillion pages that display the item, and all it takes is <em>one</em> missed page to give an inconsistent presentation to the user.</p>
-
 <p>So, you <em>could</em> change the data manager. But now <em>all</em> business logic sees the change.</p>
-
 <p>If you had the presentation call the business logic, instead of directly calling the data managers, all you would need to do is change the business logic and all pages that use the business logic see the change! You could even implement filters that decorate the business logic (see <em>Design Patterns</em>, by Gamma et al) to transform the data.</p>
-
 <h2 id="generic-exception-handling">Generic exception handling</h2>
-
 <p>The hardest part of making your application nice and generic is dealing with exceptions.</p>
-
-<p>Let's just think about our CustomerManager:</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CustomerManager</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="n">Customer</span>   <span class="nf">load</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">);</span>
-    <span class="kd">public</span> <span class="n">Customer</span>   <span class="nf">store</span><span class="o">(</span><span class="n">Customer</span> <span class="n">customer</span><span class="o">);</span>
-    <span class="kd">public</span> <span class="n">Customer</span><span class="o">[]</span> <span class="nf">findByName</span><span class="o">(</span><span class="n">String</span> <span class="n">namePattern</span><span class="o">);</span>
-    <span class="kd">public</span> <span class="n">Customer</span>   <span class="nf">createCustomer</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">float</span> <span class="n">creditLimit</span><span class="o">);</span>
-    <span class="kd">public</span> <span class="kt">void</span>       <span class="nf">deleteCustomer</span><span class="o">(</span><span class="n">Customer</span> <span class="n">customer</span><span class="o">);</span>
-<span class="o">}</span></code></pre></div>
-<p>This definition has some serious problems. If anything goes wrong, the caller needs to know about it. So we'll need to declare some thrown exceptions for error cases.</p>
-
+<p>Let&rsquo;s just think about our CustomerManager:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CustomerManager</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="n">Customer</span>   <span class="nf">load</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">);</span>
+	<span class="kd">public</span> <span class="n">Customer</span>   <span class="nf">store</span><span class="o">(</span><span class="n">Customer</span> <span class="n">customer</span><span class="o">);</span>
+	<span class="kd">public</span> <span class="n">Customer</span><span class="o">[]</span> <span class="nf">findByName</span><span class="o">(</span><span class="n">String</span> <span class="n">namePattern</span><span class="o">);</span>
+	<span class="kd">public</span> <span class="n">Customer</span>   <span class="nf">createCustomer</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">float</span> <span class="n">creditLimit</span><span class="o">);</span>
+	<span class="kd">public</span> <span class="kt">void</span>       <span class="nf">deleteCustomer</span><span class="o">(</span><span class="n">Customer</span> <span class="n">customer</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div><p>This definition has some serious problems. If anything goes wrong, the caller needs to know about it. So we&rsquo;ll need to declare some thrown exceptions for error cases.</p>
 <p><em>But what exceptions should we throw?</em></p>
-
-<p>Let's start by thinking about and implementation using JDBC. JDBC throws SQLExceptions (btw: SQL is properly pronounced &quot;squeal&quot;, no Ned Beatty references, please.)</p>
-
+<p>Let&rsquo;s start by thinking about and implementation using JDBC. JDBC throws SQLExceptions (btw: SQL is properly pronounced &ldquo;squeal&rdquo;, no Ned Beatty references, please.)</p>
 <p>So we could write a class that looks like:</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomerManagerUsingJDBC</span> <span class="kd">implements</span> <span class="n">CustomerManager</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="n">Customer</span>   <span class="nf">load</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">SQLException</span> <span class="o">{</span>
-        <span class="o">...</span>
-    <span class="o">}</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomerManagerUsingJDBC</span> <span class="kd">implements</span> <span class="n">CustomerManager</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="n">Customer</span>   <span class="nf">load</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">SQLException</span> <span class="o">{</span>
+		<span class="o">...</span>
+	<span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">Customer</span>   <span class="nf">store</span><span class="o">(</span><span class="n">Customer</span> <span class="n">customer</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">SQLException</span> <span class="o">{</span>
-        <span class="o">...</span>
-    <span class="o">}</span>
-    <span class="o">...</span>
-<span class="o">}</span></code></pre></div>
-<p>and then modify the interface to also throw those exceptions. Ok so far, and we set up the business logic to catch SQLExceptions as necessary.</p>
-
+	<span class="kd">public</span> <span class="n">Customer</span>   <span class="nf">store</span><span class="o">(</span><span class="n">Customer</span> <span class="n">customer</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">SQLException</span> <span class="o">{</span>
+		<span class="o">...</span>
+	<span class="o">}</span>
+	<span class="o">...</span>
+<span class="o">}</span>
+</code></pre></div><p>and then modify the interface to also throw those exceptions. Ok so far, and we set up the business logic to catch SQLExceptions as necessary.</p>
 <h3 id="uhhhh-but-what-about-ejb">Uhhhh, but what about EJB?</h3>
-
 <p>But things get nasty if we try to change the implementation to use Enterprise JavaBeans:</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomerManagerUsingEJB</span> <span class="kd">implements</span> <span class="n">CustomerManager</span> <span class="o">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomerManagerUsingEJB</span> <span class="kd">implements</span> <span class="n">CustomerManager</span> <span class="o">{</span>
 
-    <span class="kd">public</span> <span class="n">Customer</span> <span class="nf">load</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">EJBException</span><span class="o">,</span> <span class="n">RemoteException</span> <span class="o">{</span>
-        <span class="o">...</span>
-    <span class="o">}</span>
+	<span class="kd">public</span> <span class="n">Customer</span> <span class="nf">load</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">EJBException</span><span class="o">,</span> <span class="n">RemoteException</span> <span class="o">{</span>
+		<span class="o">...</span>
+	<span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">Customer</span> <span class="nf">store</span><span class="o">(</span><span class="n">Customer</span> <span class="n">customer</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">EJBException</span><span class="o">,</span> <span class="n">RemoteException</span> <span class="o">{</span>
-        <span class="o">...</span>
-    <span class="o">}</span>
-    <span class="o">...</span>
-<span class="o">}</span></code></pre></div>
-<p>Accessing EJBs could throw EJBException or RemoteException. Ok, so we'll modify the interface to use EJB, then change the code in the business logic.</p>
-
+	<span class="kd">public</span> <span class="n">Customer</span> <span class="nf">store</span><span class="o">(</span><span class="n">Customer</span> <span class="n">customer</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">EJBException</span><span class="o">,</span> <span class="n">RemoteException</span> <span class="o">{</span>
+		<span class="o">...</span>
+	<span class="o">}</span>
+	<span class="o">...</span>
+<span class="o">}</span>
+</code></pre></div><p>Accessing EJBs could throw EJBException or RemoteException. Ok, so we&rsquo;ll modify the interface to use EJB, then change the code in the business logic.</p>
 <p><strong>Wrongo!!!</strong></p>
-
 <p><em>The whole point of this article is easier maintenance.</em> Easier maintenance relies on one commandment: thou shalt not change thy interface!</p>
-
-<p>Think about what this does. Anytime you change the data manager, you'd need to change the business logic to &quot;match&quot; its exceptions.</p>
-
+<p>Think about what this does. Anytime you change the data manager, you&rsquo;d need to change the business logic to &ldquo;match&rdquo; its exceptions.</p>
 <h3 id="so-uhhhh-how-do-we-deal-with-exceptions">So, uhhhh, how do we deal with exceptions?</h3>
-
 <p>Ever hear of application-defined exceptions?</p>
-
 <p>What is the actual problem <em>from the point of view of the business logic</em>?</p>
-
 <ul>
-<li>&quot;Can't get the data&quot;</li>
-<li>&quot;Can't store the data&quot;</li>
-<li>&quot;Data not found&quot;</li>
+<li>&ldquo;Can&rsquo;t get the data&rdquo;</li>
+<li>&ldquo;Can&rsquo;t store the data&rdquo;</li>
+<li>&ldquo;Data not found&rdquo;</li>
 </ul>
-
-<p>Those are a few simple cases. Ok, let's define custom exceptions to deal with this.</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyApplicationException</span> <span class="kd">extends</span> <span class="n">Exception</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">Throwable</span> <span class="n">nestedException</span><span class="o">;</span>
-    <span class="kd">public</span> <span class="nf">MyApplicationException</span> <span class="o">(</span><span class="n">String</span> <span class="n">message</span><span class="o">,</span> <span class="n">Throwable</span> <span class="n">nestedException</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kd">super</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">nestedException</span> <span class="o">=</span> <span class="n">nestedException</span><span class="o">;</span>
-    <span class="o">}</span>
-    <span class="kd">public</span> <span class="n">Throwable</span> <span class="nf">getNestedException</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">nestedException</span><span class="o">;</span>
-    <span class="o">}</span>
+<p>Those are a few simple cases. Ok, let&rsquo;s define custom exceptions to deal with this.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyApplicationException</span> <span class="kd">extends</span> <span class="n">Exception</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="n">Throwable</span> <span class="n">nestedException</span><span class="o">;</span>
+	<span class="kd">public</span> <span class="nf">MyApplicationException</span> <span class="o">(</span><span class="n">String</span> <span class="n">message</span><span class="o">,</span> <span class="n">Throwable</span> <span class="n">nestedException</span><span class="o">)</span> <span class="o">{</span>
+		<span class="kd">super</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">nestedException</span> <span class="o">=</span> <span class="n">nestedException</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="n">Throwable</span> <span class="nf">getNestedException</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">nestedException</span><span class="o">;</span>
+	<span class="o">}</span>
 <span class="o">}</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomerException</span> <span class="kd">extends</span> <span class="n">MyApplicationException</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="nf">CustomerException</span><span class="o">(</span><span class="n">String</span> <span class="n">message</span><span class="o">,</span> <span class="n">Throwable</span> <span class="n">nestedException</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kd">super</span><span class="o">(</span><span class="n">message</span><span class="o">,</span> <span class="n">nestedException</span><span class="o">);</span>
-    <span class="o">}</span>
+	<span class="kd">public</span> <span class="nf">CustomerException</span><span class="o">(</span><span class="n">String</span> <span class="n">message</span><span class="o">,</span> <span class="n">Throwable</span> <span class="n">nestedException</span><span class="o">)</span> <span class="o">{</span>
+		<span class="kd">super</span><span class="o">(</span><span class="n">message</span><span class="o">,</span> <span class="n">nestedException</span><span class="o">);</span>
+	<span class="o">}</span>
 <span class="o">}</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">NotFoundException</span> <span class="kd">extends</span> <span class="n">MyApplicationException</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="nf">NotFoundException</span><span class="o">(</span><span class="n">String</span> <span class="n">message</span><span class="o">,</span> <span class="n">Throwable</span> <span class="n">nestedException</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kd">super</span><span class="o">(</span><span class="n">message</span><span class="o">,</span> <span class="n">nestedException</span><span class="o">);</span>
-    <span class="o">}</span>
-<span class="o">}</span></code></pre></div>
-<p>Now we define the interface as follows. Note that this is how we <em>should</em> have defined it in the first place, so it won't require changes.</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CustomerManager</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="n">Customer</span> <span class="nf">load</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">CustomerException</span><span class="o">,</span> <span class="n">NotFoundException</span> <span class="o">{</span>
-        <span class="o">...</span>
-    <span class="o">}</span>
+	<span class="kd">public</span> <span class="nf">NotFoundException</span><span class="o">(</span><span class="n">String</span> <span class="n">message</span><span class="o">,</span> <span class="n">Throwable</span> <span class="n">nestedException</span><span class="o">)</span> <span class="o">{</span>
+		<span class="kd">super</span><span class="o">(</span><span class="n">message</span><span class="o">,</span> <span class="n">nestedException</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div><p>Now we define the interface as follows. Note that this is how we <em>should</em> have defined it in the first place, so it won&rsquo;t require changes.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CustomerManager</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="n">Customer</span> <span class="nf">load</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">CustomerException</span><span class="o">,</span> <span class="n">NotFoundException</span> <span class="o">{</span>
+		<span class="o">...</span>
+	<span class="o">}</span>
 
-    <span class="kd">public</span> <span class="n">Customer</span> <span class="nf">store</span><span class="o">(</span><span class="n">Customer</span> <span class="n">customer</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">CustomerException</span> <span class="o">{</span>
-        <span class="o">...</span>
-    <span class="o">}</span>
-    <span class="o">...</span>
-<span class="o">}</span></code></pre></div>
-<p>Now the interface is <em>totally generic</em>, with respect to how we store the data! A sample JDBC implementation might look like:</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomerManagerUsingJDBC</span> <span class="kd">implements</span> <span class="n">CustomerManager</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="n">Customer</span> <span class="nf">load</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">CustomerException</span><span class="o">,</span> <span class="n">NotFoundException</span> <span class="o">{</span>
-        <span class="k">try</span> <span class="o">{</span>
-            <span class="c1">// JDBC to try to fetch data
-</span><span class="c1"></span>            <span class="k">if</span> <span class="o">(</span><span class="n">resultSetIsEmpty</span><span class="o">)</span>
-                <span class="k">throw</span> <span class="k">new</span> <span class="n">NotFoundException</span><span class="o">(</span><span class="s">&#34;Customer &#34;</span> <span class="o">+</span> <span class="n">id</span> <span class="o">+</span> <span class="s">&#34; not found&#34;</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
-            
-        <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="n">NotFoundException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">throw</span> <span class="n">e</span><span class="o">;</span>
-        <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="n">SQLException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">throw</span> <span class="k">new</span> <span class="n">CustomerException</span><span class="o">(</span><span class="s">&#34;oops!&#34;</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
-        <span class="o">}</span>
-        <span class="o">...</span>
-    <span class="o">}</span>
-    <span class="o">...</span>
-<span class="o">}</span></code></pre></div>
-<p>The idea is to catch the specific exception and wrap it in an application exception. This allows the business logic to worry about the <em>concept</em> of the problem, without knowing anything about the details of <em>how</em> the data manager was implemented.</p>
-
-<p>2018 Note: Of course this gets much simpler with Kotlin, as <em>it does not use checked exceptions</em>, so you don't have to pollute callers with framework-specific exceptions of things they call...</p>
-
+	<span class="kd">public</span> <span class="n">Customer</span> <span class="nf">store</span><span class="o">(</span><span class="n">Customer</span> <span class="n">customer</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">CustomerException</span> <span class="o">{</span>
+		<span class="o">...</span>
+	<span class="o">}</span>
+	<span class="o">...</span>
+<span class="o">}</span>
+</code></pre></div><p>Now the interface is <em>totally generic</em>, with respect to how we store the data! A sample JDBC implementation might look like:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomerManagerUsingJDBC</span> <span class="kd">implements</span> <span class="n">CustomerManager</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="n">Customer</span> <span class="nf">load</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">CustomerException</span><span class="o">,</span> <span class="n">NotFoundException</span> <span class="o">{</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="c1">// JDBC to try to fetch data
+</span><span class="c1"></span>			<span class="k">if</span> <span class="o">(</span><span class="n">resultSetIsEmpty</span><span class="o">)</span>
+				<span class="k">throw</span> <span class="k">new</span> <span class="n">NotFoundException</span><span class="o">(</span><span class="s">&#34;Customer &#34;</span> <span class="o">+</span> <span class="n">id</span> <span class="o">+</span> <span class="s">&#34; not found&#34;</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+			
+		<span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="n">NotFoundException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">throw</span> <span class="n">e</span><span class="o">;</span>
+		<span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="n">SQLException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">throw</span> <span class="k">new</span> <span class="n">CustomerException</span><span class="o">(</span><span class="s">&#34;oops!&#34;</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
+		<span class="o">}</span>
+		<span class="o">...</span>
+	<span class="o">}</span>
+	<span class="o">...</span>
+<span class="o">}</span>
+</code></pre></div><p>The idea is to catch the specific exception and wrap it in an application exception. This allows the business logic to worry about the <em>concept</em> of the problem, without knowing anything about the details of <em>how</em> the data manager was implemented.</p>
+<p>2018 Note: Of course this gets much simpler with Kotlin, as <em>it does not use checked exceptions</em>, so you don&rsquo;t have to pollute callers with framework-specific exceptions of things they call&hellip;</p>
 <h2 id="enterprise-javabeans-and-layering">Enterprise JavaBeans and layering</h2>
-
-<p>The &quot;trick&quot; to using Enterprise JavaBeans is <em>hiding</em> them in the data management layer and business logic layer.</p>
-
+<p>The &ldquo;trick&rdquo; to using Enterprise JavaBeans is <em>hiding</em> them in the data management layer and business logic layer.</p>
 <p>Generally:</p>
-
 <ul>
 <li>Entity beans represent data</li>
 <li>Session beans represent business logic</li>
 </ul>
-
 <p>Your application should never <em>directly</em> use the home or remote interfaces of EJBs. It should use <em>your application interfaces!</em></p>
-
 <h3 id="entity-beans">Entity Beans</h3>
-
 <p>Entity beans are really just another way to store data.</p>
-
 <p>Start with our interfaces again:</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Customer</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span>          <span class="kd">throws</span> <span class="n">CustomerException</span><span class="o">;</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">CustomerException</span><span class="o">;</span>
-    <span class="o">...</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Customer</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span>          <span class="kd">throws</span> <span class="n">CustomerException</span><span class="o">;</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">CustomerException</span><span class="o">;</span>
+	<span class="o">...</span>
 <span class="o">}</span>
 
 <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CustomerManager</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="n">Customer</span>   <span class="nf">load</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">)</span>
-        <span class="kd">throws</span> <span class="n">CustomerException</span><span class="o">,</span> <span class="n">NotFoundException</span><span class="o">;</span>
-    <span class="kd">public</span> <span class="n">Customer</span>   <span class="nf">store</span><span class="o">(</span><span class="n">Customer</span> <span class="n">customer</span><span class="o">)</span> 
-        <span class="kd">throws</span> <span class="n">CustomerException</span><span class="o">;</span>
-    <span class="kd">public</span> <span class="n">Customer</span><span class="o">[]</span> <span class="nf">findByName</span><span class="o">(</span><span class="n">String</span> <span class="n">namePattern</span><span class="o">)</span> 
-        <span class="kd">throws</span> <span class="n">CustomerException</span><span class="o">,</span> <span class="n">NotFoundException</span><span class="o">;</span>
-    <span class="kd">public</span> <span class="n">Customer</span>   <span class="nf">createCustomer</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">float</span> <span class="n">creditLimit</span><span class="o">)</span> 
-        <span class="kd">throws</span> <span class="n">CustomerException</span><span class="o">;</span>
-    <span class="kd">public</span> <span class="kt">void</span>       <span class="nf">deleteCustomer</span><span class="o">(</span><span class="n">Customer</span> <span class="n">customer</span><span class="o">)</span> 
-        <span class="kd">throws</span> <span class="n">CustomerException</span><span class="o">;</span>
-<span class="o">}</span></code></pre></div>
-<p>The key here is the cooperation between the implementations of Customer and CustomerManager. First, our Customer implementation might look like:</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomerAsEntityBean</span> <span class="kd">implements</span> <span class="n">Customer</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">EntityCustomer</span> <span class="n">entityCustomer</span><span class="o">;</span>
-    <span class="kd">public</span> <span class="nf">CustomerAsEntityBean</span><span class="o">(</span><span class="n">EntityCustomer</span> <span class="n">entityCustomer</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">entityCustomer</span> <span class="o">=</span> <span class="n">entityCustomer</span><span class="o">;</span>
-    <span class="o">}</span>
-    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">CustomerException</span> <span class="o">{</span>
-        <span class="k">try</span> <span class="o">{</span>
-            <span class="k">return</span> <span class="n">entityCustomer</span><span class="o">.</span><span class="na">getName</span><span class="o">();</span>
-        <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// EJBException, RemoteException
-</span><span class="c1"></span>            <span class="k">throw</span> <span class="k">new</span> <span class="n">CustomerException</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-    <span class="o">...</span>
-<span class="o">}</span></code></pre></div>
-<p>This customer is a <em>proxy</em> for our Entity Bean. Note that all requests are merely passed through to the entity bean.</p>
-
+	<span class="kd">public</span> <span class="n">Customer</span>   <span class="nf">load</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">)</span>
+		<span class="kd">throws</span> <span class="n">CustomerException</span><span class="o">,</span> <span class="n">NotFoundException</span><span class="o">;</span>
+	<span class="kd">public</span> <span class="n">Customer</span>   <span class="nf">store</span><span class="o">(</span><span class="n">Customer</span> <span class="n">customer</span><span class="o">)</span> 
+		<span class="kd">throws</span> <span class="n">CustomerException</span><span class="o">;</span>
+	<span class="kd">public</span> <span class="n">Customer</span><span class="o">[]</span> <span class="nf">findByName</span><span class="o">(</span><span class="n">String</span> <span class="n">namePattern</span><span class="o">)</span> 
+		<span class="kd">throws</span> <span class="n">CustomerException</span><span class="o">,</span> <span class="n">NotFoundException</span><span class="o">;</span>
+	<span class="kd">public</span> <span class="n">Customer</span>   <span class="nf">createCustomer</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">float</span> <span class="n">creditLimit</span><span class="o">)</span> 
+		<span class="kd">throws</span> <span class="n">CustomerException</span><span class="o">;</span>
+	<span class="kd">public</span> <span class="kt">void</span>       <span class="nf">deleteCustomer</span><span class="o">(</span><span class="n">Customer</span> <span class="n">customer</span><span class="o">)</span> 
+		<span class="kd">throws</span> <span class="n">CustomerException</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div><p>The key here is the cooperation between the implementations of Customer and CustomerManager. First, our Customer implementation might look like:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomerAsEntityBean</span> <span class="kd">implements</span> <span class="n">Customer</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="n">EntityCustomer</span> <span class="n">entityCustomer</span><span class="o">;</span>
+	<span class="kd">public</span> <span class="nf">CustomerAsEntityBean</span><span class="o">(</span><span class="n">EntityCustomer</span> <span class="n">entityCustomer</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">entityCustomer</span> <span class="o">=</span> <span class="n">entityCustomer</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">CustomerException</span> <span class="o">{</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="k">return</span> <span class="n">entityCustomer</span><span class="o">.</span><span class="na">getName</span><span class="o">();</span>
+		<span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// EJBException, RemoteException
+</span><span class="c1"></span>			<span class="k">throw</span> <span class="k">new</span> <span class="n">CustomerException</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+	<span class="o">...</span>
+<span class="o">}</span>
+</code></pre></div><p>This customer is a <em>proxy</em> for our Entity Bean. Note that all requests are merely passed through to the entity bean.</p>
 <p>There are several approaches to using entity beans like this:</p>
-
 <ul>
-<li><strong>Direct proxy</strong> - just forward all calls to the entity bean. Incredibly easy to implement, always up to date with remote bean, but can provide poor performance. There is no separate &quot;store&quot; implementation; all &quot;set&quot; calls are performed immediately in the remote server. This is the implementation shown above.<br />
+<li><strong>Direct proxy</strong> - just forward all calls to the entity bean. Incredibly easy to implement, always up to date with remote bean, but can provide poor performance. There is no separate &ldquo;store&rdquo; implementation; all &ldquo;set&rdquo; calls are performed immediately in the remote server. This is the implementation shown above.<br>
  </li>
-<li><strong>Copy bean</strong> - take a snapshot of the entity bean's remote data and store it locally. More difficult to properly implement, faster access overall, but not always up to date with remote bean. Care must be taken when storing.<br />
+<li><strong>Copy bean</strong> - take a snapshot of the entity bean&rsquo;s remote data and store it locally. More difficult to properly implement, faster access overall, but not always up to date with remote bean. Care must be taken when storing.<br>
  </li>
-<li><strong>Cache as we go</strong> - set up all calls to ask the remote bean for data, then cache that piece of data for later use. If some pieces of data aren't used, they won't affect performance on obtaining them as in a copy bean. Requires much more care, as if part of the data in the entity changes, we could get out of sync!</li>
+<li><strong>Cache as we go</strong> - set up all calls to ask the remote bean for data, then cache that piece of data for later use. If some pieces of data aren&rsquo;t used, they won&rsquo;t affect performance on obtaining them as in a copy bean. Requires much more care, as if part of the data in the entity changes, we could get out of sync!</li>
 </ul>
-
 <p>Whatever implementation you choose <em>makes no difference to the rest of your application (other than the data manager)</em>. All the rest of your application cares about is that it can ask a Customer for pieces of information and deal with problems accessing that data.</p>
-
 <p>The final piece necessary to make this work is a data manager:</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomerManagerUsingEJB</span> <span class="kd">interface</span> <span class="nc">CustomerManager</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="n">Customer</span>   <span class="nf">load</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">)</span>
-            <span class="kd">throws</span> <span class="n">CustomerException</span><span class="o">,</span> <span class="n">NotFoundException</span> <span class="o">{</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomerManagerUsingEJB</span> <span class="kd">interface</span> <span class="nc">CustomerManager</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="n">Customer</span>   <span class="nf">load</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">)</span>
+			<span class="kd">throws</span> <span class="n">CustomerException</span><span class="o">,</span> <span class="n">NotFoundException</span> <span class="o">{</span>
 
-        <span class="k">try</span> <span class="o">{</span>
-            <span class="c1">// set up naming context
-</span><span class="c1"></span>            <span class="c1">// grab home interface for entity
-</span><span class="c1"></span>            <span class="c1">// find entity (store as entityCustomer)
-</span><span class="c1"></span>            <span class="k">return</span> <span class="k">new</span> <span class="n">CustomerAsEntityBean</span><span class="o">(</span><span class="n">entityCustomer</span><span class="o">);</span>
-        <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="n">FinderException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span> 
-            <span class="k">throw</span> <span class="k">new</span> <span class="n">NotFoundException</span><span class="o">(</span><span class="s">&#34;Customer &#34;</span> <span class="o">+</span> <span class="n">id</span> <span class="o">+</span> <span class="s">&#34; not found&#34;</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
-        <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span> <span class="c1">//EJBException, RemoteException
-</span><span class="c1"></span>        <span class="o">}</span>
-    <span class="o">}</span>
-    <span class="o">...</span>
-<span class="o">}</span></code></pre></div>
-<p>Now all your business logic cares about is that it can ask <em>some</em> CustomerManager for <em>some</em> Customer. It doesn't need to even know that EJB was involved!</p>
-
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="c1">// set up naming context
+</span><span class="c1"></span>			<span class="c1">// grab home interface for entity
+</span><span class="c1"></span>			<span class="c1">// find entity (store as entityCustomer)
+</span><span class="c1"></span>			<span class="k">return</span> <span class="k">new</span> <span class="n">CustomerAsEntityBean</span><span class="o">(</span><span class="n">entityCustomer</span><span class="o">);</span>
+		<span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="n">FinderException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span> 
+			<span class="k">throw</span> <span class="k">new</span> <span class="n">NotFoundException</span><span class="o">(</span><span class="s">&#34;Customer &#34;</span> <span class="o">+</span> <span class="n">id</span> <span class="o">+</span> <span class="s">&#34; not found&#34;</span><span class="o">,</span> <span class="n">e</span><span class="o">);</span>
+		<span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span> <span class="c1">//EJBException, RemoteException
+</span><span class="c1"></span>		<span class="o">}</span>
+	<span class="o">}</span>
+	<span class="o">...</span>
+<span class="o">}</span>
+</code></pre></div><p>Now all your business logic cares about is that it can ask <em>some</em> CustomerManager for <em>some</em> Customer. It doesn&rsquo;t need to even know that EJB was involved!</p>
 <h3 id="session-beans">Session Beans</h3>
-
-<p>(Similar to entity beans, but replaces a business logic component -- remember -- HIDE the EJB access)</p>
-
+<p>(Similar to entity beans, but replaces a business logic component &ndash; remember &ndash; HIDE the EJB access)</p>
 <h2 id="tying-it-all-together">Tying it all together</h2>
-
-<p>We need <em>something</em> to tie all of the pieces together. That something is a Factory class. We'll use the Factory Method pattern (see <em>Design Patterns</em> by Gamma et al) to implement this.</p>
-
+<p>We need <em>something</em> to tie all of the pieces together. That something is a Factory class. We&rsquo;ll use the Factory Method pattern (see <em>Design Patterns</em> by Gamma et al) to implement this.</p>
 <p>A simple factory might look as follows:</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyApplicationFactory</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="n">CustomerManager</span> <span class="n">customerManager</span> <span class="o">=</span>
-        <span class="k">new</span> <span class="n">CustomerManagerUsingEJB</span><span class="o">();</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="n">ApplicationLogic</span> <span class="n">applicationLogic</span> <span class="o">=</span>
-        <span class="k">new</span> <span class="n">ApplicationLogicAsSessionBean</span><span class="o">();</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="n">CustomerManager</span> <span class="nf">getCustomerManager</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">customerManager</span><span class="o">;</span>
-    <span class="o">}</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyApplicationFactory</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="kd">static</span> <span class="n">CustomerManager</span> <span class="n">customerManager</span> <span class="o">=</span>
+		<span class="k">new</span> <span class="n">CustomerManagerUsingEJB</span><span class="o">();</span>
+	<span class="kd">private</span> <span class="kd">static</span> <span class="n">ApplicationLogic</span> <span class="n">applicationLogic</span> <span class="o">=</span>
+		<span class="k">new</span> <span class="n">ApplicationLogicAsSessionBean</span><span class="o">();</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="n">CustomerManager</span> <span class="nf">getCustomerManager</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">customerManager</span><span class="o">;</span>
+	<span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="n">ApplicationLogic</span> <span class="nf">getLogic</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">applicationLogic</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span></code></pre></div>
-<p>(Note that this type of object is also called a <em>Service Locator</em>, giving centralized access to common resources. The same function can be accomplished using <em>Dependency Injection</em>, but I generally find it much simpler to debug a Service Locator)</p>
-
+	<span class="kd">public</span> <span class="kd">static</span> <span class="n">ApplicationLogic</span> <span class="nf">getLogic</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">applicationLogic</span><span class="o">;</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div><p>(Note that this type of object is also called a <em>Service Locator</em>, giving centralized access to common resources. The same function can be accomplished using <em>Dependency Injection</em>, but I generally find it much simpler to debug a Service Locator)</p>
 <p>You could even make things more flexible, keeping the names of the actual classes to use in a property file:</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyApplicationFactory</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="n">CustomerManager</span> <span class="n">customerManager</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="n">ApplicationLogic</span> <span class="n">applicationLogic</span><span class="o">;</span>
-    <span class="c1">// note: needs **much** better error handling...
-</span><span class="c1"></span>    <span class="c1">//       this is just to give the idea... 
-</span><span class="c1"></span>    <span class="kd">static</span> <span class="o">{</span>
-        <span class="k">try</span> <span class="o">{</span>
-            <span class="n">InputStream</span> <span class="n">in</span> <span class="o">=</span> 
-                <span class="n">MyApplicationFactory</span><span class="o">.</span><span class="na">getResourceAsStream</span><span class="o">(</span>
-                    <span class="s">&#34;application.properties&#34;</span><span class="o">);</span>
-            <span class="n">Properties</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Properties</span><span class="o">();</span>
-            <span class="n">p</span><span class="o">.</span><span class="na">load</span><span class="o">(</span><span class="n">in</span><span class="o">);</span>
-            <span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-            <span class="n">customerManager</span> <span class="o">=</span> 
-                <span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">&#34;manager.customer&#34;</span><span class="o">)).</span><span class="na">newInstance</span><span class="o">();</span>
-            <span class="n">applicationLogic</span> <span class="o">=</span> 
-                <span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">&#34;logic.application&#34;</span><span class="o">)).</span><span class="na">newInstance</span><span class="o">();</span>
-        <span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-            <span class="c1">// report error
-</span><span class="c1"></span>        <span class="o">}</span>
-    <span class="o">}</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyApplicationFactory</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="kd">static</span> <span class="n">CustomerManager</span> <span class="n">customerManager</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kd">static</span> <span class="n">ApplicationLogic</span> <span class="n">applicationLogic</span><span class="o">;</span>
+	<span class="c1">// note: needs **much** better error handling...
+</span><span class="c1"></span>	<span class="c1">//       this is just to give the idea... 
+</span><span class="c1"></span>	<span class="kd">static</span> <span class="o">{</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="n">InputStream</span> <span class="n">in</span> <span class="o">=</span> 
+				<span class="n">MyApplicationFactory</span><span class="o">.</span><span class="na">getResourceAsStream</span><span class="o">(</span>
+					<span class="s">&#34;application.properties&#34;</span><span class="o">);</span>
+			<span class="n">Properties</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Properties</span><span class="o">();</span>
+			<span class="n">p</span><span class="o">.</span><span class="na">load</span><span class="o">(</span><span class="n">in</span><span class="o">);</span>
+			<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+			<span class="n">customerManager</span> <span class="o">=</span> 
+				<span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">&#34;manager.customer&#34;</span><span class="o">)).</span><span class="na">newInstance</span><span class="o">();</span>
+			<span class="n">applicationLogic</span> <span class="o">=</span> 
+				<span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">&#34;logic.application&#34;</span><span class="o">)).</span><span class="na">newInstance</span><span class="o">();</span>
+		<span class="o">}</span> <span class="k">catch</span><span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="c1">// report error
+</span><span class="c1"></span>		<span class="o">}</span>
+	<span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="n">CustomerManager</span> <span class="nf">getCustomerManager</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">customerManager</span><span class="o">;</span>
-    <span class="o">}</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="n">CustomerManager</span> <span class="nf">getCustomerManager</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">customerManager</span><span class="o">;</span>
+	<span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="n">ApplicationLogic</span> <span class="nf">getLogic</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">applicationLogic</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span></code></pre></div>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="n">ApplicationLogic</span> <span class="nf">getLogic</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">applicationLogic</span><span class="o">;</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
           </div>
 
           
@@ -1228,7 +1152,7 @@ The code that fetches and saves data for you</li>
   
   <div class="copyright py-4">
     
-    <span>  1998 - 2019 &copy; Scott Stanchfield | Theme <a href='https://github.com/orianna-zzo/AllinOne' target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a>  </span>
+    <span>  1998 - 2021 &copy; Scott Stanchfield | Theme <a href='https://github.com/orianna-zzo/AllinOne' target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a>  </span>
   </div>
   
 

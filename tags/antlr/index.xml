@@ -1,16 +1,12 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Antlr on JavaDude.com</title>
+    <title>antlr on JavaDude.com</title>
     <link>https://javadude.com/tags/antlr/</link>
-    <description>Recent content in Antlr on JavaDude.com</description>
+    <description>Recent content in antlr on JavaDude.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Mon, 21 Dec 2009 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://javadude.com/tags/antlr/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 21 Dec 2009 00:00:00 +0000</lastBuildDate><atom:link href="https://javadude.com/tags/antlr/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ANTLR 3.x Tutorial</title>
       <link>https://javadude.com/posts/20091221-antlr3tut/</link>

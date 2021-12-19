@@ -1,28 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Kotlin on JavaDude.com</title>
+    <title>kotlin on JavaDude.com</title>
     <link>https://javadude.com/tags/kotlin/</link>
-    <description>Recent content in Kotlin on JavaDude.com</description>
+    <description>Recent content in kotlin on JavaDude.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Sun, 03 Feb 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://javadude.com/tags/kotlin/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 03 Feb 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://javadude.com/tags/kotlin/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>From Java to Kotlin - Episode 1 - You&#39;ve Gotta Start Somewhere...</title>
       <link>https://javadude.com/posts/20190203-kotlin01/</link>
       <pubDate>Sun, 03 Feb 2019 00:00:00 +0000</pubDate>
       
       <guid>https://javadude.com/posts/20190203-kotlin01/</guid>
-      <description>&lt;table&gt;
-    &lt;tr&gt;
-        &lt;td style=&#34;border:none;background: unset;&#34;&gt;&lt;a href=&#34;https://www.jetbrains.com&#34;&gt;&lt;img src=&#34;../../img/kotlin-logo.png&#34; alt=&#34;Kotlin Logo&#34; style=&#34;width:300px;&#34;/&gt;&lt;/a&gt;&lt;/td&gt;
-        &lt;td style=&#34;border:none;background: unset;&#34;&gt;&lt;font size=&#34;+2&#34;&gt;&lt;p&gt;Let&#39;s learn Kotlin from a Java point of view.&lt;p&gt;We&#39;ll start by looking at some basics of Variables, Values, Classes, Properties and Constructors.&lt;/p&gt;&lt;/font&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-&lt;/table&gt;</description>
+      <description>&lt;!-- raw HTML omitted --&gt;</description>
     </item>
     
   </channel>

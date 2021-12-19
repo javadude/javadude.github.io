@@ -12,9 +12,10 @@
   <meta property="og:title" content="JavaOne 2000/2001/2002" />
 <meta property="og:description" content="Some talks I gave at JavaOne in 2000, 2001 and 2002." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://javadude.com/posts/20000304-javaone/" />
-<meta property="article:published_time" content="2000-03-04T00:00:00&#43;00:00"/>
-<meta property="article:modified_time" content="2000-03-04T00:00:00&#43;00:00"/>
+<meta property="og:url" content="https://javadude.com/posts/20000304-javaone/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2000-03-04T00:00:00+00:00" />
+<meta property="article:modified_time" content="2000-03-04T00:00:00+00:00" />
+
 
 
   <title>
@@ -286,149 +287,118 @@
 
           <div class="post-content markdown">
             <p>Some talks I gave at JavaOne in 2000, 2001, and 2002.</p>
-
 <p>#JavaOne 2002</p>
-
-<p>First, thanks to everyone who showed up at my talk, <em>Creating Custom JSP Tags.</em> At least that was the title until the legal folks got hold of it...</p>
-
-<p>I've posted a non-JavaOne copy of the slides as well as code samples that can be used in Tomcat.</p>
-
+<p>First, thanks to everyone who showed up at my talk, <em>Creating Custom JSP Tags.</em> At least that was the title until the legal folks got hold of it&hellip;</p>
+<p>I&rsquo;ve posted a non-JavaOne copy of the slides as well as code samples that can be used in Tomcat.</p>
 <ul>
 <li><a href="Creating%20Custom%20JSP%20Tags.zip">Creating Custom JSP Tags.zip</a> - powerpoint slides</li>
 <li><a href="customtag.zip">customtag.zip</a> - a zipped web application containing source of the sample code demonstrated during the lecture</li>
 </ul>
-
 <h2 id="using-the-sample-code">Using the Sample Code</h2>
-
 <h3 id="trying-the-samples-on-your-machine">Trying the samples on your machine</h3>
-
 <p>The sample code has been tested under Tomcat 4.0.3. (You can obtain tomcat from <a href="http://tomcat.apache.org/">http://tomcat.apache.org</a>).</p>
-
 <p>To install the sample code:</p>
-
 <ol>
-<li>Download it using the above link.</li>
-<li>Unzip it into the webapps directory of your tomcat installation. This should create a customtag directory under webapps.</li>
-
-<li><p>Modify the conf/server.xml file in your tomcat installation to create a context for custom tag. You can add a line like</p>
-
+<li>
+<p>Download it using the above link.</p>
+</li>
+<li>
+<p>Unzip it into the webapps directory of your tomcat installation. This should create a customtag directory under webapps.</p>
+</li>
+<li>
+<p>Modify the conf/server.xml file in your tomcat installation to create a context for custom tag. You can add a line like</p>
 <pre><code>&lt;Context path=&quot;/customtag&quot; docBase=&quot;customtag&quot; debug=&quot;0&quot; reloadable=&quot;true&quot;/&gt;
 </code></pre>
-
-<p>in your server.xml file. Search for the other Contexts that are defined, such as the manager context, and place this new context there.<br />
- </p></li>
-
-<li><p>Restart your tomcat server.</p></li>
+<p>in your server.xml file. Search for the other Contexts that are defined, such as the manager context, and place this new context there.<br>
+ </p>
+</li>
+<li>
+<p>Restart your tomcat server.</p>
+</li>
 </ol>
-
-<p>Once you have the sample code installed, you can surf to any of the following URLs to view the samples. Note that these URLs assume a standard development installation of tomcat, listening at port 8080 on your local machine. If tomcat is installed elsewhere, you'll need to modify the URLs accordingly.</p>
-
+<p>Once you have the sample code installed, you can surf to any of the following URLs to view the samples. Note that these URLs assume a standard development installation of tomcat, listening at port 8080 on your local machine. If tomcat is installed elsewhere, you&rsquo;ll need to modify the URLs accordingly.</p>
 <p>URLs for custom tag samples <em>on your machine</em></p>
-
 <ul>
-<li><a href="http://localhost:8080/customtag/header1.jsp">http://localhost:8080/customtag/header1.jsp</a>
-
+<li>
+<p><a href="http://localhost:8080/customtag/header1.jsp">http://localhost:8080/customtag/header1.jsp</a></p>
 <ul>
-<li>A simple JSP that uses a custom header tag for a hardcoded replacement.<br />
+<li>A simple JSP that uses a custom header tag for a hardcoded replacement.<br>
  </li>
-</ul></li>
-<li><a href="http://localhost:8080/customtag/header2.jsp">http://localhost:8080/customtag/header2.jsp</a>
-
+</ul>
+</li>
+<li>
+<p><a href="http://localhost:8080/customtag/header2.jsp">http://localhost:8080/customtag/header2.jsp</a></p>
 <ul>
-<li>Similar to header1, but this tag takes an attribute to allow simple customization of the replacement.<br />
+<li>Similar to header1, but this tag takes an attribute to allow simple customization of the replacement.<br>
  </li>
-</ul></li>
-
-<li><p><a href="http://localhost:8080/customtag/ifsample.jsp">http://localhost:8080/customtag/ifsample.jsp</a></p>
-
+</ul>
+</li>
+<li>
+<p><a href="http://localhost:8080/customtag/ifsample.jsp">http://localhost:8080/customtag/ifsample.jsp</a></p>
 <ul>
-<li><p>A JSP that conditionally includes some text based on parameters passed to it. Try</p>
-
+<li>
+<p>A JSP that conditionally includes some text based on parameters passed to it. Try</p>
 <ul>
 <li><a href="http://localhost:8080/customtag/ifsample.jsp?showName=true">http://localhost:8080/customtag/ifsample.jsp?showName=true</a></li>
-<li><a href="http://localhost:8080/customtag/ifsample.jsp?showName=false">http://localhost:8080/customtag/ifsample.jsp?showName=false</a>
-<br /></li>
-</ul></li>
+<li><a href="http://localhost:8080/customtag/ifsample.jsp?showName=false">http://localhost:8080/customtag/ifsample.jsp?showName=false</a></li>
 </ul>
-
-<p>as variations to see how this page behaves.<br />
-     </p></li>
-
-<li><p><a href="http://localhost:8080/customtag/listpeople.jsp">http://localhost:8080/customtag/listpeople.jsp</a></p>
-
+</li>
+</ul>
+<p>as variations to see how this page behaves.<br>
+ </p>
+</li>
+<li>
+<p><a href="http://localhost:8080/customtag/listpeople.jsp">http://localhost:8080/customtag/listpeople.jsp</a></p>
 <ul>
-<li>A JSP that uses a custom iterator tag to walk through data retrieved from a data source. Note that the data manager used for this example hardcodes the data for simpler setup. If you want to change it to use a database, you only need to change the data manager class.<br />
+<li>A JSP that uses a custom iterator tag to walk through data retrieved from a data source. Note that the data manager used for this example hardcodes the data for simpler setup. If you want to change it to use a database, you only need to change the data manager class.<br>
  </li>
-</ul></li>
-
-<li><p><a href="http://localhost:8080/customtag/layout.jsp">http://localhost:8080/customtag/layout.jsp</a></p>
-
+</ul>
+</li>
+<li>
+<p><a href="http://localhost:8080/customtag/layout.jsp">http://localhost:8080/customtag/layout.jsp</a></p>
 <ul>
 <li>A JSP that uses nested custom tags to provide AWT-like BorderLayout support.</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <h2 id="license">License</h2>
-
 <p>The presentation is Copyright (c) 2002, Scott Stanchfield, All Rights Reserved. It may not be used for commercial purposes without obtaining permission.</p>
-
 <p>This sample code is free for <em>any</em> use <em>other</em> than selling it as a stand-alone product.</p>
-
-<p>Note that the sample code is provided &quot;as-is&quot; without any warrantee or guarantee of suitability for any purpose. Scott Stanchfield cannot be held responsible for any damage caused by its use.</p>
-
-<p>(In other words, use 'em for free at your own risk.)</p>
-
+<p>Note that the sample code is provided &ldquo;as-is&rdquo; without any warrantee or guarantee of suitability for any purpose. Scott Stanchfield cannot be held responsible for any damage caused by its use.</p>
+<p>(In other words, use &lsquo;em for free at your own risk.)</p>
 <p>#JavaOne 2001</p>
-
-<p>First, thanks to all who attended my talk, <em>Effective Layout Management.</em> I'm posting a non-JavaOne copy of the slides here. Be sure to read the original article, <em>Effective Layout Management</em>. A link can be found on my <a href="../../articles">articles</a> page.</p>
-
+<p>First, thanks to all who attended my talk, <em>Effective Layout Management.</em> I&rsquo;m posting a non-JavaOne copy of the slides here. Be sure to read the original article, <em>Effective Layout Management</em>. A link can be found on my <a href="../../articles">articles</a> page.</p>
 <p><strong>Note</strong>: I originally planned to update the <em>Effective Layout Management</em> article, but I have been approached by a publisher to write a book on the subject. I have not decided yet if I will actually write the book or not.</p>
-
 <ul>
 <li><a href="Effective%20Layout%20Management.zip">Effective Layout Management.zip</a> - PowerPoint Slides of <em>Effective Layout Management</em> presentation</li>
 </ul>
-
 <p>The presentation is Copyright (c) 2001, Scott Stanchfield, All Rights Reserved. It may not be used for commercial purposes without obtaining permission.</p>
-
 <h1 id="javaone-2000">JavaOne 2000</h1>
-
-<p>First, thanks to everyone who showed up at the BOFs (&quot;Birds of a Feather&quot; sessions) that I hosted! I had a great time jabbering on about VisualAge for Java, Model-View-Controller, Actions, and layout managers. I'm glad we got a chance to let the IBMers answer some of your buring questions, and many of those answers were just what we're looking for!</p>
-
-<p>If you have any questions on anything I talked about, please don't hesitate to email me at <a href="mailto:scott@javadude.com">scott@javadude.com</a>!</p>
-
-<h2 id="model-view-controller-bof-mvc-for-you-and-me">Model-View-Controller BOF (&quot;MVC for You and Me&quot;)</h2>
-
+<p>First, thanks to everyone who showed up at the BOFs (&ldquo;Birds of a Feather&rdquo; sessions) that I hosted! I had a great time jabbering on about VisualAge for Java, Model-View-Controller, Actions, and layout managers. I&rsquo;m glad we got a chance to let the IBMers answer some of your buring questions, and many of those answers were just what we&rsquo;re looking for!</p>
+<p>If you have any questions on anything I talked about, please don&rsquo;t hesitate to email me at <a href="mailto:scott@javadude.com">scott@javadude.com</a>!</p>
+<h2 id="model-view-controller-bof-mvc-for-you-and-me">Model-View-Controller BOF (&ldquo;MVC for You and Me&rdquo;)</h2>
 <p>As promised, you can download the slides for this talk here, as well as find some other interesting resources on MVC. Enjoy!</p>
-
 <ul>
-<li><a href="MVC%20for%20You%20and%20Me.zip">MVC for You and Me.zip</a> -- PowerPoint slides for my MVC talk. If you don't have PowerPoint, you can download a free viewer from Microsoft.com. </li>
+<li><a href="MVC%20for%20You%20and%20Me.zip">MVC for You and Me.zip</a> &ndash; PowerPoint slides for my MVC talk. If you don&rsquo;t have PowerPoint, you can download a free viewer from Microsoft.com. </li>
 <li>Applying the Model-View-Controller Paradigm in VisualAge for Java (No longer online)
-Introduction to the Model-View-Controller Paradigm and details on applying it visually in VisualAge for Java. _Note: This article has many specifics to VisualAge for Java, but the general concepts and the walkthrough demonstration can be useful to help you see how to apply MVC in other environments as well.<br />
+Introduction to the Model-View-Controller Paradigm and details on applying it visually in VisualAge for Java. _Note: This article has many specifics to VisualAge for Java, but the general concepts and the walkthrough demonstration can be useful to help you see how to apply MVC in other environments as well.<br>
 _ </li>
-<li>Advanced Model-View-Controller Techniques (No longer online)<br />
-A more general, conceptual article on some more advanced MVC topics. Much mess emphasis on VisualAge for Java, and includes examples of sorting, merging, and filtering Swing tables.<br />
+<li>Advanced Model-View-Controller Techniques (No longer online)<br>
+A more general, conceptual article on some more advanced MVC topics. Much mess emphasis on VisualAge for Java, and includes examples of sorting, merging, and filtering Swing tables.<br>
  </li>
 </ul>
-
 <h2 id="actions-experience-and-speculation">Actions: Experience and Speculation</h2>
-
-<p>In case you're interested in the Swing Action slides, you can access there here:</p>
-
+<p>In case you&rsquo;re interested in the Swing Action slides, you can access there here:</p>
 <ul>
 <li><a href="actions.zip">actions.zip</a></li>
 </ul>
-
 <h2 id="fun-with-layout-managers">Fun with Layout Managers</h2>
-
-<p>I've put the MaxMinLayout manager file here for you to look at. Note that it has some rough edges, and is only meant to represent a simple example of a custom layout manager. It's actually an example from my book, <em>Effective VisualAge for Java</em>, where I discuss how to integrate custom layout managers with VisualAge for Java.</p>
-
+<p>I&rsquo;ve put the MaxMinLayout manager file here for you to look at. Note that it has some rough edges, and is only meant to represent a simple example of a custom layout manager. It&rsquo;s actually an example from my book, <em>Effective VisualAge for Java</em>, where I discuss how to integrate custom layout managers with VisualAge for Java.</p>
 <ul>
 <li><a href="MaxMinLayout.zip">MaxMinLayout.zip</a></li>
 </ul>
-
 <h2 id="look-and-feel-guidelines-what-do-they-mean-to-you">Look and Feel Guidelines: What do they mean to you?</h2>
-
-<p>My apologies to anyone who wanted to come to this BOF. I had a few issues come up during the first day at JavaOne and had to cancel it. Please be aware that Sun is working on version 2 of the Look and Feel Guidelines, and they're really interested in any feedback you may have on the initial guidelines.</p>
+<p>My apologies to anyone who wanted to come to this BOF. I had a few issues come up during the first day at JavaOne and had to cancel it. Please be aware that Sun is working on version 2 of the Look and Feel Guidelines, and they&rsquo;re really interested in any feedback you may have on the initial guidelines.</p>
           </div>
 
           
@@ -631,7 +601,7 @@ A more general, conceptual article on some more advanced MVC topics. Much mess e
 
 										<li class="nav-item">
 						 					<a class="nav-link" href="#model-view-controller-bof-mvc-for-you-and-me">
-												 Model-View-Controller BOF (&#34;MVC for You and Me&#34;)
+												 Model-View-Controller BOF (“MVC for You and Me”)
 											</a>
 										</li>
 						 
@@ -780,7 +750,7 @@ A more general, conceptual article on some more advanced MVC topics. Much mess e
   
   <div class="copyright py-4">
     
-    <span>  1998 - 2019 &copy; Scott Stanchfield | Theme <a href='https://github.com/orianna-zzo/AllinOne' target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a>  </span>
+    <span>  1998 - 2021 &copy; Scott Stanchfield | Theme <a href='https://github.com/orianna-zzo/AllinOne' target="_blank">AllinOne</a> by <a href='https://github.com/orianna-zzo' target="_blank">Orianna</a>  </span>
   </div>
   
 
