@@ -1,0 +1,103 @@
+.md-grid {
+    max-width: 100%;
+}
+
+.md-typeset h1 {
+    margin-bottom: 0.5em;
+}
+
+.md-typeset h2 {
+    margin-top: 0.5em;
+}
+
+.md-container,
+.md-main {
+    flex: 1 1 0;
+}
+
+.md-content,
+.md-content__inner,
+.sas1-container,
+.sas1-text-area,
+.sas1-code-area {
+    height: 100%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+}
+
+.sas1-top {
+}
+
+.sas1-container,
+.sas1-content {
+    display: flex;
+}
+
+.sas1-container {
+    flex-direction: column;
+}
+
+.sas1-content {
+    flex: 1 1 0;
+    /* overflow: auto; */
+}
+
+.sas1-code-area {
+    padding: 20px;
+    flex: 4 1 0;
+    overflow: auto;
+}
+
+.sas1-text-area {
+    padding: 20px;
+    flex: 3 1 0;
+    overflow: auto;
+}
+
+.md-clipboard {
+    color: var(--md-default-fg-color--lighter);
+}
+
+.sas1-code-file {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 20px;
+    font-feature-settings: "kern";
+    font-family: var(--md-code-font-family);
+    background-color: var(--md-code-bg-color);
+    border-radius: 0.5rem;
+    font-size: .85em;
+    overflow: auto;
+}
+
+.sas1-code-caption {
+    margin-top: 20px;
+    margin-left: 0px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    font-style: italic;
+}
+del {
+    background-color: rgba(255, 0, 0, 0.2);
+}
+
+ins {
+    background-color: rgba(0, 255, 0, 0.2);
+    text-decoration: none;
+}
