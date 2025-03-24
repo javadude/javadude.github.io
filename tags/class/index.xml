@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Class on javadude.com</title>
+    <link>https://javadude.com/tags/class/</link>
+    <description>Recent content in Class on javadude.com</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>Scott Stanchfield</copyright>
+    <lastBuildDate>Sat, 22 Mar 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://javadude.com/tags/class/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>My Android class content for Johns Hopkins University</title>
+      <link>https://javadude.com/post/20250322-android-class/</link>
+      <pubDate>Sat, 22 Mar 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20250322-android-class/</guid>
+      <description>
+        
+          
+            &lt;p&gt;I&#39;ve been teaching an Android class for Johns Hopkins University since 2012. It&#39;s gone through many iterations over time, from development environments to languages to UI frameworks.&lt;/p&gt;
+&lt;p&gt;Most days I wish I just taught math. Math doesn&#39;t change like this every year.&lt;/p&gt;
+&lt;p&gt;Read on for the current and legacy content links.&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>My Domain-Specific Languages (DSL) class content for Johns Hopkins University</title>
+      <link>https://javadude.com/post/20250322-dsl-class/</link>
+      <pubDate>Sat, 22 Mar 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20250322-dsl-class/</guid>
+      <description>
+        
+          
+            &lt;p&gt;I taught a single-term Domain-Specific Languages class for Johns Hopkins University in 2018.&lt;/p&gt;
+&lt;p&gt;Read on for the video playlist link!&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>My Kotlin class content</title>
+      <link>https://javadude.com/post/20250322-kotlin-class/</link>
+      <pubDate>Sat, 22 Mar 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20250322-kotlin-class/</guid>
+      <description>
+        
+          
+            &lt;p&gt;I&#39;ve been teaching a live Kotlin class for Johns Hopkins University since 2020.&lt;/p&gt;
+&lt;p&gt;Read on for the latest video playlist link!&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>

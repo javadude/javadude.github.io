@@ -1,0 +1,2798 @@
+
+<!DOCTYPE html>
+<html
+  lang="en"
+  data-figures=""
+  
+    class="page"
+  
+  
+  >
+  <head>
+<title>Effective Layout Management | javadude.com</title>
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+
+
+
+
+<meta property="og:locale" content="en" />
+
+<meta property="og:type" content="article">
+<meta name="description" content="Getting familiar with Java Layout Managers." />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:creator" content="">
+<meta name="twitter:title" content="Effective Layout Management" />
+<meta name="twitter:image" content="https://javadude.com/post/20000304-layouts/duke.png"/>
+<meta property="og:url" content="https://javadude.com/post/20000304-layouts/" />
+<meta property="og:title" content="Effective Layout Management" />
+<meta property="og:description" content="Getting familiar with Java Layout Managers." />
+<meta property="og:image" content="https://javadude.com/post/20000304-layouts/duke.png" />
+  <meta name="keywords" content="java,design" />
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage":"https:\/\/javadude.com\/post\/20000304-layouts\/",
+      "name": "javadude.com",
+      "headline": "Effective Layout Management",
+      "description": "Getting familiar with Java Layout Managers.",
+      "url": "https:\/\/javadude.com\/post\/20000304-layouts\/",
+      "datePublished": "1998-01-01T00:00:00Z",
+      "dateModified": "1998-01-01T00:00:00Z",
+      "keywords": ["java","design"],
+        "articleSection": ["Articles"],
+      "author": {
+        "@type": "Person",
+        "name": "map[name:Scott Stanchfield photo:images\/yellow.jpeg]"
+      },
+      "image":{
+        "@type":"ImageObject",
+        "url": "https:\/\/javadude.com\/post\/20000304-layouts\/duke.png"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "logo": {
+          "@type":"ImageObject",
+          "url": "https:\/\/javadude.com\/"
+        },
+        "name": "javadude.com"
+      }
+    }
+  </script>
+
+<link rel="apple-touch-icon" sizes="180x180" href="https://javadude.com/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://javadude.com/icons/favicon-32x32.png">
+<link rel="manifest" href="https://javadude.com/icons/site.webmanifest">
+
+<link rel="canonical" href="https://javadude.com/post/20000304-layouts/">
+
+
+
+<link rel="preload" href="https://javadude.com/css/styles.bc1eb1dd1fc5d14285e0b88a05fef346a89bc5e461c683e5fc57576c7455fe75831ec8ecacec5edfb95ff21decee7759160e705bc419e8e864dcf581963a4140.css" integrity = "sha512-vB6x3R/F0UKF4LiKBf7zRqibxeRhxoPl/FdXbHRV/nWDHsjsrOxe37lf8h3s7ndZFg5wW8QZ6Ohk3PWBljpBQA==" as="style" crossorigin="anonymous">
+
+
+
+<link rel="preload" href="https://javadude.com/en/js/bundle.4be013d7cecbbcbad601bb190bdb5c84718e1b980d515e1b9882e80dc4395cf80a00093639868664c095e31aff8582cb2edb56166befbc98d614c728826b737d.js" as="script" integrity=
+"sha512-S&#43;AT187LvLrWAbsZC9tchHGOG5gNUV4bmILoDcQ5XPgKAAk2OYaGZMCV4xr/hYLLLttWFmvvvJjWFMcogmtzfQ==" crossorigin="anonymous">
+
+
+<link rel="stylesheet" type="text/css" href="https://javadude.com/css/styles.bc1eb1dd1fc5d14285e0b88a05fef346a89bc5e461c683e5fc57576c7455fe75831ec8ecacec5edfb95ff21decee7759160e705bc419e8e864dcf581963a4140.css" integrity="sha512-vB6x3R/F0UKF4LiKBf7zRqibxeRhxoPl/FdXbHRV/nWDHsjsrOxe37lf8h3s7ndZFg5wW8QZ6Ohk3PWBljpBQA==" crossorigin="anonymous">
+
+  </head>
+  <body
+    data-code="10000"
+    data-lines="true"
+    id="documentTop"
+    data-lang="en"
+  >
+
+<header class="nav_header" >
+  <nav class="nav"><a href='https://javadude.com/' class="nav_brand nav_item" title="javadude.com">javadude.com
+  <div class="nav_close">
+    <div><svg class="icon">
+  <title>open-menu</title>
+  <use xlink:href="#open-menu"></use>
+</svg>
+<svg class="icon">
+  <title>closeme</title>
+  <use xlink:href="#closeme"></use>
+</svg>
+</div>
+  </div>
+</a>
+
+    <div class='nav_body nav_body_left'>
+      
+      
+      
+        
+
+  <div class="nav_parent">
+    <a href="https://javadude.com/" class="nav_item" title="Home">Home </a>
+  </div>
+  <div class="nav_parent">
+    <a href="https://javadude.com/categories/class" class="nav_item" title="Classes">Classes </a>
+  </div>
+  <div class="nav_parent">
+    <a href="https://javadude.com/categories/articles" class="nav_item" title="Articles">Articles </a>
+  </div>
+  <div class="nav_parent">
+    <a href="https://javadude.com/categories/videos" class="nav_item" title="Videos">Videos </a>
+  </div>
+  <div class="nav_parent">
+    <a href="https://javadude.com/categories/tools" class="nav_item" title="Tools">Tools </a>
+  </div>
+  <div class="nav_parent">
+    <a href="https://javadude.com/publications/" class="nav_item" title="Publications">Publications </a>
+  </div>
+  <div class="nav_parent">
+    <a href="https://javadude.com/about/" class="nav_item" title="About">About </a>
+  </div>
+      
+<div class='follow'>
+  <a href="https://github.com/javadude">
+    <svg class="icon">
+  <title>github</title>
+  <use xlink:href="#github"></use>
+</svg>
+
+  </a>
+  <a href="https://gitlab.com/javamage">
+    <svg class="icon">
+  <title>gitlab</title>
+  <use xlink:href="#gitlab"></use>
+</svg>
+
+  </a>
+  <a href="https://www.youtube.com/scottstanchfield">
+    <svg class="icon">
+  <title>youtube</title>
+  <use xlink:href="#youtube"></use>
+</svg>
+
+  </a>
+  <a href="https://stackoverflow.com/users/12541/scott-stanchfield">
+    <svg class="icon">
+  <title>stackoverflow</title>
+  <use xlink:href="#stackoverflow"></use>
+</svg>
+
+  </a>
+  <a href="https://www.facebook.com/scott.stanchfield">
+    <svg class="icon">
+  <title>facebook</title>
+  <use xlink:href="#facebook"></use>
+</svg>
+
+  </a>
+    
+  <a href="https://javadude.com/index.xml">
+    <svg class="icon">
+  <title>rss</title>
+  <use xlink:href="#rss"></use>
+</svg>
+
+  </a>
+<div class="color_mode">
+  <input type="checkbox" class="color_choice" id="mode">
+</div>
+
+</div>
+
+    </div>
+  </nav>
+</header>
+
+    <main>
+  
+<div class="grid-inverse wrap content">
+  <article class="post_content">
+    <h1 class="post_title">Effective Layout Management</h1>
+  <div class="post_meta">
+    <span><svg class="icon">
+  <title>calendar</title>
+  <use xlink:href="#calendar"></use>
+</svg>
+</span>
+    <span class="post_date">
+      Jan 1, 1998	  
+    </span>
+    <span class="post_time"> · 40 min read</span><span>&nbsp;· <a href='https://javadude.com/tags/java/' title="java" class="post_tag button button_translucent">java
+        </a><a href='https://javadude.com/tags/design/' title="design" class="post_tag button button_translucent">design
+        </a>
+    </span>
+    <span class="page_only">&nbsp;·
+  <div class="post_share">
+    Share on:
+    <a href="https://twitter.com/intent/tweet?text=Effective%20Layout%20Management&url=https%3a%2f%2fjavadude.com%2fpost%2f20000304-layouts%2f&tw_p=tweetbutton" class="twitter" title="Share on Twitter" target="_blank" rel="nofollow">
+      <svg class="icon">
+  <title>twitter</title>
+  <use xlink:href="#twitter"></use>
+</svg>
+
+    </a>
+    <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fjavadude.com%2fpost%2f20000304-layouts%2f&t=Effective%20Layout%20Management" class="facebook" title="Share on Facebook" target="_blank" rel="nofollow">
+      <svg class="icon">
+  <title>facebook</title>
+  <use xlink:href="#facebook"></use>
+</svg>
+
+    </a>
+    <a href="#linkedinshare" id = "linkedinshare" class="linkedin" title="Share on LinkedIn" rel="nofollow">
+      <svg class="icon">
+  <title>linkedin</title>
+  <use xlink:href="#linkedin"></use>
+</svg>
+
+    </a>
+    <a href="https://javadude.com/post/20000304-layouts/" title="Copy Link" class="link link_yank">
+      <svg class="icon">
+  <title>copy</title>
+  <use xlink:href="#copy"></use>
+</svg>
+
+    </a>
+  </div>
+  </span>
+  </div>
+
+    <div class="post_body"><p>Let's get familiar with Java Layout Managers!</p>
+<p>(I wrote this article for the Sun Java Developer Connection website around 1998 and is no longer available. I used the Wayback Machine to retrieve it and post it here)</p>
+<p>This module will explore in great detail how the standard Abstract Window Toolkit (AWT) layout managers perform their jobs and how they can be effectively nested to create useful graphical user interfaces (GUIs).</p>
+<p><strong>Why do you need Layout Managers?</strong></p>
+<p>To describe why layout managers are necessary, all you need to do is examine a few of the problems they solve. Look at the following screen shots. These describe several_GUI sins_that are all too common:</p>
+<p><strong>Window Expanded, Components Stay Put</strong></p>
+<p>The first layout sin is to ignore a user-resize. The most common display size is probably still 640x480, so it's a good idea to make sure your application fits on that size screen. However, some users have much more screen real estate and want to take advantage of it. Non-resizable GUIs can be extremely frustrating. For example, in the initial display of a screen, the name entered is rather long, so it doesn't quite fit in the text field such that all is visible at once:</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="badresize1.gif (2921 bytes)"
+      
+        class="image_figure image_internal image_processed"
+        width="162"
+        height="150"
+        src="https://javadude.com/post/20000304-layouts/images/badresize1.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p>In the hopes of seeing the entire name at once, you could expand the dialog horizontally. Unfortunately, the programmer who wrote this application used absolute positioning and sizing, so the components in the dialog do not expand:</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="badresize2.gif (3173 bytes)"
+      
+        class="image_figure image_internal image_processed"
+        width="347"
+        height="150"
+        src="https://javadude.com/post/20000304-layouts/images/badresize2.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p>After reporting this behavior, the developer realizes the error that has been committed and changes the GUI to resize properly:</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="goodresize1.gif (2607 bytes)"
+      
+        class="image_figure image_internal image_processed"
+        width="138"
+        height="105"
+        src="https://javadude.com/post/20000304-layouts/images/goodresize1.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p><strong>Before resizing</strong></p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="goodresize2.gif (2836 bytes)"
+      
+        class="image_figure image_internal image_processed"
+        width="218"
+        height="105"
+        src="https://javadude.com/post/20000304-layouts/images/goodresize2.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p><strong>After resizing</strong></p>
+<p><strong>Components Designed for a Specific Look-And-Feel or Font Size</strong></p>
+<p>Another common problem is expecting all platforms or <code>LookAndFeel</code> libraries (when using Java Foundation Classes (JFC) Project Swing technology) to have the same sizing characteristics. The following picture shows the above GUI under the<code>MotifLookAndFeel</code>of the JFC Project Swing technology without using a layout manager:</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="badlf.gif (2218 bytes)"
+      
+        class="image_figure image_internal image_processed"
+        width="177"
+        height="136"
+        src="https://javadude.com/post/20000304-layouts/images/badlf.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p>Notice that the<code>MotifLookAndFeel</code>uses a wider, empty border around the buttons, causing some undesirable drawing effects. Switching font sizes will have a similar effect.</p>
+<p><strong>Components Designed for a Specific Language</strong></p>
+<p>Some words take up the same amount of space in different languages. &quot;No&quot; is a good example, as it's spelled that way in several languages.</p>
+<p>However, most words have varying lengths depending on which language you are using. For example:</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="bye-english.gif (1061 bytes)"
+      
+        class="image_figure image_internal image_processed"
+        width="47"
+        height="27"
+        src="https://javadude.com/post/20000304-layouts/images/bye-english.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p>A simple button to end an application. The programmer didn't give much thought to translations into other languages...</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="bye-german.gif (1060 bytes)"
+      
+        class="image_figure image_internal image_processed"
+        width="47"
+        height="27"
+        src="https://javadude.com/post/20000304-layouts/images/bye-german.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p>...such as German. <em>Auf Wiedersehen</em> gets chopped to the much smaller <em>Wieder</em>.</p>
+<p>This is unfortunate for two reasons:</p>
+<ul>
+<li>The user doesn't see the entire phrase, but even worse...</li>
+<li>...&quot;wieder&quot; means <em>again</em>. (I had a student from Germany who started laughing when I showed that button and told me what it meant...)</li>
+</ul>
+<p><strong>What are Layout Managers?</strong></p>
+<p>A layout manager encapsulates an algorithm for positioning and sizing of GUI components. Rather than building the layout algorithms into your code and watching for window resizing and other layout-modifying events, the algorithm is kept separate. This allows a layout algorithm to be reused for several applications, while simplifying your application code.</p>
+<p><code>LayoutManager</code> is an interface in the Java class libraries that describes how a <code>Container</code> and a layout manager communicate. It describes several methods which:</p>
+<ul>
+<li>Ask for sizing information for the layout manager and the components it manages.</li>
+<li>Tell the layout manager when components are added and removed from the container.</li>
+<li>Size and position the components it manages.</li>
+</ul>
+<p>An additional interface, <code>LayoutManager2</code>, was added in JDK 1.1, which adds a few more positioning and validation methods.</p>
+<p><strong>Component Size Methods</strong></p>
+<p>The <code>Component</code> class defines several size accessor methods to assist the layout process. Each of these methods returns a <code>Dimension</code> object describing the requested size. These methods are as follows:</p>
+<ul>
+<li>
+<p><code>public Dimension getPreferredSize()</code><br>
+This returns the desired size for a component.</p>
+</li>
+<li>
+<p><code>public Dimension getMinimumSize()</code><br>
+This returns the smallest desired size for a component.</p>
+</li>
+<li>
+<p><code>public Dimension getMaximumSize()</code><br>
+This returns the largest desired size for a component.</p>
+</li>
+</ul>
+<p>Layout managers will use these sizing methods when they are figuring out where to place components and what size they should be. <em>Layout managers can respect or ignore as much or as little of this information as they see fit.</em> Each layout manager has its own algorithm and may or may not use this information when deciding component placement. Which of these methods is respected or ignored is very important information and should be documented carefully when creating your own layout manager.</p>
+<p>Controlling the sizes returned for your own components can be accomplished in two ways, depending on whether you are using the JFC Project Swing components.</p>
+<p>If your component is a JFC Project Swing component, you inherit three methods,<code>setPreferredSize(Dimension)</code>, <code>setMinimumSize(Dimension)</code> and <code>setMaximumSize(Dimension)</code>. You can call these methods directly to explicitly set the size information for a component. For example:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">JButton</span><span class="w"> </span><span class="n">okButton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JButton</span><span class="p">(</span><span class="s">&#34;Ok&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">okButton</span><span class="p">.</span><span class="na">setPreferredSize</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Dimension</span><span class="p">(</span><span class="n">100</span><span class="p">,</span><span class="n">10</span><span class="p">));</span><span class="w">
+</span></span></span></code></pre></div><p>You should only adjust the sizes if you're really sure what you're doing. (The above example is probably_not_a good idea...)</p>
+<p>If your component is not a JFC Project Swing component, you will need to subclass it to adjust the sizes. For example:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyButton</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Button</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Dimension</span><span class="w"> </span><span class="nf">getPreferredSize</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dimension</span><span class="p">(</span><span class="n">100</span><span class="p">,</span><span class="n">10</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">    
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p><strong>Layout Managers and Containers</strong></p>
+<p>A layout manager must be associated with a <code>Container</code> object to perform its work. If a container does not have an associated layout manager, the container simply places components wherever specified by using the <code>setBounds()</code>, <code>setLocation()</code> and/or<code>setSize()</code> methods.</p>
+<p>If a container has an associated layout manager, the container asks that layout manager to position and size its components before they are painted. The layout manager itself_does not_perform the painting; it simply decides what size and position each component should occupy and calls <code>setBounds()</code>, <code>setLocation()</code>and/or<code>setSize()</code> on each of those components.</p>
+<p>A <code>LayoutManager</code> is associated with a <code>Container</code> by calling the <code>setLayout(LayoutManager)</code> method of <code>Container</code>. For example:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">Panel</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Panel</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">p</span><span class="p">.</span><span class="na">setLayout</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BorderLayout</span><span class="p">());</span><span class="w">
+</span></span></span></code></pre></div><p>Some containers, such as <code>Panel</code>, provide a constructor that takes a layout manager as an argument as well:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">Panel</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Panel</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BorderLayout</span><span class="p">());</span><span class="w">
+</span></span></span></code></pre></div><p><strong>The <code>add(...)</code> Methods</strong></p>
+<p>Containers have several methods that can be used to add components to them. They are:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="n">Component</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">Component</span><span class="w"> </span><span class="n">comp</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="n">Component</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">Component</span><span class="w"> </span><span class="n">comp</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="n">Component</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">Component</span><span class="w"> </span><span class="n">comp</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">Component</span><span class="w"> </span><span class="n">comp</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">constraints</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">Component</span><span class="w"> </span><span class="n">comp</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">constraints</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></div><p>Each of these methods adds a component to the container and passes information to the layout manager of the container. All of the methods take a<code>Component</code>parameter, specifying which component to add. Some take an index. This is used to specify an order in the container; some layout managers (such as<code>CardLayout</code>) respect the ordering of added components.</p>
+<p>The other parameters, <code>name</code> and <code>constraints</code> are information that can be used by a layout manager to help direct the layout. For example, when adding a component to a container that is managed by a <code>BorderLayout</code>, you specify a compass position as a constraint.</p>
+<p>Each of the above<code>add()</code>methods delegates its work to a single<code>addImpl()</code>method:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">protected</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">addImpl</span><span class="p">(</span><span class="n">Component</span><span class="w"> </span><span class="n">comp</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="w"> </span><span class="n">constraints</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></div><p>Note: <em>addImpl</em> stands for &quot;implementation of the add method.&quot;</p>
+<p>This method is the one that does all the work. It adds the <code>Component</code> to the <code>Container</code>, and, if a layout manager is managing the container layout, calls the <code>addLayoutComponent()</code> method of the layout manager. It is through <code>addLayoutComponent()</code> that the layout manager receives the constraints (from the <code>add()</code> call).</p>
+<p>If you create a subclass of <code>Container</code> and want to override an <code>add()</code> method, you only need to override <code>addImpl()</code>. All other <code>add()</code> methods route through it.</p>
+<p><strong>Container Insets</strong></p>
+<p>In addition to a layout manager, each <code>Container</code> has a <code>getInsets()</code> method that returns an <code>Insets</code> object. The <code>Insets</code> object has four public fields: <code>top</code>, <code>bottom</code>, <code>left</code> and <code>right</code>.</p>
+<p>These insets define the area a container is reserving for its own use (such as drawing a decorative border). Layout managers_must_respect this area when positioning and sizing the contained components.</p>
+<p>To demonstrate, create a simple <code>Panel</code> subclass that provides a raised, 3D border around whatever is contained within it. You'll define this border as being 5 pixels away from each edge of the container border, and reserving some extra room between it and the laid out components. The class will look something like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">BorderPanel</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Panel</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Insets</span><span class="w"> </span><span class="n">insets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Insets</span><span class="p">(</span><span class="n">10</span><span class="p">,</span><span class="n">10</span><span class="p">,</span><span class="n">10</span><span class="p">,</span><span class="n">10</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Insets</span><span class="w"> </span><span class="nf">getInsets</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="n">insets</span><span class="p">;}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">paint</span><span class="p">(</span><span class="n">Graphics</span><span class="w"> </span><span class="n">g</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w">        </span><span class="n">Dimension</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getSize</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w">        </span><span class="n">g</span><span class="p">.</span><span class="na">setColor</span><span class="p">(</span><span class="n">getBackground</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="w">        </span><span class="n">g</span><span class="p">.</span><span class="na">draw3DRect</span><span class="p">(</span><span class="n">5</span><span class="p">,</span><span class="n">5</span><span class="p">,</span><span class="n">size</span><span class="p">.</span><span class="na">width</span><span class="o">-</span><span class="n">11</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">.</span><span class="na">height</span><span class="o">-</span><span class="n">11</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">9</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>To create the panel, you defined a static <code>Insets</code> object that represents the space to reserve. Because that space won't change, you used a single static final instance of it. You'll return this instance anytime a layout manager (or anyone else) calls <code>getInsets()</code>.</p>
+<p>You then define a <code>paint()</code> method that gets the size of the container into which it is painting, then draws a raised border within that space. If you use the above class as follows:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">Frame</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Frame</span><span class="p">(</span><span class="s">&#34;Test&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">f</span><span class="p">.</span><span class="na">setLayout</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">GridLayout</span><span class="p">(</span><span class="n">1</span><span class="p">,</span><span class="n">0</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">f</span><span class="p">.</span><span class="na">setBackground</span><span class="p">(</span><span class="n">Color</span><span class="p">.</span><span class="na">lightGray</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w"></span><span class="n">BorderPanel</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BorderPanel</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="n">p</span><span class="p">.</span><span class="na">setLayout</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">GridLayout</span><span class="p">(</span><span class="n">1</span><span class="p">,</span><span class="n">0</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w"></span><span class="n">p</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Button</span><span class="p">(</span><span class="s">&#34;Hello&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="w"></span><span class="n">f</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">p</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="w"></span><span class="n">f</span><span class="p">.</span><span class="na">setVisible</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">9</span><span class="cl"><span class="w"></span><span class="n">f</span><span class="p">.</span><span class="na">pack</span><span class="p">();</span><span class="w">
+</span></span></span></code></pre></div><p>you'll get the following GUI:</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="insets1.gif (1695 bytes)"
+      
+        class="image_figure image_internal image_processed"
+        width="112"
+        height="70"
+        src="https://javadude.com/post/20000304-layouts/images/insets1.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p>If you are not familiar with <code>GridLayout</code>, it will be discussed<a href="/post/20000304-layouts/#gridLayout">later</a>.</p>
+<p>You can get another interesting effect by adding the following to the <code>paint()</code> method:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">g</span><span class="p">.</span><span class="na">draw3DRect</span><span class="p">(</span><span class="n">6</span><span class="p">,</span><span class="n">6</span><span class="p">,</span><span class="n">size</span><span class="p">.</span><span class="na">width</span><span class="o">-</span><span class="n">13</span><span class="p">,</span><span class="n">size</span><span class="p">.</span><span class="na">height</span><span class="o">-</span><span class="n">13</span><span class="p">,</span><span class="kc">false</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p>after the first <code>draw3DRect()</code>:</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="insets2.gif (1714 bytes)"
+      
+        class="image_figure image_internal image_processed"
+        width="112"
+        height="70"
+        src="https://javadude.com/post/20000304-layouts/images/insets2.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p>or if you swap the <code>true</code> / <code>false</code> on the two <code>drawRect()</code> calls:</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="insets3.gif (1707 bytes)"
+      
+        class="image_figure image_internal image_processed"
+        width="112"
+        height="70"
+        src="https://javadude.com/post/20000304-layouts/images/insets3.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p>If you are using the JFC Project Swing components, you will want to explore the various <code>Border</code> classes provided to generate these types of effects, instead of using <code>Insets</code>.</p>
+<p><strong>The Standard AWT Layout Managers</strong></p>
+<p>The AWT library includes five layout managers. These can be used in various combinations to create just about any GUI you may possibly want to write. The standard AWT layout managers are:</p>
+<ul>
+<li><code>FlowLayout</code></li>
+<li><code>BorderLayout</code></li>
+<li><code>GridLayout</code></li>
+<li><code>CardLayout</code></li>
+<li><code>GridBagLayout</code></li>
+</ul>
+<p>Each of these will now be discussed in detail, including strategies and pitfalls when using them. By themselves, these layout managers may not seem terribly useful. However, when combined they become incredibly flexible.<strong><code>FlowLayout</code></strong></p>
+<p>This is the simplest of the AWT layout managers. Its layout strategy is:</p>
+<ul>
+<li>respect the preferred size of all contained components</li>
+<li>lay out as many components as will fit horizontally within a container</li>
+<li>start a new row of components if more components exist</li>
+<li>if all components can't fit, too bad!</li>
+</ul>
+<p>To add components to a container managed by <code>FlowLayout</code>, you could use one of the following <code>add()</code> methods:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="n">Component</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">Component</span><span class="w"> </span><span class="n">comp</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="n">Component</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">Component</span><span class="w"> </span><span class="n">comp</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></div><p>You do not specify any constraints for the components, as <code>FlowLayout</code> <em>only</em> depends on the order of the <code>add()</code> calls (or the index specified in the call to <code>add(Component, int)</code>.)</p>
+<p>Examine a simple <code>FlowLayout</code> in action. Suppose you had the following class definition:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">FlowTest</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="w">        </span><span class="n">Frame</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Frame</span><span class="p">(</span><span class="s">&#34;FlowTest&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="w">        </span><span class="n">f</span><span class="p">.</span><span class="na">setLayout</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">FlowLayout</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="w">        </span><span class="n">f</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Button</span><span class="p">(</span><span class="s">&#34;A&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="w">        </span><span class="n">f</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Button</span><span class="p">(</span><span class="s">&#34;B&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="w">        </span><span class="n">f</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Button</span><span class="p">(</span><span class="s">&#34;C&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="w">        </span><span class="n">f</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Button</span><span class="p">(</span><span class="s">&#34;D&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="w">        </span><span class="n">f</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Button</span><span class="p">(</span><span class="s">&#34;E&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="w">        </span><span class="n">f</span><span class="p">.</span><span class="na">setVisible</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>This class creates a <code>Frame</code> and adds five buttons to it. It lays the buttons out as many can fit per row, then moves to the next row to display more of them. The following pictures show the frame being expanded horizontally:</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="flow1.gif (2004 bytes)"
+      
+        class="image_figure image_internal image_processed"
+        width="112"
+        height="112"
+        src="https://javadude.com/post/20000304-layouts/images/flow1.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+<br>
+<strong>Initial Size</strong></p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="flow2.gif (2004 bytes)"
+      
+        class="image_figure image_internal image_processed"
+        width="120"
+        height="112"
+        src="https://javadude.com/post/20000304-layouts/images/flow2.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+<br>
+<strong>Some horizontal expansion</strong></p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="flow3.gif (2106 bytes)"
+      
+        class="image_figure image_internal image_processed"
+        width="151"
+        height="112"
+        src="https://javadude.com/post/20000304-layouts/images/flow3.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+<br>
+<strong>More horizontal expansion</strong></p>
+<p>Notice how the layout is fitting as many components per line as possible. If there isn't room for all the components, they are simply not shown:</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="flow44.gif (1667 bytes)"
+      
+        class="image_figure image_internal image_processed"
+        width="112"
+        height="60"
+        src="https://javadude.com/post/20000304-layouts/images/flow44.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p><strong><em><code>FlowLayout</code>Variations</em></strong></p>
+<p><code>FlowLayout</code> can be customized at construction time by passing the constructor an alignment setting:</p>
+<ul>
+<li><code>FlowLayout.CENTER</code>(the default)</li>
+<li><code>FlowLayout.RIGHT</code></li>
+<li><code>FlowLayout.LEFT</code></li>
+</ul>
+<p>These settings adjust how the components in a given row are positioned. By default, all components in a row will be separated by an horizontal gap, then the whole chunk will be centered in the available width. <code>LEFT</code> and <code>RIGHT</code> define padding such that the row is left or right aligned. The alignment can also be changed by calling the <code>setAlignment()</code> method of <code>FlowLayout</code> with one of the same alignment constants.</p>
+<p><code>FlowLayout</code> can also be customized with different horizontal and vertical gap settings. These specify how much space is left between components, horizontally (hgap) and vertically (vgap)</p>
+<p><strong>Preferred Size of a<code>FlowLayout</code>Container</strong></p>
+<p>Recall that when a <code>Container</code> is asked for its preferred size, it bases that preferred size on its layout manager. This raises the subject of what <code>FlowLayout</code>would prefer to do with its components.</p>
+<p>Unfortunately, there is no way for a container to know anything about the size of its parent or how its parent's layout manager plans to lay <em>it</em> out. So, the only information available to determine the preferred size of a container is the set of components contained within it.</p>
+<p><code>FlowLayout</code>'s preference would be to lay all its components out into a <em>single row</em>. This means that its preferred height would be the maximum height of any of its components plus some &quot;slop&quot; known as its<code>vgap</code>. (<code>vgap</code> and <code>hgap</code>are common properties of most of the standard layout managers, and specify how far apart components are placed.) The preferred width would be the sum of all widths of its contained components, plus an <code>hgap</code> between each and on either end of the row.</p>
+<p>Think about the consequences of this. What would happen if a <code>FlowLayout</code>-managed container was nested within another <code>FlowLayout</code>-managed container? For example:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">Panel</span><span class="w"> </span><span class="n">p1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Panel</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">FlowLayout</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">Panel</span><span class="w"> </span><span class="n">p2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Panel</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">FlowLayout</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">p2</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Button</span><span class="p">(</span><span class="s">&#34;A&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w"></span><span class="n">p2</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Button</span><span class="p">(</span><span class="s">&#34;B&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="n">p2</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Button</span><span class="p">(</span><span class="s">&#34;C&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w"></span><span class="n">p2</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Button</span><span class="p">(</span><span class="s">&#34;D&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="w"></span><span class="n">p2</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Button</span><span class="p">(</span><span class="s">&#34;E&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="w"></span><span class="n">p1</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">p2</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p>Think this through a bit and the answer is very disconcerting. The following walks you through the layout process:</p>
+<ol>
+<li>p1's parent container tells it to lay itself out.</li>
+<li>p1 sees that it has a layout manager and delegates thelayout task to it.</li>
+<li>p1's <code>FlowLayout</code> checks the preferred sizes of all its components:
+<ol>
+<li>The only component in p1 is p2</li>
+<li>p2 sees it has a layout manager and delegates the preferred size request to the layout manager:
+<ol>
+<li>p2's <code>FlowLayout</code> states that it would prefer to lay out all of its components in a single row.</li>
+<li>p2's <code>FlowLayout</code> asks its components (the buttons) for their preferred sizes and calculates the size of that single, preferred row.</li>
+<li>p2's <code>FlowLayout</code> returns that preferred size.</li>
+</ol>
+</li>
+<li>p2 returns the preferred size.</li>
+</ol>
+</li>
+<li>p1's <code>FlowLayout</code> tries to respect the preferred size of p2 as much as possible.
+<ul>
+<li>If there's enough room for the single row, it sets the bounds of p2 to its preferred size.</li>
+<li>If there's not enough horizontal room, it sets p2's bounds to the single-line height and as much width as is available.</li>
+<li>If there's not enough horizontal or vertical room, it sets the bounds of p2 to whatever it has.</li>
+</ul>
+</li>
+</ol>
+<p>So what does this tell us? If a <code>FlowLayout</code>-managed container is placed within another container whose layout manager respects its preferred height, <em>the nested<code>FlowLayout</code>-managed container will always have a single row</em>.</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="flow5a.gif (1946 bytes)"
+      
+        class="image_figure image_internal image_processed"
+        width="159"
+        height="70"
+        src="https://javadude.com/post/20000304-layouts/images/flow5a.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+<br>
+<strong>Before Resizing</strong></p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="flow5b.gif (1914 bytes)"
+      
+        class="image_figure image_internal image_processed"
+        width="112"
+        height="126"
+        src="https://javadude.com/post/20000304-layouts/images/flow5b.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+<br>
+<strong>After Resizing</strong></p>
+<p><strong><em><code>FlowLayout</code>Strategies and Potential Pitfalls</em></strong></p>
+<p>Keep the following in mind when using a<code>FlowLayout</code>:</p>
+<ul>
+<li>Never nest a<code>FlowLayout</code>-managed container within a container whose layout manager respects preferred height.
+<ul>
+<li>Caveat: If you only have a few components, this is not as important to avoid.</li>
+</ul>
+</li>
+<li>The <code>FlowLayout</code> manager effectively hides components if they won't fit.
+<ul>
+<li>There is no visual indication of this to the user—as far as the user is concerned, the unshown components never even existed.</li>
+</ul>
+</li>
+<li>Because of the previous point, <code>FlowLayout</code> is really only useful when you have a small number of components.</li>
+<li><code>FlowLayout</code> is_horizontally_biased. If you want a_vertical_flow layout, you must write your own. (Or use the<code>BoxLayout</code>manager which comes with the JFC Project Swing component set.The<code>BoxLayout</code>manager is discussed in theFundamentals of Swing: Part Itutorial.)</li>
+</ul>
+<p><strong><code>BorderLayout</code></strong></p>
+<p><code>BorderLayout</code> is probably the most useful of the standard layout managers. It defines a layout scheme that maps its container into five logical sections:</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="border1.gif (2976 bytes)"
+      
+        class="image_figure image_internal image_processed"
+        width="268"
+        height="188"
+        src="https://javadude.com/post/20000304-layouts/images/border1.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p>The first thing going through your mind should be &quot;but I will_never_have a GUI that looks like that!&quot; Moreover, you are probably correct. However, the secret is in mastering its nesting capabilities, and using two or three of the logical sections. (It's very rare that you'll actually use more than three of the positions in a container at once.)</p>
+<p>First, look at the sample code for the above GUI:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">Frame</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Frame</span><span class="p">(</span><span class="s">&#34;orderTest&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">f</span><span class="p">.</span><span class="na">setLayout</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BorderLayout</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">f</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Button</span><span class="p">(</span><span class="s">&#34;North&#34;</span><span class="p">),</span><span class="w">  </span><span class="n">BorderLayout</span><span class="p">.</span><span class="na">NORTH</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w"></span><span class="n">f</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Button</span><span class="p">(</span><span class="s">&#34;South&#34;</span><span class="p">),</span><span class="w">  </span><span class="n">BorderLayout</span><span class="p">.</span><span class="na">SOUTH</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="n">f</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Button</span><span class="p">(</span><span class="s">&#34;East&#34;</span><span class="p">),</span><span class="w">   </span><span class="n">BorderLayout</span><span class="p">.</span><span class="na">EAST</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w"></span><span class="n">f</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Button</span><span class="p">(</span><span class="s">&#34;West&#34;</span><span class="p">),</span><span class="w">   </span><span class="n">BorderLayout</span><span class="p">.</span><span class="na">WEST</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="w"></span><span class="n">f</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Button</span><span class="p">(</span><span class="s">&#34;Center&#34;</span><span class="p">),</span><span class="w"> </span><span class="n">BorderLayout</span><span class="p">.</span><span class="na">CENTER</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p>The <code>BorderLayout</code> manager requires a constraint when adding a component. The constraint can be one of the following:</p>
+<ul>
+<li><code>BorderLayout.NORTH</code></li>
+<li><code>BorderLayout.SOUTH</code></li>
+<li><code>BorderLayout.EAST</code></li>
+<li><code>BorderLayout.WEST</code></li>
+<li><code>BorderLayout.CENTER</code></li>
+</ul>
+<p>These constraints are specified within the following two<code>add()</code>methods:</p>
+<ul>
+<li>
+<p><code>public void add(String constraint, Component component)</code><br>
+This is the &quot;old&quot; form of adding a constraint. JDK 1.0.2 only provided for constraints that were represented by a<code>String</code>to be added when adding a<code>Component</code>to a<code>Container</code></p>
+</li>
+<li>
+<p><code>public void add(Component component, Object constraint)</code><br>
+This is the &quot;new&quot; form of adding a constraint, added in JDK 1.1.</p>
+</li>
+</ul>
+<p>You'll see a few more variations of the<code>add()</code>method when you examine<code>CardLayout</code><a href="/post/20000304-layouts/#cardLayout">later</a>. Concentrate on just these forms for now.</p>
+<p>For<code>BorderLayout</code>, the constraint argument describes which position the component will occupy. Note that the earlier<code>BorderLayout</code>example source code could have been written as follows:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">Frame</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Frame</span><span class="p">(</span><span class="s">&#34;BorderTest&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">f</span><span class="p">.</span><span class="na">setLayout</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BorderLayout</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">f</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&#34;North&#34;</span><span class="p">,</span><span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="n">Button</span><span class="p">(</span><span class="s">&#34;North&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w"></span><span class="n">f</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&#34;South&#34;</span><span class="p">,</span><span class="w">  </span><span class="k">new</span><span class="w"> </span><span class="n">Button</span><span class="p">(</span><span class="s">&#34;South&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="n">f</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&#34;East&#34;</span><span class="p">,</span><span class="w">   </span><span class="k">new</span><span class="w"> </span><span class="n">Button</span><span class="p">(</span><span class="s">&#34;East&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w"></span><span class="n">f</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&#34;West&#34;</span><span class="p">,</span><span class="w">   </span><span class="k">new</span><span class="w"> </span><span class="n">Button</span><span class="p">(</span><span class="s">&#34;West&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="w"></span><span class="n">f</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&#34;Center&#34;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Button</span><span class="p">(</span><span class="s">&#34;Center&#34;</span><span class="p">));</span><span class="w">
+</span></span></span></code></pre></div><p>The big difference is that the newer form (using the<code>BorderLayout.NORTH</code>type constraints) can be compile-time checked; if you type<code>BorderLayout.NORFH</code>the compiler will catch it. If you just type &quot;Norfh&quot;, it will not be caught until runtime, causing an<code>IllegalArgumentException</code>to be thrown.</p>
+<p>The Java 2 platform (previously known as the JDK 1.2) adds additional constants of<code>BEFORE_FIRST_LINE</code>,<code>AFTER_LAST_LINE</code>,<code>BEFORE_LINE_BEGINS</code>, and<code>AFTER_LINE_ENDS</code>. These are effectively equivalent to<code>NORTH</code>,<code>SOUTH</code>,<code>WEST</code>, and<code>EAST</code>, respectively. However, they could have other orientations where text is not oriented left-to-right, top-to-bottom. Examine the<code>java.awt.ComponentOrientation</code>class for additional information on language-sensitive orientation issues.</p>
+<p><strong><em>How Is<code>BorderLayout</code>Laid Out?</em></strong></p>
+<p><code>BorderLayout</code>respects_some_of the preferred sizes of its contained components,<em>but not all</em>. Its layout strategy is:</p>
+<ol>
+<li>
+<p>If there is a<code>NORTH</code>component, get its preferred size.<br>
+Respect its preferred_height_if possible, and set its width to the full available width of the container.</p>
+</li>
+<li>
+<p>If there is a<code>SOUTH</code>component, get its preferred size.<br>
+Respect its preferred_height_if possible, and set its width to the full available width of the container.</p>
+</li>
+<li>
+<p>If there is an<code>EAST</code>component, get its preferred size.<br>
+Respect its preferred_width_if possible, and set its height to the_remaining_height of the container.</p>
+</li>
+<li>
+<p>If there is an<code>WEST</code>component, get its preferred size.<br>
+Respect its preferred_width_if possible, and set its height to the_remaining_height of the container.</p>
+</li>
+<li>
+<p>If there is a<code>CENTER</code>component, give it whatever space remains, if any.</p>
+</li>
+</ol>
+<p>Now consider nesting a<code>FlowLayout</code>-managed container inside a<code>BorderLayout</code>-managed container. First, what would happen if you added the<code>FlowLayout</code>-managed container as the<code>NORTH</code>or<code>SOUTH</code>component of the<code>BorderLayout</code>?</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">Panel</span><span class="w"> </span><span class="n">flow</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Panel</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">FlowLayout</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">Panel</span><span class="w"> </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Panel</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BorderLayout</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">flow</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Button</span><span class="p">(</span><span class="s">&#34;A&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w"></span><span class="n">flow</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Button</span><span class="p">(</span><span class="s">&#34;B&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="n">flow</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Button</span><span class="p">(</span><span class="s">&#34;C&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w"></span><span class="n">flow</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Button</span><span class="p">(</span><span class="s">&#34;D&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="w"></span><span class="n">flow</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Button</span><span class="p">(</span><span class="s">&#34;E&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="w"></span><span class="n">border</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">flow</span><span class="p">,</span><span class="w"> </span><span class="n">BorderLayout</span><span class="p">.</span><span class="na">NORTH</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p>Remember what happens when a<code>FlowLayout</code>-managed container is added to a layout that respects preferred height?<em>The</em><code>FlowLayout</code><em>container will only ever have a single row</em>! It will never flow its components to more than that one row.</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="border4.gif (2450 bytes)"
+      
+        class="image_figure image_internal image_processed"
+        width="149"
+        height="106"
+        src="https://javadude.com/post/20000304-layouts/images/border4.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p>That was the easy one (now that you know the secret). Now, what if you add the<code>FlowLayout</code>-managed container as the<code>WEST</code>or<code>EAST</code>component? To demonstrate, place the container in the<code>EAST</code>section:</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="border2.gif (2709 bytes)"
+      
+        class="image_figure image_internal image_processed"
+        width="276"
+        height="105"
+        src="https://javadude.com/post/20000304-layouts/images/border2.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p>This initial display looks pretty much as you would expect. Each component is taking up its preferred size.</p>
+<p>Next, reduce the width and increase the height. The<code>FlowLayout</code>container is still insisting on a single row for its preferred_width_(as you should expect) and is eating up room that the<code>CENTER</code>component would have liked to use. This result can be very unexpected, as you might think the<code>FlowLayout</code>container should expand to fill the<code>EAST</code>area and give some room back to the<code>CENTER</code>component:</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="border3.gif (3129 bytes)"
+      
+        class="image_figure image_internal image_processed"
+        width="211"
+        height="187"
+        src="https://javadude.com/post/20000304-layouts/images/border3.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p>Remember: a<code>BorderLayout</code>container asks for the preferred size of each section and respects it as much as possible.</p>
+<p>To demonstrate this even further, reduce the width until only the<code>EAST</code>component is still visible:</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="border5.gif (2527 bytes)"
+      
+        class="image_figure image_internal image_processed"
+        width="145"
+        height="183"
+        src="https://javadude.com/post/20000304-layouts/images/border5.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p>Finally, if you compress it more, the<code>FlowLayout</code>-managed container is clipped to the available space:</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="border6.gif (2301 bytes)"
+      
+        class="image_figure image_internal image_processed"
+        width="111"
+        height="177"
+        src="https://javadude.com/post/20000304-layouts/images/border6.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p>So, the only place that you should really put a<code>FlowLayout</code>managed container within a<code>BorderLayout</code>-managed container is the<code>CENTER</code>section (unless you only have very few components in the<code>FlowLayout</code>).</p>
+<p>Now consider some nice generalizations about<code>BorderLayout</code>:</p>
+<ul>
+<li>NORTH and<code>SOUTH</code>positions in a<code>BorderLayout</code>can be useful if you want to_bind_the height of part of a GUI to that part's preferred height.</li>
+<li>EAST and<code>WEST</code>positions in a<code>BorderLayout</code>can be useful if you want to_bind_the width of part of a GUI to that part's preferred width.</li>
+<li>Once part of the GUI is bound, the<code>CENTER</code>is the expanding part.</li>
+</ul>
+<p>These are very important properties of<code>BorderLayout</code>, and make it very powerful when used to create a more complex, nested GUI.</p>
+<p>Take a very simple example. Suppose you wanted to create a simple labeled text field. You want this new component to exhibit the following properties:</p>
+<ul>
+<li>The label takes up exactly as much horizontal room as needed</li>
+<li>The label is to the left of the text field</li>
+<li>The text field expands horizontally</li>
+</ul>
+<p>You could start with the following code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">Panel</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Panel</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BorderLayout</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">Label</span><span class="w"> </span><span class="n">nameLabel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Label</span><span class="p">(</span><span class="s">&#34;Name:&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">TextField</span><span class="w"> </span><span class="n">entry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TextField</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w"></span><span class="n">p</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">nameLabel</span><span class="p">,</span><span class="w"> </span><span class="n">BorderLayout</span><span class="p">.</span><span class="na">WEST</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="n">p</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">entry</span><span class="p">,</span><span class="w"> </span><span class="n">BorderLayout</span><span class="p">.</span><span class="na">CENTER</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p>Here you are binding the width of the label to its preferred width. It will take up that much space and not expand. The entry field is not bound and can expand. So, you achieve the desired result:</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="border7.gif (1641 bytes)"
+      
+        class="image_figure image_internal image_processed"
+        width="149"
+        height="50"
+        src="https://javadude.com/post/20000304-layouts/images/border7.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+<br>
+<strong>Initial size</strong></p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="border8.gif (1776 bytes)"
+      
+        class="image_figure image_internal image_processed"
+        width="277"
+        height="50"
+        src="https://javadude.com/post/20000304-layouts/images/border8.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+<br>
+<strong>After horizontal stretch</strong></p>
+<p>At least it_seems_you achieved the desired result. Look what happens when you expand vertically:</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="border9.gif (2140 bytes)"
+      
+        class="image_figure image_internal image_processed"
+        width="204"
+        height="122"
+        src="https://javadude.com/post/20000304-layouts/images/border9.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p>The<code>TextField</code>is stretched. So, you need to bind the height of the two components to their preferred height. This can be accomplished by placing the<code>Label</code>/<code>TextField</code>combination inside_another_<code>BorderLayout</code>-managed container, as the<code>NORTH</code>or<code>SOUTH</code>component. Assuming that you want the fields to stay at the top of the GUI, you can place it to the<code>NORTH</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">Panel</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Panel</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BorderLayout</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">Label</span><span class="w"> </span><span class="n">nameLabel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Label</span><span class="p">(</span><span class="s">&#34;Name:&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">TextField</span><span class="w"> </span><span class="n">entry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TextField</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w"></span><span class="n">p</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">nameLabel</span><span class="p">,</span><span class="w"> </span><span class="n">BorderLayout</span><span class="p">.</span><span class="na">WEST</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="n">p</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">entry</span><span class="p">,</span><span class="w"> </span><span class="n">BorderLayout</span><span class="p">.</span><span class="na">CENTER</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w"></span><span class="n">Panel</span><span class="w"> </span><span class="n">p2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Panel</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BorderLayout</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="w"></span><span class="n">p2</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">BorderLayout</span><span class="p">.</span><span class="na">NORTH</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p>Now, when you expand vertically, you get the following effect:</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="border10.gif (2075 bytes)"
+      
+        class="image_figure image_internal image_processed"
+        width="209"
+        height="146"
+        src="https://javadude.com/post/20000304-layouts/images/border10.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p><strong><em><code>BorderLayout</code>Variations</em></strong></p>
+<p><code>BorderLayout</code>can be customized with hgap and vgap values at construction time. These values specify how much space is left between components, horizontally (hgap) and vertically (vgap).</p>
+<p><strong><em>Preferred Size of a<code>BorderLayout</code>Container</em></strong></p>
+<p>If a<code>BorderLayout</code>-controlled Container is asked for its preferred size, what will it return? The idea behind its preferred size is to make sure all contained components are given their preferred sizes. First, look at the preferred width:</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="border1.gif (2976 bytes)"
+      
+        class="image_figure image_internal image_processed"
+        width="268"
+        height="188"
+        src="https://javadude.com/post/20000304-layouts/images/border1.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p>Looking at the above picture, there are three rows of components:</p>
+<ul>
+<li>NORTH</li>
+<li>WEST,<code>CENTER</code>and<code>EAST</code>(plus hgaps as needed)</li>
+<li>SOUTH</li>
+</ul>
+<p>The preferred width of the layout needs to take into account the widest of these rows. Using pw as the abbreviation for &quot;preferred width&quot;, you can write a simple equation for the preferred width of a<code>BorderLayout</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">pw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">max</span><span class="p">(</span><span class="n">north</span><span class="p">.</span><span class="na">pw</span><span class="p">,</span><span class="w"> </span><span class="n">south</span><span class="p">.</span><span class="na">pw</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">        </span><span class="p">(</span><span class="n">west</span><span class="p">.</span><span class="na">pw</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">center</span><span class="p">.</span><span class="na">pw</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">east</span><span class="p">.</span><span class="na">pw</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">hgaps</span><span class="p">))</span><span class="w">
+</span></span></span></code></pre></div><p>The_hgaps_amount to include depends on which components are present in the center row.</p>
+<p>The preferred height (<em>ph</em> in the following equation) depends on the sizes of the<code>NORTH</code>and<code>SOUTH</code>components plus the_tallest_of the middle-row components:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">ph</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vgaps</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">north</span><span class="p">.</span><span class="na">ph</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">south</span><span class="p">.</span><span class="na">ph</span><span class="w"> </span><span class="o">+</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">        </span><span class="n">max</span><span class="p">(</span><span class="n">west</span><span class="p">.</span><span class="na">ph</span><span class="p">,</span><span class="w"> </span><span class="n">center</span><span class="p">.</span><span class="na">ph</span><span class="p">,</span><span class="w"> </span><span class="n">east</span><span class="p">.</span><span class="na">ph</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></div><p>The <em>vgaps</em> amount depends on which rows are present in the <code>BorderLayout</code>.</p>
+<p>A useful application of this preferred-size knowledge is creating two or three rows of components that each keep their preferred size. Suppose you had a<code>Label</code>, a<code>TextArea</code>, and a<code>TextField</code>that you wanted to lay out like this:</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="border11.gif (3273 bytes)"
+      
+        class="image_figure image_internal image_processed"
+        width="448"
+        height="243"
+        src="https://javadude.com/post/20000304-layouts/images/border11.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p>And when you expand it vertically, you_do not_want the components to stretch vertically:</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="border12.gif (3703 bytes)"
+      
+        class="image_figure image_internal image_processed"
+        width="448"
+        height="358"
+        src="https://javadude.com/post/20000304-layouts/images/border12.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p>First, recall that you can_bind_the height of a component to its preferred height by placing it in the<code>NORTH</code>or<code>SOUTH</code>part of a<code>BorderLayout</code>. If that bound component happens to be another<code>BorderLayout</code>, (with<code>NORTH</code>,<code>CENTER</code>, and<code>SOUTH</code>components) each component within that layout would get its preferred height. This results in the above figure, with code to produce it:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">Frame</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Frame</span><span class="p">(</span><span class="s">&#34;BorderTest&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">Panel</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Panel</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BorderLayout</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">f</span><span class="p">.</span><span class="na">setLayout</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BorderLayout</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w"></span><span class="n">p</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Label</span><span class="p">(</span><span class="s">&#34;Hello&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">Label</span><span class="p">.</span><span class="na">CENTER</span><span class="p">),</span><span class="w"> 
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w">            </span><span class="n">BorderLayout</span><span class="p">.</span><span class="na">NORTH</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w"></span><span class="n">p</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">TextArea</span><span class="p">(),</span><span class="w"> </span><span class="n">BorderLayout</span><span class="p">.</span><span class="na">CENTER</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="w"></span><span class="n">p</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">TextField</span><span class="p">(),</span><span class="w"> </span><span class="n">BorderLayout</span><span class="p">.</span><span class="na">SOUTH</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="w"></span><span class="n">f</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">BorderLayout</span><span class="p">.</span><span class="na">NORTH</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p>An effective combination of a<code>FlowLayout</code>and a<code>BorderLayout</code>is for the common &quot;Ok&quot; and &quot;Cancel&quot; buttons on a dialog. For example:</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="border13.gif (2037 bytes)"
+      
+        class="image_figure image_internal image_processed"
+        width="202"
+        height="108"
+        src="https://javadude.com/post/20000304-layouts/images/border13.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p>The above is accomplished with the following code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">Frame</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Frame</span><span class="p">(</span><span class="s">&#34;BorderTest&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">Panel</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Panel</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">FlowLayout</span><span class="p">(</span><span class="n">FlowLayout</span><span class="p">.</span><span class="na">RIGHT</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">f</span><span class="p">.</span><span class="na">setLayout</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BorderLayout</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w"></span><span class="n">p</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Button</span><span class="p">(</span><span class="s">&#34;Ok&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="n">p</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Button</span><span class="p">(</span><span class="s">&#34;Cancel&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w"></span><span class="n">f</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">BorderLayout</span><span class="p">.</span><span class="na">SOUTH</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p>There is one problem with this approach: the widths of the two buttons are different. You'll see a better way to create this type of GUI in a moment.</p>
+<p><strong><code>GridLayout</code></strong></p>
+<p><code>GridLayout</code>lays out its components in a grid. Each component is given the same size and is positioned left-to-right, top-to-bottom.</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="grid1.gif (2317 bytes)"
+      
+        class="image_figure image_internal image_processed"
+        width="157"
+        height="104"
+        src="https://javadude.com/post/20000304-layouts/images/grid1.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p>The code that produced the above GUI looks like:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">Frame</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Frame</span><span class="p">(</span><span class="s">&#34;Grid Test&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">f</span><span class="p">.</span><span class="na">setLayout</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">GridLayout</span><span class="p">(</span><span class="n">3</span><span class="p">,</span><span class="n">4</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">1</span><span class="p">;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">13</span><span class="p">;</span><span class="w"> </span><span class="n">x</span><span class="o">++</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w">    </span><span class="n">f</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Button</span><span class="p">(</span><span class="s">&#34;&#34;&#34;+x));
+</span></span></span></code></pre></div><p>When specifying a<code>GridLayout</code>, there are two main parameters:<em>rows_and_columns</em>. You can specify both of these parameters, <em>but only one will ever be used.</em> Take a look at the following code snippet from<code>GridLayout.java</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nrows</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w">    </span><span class="n">ncols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">ncomponents</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nrows</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">1</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">nrows</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="k">else</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w">    </span><span class="n">nrows</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">ncomponents</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ncols</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">1</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">ncols</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><p>Notice that if_rows_is non-zero, it_calculates_the number of columns; if_rows_is zero, it calculates the number of rows based on the specified number of columns.</p>
+<p>To the casual observer, a statement like</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">f</span><span class="p">.</span><span class="na">setLayout</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">GridLayout</span><span class="p">(</span><span class="n">3</span><span class="p">,</span><span class="n">4</span><span class="p">));</span><span class="w">
+</span></span></span></code></pre></div><p>looks like it will_always_divide the screen into twelve sections, but that's not the case. In the above statement, you could substitute_any_value for the number of columns, and the effect would be exactly the same.</p>
+<p>A better way to specify the_rows_and_columns_of a<code>GridLayout</code>is to_always_set one of them to zero. A zero value for_rows_of_columns_means &quot;any number of&quot;.</p>
+<p>Note: A word of caution: you cannot specify zero for_both_; an<code>IllegalArgumentException</code>will be thrown.</p>
+<p>Specifying zero for one value makes the_design intent_obvious. If you always_want_four rows, say so; if you always_want_three columns, say so. The above example_should_be written as either</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">f</span><span class="p">.</span><span class="na">setLayout</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">GridLayout</span><span class="p">(</span><span class="n">3</span><span class="p">,</span><span class="n">0</span><span class="p">));</span><span class="w">
+</span></span></span></code></pre></div><p>or</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">f</span><span class="p">.</span><span class="na">setLayout</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">GridLayout</span><span class="p">(</span><span class="n">0</span><span class="p">,</span><span class="n">4</span><span class="p">));</span><span class="w">
+</span></span></span></code></pre></div><p><strong><em>Preferred Size of a<code>GridLayout</code>Container</em></strong></p>
+<p>How do you determine the preferred size of a<code>GridLayout</code>?<code>GridLayout</code>wants to accommodate the preferred size of_all_its contained components if possible. To do this, it looks at all the preferred sizes and determines the maximum preferred width and the maximum preferred height.<em>One thing to keep in mind, the maximum preferred height and maximum preferred width_do not_necessarily come from the same component</em>!</p>
+<p>The<code>GridLayout</code>would like to set the size of_each_component to that maximum preferred width and maximum preferred height. (Remember—all components in a<code>GridLayout</code>will be the same size!) This makes the preferred size of a<code>GridLayout</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">pw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">maxPrefWidth</span><span class="w"> </span><span class="err">\</span><span class="o">*</span><span class="w"> </span><span class="n">cols</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">hgap</span><span class="w"> </span><span class="err">\</span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">cols</span><span class="o">+</span><span class="n">1</span><span class="p">))</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">ph</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">maxPrefHeight</span><span class="w"> </span><span class="err">\</span><span class="o">*</span><span class="w"> </span><span class="n">rows</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">vgap</span><span class="w"> </span><span class="err">\</span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">rows</span><span class="o">+</span><span class="n">1</span><span class="p">))</span><span class="w">
+</span></span></span></code></pre></div><p><strong><em>&quot;Ok&quot; and &quot;Cancel&quot; Revisited</em></strong></p>
+<p>One of the goals of the earlier &quot;Ok&quot; and &quot;Cancel&quot; dialog was to make the buttons the same size. This can be accomplished by putting the buttons in a single-row<code>GridLayout</code>. You can then add that<code>GridLayout</code>container to the<code>FlowLayout</code>, or use a nested<code>BorderLayout</code>in place of the<code>FlowLayout</code>. Here are both approaches:</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="gridb1.gif (2035 bytes)"
+      
+        class="image_figure image_internal image_processed"
+        width="200"
+        height="100"
+        src="https://javadude.com/post/20000304-layouts/images/gridb1.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="n">Frame</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Frame</span><span class="p">(</span><span class="s">&#34;Ok/Cancel&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="w"></span><span class="n">f</span><span class="p">.</span><span class="na">setLayout</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BorderLayout</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="w"></span><span class="n">Panel</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Panel</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="w"></span><span class="n">p</span><span class="p">.</span><span class="na">setLayout</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">FlowLayout</span><span class="p">(</span><span class="n">FlowLayout</span><span class="p">.</span><span class="na">RIGHT</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="w"></span><span class="n">Panel</span><span class="w"> </span><span class="n">p2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Panel</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="w"></span><span class="n">p2</span><span class="p">.</span><span class="na">setLayout</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">GridLayout</span><span class="p">(</span><span class="n">1</span><span class="p">,</span><span class="n">0</span><span class="p">,</span><span class="n">5</span><span class="p">,</span><span class="n">5</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="w"></span><span class="n">p2</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Button</span><span class="p">(</span><span class="s">&#34;Ok&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="w"></span><span class="n">p2</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Button</span><span class="p">(</span><span class="s">&#34;Cancel&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="w"></span><span class="n">p</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">p2</span><span class="p">,</span><span class="w"> </span><span class="n">BorderLayout</span><span class="p">.</span><span class="na">EAST</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="w"></span><span class="n">f</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">BorderLayout</span><span class="p">.</span><span class="na">SOUTH</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="gridb2.gif (2014 bytes)"
+      
+        class="image_figure image_internal image_processed"
+        width="200"
+        height="100"
+        src="https://javadude.com/post/20000304-layouts/images/gridb2.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="n">Frame</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Frame</span><span class="p">(</span><span class="s">&#34;Ok/Cancel&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="w"></span><span class="n">f</span><span class="p">.</span><span class="na">setLayout</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BorderLayout</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="w"></span><span class="n">Panel</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Panel</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="w"></span><span class="n">p</span><span class="p">.</span><span class="na">setLayout</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BorderLayout</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="w"></span><span class="n">Panel</span><span class="w"> </span><span class="n">p2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Panel</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="w"></span><span class="n">p2</span><span class="p">.</span><span class="na">setLayout</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">GridLayout</span><span class="p">(</span><span class="n">1</span><span class="p">,</span><span class="n">0</span><span class="p">,</span><span class="n">5</span><span class="p">,</span><span class="n">5</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="w"></span><span class="n">p2</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Button</span><span class="p">(</span><span class="s">&#34;Ok&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="w"></span><span class="n">p2</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Button</span><span class="p">(</span><span class="s">&#34;Cancel&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="w"></span><span class="n">p</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">p2</span><span class="p">,</span><span class="w"> </span><span class="n">BorderLayout</span><span class="p">.</span><span class="na">EAST</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="w"></span><span class="n">f</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">BorderLayout</span><span class="p">.</span><span class="na">SOUTH</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p>Notice the difference in appearance. The<code>FlowLayout</code>pads_around_the components with the hgap and vgap, while<code>BorderLayout</code>only pads_between_components (so the components butt right against the edges of the container.)</p>
+<p>In both cases, the buttons now appear the same size. The nesting for this layout can be more easily seen in the following picture:</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="iso1.gif (3573 bytes)"
+      
+        class="image_figure image_internal image_processed"
+        width="400"
+        height="175"
+        src="https://javadude.com/post/20000304-layouts/images/iso1.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p>And similarly for the second version of the layout, using the nested<code>BorderLayout</code>.</p>
+<p><strong><code>CardLayout</code></strong></p>
+<p><code>CardLayout</code>uses a different strategy than the other layout managers. Instead of assigning locations in the container for all nested components, it only displays one component at a time. Components can be added to a<code>CardLayout</code>using the following<code>add</code>methods:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">Component</span><span class="w"> </span><span class="n">component</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">key</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">Component</span><span class="w"> </span><span class="n">component</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">Component</span><span class="w"> </span><span class="n">component</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p>The first two forms of the<code>add()</code>method will add the component at the end of the list of components for the container. The last form of the<code>add()</code>method will add the component at the specified position in the container. The position of the component within the container determines the order in which the components will be displayed via the manipulation methods of<code>CardLayout</code>.</p>
+<p>A unique<code>String</code>key must be assigned for each component that is added to the container. For example:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">Panel</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Panel</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">CardLayout</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">p</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&#34;one&#34;</span><span class="p">,</span><span class="w">   </span><span class="k">new</span><span class="w"> </span><span class="n">Button</span><span class="w"> </span><span class="p">(</span><span class="s">&#34;the first component&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">p</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Button</span><span class="w"> </span><span class="p">(</span><span class="s">&#34;the second component&#34;</span><span class="p">),</span><span class="w"> </span><span class="s">&#34;two&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w"></span><span class="n">p</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&#34;three&#34;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Button</span><span class="w"> </span><span class="p">(</span><span class="s">&#34;the third component&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="n">p</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&#34;between two and three&#34;</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Button</span><span class="w"> </span><span class="p">(</span><span class="s">&#34;the fourth component&#34;</span><span class="p">),</span><span class="w"> </span><span class="n">2</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p>When components are added to container that is controlled by a<code>CardLayout</code>, a<code>String</code>key is associated with each component. Different components can be displayed by using the<code>next()</code>,<code>previous</code>, and<code>show</code>methods of<code>CardLayout</code>. The order in which components are added to the container determines their display order when using the<code>next()</code>and<code>previous</code>methods. For example:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">CardLayout</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">CardLayout</span><span class="p">)</span><span class="n">p</span><span class="p">.</span><span class="na">getLayout</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">l</span><span class="p">.</span><span class="na">previous</span><span class="p">(</span><span class="n">p</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">l</span><span class="p">.</span><span class="na">next</span><span class="p">(</span><span class="n">p</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w"></span><span class="n">l</span><span class="p">.</span><span class="na">show</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;two&#34;</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p>Notice that the<code>previous()</code>,<code>next()</code>, and<code>show()</code>methods require a reference to the container be passed into them has an argument. Layout managers do not keep a reference to the container that uses them. When performing actions such as calling<code>previous()</code>,<code>next()</code>, and<code>show()</code>, and, as you will see later, the laying out of the actual components, the layout manager needs to be informed of the container on which it is operating so it can have access to the components it is laying out.</p>
+<p><code>CardLayout</code>is commonly used in GUIs that want to organize their data into several smaller screens, rather than having all components on one larger screen. This is typically used in combination with several buttons for switching components within the<code>CardLayout</code>, or a tabbed panel component.</p>
+<p><strong><em>Preferred Size of a<code>CardLayout</code>Container</em></strong></p>
+<p>So how do you determine the preferred size of a<code>CardLayout</code>? Keeping in mind that the preferred size wants to take into account the preferred size of all contained components in the container, the preferred size of the<code>CardLayout</code>will be the maximum preferred width of all contained components and the maximum preferred height of all contained components</p>
+<p><strong><code>GridBagLayout</code></strong></p>
+<p><code>GridBagLayout</code>tends to be one of the most difficult layout managers to understand. There are several reasons for this widely held opinion:</p>
+<ul>
+<li>It is very complex and can be difficult to learn.</li>
+<li>If_you_learn it and use it in your GUI, the poor maintenance programmer will have to learn it just as well as you did.</li>
+<li>There are a few bugs in<code>GridBagLayout</code>that evidence themselves after components are added to or removed from the<code>GridBagLayout</code>after the<code>GridBagLayout</code>has been displayed<br>
+<strong>Note:</strong><code>GridBagLayout</code>maintains some internal state that sometimes gets confused when components are added and removed.</li>
+</ul>
+<p>Covering all of the details of using<code>GridBagLayout</code>could span an entire book. It will be covered briefly in the context of an example in a later<a href="/post/20000304-layouts/#nesting">section</a>.</p>
+<p>Without a GUI builder like VisualAge for Java or JBuilder, you should avoid<code>GridBagLayout</code>if at all possible. For most GUIs, you can achieve the same results by nesting the other, simpler layout managers.</p>
+<p><strong>Setting the Initial Frame Size</strong></p>
+<p>The<code>Frame</code>class provides a<code>pack()</code>method that helps set an &quot;ideal&quot; initial size. The<code>pack()</code>method calls the<code>getPreferredSize()</code>method of<code>Frame</code>to determine what size it would like to be laid out, and, if the screen is large enough to allow it, sets the Frame to that size. If there isn't enough screen space, the Frame will be limited to the available screen space.</p>
+<p><strong>Nesting Layout Managers to Achieve Nirvana</strong></p>
+<p>The following sections describe a real-life user interface and how it might be created with the help of Java layout managers.</p>
+<p><strong>The GUI to Create</strong></p>
+<p>A great example of nesting the standard layout managers is WS_FTP, a Windows program for graphical FTP support.</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt=""
+      
+        class="image_figure image_internal image_processed"
+        width="634"
+        height="503"
+        src="https://javadude.com/post/20000304-layouts/images/ws1.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p>This GUI, while it may seem nice for &quot;power users&quot; is overly complex. The buttons at the bottom should really be menu items and the buttons to the right of each file list should be popup menus on the file lists. Nevertheless, the GUI as it stands makes a great example for nesting the basic layout managers.</p>
+<p><strong>How to Design this GUI</strong></p>
+<p>Before writing_any_GUI code, you should_always_do two things:</p>
+<ol>
+<li>**Draw a picture!**You would be surprised how many people try to visualize the GUI in their head. Drawing a picture makes the design significantly easier to develop.</li>
+<li>**Describe the resize behavior.**After drawing the picture, add information about which parts of the GUI will expand/collapse when the window is resized.</li>
+</ol>
+<p>In the above example, ignore the border lines around components. These can be added after the GUI is constructed, either by applying the Decorator Pattern or, if using JFC Project Swing containers, by calling<code>setBorder()</code>.</p>
+<p>Start with a picture describing what you want the GUI to look like. Simplify things a bit by removing the decorative borders and assume the existence of a &quot;File List&quot; component (probably a table with a header).</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt=""
+      
+        class="image_figure image_internal image_processed"
+        width="634"
+        height="503"
+        src="https://javadude.com/post/20000304-layouts/images/ws2.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p>The arrows indicate which parts of the GUI will expand/collapse when the GUI is resized.</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt=""
+      
+        class="image_figure image_internal image_processed"
+        width="188"
+        height="45"
+        src="https://javadude.com/post/20000304-layouts/images/wskey.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p>The above diagram is marked with the resize behavior of the GUI. The key explains which lines refer to fixed and varying sizing behaviors. When part of a component has a fixed size (horizontal, vertical, or both) it will not expand or contract as the window is resized. The equal signs (=) refer to adjoining components that have the same size.</p>
+<p>A few notes on the GUI's behavior:</p>
+<ul>
+<li>The two large sections that contain the File Lists should occupy the same amount of space.</li>
+<li>The two arrow buttons in the middle should be vertically centered between the file list sections.</li>
+<li>The ChgDir, MkDir, and other buttons all are the same size and are fixed at the group's preferred width and do not expand vertically. (The space below them expands when the window is stretched vertically.)</li>
+<li>The buttons at the bottom of the GUI are all the same size and will expand/collapse horizontally with the GUI's width.</li>
+<li>The ASCII, Binary and Auto checkboxes stay a fixed amount apart, floating as a group horizontally centered.</li>
+</ul>
+<p>Now, the fun begins. You need to examine the GUI and try to visualize layout managers being used to represent sections of it. When trying to design the GUI, work from the outside edges inward. Always start by looking for &quot;borders&quot;; a component, or group of components that border an edge with a fixed width or height.</p>
+<p>Looking at the above GUI, you can visualize it as a<code>BorderLayout</code>with two components: a<code>SOUTH</code>, and a<code>CENTER</code>:</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt=""
+      
+        class="image_figure image_internal image_processed"
+        width="525"
+        height="356"
+        src="https://javadude.com/post/20000304-layouts/images/ws3.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p>The<code>SOUTH</code>part of the<code>BorderLayout</code>has a fixed height, based on the preferred size of its components. The<code>CENTER</code>part will expand to fill the remaining room in the GUI. Examining the<code>SOUTH</code>section closer, you can view it as three parts:</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt=""
+      
+        class="image_figure image_internal image_processed"
+        width="590"
+        height="107"
+        src="https://javadude.com/post/20000304-layouts/images/ws4.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p>Note that there are three components here, stacked vertically, each with their preferred height. You might be tempted to stick this in a<code>GridLayout</code>, but that would force them all to take up the same amount of space vertically. That's not what you want.</p>
+<p>Suppose you put these three components as<code>NORTH</code>,<code>CENTER</code>, and<code>SOUTH</code>of a<code>BorderLayout</code>. This new<code>BorderLayout</code>panel is nested as the<code>SOUTH</code>component of the overall<code>BorderLayout</code>. Think through what happens when this part of the GUI is laid out:</p>
+<ol>
+<li>The overall<code>BorderLayout</code>asks its<code>SOUTH</code>component for its preferred size
+<ol>
+<li>The<code>SOUTH</code>component, being a<code>BorderLayout</code>itself, asks_its_components for their preferred sizes</li>
+<li>The nested<code>BorderLayout</code>returns a size that is
+<ul>
+<li>Width = max preferred width of those three components.</li>
+<li>Height = sum of the preferred heights of those three components.</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>The overall<code>BorderLayout</code>_assigns_the size of its<code>SOUTH</code>component to the frame's width, and the preferred height of that<code>SOUTH</code>component. The<code>CENTER</code>component gets all remaining room.</li>
+<li>The<code>SOUTH</code>component now gets its chance to lay out its contained components.
+<ol>
+<li>The<code>SOUTH</code>component asks for the preferred sizes of its children.</li>
+<li>The<code>SOUTH</code>component assigns the width of all components to the width it has been given.</li>
+<li>It grants_its_<code>NORTH</code>component its preferred height.</li>
+<li>It grants_its_<code>SOUTH</code>component its preferred height.</li>
+<li>It grants_its_<code>CENTER</code>component the remaining space.</li>
+</ol>
+</li>
+</ol>
+<p>Note that last bullet. The<code>CENTER</code>gets the remaining space. Because the overall<code>BorderLayout</code>had granted the<code>SOUTH</code>component its preferred height, <em>and</em> the preferred height was equal to the sum of the preferred heights of the contained components, that nested<code>CENTER</code>component (the message<code>TextArea</code>) just happens to get its preferred height.</p>
+<p>First, define the<code>NORTH</code>part of this sub-GUI. It has three components, equally spaced, with all of them centered across the width of the<code>Panel</code>. Sounds like a<code>FlowLayout</code>, eh? So, it is a<code>Panel</code>with a<code>FlowLayout</code>containing three<code>CheckBox</code>components. Notice that the first two<code>CheckBox</code>components must be associated with a<code>CheckboxGroup</code>so they will become radio buttons.</p>
+<p>Now you must create the<code>SOUTH</code>part of this sub-GUI. It has seven<code>Button</code>components, all equally sized. The phrase &quot;equally-sized&quot; should immediately trigger<code>GridLayout</code>in your mind. So, the<code>SOUTH</code>part of the sub-GUI is a<code>Panel</code>with a<code>GridLayout</code>containing seven<code>Button</code>component. This<code>GridLayout</code>consists of a single row, so use parameters of (1,0) to its constructor.</p>
+<p>The<code>CENTER</code>part is just a single component, a<code>TextArea</code>. You do not need to nest this inside another<code>Panel</code>; components can be directly added to containers... You'll set this<code>TextArea</code>'s number of rows to 3 and columns to 30. These numbers drive the_preferred size_of the<code>TextArea</code>; they have no effect on the<code>TextArea</code>once it has been sized by the layout manager. You must specify these because its placement in the layout asks for its preferred size, and it would return a larger number of rows than three if asked. The 30 will only come in handy if you<code>pack()</code>the<code>Frame</code>, where it will help contribute to the calculated width of the frame. One final note on this<code>TextArea</code>: if you place it in a<code>BorderPanel</code>as previously discussed in the<code>Insets</code>section above, you can give it a raised, lowered, or etched border.</p>
+<p>To sum up what the layout looks like so far:</p>
+<ul>
+<li><code>Ftp</code>extends Frame, layout=<code>BorderLayout</code>
+<ul>
+<li>SOUTH=<code>Panel</code>, layout=<code>BorderLayout</code>
+<ul>
+<li>NORTH=Panel, layout=<code>FlowLayout</code>
+<ul>
+<li><code>Checkbox</code>(&quot;ASCII&quot;) w/<code>CheckboxGroup</code></li>
+<li><code>Checkbox</code>(&quot;Binary&quot;), w/<code>CheckboxGroup</code></li>
+<li><code>Checkbox</code>(&quot;Auto&quot;)</li>
+</ul>
+</li>
+<li>CENTER=<code>TextArea</code>(3,30)</li>
+<li>SOUTH=<code>Panel</code>, layout=<code>GridLayout</code>(1,0)
+<ul>
+<li><code>Button</code>(&quot;Close&quot;)</li>
+<li><code>Button</code>(&quot;Cancel&quot;)</li>
+<li><code>Button</code>(&quot;LogWnd&quot;)</li>
+<li><code>Button</code>(&quot;Help&quot;)</li>
+<li><code>Button</code>(&quot;Options&quot;)</li>
+<li><code>Button</code>(&quot;About&quot;)</li>
+<li><code>Button</code>(&quot;Exit&quot;)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>CENTER=? (that's next...)</li>
+</ul>
+</li>
+</ul>
+<p>Now you need to address the<code>CENTER</code>part of that overall<code>BorderLayout</code>. First, take a look at the following picture of the center section:</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt=""
+      
+        class="image_figure image_internal image_processed"
+        width="577"
+        height="359"
+        src="https://javadude.com/post/20000304-layouts/images/ws5.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p>Notice anything interesting? It has to do with those two boxes drawn around the left and right side components. They are structurally the same.<em>Exactly_the same. When two things are the same, and it's a chore to build it each time, you should think_reuse</em>.</p>
+<p><strong>A Helper Class:<code>FileDisplay</code></strong></p>
+<p>Extract out one of those chunks and look at it separately. Put it in its own class called<code>FileDisplay</code>. Start examining this sub-GUI by looking for bordering components. You can immediately see three:</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt=""
+      
+        class="image_figure image_internal image_processed"
+        width="386"
+        height="436"
+        src="https://javadude.com/post/20000304-layouts/images/ws6.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p>The<code>NORTH</code>part consists of a<code>Label</code>and combo box (you'll use an AWT<code>Choice</code>component for now), vertically stacked. The<code>CENTER</code>is a<code>List</code>component. The<code>EAST</code>is a bunch of<code>Button</code>s vertically stacked.</p>
+<p>Looking first at the<code>NORTH</code>part, you need to have the<code>Label</code>and<code>Choice</code>take up their preferred height and the full width. Since this is the<code>NORTH</code>component, whatever they are contained in will receive its preferred height. By placing the<code>Label</code>and<code>Choice</code>as<code>NORTH</code>and<code>SOUTH</code>(or<code>NORTH</code>and<code>CENTER</code>, or<code>CENTER</code>and<code>SOUTH</code>) of a<code>BorderLayout</code>, they will receive their preferred height. Again, a<code>GridLayout</code>would be a bad choice because that assumes that both components want the same height. You could change the font size on the<code>Label</code>to make it larger, and you wouldn't want that to affect the size of the<code>Choice</code>.</p>
+<p>The<code>CENTER</code>part is simple: just a<code>List</code>component. Not contained inside any<code>Panel</code>(unless you had a<code>Panel</code>subclass that provided a decorative border, such as the previously-discussed<code>BorderPanel</code>).</p>
+<p>Now for the<code>EAST</code>part, which is a bit trickier. You want all the<code>Button</code>components the same size (your mind should immediately think<code>GridLayout</code>) but that size should be their preferred height and preferred width. Any space below the buttons expands and collapses.</p>
+<p>Because you've placed the entire strip of<code>Button</code>s as an<code>EAST</code>component of a<code>BorderLayout</code>, their width is fixed on the preferred width of the container that encloses those buttons. To fix their height on their preferred height, you can place the strip_inside another<code>BorderLayout</code>, as the<code>NORTH</code>component_! So<code>EAST</code>is a<code>Panel</code>with a<code>BorderLayout</code>containing another<code>Panel</code>as its<code>NORTH</code>component, and that<code>NORTH``Panel</code>has a<code>GridLayout</code>controlling its buttons. The<code>GridLayout</code>is a single column of buttons, so its constructor parameters are (0,1).</p>
+<p>Now for a look at the structure of the<code>FileDisplay</code>:</p>
+<ul>
+<li><code>FileDisplay</code>extends<code>Panel</code>, layout=<code>BorderLayout</code>
+<ul>
+<li>NORTH=<code>Panel</code>, layout=<code>BorderLayout</code>
+<ul>
+<li>NORTH=<code>Label</code>(&quot;&quot;)</li>
+<li>SOUTH=<code>Choice</code></li>
+</ul>
+</li>
+<li>CENTER=<code>List</code></li>
+<li>EAST=<code>Panel</code>, layout=<code>BorderLayout</code>
+<ul>
+<li>NORTH=<code>Panel</code>,layout=<code>GridLayout</code>(0,1)
+<ul>
+<li><code>Button</code>(&quot;ChgDir&quot;)</li>
+<li><code>Button</code>(&quot;MkDir&quot;)</li>
+<li><code>TextField</code>(&quot;*.*&quot;)</li>
+<li><code>Button</code>(&quot;View&quot;)</li>
+<li><code>Button</code>(&quot;Exec&quot;)</li>
+<li><code>Button</code>(&quot;Rename&quot;)</li>
+<li><code>Button</code>(&quot;Delete&quot;)</li>
+<li><code>Button</code>(&quot;Refresh&quot;)</li>
+<li><code>Button</code>(&quot;DirInfo&quot;)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>To make this work properly, you must have<code>FileDisplay</code>&quot;promote&quot; the text property of its<code>Label</code>as a property of its own. Provide a<code>get()</code>and<code>set()</code>method for that property that simply gets and sets the text property of the<code>Label</code>. You'll see this when the code is reviewed later.</p>
+<p>All that remains now is the<code>CENTER</code>section of the main GUI.</p>
+<p><strong>Back to the Main FTP GUI...</strong></p>
+<p>Examine what the<code>CENTER</code>section looks like without the details that you captured in<code>FileDisplay</code>:</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt=""
+      
+        class="image_figure image_internal image_processed"
+        width="606"
+        height="391"
+        src="https://javadude.com/post/20000304-layouts/images/ws7.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p>The two ovals represent the two instance of<code>FileDisplay</code>. The behavior of this part of the GUI is really up to four components: two<code>FileDisplay</code>components, which should take up equal amounts of space, and two<code>Button</code>components, each with its preferred size, floating casually in between them.</p>
+<p>For purposes of aesthetics, assume that the buttons should be centered vertically.</p>
+<p>This is a tricky layout situation. Among the standard layout managers, there is really only one choice: the<code>GridBagLayout</code>.</p>
+<p>Examine how difficult this can be for a simple case like this. First, you need to determine where the grid cells are. You do this as is always necessary to do with<code>GridBagLayout</code>—draw lines between each pair of adjoining components all the way across the GUI:</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt=""
+      
+        class="image_figure image_internal image_processed"
+        width="619"
+        height="409"
+        src="https://javadude.com/post/20000304-layouts/images/ws9.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p>You can see that this<code>GridBagLayout</code>will have six cells and four (numbered) components. Each cell requires the configuration of a<code>GridBagConstraints</code>object, to be passed along as the constraints in the<code>add(Component component, Object constraints)</code>version of the<code>add()</code>method. You now need to walk through the<code>GridBagConstraints</code>options and determine what they should be.</p>
+<p>First, the easy ones, gridx, gridy, gridwidth, gridheight, ipadx, and ipady. You'll use insets rather than padding, so it makes the ipadx and ipady settings zero for all components:</p>
+<table>
+  <thead>
+      <tr>
+          <th>parameter</th>
+          <th>1</th>
+          <th>2</th>
+          <th>3</th>
+          <th>4</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>gridx</td>
+          <td>0</td>
+          <td>2</td>
+          <td>1</td>
+          <td>1</td>
+      </tr>
+      <tr>
+          <td>gridy</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+          <td>1</td>
+      </tr>
+      <tr>
+          <td>gridwidth</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+      </tr>
+      <tr>
+          <td>gridheight</td>
+          <td>2</td>
+          <td>2</td>
+          <td>1</td>
+          <td>1</td>
+      </tr>
+      <tr>
+          <td>ipadx</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+      </tr>
+      <tr>
+          <td>ipady</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+      </tr>
+  </tbody>
+</table>
+<p>Next you need to understand fill. Recall that this tells how the components will expand within their allotted cells. For components 1 and 2, this will be BOTH; you want components 3 and 4 to be their preferred size, so fill will be NONE.</p>
+<p>Next, anchor. Because components 1 and 2 completely fill their allotted space, their anchor could be any value. Usually you use the default of<code>CENTER</code>. Component 3 sits at the bottom/center of its cell—that's the<code>SOUTH</code>anchor position. Component 4 sits at the top/center of its cell—that's the<code>NORTH</code>, anchor position.</p>
+<p>The insets define the space to leave around components. There's no space around components 1 and 2, so their insets are all 0. You want some space around components 3 and 4. How about four pixels between them and any adjoining components. You can do this in several ways to put 4 pixels between components 3 and 4—give them 2 as their bottom and top insets.</p>
+<p>Now the tricky part of this<code>GridBagLayout</code>: the weights. Think about the constraints rules you want:</p>
+<ol>
+<li>The cells of components 1 and 2 expand horizontally, equally</li>
+<li>The cells of components 3 and 4 do not expand horizontally</li>
+<li>The cells of components 1 and 2 expand vertically to fill the entire space equally</li>
+<li>The cells of components 3 and 4 expand vertically, each filling half the space</li>
+</ol>
+<p>By rule #1, the weightx settings of components 1 and 2 must be equal. By rule #2, the weightx settings of components 3 and 4 must be 0. These are the only rules relating to horizontal space, so you can pick any weights you want for components 1 and 2, as long as they are the same. The weights are floating point numbers, and a nice convention to follow is to normalize the total weights to 1.0, giving each component 1 and 2 a weightx of 0.5.</p>
+<p>By rule #3, the weighty settings of components 1 and 2 must be equal, and should be the total weighty of the container. By rule #4, the weighty settings of components 3 and 4 must be equal and be half of the total weighty. This gives the following results:</p>
+<table>
+  <thead>
+      <tr>
+          <th>parameter</th>
+          <th>1</th>
+          <th>2</th>
+          <th>3</th>
+          <th>4</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>gridx</td>
+          <td>0</td>
+          <td>2</td>
+          <td>1</td>
+          <td>1</td>
+      </tr>
+      <tr>
+          <td>gridy</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+          <td>1</td>
+      </tr>
+      <tr>
+          <td>gridwidth</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+      </tr>
+      <tr>
+          <td>gridheight</td>
+          <td>2</td>
+          <td>2</td>
+          <td>1</td>
+          <td>1</td>
+      </tr>
+      <tr>
+          <td>ipadx</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+      </tr>
+      <tr>
+          <td>ipady</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+      </tr>
+      <tr>
+          <td>fill</td>
+          <td>BOTH</td>
+          <td>BOTH</td>
+          <td>NONE</td>
+          <td>NONE</td>
+      </tr>
+      <tr>
+          <td>anchor</td>
+          <td>CENTER</td>
+          <td>CENTER</td>
+          <td>SOUTH</td>
+          <td>NORTH</td>
+      </tr>
+      <tr>
+          <td>weightx</td>
+          <td>0.5</td>
+          <td>0.5</td>
+          <td>0.0</td>
+          <td>0.0</td>
+      </tr>
+      <tr>
+          <td>weighty</td>
+          <td>1.0</td>
+          <td>1.0</td>
+          <td>0.5</td>
+          <td>0.5</td>
+      </tr>
+      <tr>
+          <td>insets - top</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+          <td>2</td>
+      </tr>
+      <tr>
+          <td>insets - bottom</td>
+          <td>0</td>
+          <td>0</td>
+          <td>2</td>
+          <td>0</td>
+      </tr>
+      <tr>
+          <td>insets - left</td>
+          <td>0</td>
+          <td>0</td>
+          <td>4</td>
+          <td>4</td>
+      </tr>
+      <tr>
+          <td>insets - right</td>
+          <td>0</td>
+          <td>0</td>
+          <td>4</td>
+          <td>4</td>
+      </tr>
+  </tbody>
+</table>
+<p>Setting these<code>GridBagConstraints</code>finishes the GUI design. Writing code for this GUI produces:</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="ws10.gif (8008 bytes)"
+      
+        class="image_figure image_internal image_processed"
+        width="428"
+        height="403"
+        src="https://javadude.com/post/20000304-layouts/images/ws10.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p>Which, decorations aside, looks just like you wanted it to!</p>
+<p>A note on that last<code>GridBagLayout</code>: sometimes the initial thought regarding components 3 and 4 is to have weightx and weighty be zero for both components. This would produce the following result:</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="ws11.gif (8037 bytes)"
+      
+        class="image_figure image_internal image_processed"
+        width="428"
+        height="403"
+        src="https://javadude.com/post/20000304-layouts/images/ws11.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p>Notice where the &quot;&lt;--&quot; and &quot;--&gt;&quot; buttons are. The weightx and weighty values control the sizing of the_grid cells_that a component will occupy. If the sum of the weights for a given row or column in a<code>GridBagLayout</code>does not equal that of the other rows or columns,<code>GridBagLayout</code>makes up the difference by setting the weight of the_last_component in that row or column. In this case, you have three columns: two are the<code>FileDisplay</code>components, and the third is the column with the two buttons in it. Because the weighty values of the two buttons don't add to the same weighty values of the other two columns,<code>GridBagLayout</code>gives the lower button's grid cell the entire remaining height.</p>
+<p><strong>Looking at Some Code for this GUI</strong></p>
+<p>There are two common approaches to writing GUI code by hand. One involves building sub-GUIs via method calls, the other involves simply putting all the code in one-big blob.</p>
+<p>The following example code for this GUI follows the first pattern:</p>
+<ul>
+<li><a href="/post/20000304-layouts/Ftp1.java">Ftp1.java</a></li>
+<li><a href="/post/20000304-layouts/FileDisplay1.java">FileDisplay1.java</a></li>
+</ul>
+<p>This code was generated using IBM's VisualAge for Java, and simplified by removing the exception handling and &quot;ivj&quot; prefixes on all the variable names. The code follows a &quot;lazy instantiation&quot; strategy: no GUI components or sub-GUIs are created until needed. This has several advantages:</p>
+<ul>
+<li>If a GUI in your application isn't used, it's never created, making the program more efficient.</li>
+<li>You never need to worry if you've already created part of a GUI or not; you simply call the method in question to access that part of the GUI.</li>
+<li>The GUI structure is directly reflected in the code. Nested GUI elements are calls made to other methods.</li>
+</ul>
+<p>Of course, there are a few disadvantages as well:</p>
+<ul>
+<li>More code to write</li>
+<li>Slightly slower performance due to extra method calls (although this is minimal compared to other performance issues)</li>
+</ul>
+<p>Another alternative is to use a GUI builder tool to create the interfaces. This can be a very attractive option, especially if your GUI is very complex.</p>
+<p>Taking this same example and writing it_blob_-style can result in the following code:</p>
+<ul>
+<li><a href="/post/20000304-layouts/Ftp2.java">Ftp2.java</a></li>
+<li><a href="/post/20000304-layouts/FileDisplay2.java">FileDisplay2.java</a></li>
+</ul>
+<p>The advantage here is less code, although it can be difficult to see the GUI structure in the code. It can also be very difficult to properly order the creation/addition of GUI objects—you must be very careful to create everything you need before you use it.</p>
+<p><strong>A Very Common Layout Need</strong></p>
+<p>A common GUI need is to create some sort of input form. The following is a simple example:</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="nameform1.gif (2577 bytes)"
+      
+        class="image_figure image_internal image_processed"
+        width="339"
+        height="106"
+        src="https://javadude.com/post/20000304-layouts/images/nameform1.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p>Note that in this GUI all of the labels line up horizontally, as do the text fields. When this GUI is expanded horizontally, the text fields should stretch but the labels should not.</p>
+<p>One of the things to be mindful of when designing this GUI is what happens when the window is expanded vertically. Text fields tend not to look too good when expanded vertically. You probably want everything to keep its preferred height.</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="nameform2.gif (3056 bytes)"
+      
+        class="image_figure image_internal image_processed"
+        width="339"
+        height="215"
+        src="https://javadude.com/post/20000304-layouts/images/nameform2.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p><strong>Keeping the labels and text fields at their preferred height</strong></p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="nameform3.gif (3435 bytes)"
+      
+        class="image_figure image_internal image_processed"
+        width="339"
+        height="217"
+        src="https://javadude.com/post/20000304-layouts/images/nameform3.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p><strong>Allowing the labels and text fields to stretch</strong></p>
+<p>So, how do you design this GUI?</p>
+<p>First, you need to think about how to bind the labels and text fields to their preferred height. This can be accomplished by placing all of the components as the<code>NORTH</code>component of a<code>BorderLayout</code>.</p>
+<p>Next, you need to divide the GUI into two evenly spaced parts: the left half the right half. You should think &quot;<code>GridLayout</code>&quot; whenever you hear the phrase &quot;equally spaced&quot;. This<code>GridLayout</code>consists of a single row; its parameters to its constructor would be (1,0). (In the above example, you are also setting hgap to five.)</p>
+<p>Now what do you do about the pairs of text fields and labels? Your initial answer might involve placing each pair of text fields and labels into their own<code>BorderLayout</code>. For example:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">Panel</span><span class="w"> </span><span class="n">panel1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Panel</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">BorderLayout</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">panel1</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Label</span><span class="p">(</span><span class="s">&#34;First name:&#34;</span><span class="p">),</span><span class="w"> </span><span class="n">BorderLayout</span><span class="p">.</span><span class="na">WEST</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">panel1</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">TextField</span><span class="p">(),</span><span class="w"> </span><span class="n">BorderLayout</span><span class="p">.</span><span class="na">CENTER</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p>Using this strategy for each pair of labels and text fields, and adding each of those into their proper place in the GUI, you get a slightly undesirable affect:</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="nameform4.gif (2866 bytes)"
+      
+        class="image_figure image_internal image_processed"
+        width="367"
+        height="162"
+        src="https://javadude.com/post/20000304-layouts/images/nameform4.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p>So what happened? Think about what<code>BorderLayout</code>does. It says &quot;look at my<code>WEST</code>component. Give it its preferred width. Then, give the<code>CENTER</code>component the remaining available space.&quot; Note that it doesn't say &quot;look at the component below me. Make sure my<code>WEST</code>component matches the same size as_his_<code>WEST</code>component.&quot; You need to somehow associate the labels with one other, and the text fields with one another.</p>
+<p>The only way you can do this is to put all the labels that go together in the same container. Similar for the text fields. However, you also need to make sure the text fields and labels line up.</p>
+<p>If you can make sure that the container that holds the labels takes up the same vertical space as the container that holds the text fields, you can use a<code>GridLayout</code>to divide each of those spaces evenly. But wait; you have already decided to put all of the labels and text fields in the<code>NORTH</code>component of the overall<code>BorderLayout</code>. This fixes the height of that set of components to its preferred height.</p>
+<p>So, you start off with the overall<code>BorderLayout</code>. You add a Panel as the<code>NORTH</code>component of the<code>BorderLayout</code>. This<code>NORTH</code>Panel contains all the other components, and uses a single-row<code>GridLayout</code>.</p>
+<p>Within that<code>GridLayout</code>, you add two Panels for the left and right halves of the GUI. Each of these panels will contain two components: a Panel that contains the labels, and a Panel that contains the text fields. Because you want the text fields to expand horizontally, and the labels to keep a fixed width, you want to use a<code>BorderLayout</code>.</p>
+<p>The final GUI will be structured as follows:</p>
+<ul>
+<li>Frame, layout=<code>BorderLayout</code>
+<ul>
+<li>NORTH=Panel, layout=<code>GridLayout</code>(1,0)
+<ul>
+<li>Panel, layout=<code>BorderLayout</code>
+<ul>
+<li>WEST=Panel, layout=<code>GridLayout</code>(3,0)
+<ul>
+<li>Label(&quot;First name:&quot;)</li>
+<li>Label(&quot;Street:&quot;)</li>
+<li>Label(&quot;Phone:&quot;)</li>
+</ul>
+</li>
+<li>CENTER=Panel, layout=<code>GridLayout</code>(3,0)
+<ul>
+<li>TextField</li>
+<li>TextField</li>
+<li>TextField</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Panel, layout=<code>BorderLayout</code>
+<ul>
+<li>WEST=Panel, layout=<code>GridLayout</code>(3,0)
+<ul>
+<li>Label(&quot;Last name:&quot;)</li>
+<li>Label(&quot;City:&quot;)</li>
+</ul>
+</li>
+<li>CENTER=Panel, layout=<code>GridLayout</code>(3,0)
+<ul>
+<li>TextField</li>
+<li>TextField</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>One thing to notice here is the parameters passed to the most deeply nested<code>GridLayout</code>containers. Your first thought when setting up these<code>GridLayout</code>containers should be &quot;there is one column of components&quot;. The problem is, the first set of<code>GridLayout</code>containers have three components each; the second set has two components each. If you set a<code>GridLayout</code>constructor parameters to (0, 1), the GUI would look as follows:</p>
+<p>
+  <figure>
+  <picture>
+
+    
+      
+        
+        
+        
+        
+        
+        
+    <img
+      loading="lazy"
+      decoding="async"
+      alt="nameform5.gif (2814 bytes)"
+      
+        class="image_figure image_internal image_processed"
+        width="309"
+        height="163"
+        src="https://javadude.com/post/20000304-layouts/images/nameform5.gif"
+      
+      
+    />
+
+    </picture>
+</figure>
+</p>
+<p>Notice the second set of labels and text fields is evenly spaced into two chunks. What you wanted was to have all the text fields and all the labels take up the same amount of vertical space (which means that there will be a blank spot at the bottom of the rightmost set of labels and text fields).</p>
+<p>Duke, the Java mascot, provided by Sun Microsystems under the New BSD license.</p>
+    </div><div class="post_comments">
+  
+  
+  
+  
+</div>
+
+
+
+
+  </article>
+<aside class="sidebar">
+  <section class="sidebar_inner">
+    <br>
+    
+  
+  <div class="search">
+    <input type="search" class="search_field form_field" placeholder='Search...' id="find" autocomplete="off" data-scope='post'>
+    <label for="find" class="search_label"><svg class="icon">
+  <title>search</title>
+  <use xlink:href="#search"></use>
+</svg>
+
+    </label>
+    
+    <div class="search_results results"></div>
+  </div>
+
+        <div class="author_header">
+          <img src="https://javadude.com/images/yellow.jpeg" alt="Scott Stanchfield photo">
+          <h2>Scott Stanchfield</h2>
+        </div>
+      <div class="author_bio">
+        Developer. Teacher. Tinkerer.<br/>Android and Kotlin rock!<br/>
+      </div>
+      <a href='https://javadude.com/about/' class="button mt-1" role="button" title='Read More'>Read More</a>
+
+    
+    <h2 class="mt-4">Recent Posts</h2>
+    <ul class="flex-column">
+      <li>
+        <a href="https://javadude.com/post/20250323-android-docs/" class="nav-link" title="Official Android Docs (That I&#39;ve Written)">Official Android Docs (That I've Written)</a>
+      </li>
+      <li>
+        <a href="https://javadude.com/post/20250322-android-class/" class="nav-link" title="My Android class content for Johns Hopkins University">My Android class content for Johns Hopkins University</a>
+      </li>
+      <li>
+        <a href="https://javadude.com/post/20250322-dsl-class/" class="nav-link" title="My Domain-Specific Languages (DSL) class content for Johns Hopkins University">My Domain-Specific Languages (DSL) class content for Johns Hopkins University</a>
+      </li>
+      <li>
+        <a href="https://javadude.com/post/20250322-kotlin-class/" class="nav-link" title="My Kotlin class content">My Kotlin class content</a>
+      </li>
+      <li>
+        <a href="https://javadude.com/post/20190326-android-studio-deadlocks/" class="nav-link" title="Finding a deadlock in Android Studio">Finding a deadlock in Android Studio</a>
+      </li>
+      <li>
+        <a href="https://javadude.com/post/20190203-kotlin01/" class="nav-link" title="From Java to Kotlin - Episode 1 - You&#39;ve Gotta Start Somewhere...">From Java to Kotlin - Episode 1 - You've Gotta Start Somewhere...</a>
+      </li>
+      <li>
+        <a href="https://javadude.com/post/20170628-dsls-and-codegen/" class="nav-link" title="Domain-Specific Languages (DSLs) and Code Generation">Domain-Specific Languages (DSLs) and Code Generation</a>
+      </li>
+      <li>
+        <a href="https://javadude.com/post/20151119-patterns/" class="nav-link" title="Design Patterns Brown-Bag Lectures">Design Patterns Brown-Bag Lectures</a>
+      </li>
+    </ul>
+    <div>
+      <h2 class="mt-4 taxonomy" id="categories-section">Categories</h2>
+      <nav class="tags_nav">
+        <a href='https://javadude.com/categories/articles/' class="post_tag button button_translucent" title="articles">
+          ARTICLES
+          <span class="button_tally">13</span>
+        </a>
+        
+        <a href='https://javadude.com/categories/videos/' class="post_tag button button_translucent" title="videos">
+          VIDEOS
+          <span class="button_tally">12</span>
+        </a>
+        
+        <a href='https://javadude.com/categories/tools/' class="post_tag button button_translucent" title="tools">
+          TOOLS
+          <span class="button_tally">8</span>
+        </a>
+        
+        <a href='https://javadude.com/categories/class/' class="post_tag button button_translucent" title="class">
+          CLASS
+          <span class="button_tally">3</span>
+        </a>
+        
+        
+      </nav>
+    </div>
+    <div>
+      <h2 class="mt-4 taxonomy" id="tags-section">Tags</h2>
+      <nav class="tags_nav">
+        <a href='https://javadude.com/tags/java/' class="post_tag button button_translucent" title="java">
+          JAVA
+          <span class="button_tally">28</span>
+        </a>
+        
+        <a href='https://javadude.com/tags/language/' class="post_tag button button_translucent" title="language">
+          LANGUAGE
+          <span class="button_tally">12</span>
+        </a>
+        
+        <a href='https://javadude.com/tags/design/' class="post_tag button button_translucent" title="design">
+          DESIGN
+          <span class="button_tally">6</span>
+        </a>
+        
+        <a href='https://javadude.com/tags/kotlin/' class="post_tag button button_translucent" title="kotlin">
+          KOTLIN
+          <span class="button_tally">5</span>
+        </a>
+        
+        <a href='https://javadude.com/tags/parsing/' class="post_tag button button_translucent" title="parsing">
+          PARSING
+          <span class="button_tally">5</span>
+        </a>
+        
+        <a href='https://javadude.com/tags/android/' class="post_tag button button_translucent" title="android">
+          ANDROID
+          <span class="button_tally">4</span>
+        </a>
+        
+        <a href='https://javadude.com/tags/dsl/' class="post_tag button button_translucent" title="dsl">
+          DSL
+          <span class="button_tally">4</span>
+        </a>
+        
+        <a href='https://javadude.com/tags/antlr/' class="post_tag button button_translucent" title="antlr">
+          ANTLR
+          <span class="button_tally">3</span>
+        </a>
+        
+        <a href='https://javadude.com/tags/class/' class="post_tag button button_translucent" title="class">
+          CLASS
+          <span class="button_tally">3</span>
+        </a>
+        
+        <a href='https://javadude.com/tags/eclipse/' class="post_tag button button_translucent" title="eclipse">
+          ECLIPSE
+          <span class="button_tally">3</span>
+        </a>
+        
+        <a href='https://javadude.com/tags/beans/' class="post_tag button button_translucent" title="beans">
+          BEANS
+          <span class="button_tally">2</span>
+        </a>
+        
+        <a href='https://javadude.com/tags/patterns/' class="post_tag button button_translucent" title="patterns">
+          PATTERNS
+          <span class="button_tally">2</span>
+        </a>
+        
+        <a href='https://javadude.com/tags/xtext/' class="post_tag button button_translucent" title="xtext">
+          XTEXT
+          <span class="button_tally">2</span>
+        </a>
+        
+        <a href='https://javadude.com/tags/android-studio/' class="post_tag button button_translucent" title="android studio">
+          ANDROID STUDIO
+          <span class="button_tally">1</span>
+        </a>
+        
+        <a href='https://javadude.com/tags/code-generation/' class="post_tag button button_translucent" title="code generation">
+          CODE GENERATION
+          <span class="button_tally">1</span>
+        </a>
+        
+        <a href='https://javadude.com/tags/gradle/' class="post_tag button button_translucent" title="gradle">
+          GRADLE
+          <span class="button_tally">1</span>
+        </a>
+        
+        <a href='https://javadude.com/tags/index/' class="post_tag button button_translucent" title="index">
+          INDEX
+          <span class="button_tally">1</span>
+        </a>
+        
+        
+      </nav>
+    </div>
+  </section>
+</aside>
+
+  
+</div>
+    </main><svg width="0" height="0" class="hidden">
+  <symbol viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" id="facebook">
+    <path d="M437 0H75C33.648 0 0 33.648 0 75v362c0 41.352 33.648 75 75 75h151V331h-60v-90h60v-61c0-49.629 40.371-90 90-90h91v90h-91v61h91l-15 90h-76v181h121c41.352 0 75-33.648 75-75V75c0-41.352-33.648-75-75-75zm0 0"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18.001 18.001" id="twitter">
+    <path d="M15.891 4.013c.808-.496 1.343-1.173 1.605-2.034a8.68 8.68 0 0 1-2.351.861c-.703-.756-1.593-1.14-2.66-1.14-1.043 0-1.924.366-2.643 1.078a3.56 3.56 0 0 0-1.076 2.605c0 .309.039.585.117.819-3.076-.105-5.622-1.381-7.628-3.837-.34.601-.51 1.213-.51 1.846 0 1.301.549 2.332 1.645 3.089-.625-.053-1.176-.211-1.645-.47 0 .929.273 1.705.82 2.388a3.623 3.623 0 0 0 2.115 1.291c-.312.08-.641.118-.979.118-.312 0-.533-.026-.664-.083.23.757.664 1.371 1.291 1.841a3.652 3.652 0 0 0 2.152.743C4.148 14.173 2.625 14.69.902 14.69c-.422 0-.721-.006-.902-.038 1.697 1.102 3.586 1.649 5.676 1.649 2.139 0 4.029-.542 5.674-1.626 1.645-1.078 2.859-2.408 3.639-3.974a10.77 10.77 0 0 0 1.172-4.892v-.468a7.788 7.788 0 0 0 1.84-1.921 8.142 8.142 0 0 1-2.11.593z"
+      ></path>
+  </symbol>
+  <symbol aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" id="mail">
+    <path  d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" id="calendar">
+    <path d="M452 40h-24V0h-40v40H124V0H84v40H60C26.916 40 0 66.916 0 100v352c0 33.084 26.916 60 60 60h392c33.084 0 60-26.916 60-60V100c0-33.084-26.916-60-60-60zm20 412c0 11.028-8.972 20-20 20H60c-11.028 0-20-8.972-20-20V188h432v264zm0-304H40v-48c0-11.028 8.972-20 20-20h24v40h40V80h264v40h40V80h24c11.028 0 20 8.972 20 20v48z"></path>
+    <path d="M76 230h40v40H76zm80 0h40v40h-40zm80 0h40v40h-40zm80 0h40v40h-40zm80 0h40v40h-40zM76 310h40v40H76zm80 0h40v40h-40zm80 0h40v40h-40zm80 0h40v40h-40zM76 390h40v40H76zm80 0h40v40h-40zm80 0h40v40h-40zm80 0h40v40h-40zm80-80h40v40h-40z"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" id="github">
+    <path d="M255.968 5.329C114.624 5.329 0 120.401 0 262.353c0 113.536 73.344 209.856 175.104 243.872 12.8 2.368 17.472-5.568 17.472-12.384 0-6.112-.224-22.272-.352-43.712-71.2 15.52-86.24-34.464-86.24-34.464-11.616-29.696-28.416-37.6-28.416-37.6-23.264-15.936 1.728-15.616 1.728-15.616 25.696 1.824 39.2 26.496 39.2 26.496 22.848 39.264 59.936 27.936 74.528 21.344 2.304-16.608 8.928-27.936 16.256-34.368-56.832-6.496-116.608-28.544-116.608-127.008 0-28.064 9.984-51.008 26.368-68.992-2.656-6.496-11.424-32.64 2.496-68 0 0 21.504-6.912 70.4 26.336 20.416-5.696 42.304-8.544 64.096-8.64 21.728.128 43.648 2.944 64.096 8.672 48.864-33.248 70.336-26.336 70.336-26.336 13.952 35.392 5.184 61.504 2.56 68 16.416 17.984 26.304 40.928 26.304 68.992 0 98.72-59.84 120.448-116.864 126.816 9.184 7.936 17.376 23.616 17.376 47.584 0 34.368-.32 62.08-.32 70.496 0 6.88 4.608 14.88 17.6 12.352C438.72 472.145 512 375.857 512 262.353 512 120.401 397.376 5.329 255.968 5.329z"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 212 212" id="gitlab">
+    <path d="M12.3 74.7h54L43.3 3c-1-3.6-6.4-3.6-7.6 0L12.3 74.8z" />
+    <path d="M12.3 74.7L.5 111c-1 3.2 0 6.8 3 8.8l101.6 74-92.5-119z"/>
+    <path d="M105 193.7l-38.6-119h-54l92.7 119z"/>
+    <path d="M105 193.7l38.7-119H66.4l38.7 119z"/>
+    <path d="M105 193.7l38.7-119H198l-93 119z"/>
+    <path d="M198 74.7l11.6 36.2c1 3 0 6.6-3 8.6l-101.5 74 93-119z"/>
+    <path d="M198 74.7h-54.3L167 3c1.2-3.6 6.4-3.6 7.6 0L198 74.8z"/>
+  </symbol>
+  <symbol viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="rss">
+    <circle cx="3.429" cy="20.571" r="3.429"></circle>
+    <path d="M11.429 24h4.57C15.999 15.179 8.821 8.001 0 8v4.572c6.302.001 11.429 5.126 11.429 11.428z"></path>
+    <path d="M24 24C24 10.766 13.234 0 0 0v4.571c10.714 0 19.43 8.714 19.43 19.429z"></path>
+  </symbol>
+  <symbol viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" id="linkedin">
+    <path d="M437 0H75C33.648 0 0 33.648 0 75v362c0 41.352 33.648 75 75 75h362c41.352 0 75-33.648 75-75V75c0-41.352-33.648-75-75-75zM181 406h-60V196h60zm0-240h-60v-60h60zm210 240h-60V286c0-16.54-13.46-30-30-30s-30 13.46-30 30v120h-60V196h60v11.309C286.719 202.422 296.93 196 316 196c40.691.043 75 36.547 75 79.688zm0 0"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 612 612" id="to-top">
+    <path d="M604.501 440.509L325.398 134.956c-5.331-5.357-12.423-7.627-19.386-7.27-6.989-.357-14.056 1.913-19.387 7.27L7.499 440.509c-9.999 10.024-9.999 26.298 0 36.323s26.223 10.024 36.222 0l262.293-287.164L568.28 476.832c9.999 10.024 26.222 10.024 36.221 0 9.999-10.023 9.999-26.298 0-36.323z"></path>
+  </symbol>
+  <symbol viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" id="carly">
+    <path d="M504.971 239.029L448 182.059V84c0-46.317-37.682-84-84-84h-44c-13.255 0-24 10.745-24 24s10.745 24 24 24h44c19.851 0 36 16.149 36 36v108c0 6.365 2.529 12.47 7.029 16.971L454.059 256l-47.029 47.029A24.002 24.002 0 0 0 400 320v108c0 19.851-16.149 36-36 36h-44c-13.255 0-24 10.745-24 24s10.745 24 24 24h44c46.318 0 84-37.683 84-84v-98.059l56.971-56.971c9.372-9.372 9.372-24.568 0-33.941zM112 192V84c0-19.851 16.149-36 36-36h44c13.255 0 24-10.745 24-24S205.255 0 192 0h-44c-46.318 0-84 37.683-84 84v98.059l-56.971 56.97c-9.373 9.373-9.373 24.568 0 33.941L64 329.941V428c0 46.317 37.682 84 84 84h44c13.255 0 24-10.745 24-24s-10.745-24-24-24h-44c-19.851 0-36-16.149-36-36V320c0-6.365-2.529-12.47-7.029-16.971L57.941 256l47.029-47.029A24.002 24.002 0 0 0 112 192z"></path>
+  </symbol>
+  <symbol viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="copy">
+    <path d="M23 2.75A2.75 2.75 0 0 0 20.25 0H8.75A2.75 2.75 0 0 0 6 2.75v13.5A2.75 2.75 0 0 0 8.75 19h11.5A2.75 2.75 0 0 0 23 16.25zM18.25 14.5h-7.5a.75.75 0 0 1 0-1.5h7.5a.75.75 0 0 1 0 1.5zm0-3h-7.5a.75.75 0 0 1 0-1.5h7.5a.75.75 0 0 1 0 1.5zm0-3h-7.5a.75.75 0 0 1 0-1.5h7.5a.75.75 0 0 1 0 1.5z"></path>
+    <path d="M8.75 20.5a4.255 4.255 0 0 1-4.25-4.25V2.75c0-.086.02-.166.025-.25H3.75A2.752 2.752 0 0 0 1 5.25v16A2.752 2.752 0 0 0 3.75 24h12a2.752 2.752 0 0 0 2.75-2.75v-.75z"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512.001 512.001" id="closeme">
+    <path d="M284.286 256.002L506.143 34.144c7.811-7.811 7.811-20.475 0-28.285-7.811-7.81-20.475-7.811-28.285 0L256 227.717 34.143 5.859c-7.811-7.811-20.475-7.811-28.285 0-7.81 7.811-7.811 20.475 0 28.285l221.857 221.857L5.858 477.859c-7.811 7.811-7.811 20.475 0 28.285a19.938 19.938 0 0 0 14.143 5.857 19.94 19.94 0 0 0 14.143-5.857L256 284.287l221.857 221.857c3.905 3.905 9.024 5.857 14.143 5.857s10.237-1.952 14.143-5.857c7.811-7.811 7.811-20.475 0-28.285L284.286 256.002z"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" id="open-menu">
+    <path d="M492 236H20c-11.046 0-20 8.954-20 20s8.954 20 20 20h472c11.046 0 20-8.954 20-20s-8.954-20-20-20zm0-160H20C8.954 76 0 84.954 0 96s8.954 20 20 20h472c11.046 0 20-8.954 20-20s-8.954-20-20-20zm0 320H20c-11.046 0-20 8.954-20 20s8.954 20 20 20h472c11.046 0 20-8.954 20-20s-8.954-20-20-20z"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="instagram">
+    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id=youtube>
+    <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="stackoverflow">
+    <path d="M21 27v-8h3v11H0V19h3v8h18z"></path><path d="M17.1.2L15 1.8l7.9 10.6 2.1-1.6L17.1.2zm3.7 14.7L10.6 6.4l1.7-2 10.2 8.5-1.7 2zM7.2 12.3l12 5.6 1.1-2.4-12-5.6-1.1 2.4zm-1.8 6.8l13.56 1.96.17-2.38-13.26-2.55-.47 2.97zM19 25H5v-3h14v3z"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="xing">
+    <path d="M18.188 0c-.517 0-.741.325-.927.66 0 0-7.455 13.224-7.702 13.657.015.024 4.919 9.023 4.919 9.023.17.308.436.66.967.66h3.454c.211 0 .375-.078.463-.22.089-.151.089-.346-.009-.536l-4.879-8.916c-.004-.006-.004-.016 0-.022L22.139.756c.095-.191.097-.387.006-.535C22.056.078 21.894 0 21.686 0h-3.498zM3.648 4.74c-.211 0-.385.074-.473.216-.09.149-.078.339.02.531l2.34 4.05c.004.01.004.016 0 .021L1.86 16.051c-.099.188-.093.381 0 .529.085.142.239.234.45.234h3.461c.518 0 .766-.348.945-.667l3.734-6.609-2.378-4.155c-.172-.315-.434-.659-.962-.659H3.648v.016z"/>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 71 55" id="discord">
+    <path d="M60.1045 4.8978C55.5792 2.8214 50.7265 1.2916 45.6527 0.41542C45.5603 0.39851 45.468 0.440769 45.4204 0.525289C44.7963 1.6353 44.105 3.0834 43.6209 4.2216C38.1637 3.4046 32.7345 3.4046 27.3892 4.2216C26.905 3.0581 26.1886 1.6353 25.5617 0.525289C25.5141 0.443589 25.4218 0.40133 25.3294 0.41542C20.2584 1.2888 15.4057 2.8186 10.8776 4.8978C10.8384 4.9147 10.8048 4.9429 10.7825 4.9795C1.57795 18.7309 -0.943561 32.1443 0.293408 45.3914C0.299005 45.4562 0.335386 45.5182 0.385761 45.5576C6.45866 50.0174 12.3413 52.7249 18.1147 54.5195C18.2071 54.5477 18.305 54.5139 18.3638 54.4378C19.7295 52.5728 20.9469 50.6063 21.9907 48.5383C22.0523 48.4172 21.9935 48.2735 21.8676 48.2256C19.9366 47.4931 18.0979 46.6 16.3292 45.5858C16.1893 45.5041 16.1781 45.304 16.3068 45.2082C16.679 44.9293 17.0513 44.6391 17.4067 44.3461C17.471 44.2926 17.5606 44.2813 17.6362 44.3151C29.2558 49.6202 41.8354 49.6202 53.3179 44.3151C53.3935 44.2785 53.4831 44.2898 53.5502 44.3433C53.9057 44.6363 54.2779 44.9293 54.6529 45.2082C54.7816 45.304 54.7732 45.5041 54.6333 45.5858C52.8646 46.6197 51.0259 47.4931 49.0921 48.2228C48.9662 48.2707 48.9102 48.4172 48.9718 48.5383C50.038 50.6034 51.2554 52.5699 52.5959 54.435C52.6519 54.5139 52.7526 54.5477 52.845 54.5195C58.6464 52.7249 64.529 50.0174 70.6019 45.5576C70.6551 45.5182 70.6887 45.459 70.6943 45.3942C72.1747 30.0791 68.2147 16.7757 60.1968 4.9823C60.1772 4.9429 60.1437 4.9147 60.1045 4.8978ZM23.7259 37.3253C20.2276 37.3253 17.3451 34.1136 17.3451 30.1693C17.3451 26.225 20.1717 23.0133 23.7259 23.0133C27.308 23.0133 30.1626 26.2532 30.1066 30.1693C30.1066 34.1136 27.28 37.3253 23.7259 37.3253ZM47.3178 37.3253C43.8196 37.3253 40.9371 34.1136 40.9371 30.1693C40.9371 26.225 43.7636 23.0133 47.3178 23.0133C50.9 23.0133 53.7545 26.2532 53.6986 30.1693C53.6986 34.1136 50.9 37.3253 47.3178 37.3253Z"/>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 18" id="mastodon">
+    <path
+    fill="#ffffff"
+    d="m 15.054695,9.8859583 c -0.22611,1.1632697 -2.02517,2.4363497 -4.09138,2.6830797 -1.0774504,0.12856 -2.1382704,0.24673 -3.2694704,0.19484 -1.84996,-0.0848 -3.30971,-0.44157 -3.30971,-0.44157 0,0.1801 0.0111,0.35157 0.0333,0.51194 0.24051,1.82571 1.81034,1.93508 3.29737,1.98607 1.50088,0.0514 2.8373104,-0.37004 2.8373104,-0.37004 l 0.0617,1.35686 c 0,0 -1.0498104,0.56374 -2.9199404,0.66742 -1.03124,0.0567 -2.3117,-0.0259 -3.80308,-0.42069 -3.23454998,-0.85613 -3.79081998,-4.304 -3.87592998,-7.8024197 -0.026,-1.03871 -0.01,-2.01815 -0.01,-2.83732 0,-3.57732 2.34385998,-4.62587996 2.34385998,-4.62587996 1.18184,-0.54277 3.20976,-0.77101 5.318,-0.7882499985409 h 0.0518 C 9.8267646,0.01719834 11.856025,0.24547834 13.037775,0.78824834 c 0,0 2.34377,1.04855996 2.34377,4.62587996 0,0 0.0294,2.63937 -0.32687,4.47183"/>
+ <path
+    fill="#000000"
+    d="m 12.616925,5.6916583 v 4.3315297 h -1.71607 V 5.8189683 c 0,-0.88624 -0.37289,-1.33607 -1.1187604,-1.33607 -0.82467,0 -1.23799,0.53361 -1.23799,1.58875 v 2.30122 h -1.70594 v -2.30122 c 0,-1.05514 -0.4134,-1.58875 -1.23808,-1.58875 -0.74587,0 -1.11876,0.44983 -1.11876,1.33607 v 4.2042197 h -1.71607 V 5.6916583 c 0,-0.88527 0.22541,-1.58876 0.67817,-2.10922 0.46689,-0.52047 1.07833,-0.78727 1.83735,-0.78727 0.87816,0 1.54317,0.33752 1.98288,1.01267 l 0.42744,0.71655 0.42753,-0.71655 c 0.43961,-0.67515 1.10463,-1.01267 1.9828704,-1.01267 0.75893,0 1.37037,0.2668 1.83735,0.78727 0.45268,0.52046 0.67808,1.22395 0.67808,2.10922"/>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 530" id="bluesky" >
+    <path d="m135.72 44.03c66.496 49.921 138.02 151.14 164.28 205.46 26.262-54.316 97.782-155.54 164.28-205.46 47.98-36.021 125.72-63.892 125.72 24.795 0 17.712-10.155 148.79-16.111 170.07-20.703 73.984-96.144 92.854-163.25 81.433 117.3 19.964 147.14 86.092 82.697 152.22-122.39 125.59-175.91-31.511-189.63-71.766-2.514-7.3797-3.6904-10.832-3.7077-7.8964-0.0174-2.9357-1.1937 0.51669-3.7077 7.8964-13.714 40.255-67.233 197.36-189.63 71.766-64.444-66.128-34.605-132.26 82.697-152.22-67.108 11.421-142.55-7.4491-163.25-81.433-5.9562-21.282-16.111-152.36-16.111-170.07 0-88.687 77.742-60.816 125.72-24.795z"/>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" id="ko-fi">
+    <path fill="#ffffff" d="M4.5,9.8527H32.7947a0,0,0,0,1,0,0v19.225a9.07,9.07,0,0,1-9.07,9.07H13.57a9.07,9.07,0,0,1-9.07-9.07V9.8527A0,0,0,0,1,4.5,9.8527Z"/>
+    <path fill="#000000" d="M12.197,25.9493l6.45,6.45,6.45-6.45a8.2,8.2,0,0,0,2.4016-5.798h0a4.5082,4.5082,0,0,0-4.212-4.5459,4.4262,4.4262,0,0,0-4.64,4.4209,4.4261,4.4261,0,0,0-4.64-4.4209,4.5082,4.5082,0,0,0-4.212,4.5459h0A8.2,8.2,0,0,0,12.197,25.9493Z"/>
+    <path fill="#ffffff" d="M32.7947,9.8527H35.73a7.77,7.77,0,0,1,0,15.5394H32.7947"/>
+  </svg>
+  </symbol>
+</svg>
+
+<footer class="footer">
+  <div class="footer_inner wrap pale">
+    <img src='https://javadude.com/icons/apple-touch-icon.png' class="icon icon_2 transparent" alt="Scott Stanchfield">
+    <p>Copyright&nbsp;1998-&nbsp;<span class="year"></span>&nbsp;SCOTT STANCHFIELD. All Rights Reserved</p><a class="to_top" href="#documentTop">
+  <svg class="icon">
+  <title>to-top</title>
+  <use xlink:href="#to-top"></use>
+</svg>
+
+</a>
+
+  </div>
+</footer>
+
+<script type="text/javascript" src="https://javadude.com/en/js/bundle.4be013d7cecbbcbad601bb190bdb5c84718e1b980d515e1b9882e80dc4395cf80a00093639868664c095e31aff8582cb2edb56166befbc98d614c728826b737d.js" integrity="sha512-S&#43;AT187LvLrWAbsZC9tchHGOG5gNUV4bmILoDcQ5XPgKAAk2OYaGZMCV4xr/hYLLLttWFmvvvJjWFMcogmtzfQ==" crossorigin="anonymous"></script>
+
+  <script src="https://javadude.com/js/search.min.9d5e38dcb73906849f3712f1758a587e9829a568aa586eae69d7684f6829a46c0084632567291f21ea3ee4a6b14ff0d9e1e6b2a4df73f2e419f4b5e0c30a4f04.js"></script>
+
+  </body>
+</html>

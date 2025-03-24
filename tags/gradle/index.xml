@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Gradle on javadude.com</title>
+    <link>https://javadude.com/tags/gradle/</link>
+    <description>Recent content in Gradle on javadude.com</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>Scott Stanchfield</copyright>
+    <lastBuildDate>Sun, 23 Mar 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://javadude.com/tags/gradle/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Official Android Docs (That I&#39;ve Written)</title>
+      <link>https://javadude.com/post/20250323-android-docs/</link>
+      <pubDate>Sun, 23 Mar 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20250323-android-docs/</guid>
+      <description>
+        
+          
+            &lt;p&gt;A collection of official Android documentation that I wrote while employed at Google,
+with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
+&lt;p&gt;Includes build and project structure overviews and details on dependency resolution and maintenance.&lt;/p&gt;
+&lt;p&gt;Read on for the links! Good stuff!&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>

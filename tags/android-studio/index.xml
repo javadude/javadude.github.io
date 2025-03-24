@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Android Studio on javadude.com</title>
+    <link>https://javadude.com/tags/android-studio/</link>
+    <description>Recent content in Android Studio on javadude.com</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>Scott Stanchfield</copyright>
+    <lastBuildDate>Tue, 26 Mar 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://javadude.com/tags/android-studio/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Finding a deadlock in Android Studio</title>
+      <link>https://javadude.com/post/20190326-android-studio-deadlocks/</link>
+      <pubDate>Tue, 26 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20190326-android-studio-deadlocks/</guid>
+      <description>
+        
+          
+            &lt;p&gt;Android Studio makes it crazy easy to locate deadlocks! I&#39;ll explain how in this video.&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>

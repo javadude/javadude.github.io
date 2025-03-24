@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Eclipse on javadude.com</title>
+    <link>https://javadude.com/tags/eclipse/</link>
+    <description>Recent content in Eclipse on javadude.com</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>Scott Stanchfield</copyright>
+    <lastBuildDate>Wed, 28 Jun 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://javadude.com/tags/eclipse/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Domain-Specific Languages (DSLs) and Code Generation</title>
+      <link>https://javadude.com/post/20170628-dsls-and-codegen/</link>
+      <pubDate>Wed, 28 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20170628-dsls-and-codegen/</guid>
+      <description>
+        
+          
+            &lt;p&gt;A Tech Talk I gave for Johns Hopkins University June 28, 2017.&lt;/p&gt;
+&lt;p&gt;What is a Domain-Specific Language? How can we use one for code-generation?&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Code Generation with xText and xTend</title>
+      <link>https://javadude.com/post/20130730-xtext/</link>
+      <pubDate>Tue, 30 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20130730-xtext/</guid>
+      <description>
+        
+          
+            &lt;p&gt;A Java Users Group talk from July 2013 I presented on new features in JCode Generation with xText and xTend.&lt;/p&gt;
+&lt;p&gt;We&#39;ll use xText to create a custom language by specifying a grammar, read the content into a model, and generate code using xTend!&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Effective Eclipse</title>
+      <link>https://javadude.com/post/20100519-effective-eclipse/</link>
+      <pubDate>Wed, 19 May 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20100519-effective-eclipse/</guid>
+      <description>
+        
+          
+            &lt;p&gt;A Java Users Group talk from May 2010 I presented on Eclipse tips and tricks.&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>

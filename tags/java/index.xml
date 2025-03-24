@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Java on javadude.com</title>
+    <link>https://javadude.com/tags/java/</link>
+    <description>Recent content in Java on javadude.com</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>Scott Stanchfield</copyright>
+    <lastBuildDate>Wed, 28 Jun 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://javadude.com/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Domain-Specific Languages (DSLs) and Code Generation</title>
+      <link>https://javadude.com/post/20170628-dsls-and-codegen/</link>
+      <pubDate>Wed, 28 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20170628-dsls-and-codegen/</guid>
+      <description>
+        
+          
+            &lt;p&gt;A Tech Talk I gave for Johns Hopkins University June 28, 2017.&lt;/p&gt;
+&lt;p&gt;What is a Domain-Specific Language? How can we use one for code-generation?&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Design Patterns Brown-Bag Lectures</title>
+      <link>https://javadude.com/post/20151119-patterns/</link>
+      <pubDate>Thu, 19 Nov 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20151119-patterns/</guid>
+      <description>
+        
+          
+            &lt;p&gt;Talks on Gang-of-Four Design Patterns: Mediator, Observer, Javabeans, Model-View-Controller, Command, Template Method, Strategy and Null Object, Composite and Visitor, Factory Method, Abstract Factory and Builder&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Android Intents and Fragments</title>
+      <link>https://javadude.com/post/20141006-intents-and-fragments/</link>
+      <pubDate>Mon, 06 Oct 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20141006-intents-and-fragments/</guid>
+      <description>
+        
+          
+            &lt;p&gt;A tech talk I gave for Johns Hopkins University on Oct 6, 2014 on Android Intents and Fragments.&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Java 8 - Lambdas and Streams</title>
+      <link>https://javadude.com/post/20140923-lambdas-and-streams/</link>
+      <pubDate>Tue, 23 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20140923-lambdas-and-streams/</guid>
+      <description>
+        
+          
+            &lt;p&gt;A Java Users Group talk from September 2014 I presented on new features in Java 8: Lambdas and Streams.&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Code Generation with xText and xTend</title>
+      <link>https://javadude.com/post/20130730-xtext/</link>
+      <pubDate>Tue, 30 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20130730-xtext/</guid>
+      <description>
+        
+          
+            &lt;p&gt;A Java Users Group talk from July 2013 I presented on new features in JCode Generation with xText and xTend.&lt;/p&gt;
+&lt;p&gt;We&#39;ll use xText to create a custom language by specifying a grammar, read the content into a model, and generate code using xTend!&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Java Enumerations</title>
+      <link>https://javadude.com/post/20121219-enumerations/</link>
+      <pubDate>Wed, 19 Dec 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20121219-enumerations/</guid>
+      <description>
+        
+          
+            &lt;p&gt;A Java Users Group talk I presented on enumerations in Java.&lt;/p&gt;
+&lt;p&gt;I cover:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The old &amp;quot;type-safe enumeration pattern&amp;quot;&lt;/li&gt;
+&lt;li&gt;Using enums for values&lt;/li&gt;
+&lt;li&gt;Adding data and methods to enums&lt;/li&gt;
+&lt;li&gt;Using enums for the Gang-of-Four State Pattern&lt;/li&gt;
+&lt;li&gt;Using enums to emulate function pointers in Java&lt;/li&gt;
+&lt;li&gt;EnumSet and EnumMap&lt;/li&gt;
+&lt;/ul&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Template Method and Strategy</title>
+      <link>https://javadude.com/post/20111013-template-method-and-strategy/</link>
+      <pubDate>Thu, 13 Oct 2011 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20111013-template-method-and-strategy/</guid>
+      <description>
+        
+          
+            &lt;p&gt;I presented a talk on the Template Method and Strategy Patterns to the Columbia, Maryland Java Users Group on 10/13/2011.&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Java Dynamic Proxies</title>
+      <link>https://javadude.com/post/20101202-dynamic-proxies/</link>
+      <pubDate>Thu, 02 Dec 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20101202-dynamic-proxies/</guid>
+      <description>
+        
+          
+            &lt;p&gt;I presented a talk on Dynamic Proxies to the Columbia, Maryland Java Users Group on 12/02/2010.&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Java Annotations</title>
+      <link>https://javadude.com/post/20100120-annotations/</link>
+      <pubDate>Wed, 20 Jan 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20100120-annotations/</guid>
+      <description>
+        
+          
+            &lt;p&gt;I presented a talk on Java Annotations to the Columbia, Maryland Java Users Group on 1/19/2010.&lt;/p&gt;
+&lt;p&gt;This is a &lt;em&gt;very&lt;/em&gt; deep dive into&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Annotation Concepts&lt;/li&gt;
+&lt;li&gt;Creating annotation processors&lt;/li&gt;
+&lt;li&gt;Using annotations at compile time and runtime&lt;/li&gt;
+&lt;li&gt;Generating code from annotations&lt;/li&gt;
+&lt;/ul&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>ANTLR 3.x Tutorial</title>
+      <link>https://javadude.com/post/20091221-antlr3tut/</link>
+      <pubDate>Mon, 21 Dec 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20091221-antlr3tut/</guid>
+      <description>
+        
+          
+            &lt;p&gt;A video tutorial on ANTLR 3.x&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>ANTXR</title>
+      <link>https://javadude.com/post/20051102-antxr/</link>
+      <pubDate>Wed, 02 Nov 2005 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20051102-antxr/</guid>
+      <description>
+        
+          
+            &lt;p&gt;ANTXR: Easy XML Parsing, based on the ANTLR parser generator&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Import on Demand is EVIL!</title>
+      <link>https://javadude.com/post/20040522-import-on-demand-is-evil/</link>
+      <pubDate>Sat, 22 May 2004 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20040522-import-on-demand-is-evil/</guid>
+      <description>
+        
+          
+            &lt;p&gt;There should &lt;em&gt;&lt;strong&gt;never&lt;/strong&gt;&lt;/em&gt; exist any language feature such that &lt;em&gt;&lt;strong&gt;adding&lt;/strong&gt;&lt;/em&gt; a new type to a referenced package can break your existing code. Import-on-demand (aka &amp;quot;start imports&amp;quot;) is one such feature... And it&#39;s evil...&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Java is Pass-by-Value, Dammit!</title>
+      <link>https://javadude.com/post/20010516-pass-by-value/</link>
+      <pubDate>Wed, 16 May 2001 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20010516-pass-by-value/</guid>
+      <description>
+        
+          
+            &lt;p&gt;I&#39;m really tired of hearing folks incorrectly state &amp;quot;primitives are passed by value, objects are passed by reference&amp;quot;.&lt;/p&gt;
+&lt;p&gt;So I&#39;m gonna rant, and you&#39;re gonna listen...&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Layering Applications</title>
+      <link>https://javadude.com/post/20010516-layering-applications/</link>
+      <pubDate>Wed, 16 May 2001 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20010516-layering-applications/</guid>
+      <description>
+        
+          
+            &lt;p&gt;Maintainable applications can be quite tricky to develop. One of the keys to creating such a beast, is to properly layer your application.&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>An ANTLR 2.0 Tutorial</title>
+      <link>https://javadude.com/post/20000304-antlrtut/</link>
+      <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20000304-antlrtut/</guid>
+      <description>
+        
+          
+            &lt;p&gt;A tutorial on ANTLR 2.x&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Creating JavaBean Property Editors</title>
+      <link>https://javadude.com/post/20000304-property-editors/</link>
+      <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20000304-property-editors/</guid>
+      <description>
+        
+          
+            &lt;p&gt;Property editors are a way to make your bean more user-friendly.  Bean builder tools can determine quite a lot about your bean just by looking at it and its corresponding BeanInfo class, but they usually have only very simple methods of editing the properties in the bean.&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Importifier</title>
+      <link>https://javadude.com/post/20000304-importifier/</link>
+      <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20000304-importifier/</guid>
+      <description>
+        
+          
+            &lt;p&gt;Automatic Expansion of Java Import Statements&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>JavaOne 2000/2001/2002</title>
+      <link>https://javadude.com/post/20000304-javaone/</link>
+      <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20000304-javaone/</guid>
+      <description>
+        
+          
+            &lt;p&gt;Some talks I gave at JavaOne in 2000, 2001, and 2002.&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Swing Border Editor</title>
+      <link>https://javadude.com/post/20000304-border-editor/</link>
+      <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20000304-border-editor/</guid>
+      <description>
+        
+          
+            &lt;p&gt;Simple Swing Border Editing in GUI Builders&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>The JavaBean Component Model</title>
+      <link>https://javadude.com/post/20000304-javabeans/</link>
+      <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20000304-javabeans/</guid>
+      <description>
+        
+          
+            &lt;p&gt;The basics of the JavaBean Component Model&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Using JavaBean Accessors</title>
+      <link>https://javadude.com/post/20000304-accessors/</link>
+      <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20000304-accessors/</guid>
+      <description>
+        
+          
+            &lt;p&gt;Accessors are a key ingredient to proper encapsulation.  The can restrict access to only read/write data, inform other objects of changes to data, and perform validation on new values being set.  Consistent accessor usage makes class modification easy and transparent.&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Using the Right Comment in Java</title>
+      <link>https://javadude.com/post/20000304-comments/</link>
+      <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20000304-comments/</guid>
+      <description>
+        
+          
+            &lt;p&gt;Java provides three types of comments; when should we use which?&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Autogut</title>
+      <link>https://javadude.com/post/19991024-autogut/</link>
+      <pubDate>Sun, 24 Oct 1999 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/19991024-autogut/</guid>
+      <description>
+        
+          
+            &lt;p&gt;A VisualAge for Java plugin to create interfaces from classes&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>SplitterLayout</title>
+      <link>https://javadude.com/post/19980228-splitterlayout/</link>
+      <pubDate>Sun, 24 Oct 1999 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/19980228-splitterlayout/</guid>
+      <description>
+        
+          
+            &lt;p&gt;A Layout Manager for Split Windows&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>BoxBeans</title>
+      <link>https://javadude.com/post/19981126-boxbeans/</link>
+      <pubDate>Thu, 26 Nov 1998 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/19981126-boxbeans/</guid>
+      <description>
+        
+          
+            &lt;p&gt;JavaBeans for BoxLayout Visualization&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>ParseView</title>
+      <link>https://javadude.com/post/19980717-parseview/</link>
+      <pubDate>Fri, 17 Jul 1998 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/19980717-parseview/</guid>
+      <description>
+        
+          
+            &lt;p&gt;Visual Debugging for ANTLR 2.x&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>TabSplitter</title>
+      <link>https://javadude.com/post/19980228-tabsplitter/</link>
+      <pubDate>Sat, 28 Feb 1998 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/19980228-tabsplitter/</guid>
+      <description>
+        
+          
+            &lt;p&gt;Way Cool (And Antiquated) Tabbed Panel Component&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Effective Layout Management</title>
+      <link>https://javadude.com/post/20000304-layouts/</link>
+      <pubDate>Thu, 01 Jan 1998 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20000304-layouts/</guid>
+      <description>
+        
+          
+            &lt;p&gt;Let&#39;s get familiar with Java Layout Managers!&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>

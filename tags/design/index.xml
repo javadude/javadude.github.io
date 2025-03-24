@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Design on javadude.com</title>
+    <link>https://javadude.com/tags/design/</link>
+    <description>Recent content in Design on javadude.com</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>Scott Stanchfield</copyright>
+    <lastBuildDate>Wed, 16 May 2001 00:00:00 +0000</lastBuildDate><atom:link href="https://javadude.com/tags/design/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Layering Applications</title>
+      <link>https://javadude.com/post/20010516-layering-applications/</link>
+      <pubDate>Wed, 16 May 2001 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20010516-layering-applications/</guid>
+      <description>
+        
+          
+            &lt;p&gt;Maintainable applications can be quite tricky to develop. One of the keys to creating such a beast, is to properly layer your application.&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Creating JavaBean Property Editors</title>
+      <link>https://javadude.com/post/20000304-property-editors/</link>
+      <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20000304-property-editors/</guid>
+      <description>
+        
+          
+            &lt;p&gt;Property editors are a way to make your bean more user-friendly.  Bean builder tools can determine quite a lot about your bean just by looking at it and its corresponding BeanInfo class, but they usually have only very simple methods of editing the properties in the bean.&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>JavaOne 2000/2001/2002</title>
+      <link>https://javadude.com/post/20000304-javaone/</link>
+      <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20000304-javaone/</guid>
+      <description>
+        
+          
+            &lt;p&gt;Some talks I gave at JavaOne in 2000, 2001, and 2002.&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>The JavaBean Component Model</title>
+      <link>https://javadude.com/post/20000304-javabeans/</link>
+      <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20000304-javabeans/</guid>
+      <description>
+        
+          
+            &lt;p&gt;The basics of the JavaBean Component Model&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Using JavaBean Accessors</title>
+      <link>https://javadude.com/post/20000304-accessors/</link>
+      <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20000304-accessors/</guid>
+      <description>
+        
+          
+            &lt;p&gt;Accessors are a key ingredient to proper encapsulation.  The can restrict access to only read/write data, inform other objects of changes to data, and perform validation on new values being set.  Consistent accessor usage makes class modification easy and transparent.&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Effective Layout Management</title>
+      <link>https://javadude.com/post/20000304-layouts/</link>
+      <pubDate>Thu, 01 Jan 1998 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20000304-layouts/</guid>
+      <description>
+        
+          
+            &lt;p&gt;Let&#39;s get familiar with Java Layout Managers!&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>

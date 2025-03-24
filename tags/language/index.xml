@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Language on javadude.com</title>
+    <link>https://javadude.com/tags/language/</link>
+    <description>Recent content in Language on javadude.com</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>Scott Stanchfield</copyright>
+    <lastBuildDate>Sun, 03 Feb 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://javadude.com/tags/language/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>From Java to Kotlin - Episode 1 - You&#39;ve Gotta Start Somewhere...</title>
+      <link>https://javadude.com/post/20190203-kotlin01/</link>
+      <pubDate>Sun, 03 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20190203-kotlin01/</guid>
+      <description>
+        
+          
+            &lt;p&gt;Let&#39;s learn Kotlin from a Java point of view. We&#39;ll start by looking at some basics of Variables, Values, Classes, Properties and Constructors.&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Java 8 - Lambdas and Streams</title>
+      <link>https://javadude.com/post/20140923-lambdas-and-streams/</link>
+      <pubDate>Tue, 23 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20140923-lambdas-and-streams/</guid>
+      <description>
+        
+          
+            &lt;p&gt;A Java Users Group talk from September 2014 I presented on new features in Java 8: Lambdas and Streams.&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Java Enumerations</title>
+      <link>https://javadude.com/post/20121219-enumerations/</link>
+      <pubDate>Wed, 19 Dec 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20121219-enumerations/</guid>
+      <description>
+        
+          
+            &lt;p&gt;A Java Users Group talk I presented on enumerations in Java.&lt;/p&gt;
+&lt;p&gt;I cover:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The old &amp;quot;type-safe enumeration pattern&amp;quot;&lt;/li&gt;
+&lt;li&gt;Using enums for values&lt;/li&gt;
+&lt;li&gt;Adding data and methods to enums&lt;/li&gt;
+&lt;li&gt;Using enums for the Gang-of-Four State Pattern&lt;/li&gt;
+&lt;li&gt;Using enums to emulate function pointers in Java&lt;/li&gt;
+&lt;li&gt;EnumSet and EnumMap&lt;/li&gt;
+&lt;/ul&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Java Dynamic Proxies</title>
+      <link>https://javadude.com/post/20101202-dynamic-proxies/</link>
+      <pubDate>Thu, 02 Dec 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20101202-dynamic-proxies/</guid>
+      <description>
+        
+          
+            &lt;p&gt;I presented a talk on Dynamic Proxies to the Columbia, Maryland Java Users Group on 12/02/2010.&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Java Annotations</title>
+      <link>https://javadude.com/post/20100120-annotations/</link>
+      <pubDate>Wed, 20 Jan 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20100120-annotations/</guid>
+      <description>
+        
+          
+            &lt;p&gt;I presented a talk on Java Annotations to the Columbia, Maryland Java Users Group on 1/19/2010.&lt;/p&gt;
+&lt;p&gt;This is a &lt;em&gt;very&lt;/em&gt; deep dive into&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Annotation Concepts&lt;/li&gt;
+&lt;li&gt;Creating annotation processors&lt;/li&gt;
+&lt;li&gt;Using annotations at compile time and runtime&lt;/li&gt;
+&lt;li&gt;Generating code from annotations&lt;/li&gt;
+&lt;/ul&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>ANTLR 3.x Tutorial</title>
+      <link>https://javadude.com/post/20091221-antlr3tut/</link>
+      <pubDate>Mon, 21 Dec 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20091221-antlr3tut/</guid>
+      <description>
+        
+          
+            &lt;p&gt;A video tutorial on ANTLR 3.x&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Import on Demand is EVIL!</title>
+      <link>https://javadude.com/post/20040522-import-on-demand-is-evil/</link>
+      <pubDate>Sat, 22 May 2004 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20040522-import-on-demand-is-evil/</guid>
+      <description>
+        
+          
+            &lt;p&gt;There should &lt;em&gt;&lt;strong&gt;never&lt;/strong&gt;&lt;/em&gt; exist any language feature such that &lt;em&gt;&lt;strong&gt;adding&lt;/strong&gt;&lt;/em&gt; a new type to a referenced package can break your existing code. Import-on-demand (aka &amp;quot;start imports&amp;quot;) is one such feature... And it&#39;s evil...&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Java is Pass-by-Value, Dammit!</title>
+      <link>https://javadude.com/post/20010516-pass-by-value/</link>
+      <pubDate>Wed, 16 May 2001 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20010516-pass-by-value/</guid>
+      <description>
+        
+          
+            &lt;p&gt;I&#39;m really tired of hearing folks incorrectly state &amp;quot;primitives are passed by value, objects are passed by reference&amp;quot;.&lt;/p&gt;
+&lt;p&gt;So I&#39;m gonna rant, and you&#39;re gonna listen...&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>An ANTLR 2.0 Tutorial</title>
+      <link>https://javadude.com/post/20000304-antlrtut/</link>
+      <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20000304-antlrtut/</guid>
+      <description>
+        
+          
+            &lt;p&gt;A tutorial on ANTLR 2.x&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>JavaOne 2000/2001/2002</title>
+      <link>https://javadude.com/post/20000304-javaone/</link>
+      <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20000304-javaone/</guid>
+      <description>
+        
+          
+            &lt;p&gt;Some talks I gave at JavaOne in 2000, 2001, and 2002.&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Using JavaBean Accessors</title>
+      <link>https://javadude.com/post/20000304-accessors/</link>
+      <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20000304-accessors/</guid>
+      <description>
+        
+          
+            &lt;p&gt;Accessors are a key ingredient to proper encapsulation.  The can restrict access to only read/write data, inform other objects of changes to data, and perform validation on new values being set.  Consistent accessor usage makes class modification easy and transparent.&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Using the Right Comment in Java</title>
+      <link>https://javadude.com/post/20000304-comments/</link>
+      <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20000304-comments/</guid>
+      <description>
+        
+          
+            &lt;p&gt;Java provides three types of comments; when should we use which?&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>

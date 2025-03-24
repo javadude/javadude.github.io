@@ -1,0 +1,1266 @@
+
+<!DOCTYPE html>
+<html
+  lang="en"
+  data-figures=""
+  
+    class="page"
+  
+  
+  >
+  <head>
+<title>From Java to Kotlin - Episode 1 - You&#39;ve Gotta Start Somewhere... | javadude.com</title>
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+
+
+
+
+<meta property="og:locale" content="en" />
+
+<meta property="og:type" content="article">
+<meta name="description" content="Let&#39;s learn Kotlin from a Java point of view. We&#39;ll start by looking at some basics of Variables, Values, Classes, Properties and Constructors." />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:creator" content="">
+<meta name="twitter:title" content="From Java to Kotlin - Episode 1 - You&#39;ve Gotta Start Somewhere..." />
+<meta name="twitter:image" content="https://javadude.com/post/20190203-kotlin01/kotlin-logo.png"/>
+<meta property="og:url" content="https://javadude.com/post/20190203-kotlin01/" />
+<meta property="og:title" content="From Java to Kotlin - Episode 1 - You&#39;ve Gotta Start Somewhere..." />
+<meta property="og:description" content="Let&#39;s learn Kotlin from a Java point of view. We&#39;ll start by looking at some basics of Variables, Values, Classes, Properties and Constructors." />
+<meta property="og:image" content="https://javadude.com/post/20190203-kotlin01/kotlin-logo.png" />
+  <meta name="keywords" content="kotlin,language" />
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage":"https:\/\/javadude.com\/post\/20190203-kotlin01\/",
+      "name": "javadude.com",
+      "headline": "From Java to Kotlin - Episode 1 - You've Gotta Start Somewhere...",
+      "description": "\u003cp\u003eLet's learn Kotlin from a Java point of view. We'll start by looking at some basics of Variables, Values, Classes, Properties and Constructors.\u003c/p\u003e",
+      "url": "https:\/\/javadude.com\/post\/20190203-kotlin01\/",
+      "datePublished": "2019-02-03T00:00:00Z",
+      "dateModified": "2019-02-03T00:00:00Z",
+      "keywords": ["kotlin","language"],
+        "articleSection": ["Articles"],
+      "author": {
+        "@type": "Person",
+        "name": "map[name:Scott Stanchfield photo:images\/yellow.jpeg]"
+      },
+      "image":{
+        "@type":"ImageObject",
+        "url": "https:\/\/javadude.com\/post\/20190203-kotlin01\/kotlin-logo.png"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "logo": {
+          "@type":"ImageObject",
+          "url": "https:\/\/javadude.com\/"
+        },
+        "name": "javadude.com"
+      }
+    }
+  </script>
+
+<link rel="apple-touch-icon" sizes="180x180" href="https://javadude.com/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://javadude.com/icons/favicon-32x32.png">
+<link rel="manifest" href="https://javadude.com/icons/site.webmanifest">
+
+<link rel="canonical" href="https://javadude.com/post/20190203-kotlin01/">
+
+
+
+<link rel="preload" href="https://javadude.com/css/styles.bc1eb1dd1fc5d14285e0b88a05fef346a89bc5e461c683e5fc57576c7455fe75831ec8ecacec5edfb95ff21decee7759160e705bc419e8e864dcf581963a4140.css" integrity = "sha512-vB6x3R/F0UKF4LiKBf7zRqibxeRhxoPl/FdXbHRV/nWDHsjsrOxe37lf8h3s7ndZFg5wW8QZ6Ohk3PWBljpBQA==" as="style" crossorigin="anonymous">
+
+
+
+<link rel="preload" href="https://javadude.com/en/js/bundle.4be013d7cecbbcbad601bb190bdb5c84718e1b980d515e1b9882e80dc4395cf80a00093639868664c095e31aff8582cb2edb56166befbc98d614c728826b737d.js" as="script" integrity=
+"sha512-S&#43;AT187LvLrWAbsZC9tchHGOG5gNUV4bmILoDcQ5XPgKAAk2OYaGZMCV4xr/hYLLLttWFmvvvJjWFMcogmtzfQ==" crossorigin="anonymous">
+
+
+<link rel="stylesheet" type="text/css" href="https://javadude.com/css/styles.bc1eb1dd1fc5d14285e0b88a05fef346a89bc5e461c683e5fc57576c7455fe75831ec8ecacec5edfb95ff21decee7759160e705bc419e8e864dcf581963a4140.css" integrity="sha512-vB6x3R/F0UKF4LiKBf7zRqibxeRhxoPl/FdXbHRV/nWDHsjsrOxe37lf8h3s7ndZFg5wW8QZ6Ohk3PWBljpBQA==" crossorigin="anonymous">
+
+  </head>
+  <body
+    data-code="10000"
+    data-lines="true"
+    id="documentTop"
+    data-lang="en"
+  >
+
+<header class="nav_header" >
+  <nav class="nav"><a href='https://javadude.com/' class="nav_brand nav_item" title="javadude.com">javadude.com
+  <div class="nav_close">
+    <div><svg class="icon">
+  <title>open-menu</title>
+  <use xlink:href="#open-menu"></use>
+</svg>
+<svg class="icon">
+  <title>closeme</title>
+  <use xlink:href="#closeme"></use>
+</svg>
+</div>
+  </div>
+</a>
+
+    <div class='nav_body nav_body_left'>
+      
+      
+      
+        
+
+  <div class="nav_parent">
+    <a href="https://javadude.com/" class="nav_item" title="Home">Home </a>
+  </div>
+  <div class="nav_parent">
+    <a href="https://javadude.com/categories/class" class="nav_item" title="Classes">Classes </a>
+  </div>
+  <div class="nav_parent">
+    <a href="https://javadude.com/categories/articles" class="nav_item" title="Articles">Articles </a>
+  </div>
+  <div class="nav_parent">
+    <a href="https://javadude.com/categories/videos" class="nav_item" title="Videos">Videos </a>
+  </div>
+  <div class="nav_parent">
+    <a href="https://javadude.com/categories/tools" class="nav_item" title="Tools">Tools </a>
+  </div>
+  <div class="nav_parent">
+    <a href="https://javadude.com/publications/" class="nav_item" title="Publications">Publications </a>
+  </div>
+  <div class="nav_parent">
+    <a href="https://javadude.com/about/" class="nav_item" title="About">About </a>
+  </div>
+      
+<div class='follow'>
+  <a href="https://github.com/javadude">
+    <svg class="icon">
+  <title>github</title>
+  <use xlink:href="#github"></use>
+</svg>
+
+  </a>
+  <a href="https://gitlab.com/javamage">
+    <svg class="icon">
+  <title>gitlab</title>
+  <use xlink:href="#gitlab"></use>
+</svg>
+
+  </a>
+  <a href="https://www.youtube.com/scottstanchfield">
+    <svg class="icon">
+  <title>youtube</title>
+  <use xlink:href="#youtube"></use>
+</svg>
+
+  </a>
+  <a href="https://stackoverflow.com/users/12541/scott-stanchfield">
+    <svg class="icon">
+  <title>stackoverflow</title>
+  <use xlink:href="#stackoverflow"></use>
+</svg>
+
+  </a>
+  <a href="https://www.facebook.com/scott.stanchfield">
+    <svg class="icon">
+  <title>facebook</title>
+  <use xlink:href="#facebook"></use>
+</svg>
+
+  </a>
+    
+  <a href="https://javadude.com/index.xml">
+    <svg class="icon">
+  <title>rss</title>
+  <use xlink:href="#rss"></use>
+</svg>
+
+  </a>
+<div class="color_mode">
+  <input type="checkbox" class="color_choice" id="mode">
+</div>
+
+</div>
+
+    </div>
+  </nav>
+</header>
+
+    <main>
+  
+<div class="grid-inverse wrap content">
+  <article class="post_content">
+    <h1 class="post_title">From Java to Kotlin - Episode 1 - You've Gotta Start Somewhere...</h1>
+  <div class="post_meta">
+    <span><svg class="icon">
+  <title>calendar</title>
+  <use xlink:href="#calendar"></use>
+</svg>
+</span>
+    <span class="post_date">
+      Feb 3, 2019	  
+    </span>
+    <span class="post_time"> · 24 min read</span><span>&nbsp;· <a href='https://javadude.com/tags/kotlin/' title="kotlin" class="post_tag button button_translucent">kotlin
+        </a><a href='https://javadude.com/tags/language/' title="language" class="post_tag button button_translucent">language
+        </a>
+    </span>
+    <span class="page_only">&nbsp;·
+  <div class="post_share">
+    Share on:
+    <a href="https://twitter.com/intent/tweet?text=From%20Java%20to%20Kotlin%20-%20Episode%201%20-%20You%27ve%20Gotta%20Start%20Somewhere...&url=https%3a%2f%2fjavadude.com%2fpost%2f20190203-kotlin01%2f&tw_p=tweetbutton" class="twitter" title="Share on Twitter" target="_blank" rel="nofollow">
+      <svg class="icon">
+  <title>twitter</title>
+  <use xlink:href="#twitter"></use>
+</svg>
+
+    </a>
+    <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fjavadude.com%2fpost%2f20190203-kotlin01%2f&t=From%20Java%20to%20Kotlin%20-%20Episode%201%20-%20You%27ve%20Gotta%20Start%20Somewhere..." class="facebook" title="Share on Facebook" target="_blank" rel="nofollow">
+      <svg class="icon">
+  <title>facebook</title>
+  <use xlink:href="#facebook"></use>
+</svg>
+
+    </a>
+    <a href="#linkedinshare" id = "linkedinshare" class="linkedin" title="Share on LinkedIn" rel="nofollow">
+      <svg class="icon">
+  <title>linkedin</title>
+  <use xlink:href="#linkedin"></use>
+</svg>
+
+    </a>
+    <a href="https://javadude.com/post/20190203-kotlin01/" title="Copy Link" class="link link_yank">
+      <svg class="icon">
+  <title>copy</title>
+  <use xlink:href="#copy"></use>
+</svg>
+
+    </a>
+  </div>
+  </span>
+  </div>
+
+    <div class="post_body"><p>Let's learn Kotlin from a Java point of view. We'll start by looking at some basics of Variables, Values, Classes, Properties and Constructors.</p>
+<h1 id="introduction">Introduction</h1>
+<p>I remember the way I felt when Java came out. There was this feeling of freedom using Java after using C++ for so long. I feel the same way switching from Java to Kotlin...</p>
+<p>This series of posts assumes you're fairly familiar with Java. I'll explain some Java concepts more than others (like Anonymous Inner Classes and Lambdas), and in some cases point you to other articles or videos for more detail on how Java does things.</p>
+<p>Hopefully, many of the Kotlin concepts will make sense on their own... But don't say I didn't warn you ;)</p>
+<p>This post starts by taking a look at the very basics of Variables, Values, Classes, Properties and Constructors. In future articles, I'll be going into more detail on these topics. Learning a new programming language often requires a lot of back and forth as the concepts are often highly interconnected...</p>
+<h1 id="a-note-on-nulls">A Note on Nulls</h1>
+<p>While you're reading this, you'll likely think &quot;why didn't he use null instead of dummy values?&quot;...</p>
+<p>Nullability is a pretty big concept and I knew this article would be pretty long to start with, so I'm punting it down the road a wee bit. But don't worry... I'll get to it... It's quite important!</p>
+<h1 id="main-functions">Main Functions</h1>
+<p>Kotlin has &quot;main&quot; functions just like Java. You'll most likely use Kotlin in environments like servers or Android applications that don't need a main, but they're useful for examples.</p>
+<p>If you don't need any command-line arguments:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="s2">&#34;Hello, World!&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>If you want command-line arguments, you can use an explicit Array (more on that and <code>joinToString()</code> later). I'm passing <code>A B C</code> to Kotlin Playground for this example.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">Array</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="s2">&#34;Hello, World!&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">args</span><span class="p">.</span><span class="n">joinToString</span><span class="p">())</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>or you can use a varying-length argument list (more on that and <code>joinToString()</code> later). I'm passing <code>A B C</code> to Kotlin Playground for this example.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">fun</span> <span class="nf">main</span><span class="p">(</span><span class="k">vararg</span> <span class="n">args</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="s2">&#34;Hello, World!&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">args</span><span class="p">.</span><span class="n">joinToString</span><span class="p">())</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h1 id="yay-no-semicolons">Yay! No Semicolons!</h1>
+<p>Ding, dong, semicolons are dead! Well, not dead, just not as required as in Java. You can still use them to separate statements, but I don't recommend it. Give yourself a little time to get used to it and you'll add 5 more years before you get carpal-tunnel syndrome. At least according to the science I made up in my head.</p>
+<p>(I do find myself forgetting semicolons when I have to write Java code... But I don't do that often any more...)</p>
+<h1 id="variables-and-values">Variables and Values</h1>
+<p>In Kotlin, we explicitly state whether a local or member of a class can be modified. We do this by specifying <code>var</code> or <code>val</code> to define a variable or value.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="k">var</span> <span class="py">x</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s2">&#34;Hello&#34;</span>  <span class="c1">// &#34;initializer is redundant&#34; warning!
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="c1"></span>    <span class="k">val</span> <span class="py">y</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s2">&#34;Message&#34;</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="n">x</span> <span class="p">=</span> <span class="s2">&#34;aaa&#34;</span> <span class="c1">// just fine; can change the variable
+</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="c1"></span>    <span class="n">y</span> <span class="p">=</span> <span class="s2">&#34;bbb&#34;</span> <span class="c1">// will not compile!!! can&#39;t change a &#34;val&#34;
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>If you run the above example, you'll get an &quot;initializer is redundant&quot; warning for line 2. Kotlin does a lot of data flow analysis, and here it's telling us that it sees the only path using <code>x</code> assigns it twice before using it, so the initializer isn't needed. We could write</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="k">var</span> <span class="py">x</span><span class="p">:</span> <span class="n">String</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="k">val</span> <span class="py">y</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s2">&#34;Message&#34;</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">
+</span></span><span class="line"><span class="ln">5</span><span class="cl">    <span class="n">x</span> <span class="p">=</span> <span class="s2">&#34;aaa&#34;</span> <span class="c1">// just fine; can change the variable
+</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">8</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">9</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h1 id="type-inferencing">Type Inferencing</h1>
+<p>But things get even better. Kotlin loves to <em>infer</em> types so you don't have to write as much code. For example:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="k">val</span> <span class="py">x</span> <span class="p">=</span> <span class="s2">&#34;aaa&#34;</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>The expression <code>&quot;aaa&quot;</code> is of type <code>String</code>, so kotlin knows that the value <code>x</code> can be a <code>String</code> and infers the type.</p>
+<h1 id="everything-is-public-and-final">Everything is Public and Final</h1>
+<p>First, the good news...</p>
+<p>All types, functions and properties are <code>public</code> by default. I think this was a great choice, as I'm a big proponent of keeping things accessible unless there's a really strong reason not to (that reason is usually a sensitive algorithm, such as a security feature). <code>public</code> here means the same thing as in Java; any class can access <code>public</code> types, functions and properties.</p>
+<p>However...</p>
+<p>All classes, functions and properties are <code>final</code> by default (unless explicitly marked as <code>open</code>, <code>abstract</code> or <code>sealed</code>), or being functions/properties defined inside an <code>interface</code>). Interfaces are always non-final (as a <code>final</code> interface wouldn't make sense...)</p>
+<p><strong>[Here comes the rant!!!]</strong></p>
+<p>This was a <em>horrible</em> design choice, IMNSHO. This means you cannot create subclasses, or override functions or properties unless the parent explicitly says so. Unfortunately the designers of the language took advice from &quot;Effective Java&quot; (which says to only make non-final if you intend people to extend) a little too far. I've come across far too many cases where a library doesn't let you extend something that has gotten in the way. I believe in the Open/Closed principal - open for extension, closed for modification of its guts.</p>
+<p><strong>[rant over... you may continue with your lives...]</strong></p>
+<h1 id="class-and-interface-inheritance">Class and Interface Inheritance</h1>
+<p>Classes/Interfaces (and their members) in Kotlin are nowhere near as verbose as in Java.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">interface</span> <span class="nc">Foo</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="k">open</span> <span class="k">class</span> <span class="nc">A</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="k">open</span> <span class="k">class</span> <span class="nc">B</span><span class="p">:</span> <span class="n">A</span><span class="p">(),</span> <span class="n">Foo</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="k">class</span> <span class="nc">C</span><span class="p">:</span> <span class="n">B</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">
+</span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl">    <span class="k">val</span> <span class="py">c</span> <span class="p">=</span> <span class="n">C</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Let's break this down, line by line</p>
+<table>
+  <thead>
+      <tr>
+          <th>Line</th>
+          <th>What's Happening</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1</td>
+          <td>Defines an interface named <code>Foo</code>. Nothing in it, but we might just be using it as a Marker to help us classify objects.</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>Defines a class named <code>A</code><br/>- We can extend it because it's marked <code>open</code></td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>Defines a class named <code>B</code><br/>- It is a subclass of class <code>A</code><br/>- It implements interface <code>Foo</code><br/>- It can be extended because it's <code>open</code></td>
+      </tr>
+      <tr>
+          <td>4</td>
+          <td>Defines a class named <code>C</code><br/>- It is a subclass of <code>B</code><br/>- Note that this means it's indirectly a subclass of <code>A</code> and implements <code>Foo</code><br/>- It <em>cannot</em> be extended because it is <em>not</em> explicitly marked <code>open</code></td>
+      </tr>
+      <tr>
+          <td>7</td>
+          <td>Create an instance of <code>C</code> and point value <code>c</code> to it. (Yes... Kotlin has pointers, just like Java... See <a href="../../articles/passbyvalue.htm">Java is Pass-By-Value, Dammit!</a>)</td>
+      </tr>
+  </tbody>
+</table>
+<p>Some interesting things to note</p>
+<ul>
+<li>Both interfaces and a class can appear after the colon.
+<ul>
+<li>there can be at most one class, and any number of interfaces, in any order</li>
+</ul>
+</li>
+<li>Superclasses must be followed by a call to a constructor (the parentheses in <code>A()</code> and <code>B()</code> on lines 3 and 4)</li>
+</ul>
+<p>Before we talk about constructors, let's talk about properties, and I'll circle back. I promise...</p>
+<h1 id="properties">Properties</h1>
+<p>I've been waiting for these for a long time... There's a concept used in Java called JavaBeans, part of which is a convention for defining properties. I've got an <a href="../20000304-javabeans">article on JavaBeans</a> that goes into a ton of detail, but here are the basics.</p>
+<h2 id="properties-in-java">Properties in Java</h2>
+<p>A JavaBean property is defined by one or two methods in a Java class:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="c1">// JAVA CODE</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getFirstName</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setFirstName</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">firstName</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>Property types</p>
+<ul>
+<li>If <em>only</em> a <code>get</code> method exists, we're defining a read-only property. For example, if we only had <code>getFirstName()</code> we're defining a read-only property called <code>firstName</code> (note the case.)</li>
+<li>If <em>only</em> a <code>set</code> method exists, we're defining a write-only property. For example, if we only had <code>setFirstName()</code> we're defining a write-only property called <code>firstName</code></li>
+<li>If <em>both</em> methods exist, we're defining a read/write property</li>
+</ul>
+<p>These conventions could be used by various tools, such as GUI builders, to automatically determine properties that a user could configure when designing an application. These properties would often appear in a little table where the user could set values and see how the GUI changes, then generate code to set that value at runtime.</p>
+<p>But this is horribly verbose, and nearly all <code>get</code>/<code>set</code> methods look identical in an application.</p>
+<h2 id="properties-in-kotlin">Properties in Kotlin</h2>
+<p>Kotlin fixes this by introducing properties as first-class language constructs.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="k">class</span> <span class="nc">A</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="k">var</span> <span class="py">firstName</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s2">&#34;no first name&#34;</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="k">var</span> <span class="py">lastName</span> <span class="p">=</span> <span class="s2">&#34;no last name&#34;</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="k">val</span> <span class="py">a</span> <span class="p">=</span> <span class="n">A</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">firstName</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="n">a</span><span class="p">.</span><span class="n">firstName</span> <span class="p">=</span> <span class="s2">&#34;Scott&#34;</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">firstName</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Adding <code>var</code> and <code>val</code> definitions inside a class or interface defines a property. <code>var</code> properties are read/write (you can modify them), and <code>val</code> properties are read-only (you cannot modify them).</p>
+<p>Let's look at this example line-by-line</p>
+<table>
+  <thead>
+      <tr>
+          <th>Line</th>
+          <th>What's Happening</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1</td>
+          <td>Define a new class (not extensible!)</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>Define a read/write property called <code>firstName</code> of type <code>String</code> initialized to <code>&quot;no first name&quot;</code></td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>Define a read/write property called <code>lastName</code> of <em>inferred</em> type <code>String</code> initialized to <code>&quot;no last name&quot;</code></td>
+      </tr>
+      <tr>
+          <td>7</td>
+          <td>Create an instance of class <code>A</code> and point value <code>a</code> to it. Note that there is no <code>new</code> keyword; we just specify the class name followed by parens and constructor parameters (if any)</td>
+      </tr>
+      <tr>
+          <td>8</td>
+          <td>Follow pointer <code>a</code> to its <code>A</code> instance and print the value of its <code>firstName</code> property</td>
+      </tr>
+      <tr>
+          <td>9</td>
+          <td>Follow pointer <code>a</code> to its <code>A</code> instance and change the value of its <code>firstName</code> property to <code>&quot;Scott&quot;</code> <br/>(Note that technically we're setting the value of the property to <em>point</em> to a <code>String</code> with the value <code>&quot;Scott&quot;</code>)</td>
+      </tr>
+      <tr>
+          <td>10</td>
+          <td>Follow pointer <code>a</code> to its <code>A</code> instance and print the value of its <code>firstName</code> property</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="using-kotlin-properties-from-java-code">Using Kotlin Properties From Java Code</h2>
+<p>Kotlin has excellent interoperability with Java. If we defined a Kotlin class</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">class</span> <span class="nc">A</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="k">var</span> <span class="py">firstName</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s2">&#34;no first name&#34;</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="k">var</span> <span class="py">lastName</span> <span class="p">=</span> <span class="s2">&#34;no last name&#34;</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>we could access it from Java as</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="c1">// JAVA CODE</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="n">A</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">A</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="n">a</span><span class="p">.</span><span class="na">setFirstName</span><span class="p">(</span><span class="s">&#34;Scott&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w"></span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="na">getFirstName</span><span class="p">());</span><span class="w">
+</span></span></span></code></pre></div><p>Behind the scenes, Kotlin creates a class file to run in the Java Virtual Machine, and this class file contains <code>get</code> and <code>set</code> methods for each read/write property, or just <code>get</code> methods for read-only properties.</p>
+<h2 id="backing-fields">Backing Fields</h2>
+<p>To explain &quot;Backing fields&quot; in Kotlin, let's look at a typical property implementation in Java</p>
+<p>Remember that JavaBean properties are defined <em>solely on the presence of <code>get</code> and <code>set</code> methods</em>. The implementation of those methods does not matter. However, we typically need to store a value when <code>set</code> is called and return it when <code>get</code> is called. For example:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1">// JAVA CODE</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="w"></span><span class="kd">class</span> <span class="nc">Foo</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getName</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">name</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setName</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>Note the field <code>name</code> in this example. It's a field in the class that's hidden from anything outside of class Foo. The property defined by <code>getName</code> and <code>setName</code> uses the <code>name</code> field to store the property value.</p>
+<p>Kotlin properties can automatically create a behind-the-scenes field just like this. For example, when you write</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="k">var</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s2">&#34;no name&#34;</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>the Kotlin compiler generates a <code>get</code> and <code>set</code> function for us (note that Kotlin uses the name &quot;function&quot; for what we would call a &quot;method&quot; in Java), and a &quot;backing field&quot; to hold the value of the <code>name</code> property.</p>
+<p>But that doesn't <em>always</em> happen...</p>
+<p>In Java, we might define a <code>get</code> method that computes a value (often called a &quot;derived property&quot;) or returns a literal value. For example</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="ln">1</span><span class="cl"><span class="c1">// JAVA CODE</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="kd">class</span> <span class="nc">Foo</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getName</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&#34;Scott&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></div><p>In this case, we don't need a field to store the value.</p>
+<p>If we do something like the following in Kotlin</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="k">val</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s2">&#34;no name&#34;</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">       <span class="c1">// NOTE: a &#34;val&#34; property, so only defines a getter!
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><p>It <em>initializes</em> the backing field to &quot;no name&quot; and returns it whenever the property is accessed.</p>
+<p>If we want the equivalent of that literal-value <code>get</code> method in Java, we need to explicitly define what the <code>get</code> function in Kotlin would look like. We do this as follows:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="k">val</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">        <span class="k">get</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">            <span class="k">return</span> <span class="s2">&#34;no name&#34;</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>In this case, because we explicitly define the get() function, and do not mention the backing field, no backing field is defined.</p>
+<p>So how do we explicitly mention the backing field? We use the <code>field</code> keyword. For example:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="k">val</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s2">&#34;no name&#34;</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">        <span class="k">get</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">            <span class="k">return</span> <span class="k">field</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>This example is pretty silly; we're explicitly defining the default behavior of a read-only property. It's more interesting if we want to modify the behavior. For example, we could print or log a message whenever the field is requested</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">class</span> <span class="nc">Foo</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="k">val</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s2">&#34;no name&#34;</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">        <span class="k">get</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">            <span class="n">println</span><span class="p">(</span><span class="s2">&#34;name requested!&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">            <span class="k">return</span> <span class="k">field</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Or more usefully, do something when a value is set. For example, suppose we wanted to ensure a Doctor was always called &quot;Dr.&quot;:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="k">class</span> <span class="nc">Doctor</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="k">var</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s2">&#34;Dr. Nobody&#34;</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">        <span class="k">set</span><span class="p">(</span><span class="k">value</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">            <span class="k">if</span> <span class="p">(!</span><span class="k">value</span><span class="p">.</span><span class="n">startsWith</span><span class="p">(</span><span class="s2">&#34;Dr. &#34;</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">                <span class="k">field</span> <span class="p">=</span> <span class="s2">&#34;Dr. &#34;</span> <span class="p">+</span> <span class="k">value</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">                <span class="k">field</span> <span class="p">=</span> <span class="k">value</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">
+</span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">    <span class="k">val</span> <span class="py">doc</span> <span class="p">=</span> <span class="n">Doctor</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">    <span class="n">doc</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="s2">&#34;Scott&#34;</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">doc</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>(NOTE: There are some much more &quot;Kotlin-y&quot; ways to write the body of that <code>set</code> function, but I wanted to keep it closer to Java until we get to those concepts and idioms)</p>
+<p>(ALSO NOTE: Before you comment on it, we would have been better off modifying the <code>get</code> instead of the <code>set</code>. I just wanted to demonstrate what the <code>set</code> would look like…)</p>
+<p>Here we're explicitly defining a <code>set</code> function for the <code>name</code> property. We look at the value passed in (the type of <code>value</code> is inferred to be <code>String</code>, the same as the type of the property), and if it doesn't call me a &quot;Dr.&quot; (which I am not; you can just call me &quot;Scott&quot;) it prepends &quot;Dr.&quot;&quot; when setting the value in the backing field.</p>
+<p>We're not defining the <code>get</code> function so we get its default behavior.</p>
+<p>Most of the time, you'll use properties without explicitly defining the <code>get</code> or <code>set</code> functions, but occasionally these are useful.</p>
+<p>The most-common instance of defining a <code>get</code> is for returning literals. This can be a little more efficient than initializing the property value and having to keep an extra backing field inside the class.</p>
+<h1 id="constructors">Constructors</h1>
+<p>NOTE: There is a <em>lot</em> of code in this section that can be significantly reduced; I'm starting the section conceptually similar to how you would write the equivalent Java code, followed by a section on simplifying it after we've finished the basic concepts.</p>
+<p>Now that we've defined the basics of properties (there will be much more cool stuff to come later...), we can talk about how Constructors work.</p>
+<p>Kotlin wants to be terse, which is good, because I don't like to type. (He says after typing in everything you've just read...) One of its best tricks is to combine the definition of a constructor directly in the definition of the class.</p>
+<p>Let's take a look at how we can pass in a name to a <code>Person</code> instance when creating it.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="k">var</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s2">&#34;No Name&#34;</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="k">init</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Let's look at this example line-by-line</p>
+<table>
+  <thead>
+      <tr>
+          <th>Line</th>
+          <th>What's Happening</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1</td>
+          <td>Define a new class named <code>Person</code> with a <em>primary constructor</em>.<br/>This primary constructor takes a <code>name</code> parameter, which is <code>final</code> (in Java terms) and is of type <code>String</code>.</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>Define a read/write property called <code>name</code> of type <code>String</code> initialized to <code>&quot;No name&quot;</code></td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>Define an initializer. This is a block of code that will run as the body of the primary constructor.</td>
+      </tr>
+      <tr>
+          <td>4</td>
+          <td>Assign the property <code>name</code> to the constructor parameter <code>name</code>. The <code>this.</code> qualifies it to distinguish the property from the parameter. Alternatively, we could have just used a unique name for the parameter and not needed the <code>this.</code> qualification.</td>
+      </tr>
+  </tbody>
+</table>
+<p>Kotlin separates the concept of primary and secondary constructors. The <em>Primary Constructor</em> is specified directly after the name of the class. <em>Secondary Constructors</em> are specified in the body of the class.</p>
+<h2 id="secondary-constructors">Secondary Constructors</h2>
+<p>You can define alternative constructors. For example, if we wanted to be able to skip passing in a value for the name we could define the following</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="k">var</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s2">&#34;No Name&#34;</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="k">constructor</span><span class="p">():</span> <span class="k">this</span><span class="p">(</span><span class="s2">&#34;No Name&#34;</span><span class="p">)</span>  <span class="c1">// SECONDARY CONSTRUCTOR
+</span></span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="c1"></span>    <span class="k">init</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    <span class="k">val</span> <span class="py">person</span> <span class="p">=</span> <span class="n">Person</span><span class="p">(</span><span class="s2">&#34;Scott&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">person</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="k">val</span> <span class="py">person2</span> <span class="p">=</span> <span class="n">Person</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">person2</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>On line 3 we're defining a <em>secondary constructor</em> that calls the primary constructor passing in &quot;No Name&quot;. You can have any number of secondary constructors.</p>
+<p>If you have defined a <em>primary constructor</em>, <strong>all</strong> <em>secondary constructors</em> must directly or indirectly call it by using the <code>constructor(...) : this(...)</code> syntax. For example:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="k">var</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s2">&#34;No Name&#34;</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="k">constructor</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="n">Int</span><span class="p">):</span> <span class="k">this</span><span class="p">(</span><span class="s2">&#34;No Name &#34;</span> <span class="p">+</span> <span class="n">n</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="k">constructor</span><span class="p">():</span> <span class="k">this</span><span class="p">(</span><span class="m">42</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="k">init</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">
+</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="k">val</span> <span class="py">person</span> <span class="p">=</span> <span class="n">Person</span><span class="p">(</span><span class="s2">&#34;Scott&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">person</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">    <span class="k">val</span> <span class="py">person2</span> <span class="p">=</span> <span class="n">Person</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">person2</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">    <span class="k">val</span> <span class="py">person3</span> <span class="p">=</span> <span class="n">Person</span><span class="p">(</span><span class="m">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">person3</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>This time, line 3 defines a secondary that takes an <code>Int</code> (similar to Java's primitive <code>int</code> behind the scenes, but treated like an object in code) and appends it after &quot;No Name&quot; before passing it to the primary constructor.</p>
+<p>Line 4 defines another secondary constructor that takes no parameters, and passes <code>42</code> to the other secondary constructor, which will then append it to &quot;No Name&quot; and pass it to the primary constructor.</p>
+<p>The <code>init</code> block then runs as the body of the primary constructor to set the <code>name</code> property.</p>
+<h2 id="calling-superclass-constructors">Calling Superclass Constructors</h2>
+<p>If you only need to call the primary constructor from a subclass, things are pretty simple:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="k">var</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s2">&#34;No Name&#34;</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="k">init</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="k">class</span> <span class="nc">Student</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="n">String</span><span class="p">):</span> <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">
+</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="k">val</span> <span class="py">student</span> <span class="p">=</span> <span class="n">Student</span><span class="p">(</span><span class="s2">&#34;Scott&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Note that <code>Person</code> is defined as <code>open</code> so we can create subclasses, and has a primary constructor. We call that primary constructor on line 8, right after the superclass name, passing in the value passed to the primary constructor of Student. Student can do more than that, of course. For example:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="k">var</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s2">&#34;No Name&#34;</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="k">init</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="k">class</span> <span class="nc">Student</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="n">name</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    <span class="n">gpa</span><span class="p">:</span> <span class="n">Float</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="p">):</span> <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="k">var</span> <span class="py">gpa</span><span class="p">:</span> <span class="n">Float</span> <span class="p">=</span> <span class="m">0F</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">    <span class="k">init</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="n">gpa</span> <span class="p">=</span> <span class="n">gpa</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">
+</span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">    <span class="k">val</span> <span class="py">student</span> <span class="p">=</span> <span class="n">Student</span><span class="p">(</span><span class="s2">&#34;Scott&#34;</span><span class="p">,</span> <span class="m">3.99F</span><span class="p">)</span> <span class="c1">// Sooooo close...
+</span></span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="c1"></span>    <span class="n">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">gpa</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Things get a little trickier if you want to call secondary constructors in a superclass. In that case, <em>you cannot define a primary constructor in the subclass</em>. If you define a primary constructor, <em>all</em> secondary constructors must call it, which doesn't give us the choice of which super constructor to call... Here's an example:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="k">constructor</span><span class="p">():</span> <span class="k">this</span><span class="p">(</span><span class="s2">&#34;No Name&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="k">var</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s2">&#34;No Name&#34;</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="k">init</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="k">class</span> <span class="nc">Student</span><span class="p">:</span> <span class="n">Person</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    <span class="k">constructor</span><span class="p">():</span> <span class="k">super</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="k">constructor</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="n">String</span><span class="p">):</span> <span class="k">super</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="k">var</span> <span class="py">gpa</span><span class="p">:</span> <span class="n">Float</span> <span class="p">=</span> <span class="m">0F</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">
+</span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">    <span class="k">val</span> <span class="py">student</span> <span class="p">=</span> <span class="n">Student</span><span class="p">(</span><span class="s2">&#34;Scott&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">    <span class="n">student</span><span class="p">.</span><span class="n">gpa</span> <span class="p">=</span> <span class="m">3.99F</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">    <span class="k">val</span> <span class="py">student2</span> <span class="p">=</span> <span class="n">Student</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">    <span class="n">student2</span><span class="p">.</span><span class="n">gpa</span> <span class="p">=</span> <span class="m">3.50F</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">gpa</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">student2</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">student2</span><span class="p">.</span><span class="n">gpa</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>So we can pick and choose which superclass constructors are called, but this makes it impossible to pass the gpa to a student constructor and assign it! Time to start looking at better ways to write the code we've been seeing...</p>
+<h1 id="simplifying-constructors">Simplifying Constructors</h1>
+<p>Let's introduce some new concepts that can make constructors much simpler...</p>
+<h2 id="default-parameter-values">Default Parameter Values</h2>
+<p>First, default values for parameters...</p>
+<p>Most of the time, we define alternate constructors just to provide default values or different subsets of parameters. Let's start by defining a primary constructor for Person that takes the <code>name</code> and gives it a default value.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="n">name</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s2">&#34;No Name&#34;</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="k">var</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s2">&#34;No Name&#34;</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="k">init</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">
+</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="k">val</span> <span class="py">person1</span> <span class="p">=</span> <span class="n">Person</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="k">val</span> <span class="py">person2</span> <span class="p">=</span> <span class="n">Person</span><span class="p">(</span><span class="s2">&#34;Scott&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">person1</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">person2</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Now we can create a <code>Person</code> with or without a name using the same constructor. Let's add the <code>Student</code> subclass:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="n">name</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s2">&#34;No Name&#34;</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="k">var</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s2">&#34;No Name&#34;</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="k">init</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">
+</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="k">class</span> <span class="nc">Student</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="n">gpa</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="n">name</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s2">&#34;No Name&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="p">):</span> <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">    <span class="k">var</span> <span class="py">gpa</span><span class="p">:</span> <span class="n">Float</span> <span class="p">=</span> <span class="m">0F</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">    <span class="k">init</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="n">gpa</span> <span class="p">=</span> <span class="n">gpa</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">
+</span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">    <span class="k">val</span> <span class="py">person1</span> <span class="p">=</span> <span class="n">Person</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl">    <span class="k">val</span> <span class="py">person2</span> <span class="p">=</span> <span class="n">Person</span><span class="p">(</span><span class="s2">&#34;Scott&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">person1</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">person2</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">25</span><span class="cl">
+</span></span><span class="line"><span class="ln">26</span><span class="cl">    <span class="k">val</span> <span class="py">student</span> <span class="p">=</span> <span class="n">Student</span><span class="p">(</span><span class="m">3.99F</span><span class="p">,</span> <span class="s2">&#34;Scott&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">27</span><span class="cl">    <span class="k">val</span> <span class="py">student2</span> <span class="p">=</span> <span class="n">Student</span><span class="p">(</span><span class="m">3.5F</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">28</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">29</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">gpa</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">30</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">student2</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">31</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">student2</span><span class="p">.</span><span class="n">gpa</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">32</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Now we're able to require the GPA in the <code>Student</code> constructor! Note that parameters with default values must appear <em>after</em> any parameters that <em>do not</em> have default values... Unless...</p>
+<h2 id="naming-parameters-in-a-call">Naming Parameters in a Call</h2>
+<p>Kotlin allows you to explicitly name your parameters when calling a function or constructor. For example:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="n">name</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s2">&#34;No Name&#34;</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="k">var</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s2">&#34;No Name&#34;</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="k">init</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">
+</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="k">class</span> <span class="nc">Student</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="n">gpa</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="n">name</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s2">&#34;No Name&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="p">):</span> <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">    <span class="k">var</span> <span class="py">gpa</span><span class="p">:</span> <span class="n">Float</span> <span class="p">=</span> <span class="m">0F</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">    <span class="k">init</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="n">gpa</span> <span class="p">=</span> <span class="n">gpa</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">
+</span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">    <span class="k">val</span> <span class="py">person1</span> <span class="p">=</span> <span class="n">Person</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl">    <span class="k">val</span> <span class="py">person2</span> <span class="p">=</span> <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="p">=</span><span class="s2">&#34;Scott&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">person1</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">person2</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">25</span><span class="cl">
+</span></span><span class="line"><span class="ln">26</span><span class="cl">    <span class="k">val</span> <span class="py">student</span> <span class="p">=</span> <span class="n">Student</span><span class="p">(</span><span class="m">3.99F</span><span class="p">,</span> <span class="n">name</span><span class="p">=</span><span class="s2">&#34;Scott&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">27</span><span class="cl">    <span class="k">val</span> <span class="py">student2</span> <span class="p">=</span> <span class="n">Student</span><span class="p">(</span><span class="m">3.5F</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">28</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">29</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">gpa</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">30</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">student2</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">31</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">student2</span><span class="p">.</span><span class="n">gpa</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">32</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>This also allows us to specify parameters out of order, or even define default-valued parameters before non-default-valued parameters:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="n">name</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s2">&#34;No Name&#34;</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="k">var</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s2">&#34;No Name&#34;</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="k">init</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">
+</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="c1">// NOTE PARAMETER ORDER CHANGE!!!
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="c1"></span><span class="k">class</span> <span class="nc">Student</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="n">name</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s2">&#34;No Name&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">    <span class="n">gpa</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="p">):</span> <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> 
+</span></span><span class="line"><span class="ln">15</span><span class="cl">    <span class="k">var</span> <span class="py">gpa</span><span class="p">:</span> <span class="n">Float</span> <span class="p">=</span> <span class="m">0F</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">    <span class="k">init</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="n">gpa</span> <span class="p">=</span> <span class="n">gpa</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">
+</span></span><span class="line"><span class="ln">21</span><span class="cl"><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl">    <span class="k">val</span> <span class="py">person1</span> <span class="p">=</span> <span class="n">Person</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl">    <span class="k">val</span> <span class="py">person2</span> <span class="p">=</span> <span class="n">Person</span><span class="p">(</span><span class="s2">&#34;Scott&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">person1</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">25</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">person2</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">26</span><span class="cl">
+</span></span><span class="line"><span class="ln">27</span><span class="cl">    <span class="k">val</span> <span class="py">student</span> <span class="p">=</span> <span class="n">Student</span><span class="p">(</span><span class="s2">&#34;Scott&#34;</span><span class="p">,</span> <span class="m">3.99F</span><span class="p">)</span> <span class="c1">// ordered
+</span></span></span><span class="line"><span class="ln">28</span><span class="cl"><span class="c1"></span>    <span class="k">val</span> <span class="py">student2</span> <span class="p">=</span> <span class="n">Student</span><span class="p">(</span><span class="n">gpa</span><span class="p">=</span><span class="m">3.5F</span><span class="p">)</span>      <span class="c1">// named
+</span></span></span><span class="line"><span class="ln">29</span><span class="cl"><span class="c1"></span>    <span class="k">val</span> <span class="py">student3</span> <span class="p">=</span> <span class="n">Student</span><span class="p">(</span><span class="n">gpa</span><span class="p">=</span><span class="m">3.99F</span><span class="p">,</span> <span class="n">name</span><span class="p">=</span><span class="s2">&#34;Scott&#34;</span><span class="p">)</span> <span class="c1">// different order!
+</span></span></span><span class="line"><span class="ln">30</span><span class="cl"><span class="c1"></span>    <span class="n">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">31</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">gpa</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">32</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">student2</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">33</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">student2</span><span class="p">.</span><span class="n">gpa</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">34</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">student3</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">35</span><span class="cl">    <span class="n">println</span><span class="p">(</span><span class="n">student3</span><span class="p">.</span><span class="n">gpa</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">36</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Let's look at a few lines in particular</p>
+<table>
+  <thead>
+      <tr>
+          <th>Line</th>
+          <th>What's Happening</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>14</td>
+          <td>we swapped the order of the parameters; the <code>name</code> with a default value, comes first. (NOTE: We can no longer call the constructor without a name specified <em>unless</em> we name the <code>gpa</code> parameter in the call!)</td>
+      </tr>
+      <tr>
+          <td>27</td>
+          <td>We create a <code>Student</code> instance with positional parameters as before, but the parameter order is reversed in the constructor definition (line 9).</td>
+      </tr>
+      <tr>
+          <td>28</td>
+          <td>We create a <code>Student</code> instance <em>without</em> a name passed in. Note that we <em>must</em> name the gpa parameter, as it follows a default-valued parameter in the constructor definition.</td>
+      </tr>
+      <tr>
+          <td>29</td>
+          <td>We create a <code>Student</code> instance with named parameters as before, gpa first. When you name parameters, you can pass them in any order!</td>
+      </tr>
+  </tbody>
+</table>
+<p>Note that I do not recommend putting parameters without default values after parameters with default values; this can cause confusion, but I wanted to point out the requirement for naming in this case.</p>
+<h2 id="initializers-can-access-primary-constructor-parameters">Initializers Can Access Primary Constructor Parameters</h2>
+<p>A really nice optimization is that property initializers have access to primary constructor parameters. This eliminates the need for many <code>init</code> blocks, as they often just initialize properties.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="n">name</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s2">&#34;No Name&#34;</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="k">var</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="n">name</span>  <span class="c1">// direct access to primary constructor parameter
+</span></span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="c1">// NOTE PARAMETER ORDER CHANGE!!!
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="c1"></span><span class="k">class</span> <span class="nc">Student</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">    <span class="n">name</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s2">&#34;No Name&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    <span class="n">gpa</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="p">):</span> <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="p">{</span> 
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="k">var</span> <span class="py">gpa</span><span class="p">:</span> <span class="n">Float</span> <span class="p">=</span> <span class="n">gpa</span>  <span class="c1">// direct access to primary constructor parameter
+</span></span></span><span class="line"><span class="ln">13</span><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><p>Wow! Code reduction! Love it!</p>
+<p>Looking at lines 4 and 12, we reference the primary constructor parameters in the property initializers. That removes the need for a dummy initializer value, and gets rid of the <code>init</code> blocks. Nifty! But the next step is the biggie... (Side note - my grandmother on my mom's side always hated the word &quot;biggie&quot; for some reason. Trips to Wendy's were always accompanied by her cringing...)</p>
+<h2 id="define-properties-in-the-primary-constructor">Define Properties in the Primary Constructor</h2>
+<p>Here's one of my favorite things about Kotlin. If your constructor is passing in values that are directly used to initialize properties, you can define the properties <em>directly</em> in the constructor. It's easiest to understand this in an example...</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">open</span> <span class="k">class</span> <span class="nc">Person</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="k">var</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s2">&#34;No Name&#34;</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">
+</span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="k">class</span> <span class="nc">Student</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl">    <span class="n">name</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s2">&#34;No Name&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl">    <span class="k">var</span> <span class="py">gpa</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="p">):</span> <span class="n">Person</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+</span></span></code></pre></div><p>Check out the terseness, but still <em>very</em> readable. (I'd say even more readable now, as you no longer have the duplication and required explicit association of the constructor parameters and properties.)</p>
+<p>By adding <code>var</code> or <code>val</code> in front of a primary constructor parameter, you</p>
+<ul>
+<li>Define a property for the class</li>
+<li>Initialize the property to the value passed in (or default value)</li>
+</ul>
+<p>Line 2 defines the <code>name</code> property of <code>Person</code> and line 8 defines the <code>gpa</code> property of <code>Student</code>.</p>
+<p>Because <code>Student</code> inherits <code>name</code> from <code>Person</code>, we don't add <code>var</code> or <code>val</code> to <code>name</code> in the <code>Student</code> constructor; it's just a normal constructor parameter that we pass on to the superclass.</p>
+<p>Because these are <code>var</code> properties, we can modify them the same way we did before. We could also make them <code>val</code> properties, in which case, once the value has been set at creation time, we cannot change it.</p>
+<p>You may have noticed that we no longer have a body (<code>{ ... }</code>) for these classes. If everything you need to define is in the constructors, you don't need a body and can remove the curly braces!</p>
+<h1 id="property-subsets-in-constructors">Property Subsets in Constructors</h1>
+<p>One last thought before I pass out or my fingers refuse to keep typing...</p>
+<p>Suppose we have several properties, some of which must be specified together or not at all.</p>
+<p>For example, let's define a <code>Section</code> class that defines text in a document that may have a header and footer:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">open</span> <span class="k">class</span> <span class="nc">Section</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="k">val</span> <span class="py">text</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> 
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="k">val</span> <span class="py">header</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s2">&#34;&#34;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="ln">4</span><span class="cl">    <span class="k">val</span> <span class="py">footer</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s2">&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="p">)</span>
+</span></span></code></pre></div><p>I'd like to impose a restriction such that if we specify a header or footer, the other must also be specified.</p>
+<p>We could add a check in the intializer...</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="k">open</span> <span class="k">class</span> <span class="nc">Section</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="k">val</span> <span class="py">text</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> 
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="k">val</span> <span class="py">header</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s2">&#34;&#34;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="k">val</span> <span class="py">footer</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s2">&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="k">init</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">header</span><span class="p">.</span><span class="n">isEmpty</span><span class="p">()</span> <span class="o">!=</span> <span class="n">footer</span><span class="p">.</span><span class="n">isEmpty</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">            <span class="k">throw</span> <span class="n">IllegalArgumentException</span><span class="p">(</span><span class="s2">&#34;Header and Footer must both be specified, or neither specified&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">
+</span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">    <span class="k">val</span> <span class="py">section</span> <span class="p">=</span> <span class="n">Section</span><span class="p">(</span><span class="s2">&#34;Some text&#34;</span><span class="p">,</span> <span class="s2">&#34;Section 1&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>If you run this, you'll get the IllegalArgumentException.</p>
+<p>But... I really prefer to catch things at compile-time when possible. So I'd really like to have constructors that either require <em>neither</em> header nor footer, <em>or both</em> header and footer. So we add a secondary constructor and tweak the primary:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="k">open</span> <span class="k">class</span> <span class="nc">Section</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="k">val</span> <span class="py">text</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> 
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="k">val</span> <span class="py">header</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> 
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="k">val</span> <span class="py">footer</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="k">constructor</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="n">String</span><span class="p">):</span> <span class="k">this</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">
+</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">    <span class="k">val</span> <span class="py">section1</span> <span class="p">=</span> <span class="n">Section</span><span class="p">(</span><span class="s2">&#34;Some text&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">    <span class="k">val</span> <span class="py">section2</span> <span class="p">=</span> <span class="n">Section</span><span class="p">(</span><span class="s2">&#34;Some text&#34;</span><span class="p">,</span> <span class="s2">&#34;Section 1&#34;</span><span class="p">,</span> <span class="s2">&#34;End of Section 1&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">    <span class="k">val</span> <span class="py">section3</span> <span class="p">=</span> <span class="n">Section</span><span class="p">(</span><span class="s2">&#34;Some text&#34;</span><span class="p">,</span> <span class="s2">&#34;Section 1&#34;</span><span class="p">)</span> <span class="c1">// will not compile
+</span></span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><p>Our primary constructor now requires both header and footer, and the secondary only requires the text, passing the default values to the primary. Perfect!</p>
+<p>But what if we have parameters that create more complex groupings?</p>
+<p>Let's create a very-poorly-designed class to represent a location (very-poorly-designed because we should use inheritance [and later, Kotlin's sealed classes!]). Start with</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="ln">1</span><span class="cl"><span class="k">open</span> <span class="k">class</span> <span class="nc">Location</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">    <span class="k">val</span> <span class="py">lat</span><span class="p">:</span> <span class="n">Double</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">    <span class="k">val</span> <span class="py">lon</span><span class="p">:</span> <span class="n">Double</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl">    <span class="k">val</span> <span class="py">street</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">    <span class="k">val</span> <span class="py">city</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl">    <span class="k">val</span> <span class="py">state</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl">    <span class="k">val</span> <span class="py">zip</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="p">)</span>
+</span></span></code></pre></div><p>Here we want to have <em>either</em> lat/lon, <em>or</em> street/city/state/zip. (Yes... this is crazy gross, but I'm tired and this demonstrates the concept and my brain won't think of another example right now so there).</p>
+<p>So we try</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="k">open</span> <span class="k">class</span> <span class="nc">Location</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="k">val</span> <span class="py">lat</span><span class="p">:</span> <span class="n">Double</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="k">val</span> <span class="py">lon</span><span class="p">:</span> <span class="n">Double</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="k">val</span> <span class="py">street</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="k">val</span> <span class="py">city</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="k">val</span> <span class="py">state</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="k">val</span> <span class="py">zip</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    <span class="k">constructor</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">        <span class="n">lat</span> <span class="p">:</span> <span class="n">Double</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">        <span class="n">lon</span> <span class="p">:</span> <span class="n">Double</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">    <span class="p">):</span> <span class="k">this</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">    
+</span></span><span class="line"><span class="ln">15</span><span class="cl">    <span class="k">constructor</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">        <span class="n">street</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">        <span class="n">city</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">        <span class="n">state</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">        <span class="n">zip</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">    <span class="p">):</span> <span class="k">this</span><span class="p">(</span><span class="m">0.0</span><span class="p">,</span> <span class="m">0.0</span><span class="p">,</span> <span class="n">street</span><span class="p">,</span> <span class="n">city</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">zip</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl">
+</span></span><span class="line"><span class="ln">23</span><span class="cl"><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl">    <span class="c1">// good
+</span></span></span><span class="line"><span class="ln">25</span><span class="cl"><span class="c1"></span>    <span class="k">val</span> <span class="py">location1</span> <span class="p">=</span> <span class="n">Location</span><span class="p">(</span><span class="m">39.149810</span><span class="p">,</span> <span class="p">-</span><span class="m">76.911257</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">26</span><span class="cl">        <span class="c1">// (sing it with me... &#34;My Harris Teeter&#34;)
+</span></span></span><span class="line"><span class="ln">27</span><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="ln">28</span><span class="cl">    <span class="c1">// good
+</span></span></span><span class="line"><span class="ln">29</span><span class="cl"><span class="c1"></span>    <span class="k">val</span> <span class="py">location2</span> <span class="p">=</span> <span class="n">Location</span><span class="p">(</span><span class="s2">&#34;123 Sesame St&#34;</span><span class="p">,</span> <span class="s2">&#34;New York&#34;</span><span class="p">,</span> <span class="s2">&#34;NY&#34;</span><span class="p">,</span> <span class="s2">&#34;10001&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">30</span><span class="cl">
+</span></span><span class="line"><span class="ln">31</span><span class="cl">    <span class="c1">// uh oh...
+</span></span></span><span class="line"><span class="ln">32</span><span class="cl"><span class="c1"></span>    <span class="k">val</span> <span class="py">location3</span> <span class="p">=</span> <span class="n">Location</span><span class="p">(</span><span class="m">39.149810</span><span class="p">,</span> <span class="p">-</span><span class="m">76.911257</span><span class="p">,</span> <span class="s2">&#34;123 Sesame St&#34;</span><span class="p">,</span> <span class="s2">&#34;New York&#34;</span><span class="p">,</span> <span class="s2">&#34;NY&#34;</span><span class="p">,</span> <span class="s2">&#34;10001&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">33</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>The primary constructor is <code>public</code> by default. In this case, we really don't want that. So let's make it private.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="k">open</span> <span class="k">class</span> <span class="nc">Location</span> <span class="k">private</span> <span class="k">constructor</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">    <span class="k">val</span> <span class="py">lat</span><span class="p">:</span> <span class="n">Double</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    <span class="k">val</span> <span class="py">lon</span><span class="p">:</span> <span class="n">Double</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">    <span class="k">val</span> <span class="py">street</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">    <span class="k">val</span> <span class="py">city</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="k">val</span> <span class="py">state</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">    <span class="k">val</span> <span class="py">zip</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">
+</span></span><span class="line"><span class="ln">10</span><span class="cl">    <span class="k">constructor</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">        <span class="n">lat</span><span class="p">:</span> <span class="n">Double</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">        <span class="n">lon</span><span class="p">:</span> <span class="n">Double</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">    <span class="p">):</span> <span class="k">this</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">    
+</span></span><span class="line"><span class="ln">15</span><span class="cl">    <span class="k">constructor</span><span class="p">(</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl">        <span class="n">street</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">        <span class="n">city</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">        <span class="n">state</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl">        <span class="n">zip</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">    <span class="p">):</span> <span class="k">this</span><span class="p">(</span><span class="m">0.0</span><span class="p">,</span> <span class="m">0.0</span><span class="p">,</span> <span class="n">street</span><span class="p">,</span> <span class="n">city</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">zip</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">22</span><span class="cl">
+</span></span><span class="line"><span class="ln">23</span><span class="cl"><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl">    <span class="c1">// good
+</span></span></span><span class="line"><span class="ln">25</span><span class="cl"><span class="c1"></span>    <span class="k">val</span> <span class="py">location1</span> <span class="p">=</span> <span class="n">Location</span><span class="p">(</span><span class="m">39.149810</span><span class="p">,</span> <span class="p">-</span><span class="m">76.911257</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">26</span><span class="cl">        <span class="c1">// (sing it with me... &#34;My Harris Teeter&#34;)
+</span></span></span><span class="line"><span class="ln">27</span><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="ln">28</span><span class="cl">    <span class="c1">// good
+</span></span></span><span class="line"><span class="ln">29</span><span class="cl"><span class="c1"></span>    <span class="k">val</span> <span class="py">location2</span> <span class="p">=</span> <span class="n">Location</span><span class="p">(</span><span class="s2">&#34;123 Sesame St&#34;</span><span class="p">,</span> <span class="s2">&#34;New York&#34;</span><span class="p">,</span> <span class="s2">&#34;NY&#34;</span><span class="p">,</span> <span class="s2">&#34;10001&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">30</span><span class="cl">
+</span></span><span class="line"><span class="ln">31</span><span class="cl">    <span class="c1">// uh oh...
+</span></span></span><span class="line"><span class="ln">32</span><span class="cl"><span class="c1"></span>    <span class="k">val</span> <span class="py">location3</span> <span class="p">=</span> <span class="n">Location</span><span class="p">(</span><span class="m">39.149810</span><span class="p">,</span> <span class="p">-</span><span class="m">76.911257</span><span class="p">,</span> <span class="s2">&#34;123 Sesame St&#34;</span><span class="p">,</span> <span class="s2">&#34;New York&#34;</span><span class="p">,</span> <span class="s2">&#34;NY&#34;</span><span class="p">,</span> <span class="s2">&#34;10001&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">33</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>If you run this you'll get an error compiling <code>location3</code>, as the constructor that takes all of those arguments is <code>private</code>.</p>
+<p>A little ugly, but poof! Private primary constructor. I haven't had to do this <em>too</em> often, but I have had to do it...</p>
+<p>Lots more to cover in later articles, but it's after midnight and I need some sleep... More soon!</p>
+    </div><div class="post_comments">
+  
+  
+  
+  
+</div>
+
+
+
+
+  </article>
+<aside class="sidebar">
+  <section class="sidebar_inner">
+    <br>
+    
+  
+  <div class="search">
+    <input type="search" class="search_field form_field" placeholder='Search...' id="find" autocomplete="off" data-scope='post'>
+    <label for="find" class="search_label"><svg class="icon">
+  <title>search</title>
+  <use xlink:href="#search"></use>
+</svg>
+
+    </label>
+    
+    <div class="search_results results"></div>
+  </div>
+
+        <div class="author_header">
+          <img src="https://javadude.com/images/yellow.jpeg" alt="Scott Stanchfield photo">
+          <h2>Scott Stanchfield</h2>
+        </div>
+      <div class="author_bio">
+        Developer. Teacher. Tinkerer.<br/>Android and Kotlin rock!<br/>
+      </div>
+      <a href='https://javadude.com/about/' class="button mt-1" role="button" title='Read More'>Read More</a>
+
+    
+    <h2 class="mt-4">Recent Posts</h2>
+    <ul class="flex-column">
+      <li>
+        <a href="https://javadude.com/post/20250323-android-docs/" class="nav-link" title="Official Android Docs (That I&#39;ve Written)">Official Android Docs (That I've Written)</a>
+      </li>
+      <li>
+        <a href="https://javadude.com/post/20250322-android-class/" class="nav-link" title="My Android class content for Johns Hopkins University">My Android class content for Johns Hopkins University</a>
+      </li>
+      <li>
+        <a href="https://javadude.com/post/20250322-dsl-class/" class="nav-link" title="My Domain-Specific Languages (DSL) class content for Johns Hopkins University">My Domain-Specific Languages (DSL) class content for Johns Hopkins University</a>
+      </li>
+      <li>
+        <a href="https://javadude.com/post/20250322-kotlin-class/" class="nav-link" title="My Kotlin class content">My Kotlin class content</a>
+      </li>
+      <li>
+        <a href="https://javadude.com/post/20190326-android-studio-deadlocks/" class="nav-link" title="Finding a deadlock in Android Studio">Finding a deadlock in Android Studio</a>
+      </li>
+      <li>
+        <a href="https://javadude.com/post/20190203-kotlin01/" class="nav-link" title="From Java to Kotlin - Episode 1 - You&#39;ve Gotta Start Somewhere...">From Java to Kotlin - Episode 1 - You've Gotta Start Somewhere...</a>
+      </li>
+      <li>
+        <a href="https://javadude.com/post/20170628-dsls-and-codegen/" class="nav-link" title="Domain-Specific Languages (DSLs) and Code Generation">Domain-Specific Languages (DSLs) and Code Generation</a>
+      </li>
+      <li>
+        <a href="https://javadude.com/post/20151119-patterns/" class="nav-link" title="Design Patterns Brown-Bag Lectures">Design Patterns Brown-Bag Lectures</a>
+      </li>
+    </ul>
+    <div>
+      <h2 class="mt-4 taxonomy" id="categories-section">Categories</h2>
+      <nav class="tags_nav">
+        <a href='https://javadude.com/categories/articles/' class="post_tag button button_translucent" title="articles">
+          ARTICLES
+          <span class="button_tally">13</span>
+        </a>
+        
+        <a href='https://javadude.com/categories/videos/' class="post_tag button button_translucent" title="videos">
+          VIDEOS
+          <span class="button_tally">12</span>
+        </a>
+        
+        <a href='https://javadude.com/categories/tools/' class="post_tag button button_translucent" title="tools">
+          TOOLS
+          <span class="button_tally">8</span>
+        </a>
+        
+        <a href='https://javadude.com/categories/class/' class="post_tag button button_translucent" title="class">
+          CLASS
+          <span class="button_tally">3</span>
+        </a>
+        
+        
+      </nav>
+    </div>
+    <div>
+      <h2 class="mt-4 taxonomy" id="tags-section">Tags</h2>
+      <nav class="tags_nav">
+        <a href='https://javadude.com/tags/java/' class="post_tag button button_translucent" title="java">
+          JAVA
+          <span class="button_tally">28</span>
+        </a>
+        
+        <a href='https://javadude.com/tags/language/' class="post_tag button button_translucent" title="language">
+          LANGUAGE
+          <span class="button_tally">12</span>
+        </a>
+        
+        <a href='https://javadude.com/tags/design/' class="post_tag button button_translucent" title="design">
+          DESIGN
+          <span class="button_tally">6</span>
+        </a>
+        
+        <a href='https://javadude.com/tags/kotlin/' class="post_tag button button_translucent" title="kotlin">
+          KOTLIN
+          <span class="button_tally">5</span>
+        </a>
+        
+        <a href='https://javadude.com/tags/parsing/' class="post_tag button button_translucent" title="parsing">
+          PARSING
+          <span class="button_tally">5</span>
+        </a>
+        
+        <a href='https://javadude.com/tags/android/' class="post_tag button button_translucent" title="android">
+          ANDROID
+          <span class="button_tally">4</span>
+        </a>
+        
+        <a href='https://javadude.com/tags/dsl/' class="post_tag button button_translucent" title="dsl">
+          DSL
+          <span class="button_tally">4</span>
+        </a>
+        
+        <a href='https://javadude.com/tags/antlr/' class="post_tag button button_translucent" title="antlr">
+          ANTLR
+          <span class="button_tally">3</span>
+        </a>
+        
+        <a href='https://javadude.com/tags/class/' class="post_tag button button_translucent" title="class">
+          CLASS
+          <span class="button_tally">3</span>
+        </a>
+        
+        <a href='https://javadude.com/tags/eclipse/' class="post_tag button button_translucent" title="eclipse">
+          ECLIPSE
+          <span class="button_tally">3</span>
+        </a>
+        
+        <a href='https://javadude.com/tags/beans/' class="post_tag button button_translucent" title="beans">
+          BEANS
+          <span class="button_tally">2</span>
+        </a>
+        
+        <a href='https://javadude.com/tags/patterns/' class="post_tag button button_translucent" title="patterns">
+          PATTERNS
+          <span class="button_tally">2</span>
+        </a>
+        
+        <a href='https://javadude.com/tags/xtext/' class="post_tag button button_translucent" title="xtext">
+          XTEXT
+          <span class="button_tally">2</span>
+        </a>
+        
+        <a href='https://javadude.com/tags/android-studio/' class="post_tag button button_translucent" title="android studio">
+          ANDROID STUDIO
+          <span class="button_tally">1</span>
+        </a>
+        
+        <a href='https://javadude.com/tags/code-generation/' class="post_tag button button_translucent" title="code generation">
+          CODE GENERATION
+          <span class="button_tally">1</span>
+        </a>
+        
+        <a href='https://javadude.com/tags/gradle/' class="post_tag button button_translucent" title="gradle">
+          GRADLE
+          <span class="button_tally">1</span>
+        </a>
+        
+        <a href='https://javadude.com/tags/index/' class="post_tag button button_translucent" title="index">
+          INDEX
+          <span class="button_tally">1</span>
+        </a>
+        
+        
+      </nav>
+    </div>
+  </section>
+</aside>
+
+  
+</div>
+    </main><svg width="0" height="0" class="hidden">
+  <symbol viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" id="facebook">
+    <path d="M437 0H75C33.648 0 0 33.648 0 75v362c0 41.352 33.648 75 75 75h151V331h-60v-90h60v-61c0-49.629 40.371-90 90-90h91v90h-91v61h91l-15 90h-76v181h121c41.352 0 75-33.648 75-75V75c0-41.352-33.648-75-75-75zm0 0"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18.001 18.001" id="twitter">
+    <path d="M15.891 4.013c.808-.496 1.343-1.173 1.605-2.034a8.68 8.68 0 0 1-2.351.861c-.703-.756-1.593-1.14-2.66-1.14-1.043 0-1.924.366-2.643 1.078a3.56 3.56 0 0 0-1.076 2.605c0 .309.039.585.117.819-3.076-.105-5.622-1.381-7.628-3.837-.34.601-.51 1.213-.51 1.846 0 1.301.549 2.332 1.645 3.089-.625-.053-1.176-.211-1.645-.47 0 .929.273 1.705.82 2.388a3.623 3.623 0 0 0 2.115 1.291c-.312.08-.641.118-.979.118-.312 0-.533-.026-.664-.083.23.757.664 1.371 1.291 1.841a3.652 3.652 0 0 0 2.152.743C4.148 14.173 2.625 14.69.902 14.69c-.422 0-.721-.006-.902-.038 1.697 1.102 3.586 1.649 5.676 1.649 2.139 0 4.029-.542 5.674-1.626 1.645-1.078 2.859-2.408 3.639-3.974a10.77 10.77 0 0 0 1.172-4.892v-.468a7.788 7.788 0 0 0 1.84-1.921 8.142 8.142 0 0 1-2.11.593z"
+      ></path>
+  </symbol>
+  <symbol aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" id="mail">
+    <path  d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" id="calendar">
+    <path d="M452 40h-24V0h-40v40H124V0H84v40H60C26.916 40 0 66.916 0 100v352c0 33.084 26.916 60 60 60h392c33.084 0 60-26.916 60-60V100c0-33.084-26.916-60-60-60zm20 412c0 11.028-8.972 20-20 20H60c-11.028 0-20-8.972-20-20V188h432v264zm0-304H40v-48c0-11.028 8.972-20 20-20h24v40h40V80h264v40h40V80h24c11.028 0 20 8.972 20 20v48z"></path>
+    <path d="M76 230h40v40H76zm80 0h40v40h-40zm80 0h40v40h-40zm80 0h40v40h-40zm80 0h40v40h-40zM76 310h40v40H76zm80 0h40v40h-40zm80 0h40v40h-40zm80 0h40v40h-40zM76 390h40v40H76zm80 0h40v40h-40zm80 0h40v40h-40zm80 0h40v40h-40zm80-80h40v40h-40z"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" id="github">
+    <path d="M255.968 5.329C114.624 5.329 0 120.401 0 262.353c0 113.536 73.344 209.856 175.104 243.872 12.8 2.368 17.472-5.568 17.472-12.384 0-6.112-.224-22.272-.352-43.712-71.2 15.52-86.24-34.464-86.24-34.464-11.616-29.696-28.416-37.6-28.416-37.6-23.264-15.936 1.728-15.616 1.728-15.616 25.696 1.824 39.2 26.496 39.2 26.496 22.848 39.264 59.936 27.936 74.528 21.344 2.304-16.608 8.928-27.936 16.256-34.368-56.832-6.496-116.608-28.544-116.608-127.008 0-28.064 9.984-51.008 26.368-68.992-2.656-6.496-11.424-32.64 2.496-68 0 0 21.504-6.912 70.4 26.336 20.416-5.696 42.304-8.544 64.096-8.64 21.728.128 43.648 2.944 64.096 8.672 48.864-33.248 70.336-26.336 70.336-26.336 13.952 35.392 5.184 61.504 2.56 68 16.416 17.984 26.304 40.928 26.304 68.992 0 98.72-59.84 120.448-116.864 126.816 9.184 7.936 17.376 23.616 17.376 47.584 0 34.368-.32 62.08-.32 70.496 0 6.88 4.608 14.88 17.6 12.352C438.72 472.145 512 375.857 512 262.353 512 120.401 397.376 5.329 255.968 5.329z"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 212 212" id="gitlab">
+    <path d="M12.3 74.7h54L43.3 3c-1-3.6-6.4-3.6-7.6 0L12.3 74.8z" />
+    <path d="M12.3 74.7L.5 111c-1 3.2 0 6.8 3 8.8l101.6 74-92.5-119z"/>
+    <path d="M105 193.7l-38.6-119h-54l92.7 119z"/>
+    <path d="M105 193.7l38.7-119H66.4l38.7 119z"/>
+    <path d="M105 193.7l38.7-119H198l-93 119z"/>
+    <path d="M198 74.7l11.6 36.2c1 3 0 6.6-3 8.6l-101.5 74 93-119z"/>
+    <path d="M198 74.7h-54.3L167 3c1.2-3.6 6.4-3.6 7.6 0L198 74.8z"/>
+  </symbol>
+  <symbol viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="rss">
+    <circle cx="3.429" cy="20.571" r="3.429"></circle>
+    <path d="M11.429 24h4.57C15.999 15.179 8.821 8.001 0 8v4.572c6.302.001 11.429 5.126 11.429 11.428z"></path>
+    <path d="M24 24C24 10.766 13.234 0 0 0v4.571c10.714 0 19.43 8.714 19.43 19.429z"></path>
+  </symbol>
+  <symbol viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" id="linkedin">
+    <path d="M437 0H75C33.648 0 0 33.648 0 75v362c0 41.352 33.648 75 75 75h362c41.352 0 75-33.648 75-75V75c0-41.352-33.648-75-75-75zM181 406h-60V196h60zm0-240h-60v-60h60zm210 240h-60V286c0-16.54-13.46-30-30-30s-30 13.46-30 30v120h-60V196h60v11.309C286.719 202.422 296.93 196 316 196c40.691.043 75 36.547 75 79.688zm0 0"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 612 612" id="to-top">
+    <path d="M604.501 440.509L325.398 134.956c-5.331-5.357-12.423-7.627-19.386-7.27-6.989-.357-14.056 1.913-19.387 7.27L7.499 440.509c-9.999 10.024-9.999 26.298 0 36.323s26.223 10.024 36.222 0l262.293-287.164L568.28 476.832c9.999 10.024 26.222 10.024 36.221 0 9.999-10.023 9.999-26.298 0-36.323z"></path>
+  </symbol>
+  <symbol viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" id="carly">
+    <path d="M504.971 239.029L448 182.059V84c0-46.317-37.682-84-84-84h-44c-13.255 0-24 10.745-24 24s10.745 24 24 24h44c19.851 0 36 16.149 36 36v108c0 6.365 2.529 12.47 7.029 16.971L454.059 256l-47.029 47.029A24.002 24.002 0 0 0 400 320v108c0 19.851-16.149 36-36 36h-44c-13.255 0-24 10.745-24 24s10.745 24 24 24h44c46.318 0 84-37.683 84-84v-98.059l56.971-56.971c9.372-9.372 9.372-24.568 0-33.941zM112 192V84c0-19.851 16.149-36 36-36h44c13.255 0 24-10.745 24-24S205.255 0 192 0h-44c-46.318 0-84 37.683-84 84v98.059l-56.971 56.97c-9.373 9.373-9.373 24.568 0 33.941L64 329.941V428c0 46.317 37.682 84 84 84h44c13.255 0 24-10.745 24-24s-10.745-24-24-24h-44c-19.851 0-36-16.149-36-36V320c0-6.365-2.529-12.47-7.029-16.971L57.941 256l47.029-47.029A24.002 24.002 0 0 0 112 192z"></path>
+  </symbol>
+  <symbol viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="copy">
+    <path d="M23 2.75A2.75 2.75 0 0 0 20.25 0H8.75A2.75 2.75 0 0 0 6 2.75v13.5A2.75 2.75 0 0 0 8.75 19h11.5A2.75 2.75 0 0 0 23 16.25zM18.25 14.5h-7.5a.75.75 0 0 1 0-1.5h7.5a.75.75 0 0 1 0 1.5zm0-3h-7.5a.75.75 0 0 1 0-1.5h7.5a.75.75 0 0 1 0 1.5zm0-3h-7.5a.75.75 0 0 1 0-1.5h7.5a.75.75 0 0 1 0 1.5z"></path>
+    <path d="M8.75 20.5a4.255 4.255 0 0 1-4.25-4.25V2.75c0-.086.02-.166.025-.25H3.75A2.752 2.752 0 0 0 1 5.25v16A2.752 2.752 0 0 0 3.75 24h12a2.752 2.752 0 0 0 2.75-2.75v-.75z"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512.001 512.001" id="closeme">
+    <path d="M284.286 256.002L506.143 34.144c7.811-7.811 7.811-20.475 0-28.285-7.811-7.81-20.475-7.811-28.285 0L256 227.717 34.143 5.859c-7.811-7.811-20.475-7.811-28.285 0-7.81 7.811-7.811 20.475 0 28.285l221.857 221.857L5.858 477.859c-7.811 7.811-7.811 20.475 0 28.285a19.938 19.938 0 0 0 14.143 5.857 19.94 19.94 0 0 0 14.143-5.857L256 284.287l221.857 221.857c3.905 3.905 9.024 5.857 14.143 5.857s10.237-1.952 14.143-5.857c7.811-7.811 7.811-20.475 0-28.285L284.286 256.002z"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" id="open-menu">
+    <path d="M492 236H20c-11.046 0-20 8.954-20 20s8.954 20 20 20h472c11.046 0 20-8.954 20-20s-8.954-20-20-20zm0-160H20C8.954 76 0 84.954 0 96s8.954 20 20 20h472c11.046 0 20-8.954 20-20s-8.954-20-20-20zm0 320H20c-11.046 0-20 8.954-20 20s8.954 20 20 20h472c11.046 0 20-8.954 20-20s-8.954-20-20-20z"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="instagram">
+    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id=youtube>
+    <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="stackoverflow">
+    <path d="M21 27v-8h3v11H0V19h3v8h18z"></path><path d="M17.1.2L15 1.8l7.9 10.6 2.1-1.6L17.1.2zm3.7 14.7L10.6 6.4l1.7-2 10.2 8.5-1.7 2zM7.2 12.3l12 5.6 1.1-2.4-12-5.6-1.1 2.4zm-1.8 6.8l13.56 1.96.17-2.38-13.26-2.55-.47 2.97zM19 25H5v-3h14v3z"></path>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="xing">
+    <path d="M18.188 0c-.517 0-.741.325-.927.66 0 0-7.455 13.224-7.702 13.657.015.024 4.919 9.023 4.919 9.023.17.308.436.66.967.66h3.454c.211 0 .375-.078.463-.22.089-.151.089-.346-.009-.536l-4.879-8.916c-.004-.006-.004-.016 0-.022L22.139.756c.095-.191.097-.387.006-.535C22.056.078 21.894 0 21.686 0h-3.498zM3.648 4.74c-.211 0-.385.074-.473.216-.09.149-.078.339.02.531l2.34 4.05c.004.01.004.016 0 .021L1.86 16.051c-.099.188-.093.381 0 .529.085.142.239.234.45.234h3.461c.518 0 .766-.348.945-.667l3.734-6.609-2.378-4.155c-.172-.315-.434-.659-.962-.659H3.648v.016z"/>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 71 55" id="discord">
+    <path d="M60.1045 4.8978C55.5792 2.8214 50.7265 1.2916 45.6527 0.41542C45.5603 0.39851 45.468 0.440769 45.4204 0.525289C44.7963 1.6353 44.105 3.0834 43.6209 4.2216C38.1637 3.4046 32.7345 3.4046 27.3892 4.2216C26.905 3.0581 26.1886 1.6353 25.5617 0.525289C25.5141 0.443589 25.4218 0.40133 25.3294 0.41542C20.2584 1.2888 15.4057 2.8186 10.8776 4.8978C10.8384 4.9147 10.8048 4.9429 10.7825 4.9795C1.57795 18.7309 -0.943561 32.1443 0.293408 45.3914C0.299005 45.4562 0.335386 45.5182 0.385761 45.5576C6.45866 50.0174 12.3413 52.7249 18.1147 54.5195C18.2071 54.5477 18.305 54.5139 18.3638 54.4378C19.7295 52.5728 20.9469 50.6063 21.9907 48.5383C22.0523 48.4172 21.9935 48.2735 21.8676 48.2256C19.9366 47.4931 18.0979 46.6 16.3292 45.5858C16.1893 45.5041 16.1781 45.304 16.3068 45.2082C16.679 44.9293 17.0513 44.6391 17.4067 44.3461C17.471 44.2926 17.5606 44.2813 17.6362 44.3151C29.2558 49.6202 41.8354 49.6202 53.3179 44.3151C53.3935 44.2785 53.4831 44.2898 53.5502 44.3433C53.9057 44.6363 54.2779 44.9293 54.6529 45.2082C54.7816 45.304 54.7732 45.5041 54.6333 45.5858C52.8646 46.6197 51.0259 47.4931 49.0921 48.2228C48.9662 48.2707 48.9102 48.4172 48.9718 48.5383C50.038 50.6034 51.2554 52.5699 52.5959 54.435C52.6519 54.5139 52.7526 54.5477 52.845 54.5195C58.6464 52.7249 64.529 50.0174 70.6019 45.5576C70.6551 45.5182 70.6887 45.459 70.6943 45.3942C72.1747 30.0791 68.2147 16.7757 60.1968 4.9823C60.1772 4.9429 60.1437 4.9147 60.1045 4.8978ZM23.7259 37.3253C20.2276 37.3253 17.3451 34.1136 17.3451 30.1693C17.3451 26.225 20.1717 23.0133 23.7259 23.0133C27.308 23.0133 30.1626 26.2532 30.1066 30.1693C30.1066 34.1136 27.28 37.3253 23.7259 37.3253ZM47.3178 37.3253C43.8196 37.3253 40.9371 34.1136 40.9371 30.1693C40.9371 26.225 43.7636 23.0133 47.3178 23.0133C50.9 23.0133 53.7545 26.2532 53.6986 30.1693C53.6986 34.1136 50.9 37.3253 47.3178 37.3253Z"/>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 18" id="mastodon">
+    <path
+    fill="#ffffff"
+    d="m 15.054695,9.8859583 c -0.22611,1.1632697 -2.02517,2.4363497 -4.09138,2.6830797 -1.0774504,0.12856 -2.1382704,0.24673 -3.2694704,0.19484 -1.84996,-0.0848 -3.30971,-0.44157 -3.30971,-0.44157 0,0.1801 0.0111,0.35157 0.0333,0.51194 0.24051,1.82571 1.81034,1.93508 3.29737,1.98607 1.50088,0.0514 2.8373104,-0.37004 2.8373104,-0.37004 l 0.0617,1.35686 c 0,0 -1.0498104,0.56374 -2.9199404,0.66742 -1.03124,0.0567 -2.3117,-0.0259 -3.80308,-0.42069 -3.23454998,-0.85613 -3.79081998,-4.304 -3.87592998,-7.8024197 -0.026,-1.03871 -0.01,-2.01815 -0.01,-2.83732 0,-3.57732 2.34385998,-4.62587996 2.34385998,-4.62587996 1.18184,-0.54277 3.20976,-0.77101 5.318,-0.7882499985409 h 0.0518 C 9.8267646,0.01719834 11.856025,0.24547834 13.037775,0.78824834 c 0,0 2.34377,1.04855996 2.34377,4.62587996 0,0 0.0294,2.63937 -0.32687,4.47183"/>
+ <path
+    fill="#000000"
+    d="m 12.616925,5.6916583 v 4.3315297 h -1.71607 V 5.8189683 c 0,-0.88624 -0.37289,-1.33607 -1.1187604,-1.33607 -0.82467,0 -1.23799,0.53361 -1.23799,1.58875 v 2.30122 h -1.70594 v -2.30122 c 0,-1.05514 -0.4134,-1.58875 -1.23808,-1.58875 -0.74587,0 -1.11876,0.44983 -1.11876,1.33607 v 4.2042197 h -1.71607 V 5.6916583 c 0,-0.88527 0.22541,-1.58876 0.67817,-2.10922 0.46689,-0.52047 1.07833,-0.78727 1.83735,-0.78727 0.87816,0 1.54317,0.33752 1.98288,1.01267 l 0.42744,0.71655 0.42753,-0.71655 c 0.43961,-0.67515 1.10463,-1.01267 1.9828704,-1.01267 0.75893,0 1.37037,0.2668 1.83735,0.78727 0.45268,0.52046 0.67808,1.22395 0.67808,2.10922"/>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 530" id="bluesky" >
+    <path d="m135.72 44.03c66.496 49.921 138.02 151.14 164.28 205.46 26.262-54.316 97.782-155.54 164.28-205.46 47.98-36.021 125.72-63.892 125.72 24.795 0 17.712-10.155 148.79-16.111 170.07-20.703 73.984-96.144 92.854-163.25 81.433 117.3 19.964 147.14 86.092 82.697 152.22-122.39 125.59-175.91-31.511-189.63-71.766-2.514-7.3797-3.6904-10.832-3.7077-7.8964-0.0174-2.9357-1.1937 0.51669-3.7077 7.8964-13.714 40.255-67.233 197.36-189.63 71.766-64.444-66.128-34.605-132.26 82.697-152.22-67.108 11.421-142.55-7.4491-163.25-81.433-5.9562-21.282-16.111-152.36-16.111-170.07 0-88.687 77.742-60.816 125.72-24.795z"/>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" id="ko-fi">
+    <path fill="#ffffff" d="M4.5,9.8527H32.7947a0,0,0,0,1,0,0v19.225a9.07,9.07,0,0,1-9.07,9.07H13.57a9.07,9.07,0,0,1-9.07-9.07V9.8527A0,0,0,0,1,4.5,9.8527Z"/>
+    <path fill="#000000" d="M12.197,25.9493l6.45,6.45,6.45-6.45a8.2,8.2,0,0,0,2.4016-5.798h0a4.5082,4.5082,0,0,0-4.212-4.5459,4.4262,4.4262,0,0,0-4.64,4.4209,4.4261,4.4261,0,0,0-4.64-4.4209,4.5082,4.5082,0,0,0-4.212,4.5459h0A8.2,8.2,0,0,0,12.197,25.9493Z"/>
+    <path fill="#ffffff" d="M32.7947,9.8527H35.73a7.77,7.77,0,0,1,0,15.5394H32.7947"/>
+  </svg>
+  </symbol>
+</svg>
+
+<footer class="footer">
+  <div class="footer_inner wrap pale">
+    <img src='https://javadude.com/icons/apple-touch-icon.png' class="icon icon_2 transparent" alt="Scott Stanchfield">
+    <p>Copyright&nbsp;1998-&nbsp;<span class="year"></span>&nbsp;SCOTT STANCHFIELD. All Rights Reserved</p><a class="to_top" href="#documentTop">
+  <svg class="icon">
+  <title>to-top</title>
+  <use xlink:href="#to-top"></use>
+</svg>
+
+</a>
+
+  </div>
+</footer>
+
+<script type="text/javascript" src="https://javadude.com/en/js/bundle.4be013d7cecbbcbad601bb190bdb5c84718e1b980d515e1b9882e80dc4395cf80a00093639868664c095e31aff8582cb2edb56166befbc98d614c728826b737d.js" integrity="sha512-S&#43;AT187LvLrWAbsZC9tchHGOG5gNUV4bmILoDcQ5XPgKAAk2OYaGZMCV4xr/hYLLLttWFmvvvJjWFMcogmtzfQ==" crossorigin="anonymous"></script>
+
+  <script src="https://javadude.com/js/search.min.9d5e38dcb73906849f3712f1758a587e9829a568aa586eae69d7684f6829a46c0084632567291f21ea3ee4a6b14ff0d9e1e6b2a4df73f2e419f4b5e0c30a4f04.js"></script>
+
+  </body>
+</html>

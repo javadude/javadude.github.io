@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Android on javadude.com</title>
+    <link>https://javadude.com/tags/android/</link>
+    <description>Recent content in Android on javadude.com</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>Scott Stanchfield</copyright>
+    <lastBuildDate>Sun, 23 Mar 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://javadude.com/tags/android/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Official Android Docs (That I&#39;ve Written)</title>
+      <link>https://javadude.com/post/20250323-android-docs/</link>
+      <pubDate>Sun, 23 Mar 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20250323-android-docs/</guid>
+      <description>
+        
+          
+            &lt;p&gt;A collection of official Android documentation that I wrote while employed at Google,
+with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
+&lt;p&gt;Includes build and project structure overviews and details on dependency resolution and maintenance.&lt;/p&gt;
+&lt;p&gt;Read on for the links! Good stuff!&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>My Android class content for Johns Hopkins University</title>
+      <link>https://javadude.com/post/20250322-android-class/</link>
+      <pubDate>Sat, 22 Mar 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20250322-android-class/</guid>
+      <description>
+        
+          
+            &lt;p&gt;I&#39;ve been teaching an Android class for Johns Hopkins University since 2012. It&#39;s gone through many iterations over time, from development environments to languages to UI frameworks.&lt;/p&gt;
+&lt;p&gt;Most days I wish I just taught math. Math doesn&#39;t change like this every year.&lt;/p&gt;
+&lt;p&gt;Read on for the current and legacy content links.&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Finding a deadlock in Android Studio</title>
+      <link>https://javadude.com/post/20190326-android-studio-deadlocks/</link>
+      <pubDate>Tue, 26 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20190326-android-studio-deadlocks/</guid>
+      <description>
+        
+          
+            &lt;p&gt;Android Studio makes it crazy easy to locate deadlocks! I&#39;ll explain how in this video.&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Android Intents and Fragments</title>
+      <link>https://javadude.com/post/20141006-intents-and-fragments/</link>
+      <pubDate>Mon, 06 Oct 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20141006-intents-and-fragments/</guid>
+      <description>
+        
+          
+            &lt;p&gt;A tech talk I gave for Johns Hopkins University on Oct 6, 2014 on Android Intents and Fragments.&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>

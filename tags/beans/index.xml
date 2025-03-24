@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Beans on javadude.com</title>
+    <link>https://javadude.com/tags/beans/</link>
+    <description>Recent content in Beans on javadude.com</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>Scott Stanchfield</copyright>
+    <lastBuildDate>Sat, 04 Mar 2000 00:00:00 +0000</lastBuildDate><atom:link href="https://javadude.com/tags/beans/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Creating JavaBean Property Editors</title>
+      <link>https://javadude.com/post/20000304-property-editors/</link>
+      <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20000304-property-editors/</guid>
+      <description>
+        
+          
+            &lt;p&gt;Property editors are a way to make your bean more user-friendly.  Bean builder tools can determine quite a lot about your bean just by looking at it and its corresponding BeanInfo class, but they usually have only very simple methods of editing the properties in the bean.&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>The JavaBean Component Model</title>
+      <link>https://javadude.com/post/20000304-javabeans/</link>
+      <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20000304-javabeans/</guid>
+      <description>
+        
+          
+            &lt;p&gt;The basics of the JavaBean Component Model&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>

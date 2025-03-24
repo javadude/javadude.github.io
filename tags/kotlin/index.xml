@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kotlin on javadude.com</title>
+    <link>https://javadude.com/tags/kotlin/</link>
+    <description>Recent content in Kotlin on javadude.com</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>Scott Stanchfield</copyright>
+    <lastBuildDate>Sun, 23 Mar 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://javadude.com/tags/kotlin/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Official Android Docs (That I&#39;ve Written)</title>
+      <link>https://javadude.com/post/20250323-android-docs/</link>
+      <pubDate>Sun, 23 Mar 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20250323-android-docs/</guid>
+      <description>
+        
+          
+            &lt;p&gt;A collection of official Android documentation that I wrote while employed at Google,
+with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
+&lt;p&gt;Includes build and project structure overviews and details on dependency resolution and maintenance.&lt;/p&gt;
+&lt;p&gt;Read on for the links! Good stuff!&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>My Android class content for Johns Hopkins University</title>
+      <link>https://javadude.com/post/20250322-android-class/</link>
+      <pubDate>Sat, 22 Mar 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20250322-android-class/</guid>
+      <description>
+        
+          
+            &lt;p&gt;I&#39;ve been teaching an Android class for Johns Hopkins University since 2012. It&#39;s gone through many iterations over time, from development environments to languages to UI frameworks.&lt;/p&gt;
+&lt;p&gt;Most days I wish I just taught math. Math doesn&#39;t change like this every year.&lt;/p&gt;
+&lt;p&gt;Read on for the current and legacy content links.&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>My Domain-Specific Languages (DSL) class content for Johns Hopkins University</title>
+      <link>https://javadude.com/post/20250322-dsl-class/</link>
+      <pubDate>Sat, 22 Mar 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20250322-dsl-class/</guid>
+      <description>
+        
+          
+            &lt;p&gt;I taught a single-term Domain-Specific Languages class for Johns Hopkins University in 2018.&lt;/p&gt;
+&lt;p&gt;Read on for the video playlist link!&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>My Kotlin class content</title>
+      <link>https://javadude.com/post/20250322-kotlin-class/</link>
+      <pubDate>Sat, 22 Mar 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20250322-kotlin-class/</guid>
+      <description>
+        
+          
+            &lt;p&gt;I&#39;ve been teaching a live Kotlin class for Johns Hopkins University since 2020.&lt;/p&gt;
+&lt;p&gt;Read on for the latest video playlist link!&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>From Java to Kotlin - Episode 1 - You&#39;ve Gotta Start Somewhere...</title>
+      <link>https://javadude.com/post/20190203-kotlin01/</link>
+      <pubDate>Sun, 03 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://javadude.com/post/20190203-kotlin01/</guid>
+      <description>
+        
+          
+            &lt;p&gt;Let&#39;s learn Kotlin from a Java point of view. We&#39;ll start by looking at some basics of Variables, Values, Classes, Properties and Constructors.&lt;/p&gt;
+          
+          
+        
+      </description>
+    </item>
+    
+  </channel>
+</rss>
