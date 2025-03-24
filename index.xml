@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>javadude.com</title>
-    <link>//localhost:1313/</link>
+    <link>https://www.javadude.com/</link>
     <description>Recent content on javadude.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Scott Stanchfield</copyright>
-    <lastBuildDate>Sun, 23 Mar 2025 00:00:00 +0000</lastBuildDate><atom:link href="//localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 23 Mar 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://www.javadude.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Official Android Docs (That I&#39;ve Written)</title>
-      <link>//localhost:1313/post/20250323-android-docs/</link>
+      <link>https://www.javadude.com/post/20250323-android-docs/</link>
       <pubDate>Sun, 23 Mar 2025 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/20250323-android-docs/</guid>
+      <guid>https://www.javadude.com/post/20250323-android-docs/</guid>
       <description>
         
           
@@ -29,10 +29,10 @@ with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
     
     <item>
       <title>My Android class content for Johns Hopkins University</title>
-      <link>//localhost:1313/post/20250322-android-class/</link>
+      <link>https://www.javadude.com/post/20250322-android-class/</link>
       <pubDate>Sat, 22 Mar 2025 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/20250322-android-class/</guid>
+      <guid>https://www.javadude.com/post/20250322-android-class/</guid>
       <description>
         
           
@@ -47,10 +47,10 @@ with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
     
     <item>
       <title>My Domain-Specific Languages (DSL) class content for Johns Hopkins University</title>
-      <link>//localhost:1313/post/20250322-dsl-class/</link>
+      <link>https://www.javadude.com/post/20250322-dsl-class/</link>
       <pubDate>Sat, 22 Mar 2025 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/20250322-dsl-class/</guid>
+      <guid>https://www.javadude.com/post/20250322-dsl-class/</guid>
       <description>
         
           
@@ -64,10 +64,10 @@ with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
     
     <item>
       <title>My Kotlin class content</title>
-      <link>//localhost:1313/post/20250322-kotlin-class/</link>
+      <link>https://www.javadude.com/post/20250322-kotlin-class/</link>
       <pubDate>Sat, 22 Mar 2025 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/20250322-kotlin-class/</guid>
+      <guid>https://www.javadude.com/post/20250322-kotlin-class/</guid>
       <description>
         
           
@@ -81,10 +81,10 @@ with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
     
     <item>
       <title>Finding a deadlock in Android Studio</title>
-      <link>//localhost:1313/post/20190326-android-studio-deadlocks/</link>
+      <link>https://www.javadude.com/post/20190326-android-studio-deadlocks/</link>
       <pubDate>Tue, 26 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/20190326-android-studio-deadlocks/</guid>
+      <guid>https://www.javadude.com/post/20190326-android-studio-deadlocks/</guid>
       <description>
         
           
@@ -97,10 +97,10 @@ with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
     
     <item>
       <title>From Java to Kotlin - Episode 1 - You&#39;ve Gotta Start Somewhere...</title>
-      <link>//localhost:1313/post/20190203-kotlin01/</link>
+      <link>https://www.javadude.com/post/20190203-kotlin01/</link>
       <pubDate>Sun, 03 Feb 2019 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/20190203-kotlin01/</guid>
+      <guid>https://www.javadude.com/post/20190203-kotlin01/</guid>
       <description>
         
           
@@ -113,10 +113,10 @@ with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
     
     <item>
       <title>Domain-Specific Languages (DSLs) and Code Generation</title>
-      <link>//localhost:1313/post/20170628-dsls-and-codegen/</link>
+      <link>https://www.javadude.com/post/20170628-dsls-and-codegen/</link>
       <pubDate>Wed, 28 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/20170628-dsls-and-codegen/</guid>
+      <guid>https://www.javadude.com/post/20170628-dsls-and-codegen/</guid>
       <description>
         
           
@@ -130,10 +130,10 @@ with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
     
     <item>
       <title>Design Patterns Brown-Bag Lectures</title>
-      <link>//localhost:1313/post/20151119-patterns/</link>
+      <link>https://www.javadude.com/post/20151119-patterns/</link>
       <pubDate>Thu, 19 Nov 2015 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/20151119-patterns/</guid>
+      <guid>https://www.javadude.com/post/20151119-patterns/</guid>
       <description>
         
           
@@ -146,10 +146,10 @@ with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
     
     <item>
       <title>Android Intents and Fragments</title>
-      <link>//localhost:1313/post/20141006-intents-and-fragments/</link>
+      <link>https://www.javadude.com/post/20141006-intents-and-fragments/</link>
       <pubDate>Mon, 06 Oct 2014 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/20141006-intents-and-fragments/</guid>
+      <guid>https://www.javadude.com/post/20141006-intents-and-fragments/</guid>
       <description>
         
           
@@ -162,10 +162,10 @@ with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
     
     <item>
       <title>Java 8 - Lambdas and Streams</title>
-      <link>//localhost:1313/post/20140923-lambdas-and-streams/</link>
+      <link>https://www.javadude.com/post/20140923-lambdas-and-streams/</link>
       <pubDate>Tue, 23 Sep 2014 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/20140923-lambdas-and-streams/</guid>
+      <guid>https://www.javadude.com/post/20140923-lambdas-and-streams/</guid>
       <description>
         
           
@@ -178,10 +178,10 @@ with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
     
     <item>
       <title>Code Generation with xText and xTend</title>
-      <link>//localhost:1313/post/20130730-xtext/</link>
+      <link>https://www.javadude.com/post/20130730-xtext/</link>
       <pubDate>Tue, 30 Jul 2013 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/20130730-xtext/</guid>
+      <guid>https://www.javadude.com/post/20130730-xtext/</guid>
       <description>
         
           
@@ -195,10 +195,10 @@ with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
     
     <item>
       <title>Java Enumerations</title>
-      <link>//localhost:1313/post/20121219-enumerations/</link>
+      <link>https://www.javadude.com/post/20121219-enumerations/</link>
       <pubDate>Wed, 19 Dec 2012 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/20121219-enumerations/</guid>
+      <guid>https://www.javadude.com/post/20121219-enumerations/</guid>
       <description>
         
           
@@ -220,10 +220,10 @@ with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
     
     <item>
       <title>Template Method and Strategy</title>
-      <link>//localhost:1313/post/20111013-template-method-and-strategy/</link>
+      <link>https://www.javadude.com/post/20111013-template-method-and-strategy/</link>
       <pubDate>Thu, 13 Oct 2011 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/20111013-template-method-and-strategy/</guid>
+      <guid>https://www.javadude.com/post/20111013-template-method-and-strategy/</guid>
       <description>
         
           
@@ -236,10 +236,10 @@ with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
     
     <item>
       <title>Java Dynamic Proxies</title>
-      <link>//localhost:1313/post/20101202-dynamic-proxies/</link>
+      <link>https://www.javadude.com/post/20101202-dynamic-proxies/</link>
       <pubDate>Thu, 02 Dec 2010 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/20101202-dynamic-proxies/</guid>
+      <guid>https://www.javadude.com/post/20101202-dynamic-proxies/</guid>
       <description>
         
           
@@ -252,10 +252,10 @@ with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
     
     <item>
       <title>Effective Eclipse</title>
-      <link>//localhost:1313/post/20100519-effective-eclipse/</link>
+      <link>https://www.javadude.com/post/20100519-effective-eclipse/</link>
       <pubDate>Wed, 19 May 2010 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/20100519-effective-eclipse/</guid>
+      <guid>https://www.javadude.com/post/20100519-effective-eclipse/</guid>
       <description>
         
           
@@ -268,10 +268,10 @@ with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
     
     <item>
       <title>Java Annotations</title>
-      <link>//localhost:1313/post/20100120-annotations/</link>
+      <link>https://www.javadude.com/post/20100120-annotations/</link>
       <pubDate>Wed, 20 Jan 2010 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/20100120-annotations/</guid>
+      <guid>https://www.javadude.com/post/20100120-annotations/</guid>
       <description>
         
           
@@ -291,10 +291,10 @@ with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
     
     <item>
       <title>ANTLR 3.x Tutorial</title>
-      <link>//localhost:1313/post/20091221-antlr3tut/</link>
+      <link>https://www.javadude.com/post/20091221-antlr3tut/</link>
       <pubDate>Mon, 21 Dec 2009 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/20091221-antlr3tut/</guid>
+      <guid>https://www.javadude.com/post/20091221-antlr3tut/</guid>
       <description>
         
           
@@ -307,10 +307,10 @@ with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
     
     <item>
       <title>ANTXR</title>
-      <link>//localhost:1313/post/20051102-antxr/</link>
+      <link>https://www.javadude.com/post/20051102-antxr/</link>
       <pubDate>Wed, 02 Nov 2005 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/20051102-antxr/</guid>
+      <guid>https://www.javadude.com/post/20051102-antxr/</guid>
       <description>
         
           
@@ -323,10 +323,10 @@ with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
     
     <item>
       <title>Import on Demand is EVIL!</title>
-      <link>//localhost:1313/post/20040522-import-on-demand-is-evil/</link>
+      <link>https://www.javadude.com/post/20040522-import-on-demand-is-evil/</link>
       <pubDate>Sat, 22 May 2004 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/20040522-import-on-demand-is-evil/</guid>
+      <guid>https://www.javadude.com/post/20040522-import-on-demand-is-evil/</guid>
       <description>
         
           
@@ -339,10 +339,10 @@ with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
     
     <item>
       <title>Java is Pass-by-Value, Dammit!</title>
-      <link>//localhost:1313/post/20010516-pass-by-value/</link>
+      <link>https://www.javadude.com/post/20010516-pass-by-value/</link>
       <pubDate>Wed, 16 May 2001 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/20010516-pass-by-value/</guid>
+      <guid>https://www.javadude.com/post/20010516-pass-by-value/</guid>
       <description>
         
           
@@ -356,10 +356,10 @@ with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
     
     <item>
       <title>Layering Applications</title>
-      <link>//localhost:1313/post/20010516-layering-applications/</link>
+      <link>https://www.javadude.com/post/20010516-layering-applications/</link>
       <pubDate>Wed, 16 May 2001 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/20010516-layering-applications/</guid>
+      <guid>https://www.javadude.com/post/20010516-layering-applications/</guid>
       <description>
         
           
@@ -372,10 +372,10 @@ with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
     
     <item>
       <title>An ANTLR 2.0 Tutorial</title>
-      <link>//localhost:1313/post/20000304-antlrtut/</link>
+      <link>https://www.javadude.com/post/20000304-antlrtut/</link>
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/20000304-antlrtut/</guid>
+      <guid>https://www.javadude.com/post/20000304-antlrtut/</guid>
       <description>
         
           
@@ -388,10 +388,10 @@ with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
     
     <item>
       <title>Converting a Grammar from LALR to LL</title>
-      <link>//localhost:1313/post/20000304-lalr-to-ll/</link>
+      <link>https://www.javadude.com/post/20000304-lalr-to-ll/</link>
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/20000304-lalr-to-ll/</guid>
+      <guid>https://www.javadude.com/post/20000304-lalr-to-ll/</guid>
       <description>
         
           
@@ -404,10 +404,10 @@ with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
     
     <item>
       <title>Creating JavaBean Property Editors</title>
-      <link>//localhost:1313/post/20000304-property-editors/</link>
+      <link>https://www.javadude.com/post/20000304-property-editors/</link>
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/20000304-property-editors/</guid>
+      <guid>https://www.javadude.com/post/20000304-property-editors/</guid>
       <description>
         
           
@@ -420,10 +420,10 @@ with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
     
     <item>
       <title>Importifier</title>
-      <link>//localhost:1313/post/20000304-importifier/</link>
+      <link>https://www.javadude.com/post/20000304-importifier/</link>
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/20000304-importifier/</guid>
+      <guid>https://www.javadude.com/post/20000304-importifier/</guid>
       <description>
         
           
@@ -436,10 +436,10 @@ with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
     
     <item>
       <title>JavaOne 2000/2001/2002</title>
-      <link>//localhost:1313/post/20000304-javaone/</link>
+      <link>https://www.javadude.com/post/20000304-javaone/</link>
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/20000304-javaone/</guid>
+      <guid>https://www.javadude.com/post/20000304-javaone/</guid>
       <description>
         
           
@@ -452,10 +452,10 @@ with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
     
     <item>
       <title>Swing Border Editor</title>
-      <link>//localhost:1313/post/20000304-border-editor/</link>
+      <link>https://www.javadude.com/post/20000304-border-editor/</link>
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/20000304-border-editor/</guid>
+      <guid>https://www.javadude.com/post/20000304-border-editor/</guid>
       <description>
         
           
@@ -468,10 +468,10 @@ with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
     
     <item>
       <title>The JavaBean Component Model</title>
-      <link>//localhost:1313/post/20000304-javabeans/</link>
+      <link>https://www.javadude.com/post/20000304-javabeans/</link>
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/20000304-javabeans/</guid>
+      <guid>https://www.javadude.com/post/20000304-javabeans/</guid>
       <description>
         
           
@@ -484,10 +484,10 @@ with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
     
     <item>
       <title>Using JavaBean Accessors</title>
-      <link>//localhost:1313/post/20000304-accessors/</link>
+      <link>https://www.javadude.com/post/20000304-accessors/</link>
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/20000304-accessors/</guid>
+      <guid>https://www.javadude.com/post/20000304-accessors/</guid>
       <description>
         
           
@@ -500,10 +500,10 @@ with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
     
     <item>
       <title>Using the Right Comment in Java</title>
-      <link>//localhost:1313/post/20000304-comments/</link>
+      <link>https://www.javadude.com/post/20000304-comments/</link>
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/20000304-comments/</guid>
+      <guid>https://www.javadude.com/post/20000304-comments/</guid>
       <description>
         
           
@@ -516,10 +516,10 @@ with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
     
     <item>
       <title>Autogut</title>
-      <link>//localhost:1313/post/19991024-autogut/</link>
+      <link>https://www.javadude.com/post/19991024-autogut/</link>
       <pubDate>Sun, 24 Oct 1999 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/19991024-autogut/</guid>
+      <guid>https://www.javadude.com/post/19991024-autogut/</guid>
       <description>
         
           
@@ -532,10 +532,10 @@ with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
     
     <item>
       <title>SplitterLayout</title>
-      <link>//localhost:1313/post/19980228-splitterlayout/</link>
+      <link>https://www.javadude.com/post/19980228-splitterlayout/</link>
       <pubDate>Sun, 24 Oct 1999 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/19980228-splitterlayout/</guid>
+      <guid>https://www.javadude.com/post/19980228-splitterlayout/</guid>
       <description>
         
           
@@ -548,10 +548,10 @@ with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
     
     <item>
       <title>BoxBeans</title>
-      <link>//localhost:1313/post/19981126-boxbeans/</link>
+      <link>https://www.javadude.com/post/19981126-boxbeans/</link>
       <pubDate>Thu, 26 Nov 1998 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/19981126-boxbeans/</guid>
+      <guid>https://www.javadude.com/post/19981126-boxbeans/</guid>
       <description>
         
           
@@ -564,10 +564,10 @@ with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
     
     <item>
       <title>ParseView</title>
-      <link>//localhost:1313/post/19980717-parseview/</link>
+      <link>https://www.javadude.com/post/19980717-parseview/</link>
       <pubDate>Fri, 17 Jul 1998 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/19980717-parseview/</guid>
+      <guid>https://www.javadude.com/post/19980717-parseview/</guid>
       <description>
         
           
@@ -580,10 +580,10 @@ with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
     
     <item>
       <title>TabSplitter</title>
-      <link>//localhost:1313/post/19980228-tabsplitter/</link>
+      <link>https://www.javadude.com/post/19980228-tabsplitter/</link>
       <pubDate>Sat, 28 Feb 1998 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/19980228-tabsplitter/</guid>
+      <guid>https://www.javadude.com/post/19980228-tabsplitter/</guid>
       <description>
         
           
@@ -596,10 +596,10 @@ with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
     
     <item>
       <title>Effective Layout Management</title>
-      <link>//localhost:1313/post/20000304-layouts/</link>
+      <link>https://www.javadude.com/post/20000304-layouts/</link>
       <pubDate>Thu, 01 Jan 1998 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/20000304-layouts/</guid>
+      <guid>https://www.javadude.com/post/20000304-layouts/</guid>
       <description>
         
           

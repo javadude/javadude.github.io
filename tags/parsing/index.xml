@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Parsing on javadude.com</title>
-    <link>//localhost:1313/tags/parsing/</link>
+    <link>https://www.javadude.com/tags/parsing/</link>
     <description>Recent content in Parsing on javadude.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Scott Stanchfield</copyright>
-    <lastBuildDate>Wed, 28 Jun 2017 00:00:00 +0000</lastBuildDate><atom:link href="//localhost:1313/tags/parsing/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 28 Jun 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://www.javadude.com/tags/parsing/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Domain-Specific Languages (DSLs) and Code Generation</title>
-      <link>//localhost:1313/post/20170628-dsls-and-codegen/</link>
+      <link>https://www.javadude.com/post/20170628-dsls-and-codegen/</link>
       <pubDate>Wed, 28 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/20170628-dsls-and-codegen/</guid>
+      <guid>https://www.javadude.com/post/20170628-dsls-and-codegen/</guid>
       <description>
         
           
@@ -27,10 +27,10 @@
     
     <item>
       <title>Code Generation with xText and xTend</title>
-      <link>//localhost:1313/post/20130730-xtext/</link>
+      <link>https://www.javadude.com/post/20130730-xtext/</link>
       <pubDate>Tue, 30 Jul 2013 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/20130730-xtext/</guid>
+      <guid>https://www.javadude.com/post/20130730-xtext/</guid>
       <description>
         
           
@@ -44,10 +44,10 @@
     
     <item>
       <title>ANTLR 3.x Tutorial</title>
-      <link>//localhost:1313/post/20091221-antlr3tut/</link>
+      <link>https://www.javadude.com/post/20091221-antlr3tut/</link>
       <pubDate>Mon, 21 Dec 2009 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/20091221-antlr3tut/</guid>
+      <guid>https://www.javadude.com/post/20091221-antlr3tut/</guid>
       <description>
         
           
@@ -60,10 +60,10 @@
     
     <item>
       <title>An ANTLR 2.0 Tutorial</title>
-      <link>//localhost:1313/post/20000304-antlrtut/</link>
+      <link>https://www.javadude.com/post/20000304-antlrtut/</link>
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/20000304-antlrtut/</guid>
+      <guid>https://www.javadude.com/post/20000304-antlrtut/</guid>
       <description>
         
           
@@ -76,10 +76,10 @@
     
     <item>
       <title>Converting a Grammar from LALR to LL</title>
-      <link>//localhost:1313/post/20000304-lalr-to-ll/</link>
+      <link>https://www.javadude.com/post/20000304-lalr-to-ll/</link>
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/20000304-lalr-to-ll/</guid>
+      <guid>https://www.javadude.com/post/20000304-lalr-to-ll/</guid>
       <description>
         
           

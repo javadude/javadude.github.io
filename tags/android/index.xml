@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Android on javadude.com</title>
-    <link>//localhost:1313/tags/android/</link>
+    <link>https://www.javadude.com/tags/android/</link>
     <description>Recent content in Android on javadude.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Scott Stanchfield</copyright>
-    <lastBuildDate>Sun, 23 Mar 2025 00:00:00 +0000</lastBuildDate><atom:link href="//localhost:1313/tags/android/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 23 Mar 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://www.javadude.com/tags/android/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Official Android Docs (That I&#39;ve Written)</title>
-      <link>//localhost:1313/post/20250323-android-docs/</link>
+      <link>https://www.javadude.com/post/20250323-android-docs/</link>
       <pubDate>Sun, 23 Mar 2025 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/20250323-android-docs/</guid>
+      <guid>https://www.javadude.com/post/20250323-android-docs/</guid>
       <description>
         
           
@@ -29,10 +29,10 @@ with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
     
     <item>
       <title>My Android class content for Johns Hopkins University</title>
-      <link>//localhost:1313/post/20250322-android-class/</link>
+      <link>https://www.javadude.com/post/20250322-android-class/</link>
       <pubDate>Sat, 22 Mar 2025 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/20250322-android-class/</guid>
+      <guid>https://www.javadude.com/post/20250322-android-class/</guid>
       <description>
         
           
@@ -47,10 +47,10 @@ with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
     
     <item>
       <title>Finding a deadlock in Android Studio</title>
-      <link>//localhost:1313/post/20190326-android-studio-deadlocks/</link>
+      <link>https://www.javadude.com/post/20190326-android-studio-deadlocks/</link>
       <pubDate>Tue, 26 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/20190326-android-studio-deadlocks/</guid>
+      <guid>https://www.javadude.com/post/20190326-android-studio-deadlocks/</guid>
       <description>
         
           
@@ -63,10 +63,10 @@ with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
     
     <item>
       <title>Android Intents and Fragments</title>
-      <link>//localhost:1313/post/20141006-intents-and-fragments/</link>
+      <link>https://www.javadude.com/post/20141006-intents-and-fragments/</link>
       <pubDate>Mon, 06 Oct 2014 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/post/20141006-intents-and-fragments/</guid>
+      <guid>https://www.javadude.com/post/20141006-intents-and-fragments/</guid>
       <description>
         
           

@@ -10,7 +10,7 @@ const imageAltClass = 'img_alt';
 
 
 const defaultSiteLanguage = 'en';
-const baseURL = '/';
+const baseURL = 'https://www.javadude.com/';
 const searchFieldClass = '.search_field';
 const searchClass = '.search';
 const goBackClass = 'button_back';
