@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Xtext on javadude.com</title>
-    <link>https://javadude.com/tags/xtext/</link>
+    <link>//localhost:1313/tags/xtext/</link>
     <description>Recent content in Xtext on javadude.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Scott Stanchfield</copyright>
-    <lastBuildDate>Wed, 28 Jun 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://javadude.com/tags/xtext/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 28 Jun 2017 00:00:00 +0000</lastBuildDate><atom:link href="//localhost:1313/tags/xtext/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Domain-Specific Languages (DSLs) and Code Generation</title>
-      <link>https://javadude.com/post/20170628-dsls-and-codegen/</link>
+      <link>//localhost:1313/post/20170628-dsls-and-codegen/</link>
       <pubDate>Wed, 28 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/post/20170628-dsls-and-codegen/</guid>
+      <guid>//localhost:1313/post/20170628-dsls-and-codegen/</guid>
       <description>
         
           
@@ -27,10 +27,10 @@
     
     <item>
       <title>Code Generation with xText and xTend</title>
-      <link>https://javadude.com/post/20130730-xtext/</link>
+      <link>//localhost:1313/post/20130730-xtext/</link>
       <pubDate>Tue, 30 Jul 2013 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/post/20130730-xtext/</guid>
+      <guid>//localhost:1313/post/20130730-xtext/</guid>
       <description>
         
           

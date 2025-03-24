@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Videos on javadude.com</title>
-    <link>https://javadude.com/categories/videos/</link>
+    <link>//localhost:1313/categories/videos/</link>
     <description>Recent content in Videos on javadude.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Scott Stanchfield</copyright>
-    <lastBuildDate>Tue, 26 Mar 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://javadude.com/categories/videos/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 26 Mar 2019 00:00:00 +0000</lastBuildDate><atom:link href="//localhost:1313/categories/videos/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Finding a deadlock in Android Studio</title>
-      <link>https://javadude.com/post/20190326-android-studio-deadlocks/</link>
+      <link>//localhost:1313/post/20190326-android-studio-deadlocks/</link>
       <pubDate>Tue, 26 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/post/20190326-android-studio-deadlocks/</guid>
+      <guid>//localhost:1313/post/20190326-android-studio-deadlocks/</guid>
       <description>
         
           
@@ -26,10 +26,10 @@
     
     <item>
       <title>Domain-Specific Languages (DSLs) and Code Generation</title>
-      <link>https://javadude.com/post/20170628-dsls-and-codegen/</link>
+      <link>//localhost:1313/post/20170628-dsls-and-codegen/</link>
       <pubDate>Wed, 28 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/post/20170628-dsls-and-codegen/</guid>
+      <guid>//localhost:1313/post/20170628-dsls-and-codegen/</guid>
       <description>
         
           
@@ -43,10 +43,10 @@
     
     <item>
       <title>Design Patterns Brown-Bag Lectures</title>
-      <link>https://javadude.com/post/20151119-patterns/</link>
+      <link>//localhost:1313/post/20151119-patterns/</link>
       <pubDate>Thu, 19 Nov 2015 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/post/20151119-patterns/</guid>
+      <guid>//localhost:1313/post/20151119-patterns/</guid>
       <description>
         
           
@@ -59,10 +59,10 @@
     
     <item>
       <title>Android Intents and Fragments</title>
-      <link>https://javadude.com/post/20141006-intents-and-fragments/</link>
+      <link>//localhost:1313/post/20141006-intents-and-fragments/</link>
       <pubDate>Mon, 06 Oct 2014 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/post/20141006-intents-and-fragments/</guid>
+      <guid>//localhost:1313/post/20141006-intents-and-fragments/</guid>
       <description>
         
           
@@ -75,10 +75,10 @@
     
     <item>
       <title>Java 8 - Lambdas and Streams</title>
-      <link>https://javadude.com/post/20140923-lambdas-and-streams/</link>
+      <link>//localhost:1313/post/20140923-lambdas-and-streams/</link>
       <pubDate>Tue, 23 Sep 2014 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/post/20140923-lambdas-and-streams/</guid>
+      <guid>//localhost:1313/post/20140923-lambdas-and-streams/</guid>
       <description>
         
           
@@ -91,10 +91,10 @@
     
     <item>
       <title>Code Generation with xText and xTend</title>
-      <link>https://javadude.com/post/20130730-xtext/</link>
+      <link>//localhost:1313/post/20130730-xtext/</link>
       <pubDate>Tue, 30 Jul 2013 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/post/20130730-xtext/</guid>
+      <guid>//localhost:1313/post/20130730-xtext/</guid>
       <description>
         
           
@@ -108,10 +108,10 @@
     
     <item>
       <title>Java Enumerations</title>
-      <link>https://javadude.com/post/20121219-enumerations/</link>
+      <link>//localhost:1313/post/20121219-enumerations/</link>
       <pubDate>Wed, 19 Dec 2012 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/post/20121219-enumerations/</guid>
+      <guid>//localhost:1313/post/20121219-enumerations/</guid>
       <description>
         
           
@@ -133,10 +133,10 @@
     
     <item>
       <title>Template Method and Strategy</title>
-      <link>https://javadude.com/post/20111013-template-method-and-strategy/</link>
+      <link>//localhost:1313/post/20111013-template-method-and-strategy/</link>
       <pubDate>Thu, 13 Oct 2011 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/post/20111013-template-method-and-strategy/</guid>
+      <guid>//localhost:1313/post/20111013-template-method-and-strategy/</guid>
       <description>
         
           
@@ -149,10 +149,10 @@
     
     <item>
       <title>Java Dynamic Proxies</title>
-      <link>https://javadude.com/post/20101202-dynamic-proxies/</link>
+      <link>//localhost:1313/post/20101202-dynamic-proxies/</link>
       <pubDate>Thu, 02 Dec 2010 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/post/20101202-dynamic-proxies/</guid>
+      <guid>//localhost:1313/post/20101202-dynamic-proxies/</guid>
       <description>
         
           
@@ -165,10 +165,10 @@
     
     <item>
       <title>Effective Eclipse</title>
-      <link>https://javadude.com/post/20100519-effective-eclipse/</link>
+      <link>//localhost:1313/post/20100519-effective-eclipse/</link>
       <pubDate>Wed, 19 May 2010 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/post/20100519-effective-eclipse/</guid>
+      <guid>//localhost:1313/post/20100519-effective-eclipse/</guid>
       <description>
         
           
@@ -181,10 +181,10 @@
     
     <item>
       <title>Java Annotations</title>
-      <link>https://javadude.com/post/20100120-annotations/</link>
+      <link>//localhost:1313/post/20100120-annotations/</link>
       <pubDate>Wed, 20 Jan 2010 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/post/20100120-annotations/</guid>
+      <guid>//localhost:1313/post/20100120-annotations/</guid>
       <description>
         
           
@@ -204,10 +204,10 @@
     
     <item>
       <title>ANTLR 3.x Tutorial</title>
-      <link>https://javadude.com/post/20091221-antlr3tut/</link>
+      <link>//localhost:1313/post/20091221-antlr3tut/</link>
       <pubDate>Mon, 21 Dec 2009 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/post/20091221-antlr3tut/</guid>
+      <guid>//localhost:1313/post/20091221-antlr3tut/</guid>
       <description>
         
           

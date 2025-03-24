@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Kotlin on javadude.com</title>
-    <link>https://javadude.com/tags/kotlin/</link>
+    <link>//localhost:1313/tags/kotlin/</link>
     <description>Recent content in Kotlin on javadude.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Scott Stanchfield</copyright>
-    <lastBuildDate>Sun, 23 Mar 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://javadude.com/tags/kotlin/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 23 Mar 2025 00:00:00 +0000</lastBuildDate><atom:link href="//localhost:1313/tags/kotlin/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Official Android Docs (That I&#39;ve Written)</title>
-      <link>https://javadude.com/post/20250323-android-docs/</link>
+      <link>//localhost:1313/post/20250323-android-docs/</link>
       <pubDate>Sun, 23 Mar 2025 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/post/20250323-android-docs/</guid>
+      <guid>//localhost:1313/post/20250323-android-docs/</guid>
       <description>
         
           
@@ -29,10 +29,10 @@ with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
     
     <item>
       <title>My Android class content for Johns Hopkins University</title>
-      <link>https://javadude.com/post/20250322-android-class/</link>
+      <link>//localhost:1313/post/20250322-android-class/</link>
       <pubDate>Sat, 22 Mar 2025 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/post/20250322-android-class/</guid>
+      <guid>//localhost:1313/post/20250322-android-class/</guid>
       <description>
         
           
@@ -47,10 +47,10 @@ with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
     
     <item>
       <title>My Domain-Specific Languages (DSL) class content for Johns Hopkins University</title>
-      <link>https://javadude.com/post/20250322-dsl-class/</link>
+      <link>//localhost:1313/post/20250322-dsl-class/</link>
       <pubDate>Sat, 22 Mar 2025 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/post/20250322-dsl-class/</guid>
+      <guid>//localhost:1313/post/20250322-dsl-class/</guid>
       <description>
         
           
@@ -64,10 +64,10 @@ with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
     
     <item>
       <title>My Kotlin class content</title>
-      <link>https://javadude.com/post/20250322-kotlin-class/</link>
+      <link>//localhost:1313/post/20250322-kotlin-class/</link>
       <pubDate>Sat, 22 Mar 2025 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/post/20250322-kotlin-class/</guid>
+      <guid>//localhost:1313/post/20250322-kotlin-class/</guid>
       <description>
         
           
@@ -81,10 +81,10 @@ with editorial tweaks from the amazing tech writers I worked with!&lt;/p&gt;
     
     <item>
       <title>From Java to Kotlin - Episode 1 - You&#39;ve Gotta Start Somewhere...</title>
-      <link>https://javadude.com/post/20190203-kotlin01/</link>
+      <link>//localhost:1313/post/20190203-kotlin01/</link>
       <pubDate>Sun, 03 Feb 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/post/20190203-kotlin01/</guid>
+      <guid>//localhost:1313/post/20190203-kotlin01/</guid>
       <description>
         
           

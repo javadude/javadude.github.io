@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Language on javadude.com</title>
-    <link>https://javadude.com/tags/language/</link>
+    <link>//localhost:1313/tags/language/</link>
     <description>Recent content in Language on javadude.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Scott Stanchfield</copyright>
-    <lastBuildDate>Sun, 03 Feb 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://javadude.com/tags/language/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 03 Feb 2019 00:00:00 +0000</lastBuildDate><atom:link href="//localhost:1313/tags/language/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>From Java to Kotlin - Episode 1 - You&#39;ve Gotta Start Somewhere...</title>
-      <link>https://javadude.com/post/20190203-kotlin01/</link>
+      <link>//localhost:1313/post/20190203-kotlin01/</link>
       <pubDate>Sun, 03 Feb 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/post/20190203-kotlin01/</guid>
+      <guid>//localhost:1313/post/20190203-kotlin01/</guid>
       <description>
         
           
@@ -26,10 +26,10 @@
     
     <item>
       <title>Java 8 - Lambdas and Streams</title>
-      <link>https://javadude.com/post/20140923-lambdas-and-streams/</link>
+      <link>//localhost:1313/post/20140923-lambdas-and-streams/</link>
       <pubDate>Tue, 23 Sep 2014 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/post/20140923-lambdas-and-streams/</guid>
+      <guid>//localhost:1313/post/20140923-lambdas-and-streams/</guid>
       <description>
         
           
@@ -42,10 +42,10 @@
     
     <item>
       <title>Java Enumerations</title>
-      <link>https://javadude.com/post/20121219-enumerations/</link>
+      <link>//localhost:1313/post/20121219-enumerations/</link>
       <pubDate>Wed, 19 Dec 2012 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/post/20121219-enumerations/</guid>
+      <guid>//localhost:1313/post/20121219-enumerations/</guid>
       <description>
         
           
@@ -67,10 +67,10 @@
     
     <item>
       <title>Java Dynamic Proxies</title>
-      <link>https://javadude.com/post/20101202-dynamic-proxies/</link>
+      <link>//localhost:1313/post/20101202-dynamic-proxies/</link>
       <pubDate>Thu, 02 Dec 2010 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/post/20101202-dynamic-proxies/</guid>
+      <guid>//localhost:1313/post/20101202-dynamic-proxies/</guid>
       <description>
         
           
@@ -83,10 +83,10 @@
     
     <item>
       <title>Java Annotations</title>
-      <link>https://javadude.com/post/20100120-annotations/</link>
+      <link>//localhost:1313/post/20100120-annotations/</link>
       <pubDate>Wed, 20 Jan 2010 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/post/20100120-annotations/</guid>
+      <guid>//localhost:1313/post/20100120-annotations/</guid>
       <description>
         
           
@@ -106,10 +106,10 @@
     
     <item>
       <title>ANTLR 3.x Tutorial</title>
-      <link>https://javadude.com/post/20091221-antlr3tut/</link>
+      <link>//localhost:1313/post/20091221-antlr3tut/</link>
       <pubDate>Mon, 21 Dec 2009 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/post/20091221-antlr3tut/</guid>
+      <guid>//localhost:1313/post/20091221-antlr3tut/</guid>
       <description>
         
           
@@ -122,10 +122,10 @@
     
     <item>
       <title>Import on Demand is EVIL!</title>
-      <link>https://javadude.com/post/20040522-import-on-demand-is-evil/</link>
+      <link>//localhost:1313/post/20040522-import-on-demand-is-evil/</link>
       <pubDate>Sat, 22 May 2004 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/post/20040522-import-on-demand-is-evil/</guid>
+      <guid>//localhost:1313/post/20040522-import-on-demand-is-evil/</guid>
       <description>
         
           
@@ -138,10 +138,10 @@
     
     <item>
       <title>Java is Pass-by-Value, Dammit!</title>
-      <link>https://javadude.com/post/20010516-pass-by-value/</link>
+      <link>//localhost:1313/post/20010516-pass-by-value/</link>
       <pubDate>Wed, 16 May 2001 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/post/20010516-pass-by-value/</guid>
+      <guid>//localhost:1313/post/20010516-pass-by-value/</guid>
       <description>
         
           
@@ -155,10 +155,10 @@
     
     <item>
       <title>An ANTLR 2.0 Tutorial</title>
-      <link>https://javadude.com/post/20000304-antlrtut/</link>
+      <link>//localhost:1313/post/20000304-antlrtut/</link>
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/post/20000304-antlrtut/</guid>
+      <guid>//localhost:1313/post/20000304-antlrtut/</guid>
       <description>
         
           
@@ -171,10 +171,10 @@
     
     <item>
       <title>JavaOne 2000/2001/2002</title>
-      <link>https://javadude.com/post/20000304-javaone/</link>
+      <link>//localhost:1313/post/20000304-javaone/</link>
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/post/20000304-javaone/</guid>
+      <guid>//localhost:1313/post/20000304-javaone/</guid>
       <description>
         
           
@@ -187,10 +187,10 @@
     
     <item>
       <title>Using JavaBean Accessors</title>
-      <link>https://javadude.com/post/20000304-accessors/</link>
+      <link>//localhost:1313/post/20000304-accessors/</link>
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/post/20000304-accessors/</guid>
+      <guid>//localhost:1313/post/20000304-accessors/</guid>
       <description>
         
           
@@ -203,10 +203,10 @@
     
     <item>
       <title>Using the Right Comment in Java</title>
-      <link>https://javadude.com/post/20000304-comments/</link>
+      <link>//localhost:1313/post/20000304-comments/</link>
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/post/20000304-comments/</guid>
+      <guid>//localhost:1313/post/20000304-comments/</guid>
       <description>
         
           

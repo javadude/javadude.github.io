@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Design on javadude.com</title>
-    <link>https://javadude.com/tags/design/</link>
+    <link>//localhost:1313/tags/design/</link>
     <description>Recent content in Design on javadude.com</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Scott Stanchfield</copyright>
-    <lastBuildDate>Wed, 16 May 2001 00:00:00 +0000</lastBuildDate><atom:link href="https://javadude.com/tags/design/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 16 May 2001 00:00:00 +0000</lastBuildDate><atom:link href="//localhost:1313/tags/design/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Layering Applications</title>
-      <link>https://javadude.com/post/20010516-layering-applications/</link>
+      <link>//localhost:1313/post/20010516-layering-applications/</link>
       <pubDate>Wed, 16 May 2001 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/post/20010516-layering-applications/</guid>
+      <guid>//localhost:1313/post/20010516-layering-applications/</guid>
       <description>
         
           
@@ -26,10 +26,10 @@
     
     <item>
       <title>Creating JavaBean Property Editors</title>
-      <link>https://javadude.com/post/20000304-property-editors/</link>
+      <link>//localhost:1313/post/20000304-property-editors/</link>
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/post/20000304-property-editors/</guid>
+      <guid>//localhost:1313/post/20000304-property-editors/</guid>
       <description>
         
           
@@ -42,10 +42,10 @@
     
     <item>
       <title>JavaOne 2000/2001/2002</title>
-      <link>https://javadude.com/post/20000304-javaone/</link>
+      <link>//localhost:1313/post/20000304-javaone/</link>
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/post/20000304-javaone/</guid>
+      <guid>//localhost:1313/post/20000304-javaone/</guid>
       <description>
         
           
@@ -58,10 +58,10 @@
     
     <item>
       <title>The JavaBean Component Model</title>
-      <link>https://javadude.com/post/20000304-javabeans/</link>
+      <link>//localhost:1313/post/20000304-javabeans/</link>
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/post/20000304-javabeans/</guid>
+      <guid>//localhost:1313/post/20000304-javabeans/</guid>
       <description>
         
           
@@ -74,10 +74,10 @@
     
     <item>
       <title>Using JavaBean Accessors</title>
-      <link>https://javadude.com/post/20000304-accessors/</link>
+      <link>//localhost:1313/post/20000304-accessors/</link>
       <pubDate>Sat, 04 Mar 2000 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/post/20000304-accessors/</guid>
+      <guid>//localhost:1313/post/20000304-accessors/</guid>
       <description>
         
           
@@ -90,10 +90,10 @@
     
     <item>
       <title>Effective Layout Management</title>
-      <link>https://javadude.com/post/20000304-layouts/</link>
+      <link>//localhost:1313/post/20000304-layouts/</link>
       <pubDate>Thu, 01 Jan 1998 00:00:00 +0000</pubDate>
       
-      <guid>https://javadude.com/post/20000304-layouts/</guid>
+      <guid>//localhost:1313/post/20000304-layouts/</guid>
       <description>
         
           

@@ -8,15 +8,12 @@
   
   
   >
-  <head>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 <title>Code Generation with xText and xTend | javadude.com</title>
 <meta charset="utf-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-
-
 
 
 <meta property="og:locale" content="en" />
@@ -26,21 +23,21 @@
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="">
 <meta name="twitter:title" content="Code Generation with xText and xTend" />
-<meta name="twitter:image" content="https://javadude.com/post/20130730-xtext/xtext.png"/>
-<meta property="og:url" content="https://javadude.com/post/20130730-xtext/" />
+<meta name="twitter:image" content="//localhost:1313/post/20130730-xtext/xtext.png"/>
+<meta property="og:url" content="//localhost:1313/post/20130730-xtext/" />
 <meta property="og:title" content="Code Generation with xText and xTend" />
 <meta property="og:description" content="Using xText to create Domain-Specific Languages and generate code." />
-<meta property="og:image" content="https://javadude.com/post/20130730-xtext/xtext.png" />
+<meta property="og:image" content="//localhost:1313/post/20130730-xtext/xtext.png" />
   <meta name="keywords" content="java,eclipse,parsing,code generation,dsl,xtext" />
   <script type="application/ld+json">
     {
       "@context": "http://schema.org",
       "@type": "BlogPosting",
-      "mainEntityOfPage":"https:\/\/javadude.com\/post\/20130730-xtext\/",
+      "mainEntityOfPage":"\/\/localhost:1313\/post\/20130730-xtext\/",
       "name": "javadude.com",
       "headline": "Code Generation with xText and xTend",
       "description": "Using xText to create Domain-Specific Languages and generate code.",
-      "url": "https:\/\/javadude.com\/post\/20130730-xtext\/",
+      "url": "\/\/localhost:1313\/post\/20130730-xtext\/",
       "datePublished": "2013-07-30T00:00:00Z",
       "dateModified": "2013-07-30T00:00:00Z",
       "keywords": ["java","eclipse","parsing","code generation","dsl","xtext"],
@@ -51,36 +48,36 @@
       },
       "image":{
         "@type":"ImageObject",
-        "url": "https:\/\/javadude.com\/post\/20130730-xtext\/xtext.png"
+        "url": "\/\/localhost:1313\/post\/20130730-xtext\/xtext.png"
       },
       "publisher": {
         "@type": "Organization",
         "logo": {
           "@type":"ImageObject",
-          "url": "https:\/\/javadude.com\/"
+          "url": "\/\/localhost:1313\/"
         },
         "name": "javadude.com"
       }
     }
   </script>
 
-<link rel="apple-touch-icon" sizes="180x180" href="https://javadude.com/icons/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://javadude.com/icons/favicon-32x32.png">
-<link rel="manifest" href="https://javadude.com/icons/site.webmanifest">
+<link rel="apple-touch-icon" sizes="180x180" href="//localhost:1313/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="//localhost:1313/icons/favicon-32x32.png">
+<link rel="manifest" href="//localhost:1313/icons/site.webmanifest">
 
-<link rel="canonical" href="https://javadude.com/post/20130730-xtext/">
-
-
-
-<link rel="preload" href="https://javadude.com/css/styles.bc1eb1dd1fc5d14285e0b88a05fef346a89bc5e461c683e5fc57576c7455fe75831ec8ecacec5edfb95ff21decee7759160e705bc419e8e864dcf581963a4140.css" integrity = "sha512-vB6x3R/F0UKF4LiKBf7zRqibxeRhxoPl/FdXbHRV/nWDHsjsrOxe37lf8h3s7ndZFg5wW8QZ6Ohk3PWBljpBQA==" as="style" crossorigin="anonymous">
+<link rel="canonical" href="//localhost:1313/post/20130730-xtext/">
 
 
 
-<link rel="preload" href="https://javadude.com/en/js/bundle.4be013d7cecbbcbad601bb190bdb5c84718e1b980d515e1b9882e80dc4395cf80a00093639868664c095e31aff8582cb2edb56166befbc98d614c728826b737d.js" as="script" integrity=
-"sha512-S&#43;AT187LvLrWAbsZC9tchHGOG5gNUV4bmILoDcQ5XPgKAAk2OYaGZMCV4xr/hYLLLttWFmvvvJjWFMcogmtzfQ==" crossorigin="anonymous">
+<link rel="preload" href="//localhost:1313/css/styles.bc1eb1dd1fc5d14285e0b88a05fef346a89bc5e461c683e5fc57576c7455fe75831ec8ecacec5edfb95ff21decee7759160e705bc419e8e864dcf581963a4140.css" integrity = "sha512-vB6x3R/F0UKF4LiKBf7zRqibxeRhxoPl/FdXbHRV/nWDHsjsrOxe37lf8h3s7ndZFg5wW8QZ6Ohk3PWBljpBQA==" as="style" crossorigin="anonymous">
 
 
-<link rel="stylesheet" type="text/css" href="https://javadude.com/css/styles.bc1eb1dd1fc5d14285e0b88a05fef346a89bc5e461c683e5fc57576c7455fe75831ec8ecacec5edfb95ff21decee7759160e705bc419e8e864dcf581963a4140.css" integrity="sha512-vB6x3R/F0UKF4LiKBf7zRqibxeRhxoPl/FdXbHRV/nWDHsjsrOxe37lf8h3s7ndZFg5wW8QZ6Ohk3PWBljpBQA==" crossorigin="anonymous">
+
+<link rel="preload" href="//localhost:1313/en/js/bundle.5ed9f39b7a2c7810a1ff5fee695ff4ea88bad5a93e653deb6b7cd55ab5b2fd024060fa82fa8cb3ad06f6745c8be2b054f50cc455c8abfbee7de713a8f59a1ee0.js" as="script" integrity=
+"sha512-Xtnzm3oseBCh/1/uaV/06oi61ak&#43;ZT3ra3zVWrWy/QJAYPqC&#43;oyzrQb2dFyL4rBU9QzEVcir&#43;&#43;595xOo9Zoe4A==" crossorigin="anonymous">
+
+
+<link rel="stylesheet" type="text/css" href="//localhost:1313/css/styles.bc1eb1dd1fc5d14285e0b88a05fef346a89bc5e461c683e5fc57576c7455fe75831ec8ecacec5edfb95ff21decee7759160e705bc419e8e864dcf581963a4140.css" integrity="sha512-vB6x3R/F0UKF4LiKBf7zRqibxeRhxoPl/FdXbHRV/nWDHsjsrOxe37lf8h3s7ndZFg5wW8QZ6Ohk3PWBljpBQA==" crossorigin="anonymous">
 
   </head>
   <body
@@ -91,7 +88,7 @@
   >
 
 <header class="nav_header" >
-  <nav class="nav"><a href='https://javadude.com/' class="nav_brand nav_item" title="javadude.com">javadude.com
+  <nav class="nav"><a href='//localhost:1313/' class="nav_brand nav_item" title="javadude.com">javadude.com
   <div class="nav_close">
     <div><svg class="icon">
   <title>open-menu</title>
@@ -112,25 +109,25 @@
         
 
   <div class="nav_parent">
-    <a href="https://javadude.com/" class="nav_item" title="Home">Home </a>
+    <a href="//localhost:1313/" class="nav_item" title="Home">Home </a>
   </div>
   <div class="nav_parent">
-    <a href="https://javadude.com/categories/class" class="nav_item" title="Classes">Classes </a>
+    <a href="//localhost:1313/categories/class" class="nav_item" title="Classes">Classes </a>
   </div>
   <div class="nav_parent">
-    <a href="https://javadude.com/categories/articles" class="nav_item" title="Articles">Articles </a>
+    <a href="//localhost:1313/categories/articles" class="nav_item" title="Articles">Articles </a>
   </div>
   <div class="nav_parent">
-    <a href="https://javadude.com/categories/videos" class="nav_item" title="Videos">Videos </a>
+    <a href="//localhost:1313/categories/videos" class="nav_item" title="Videos">Videos </a>
   </div>
   <div class="nav_parent">
-    <a href="https://javadude.com/categories/tools" class="nav_item" title="Tools">Tools </a>
+    <a href="//localhost:1313/categories/tools" class="nav_item" title="Tools">Tools </a>
   </div>
   <div class="nav_parent">
-    <a href="https://javadude.com/publications/" class="nav_item" title="Publications">Publications </a>
+    <a href="//localhost:1313/publications/" class="nav_item" title="Publications">Publications </a>
   </div>
   <div class="nav_parent">
-    <a href="https://javadude.com/about/" class="nav_item" title="About">About </a>
+    <a href="//localhost:1313/about/" class="nav_item" title="About">About </a>
   </div>
       
 <div class='follow'>
@@ -170,7 +167,7 @@
 
   </a>
     
-  <a href="https://javadude.com/index.xml">
+  <a href="//localhost:1313/index.xml">
     <svg class="icon">
   <title>rss</title>
   <use xlink:href="#rss"></use>
@@ -201,25 +198,25 @@
     <span class="post_date">
       Jul 30, 2013	  
     </span>
-    <span class="post_time"> · 1 min read</span><span>&nbsp;· <a href='https://javadude.com/tags/java/' title="java" class="post_tag button button_translucent">java
-        </a><a href='https://javadude.com/tags/eclipse/' title="eclipse" class="post_tag button button_translucent">eclipse
-        </a><a href='https://javadude.com/tags/parsing/' title="parsing" class="post_tag button button_translucent">parsing
-        </a><a href='https://javadude.com/tags/code-generation/' title="code generation" class="post_tag button button_translucent">code generation
-        </a><a href='https://javadude.com/tags/dsl/' title="dsl" class="post_tag button button_translucent">dsl
-        </a><a href='https://javadude.com/tags/xtext/' title="xtext" class="post_tag button button_translucent">xtext
+    <span class="post_time"> · 1 min read</span><span>&nbsp;· <a href='//localhost:1313/tags/java/' title="java" class="post_tag button button_translucent">java
+        </a><a href='//localhost:1313/tags/eclipse/' title="eclipse" class="post_tag button button_translucent">eclipse
+        </a><a href='//localhost:1313/tags/parsing/' title="parsing" class="post_tag button button_translucent">parsing
+        </a><a href='//localhost:1313/tags/code-generation/' title="code generation" class="post_tag button button_translucent">code generation
+        </a><a href='//localhost:1313/tags/dsl/' title="dsl" class="post_tag button button_translucent">dsl
+        </a><a href='//localhost:1313/tags/xtext/' title="xtext" class="post_tag button button_translucent">xtext
         </a>
     </span>
     <span class="page_only">&nbsp;·
   <div class="post_share">
     Share on:
-    <a href="https://twitter.com/intent/tweet?text=Code%20Generation%20with%20xText%20and%20xTend&url=https%3a%2f%2fjavadude.com%2fpost%2f20130730-xtext%2f&tw_p=tweetbutton" class="twitter" title="Share on Twitter" target="_blank" rel="nofollow">
+    <a href="https://twitter.com/intent/tweet?text=Code%20Generation%20with%20xText%20and%20xTend&url=%2f%2flocalhost%3a1313%2fpost%2f20130730-xtext%2f&tw_p=tweetbutton" class="twitter" title="Share on Twitter" target="_blank" rel="nofollow">
       <svg class="icon">
   <title>twitter</title>
   <use xlink:href="#twitter"></use>
 </svg>
 
     </a>
-    <a href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fjavadude.com%2fpost%2f20130730-xtext%2f&t=Code%20Generation%20with%20xText%20and%20xTend" class="facebook" title="Share on Facebook" target="_blank" rel="nofollow">
+    <a href="https://www.facebook.com/sharer.php?u=%2f%2flocalhost%3a1313%2fpost%2f20130730-xtext%2f&t=Code%20Generation%20with%20xText%20and%20xTend" class="facebook" title="Share on Facebook" target="_blank" rel="nofollow">
       <svg class="icon">
   <title>facebook</title>
   <use xlink:href="#facebook"></use>
@@ -233,7 +230,7 @@
 </svg>
 
     </a>
-    <a href="https://javadude.com/post/20130730-xtext/" title="Copy Link" class="link link_yank">
+    <a href="//localhost:1313/post/20130730-xtext/" title="Copy Link" class="link link_yank">
       <svg class="icon">
   <title>copy</title>
   <use xlink:href="#copy"></use>
@@ -270,7 +267,7 @@
         class="image_figure image_external image_processed"
         width="88"
         height="31"
-        src="https://javadude.com/images/88x31_18315796089310489741.png"
+        src="//localhost:1313/images/88x31_18315796089310489741.png"
       
       
     />
@@ -317,61 +314,61 @@ Code Generation with xText and xTend by Scott Stanchfield is licensed under a <a
   </div>
 
         <div class="author_header">
-          <img src="https://javadude.com/images/yellow.jpeg" alt="Scott Stanchfield photo">
+          <img src="//localhost:1313/images/yellow.jpeg" alt="Scott Stanchfield photo">
           <h2>Scott Stanchfield</h2>
         </div>
       <div class="author_bio">
         Developer. Teacher. Tinkerer.<br/>Android and Kotlin rock!<br/>
       </div>
-      <a href='https://javadude.com/about/' class="button mt-1" role="button" title='Read More'>Read More</a>
+      <a href='//localhost:1313/about/' class="button mt-1" role="button" title='Read More'>Read More</a>
 
     
     <h2 class="mt-4">Recent Posts</h2>
     <ul class="flex-column">
       <li>
-        <a href="https://javadude.com/post/20250323-android-docs/" class="nav-link" title="Official Android Docs (That I&#39;ve Written)">Official Android Docs (That I've Written)</a>
+        <a href="//localhost:1313/post/20250323-android-docs/" class="nav-link" title="Official Android Docs (That I&#39;ve Written)">Official Android Docs (That I've Written)</a>
       </li>
       <li>
-        <a href="https://javadude.com/post/20250322-android-class/" class="nav-link" title="My Android class content for Johns Hopkins University">My Android class content for Johns Hopkins University</a>
+        <a href="//localhost:1313/post/20250322-android-class/" class="nav-link" title="My Android class content for Johns Hopkins University">My Android class content for Johns Hopkins University</a>
       </li>
       <li>
-        <a href="https://javadude.com/post/20250322-dsl-class/" class="nav-link" title="My Domain-Specific Languages (DSL) class content for Johns Hopkins University">My Domain-Specific Languages (DSL) class content for Johns Hopkins University</a>
+        <a href="//localhost:1313/post/20250322-dsl-class/" class="nav-link" title="My Domain-Specific Languages (DSL) class content for Johns Hopkins University">My Domain-Specific Languages (DSL) class content for Johns Hopkins University</a>
       </li>
       <li>
-        <a href="https://javadude.com/post/20250322-kotlin-class/" class="nav-link" title="My Kotlin class content">My Kotlin class content</a>
+        <a href="//localhost:1313/post/20250322-kotlin-class/" class="nav-link" title="My Kotlin class content">My Kotlin class content</a>
       </li>
       <li>
-        <a href="https://javadude.com/post/20190326-android-studio-deadlocks/" class="nav-link" title="Finding a deadlock in Android Studio">Finding a deadlock in Android Studio</a>
+        <a href="//localhost:1313/post/20190326-android-studio-deadlocks/" class="nav-link" title="Finding a deadlock in Android Studio">Finding a deadlock in Android Studio</a>
       </li>
       <li>
-        <a href="https://javadude.com/post/20190203-kotlin01/" class="nav-link" title="From Java to Kotlin - Episode 1 - You&#39;ve Gotta Start Somewhere...">From Java to Kotlin - Episode 1 - You've Gotta Start Somewhere...</a>
+        <a href="//localhost:1313/post/20190203-kotlin01/" class="nav-link" title="From Java to Kotlin - Episode 1 - You&#39;ve Gotta Start Somewhere...">From Java to Kotlin - Episode 1 - You've Gotta Start Somewhere...</a>
       </li>
       <li>
-        <a href="https://javadude.com/post/20170628-dsls-and-codegen/" class="nav-link" title="Domain-Specific Languages (DSLs) and Code Generation">Domain-Specific Languages (DSLs) and Code Generation</a>
+        <a href="//localhost:1313/post/20170628-dsls-and-codegen/" class="nav-link" title="Domain-Specific Languages (DSLs) and Code Generation">Domain-Specific Languages (DSLs) and Code Generation</a>
       </li>
       <li>
-        <a href="https://javadude.com/post/20151119-patterns/" class="nav-link" title="Design Patterns Brown-Bag Lectures">Design Patterns Brown-Bag Lectures</a>
+        <a href="//localhost:1313/post/20151119-patterns/" class="nav-link" title="Design Patterns Brown-Bag Lectures">Design Patterns Brown-Bag Lectures</a>
       </li>
     </ul>
     <div>
       <h2 class="mt-4 taxonomy" id="categories-section">Categories</h2>
       <nav class="tags_nav">
-        <a href='https://javadude.com/categories/articles/' class="post_tag button button_translucent" title="articles">
+        <a href='//localhost:1313/categories/articles/' class="post_tag button button_translucent" title="articles">
           ARTICLES
           <span class="button_tally">13</span>
         </a>
         
-        <a href='https://javadude.com/categories/videos/' class="post_tag button button_translucent" title="videos">
+        <a href='//localhost:1313/categories/videos/' class="post_tag button button_translucent" title="videos">
           VIDEOS
           <span class="button_tally">12</span>
         </a>
         
-        <a href='https://javadude.com/categories/tools/' class="post_tag button button_translucent" title="tools">
+        <a href='//localhost:1313/categories/tools/' class="post_tag button button_translucent" title="tools">
           TOOLS
           <span class="button_tally">8</span>
         </a>
         
-        <a href='https://javadude.com/categories/class/' class="post_tag button button_translucent" title="class">
+        <a href='//localhost:1313/categories/class/' class="post_tag button button_translucent" title="class">
           CLASS
           <span class="button_tally">3</span>
         </a>
@@ -382,87 +379,87 @@ Code Generation with xText and xTend by Scott Stanchfield is licensed under a <a
     <div>
       <h2 class="mt-4 taxonomy" id="tags-section">Tags</h2>
       <nav class="tags_nav">
-        <a href='https://javadude.com/tags/java/' class="post_tag button button_translucent" title="java">
+        <a href='//localhost:1313/tags/java/' class="post_tag button button_translucent" title="java">
           JAVA
           <span class="button_tally">28</span>
         </a>
         
-        <a href='https://javadude.com/tags/language/' class="post_tag button button_translucent" title="language">
+        <a href='//localhost:1313/tags/language/' class="post_tag button button_translucent" title="language">
           LANGUAGE
           <span class="button_tally">12</span>
         </a>
         
-        <a href='https://javadude.com/tags/design/' class="post_tag button button_translucent" title="design">
+        <a href='//localhost:1313/tags/design/' class="post_tag button button_translucent" title="design">
           DESIGN
           <span class="button_tally">6</span>
         </a>
         
-        <a href='https://javadude.com/tags/kotlin/' class="post_tag button button_translucent" title="kotlin">
+        <a href='//localhost:1313/tags/kotlin/' class="post_tag button button_translucent" title="kotlin">
           KOTLIN
           <span class="button_tally">5</span>
         </a>
         
-        <a href='https://javadude.com/tags/parsing/' class="post_tag button button_translucent" title="parsing">
+        <a href='//localhost:1313/tags/parsing/' class="post_tag button button_translucent" title="parsing">
           PARSING
           <span class="button_tally">5</span>
         </a>
         
-        <a href='https://javadude.com/tags/android/' class="post_tag button button_translucent" title="android">
+        <a href='//localhost:1313/tags/android/' class="post_tag button button_translucent" title="android">
           ANDROID
           <span class="button_tally">4</span>
         </a>
         
-        <a href='https://javadude.com/tags/dsl/' class="post_tag button button_translucent" title="dsl">
+        <a href='//localhost:1313/tags/dsl/' class="post_tag button button_translucent" title="dsl">
           DSL
           <span class="button_tally">4</span>
         </a>
         
-        <a href='https://javadude.com/tags/antlr/' class="post_tag button button_translucent" title="antlr">
+        <a href='//localhost:1313/tags/antlr/' class="post_tag button button_translucent" title="antlr">
           ANTLR
           <span class="button_tally">3</span>
         </a>
         
-        <a href='https://javadude.com/tags/class/' class="post_tag button button_translucent" title="class">
+        <a href='//localhost:1313/tags/class/' class="post_tag button button_translucent" title="class">
           CLASS
           <span class="button_tally">3</span>
         </a>
         
-        <a href='https://javadude.com/tags/eclipse/' class="post_tag button button_translucent" title="eclipse">
+        <a href='//localhost:1313/tags/eclipse/' class="post_tag button button_translucent" title="eclipse">
           ECLIPSE
           <span class="button_tally">3</span>
         </a>
         
-        <a href='https://javadude.com/tags/beans/' class="post_tag button button_translucent" title="beans">
+        <a href='//localhost:1313/tags/beans/' class="post_tag button button_translucent" title="beans">
           BEANS
           <span class="button_tally">2</span>
         </a>
         
-        <a href='https://javadude.com/tags/patterns/' class="post_tag button button_translucent" title="patterns">
+        <a href='//localhost:1313/tags/patterns/' class="post_tag button button_translucent" title="patterns">
           PATTERNS
           <span class="button_tally">2</span>
         </a>
         
-        <a href='https://javadude.com/tags/xtext/' class="post_tag button button_translucent" title="xtext">
+        <a href='//localhost:1313/tags/xtext/' class="post_tag button button_translucent" title="xtext">
           XTEXT
           <span class="button_tally">2</span>
         </a>
         
-        <a href='https://javadude.com/tags/android-studio/' class="post_tag button button_translucent" title="android studio">
+        <a href='//localhost:1313/tags/android-studio/' class="post_tag button button_translucent" title="android studio">
           ANDROID STUDIO
           <span class="button_tally">1</span>
         </a>
         
-        <a href='https://javadude.com/tags/code-generation/' class="post_tag button button_translucent" title="code generation">
+        <a href='//localhost:1313/tags/code-generation/' class="post_tag button button_translucent" title="code generation">
           CODE GENERATION
           <span class="button_tally">1</span>
         </a>
         
-        <a href='https://javadude.com/tags/gradle/' class="post_tag button button_translucent" title="gradle">
+        <a href='//localhost:1313/tags/gradle/' class="post_tag button button_translucent" title="gradle">
           GRADLE
           <span class="button_tally">1</span>
         </a>
         
-        <a href='https://javadude.com/tags/index/' class="post_tag button button_translucent" title="index">
+        <a href='//localhost:1313/tags/index/' class="post_tag button button_translucent" title="index">
           INDEX
           <span class="button_tally">1</span>
         </a>
@@ -561,7 +558,7 @@ Code Generation with xText and xTend by Scott Stanchfield is licensed under a <a
 
 <footer class="footer">
   <div class="footer_inner wrap pale">
-    <img src='https://javadude.com/icons/apple-touch-icon.png' class="icon icon_2 transparent" alt="Scott Stanchfield">
+    <img src='//localhost:1313/icons/apple-touch-icon.png' class="icon icon_2 transparent" alt="Scott Stanchfield">
     <p>Copyright&nbsp;1998-&nbsp;<span class="year"></span>&nbsp;SCOTT STANCHFIELD. All Rights Reserved</p><a class="to_top" href="#documentTop">
   <svg class="icon">
   <title>to-top</title>
@@ -573,9 +570,9 @@ Code Generation with xText and xTend by Scott Stanchfield is licensed under a <a
   </div>
 </footer>
 
-<script type="text/javascript" src="https://javadude.com/en/js/bundle.4be013d7cecbbcbad601bb190bdb5c84718e1b980d515e1b9882e80dc4395cf80a00093639868664c095e31aff8582cb2edb56166befbc98d614c728826b737d.js" integrity="sha512-S&#43;AT187LvLrWAbsZC9tchHGOG5gNUV4bmILoDcQ5XPgKAAk2OYaGZMCV4xr/hYLLLttWFmvvvJjWFMcogmtzfQ==" crossorigin="anonymous"></script>
+<script type="text/javascript" src="//localhost:1313/en/js/bundle.5ed9f39b7a2c7810a1ff5fee695ff4ea88bad5a93e653deb6b7cd55ab5b2fd024060fa82fa8cb3ad06f6745c8be2b054f50cc455c8abfbee7de713a8f59a1ee0.js" integrity="sha512-Xtnzm3oseBCh/1/uaV/06oi61ak&#43;ZT3ra3zVWrWy/QJAYPqC&#43;oyzrQb2dFyL4rBU9QzEVcir&#43;&#43;595xOo9Zoe4A==" crossorigin="anonymous"></script>
 
-  <script src="https://javadude.com/js/search.min.9d5e38dcb73906849f3712f1758a587e9829a568aa586eae69d7684f6829a46c0084632567291f21ea3ee4a6b14ff0d9e1e6b2a4df73f2e419f4b5e0c30a4f04.js"></script>
+  <script src="//localhost:1313/js/search.min.9d5e38dcb73906849f3712f1758a587e9829a568aa586eae69d7684f6829a46c0084632567291f21ea3ee4a6b14ff0d9e1e6b2a4df73f2e419f4b5e0c30a4f04.js"></script>
 
   </body>
 </html>
